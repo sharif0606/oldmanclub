@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Permission;
-use App\Models\Role;
+use App\Models\Backend\Permission;
+use App\Models\Backend\Role;
 use Illuminate\Http\Request;
 use App\Http\Requests\Backend\Permission\SaveRequest;
 use Exception;

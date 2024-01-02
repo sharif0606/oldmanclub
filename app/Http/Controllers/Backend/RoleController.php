@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Role;
+use App\Models\Backend\Role;
 use Illuminate\Http\Request;
 use App\Http\Requests\Backend\Role\AddNewRequest;
 use App\Http\Requests\Backend\Role\UpdateRequest;

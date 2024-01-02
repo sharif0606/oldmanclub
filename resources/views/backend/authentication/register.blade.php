@@ -13,7 +13,7 @@
 				@csrf
 				<div class="form-group">
 					<label class="control-label mb-10" for="FullName">Full Name</label>
-					<input type="text" class="form-control" name="FullName" value="{{old('FullName')}}" required="" id="FullName" placeholder="Your Full Name">
+					<input type="text" class="form-control rounded" name="FullName" value="{{old('FullName')}}" required="" id="FullName" placeholder="Your Full Name">
 					@if($errors->has('FullName'))
 						<small class="d-block text-danger">
 							{{$errors->first('FullName')}}
@@ -22,7 +22,7 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label mb-10" for="EmailAddress">Email address</label>
-					<input type="email" class="form-control" required="" id="EmailAddress" name="EmailAddress" value="{{old('EmailAddress')}}" placeholder="Enter email">
+					<input type="email" class="form-control rounded" required="" id="EmailAddress" name="EmailAddress" value="{{old('EmailAddress')}}" placeholder="Enter email">
 					@if($errors->has('EmailAddress'))
 						<small class="d-block text-danger">
 							{{$errors->first('EmailAddress')}}
@@ -31,7 +31,7 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label mb-10" for="contact_no_en">Contact Number</label>
-					<input type="text" class="form-control" required="" id="contact_no_en" name="contact_no_en" value="{{old('contact_no_en')}}" placeholder="Phone Number">
+					<input type="text" class="form-control rounded" required="" id="contact_no_en" name="contact_no_en" value="{{old('contact_no_en')}}" placeholder="Phone Number">
 					@if($errors->has('contact_no_en'))
 						<small class="d-block text-danger">
 							{{$errors->first('contact_no_en')}}
@@ -40,7 +40,7 @@
 				</div>
 				<div class="form-group">
 					<label class="pull-left control-label mb-10" for="password">Password</label>
-					<input type="password" class="form-control" required="" id="password" name="password" placeholder="Enter pwd">
+					<input type="password" class="form-control rounded" required="" id="password" name="password" placeholder="Enter pwd">
 					@if($errors->has('password'))
 						<small class="d-block text-danger">
 							{{$errors->first('password')}}
@@ -49,11 +49,11 @@
 				</div>
 				<div class="form-group">
 					<label class="pull-left control-label mb-10" for="password_confirmation">Confirm Password</label>
-					<input type="password" class="form-control" required="" id="password_confirmation" name="password_confirmation" placeholder="Enter pwd">
+					<input type="password" class="form-control rounded" required="" id="password_confirmation" name="password_confirmation" placeholder="Enter pwd">
 				</div>
 				
 				<div class="text-center mt-4">
-					<button type="submit" class="btn btn-primary btn-block form-control">Sign Up</button>
+					<button type="submit" class="btn btn-primary btn-block form-control rounded">Sign Up</button>
 				</div>
 			</form>
 		</div>

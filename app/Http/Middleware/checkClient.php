@@ -3,8 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Models\Backend\User; // custome
-use App\Models\Backend\Permission; // custome
+use App\Models\User\Client; 
 use Illuminate\Http\Request;
 use Session; // custome
 
@@ -22,14 +21,14 @@ class checkAuth
        //echo $request->route()->getName();
             //die();
         if(!Session::has('userId') || Session::has('userId')==null){
-            return redirect()->route('logOut');
+            return redirect()->route('clientlogOut');
         }else{
-            $user=User::where('status',1)->where('id',currentUserId())->first();
+            $user=Client::where('status',1)->where('id',currentUserId())->first();
             if(!$user)
-                return redirect()->route('logOut');
+                return redirect()->route('clientlogOut');
             else
                 return $next($request);
         }
-        return redirect()->route('logOut');
+        return redirect()->route('clientlogOut');
     }
 }
