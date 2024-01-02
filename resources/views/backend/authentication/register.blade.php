@@ -2,12 +2,11 @@
 @section('title','Sign Up')
 @section('content')
 	<div>
-		<p class="float-end mt-0">Already have an account?<a href="{{route('login')}}" class="text-primary">Sign In</a></p>
+		<p class="float-end mt-0 mb-0">Already have an account?<a href="{{route('login')}}" class="text-primary">Sign In</a></p>
 	</div>
 	<div class="align">
 		<h2 class="">Sign up your account</h2>
-		<p class="">For the purpose of industry regulation,
-			<br>Your details ar required
+		<p class="">For the purpose of industry regulation,Your details ar required
 		</p>
 		<div>
 			<form action="{{route('register.store')}}" method="POST">

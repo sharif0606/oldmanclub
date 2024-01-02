@@ -19,7 +19,7 @@
                                     <select class="form-control" name="roleId" id="roleId">
                                         <option value="">Select Role</option>
                                         @forelse($role as $r)
-                                            <option value="{{$r->id}}" {{ old('roleId',$user->role_id)==$r->id?"selected":""}}> {{ $r->type}}</option>
+                                            <option value="{{$r->id}}" {{ old('roleId',$user->role_id)==$r->id?"selected":""}}> {{ $r->name}}</option>
                                         @empty
                                             <option value="">No Role found</option>
                                         @endforelse
