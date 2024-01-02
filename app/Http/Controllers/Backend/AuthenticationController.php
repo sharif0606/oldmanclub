@@ -25,7 +25,7 @@ class AuthenticationController extends Controller
             $user->contact_no_en=$request->contact_no_en;
             $user->email=$request->EmailAddress;
             $user->password=Hash::make($request->password);
-            $user->role_id=1;
+            // $user->role_id=1;
             if($user->save())
                 return redirect('login')->with('success','Successfully Registred');
             else
@@ -57,18 +57,17 @@ class AuthenticationController extends Controller
         }else
                 return redirect()->route('login')->with('error','Your phone number or password is wrong!');
         }catch(Exception $e){
-            //dd($e);
+            dd($e);
             return redirect()->route('login')->with('error','Your phone number or password is wrong!');
         }
     }
-
     public function setSession($user){
         return request()->session()->put([
                 'userId'=>encryptor('encrypt',$user->id),
                 'userName'=>encryptor('encrypt',$user->name),
                 'role_id'=>encryptor('encrypt',$user->role_id),
                 'accessType'=>encryptor('encrypt',$user->full_access),
-                'role'=>encryptor('encrypt',$user->role->type),
+                'role'=>encryptor('encrypt',$user->role->name),
                 'roleIdentity'=>encryptor('encrypt',$user->role->identity),
                 'language'=>encryptor('encrypt',$user->language),
                 'image'=>$user->image ?? 'no-image.png'

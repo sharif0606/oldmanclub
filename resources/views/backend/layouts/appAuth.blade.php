@@ -7,23 +7,30 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>{{env('APP_NAME')}} | @yield('title','Page Name')</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('public/images/favicon.png')}}">
-    <link href="{{asset('public/css/style.css')}}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{asset('public/assets/css/style.css')}}">
 
 </head>
 
 <body class="h-100">
-    <div class="authincation h-100">
-        <div class="container-fluid h-100">
-            <div class="row justify-content-center h-100 align-items-center">
-                <div class="col-md-6">
-                    <div class="authincation-content">
-                        <div class="row no-gutters">
-                            <div class="col-xl-12">
-								@yield('content')
-                            </div>
-                        </div>
-                    </div>
+<div class="container">
+        <div class="row">
+            <div class="col-md-6 hero">
+                <img src="{{asset('public/assets/images/login_register/background-image.jpg')}}" class="img-fluid" alt="background-image" width="600" height="600">
+                <h5 class="hero-heading"><i class="fa-brands fa-slack"></i> Old Club Man</h5>
+                <p class="hero-text text-white">
+                    <i class="fa-solid fa-quote-left"></i>
+                    <br>
+                    The passage experienced a surge in popularity during the 1960s when laetraset used it on their dry-transfer sheets.and again during the 90s as desktop publishers bundled the text with their software.
+                    <br>
+                    <i class="fa-solid fa-chevron-right float-end"></i>
+                </p>
+            </div>
+    
+            <div class="col-md-6">
+                <div class="">
+                    @yield('content')
                 </div>
             </div>
         </div>

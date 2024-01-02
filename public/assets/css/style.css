@@ -4523,3 +4523,35 @@ h6.h1 {
     display: inline-block !important;
   }
 }
+
+/* login/register */
+
+.hero{
+  position: relative;
+  text-align: center;
+}
+.hero-text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: left;
+}
+.hero-heading{
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  text-align: left;
+  color: white
+}
+img{
+  -webkit-filter: hue-rotate(240deg);
+  filter: hue-rotate(240deg);
+}
+.btn{
+  background-color: rgb(95, 21, 95);
+}
+.align{
+  margin: 70px;
+}

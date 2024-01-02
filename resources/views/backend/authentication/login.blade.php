@@ -1,9 +1,14 @@
 @extends('backend.layouts.appAuth')
 
 @section('content')
-<div class="auth-form">
-	<h4 class="text-center mb-4">Sign in your account</h4>
-	<form action="{{route('login.check')}}" method="POST">
+
+<div class="align">
+		<h2 class="">Welcome To Login Your Account</h2>
+		<p class="">For the purpose of industry regulation,
+			<br>Your details ar required
+		</p>
+		<div>
+		<form action="{{route('login.check')}}" method="POST">
 		@csrf
 		<div class="form-group">
 			<label class="control-label mb-10" for="username">Contact Number / Email Address</label>
@@ -23,15 +28,17 @@
 				</small>
 			@endif
 		</div>
+		<div class="form-group text-center mt-5">
+			<a href="#" class="text-danger fw-bold">Forgot Email Or Password?</a>
+		</div>
+
 		<div class="form-group">
-			<a href="page-forgot-password.html">Forgot Password?</a>
+			<p class="text-center">I Don't have an account?<a href="{{route('register')}}" class="text-primary">Sign Up</a></p>
 		</div>
 		<div class="text-center">
-			<button type="submit" class="btn btn-primary btn-block">Sign me in</button>
+			<button type="submit" class="btn btn-primary btn-block form-control">Login</button>
 		</div>
 	</form>
-	<div class="new-account mt-3">
-		<p>Don't have an account? <a class="text-primary" href="{{route('register')}}">Sign up</a></p>
+		</div>
 	</div>
-</div>
 @endsection
