@@ -7,7 +7,7 @@ use App\Models\User\Client;
 use Illuminate\Http\Request;
 use Session; // custome
 
-class checkAuth
+class checkClient
 {
     /**
      * Handle an incoming request.

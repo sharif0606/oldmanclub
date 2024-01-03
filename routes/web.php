@@ -11,6 +11,8 @@ use App\Http\Controllers\Backend\PermissionController as permission;
 
 
 use App\Http\Controllers\User\ClientAuthentication as clientauth;
+use App\Http\Controllers\User\ClientController as client;
+
 
 
 
@@ -44,12 +46,16 @@ Route::middleware(['checkrole'])->prefix('admin')->group(function(){
 
 
 // Client Controller
-Route::get('client/register',[clientauth::class,'signUpForm'])->name('client.register');
-Route::post('client/register',[clientauth::class,'signUpStore'])->name('client.register.store');
-Route::get('client/login', [clientauth::class,'signInForm'])->name('client.login');
-Route::post('client/login', [clientauth::class,'signInCheck'])->name('client.login.check');
+
+Route::get('client/register',[clientauth::class,'signUpForm'])->name('clientregister');
+Route::post('client/register',[clientauth::class,'signUpStore'])->name('clientregister.store');
+Route::get('client/login', [clientauth::class,'signInForm'])->name('clientlogin');
+Route::post('client/login', [clientauth::class,'signInCheck'])->name('clientlogin.check');
 Route::get('client/logout', [clientauth::class,'singOut'])->name('clientlogOut');
 
+Route::middleware(['checkclient'])->prefix('client')->group(function(){
+    Route::get('dashboard', [client::class,'index'])->name('dashboard'); 
+});
 Route::get('/', function () {
     return view('frontend.home');
 });

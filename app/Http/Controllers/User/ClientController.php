@@ -13,7 +13,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        
+        $client = Client::find(currentUserId());
+        return view('user.clientDashboard', compact('client'));
     }
 
     /**

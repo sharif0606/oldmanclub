@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 02, 2024 at 04:49 PM
+-- Generation Time: Jan 03, 2024 at 04:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,9 +42,9 @@ CREATE TABLE `clients` (
   `password` varchar(255) NOT NULL,
   `address_line_1` varchar(255) DEFAULT NULL,
   `address_line_2` varchar(255) DEFAULT NULL,
-  `country_id` bigint(20) UNSIGNED NOT NULL,
-  `divition_id` bigint(20) UNSIGNED NOT NULL,
-  `district_id` bigint(20) UNSIGNED NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `state` varchar(255) NOT NULL,
   `zip_code` varchar(255) DEFAULT NULL,
   `nationality` varchar(255) DEFAULT NULL,
   `id_no` varchar(255) DEFAULT NULL,
@@ -60,6 +60,14 @@ CREATE TABLE `clients` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `clients`
+--
+
+INSERT INTO `clients` (`id`, `first_name_en`, `first_name_bn`, `middle_name_en`, `middle_name_bn`, `last_name_en`, `last_name_bn`, `date_of_birth`, `contact_en`, `contact_bn`, `email`, `password`, `address_line_1`, `address_line_2`, `country`, `city`, `state`, `zip_code`, `nationality`, `id_no`, `id_no_type`, `photo_id`, `is_photo_verified`, `address_proof_photo`, `address_proof_type`, `is_address_verified`, `is_email_verified`, `is_contact_verified`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Ibrahim', NULL, 'khalil', NULL, 'ahm', NULL, '2024-01-02', '123', NULL, 'ibrahim@gmail.com', '$2y$12$li52gF.m6RNtqB56hkC7x.zH/PVo0NtLAfoUoOBT4BOUdLb5Bs7M6', 'Hazi Para', 'Hazi Para', 'Bangladesh', 'Wazedia', 'dhaka', '4213', NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, 0, 0, 1, '2024-01-03 08:13:29', '2024-01-03 08:13:29'),
+(2, 'jasim', NULL, 'uddin', NULL, 'uddin', NULL, '1999-12-08', '1', NULL, 'jasim@gmail.com', '$2y$12$vhVbWfdHNs3AA4HSOuF1duqEoGRIuaBd/bPF0QxLzKoa6T1QBVjLm', 'Hazi Para', 'Hazi Para', 'Bangladesh', 'Wazedia', 'dhaka', '4213', NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, 0, 0, 1, '2024-01-03 08:20:18', '2024-01-03 08:20:18');
 
 -- --------------------------------------------------------
 
@@ -136,7 +144,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (7, '2014_10_12_000000_create_users_table', 1),
 (8, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (9, '2023_11_12_043129_create_permissions_table', 1),
-(11, '2024_01_02_133453_create_clients_table', 2);
+(13, '2024_01_02_133453_create_clients_table', 2);
 
 -- --------------------------------------------------------
 
@@ -266,10 +274,7 @@ INSERT INTO `users` (`id`, `name_en`, `name_bn`, `email`, `contact_no_en`, `cont
 --
 ALTER TABLE `clients`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `clients_email_unique` (`email`),
-  ADD KEY `clients_country_id_index` (`country_id`),
-  ADD KEY `clients_divition_id_index` (`divition_id`),
-  ADD KEY `clients_district_id_index` (`district_id`);
+  ADD UNIQUE KEY `clients_email_unique` (`email`);
 
 --
 -- Indexes for table `countries`
@@ -357,7 +362,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -381,7 +386,7 @@ ALTER TABLE `divisions`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -422,14 +427,6 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `clients`
---
-ALTER TABLE `clients`
-  ADD CONSTRAINT `clients_country_id_foreign` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `clients_district_id_foreign` FOREIGN KEY (`district_id`) REFERENCES `districts` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `clients_divition_id_foreign` FOREIGN KEY (`divition_id`) REFERENCES `divisions` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `divisions`

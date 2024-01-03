@@ -26,12 +26,9 @@ return new class extends Migration
             $table->string('password');
             $table->string('address_line_1')->nullable();
             $table->string('address_line_2')->nullable();
-            $table->unsignedBigInteger('country_id')->index();
-            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade')->nullable();
-            $table->unsignedBigInteger('divition_id')->index();
-            $table->foreign('divition_id')->references('id')->on('divisions')->onDelete('cascade')->nullable();
-            $table->unsignedBigInteger('district_id')->index();
-            $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade')->nullable();
+            $table->string('country');
+            $table->string('city');
+            $table->string('state');
             $table->string('zip_code')->nullable();
             $table->string('nationality')->nullable();
             $table->string('id_no')->nullable();
@@ -43,7 +40,7 @@ return new class extends Migration
             $table->integer('is_address_verified')->default(0)->comment('0=>No, 1=>Yes');
             $table->integer('is_email_verified')->default(0)->comment('0=>No, 1=>Yes');
             $table->integer('is_contact_verified')->default(0)->comment('0=>No, 1=>Yes');
-            $table->integer('status')->default(0)->comment('1=>active, 0=>inactive');
+            $table->integer('status')->default(1)->comment('1=>active, 0=>inactive');
             $table->timestamps();
         });
     }

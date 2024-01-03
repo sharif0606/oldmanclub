@@ -12,6 +12,7 @@ use Exception;
 
 class ClientAuthentication extends Controller
 {
+    
     public function signUpForm(){
         return view('user.authentication.register');
     }
@@ -22,16 +23,23 @@ class ClientAuthentication extends Controller
             $user->first_name_en=$request->fname_en;
             $user->middle_name_en=$request->mname_en;
             $user->last_name_en=$request->lname_en;
+            $user->contact_en=$request->ContactNumber_en;
             $user->date_of_birth = $request->dob;
             $user->email=$request->EmailAddress;
+            $user->address_line_1 = $request->PresentAddress;
+            $user->address_line_2 = $request->ParmanentAddress;
+            $user->country= $request->country;
+            $user->city = $request->city;
+            $user->state = $request->state;
+            $user->zip_code = $request->zp;
             $user->password=Hash::make($request->password);
             if($user->save())
-                return redirect('login')->with('success','Successfully Registred');
+                return redirect()->route('clientlogin')->with('success','Successfully Registred');
             else
-                return redirect('login')->with('danger','Please try again');
+                return redirect->route('clientlogin')->with('danger','Please try again');
         }catch(Exception $e){
             dd($e);
-            return redirect('login')->with('danger','Please try again');;
+            return redirect()->route('clientlogin')->with('danger','Please try again');;
         }
 
     }
@@ -63,10 +71,7 @@ class ClientAuthentication extends Controller
         return request()->session()->put([
                 'userId'=>encryptor('encrypt',$user->id),
                 'userName'=>encryptor('encrypt',$user->name),
-                'role_id'=>encryptor('encrypt',$user->role_id),
                 'accessType'=>encryptor('encrypt',$user->full_access),
-                'role'=>encryptor('encrypt',$user->role->name),
-                'roleIdentity'=>encryptor('encrypt',$user->role->identity),
                 'language'=>encryptor('encrypt',$user->language),
                 'image'=>$user->image ?? 'no-image.png'
             ]
