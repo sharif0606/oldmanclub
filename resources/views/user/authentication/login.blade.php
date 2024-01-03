@@ -7,7 +7,7 @@
 			<br>Your details ar required
 		</p>
 		<div class="">
-			<form action="{{route('clientlogin')}}" method="POST">
+			<form action="{{route('clientlogin.check')}}" method="POST">
 				@csrf
 				<div class="form-group">
 					<label class="control-label mb-10" for="username">Contact Number / Email Address</label>

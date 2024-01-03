@@ -54,7 +54,7 @@ Route::post('client/login', [clientauth::class,'signInCheck'])->name('clientlogi
 Route::get('client/logout', [clientauth::class,'singOut'])->name('clientlogOut');
 
 Route::middleware(['checkclient'])->prefix('client')->group(function(){
-    Route::get('dashboard', [client::class,'index'])->name('dashboard'); 
+    Route::get('dashboard', [client::class,'index'])->name('clientdashboard'); 
 });
 Route::get('/', function () {
     return view('frontend.home');

@@ -55,16 +55,16 @@ class ClientAuthentication extends Controller
                 if($user->status==1){
                     if(Hash::check($request->password , $user->password)){
                         $this->setSession($user);
-                        return redirect()->route('dashboard')->with('success','Successfully login');
+                        return redirect()->route('clientdashboard')->with('success','Successfully login');
                     }else
-                        return redirect()->route('login')->with('error','Your phone number or password is wrong!');
+                        return redirect()->route('clientlogin')->with('error','Your phone number or password is wrong!');
                 }else
-                    return redirect()->route('login')->with('error','You are not active user. Please contact to authority!');
+                    return redirect()->route('clientlogin')->with('error','You are not active user. Please contact to authority!');
         }else
-                return redirect()->route('login')->with('error','Your phone number or password is wrong!');
+                return redirect()->route('clientlogin')->with('error','Your phone number or password is wrong!');
         }catch(Exception $e){
             dd($e);
-            return redirect()->route('login')->with('error','Your phone number or password is wrong!');
+            return redirect()->route('clientlogin')->with('error','Your phone number or password is wrong!');
         }
     }
     public function setSession($user){
