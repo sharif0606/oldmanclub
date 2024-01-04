@@ -33,7 +33,7 @@
 				</div>
 
 				<div class="form-group">
-					<p class="text-center">I Don't have an account?<a href="{{route('register')}}" class="text-primary">Sign Up</a></p>
+					<p class="text-center">I Don't have an account?<a href="{{route('clientregister')}}" class="text-primary">Sign Up</a></p>
 				</div>
 				<div class="text-center">
 					<button type="submit" class="btn btn-primary btn-block form-control rounded">Login</button>
