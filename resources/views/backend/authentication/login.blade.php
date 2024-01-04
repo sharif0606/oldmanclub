@@ -2,7 +2,7 @@
 @section('title','Login')
 @section('content')
 	<div class="align">
-		<h2 class="">Welcome To Login Your Account</h2>
+		<h2 class="">Welcome To Admin Login</h2>
 		<p class="">For the purpose of industry regulation,
 			<br>Your details ar required
 		</p>
@@ -12,7 +12,7 @@
 				<div class="form-group">
 					<label class="control-label mb-10" for="username">Contact Number / Email Address</label>
 					<input type="text" class="form-control rounded" required="" id="username" name="username" value="{{ old('username') }}" placeholder="Phone Number/Email Address">
-
+					
 					@if($errors->has('username'))
 						<small class="d-block text-danger">
 							{{$errors->first('username')}}

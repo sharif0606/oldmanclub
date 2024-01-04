@@ -29,7 +29,6 @@
                     <i class="fas fa-chevron-right float-end"></i>
                 </p>
             </div>
-
             <div class="col-md-6">
                 @yield('content')
             </div>

@@ -24,9 +24,9 @@
                                 <div class="col-md-12">
                                     <div class="d-grid my-3">
                                         <button type="button" class="btn btn-primary next-step py-2">Register With Email</button>
-                                        <small class="text-center">or</small>
-                                        <a href="#" class="btn btn-outline-primary btn-block text-white my-2 ">
-                                        <i class="fa-brands fa-google float-start p-2"></i>Register with Google
+                                        <h6 class="text-center mt-2">or</h6>
+                                        <a href="#" class="btn btn-outline-primary btn-block text-white py-2">
+                                        <i class="fa-brands fa-google float-start "></i>Register with Google
                                         </a>
                                     </div>
                                 </div> 
@@ -36,7 +36,7 @@
                     <div class="tab-pane fade" id="step-2" role="tabpanel" aria-labelledby="step-2-tab">
                         
                         <div class="col-sm-6">
-                            <button type="button" class="btn btn-primary prev-step m-2"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                            <button type="button" class="btn btn-primary prev-step"><i class="fa-solid fa-arrow-left"></i> Back</button>
                         </div>
                         <div>
                             <h2 class="">Register Your Account</h2>
@@ -82,7 +82,7 @@
                         <button type="button" class="btn btn-danger next-step float-end">Next <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
                     <div class="tab-pane fade" id="step-3" role="tabpanel" aria-labelledby="step-3-tab">
-                        <button type="button" class="btn btn-primary prev-step m-2"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                        <button type="button" class="btn btn-primary prev-step"><i class="fa-solid fa-arrow-left"></i> Back</button>
                         <div>
                             <h2 class="">Complete Your Profile</h2>
                             <p class="">For the purpose of industry regulation,
@@ -129,7 +129,7 @@
                     </div>
                     <div class="tab-pane fade" id="step-4" role="tabpanel" aria-labelledby="step-4-tab">
                         <div class="col-sm-6">
-                            <button type="button" class="btn btn-primary prev-step m-2"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                            <button type="button" class="btn btn-primary prev-step"><i class="fa-solid fa-arrow-left"></i> Back</button>
                         </div>
                         <div>
                             <h2 class="">Complete Your Profile</h2>
