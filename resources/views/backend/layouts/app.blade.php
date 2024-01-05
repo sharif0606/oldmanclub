@@ -23,13 +23,13 @@
     <!--*******************
         Preloader start
     ********************-->
-    <div id="preloader">
+    <!-- <div id="preloader">
         <div class="sk-three-bounce">
             <div class="sk-child sk-bounce1"></div>
             <div class="sk-child sk-bounce2"></div>
             <div class="sk-child sk-bounce3"></div>
         </div>
-    </div>
+    </div> -->
     <!--*******************
         Preloader end
     ********************-->
@@ -161,7 +161,17 @@
                         <ul aria-expanded="false">
                             <li><a href="{{route('user.index')}}">User</a></li>
                             <li><a href="{{route('role.index')}}">Role</a></li>
-                            <li><a href="./app-calender.html">Settings</a></li>
+                            <li><a href="{{route('setting.index')}}">Settings</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon icon-settings"></i>
+                            <span class="nav-text">Website</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('setting.index')}}">Settings</a></li>
+                            <li><a href="{{route('slider.index')}}">Slider</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i

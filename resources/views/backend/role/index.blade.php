@@ -9,9 +9,10 @@
         <div class="card">
             
             <!-- table bordered -->
-            <div class="table-responsive"><div>
-                <a class="pull-right fs-1" href="{{route('role.create')}}"><i class="fa fa-plus"></i></a>
-            </div>
+            <div class="table-responsive">
+                <div>
+                    <a class="pull-right fs-1" href="{{route('role.create')}}"><i class="fa fa-plus"></i></a>
+                </div>
                 <table class="table table-bordered mb-0">
                     <thead>
                         <tr>
