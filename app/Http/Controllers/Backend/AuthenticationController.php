@@ -26,13 +26,16 @@ class AuthenticationController extends Controller
             $user->email=$request->EmailAddress;
             $user->password=Hash::make($request->password);
             // $user->role_id=1;
-            if($user->save())
+            if($user->save()){
+                $this->notice::success('Successfully Registered');
                 return redirect('login')->with('success','Successfully Registred');
-            else
-                return redirect('login')->with('danger','Please try again');
+            }else
+                $this->notice::error('something wrong! Please try again');
+                return redirect('login');
         }catch(Exception $e){
             dd($e);
-            return redirect('login')->with('danger','Please try again');;
+            $this->notice::error('something wrong! Please try again');
+            return redirect('login');
         }
 
     }
@@ -49,16 +52,21 @@ class AuthenticationController extends Controller
                 if($user->status==1){
                     if(Hash::check($request->password , $user->password)){
                         $this->setSession($user);
+                        $this->notice::success('Successfully Login');
                         return redirect()->route('dashboard')->with('success','Successfully login');
                     }else
+                        $this->notice::error('Your User name or password is wrong!');
                         return redirect()->route('login')->with('error','Your phone number or password is wrong!');
                 }else
-                    return redirect()->route('login')->with('error','You are not active user. Please contact to authority!');
+                    $this->notice::error('You are not active user. Please contact to authority!');
+                    return redirect()->route('login');
         }else
-                return redirect()->route('login')->with('error','Your phone number or password is wrong!');
+            $this->notice::error('Your User name or password is wrong!');
+            return redirect()->route('login');
         }catch(Exception $e){
             dd($e);
-            return redirect()->route('login')->with('error','Your phone number or password is wrong!');
+            $this->notice::error('Your User name or password is wrong!');
+            return redirect()->route('login');
         }
     }
     public function setSession($user){

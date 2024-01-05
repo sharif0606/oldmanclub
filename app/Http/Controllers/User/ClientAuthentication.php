@@ -33,21 +33,22 @@ class ClientAuthentication extends Controller
             $user->state = $request->state;
             $user->zip_code = $request->zp;
             $user->password=Hash::make($request->password);
-            if($user->save())
+            if($user->save()){
+                $this->notice::success('Successfully Registered');
                 return redirect()->route('clientlogin')->with('success','Successfully Registred');
-            else
+            }else
+                $this->notice::error('something wrong! Please try again');
                 return redirect->route('clientlogin')->with('danger','Please try again');
         }catch(Exception $e){
             dd($e);
+            $this->notice::error('something wrong! Please try again');
             return redirect()->route('clientlogin')->with('danger','Please try again');;
         }
 
     }
-
     public function signInForm(){
         return view('user.authentication.login');
     }
-
     public function signInCheck(SigninRequest $request){
         try{
             $user=Client::where('email',$request->username)->first();
@@ -55,16 +56,21 @@ class ClientAuthentication extends Controller
                 if($user->status==1){
                     if(Hash::check($request->password , $user->password)){
                         $this->setSession($user);
+                        $this->notice::success('Successfully Login');
                         return redirect()->route('clientdashboard')->with('success','Successfully login');
                     }else
+                        $this->notice::error('Your User name or password is wrong!');
                         return redirect()->route('clientlogin')->with('error','Your phone number or password is wrong!');
                 }else
-                    return redirect()->route('clientlogin')->with('error','You are not active user. Please contact to authority!');
+                    $this->notice::error('You are not active user. Please contact to authority!');
+                    return redirect()->route('clientlogin');
         }else
-                return redirect()->route('clientlogin')->with('error','Your phone number or password is wrong!');
+            $this->notice::error('Your User name or password is wrong!');
+            return redirect()->route('clientlogin');
         }catch(Exception $e){
             dd($e);
-            return redirect()->route('clientlogin')->with('error','Your phone number or password is wrong!');
+            $this->notice::error('Your User name or password is wrong!');
+            return redirect()->route('clientlogin');
         }
     }
     public function setSession($user){
