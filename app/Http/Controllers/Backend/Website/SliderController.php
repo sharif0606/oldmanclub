@@ -86,7 +86,7 @@ class SliderController extends Controller
             if($request->hasFile('image')){
                 $imageName = rand(111,999).time().'.'.
                 $request->image->extension();
-                $request->image->move(public_path('uploads/setting'), $imageName);
+                $request->image->move(public_path('uploads/slider'), $imageName);
                 $slider->image=$imageName;
             }
             if($slider->save()){

@@ -7,8 +7,9 @@
             <h4 class="card-title">Setting</h4>
         </div>
         <div class="card-body">
-            <form action="{{route('slider.store',encryptor('encrypt',$slider->id))}}" method="post" enctype="multipart/form-data" id="step-form-horizontal" class="step-form-horizontal">
+            <form action="{{route('slider.update',encryptor('encrypt',$slider->id))}}" method="post" enctype="multipart/form-data" id="step-form-horizontal" class="step-form-horizontal">
                 @csrf
+                @method('PATCH')
                 <div>
                     <h4></h4>
                     <section>

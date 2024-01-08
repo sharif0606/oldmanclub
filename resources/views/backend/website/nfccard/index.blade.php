@@ -1,12 +1,12 @@
 @extends('backend.layouts.app')
-@section('title','Service')
+@section('title','NFC CARD')
 @section('content')
 <div class="col-lg-12">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">Our Service List</h4>
+            <h4 class="card-title">NFC Card List</h4>
                 <div>
-                    <a class="pull-right fs-1" href="{{route('ourservice.create')}}"><i class="fa fa-plus">Add new</i></a>
+                    <a class="pull-right fs-1" href="{{route('nfccard.create')}}"><i class="fa fa-plus">Add new</i></a>
                 </div>
         </div>
         <div class="card-body">
@@ -15,28 +15,32 @@
                     <thead>
                         <tr>
                             <th scope="col">{{__('#SL')}}</th>
-                            <th scope="col">{{__('Title')}}</th>
-                            <th scope="col">{{__('Link')}}</th>
-                            <th scope="col">{{__('Image')}}</th>
-                            <th scope="col">{{__('Details')}}</th>
+                            <th scope="col">{{__('Header Large')}}</th>
+                            <th scope="col">{{__('Header Small')}}</th>
+                            <th scope="col">{{__('Header Image')}}</th>
+                            <th scope="col">{{__('Video Link')}}</th>
+                            <th scope="col">{{__('Feature List')}}</th>
+                            <th scope="col">{{__('Feature Image')}}</th>
                             <th scope="col">{{__('Action')}}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($ourservices as $value)
+                        @forelse($nfccard as $value)
                         <tr>
                             <td>{{ ++$loop->index }}</td>
-                            <td>{{$value->title}} </td>
-                            <td>{{$value->link}} </td>
-                            <td><img width="50px" src="{{asset('public/uploads/ourservices/'.$value->image)}}" alt=""> </td>
-                            <td>{{$value->details}} </td>
+                            <td>{{$value->header_text_large}} </td>
+                            <td>{{$value->header_text_small}} </td>
+                            <td><img width="50px" src="{{asset('public/uploads/nfccard/'.$value->header_image)}}" alt=""> </td>
+                            <td>{{$value->video_link}} </td>
+                            <td>{{ implode(', ', $value->feature_list) }}  </td>
+                            <td><img width="50px" src="{{asset('public/uploads/nfccard/'.$value->feature_image)}}" alt=""> </td>
                             <td>
                                 <div class="d-flex">
-                                    <a href="{{route('ourservice.edit',encryptor('encrypt',$value->id))}}">
+                                    <a href="{{route('nfccard.edit',encryptor('encrypt',$value->id))}}">
                                         <i class="fa fa-edit mx-1"></i>
                                     </a>
                                     <form id=""
-                                        action="{{ route('ourservice.destroy', encryptor('encrypt', $value->id)) }}"
+                                        action="{{ route('nfccard.destroy', encryptor('encrypt', $value->id)) }}"
                                         method="post">
                                         @csrf
                                         @method('delete')

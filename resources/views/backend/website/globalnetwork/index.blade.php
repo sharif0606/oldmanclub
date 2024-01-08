@@ -4,7 +4,7 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">Table Bordered</h4>
+            <h3 class="card-title">Global Network List</h3>
                 <div>
                     <a class="pull-right fs-1" href="{{route('globalnetwork.create')}}"><i class="fa fa-plus">Add new</i></a>
                 </div>
@@ -31,7 +31,7 @@
                             <td>
                                 <div class="d-flex">
                                     <a href="{{route('globalnetwork.edit',encryptor('encrypt',$value->id))}}">
-                                        <i class="fa fa-edit"></i>
+                                        <i class="fa fa-edit mx-1"></i>
                                     </a>
                                     <form id=""
                                         action="{{ route('globalnetwork.destroy', encryptor('encrypt', $value->id)) }}"

@@ -19,15 +19,15 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 hero p-0">
-                <img src="{{asset('public/assets/images/login_register/background-image.jpg')}}" class="img-fluid" alt="background-image">
-                <h5 class="hero-heading"><i class="fab fa-slack"></i> Old Club Man</h5>
-                <p class="hero-text text-white">
+                <img src="{{asset('public/assets/images/login_register/Frame1.png')}}" class="img-fluid" alt="background-image">
+                <!-- <h5 class="hero-heading"><i class="fab fa-slack"></i> Old Club Man</h5> -->
+                <!-- <p class="hero-text text-white">
                     <i class="fas fa-quote-left"></i>
                     <br>
                     The passage experienced a surge in popularity during the 1960s when laetraset used it on their dry-transfer sheets. And again during the 90s as desktop publishers bundled the text with their software.
                     <br>
                     <i class="fas fa-chevron-right float-end"></i>
-                </p>
+                </p> -->
             </div>
             <div class="col-md-6">
                 @yield('content')

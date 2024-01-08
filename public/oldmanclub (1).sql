@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2024 at 04:55 PM
+-- Generation Time: Jan 08, 2024 at 04:34 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -89,6 +89,33 @@ CREATE TABLE `countries` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `customer_feedback`
+--
+
+CREATE TABLE `customer_feedback` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `customer_id` bigint(20) UNSIGNED NOT NULL,
+  `rate` varchar(255) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `show_hide` int(11) NOT NULL DEFAULT 1 COMMENT '0=>hide 1=>show ',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `customer_feedback`
+--
+
+INSERT INTO `customer_feedback` (`id`, `customer_id`, `rate`, `message`, `show_hide`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, '4.6*', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took', 1, '2024-01-06 00:53:15', '2024-01-06 01:36:51', NULL),
+(2, 2, '4.5*', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took', 1, '2024-01-06 01:37:54', '2024-01-06 01:37:54', NULL),
+(3, 1, '4.5*', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took', 1, '2024-01-06 01:39:54', '2024-01-06 01:39:54', NULL),
+(4, 2, '4.6*', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took', 1, '2024-01-06 01:42:51', '2024-01-06 01:43:56', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `districts`
 --
 
@@ -121,6 +148,56 @@ CREATE TABLE `divisions` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `global_net_work_images`
+--
+
+CREATE TABLE `global_net_work_images` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `link` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `global_net_work_images`
+--
+
+INSERT INTO `global_net_work_images` (`id`, `title`, `link`, `image`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'NFC Card', 'https://www.google.com/', '828.png', '2024-01-06 02:22:20', '2024-01-08 09:22:51', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `homepages`
+--
+
+CREATE TABLE `homepages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `service_section_text` varchar(255) NOT NULL,
+  `special_offer_text` varchar(255) NOT NULL,
+  `special_offer_image` varchar(255) NOT NULL,
+  `special_offer_link` varchar(255) NOT NULL,
+  `global_network_text` varchar(255) NOT NULL,
+  `global_network_image` varchar(255) NOT NULL,
+  `customer_feedback_text` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `homepages`
+--
+
+INSERT INTO `homepages` (`id`, `service_section_text`, `special_offer_text`, `special_offer_image`, `special_offer_link`, `global_network_text`, `global_network_image`, `customer_feedback_text`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'We understand the demand of growing market and your interest in multiple. There is a lot of my about service but there is  no alternative to your need', 'Welcome to Old club man one of the multiple service companies in Bangladesh. Old club man is a company where customer ideas count and implemented. Where determination creates a new world-class services.', '767.png', 'https://www.google.com/', 'See old club man everywhere to make it easier for you when you move locations', '972.png', 'These are the stories of our customers who have joined us with great pleasure when using this crazy feature.', '2024-01-05 23:36:37', '2024-01-05 23:43:38', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -146,7 +223,67 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (9, '2023_11_12_043129_create_permissions_table', 1),
 (13, '2024_01_02_133453_create_clients_table', 2),
 (15, '2024_01_05_121923_create_settings_table', 3),
-(16, '2024_01_05_145229_create_sliders_table', 4);
+(16, '2024_01_05_145229_create_sliders_table', 4),
+(17, '2024_01_06_032524_create_our_services_table', 5),
+(19, '2024_01_06_042433_create_homepages_table', 6),
+(20, '2024_01_06_054933_create_customer_feedback_table', 7),
+(21, '2024_01_06_074858_create_global_net_work_images_table', 8),
+(23, '2024_01_08_094246_create_nfc_card_images_table', 9);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nfc_card_images`
+--
+
+CREATE TABLE `nfc_card_images` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `header_text_large` varchar(255) NOT NULL,
+  `header_text_small` text NOT NULL,
+  `header_image` varchar(255) NOT NULL,
+  `video_link` varchar(255) NOT NULL,
+  `feature_list` varchar(255) NOT NULL,
+  `feature_image` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `nfc_card_images`
+--
+
+INSERT INTO `nfc_card_images` (`id`, `header_text_large`, `header_text_small`, `header_image`, `video_link`, `feature_list`, `feature_image`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'NFC BUSINESS CARD WITH OLD CLUB MAN', 'Itroducing KSA card-a complimentary service that extends the reach of your individual business card online. Utilizing intelligent scanning technology. It promtly directs clients to shedules sign-up forms. And all the essential elements that drive your business forward', '510.png', 'https://www.youtube.com/watch?v=FwjOR2PwVyg', '[\"NFC Enabled Smart Card\",\"   Customizable online digital profile\",\"   NFC chip\",\"   Unlimited steps\",\"   Digital QR code\",\"   Lead generation mode\",\"   Lifetimr Validity.\"]', '493.png', '2024-01-08 04:52:16', '2024-01-08 05:16:02', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `our_services`
+--
+
+CREATE TABLE `our_services` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `link` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `details` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `our_services`
+--
+
+INSERT INTO `our_services` (`id`, `title`, `link`, `image`, `details`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Product Shipping Service', 'https://www.google.com/', '598.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-05 21:59:22', '2024-01-08 07:14:03', NULL),
+(2, 'E-commerce System', 'https://www.google.com/', '373.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-08 06:51:47', '2024-01-08 07:08:11', NULL),
+(3, 'NFC Business Card', 'https://www.google.com/', '547.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-08 06:52:21', '2024-01-08 07:08:36', NULL),
+(4, 'Printing Service', 'https://www.google.com/', '712.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-08 06:52:58', '2024-01-08 06:52:58', NULL),
+(5, 'USA Company Registration', 'https://www.google.com/', '885.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-08 06:53:29', '2024-01-08 06:53:29', NULL),
+(6, 'Smart Mail Service', 'https://www.google.com/', '613.jpg', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-08 07:01:19', '2024-01-08 07:01:19', NULL);
 
 -- --------------------------------------------------------
 
@@ -231,7 +368,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`id`, `header_logo`, `company_name`, `contact_no_en`, `contact_no_bn`, `email`, `facebook_icon`, `twitter_icon`, `linkedln_icon`, `instagram_icon`, `footer_text`, `footer_logo`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(2, '4311704466145.png', 'Old Man Club', '1', NULL, 'oldman@gmail.com', 'https://www.facebook.com', 'https://twitter.com', 'https://www.linkedin.com/', 'https://www.instagram.com/', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', '7571704466145.png', '2024-01-05 08:49:05', '2024-01-05 08:49:05', NULL);
+(2, '7741704716417.png', 'Old Man Club', '1', NULL, 'oldman@gmail.com', 'https://www.facebook.com', 'https://twitter.com', 'https://www.linkedin.com/', 'https://www.instagram.com/', 'Old Man Club is a Multipurpose Platform that serves unique service througout the world.', '7571704466145.png', '2024-01-05 08:49:05', '2024-01-08 06:20:17', NULL);
 
 -- --------------------------------------------------------
 
@@ -256,7 +393,8 @@ CREATE TABLE `sliders` (
 --
 
 INSERT INTO `sliders` (`id`, `text_large`, `text_small`, `link`, `image`, `order_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'WANT ANYTHING TO BE EASY WITH OLD MAN CLUB', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been', 'https://www.google.com/', '7831704469847.png', 1, '2024-01-05 09:50:47', '2024-01-05 09:54:43', NULL);
+(1, 'WANT ANYTHING TO BE EASY WITH OLD MAN CLUB', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been', 'https://www.google.com/', '5851704706064.png', 1, '2024-01-05 09:50:47', '2024-01-08 03:27:44', NULL),
+(2, 'WANT ANYTHING TO BE EASY WITH OLD MAN CLUB', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been', 'https://www.google.com/', '9421704706076.png', 1, '2024-01-08 03:19:46', '2024-01-08 03:27:56', NULL);
 
 -- --------------------------------------------------------
 
@@ -344,6 +482,13 @@ ALTER TABLE `countries`
   ADD UNIQUE KEY `countries_name_en_unique` (`name_en`);
 
 --
+-- Indexes for table `customer_feedback`
+--
+ALTER TABLE `customer_feedback`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `customer_feedback_customer_id_index` (`customer_id`);
+
+--
 -- Indexes for table `districts`
 --
 ALTER TABLE `districts`
@@ -360,9 +505,33 @@ ALTER TABLE `divisions`
   ADD KEY `divisions_country_id_index` (`country_id`);
 
 --
+-- Indexes for table `global_net_work_images`
+--
+ALTER TABLE `global_net_work_images`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `homepages`
+--
+ALTER TABLE `homepages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `nfc_card_images`
+--
+ALTER TABLE `nfc_card_images`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `our_services`
+--
+ALTER TABLE `our_services`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -442,6 +611,12 @@ ALTER TABLE `countries`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `customer_feedback`
+--
+ALTER TABLE `customer_feedback`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `districts`
 --
 ALTER TABLE `districts`
@@ -454,10 +629,34 @@ ALTER TABLE `divisions`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `global_net_work_images`
+--
+ALTER TABLE `global_net_work_images`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `homepages`
+--
+ALTER TABLE `homepages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `nfc_card_images`
+--
+ALTER TABLE `nfc_card_images`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `our_services`
+--
+ALTER TABLE `our_services`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -487,7 +686,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `sliders`
 --
 ALTER TABLE `sliders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `thanas`
@@ -510,6 +709,12 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `customer_feedback`
+--
+ALTER TABLE `customer_feedback`
+  ADD CONSTRAINT `customer_feedback_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `divisions`

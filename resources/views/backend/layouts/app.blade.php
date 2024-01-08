@@ -165,7 +165,7 @@
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon icon-settings"></i>
+                        <i class="fa fa-globe"></i>
                             <span class="nav-text">Website</span>
                         </a>
                         <ul aria-expanded="false">
@@ -175,9 +175,10 @@
                             <li><a href="{{route('homepage.index')}}">Home Page</a></li>
                             <li><a href="{{route('cus_feedback.index')}}">Customer Feedback</a></li>
                             <li><a href="{{route('globalnetwork.index')}}">Global Network</a></li>
+                            <li><a href="{{route('nfccard.index')}}">NFC Card Image</a></li>
                         </ul>
                     </li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                    <!-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                 class="icon icon-chart-bar-33"></i><span class="nav-text">Charts</span></a>
                         <ul aria-expanded="false">
                             <li><a href="./chart-flot.html">Flot</a></li>
@@ -263,7 +264,7 @@
                             </li>
                             <li><a href="./page-lock-screen.html">Lock Screen</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
 

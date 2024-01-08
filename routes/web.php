@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\Website\OurServicesController as ourservice;
 use App\Http\Controllers\Backend\Website\HomepageController as homepage;
 use App\Http\Controllers\Backend\Website\CustomerFeedbackController as cus_feedback;
 use App\Http\Controllers\Backend\Website\GlobalNetWorkImageController as globalnetwork;
+use App\Http\Controllers\Backend\Website\NfcCardImageController as nfccard;
 
 
 
@@ -20,8 +21,8 @@ use App\Http\Controllers\Backend\Website\GlobalNetWorkImageController as globaln
 use App\Http\Controllers\User\ClientAuthentication as clientauth;
 use App\Http\Controllers\User\ClientController as client;
 
-
-
+// landing page
+use App\Http\Controllers\Common\frontendController as frontend;
 
 
 /*
@@ -55,6 +56,7 @@ Route::middleware(['checkrole'])->prefix('admin')->group(function(){
     Route::resource('homepage', homepage::class);
     Route::resource('cus_feedback', cus_feedback::class);
     Route::resource('globalnetwork', globalnetwork::class);
+    Route::resource('nfccard', nfccard::class);
     
 });
 
@@ -70,7 +72,9 @@ Route::get('client/logout', [clientauth::class,'singOut'])->name('clientlogOut')
 Route::middleware(['checkclient'])->prefix('client')->group(function(){
     Route::get('dashboard', [client::class,'index'])->name('clientdashboard'); 
 });
-Route::get('/', function () {
-    return view('frontend.home');
-});
+
+Route::get('', [frontend::class, 'frontend'])->name('frontend');
+// Route::get('/', function () {
+//     return view('frontend.home');
+// });
 

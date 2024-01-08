@@ -1,0 +1,247 @@
+body{
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+.company{
+    color: #CB9025;
+}
+
+.hero-section{
+    background-color: #2F0549;
+    /* height: 800px; */
+    position: relative;
+    z-index: 200;
+}
+.navbar {
+    background-color: #2F0549;
+    overflow: hidden;
+    /* position: relative; */
+    /* padding: 80px 60px; */
+}
+.navbar-nav .nav-link {
+    position: relative;
+    color: #ffff; /* Set the default text color */
+}
+
+.navbar-nav .nav-link:hover::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px; /* Adjust the distance of the yellow bar from the text */
+    width: 100%;
+    height: 2px; /* Adjust the thickness of the yellow bar */
+    background-color: yellow; /* Set the color of the yellow bar */
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 36px;
+    text-decoration: none;
+}
+
+.navbar img {
+    float: left;
+    padding: 10px; 
+    height: 50px; 
+    /* margin-left: 55px;  */
+}
+
+.navbar-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-right {
+    float: right;
+}
+
+.navbar button {
+    background-color:  #2F0549;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+}
+/* .sign-up-btn{
+    background-color:  #2F0549;
+    color: white;
+} */
+
+.slider{
+ margin-right: 0px;
+}
+.slider-text{
+    color:#ffffff;
+    margin-top: 100px;
+    margin-left: 60px;
+}
+.slider-image{
+    float: right;
+    margin-top: -250px;
+    position: relative;
+    margin-right: -60px;
+    height: auto;
+}
+
+.card-info {
+    margin-top: -280px; /* Adjust the negative margin to overlap */
+}
+
+/* Our service starts */
+.card-group {
+    display: flex;  
+}
+.card {
+    flex: 1; 
+    text-align: center;
+    margin: 10px; 
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}
+
+.card i {
+    padding-top: 16px;
+    font-size: 24px; /* Adjust the icon size */
+    margin-bottom: 10px; /* Add margin below the icon */
+}
+
+.our-service-details .card {
+    height: 300px; /* Set a fixed height for the cards */
+    border-radius: 10px; /* Add border-radius for rounded corners */
+    overflow: hidden; /* Hide overflowing content */
+}
+
+.our-service-details .card img {
+    object-fit: cover; /* Maintain aspect ratio and cover the entire container */
+    height: 100%; /* Set the image height to 100% of the container */
+    width: 100%; /* Set the image width to 100% of the container */
+}
+
+.fixed-size-card {
+    height: 100%;
+}
+
+.fixed-size-card img {
+    height: 250px; /* Set your desired fixed height for the image */
+}
+
+.fixed-size-card hr {
+    width: 100%; /* Set the width of the line as needed */
+    margin: 0 auto; /* Center the line within the card */
+}
+
+.fixed-size-card .card-body {
+    text-align: center; /* Center-align the text */
+    padding: 10px; /* Add padding for better aesthetics */
+}
+.card-link{
+    text-decoration: none;
+}
+.our-service-details .card-body{
+    /* display: block; */
+    margin-bottom: 0px;
+}
+/* Add a tiny border between cards */
+.card:not(:last-child) {
+    margin-right: 0px; /* Adjust the margin to control the space between cards */
+}
+/* Special offers */
+.credit-card{
+    height: 400px;
+    background-color: #2F0549;
+}
+
+/* Global-network */
+.global-network{
+    margin-top: 220px;
+}
+
+/* Happy Customer */
+.happy-customer{
+    margin-bottom: 0px;
+}
+.testimonial-item{
+    margin: 0px 12px;
+}
+
+/* Subcribe */
+.subscribe {
+    position: relative;
+    z-index: 2;
+    margin-top: 0px;
+}
+
+/* Footer Section */
+.footer {
+    background-color: #F8F8F8;
+    color: #4F5665;
+    padding: 20px 20px;
+    height: 320px;
+    z-index: 1;
+    margin-top: -45px; /* Adjust the negative margin to intersect the footer in half */
+}
+
+.footer-logo {
+    /* Adjust styles for your logo */
+    display: block;
+    /* width: 50px; 
+    height: 50px;  */
+    margin-bottom: 10px;
+}
+
+.footer-social-icons {
+    /* Add your social icons styling */
+    margin-top: 10px;
+}
+
+.footer-column {
+    float: left;
+    width: 25%; /* Adjust column width as needed */
+    padding-top: 80px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 0px;
+}
+
+.footer-heading {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 8px;
+}
+
+.footer-links a {
+    color: #4F5665;
+    text-decoration: none;
+    display: block;
+}
+
+
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+/* @media only screen and (min-width: 600px) {
+        
+} */
+
+/* Medium devices (landscape tablets, 768px and up) */
+/* @media only screen and (min-width: 768px) {
+   
+} */

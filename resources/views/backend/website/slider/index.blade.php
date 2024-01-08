@@ -4,7 +4,7 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">Table Bordered</h4>
+            <h4 class="card-title">Slider List</h4>
                 <div>
                     <a class="pull-right fs-1" href="{{route('slider.create')}}"><i class="fa fa-plus">Add new</i></a>
                 </div>
@@ -18,8 +18,8 @@
                             <th scope="col">{{__('Heading')}}</th>
                             <th scope="col">{{__('Description')}}</th>
                             <th scope="col">{{__('Link')}}</th>
-                            <th scope="col">{{__('Image')}}</th>
                             <th scope="col">{{__('Order By')}}</th>
+                            <th scope="col">{{__('Image')}}</th>
                             <th scope="col">{{__('Action')}}</th>
                         </tr>
                     </thead>
@@ -35,7 +35,7 @@
                             <td>
                                 <div class="d-flex">
                                     <a href="{{route('slider.edit',encryptor('encrypt',$value->id))}}">
-                                        <i class="fa fa-edit"></i>
+                                        <i class="fa fa-edit mx-1"></i>
                                     </a>
                                     <form id=""
                                         action="{{ route('slider.destroy', encryptor('encrypt', $value->id)) }}"
