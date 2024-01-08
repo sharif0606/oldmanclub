@@ -15,7 +15,7 @@ class SettingController extends Controller
     public function index()
     {
         $data = Setting::get();
-        return view('backend.setting.index',compact('data'));
+        return view('backend.website.setting.index',compact('data'));
     }
 
     /**
@@ -23,7 +23,7 @@ class SettingController extends Controller
      */
     public function create()
     {
-        return view('backend.setting.create');
+        return view('backend.website.setting.create');
     }
 
     /**
@@ -57,8 +57,11 @@ class SettingController extends Controller
                 $this->notice::success('Data Successfully saved');
                 return redirect()->route('setting.index');
             }
+            else{
+                return redirect()->back()->withInput();
+            }
         }catch(Exception $e){
-            dd($e);
+            // dd($e);
             $this->notice::error('Somthing Wrong! Please try again');
             return redirect()->route('setting.create');
         }
@@ -78,7 +81,7 @@ class SettingController extends Controller
     public function edit($id)
     {
         $data = Setting::findOrFail(encryptor('decrypt',$id));
-        return view('backend.setting.edit',compact('data'));
+        return view('backend.website.setting.edit',compact('data'));
     }
 
     /**
@@ -109,11 +112,14 @@ class SettingController extends Controller
                 $data->footer_logo=$imageName;
             }
             if($data->save()){
-                $this->notice::success('Data Successfully saved');
+                $this->notice::success('Data Successfully Updated');
                 return redirect()->route('setting.index');
             }
+            else{
+                return redirect()->back()->withInput();
+            }
         }catch(Exception $e){
-            dd($e);
+            // dd($e);
             $this->notice::error('Somthing Wrong! Please try again');
             return redirect()->route('setting.create');
         }

@@ -14,7 +14,7 @@ class SliderController extends Controller
     public function index()
     {
         $slider = Slider::get();
-        return view('backend.slider.index',compact('slider'));
+        return view('backend.website.slider.index',compact('slider'));
     }
 
     /**
@@ -22,7 +22,7 @@ class SliderController extends Controller
      */
     public function create()
     {
-        return view('backend.slider.create');
+        return view('backend.website.slider.create');
     }
 
     /**
@@ -45,8 +45,11 @@ class SliderController extends Controller
                 $this->notice::success('slider successfully Saved');
                 return redirect()->route('slider.index');
             }
+            else{
+                return redirect()->back()->withInput();
+            }
         }catch(Exception $e){
-            dd($e);
+            // dd($e);
             $this->notice::error('Something wrong! Please try again');
             return redirect()->route('slider.create');
         }
@@ -67,7 +70,7 @@ class SliderController extends Controller
     public function edit($id)
     {
         $slider = Slider::findOrFail(encryptor('decrypt',$id));
-        return view('backend.slider.edit',compact('slider'));
+        return view('backend.website.slider.edit',compact('slider'));
     }
 
     /**
@@ -84,14 +87,17 @@ class SliderController extends Controller
                 $imageName = rand(111,999).time().'.'.
                 $request->image->extension();
                 $request->image->move(public_path('uploads/setting'), $imageName);
-                $data->image=$imageName;
+                $slider->image=$imageName;
             }
             if($slider->save()){
-                $this->notice::success('slider successfully Saved');
+                $this->notice::success('slider successfully Updated');
                 return redirect()->route('slider.index');
             }
+            else{
+                return redirect()->back()->withInput();
+            }
         }catch(Exception $e){
-            dd($e);
+            // dd($e);
             $this->notice::error('Something wrong! Please try again');
             return redirect()->route('slider.create');
         }

@@ -8,6 +8,10 @@ use App\Http\Controllers\Backend\DashboardController as dashboard;
 use App\Http\Controllers\Backend\PermissionController as permission;
 use App\Http\Controllers\Backend\Website\SettingController as setting;
 use App\Http\Controllers\Backend\Website\SliderController as slider;
+use App\Http\Controllers\Backend\Website\OurServicesController as ourservice;
+use App\Http\Controllers\Backend\Website\HomepageController as homepage;
+use App\Http\Controllers\Backend\Website\CustomerFeedbackController as cus_feedback;
+use App\Http\Controllers\Backend\Website\GlobalNetWorkImageController as globalnetwork;
 
 
 
@@ -47,6 +51,11 @@ Route::middleware(['checkrole'])->prefix('admin')->group(function(){
     Route::post('permission/{role}', [permission::class,'save'])->name('permission.save');
     Route::resource('setting', setting::class);
     Route::resource('slider', slider::class);
+    Route::resource('ourservice', ourservice::class);
+    Route::resource('homepage', homepage::class);
+    Route::resource('cus_feedback', cus_feedback::class);
+    Route::resource('globalnetwork', globalnetwork::class);
+    
 });
 
 

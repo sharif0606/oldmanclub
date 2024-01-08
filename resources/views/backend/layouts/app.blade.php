@@ -161,7 +161,6 @@
                         <ul aria-expanded="false">
                             <li><a href="{{route('user.index')}}">User</a></li>
                             <li><a href="{{route('role.index')}}">Role</a></li>
-                            <li><a href="{{route('setting.index')}}">Settings</a></li>
                         </ul>
                     </li>
                     <li>
@@ -172,6 +171,10 @@
                         <ul aria-expanded="false">
                             <li><a href="{{route('setting.index')}}">Settings</a></li>
                             <li><a href="{{route('slider.index')}}">Slider</a></li>
+                            <li><a href="{{route('ourservice.index')}}">Our Service</a></li>
+                            <li><a href="{{route('homepage.index')}}">Home Page</a></li>
+                            <li><a href="{{route('cus_feedback.index')}}">Customer Feedback</a></li>
+                            <li><a href="{{route('globalnetwork.index')}}">Global Network</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
