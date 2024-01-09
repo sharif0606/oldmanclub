@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Website;
+namespace App\Http\Controllers\Backend\Website\NfcCard;
 
-use App\Models\Backend\Website\NfcCardImage;
+use App\Models\Backend\Website\NfcCard\NfcCardImage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use File;

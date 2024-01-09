@@ -1,18 +1,60 @@
 @extends('frontend.layouts.app')
 @section('content')
-<!-- Hero section start -->
-<div class="container-fluid hero-section">
+@push('styles')
+
+<style>
+    .slick-dots {
+    position: absolute;
+    bottom: 180px;
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin-left: 60px;
+    list-style: none;
+    text-align: left;
+    }
+    .slick-dots li {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+    padding: 0;
+    cursor: pointer;
+    }
+    .slick-dots li button:before {
+    font-family: 'slick';
+    font-size: 20px;
+    line-height: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    content: '•';
+    text-align: center;
+    opacity: .25;
+    color: #ffffff;
+    }
+    .slick-dots li.slick-active button:before {
+        opacity: .75;
+        color: #ffc107;
+    }
+</style>
+@endpush
+    <!-- Hero section start -->
+    <div class="container-fluid hero-section">
         <div class="container">
             <div class="row">
-               <div class="col-md-12 hero-slider">
+               <div class="col-md-12 col-sm-12 hero-slider">
                 @foreach($slider as $s)
                     <div class="slider-item-hero">
-                        <div class="col-md-5 col-xs-5 col-sm-6 slider-text">
+                        <div class="col-md-5 col-sm-6 slider-text">
                             <h2>{{$s->text_large}}</h2>
                             <p>{{$s->text_small}}</p>
                             <a href="{{$s->link}}" class="btn btn-warning px-5 py-2 mt-4">Get Started</a>
                         </div>
-                        <div class="col-md-7 col-xs-7 col-sm-6 slider-image">
+                        <div class="col-md-7 col-sm-6 slider-image">
                                 <img src="{{asset('public/uploads/slider/'.$s->image)}}" alt="Slider Image 1" class="img-fluid">
                         </div>
                     </div>
@@ -39,9 +81,9 @@
                     </div> -->
                 </div>
             </div>
-            <div class="container">
+            <div class="container user-location">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <section class="card-info mt-5">
                             <div class="card-group">
                                 <div class="card">
@@ -67,7 +109,7 @@
      
 
     <!-- Our Service section start -->
-    <div class="container">
+    <div class="container mt-5">
         <div class="row">
             <div class="col-md-12">                  
                 <div class="our-service-details mt-5 text-center">

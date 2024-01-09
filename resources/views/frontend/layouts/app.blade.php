@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    @stack('styles')
 </head>
 <body>
     <!-- header start-->
@@ -33,7 +34,7 @@
                         </ul>
                         <div class="navbar-right">
                             <a href="{{route('clientlogin')}}" class="btn btn-link">Sign In</a>
-                            <a href="{{route('clientregister')}}" class="btn btn-outline-primary sign-up-btn">Sign Up</a>
+                            <a href="{{route('clientregister')}}" class="btn btn-outline-warning sign-up-btn">Sign Up</a>
                         </div>
                     </div>
                 </div>
@@ -111,7 +112,7 @@
                 slidesToShow: 3,
                 slidesToScroll: 2,
                 arrows: true,
-                dots: true,
+                dots: false,
                autoplay: false,
               autoplaySpeed: 2000,
               responsive:[
@@ -134,8 +135,10 @@
             $('.hero-slider').slick({
                 slidesToShow: 1,
                 slidesToScroll: 1,
-                arrows: true,
+                arrows: false,
                 dots: true,
+                // autoplay: true,
+                // autoplaySpeed: 2000,
             });
         });
     </script>

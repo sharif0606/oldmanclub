@@ -12,7 +12,12 @@ use App\Http\Controllers\Backend\Website\OurServicesController as ourservice;
 use App\Http\Controllers\Backend\Website\HomepageController as homepage;
 use App\Http\Controllers\Backend\Website\CustomerFeedbackController as cus_feedback;
 use App\Http\Controllers\Backend\Website\GlobalNetWorkImageController as globalnetwork;
-use App\Http\Controllers\Backend\Website\NfcCardImageController as nfccard;
+
+//NFC Business Card
+use App\Http\Controllers\Backend\Website\NfcCard\NfcCardImageController as nfccard;
+use App\Http\Controllers\Backend\Website\NfcCard\NfcCardPriceSectionController as nfcpricesection;
+use App\Http\Controllers\Backend\Website\NfcCard\NfcCardPriceController as nfccardprice;
+use App\Http\Controllers\Backend\Website\NfcCard\SubscribeSectionController as subscribesection;
 
 
 
@@ -56,8 +61,13 @@ Route::middleware(['checkrole'])->prefix('admin')->group(function(){
     Route::resource('homepage', homepage::class);
     Route::resource('cus_feedback', cus_feedback::class);
     Route::resource('globalnetwork', globalnetwork::class);
-    Route::resource('nfccard', nfccard::class);
     
+//NFC card section
+    Route::resource('nfccard', nfccard::class);
+    Route::resource('nfcpricesection', nfcpricesection::class);
+    Route::resource('nfccardprice', nfccardprice::class);
+    Route::resource('subscribesection', subscribesection::class);
+ 
 });
 
 

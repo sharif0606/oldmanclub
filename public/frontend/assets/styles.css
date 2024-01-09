@@ -11,7 +11,7 @@ body{
 
 .hero-section{
     background-color: #2F0549;
-    /* height: 800px; */
+    height: 450px;
     position: relative;
     z-index: 200;
 }
@@ -59,7 +59,9 @@ body{
 }
 
 .navbar-right {
-    float: right;
+    /* float: right; */
+    display: flex;
+    align-items: center;
 }
 
 .navbar button {
@@ -234,7 +236,10 @@ body{
 }
 
 
-
+.user-location{
+    position: absolute;
+    bottom: -40px;
+}
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 /* @media only screen and (min-width: 600px) {
@@ -245,3 +250,42 @@ body{
 /* @media only screen and (min-width: 768px) {
    
 } */
+
+/* slider dots */
+.slick-dots {
+    position: absolute;
+    bottom: 180px;
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin-left: 60px;
+    list-style: none;
+    text-align: left;
+    }
+    .slick-dots li {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+    padding: 0;
+    cursor: pointer;
+    }
+    .slick-dots li button:before {
+    font-family: 'slick';
+    font-size: 20px;
+    line-height: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    content: '•';
+    text-align: center;
+    opacity: .25;
+    color: #ffffff;
+    }
+    .slick-dots li.slick-active button:before {
+        opacity: .75;
+        color: #ffc107;
+    }

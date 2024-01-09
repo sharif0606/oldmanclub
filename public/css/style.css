@@ -19416,3 +19416,7 @@ a {
 body{
   color:#000;
 }
+
+.logo-abbr{
+  max-width: 250px;
+}

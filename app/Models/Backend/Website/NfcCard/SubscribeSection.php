@@ -1,0 +1,13 @@
+<?php
+
+namespace App\Models\Backend\Website\NfcCard;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\softDeletes;
+
+class SubscribeSection extends Model
+{
+    use HasFactory;
+    use softDeletes;
+}

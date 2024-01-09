@@ -44,10 +44,11 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="index.html" class="brand-logo">
-                <img class="logo-abbr" src="./images/logo.png" alt="">
-                <img class="logo-compact" src="./images/logo-text.png" alt="">
-                <img class="brand-title" src="./images/logo-text.png" alt="">
+            <a href="{{route('dashboard')}}" class="brand-logo">
+                <img class="logo-abbr" style="max-width: 250px;"  src="{{asset('public/assets/images/Group.png')}}" alt="">
+                <!-- <img class="logo-abbr" src="./images/logo.png" alt=""> -->
+                <!-- <img class="logo-compact" src="./images/logo-text.png" alt="">
+                <img class="brand-title" src="./images/logo-text.png" alt=""> -->
             </a>
 
             <div class="nav-control">
@@ -175,7 +176,18 @@
                             <li><a href="{{route('homepage.index')}}">Home Page</a></li>
                             <li><a href="{{route('cus_feedback.index')}}">Customer Feedback</a></li>
                             <li><a href="{{route('globalnetwork.index')}}">Global Network</a></li>
-                            <li><a href="{{route('nfccard.index')}}">NFC Card Image</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="fa fa-globe"></i>
+                            <span class="nav-text">NFC</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('nfccard.index')}}">NFC Business Card</a></li>
+                            <li><a href="{{route('nfcpricesection.index')}}">NFC Price Section</a></li>
+                            <li><a href="{{route('nfccardprice.index')}}">NFC Card Price</a></li>
+                            <li><a href="{{route('subscribesection.index')}}">NFC Subscribe</a></li>
                         </ul>
                     </li>
                     <!-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i

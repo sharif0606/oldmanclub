@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Backend\Website;
+namespace App\Models\Backend\Website\NfcCard;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
