@@ -26,16 +26,18 @@
                         <section class="card-info mt-5">
                             <div class="card-group">
                                 <div class="card">
-                                    <i class="fas fa-users"></i>
-                                    <p>90K+ <br> Users</p>
+                                    <img src="{{asset('public/images/icon/user.png')}}" class="mx-3" alt="" srcset="">
+                                    <p ><b >90K+</b> <br>Users</p>
+                                   
+                                    
                                 </div>
                                 <div class="card">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <p>200+ <br> Locations</p>
+                                <img src="{{asset('public/images/icon/location.png')}}" class="mx-3" alt="" srcset="">
+                                    <p><b >200+</b> <br> Locations</p>
                                 </div>
                                 <div class="card">
-                                    <i class="fas fa-university"></i>
-                                    <p>50+ <br> Banks</p>
+                                <img src="{{asset('public/images/icon/Server.png')}}" class="mx-3" alt="" srcset="">
+                                    <p><b class="fw-bolder">50+</b><br>Banks</p>
                                 </div>
                             </div>
                         </section>
