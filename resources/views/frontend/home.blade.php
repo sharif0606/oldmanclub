@@ -1,7 +1,6 @@
 @extends('frontend.layouts.app')
 @section('content')
 @push('styles')
-
 <style>
     .slick-dots {
     position: absolute;
@@ -59,26 +58,6 @@
                         </div>
                     </div>
                 @endforeach
-                    <!-- <div class="slider-item-hero">
-                        <div class="col-md-5 col-xs-5 col-sm-6 slider-text">
-                            <h2>Want anything To be easy with old club man.</h2>
-                            <p>Provide Multiple Services for all your needs with ease and fun using Old Club Man. Discover interesting features from us.</p>
-                            <button type="button" class="btn btn-info mt-5">Get Started</button>
-                        </div>
-                        <div class="col-md-7 col-xs-7 col-sm-6 slider-image">
-                            <img src="assets/image/Slider Landing Page 1.png" alt="Slider Image 1" class="img-fluid">
-                        </div>
-                    </div>
-                     <div class="slider-item-hero">
-                        <div class="col-md-5 col-xs-5 col-sm-6 slider-text">
-                            <h2>Want anything To be easy with old club man.</h2>
-                            <p>Provide Multiple Services for all your needs with ease and fun using Old Club Man. Discover interesting features from us.</p>
-                            <button type="button" class="btn btn-info mt-5">Get Started</button>
-                        </div>
-                        <div class="col-md-7 col-xs-7 col-sm-6 slider-image">
-                            <img src="assets/image/Slider Landing Page 1.png" alt="Slider Image 1" class="img-fluid">
-                        </div>
-                    </div> -->
                 </div>
             </div>
             <div class="container user-location">
@@ -122,71 +101,17 @@
                         <div class="col-md-4 mb-4">
                             <a href="{{$value->link}}" class="card-link">
                                 <div class="card fixed-size-card">
-                                <img src="{{asset('public/uploads/ourservices/'.$value->image)}}" class="card-img-top" alt="Product Shipping Service">
-                                <hr class="my-3">
-                                <div class="card-body ">
-                                <p class="card-text text-decoration-none">
-                                    {{$value->title}}    
-                               </p>
-                            </div>
-                            </div>
+                                    <img src="{{asset('public/uploads/ourservices/'.$value->image)}}" class="card-img-top" alt="Product Shipping Service">
+                                    <hr class="my-3">
+                                    <div class="card-body ">
+                                        <p class="card-text text-decoration-none">
+                                            {{$value->title}}    
+                                        </p>
+                                    </div>
+                                </div>
                             </a>                               
                         </div>
-                        <!-- <div class="col-md-4 mb-4">
-                            <a href="" class="card-link">
-                                <div class="card fixed-size-card">
-                                <img src="assets/image/ecommerce-systems.png" class="card-img-top" alt="Ecommerce Systems">
-                                <hr class="my-3">
-                                <div class="card-body">
-                                <p class="card-text">Product Shipping Service</p>
-                            </div>
-                            </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <a href="" class="card-link">
-                                <div class="card fixed-size-card">
-                                <img src="assets/image/NFC-busines-card.png" class="card-img-top" alt="NFC Business Card">
-                                <hr class="my-3">
-                                <div class="card-body">
-                                <p class="card-text ">Product Shipping Service</p>
-                            </div>
-                            </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <a href="" class="card-link">
-                                <div class="card fixed-size-card">
-                                <img src="assets/image/printing-service.png" class="card-img-top" alt="NFC Business Card">
-                                <hr class="my-3">
-                                <div class="card-body">
-                                <p class="card-text">Product Shipping Service</p>
-                            </div>
-                            </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <a href="" class="card-link">
-                                <div class="card fixed-size-card">
-                                <img src="assets/image/USA-company-registration.png" class="card-img-top" alt="NFC Business Card">
-                                <hr class="my-3">
-                                <div class="card-body">
-                                <p class="card-text">Product Shipping Service</p>
-                            </div>
-                            </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <a href="" class="card-link">
-                                <div class="card fixed-size-card">
-                                <img src="assets/image/NFC-busines-card.png" class="card-img-top img-fluid w-100" alt="NFC Business Card">
-                                <hr class="my-3">
-                                <div class="card-body">
-                                <p class="card-text ">Product Shipping Service</p>
-                            </div>
-                            </div>
-                            </a>
-                        </div> -->
+                       
                         @empty
                         <h1>No Service Found</h1>
                         @endforelse
@@ -278,90 +203,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="card testimonial-item">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="customer-info">
-                                            <img src="assets/image/customer-1.jpg" alt="Customer 1" class="rounded-circle customer-image" width="50px">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="customer-details">
-                                            <h4>Customer Name</h4>
-                                            <p>City, Country</p>                                 
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="rating">
-                                                <span class="rating-number">4.5</span>
-                                                <span class="star-icon">&#9733;</span>
-                                            </div>
-                                    </div>
-                                </div>
-                                <div class="customer-review">
-                                    <p>
-                                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card testimonial-item">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="customer-info">
-                                            <img src="assets/image/customer-1.jpg" alt="Customer 1" class="rounded-circle customer-image" width="50px">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="customer-details">
-                                            <h4>Customer Name</h4>
-                                            <p>City, Country</p>                                 
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="rating">
-                                                <span class="rating-number">4.5</span>
-                                                <span class="star-icon">&#9733;</span>
-                                            </div>
-                                    </div>
-                                </div>
-                                <div class="customer-review">
-                                    <p>
-                                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card testimonial-item">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="customer-info">
-                                            <img src="assets/image/customer-1.jpg" alt="Customer 1" class="rounded-circle customer-image" width="50px">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="customer-details">
-                                            <h4>Customer Name</h4>
-                                            <p>City, Country</p>                                 
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="rating">
-                                                <span class="rating-number">4.5</span>
-                                                <span class="star-icon">&#9733;</span>
-                                            </div>
-                                    </div>
-                                </div>
-                                <div class="customer-review">
-                                    <p>
-                                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-                                    </p>
-                                </div>
-                            </div>
-                        </div> -->
                         @endforeach
                         <button type="button" class="slick-prev">Previous</button>
                         <button type="button" class="slick-next">Next</button>

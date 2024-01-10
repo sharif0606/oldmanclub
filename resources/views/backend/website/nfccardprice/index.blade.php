@@ -18,8 +18,8 @@
                             <th scope="col">{{__('Nfc Card Name')}}</th>
                             <th scope="col">{{__('Card Price')}}</th>
                             <th scope="col">{{__('Card Title')}}</th>
-                            <th scope="col">{{__('Card Feature List')}}</th>
                             <th scope="col">{{__('Payment Type')}}</th>
+                            <th scope="col">{{__('Card Feature List')}}</th>
                             <th scope="col">{{__('Action')}}</th>
                         </tr>
                     </thead>

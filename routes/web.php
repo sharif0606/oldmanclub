@@ -84,6 +84,7 @@ Route::middleware(['checkclient'])->prefix('client')->group(function(){
 });
 
 Route::get('', [frontend::class, 'frontend'])->name('frontend');
+Route::get('nfccard', [frontend::class, 'nfccard'])->name('nfccard');
 // Route::get('/', function () {
 //     return view('frontend.home');
 // });
