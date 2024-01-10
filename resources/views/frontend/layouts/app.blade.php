@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing Page</title>
-    <link rel="stylesheet" href="{{asset('public/frontend/assets/styles.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="{{asset('public/frontend/assets/styles.css')}}">
     @stack('styles')
 </head>
 <body>
@@ -17,8 +17,8 @@
         <div class="row">
             <nav class="navbar navbar-expand-lg navbar-dark">
                 <div class="container">
-                    <img src="{{asset('public/uploads/setting/'.$setting->header_logo)}}" alt="Logo" class="logo">
-                    <h4 class="text company">{{$setting->company_name}}</h4>
+                    <img src="{{asset('public/uploads/setting/'.$setting?->header_logo)}}" alt="Logo" class="logo">
+                    <h4 class="text company">{{$setting?->company_name}}</h4>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                         aria-label="Toggle navigation">
@@ -49,13 +49,13 @@
         <div class="container">
             <div class="col-md-3 footer-column">
                 <!-- 1st Column -->
-                <img src="{{asset('public/uploads/setting/'.$setting->footer_logo)}}" alt="Logo" class="logo">
-                <p>{{$setting->footer_text}}</p>
+                <img src="{{asset('public/uploads/setting/'.$setting?->footer_logo)}}" alt="Logo" class="logo">
+                <p>{{$setting?->footer_text}}</p>
                 <div class="d-flex pt-3">
-                    <a class="btn btn-square btn-light rounded-circle me-2" href="{{$setting->twitter_icon}}"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-square btn-light rounded-circle me-2" href="{{$setting->facebook_icon}}"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-square btn-light rounded-circle me-2" href="{{$setting->instagram_icon}}"><i  class="fa-brands fa-square-instagram"></i></a>
-                    <a class="btn btn-square btn-light rounded-circle me-2" href="{{$setting->linkedln_icon}}"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-square btn-light rounded-circle me-2" href="{{$setting?->twitter_icon}}"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-square btn-light rounded-circle me-2" href="{{$setting?->facebook_icon}}"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-square btn-light rounded-circle me-2" href="{{$setting?->instagram_icon}}"><i  class="fa-brands fa-square-instagram"></i></a>
+                    <a class="btn btn-square btn-light rounded-circle me-2" href="{{$setting?->linkedln_icon}}"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
 
@@ -112,7 +112,7 @@
                 slidesToShow: 3,
                 slidesToScroll: 2,
                 arrows: true,
-                dots: false,
+                dots: true,
                autoplay: false,
               autoplaySpeed: 2000,
               responsive:[

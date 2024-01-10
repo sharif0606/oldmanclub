@@ -22,7 +22,7 @@
                 <h2 class="feature-heading">Explore Our Features</h2>
                 <div class="video-container embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item"
-                            src="{{$nfccardhero->video_link}}"
+                            src="https://www.youtube.com/embed/{{$nfccardhero->video_link}}"
                             frameborder="0"
                             allowfullscreen
                     ></iframe>
@@ -66,7 +66,7 @@
         </div>
         <div class="row">
             @foreach($nfccardprice as $card)
-            <div class="col-md-4 mt-3">
+            <div class="col-md-4 mt-3 nfccard">
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title text-start">{{$card->nfc_card_name}}</h5>

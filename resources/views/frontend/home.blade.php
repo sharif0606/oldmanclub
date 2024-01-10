@@ -1,46 +1,6 @@
 @extends('frontend.layouts.app')
 @section('content')
-@push('styles')
-<style>
-    .slick-dots {
-    position: absolute;
-    bottom: 180px;
-    display: block;
-    width: 100%;
-    padding: 0;
-    margin-left: 60px;
-    list-style: none;
-    text-align: left;
-    }
-    .slick-dots li {
-    position: relative;
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin: 0 5px;
-    padding: 0;
-    cursor: pointer;
-    }
-    .slick-dots li button:before {
-    font-family: 'slick';
-    font-size: 20px;
-    line-height: 10px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 10px;
-    height: 10px;
-    content: '•';
-    text-align: center;
-    opacity: .25;
-    color: #ffffff;
-    }
-    .slick-dots li.slick-active button:before {
-        opacity: .75;
-        color: #ffc107;
-    }
-</style>
-@endpush
+
     <!-- Hero section start -->
     <div class="container-fluid hero-section">
         <div class="container">
@@ -67,15 +27,15 @@
                             <div class="card-group">
                                 <div class="card">
                                     <i class="fas fa-users"></i>
-                                    <p>90K+ Users</p>
+                                    <p>90K+ <br> Users</p>
                                 </div>
                                 <div class="card">
                                     <i class="fas fa-map-marker-alt"></i>
-                                    <p>200+ Locations</p>
+                                    <p>200+ <br> Locations</p>
                                 </div>
                                 <div class="card">
                                     <i class="fas fa-university"></i>
-                                    <p>50+ Banks</p>
+                                    <p>50+ <br> Banks</p>
                                 </div>
                             </div>
                         </section>
@@ -93,7 +53,7 @@
             <div class="col-md-12">                  
                 <div class="our-service-details mt-5 text-center">
                     <h2>Our Service</h2>
-                    <p class="px-5 mb-5">{{$homepage->service_section_text}}
+                    <p class="px-5 mb-5">{{$homepage?->service_section_text}}
                         </p>
                 </div>
                     <div class="row pt-4">
@@ -130,13 +90,13 @@
         <div class="row">
         <div class="col-md-12 text-center">
             <h2 class="py-5">Special Offers</h2>
-            <p class="px-5">{{$homepage->special_offer_text}}
+            <p class="px-5">{{$homepage?->special_offer_text}}
             </p>
         </div>
         <div class="container">
             <div class="col-md-12 credit-card">
                 <a href="">
-                        <img src="{{asset('public/uploads/homepage/'.$homepage->special_offer_image)}}" alt="" class="w-100 img-fluid">
+                    <img src="{{asset('public/uploads/homepage/'.$homepage?->special_offer_image)}}" alt="" class="w-100 img-fluid">
                 </a>
             </div>
         </div>
@@ -146,13 +106,13 @@
 
     <!-- Global Network start -->
     <section class="global-network">
-            <div class="container">
+        <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
                     <h2 py-5>Huge Global Network</h2>
-                    <p class="p-5">{{$homepage->global_network_text}}
+                    <p class="p-5">{{$homepage?->global_network_text}}
                     </p>
-                    <img src="{{asset('public/uploads/homepage/'.$homepage->global_network_image)}}" alt="Huge Global Network" class="w-100 img-fluid py-3">
+                    <img src="{{asset('public/uploads/homepage/'.$homepage?->global_network_image)}}" alt="Huge Global Network" class="w-100 img-fluid py-3">
                 </div>
             </div>
             <div class="row">
