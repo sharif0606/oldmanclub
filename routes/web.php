@@ -18,7 +18,10 @@ use App\Http\Controllers\Backend\Website\NfcCard\NfcCardImageController as nfcca
 use App\Http\Controllers\Backend\Website\NfcCard\NfcCardPriceSectionController as nfcpricesection;
 use App\Http\Controllers\Backend\Website\NfcCard\NfcCardPriceController as nfccardprice;
 use App\Http\Controllers\Backend\Website\NfcCard\SubscribeSectionController as subscribesection;
-
+//Shipping Service
+use App\Http\Controllers\Backend\Website\ShippingService\HeaderSectionController as shippingheader;
+use App\Http\Controllers\Backend\Website\ShippingService\ServiceSectionController as shippingservice;
+use App\Http\Controllers\Backend\Website\ShippingService\ChoiceSectionController as shippingchoice;
 
 
 
@@ -67,7 +70,10 @@ Route::middleware(['checkrole'])->prefix('admin')->group(function(){
     Route::resource('nfcpricesection', nfcpricesection::class);
     Route::resource('nfccardprice', nfccardprice::class);
     Route::resource('subscribesection', subscribesection::class);
- 
+//shipping service
+    Route::resource('shippingheader', shippingheader::class);
+    Route::resource('shippingservice', shippingservice::class);
+    Route::resource('shippingchoice', shippingchoice::class);
 });
 
 
@@ -85,6 +91,7 @@ Route::middleware(['checkclient'])->prefix('client')->group(function(){
 
 Route::get('', [frontend::class, 'frontend'])->name('frontend');
 Route::get('nfccard', [frontend::class, 'nfccard'])->name('nfccard');
+Route::get('shippingservice', [frontend::class, 'shippingservice'])->name('shippingservice');
 // Route::get('/', function () {
 //     return view('frontend.home');
 // });

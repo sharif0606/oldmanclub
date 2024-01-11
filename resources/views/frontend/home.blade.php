@@ -1,4 +1,5 @@
 @extends('frontend.layouts.app')
+@section('title','Old Club Man')
 @section('content')
 
     <!-- Hero section start -->
@@ -26,18 +27,16 @@
                         <section class="card-info mt-5">
                             <div class="card-group">
                                 <div class="card">
-                                    <img src="{{asset('public/images/icon/user.png')}}" class="mx-3" alt="" srcset="">
-                                    <p ><b >90K+</b> <br>Users</p>
-                                   
-                                    
+                                    <img src="{{asset('public/images/icon/user.png')}}" class="mx-3 mt-3" width="50px" height="50px" alt="" srcset="">
+                                    <p class="location"><b >90K+</b> <br>Users</p>
                                 </div>
                                 <div class="card">
-                                <img src="{{asset('public/images/icon/location.png')}}" class="mx-3" alt="" srcset="">
-                                    <p><b >200+</b> <br> Locations</p>
+                                <img src="{{asset('public/images/icon/location.png')}}" class="mx-3 mt-3" width="50px" height="50px" alt="" srcset="">
+                                    <p class="location"><b >200+</b> <br> Locations</p>
                                 </div>
                                 <div class="card">
-                                <img src="{{asset('public/images/icon/Server.png')}}" class="mx-3" alt="" srcset="">
-                                    <p><b class="fw-bolder">50+</b><br>Banks</p>
+                                <img src="{{asset('public/images/icon/Server.png')}}" class="mx-3 mt-3" width="50px" height="50px" alt="" srcset="">
+                                    <p class="location"><b class="fw-bolder">50+</b><br>Banks</p>
                                 </div>
                             </div>
                         </section>
@@ -124,7 +123,7 @@
     </section>
     <!-- Global Network end -->
     <!-- Testimonial section starts -->
-    <div class="container mb-5">
+    <div class="container mb-5 happy">
         <div class="row">
             <div class="col-md-12 text-center">
                 <section class="happy-customer">
@@ -133,7 +132,7 @@
                     <div class="testimonial-slider">
                         <!-- Testimonial 1 -->
                         @foreach($feedback as $value)
-                        <div class="card testimonial-item ">
+                        <div class="card testimonial-item h-100">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-2">

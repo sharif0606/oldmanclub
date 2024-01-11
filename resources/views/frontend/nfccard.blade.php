@@ -1,4 +1,5 @@
 @extends('frontend.layouts.app')
+@section('title','NFC Card')
 @section('content')
 <!-- Hero section -->
 <div class="container-fluid heading">
@@ -40,14 +41,6 @@
                     @foreach($lists as $list)
                     <li>{{$list}}</li>
                     @endforeach
-                    <!-- <li>{{implode(',',$nfccardhero->feature_list)}}
-                        NFC Enabled Smart Card</li>
-                    <li>Customizable Online Digital Profile</li>
-                    <li>NFC Chip</li>
-                    <li>Unlimited Taps</li>
-                    <li>Digital QR Code</li>
-                    <li>Lead generation mode</li>
-                    <li>Lifetime validity</li>  -->
                 </ul>
             </div>
             <div class="col-md-6">

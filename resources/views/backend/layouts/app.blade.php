@@ -7,12 +7,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>@yield('title',env('APP_NAME')) </title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('public/images/favicon.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('public/images/frontend_logo.png')}}">
     <link rel="stylesheet" href="{{asset('public/vendor/owl-carousel/css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('public/vendor/owl-carousel/css/owl.theme.default.min.css')}}">
     <link href="{{asset('public/vendor/jqvmap/css/jqvmap.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/css/style.css')}}" rel="stylesheet">
+ 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+    <link href="{{asset('public/css/style.css')}}" rel="stylesheet">
 	@stack('styles')
 
 
@@ -188,6 +190,17 @@
                             <li><a href="{{route('nfcpricesection.index')}}">NFC Price Section</a></li>
                             <li><a href="{{route('nfccardprice.index')}}">NFC Card Price</a></li>
                             <li><a href="{{route('subscribesection.index')}}">NFC Subscribe</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="fa fa-globe"></i>
+                            <span class="nav-text">Shipping Service</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('shippingheader.index')}}">Header Section</a></li>
+                            <li><a href="{{route('shippingservice.index')}}">Service Section</a></li>
+                            <li><a href="{{route('shippingchoice.index')}}">Choice Section</a></li>
                         </ul>
                     </li>
                     <!-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i

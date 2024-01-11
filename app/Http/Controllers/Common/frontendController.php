@@ -16,6 +16,10 @@ use App\Models\Backend\Website\NfcCard\NfcCardPriceSection;
 use App\Models\Backend\Website\NfcCard\NfcCardPrice;
 use App\Models\Backend\Website\NfcCard\SubscribeSection;
 
+use App\Models\Backend\Website\ShippingService\Header_section;
+use App\Models\Backend\Website\ShippingService\Service_section;
+use App\Models\Backend\Website\ShippingService\ChoiceSection;
+
 class frontendController extends Controller
 {
     public function frontend(){
@@ -36,5 +40,13 @@ class frontendController extends Controller
         $nfccardprice = NfcCardPrice::get();
         $nfcsubscribe = SubscribeSection::first();
         return view('frontend.nfccard',compact('setting','nfccardhero','lists','nfcsection','nfccardprice','nfcsubscribe'));
+    }
+    public function shippingservice(){
+        $setting = Setting::first();
+        $heading = Header_section::first();
+        $service = Service_section::get();
+        $choice =ChoiceSection::first();
+        $featureList = is_array($choice->feature_list)? $choice->feature_list:explode(',',$choice->feature_list);
+        return view('frontend.shippingservice',compact('setting','heading','service','choice','featureList'));
     }
 }

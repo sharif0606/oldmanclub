@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>@yield('title',env('APP_NAME')) </title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('public/images/frontend_logo.png')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{asset('public/frontend/assets/styles.css')}}">
     @stack('styles')
 </head>
@@ -26,15 +28,15 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav mx-auto me-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link">Service</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
+                            <li class="nav-item"><a href="{{route('frontend')}}" class="nav-link">Home</a></li>
+                            <li class="nav-item"><a href="{{route('shippingservice')}}" class="nav-link">Service</a></li>
+                            <li class="nav-item"><a href="{{route('nfccard')}}" class="nav-link">Pricing</a></li>
                             <li class="nav-item"><a href="#" class="nav-link">Testimonials</a></li>
                             <li class="nav-item"><a href="#" class="nav-link">Contact Us</a></li>
                         </ul>
                         <div class="navbar-right">
                             <a href="{{route('clientlogin')}}" class="btn btn-link">Sign In</a>
-                            <a href="{{route('clientregister')}}" class="btn btn-outline-warning sign-up-btn">Sign Up</a>
+                            <a href="{{route('clientregister')}}" class="btn btn-outline-warning rounded-pill px-4 py-1 m-0 sign-up-btn">Sign Up</a>
                         </div>
                     </div>
                 </div>
@@ -104,7 +106,6 @@
     
     <!-- Slick Carousel script -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
     <script>
         $(document).ready(function(){
             $('.testimonial-slider').slick({
@@ -113,7 +114,7 @@
                 slidesToScroll: 2,
                 arrows: true,
                 dots: true,
-               autoplay: false,
+            //    autoplay: true,
               autoplaySpeed: 2000,
               responsive:[
                 {
