@@ -22,7 +22,11 @@ use App\Http\Controllers\Backend\Website\NfcCard\SubscribeSectionController as s
 use App\Http\Controllers\Backend\Website\ShippingService\HeaderSectionController as shippingheader;
 use App\Http\Controllers\Backend\Website\ShippingService\ServiceSectionController as shippingservice;
 use App\Http\Controllers\Backend\Website\ShippingService\ChoiceSectionController as shippingchoice;
-
+//LLC Service
+use App\Http\Controllers\Backend\Website\LLcHeroSection\LlcHeroSectionController as llchero;
+use App\Http\Controllers\Backend\Website\LLcHeroSection\LlcserviceController as llcservice;
+use App\Http\Controllers\Backend\Website\LLcHeroSection\LlcPricingController as llcpricing;
+use App\Http\Controllers\Backend\Website\LLcHeroSection\LlcCardsectionController as llccard;
 
 
 
@@ -74,6 +78,11 @@ Route::middleware(['checkrole'])->prefix('admin')->group(function(){
     Route::resource('shippingheader', shippingheader::class);
     Route::resource('shippingservice', shippingservice::class);
     Route::resource('shippingchoice', shippingchoice::class);
+//LLc Service
+    Route::resource('llchero', llchero::class);
+    Route::resource('llcservice', llcservice::class);
+    Route::resource('llcpricing', llcpricing::class);
+    Route::resource('llccard', llccard::class);
 });
 
 
@@ -92,6 +101,7 @@ Route::middleware(['checkclient'])->prefix('client')->group(function(){
 Route::get('', [frontend::class, 'frontend'])->name('frontend');
 Route::get('nfccard', [frontend::class, 'nfccard'])->name('nfccard');
 Route::get('shippingservice', [frontend::class, 'shippingservice'])->name('shippingservice');
+Route::get('llcservice', [frontend::class, 'llcservice'])->name('llcservice');
 // Route::get('/', function () {
 //     return view('frontend.home');
 // });

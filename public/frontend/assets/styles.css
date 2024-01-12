@@ -102,7 +102,7 @@
     .card-group {
         display: flex;  
     }
-    .card {
+    .service .card {
         flex: 1; 
         text-align: center;
         margin: 10px; 
@@ -175,48 +175,7 @@
         margin: 0px 12px;
         display: flex;
     }
-    /* Custom Card Styles */
-    /* .custom-card {
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
-    }
-
-    .custom-card img {
-        border-radius: 50%;
-        max-width: 100%;
-        height: auto;
-    }
-
-    .custom-card .customer-details {
-        margin-bottom: 10px;
-    }
-
-    .custom-card .rating {
-        display: flex;
-        align-items: center;
-    }
-
-    .custom-card .rating-number {
-        font-size: 18px;
-        margin-right: 5px;
-    }
-
-    .custom-card .star-icon {
-        color: #FFD700; /* Golden color for stars */
-        /* font-size: 18px;
-    }
-
-    .custom-card .customer-review {
-        margin-top: 10px;
-    }
-
-    /* Override Bootstrap Card Styles */
-    /* .custom-card .card-body {
-        padding: 15px;
-    } */ */ */
+   
 
     /* Subcribe */
     .subscribe {
@@ -699,3 +658,227 @@
         color: #2F0549 !important;
     }
     /* Shipping Service Css End */
+
+
+    /* LLC Service Css Start */
+    /* hero-section */
+    .llc-hero {
+        position: relative;
+        height: 420px; 
+        overflow: hidden;
+    }
+
+    .llc-hero-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: contrast(50%);
+    }
+
+    .llc-hero-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: white;
+    }
+
+    .llc-hero-content {
+        max-width: 400px; /* Adjust the max-width according to your design */
+        margin: 0 auto;
+    }
+    .llc-search-box {
+        position: relative;
+        display: inline-block;
+        width: 280px;
+    }
+
+    .llc-search-icon,
+    .llc-arrow-icon {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 20px; /* Adjust the size as needed */
+        color: #555; /* Adjust the color as needed */
+        cursor: pointer;
+    }
+
+    .llc-search-icon {
+        left: 10px;
+    }
+
+    .llc-arrow-icon {
+        right: 10px;
+    }
+
+    .llc-get-started-btn, .llc-register-btn{
+        background-color: #FFA615 !important;
+        color: #2F0549 !important;
+        border: 1px solid #FFA615 !important;
+    }
+    /* Add responsive styles as needed */
+    @media (max-width: 768px) {
+    .llc-hero-text {
+        max-width: 80%;
+    }
+    }
+    /* service section */
+    .llc-service{
+        padding-top: 50px;
+        padding-bottom: 50px;
+        margin-right: 0;
+        padding-right: 0px;
+    }
+    .llc-service-text{
+        padding-left: 10px;
+    }
+    .llc-service-image img{
+        padding-left: 30px;
+        padding-right: 10px;
+    }
+
+    /* how it's work */
+    .llc-work-section {
+        text-align: center;
+        padding: 50px 0;
+    }
+
+    .llc-work-heading {
+        font-size: 36px;
+        font-weight: bold;
+        color: #2F0549;
+        margin-bottom: 30px;
+    }
+    .llc-video-container {
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    }
+
+    .llc-video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Pricing plan */
+    .llc-pricing-section {
+        background-color: #fff;
+        padding: 60px 0;
+    }
+
+    .llc-pricing-content{
+        padding: 15px 20px;
+    }
+    .llc-pricing-card {
+        border: 2px solid #2F0549;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .llc-pricing-card:hover {
+        background-color: #2F0549;
+        color: white;
+    }
+
+    .llc-pricing-card .card-body {
+        padding: 20px;
+    }
+
+    .llc-pricing-card h3 {
+        color: #2F0549;
+    }
+    .llc-pricing-card :hover h3{
+        color:white;
+    }
+
+    .llc-pricing-card hr {
+        border-top: 2px solid #2F0549;
+    }
+
+    .llc-pricing-card ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .llc-pricing-card ul li {
+        padding-left: 20px;
+        position: relative;
+        color: #2F0549;
+    }
+
+    .llc-pricing-card:hover ul li {
+        color: white;
+    }
+
+    .llc-pricing-card button {
+        background-color: #fff;
+        color: #2F0549;
+        border: 2px solid #2F0549;
+        border-radius: 5px;
+        padding: 10px 20px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+
+
+
+    /* Card section */
+    .llc-our-card{
+        padding: 0px 25px;
+    }
+    .llc-our-card-text{
+        padding-top: 170px;
+    }
+
+    .llc-our-card-image img {
+        width: 100%;
+        height: auto;
+    }
+
+    .llc-contact-us {
+        position: relative;
+        height: 400px; /* Set your desired height */
+        overflow: hidden;
+        background: url('image/contact-image.png') no-repeat;
+        display: flex;
+            background-size: cover;
+        background-position: center center;
+        align-items: center;
+        justify-content: center;
+        color: white;
+    }
+
+    .llc-contact-us-content {
+        text-align: center;
+        /* align-items: center; */
+        /* justify-content: center; */
+    }
+
+    .llc-contact-us-content h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    .llc-contact-us-content p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+    }
+
+    .llc-contact-us-content button {
+        background-color: #FFC107;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    /* LLC Service Css End */

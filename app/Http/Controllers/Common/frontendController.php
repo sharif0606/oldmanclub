@@ -20,6 +20,8 @@ use App\Models\Backend\Website\ShippingService\Header_section;
 use App\Models\Backend\Website\ShippingService\Service_section;
 use App\Models\Backend\Website\ShippingService\ChoiceSection;
 
+use App\Models\Backend\Website\LLcservice\LlcHeroSection;
+
 class frontendController extends Controller
 {
     public function frontend(){
@@ -48,5 +50,13 @@ class frontendController extends Controller
         $choice =ChoiceSection::first();
         $featureList = is_array($choice->feature_list)? $choice->feature_list:explode(',',$choice->feature_list);
         return view('frontend.shippingservice',compact('setting','heading','service','choice','featureList'));
+    }
+    public function llcservice(){
+        $setting = \App\Models\Backend\Website\Setting::first();
+        $llcherosection = \App\Models\Backend\Website\LLcservice\LlcHeroSection::first();
+        $llcservice = \App\Models\Backend\Website\LLcservice\Llcservice::get();
+        $llcpricing = \App\Models\Backend\Website\LLcservice\LlcPricing::get();
+        $llccardsection = \App\Models\Backend\Website\LLcservice\LlcCardsection::first();
+        return view('frontend.llcservice',compact('setting','llcherosection','llcservice','llcpricing','llccardsection'));
     }
 }

@@ -203,6 +203,18 @@
                             <li><a href="{{route('shippingchoice.index')}}">Choice Section</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="fa fa-globe"></i>
+                            <span class="nav-text">LLC Service</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('llchero.index')}}">Hero Section</a></li>
+                            <li><a href="{{route('llcservice.index')}}">LLC Service</a></li>
+                            <li><a href="{{route('llcpricing.index')}}">LLC Pricing</a></li>
+                            <li><a href="{{route('llccard.index')}}">LLC Card</a></li>
+                        </ul>
+                    </li>
                     <!-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                 class="icon icon-chart-bar-33"></i><span class="nav-text">Charts</span></a>
                         <ul aria-expanded="false">

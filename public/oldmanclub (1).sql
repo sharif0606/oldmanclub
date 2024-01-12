@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2024 at 04:27 PM
+-- Generation Time: Jan 12, 2024 at 04:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `oldmanclub`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `choice_sections`
+--
+
+CREATE TABLE `choice_sections` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `feature_list` varchar(255) DEFAULT NULL,
+  `video_link` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `choice_sections`
+--
+
+INSERT INTO `choice_sections` (`id`, `feature_list`, `video_link`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '[\"Shopping Benefits\",\"      Shop & Save at USA\",\"      Uk Stores\",\"      Avoid paying Us Sales Tax\",\"      Deals & Coupons\",\"     Top Stores Details\",\"      Package Return Services \",\"     Guaranteed Pricing\",\"      Discounted Carrier Prices\"]', 'tnzjLZO2vgM', '2024-01-11 05:07:09', '2024-01-11 07:36:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -171,6 +193,29 @@ INSERT INTO `global_net_work_images` (`id`, `title`, `link`, `image`, `created_a
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `header_sections`
+--
+
+CREATE TABLE `header_sections` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `text_large` varchar(255) DEFAULT NULL,
+  `text_small` text DEFAULT NULL,
+  `header_image` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `header_sections`
+--
+
+INSERT INTO `header_sections` (`id`, `text_large`, `text_small`, `header_image`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'ONE-DEMAND SHIPPING SERVICE WORLDWIDE', 'Are you looking for a streamlined 3pL eCommerce fullfilment service and warehouse center to support your brand and order fullfilment  fulfyld is the ultimate  third party fullfilment warehousing partner  you can rely on  for a personalized apporoach and efficient fullfilment services.', '189.png', '2024-01-11 03:07:10', '2024-01-11 03:11:36', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `homepages`
 --
 
@@ -194,6 +239,105 @@ CREATE TABLE `homepages` (
 
 INSERT INTO `homepages` (`id`, `service_section_text`, `special_offer_text`, `special_offer_image`, `special_offer_link`, `global_network_text`, `global_network_image`, `customer_feedback_text`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'We understand the demand of growing market and your interest in multiple. There is a lot of my about service but there is  no alternative to your need', 'Welcome to Old club man one of the multiple service companies in Bangladesh. Old club man is a company where customer ideas count and implemented. Where determination creates a new world-class services.', '767.png', 'https://www.google.com/', 'See old club man everywhere to make it easier for you when you move locations', '972.png', 'These are the stories of our customers who have joined us with great pleasure when using this crazy feature.', '2024-01-05 23:36:37', '2024-01-05 23:43:38', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `llcservices`
+--
+
+CREATE TABLE `llcservices` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `feature_list` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `video_link` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `llcservices`
+--
+
+INSERT INTO `llcservices` (`id`, `title`, `feature_list`, `image`, `video_link`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Form your LLC with confidence', '[\"A Fully-Formed LLC\",\"Registred Agent Service\",\"Business Address\",\"Bank Account and Cards\",\"Mail Forwarding\",\"Privacy by default\",\"Corporate Guide Service\"]', '281.png', 'U5lCwGLMSYw', '2024-01-12 04:45:55', '2024-01-12 08:27:53', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `llc_cardsections`
+--
+
+CREATE TABLE `llc_cardsections` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `text_large` varchar(255) DEFAULT NULL,
+  `text_small` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `contact_text_large` varchar(255) DEFAULT NULL,
+  `contact_text_small` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `llc_cardsections`
+--
+
+INSERT INTO `llc_cardsections` (`id`, `text_large`, `text_small`, `image`, `contact_text_large`, `contact_text_small`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Sign Up For A Free Business Bank Account With Your USA Company Order', 'Join the thousand of companies that started their business without the hassle. We value our customers with expert guidance alongwith unique benefits including more than $100 cashback from our partners and bank offers.', '374.png', 'Are you interested in Our LLC USA Company?', 'If you want to evolve your digital performance and learn more about how our LLC services can help, get in touch with the team today.', '2024-01-12 06:21:02', '2024-01-12 06:26:32', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `llc_hero_sections`
+--
+
+CREATE TABLE `llc_hero_sections` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `text_large` varchar(255) DEFAULT NULL,
+  `text_small` varchar(255) DEFAULT NULL,
+  `background_image` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `llc_hero_sections`
+--
+
+INSERT INTO `llc_hero_sections` (`id`, `text_large`, `text_small`, `background_image`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Launch and manage your US business from anywhere', 'Apply for an LLC, open a US bank account and start getting paid in USD', '708.jpg', '2024-01-12 03:58:10', '2024-01-12 08:05:19', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `llc_pricings`
+--
+
+CREATE TABLE `llc_pricings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `llcpricing_plan` varchar(255) DEFAULT NULL,
+  `llcprice` varchar(255) DEFAULT NULL,
+  `llcpricing_package` varchar(255) DEFAULT NULL,
+  `llcpricingfeature_list` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `llc_pricings`
+--
+
+INSERT INTO `llc_pricings` (`id`, `llcpricing_plan`, `llcprice`, `llcpricing_package`, `llcpricingfeature_list`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Starter Plan', '15', 'LTD Company Package', '[\"Bank accounts\",\"Printed Share Certificate\",\"Digital Company Register\",\"Free Accountancy Consultant\",\"HMRC UTR Number.\"]', '2024-01-12 05:32:14', '2024-01-12 05:32:14', NULL),
+(2, 'Basic Plan', '20', 'LTD Company Package', '[\"Bank accounts\",\"Printed Share Certificate\",\"Digital Company Register\",\"Free Accountancy Consultant\",\"HMRC UTR Number.\"]', '2024-01-12 05:33:00', '2024-01-12 05:58:18', NULL),
+(3, 'Popular Plan', '28', 'LTD Company Package', '[\"Bank accounts\",\"Printed Share Certificate\",\"Digital Company Register\",\"Free Accountancy Consultant\",\"HMRC UTR Number.\"]', '2024-01-12 05:38:30', '2024-01-12 05:38:30', NULL),
+(5, 'Premium Plan', '120', 'LTD Company Package', '[\"Bank accounts\",\"Printed Share Certificate\",\"Digital Company Register\",\"Free Accountancy Consultant\",\"HMRC UTR Number.\"]', '2024-01-12 05:59:34', '2024-01-12 05:59:34', NULL);
 
 -- --------------------------------------------------------
 
@@ -231,7 +375,14 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (23, '2024_01_08_094246_create_nfc_card_images_table', 9),
 (24, '2024_01_09_085437_create_nfc_card_price_sections_table', 10),
 (25, '2024_01_09_093553_create_nfc_card_prices_table', 11),
-(26, '2024_01_09_104435_create_subscribe_sections_table', 12);
+(26, '2024_01_09_104435_create_subscribe_sections_table', 12),
+(28, '2024_01_11_082705_create_header_sections_table', 13),
+(29, '2024_01_11_091309_create_service_sections_table', 14),
+(30, '2024_01_11_102820_create_choice_sections_table', 15),
+(31, '2024_01_12_093058_create_llc_hero_sections_table', 16),
+(32, '2024_01_12_100513_create_llcservices_table', 17),
+(33, '2024_01_12_105727_create_llc_pricings_table', 18),
+(34, '2024_01_12_120125_create_llc_cardsections_table', 19);
 
 -- --------------------------------------------------------
 
@@ -257,7 +408,7 @@ CREATE TABLE `nfc_card_images` (
 --
 
 INSERT INTO `nfc_card_images` (`id`, `header_text_large`, `header_text_small`, `header_image`, `video_link`, `feature_list`, `feature_image`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'NFC BUSINESS CARD WITH OLD CLUB MAN', 'Itroducing KSA card-a complimentary service that extends the reach of your individual business card online. Utilizing intelligent scanning technology. It promtly directs clients to shedules sign-up forms. And all the essential elements that drive your business forward', '510.png', 'https://www.youtube.com/watch?v=FwjOR2PwVyg', '[\"NFC Enabled Smart Card\",\"   Customizable online digital profile\",\"   NFC chip\",\"   Unlimited steps\",\"   Digital QR code\",\"   Lead generation mode\",\"   Lifetimr Validity.\"]', '493.png', '2024-01-08 04:52:16', '2024-01-08 05:16:02', NULL);
+(1, 'NFC BUSINESS CARD WITH OLD CLUB MAN', 'Itroducing KSA card-a complimentary service that extends the reach of your individual business card online. Utilizing intelligent scanning technology. It promtly directs clients to shedules sign-up forms. And all the essential elements that drive your business forward', '510.png', 'tnzjLZO2vgM', '[\"NFC Enabled Smart Card\",\"          Customizable online digital profile\",\"          NFC chip\",\"          Unlimited steps\",\"          Digital QR code\",\"          Lead generation mode\",\"          Lifetime Validity.\"]', '493.png', '2024-01-08 04:52:16', '2024-01-11 07:46:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -394,6 +545,31 @@ INSERT INTO `roles` (`id`, `name`, `identity`, `created_at`, `updated_at`) VALUE
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `service_sections`
+--
+
+CREATE TABLE `service_sections` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `service_image` varchar(255) DEFAULT NULL,
+  `service_title` varchar(255) DEFAULT NULL,
+  `service_description` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `service_sections`
+--
+
+INSERT INTO `service_sections` (`id`, `service_image`, `service_title`, `service_description`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '179.png', 'Get a business Address', 'Are you looking for a streamlined 3pL eCommerce fullfilment service and warehouse center to support your brand and order fullfilment  fulfyld is the ultimate  third party fullfilment warehousing partner  you can rely on  for a personalized apporoach and efficient fullfilment services.', '2024-01-11 03:50:41', '2024-01-11 09:33:47', NULL),
+(2, '698.png', 'Tell us how you want to ship & save', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel metus vel quam bibendum aliquet. Duis sit amet turpis eu mauris facilisis convallis. In hac habitasse platea dictumst. Ut vitae orci ac augue luctus bibendum. Vivamus nec lectus eu justo sollicitudin bibendum ac vel justo. Aenean vulputate, odio eu tincidunt vehicula,', '2024-01-11 07:12:44', '2024-01-11 09:34:00', NULL),
+(3, '911.png', 'Get your goods fast & worry-free', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel metus vel quam bibendum aliquet. Duis sit amet turpis eu mauris facilisis convallis. In hac habitasse platea dictumst. Ut vitae orci ac augue luctus bibendum. Vivamus nec lectus eu justo sollicitudin bibendum ac vel justo. Aenean vulputate, odio eu tincidunt vehicula,', '2024-01-11 07:14:19', '2024-01-11 09:34:12', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `settings`
 --
 
@@ -445,7 +621,7 @@ CREATE TABLE `sliders` (
 --
 
 INSERT INTO `sliders` (`id`, `text_large`, `text_small`, `link`, `image`, `order_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'WANT ANYTHING TO BE EASY WITH OLD MAN CLUB', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been', 'https://www.google.com/', '5851704706064.png', 1, '2024-01-05 09:50:47', '2024-01-08 03:27:44', NULL),
+(1, 'WANT ANYTHING TO BE EASY WITH OLD MAN CLUB', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been', 'https://www.google.com/', '4131704900554.png', 1, '2024-01-05 09:50:47', '2024-01-10 09:29:14', NULL),
 (2, 'WANT ANYTHING TO BE EASY WITH OLD MAN CLUB', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been', 'https://www.google.com/', '9421704706076.png', 1, '2024-01-08 03:19:46', '2024-01-08 03:27:56', NULL);
 
 -- --------------------------------------------------------
@@ -540,6 +716,12 @@ INSERT INTO `users` (`id`, `name_en`, `name_bn`, `email`, `contact_no_en`, `cont
 --
 
 --
+-- Indexes for table `choice_sections`
+--
+ALTER TABLE `choice_sections`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `clients`
 --
 ALTER TABLE `clients`
@@ -585,9 +767,39 @@ ALTER TABLE `global_net_work_images`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `header_sections`
+--
+ALTER TABLE `header_sections`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `homepages`
 --
 ALTER TABLE `homepages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `llcservices`
+--
+ALTER TABLE `llcservices`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `llc_cardsections`
+--
+ALTER TABLE `llc_cardsections`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `llc_hero_sections`
+--
+ALTER TABLE `llc_hero_sections`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `llc_pricings`
+--
+ALTER TABLE `llc_pricings`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -644,6 +856,12 @@ ALTER TABLE `roles`
   ADD UNIQUE KEY `roles_identity_unique` (`identity`);
 
 --
+-- Indexes for table `service_sections`
+--
+ALTER TABLE `service_sections`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `settings`
 --
 ALTER TABLE `settings`
@@ -691,6 +909,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `choice_sections`
+--
+ALTER TABLE `choice_sections`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
@@ -727,16 +951,46 @@ ALTER TABLE `global_net_work_images`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `header_sections`
+--
+ALTER TABLE `header_sections`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `homepages`
 --
 ALTER TABLE `homepages`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `llcservices`
+--
+ALTER TABLE `llcservices`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `llc_cardsections`
+--
+ALTER TABLE `llc_cardsections`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `llc_hero_sections`
+--
+ALTER TABLE `llc_hero_sections`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `llc_pricings`
+--
+ALTER TABLE `llc_pricings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `nfc_card_images`
@@ -779,6 +1033,12 @@ ALTER TABLE `personal_access_tokens`
 --
 ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `service_sections`
+--
+ALTER TABLE `service_sections`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `settings`
