@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 12, 2024 at 04:45 PM
+-- Generation Time: Jan 13, 2024 at 04:16 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -382,7 +382,15 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (31, '2024_01_12_093058_create_llc_hero_sections_table', 16),
 (32, '2024_01_12_100513_create_llcservices_table', 17),
 (33, '2024_01_12_105727_create_llc_pricings_table', 18),
-(34, '2024_01_12_120125_create_llc_cardsections_table', 19);
+(34, '2024_01_12_120125_create_llc_cardsections_table', 19),
+(35, '2024_01_13_084217_create_phone_number_heroes_table', 20),
+(36, '2024_01_13_095314_create_phone_number_services_table', 21),
+(37, '2024_01_13_102756_create_phone_virtual_maps_table', 22),
+(38, '2024_01_13_105019_create_phone_customer_feedback_table', 23),
+(39, '2024_01_13_133611_create_smart_mail_heroes_table', 24),
+(40, '2024_01_13_135609_create_smart_work_sections_table', 25),
+(42, '2024_01_13_141343_create_smart_sms_services_table', 26),
+(43, '2024_01_13_142558_create_smart_phonebook_services_table', 27);
 
 -- --------------------------------------------------------
 
@@ -524,6 +532,101 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `phone_customer_feedback`
+--
+
+CREATE TABLE `phone_customer_feedback` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `customer_message` varchar(255) DEFAULT NULL,
+  `customer_name` varchar(255) DEFAULT NULL,
+  `customer_image` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `phone_customer_feedback`
+--
+
+INSERT INTO `phone_customer_feedback` (`id`, `customer_message`, `customer_name`, `customer_image`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"', 'Burhan Uddin Fuad', '217.jpg', '2024-01-13 05:12:34', '2024-01-13 05:17:37', NULL),
+(2, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"', 'Jasim uddin', '556.jpg', '2024-01-13 05:17:58', '2024-01-13 05:19:14', NULL),
+(4, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"', 'Burhan Uddin Fuad', '710.jpg', '2024-01-13 05:19:33', '2024-01-13 05:19:33', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `phone_number_heroes`
+--
+
+CREATE TABLE `phone_number_heroes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `text_large` varchar(255) DEFAULT NULL,
+  `text_small` varchar(255) DEFAULT NULL,
+  `background_image` varchar(255) DEFAULT NULL,
+  `price` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `phone_number_heroes`
+--
+
+INSERT INTO `phone_number_heroes` (`id`, `text_large`, `text_small`, `background_image`, `price`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Have a Virtual Phone Number', 'Virtual Phone Number is the best solution for people who do not want to limit their business to a specific geographical location.', '610.png', '2.79', '2024-01-13 03:16:36', '2024-01-13 03:51:38', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `phone_number_services`
+--
+
+CREATE TABLE `phone_number_services` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `text_heading` varchar(255) DEFAULT NULL,
+  `text_small` text DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `phone_number_services`
+--
+
+INSERT INTO `phone_number_services` (`id`, `text_heading`, `text_small`, `image`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Why Do You Need A Virtual Phone Number?', 'You can open a virtual office anywhere in the world. Clients and partners will call you on their local phone number while you can be based anywhere in the world. Having a virtual phone number in a particular country gives your company a professional brand image and it shows that you care about your customers. Virtual office increase global or regional visibility, at the same time they can reduce technological costs significantly.', '428.png', '2024-01-13 04:21:39', '2024-01-13 04:25:25', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `phone_virtual_maps`
+--
+
+CREATE TABLE `phone_virtual_maps` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `text_large` varchar(255) DEFAULT NULL,
+  `text_small` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `phone_virtual_maps`
+--
+
+INSERT INTO `phone_virtual_maps` (`id`, `text_large`, `text_small`, `image`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Large selection and geographical coverage of virtual phone numbers', 'More than 30000 phone numbers in 100 countries are available for purchase and immediate connection.', '352.png', '2024-01-13 04:46:36', '2024-01-13 04:49:19', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `roles`
 --
 
@@ -623,6 +726,100 @@ CREATE TABLE `sliders` (
 INSERT INTO `sliders` (`id`, `text_large`, `text_small`, `link`, `image`, `order_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'WANT ANYTHING TO BE EASY WITH OLD MAN CLUB', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been', 'https://www.google.com/', '4131704900554.png', 1, '2024-01-05 09:50:47', '2024-01-10 09:29:14', NULL),
 (2, 'WANT ANYTHING TO BE EASY WITH OLD MAN CLUB', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been', 'https://www.google.com/', '9421704706076.png', 1, '2024-01-08 03:19:46', '2024-01-08 03:27:56', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `smart_mail_heroes`
+--
+
+CREATE TABLE `smart_mail_heroes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `text_large` varchar(255) DEFAULT NULL,
+  `text_small` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `smart_mail_heroes`
+--
+
+INSERT INTO `smart_mail_heroes` (`id`, `text_large`, `text_small`, `image`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Get A Virtual Mailing Address', 'View And Manage Your Postal Mail Online', '400.png', '2024-01-13 07:53:03', '2024-01-13 07:55:27', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `smart_phonebook_services`
+--
+
+CREATE TABLE `smart_phonebook_services` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `text_large` varchar(255) DEFAULT NULL,
+  `text_small` text DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `smart_phonebook_services`
+--
+
+INSERT INTO `smart_phonebook_services` (`id`, `text_large`, `text_small`, `image`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Save Your Data With Our PhoneBook', 'You can open a virtual office anywhere in the world. Clients and Partners will call you on their local phone number while you can be based anywhere in the world. Having a virtual phone number in a particular country gives your company a professional brand image and it reflects your sincereity about your customers\' experience. Not only virtual offices increase your regional or global visibility, but also it reduces technological costs significantly.', '258.png', '2024-01-13 08:36:06', '2024-01-13 08:36:55', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `smart_sms_services`
+--
+
+CREATE TABLE `smart_sms_services` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `text_large` varchar(255) DEFAULT NULL,
+  `text_small` text DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `smart_sms_services`
+--
+
+INSERT INTO `smart_sms_services` (`id`, `text_large`, `text_small`, `image`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Voice & Text Messaging', 'You can open a virtual office anywhere in the world. Clients and Partners will call you on their local phone number while you can be based anywhere in the world. Having a virtual phone number in a particular country gives your company a professional brand image and it reflects your sincereity about your customers\' experience. Not only virtual offices increase your regional or global visibility, but also it reduces technological costs significantly.', '709.png', '2024-01-13 08:24:15', '2024-01-13 08:24:51', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `smart_work_sections`
+--
+
+CREATE TABLE `smart_work_sections` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `text_large` varchar(255) DEFAULT NULL,
+  `text_small` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `smart_work_sections`
+--
+
+INSERT INTO `smart_work_sections` (`id`, `text_large`, `text_small`, `image`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Select a Mailing Address', 'To get started, select a mailing address and a subscription plan. We offer 700+ mailing address for both personal and business.', '856.png', '2024-01-13 08:10:29', '2024-01-13 08:11:49', NULL),
+(2, 'We\'ll receive your mail', 'We\'ll receive your mail and package deliveries, scan the front of mail items and make them available to you online. Nothing more than that!', '823.png', '2024-01-13 08:10:57', '2024-01-13 08:10:57', NULL),
+(3, 'Tell us what to do', 'Simply log into your online mailbox account and request to open and scan, recycle or forward your physical mail items. Local pickup is also available. How can we help you?', '778.png', '2024-01-13 08:11:19', '2024-01-13 08:12:13', NULL);
 
 -- --------------------------------------------------------
 
@@ -848,6 +1045,30 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `phone_customer_feedback`
+--
+ALTER TABLE `phone_customer_feedback`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `phone_number_heroes`
+--
+ALTER TABLE `phone_number_heroes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `phone_number_services`
+--
+ALTER TABLE `phone_number_services`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `phone_virtual_maps`
+--
+ALTER TABLE `phone_virtual_maps`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
@@ -872,6 +1093,30 @@ ALTER TABLE `settings`
 -- Indexes for table `sliders`
 --
 ALTER TABLE `sliders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `smart_mail_heroes`
+--
+ALTER TABLE `smart_mail_heroes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `smart_phonebook_services`
+--
+ALTER TABLE `smart_phonebook_services`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `smart_sms_services`
+--
+ALTER TABLE `smart_sms_services`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `smart_work_sections`
+--
+ALTER TABLE `smart_work_sections`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -990,7 +1235,7 @@ ALTER TABLE `llc_pricings`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `nfc_card_images`
@@ -1029,6 +1274,30 @@ ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `phone_customer_feedback`
+--
+ALTER TABLE `phone_customer_feedback`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `phone_number_heroes`
+--
+ALTER TABLE `phone_number_heroes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `phone_number_services`
+--
+ALTER TABLE `phone_number_services`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `phone_virtual_maps`
+--
+ALTER TABLE `phone_virtual_maps`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
@@ -1051,6 +1320,30 @@ ALTER TABLE `settings`
 --
 ALTER TABLE `sliders`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `smart_mail_heroes`
+--
+ALTER TABLE `smart_mail_heroes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `smart_phonebook_services`
+--
+ALTER TABLE `smart_phonebook_services`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `smart_sms_services`
+--
+ALTER TABLE `smart_sms_services`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `smart_work_sections`
+--
+ALTER TABLE `smart_work_sections`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `subscribe_sections`

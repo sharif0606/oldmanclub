@@ -27,6 +27,17 @@ use App\Http\Controllers\Backend\Website\LLcHeroSection\LlcHeroSectionController
 use App\Http\Controllers\Backend\Website\LLcHeroSection\LlcserviceController as llcservice;
 use App\Http\Controllers\Backend\Website\LLcHeroSection\LlcPricingController as llcpricing;
 use App\Http\Controllers\Backend\Website\LLcHeroSection\LlcCardsectionController as llccard;
+//phone service
+use App\Http\Controllers\Backend\Website\Phoneservice\PhoneNumberHeroController as phonehero;
+use App\Http\Controllers\Backend\Website\Phoneservice\PhoneNumberServiceController as phoneservice;
+use App\Http\Controllers\Backend\Website\Phoneservice\PhoneVirtualMapsController as phonemaps;
+use App\Http\Controllers\Backend\Website\Phoneservice\PhoneCustomerFeedbackController as phonefeedback;
+//Smart Mail Service
+use App\Http\Controllers\Backend\Website\SmartMail\SmartMailHeroController as smartmailhero;
+use App\Http\Controllers\Backend\Website\SmartMail\SmartWorkSectionController as smartwork;
+use App\Http\Controllers\Backend\Website\SmartMail\SmartSmsServiceController as smartsms;
+use App\Http\Controllers\Backend\Website\SmartMail\SmartPhonebookServiceController as smartphonebook;
+
 
 
 
@@ -83,6 +94,17 @@ Route::middleware(['checkrole'])->prefix('admin')->group(function(){
     Route::resource('llcservice', llcservice::class);
     Route::resource('llcpricing', llcpricing::class);
     Route::resource('llccard', llccard::class);
+//Phone Service
+    Route::resource('phonehero', phonehero::class);
+    Route::resource('phoneservice', phoneservice::class);
+    Route::resource('phonemaps', phonemaps::class);
+    Route::resource('phonefeedback', phonefeedback::class);
+//Smart Mail Hero
+    Route::resource('smartmailhero', smartmailhero::class);
+    Route::resource('smartwork', smartwork::class);
+    Route::resource('smartsms', smartsms::class);
+    Route::resource('smartphonebook', smartphonebook::class);
+
 });
 
 
@@ -102,6 +124,8 @@ Route::get('', [frontend::class, 'frontend'])->name('frontend');
 Route::get('nfccard', [frontend::class, 'nfccard'])->name('nfccard');
 Route::get('shippingservice', [frontend::class, 'shippingservice'])->name('shippingservice');
 Route::get('llcservice', [frontend::class, 'llcservice'])->name('llcservice');
+Route::get('phoneservice', [frontend::class, 'phoneservice'])->name('phoneservice');
+Route::get('smartmailservice', [frontend::class, 'smartmailservice'])->name('smartmailservice');
 // Route::get('/', function () {
 //     return view('frontend.home');
 // });

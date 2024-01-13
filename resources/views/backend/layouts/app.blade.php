@@ -215,6 +215,30 @@
                             <li><a href="{{route('llccard.index')}}">LLC Card</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="fa fa-globe"></i>
+                            <span class="nav-text">Phone Number Service</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('phonehero.index')}}">Hero Section</a></li>
+                            <li><a href="{{route('phoneservice.index')}}">Service Section</a></li>
+                            <li><a href="{{route('phonemaps.index')}}">Virtual Maps Section</a></li>
+                            <li><a href="{{route('phonefeedback.index')}}">Customer Feedback</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="fa fa-globe"></i>
+                            <span class="nav-text">Smart Mail Service</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('smartmailhero.index')}}">Hero Section</a></li>
+                            <li><a href="{{route('smartwork.index')}}">Smart Work Section</a></li>  
+                            <li><a href="{{route('smartsms.index')}}">Smart SMS Service</a></li>  
+                            <li><a href="{{route('smartphonebook.index')}}">Smart PhoneBook Service</a></li>  
+                        </ul>
+                    </li>
                     <!-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                 class="icon icon-chart-bar-33"></i><span class="nav-text">Charts</span></a>
                         <ul aria-expanded="false">
