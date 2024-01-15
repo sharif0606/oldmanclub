@@ -1136,3 +1136,216 @@
         margin-right: 0px;
     }
     /* Smart Mail Service Css End */
+    /* Printing Service Css Start */
+    /* Hero section */
+      .print-hero-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        padding-left: 50px;
+        padding-right: 20px;
+        background-color: #ffffff;
+      }
+
+      .print-hero-content {
+        flex: 1;
+        padding-right: 50px;
+      }
+
+      .print-hero-image {
+        padding-left: 70px;
+      }
+
+      h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+
+      p {
+        font-size: 18px;
+        margin-bottom: 30px;
+      }
+
+      .print-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        text-decoration: none;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 8px;
+      }
+
+      .print-contact-btn {
+        background-color: #2f0549 !important;
+        color: #ffffff !important;
+      }
+
+      .print-learn-more-btn {
+        background-color: #ffffff !important;
+        color: #2f0549 !important;
+        border: 2px solid #2f0549 !important;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* why-choose-us */
+      .print-why-choose-us {
+        padding: 50px;
+      }
+      .print-video-container {
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      }
+
+      .print-video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* Feature section */
+      .print-features {
+        padding: 50px;
+        background-color: #2f0549;
+        text-align: center;
+      }
+
+      .print-feature-text {
+        color: #ffffff;
+      }
+
+      /* Product section */
+      .print-product-section {
+        /* padding: 50px; */
+        background-color: white;
+        text-align: center;
+      }
+
+      .print-product-cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .print-product-card {
+        width: 220px !important;
+        height: 315px !important;
+        border: 1px solid #ddd;
+        background-color: #fff;
+        text-align: center;
+      }
+
+      .print-product-image {
+        max-width: 100%;
+        height: 200px;
+        border-radius: 2px;
+        margin-bottom: 10px;
+      }
+
+      .print-product-name {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .print-product-price {
+        color: #007bff;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .print-product-review {
+        color: #ffd700;
+      }
+
+      /* Custom CSS for responsive styling */
+      .carousel-inner .carousel-item {
+        display: flex;
+      }
+      .carousel-inner .carousel-item .print-custom-card {
+        flex: 0 0 30%; /* Adjusted to make three cards fit in a row with margin between */
+        margin-right: 2%;
+      }
+      .carousel-inner .carousel-item .print-custom-card:last-child {
+        margin-right: 0;
+      }
+
+      .print-custom-card {
+        background-color: #f3f3f3;
+        border: none;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        padding: 15px;
+        width: 100%;
+      }
+
+      .print-custom-card img {
+        border-radius: 50%;
+        max-width: 100%;
+        height: auto;
+        width: 60px;
+      }
+
+      .print-card-body {
+        padding: 15px;
+      }
+
+      /* Carousel controls position */
+      .carousel-controls {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .carousel-controls button {
+        margin-right: 10px;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 992px) {
+        .carousel-inner .carousel-item .print-custom-card {
+          flex: 0 0 48%; /* Two cards in a row on medium screens */
+        }
+      }
+
+      @media (max-width: 768px) {
+        .carousel-inner .carousel-item .print-custom-card {
+          flex: 0 0 100%; /* Single card in a row on small screens */
+          margin-right: 0;
+        }
+      }
+
+      /* Subscribe section */
+      .print-subscribe-section {
+        padding: 40px;
+      }
+
+      .print-subscribe-content {
+        padding: 50px 40px;
+      }
+
+      .print-subscribe-btn {
+        padding: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .print-contact-us-btn {
+        background-color: rgb(65, 72, 87) !important;
+        color: white !important;
+        border: 1px solid #2f0549 !important;
+        /* padding: 10px 0px;  */
+      }
+    /* Printing Service Css End */

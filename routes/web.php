@@ -37,7 +37,11 @@ use App\Http\Controllers\Backend\Website\SmartMail\SmartMailHeroController as sm
 use App\Http\Controllers\Backend\Website\SmartMail\SmartWorkSectionController as smartwork;
 use App\Http\Controllers\Backend\Website\SmartMail\SmartSmsServiceController as smartsms;
 use App\Http\Controllers\Backend\Website\SmartMail\SmartPhonebookServiceController as smartphonebook;
-
+//Printing service
+use App\Http\Controllers\Backend\Website\PrintingService\PrintingHeroController as printhero;
+use App\Http\Controllers\Backend\Website\PrintingService\PrintVideoSectionController as printvideo;
+use App\Http\Controllers\Backend\Website\PrintingService\PrintCardSectionController as printcard;
+use App\Http\Controllers\Backend\Website\PrintingService\PrintCustomerFeedbackController as printcus_feedback;
 
 
 
@@ -104,6 +108,12 @@ Route::middleware(['checkrole'])->prefix('admin')->group(function(){
     Route::resource('smartwork', smartwork::class);
     Route::resource('smartsms', smartsms::class);
     Route::resource('smartphonebook', smartphonebook::class);
+//printing service 
+    Route::resource('printhero', printhero::class);
+    Route::resource('printvideo', printvideo::class);
+    Route::resource('printcard', printcard::class);
+    Route::resource('printcus_feedback', printcus_feedback::class);
+
 
 });
 
@@ -126,7 +136,7 @@ Route::get('shippingservice', [frontend::class, 'shippingservice'])->name('shipp
 Route::get('llcservice', [frontend::class, 'llcservice'])->name('llcservice');
 Route::get('phoneservice', [frontend::class, 'phoneservice'])->name('phoneservice');
 Route::get('smartmailservice', [frontend::class, 'smartmailservice'])->name('smartmailservice');
+Route::get('printservice', [frontend::class, 'printservice'])->name('printservice');
 // Route::get('/', function () {
 //     return view('frontend.home');
 // });
-

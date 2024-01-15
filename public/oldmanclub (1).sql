@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 13, 2024 at 04:16 PM
+-- Generation Time: Jan 15, 2024 at 04:22 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -390,7 +390,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (39, '2024_01_13_133611_create_smart_mail_heroes_table', 24),
 (40, '2024_01_13_135609_create_smart_work_sections_table', 25),
 (42, '2024_01_13_141343_create_smart_sms_services_table', 26),
-(43, '2024_01_13_142558_create_smart_phonebook_services_table', 27);
+(43, '2024_01_13_142558_create_smart_phonebook_services_table', 27),
+(44, '2024_01_15_092440_create_printing_heroes_table', 28),
+(45, '2024_01_15_100723_create_print_video_sections_table', 29),
+(46, '2024_01_15_105721_create_print_card_sections_table', 30),
+(47, '2024_01_15_112242_create_print_customer_feedback_table', 31);
 
 -- --------------------------------------------------------
 
@@ -623,6 +627,100 @@ CREATE TABLE `phone_virtual_maps` (
 
 INSERT INTO `phone_virtual_maps` (`id`, `text_large`, `text_small`, `image`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Large selection and geographical coverage of virtual phone numbers', 'More than 30000 phone numbers in 100 countries are available for purchase and immediate connection.', '352.png', '2024-01-13 04:46:36', '2024-01-13 04:49:19', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `printing_heroes`
+--
+
+CREATE TABLE `printing_heroes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `text_large` varchar(255) DEFAULT NULL,
+  `text_small` varchar(255) DEFAULT NULL,
+  `hero_image` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `printing_heroes`
+--
+
+INSERT INTO `printing_heroes` (`id`, `text_large`, `text_small`, `hero_image`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(2, 'ONE-DEMAND SHIPPING SERVICE WORLDWIDE', 'Some text goes here about the on-demand shipping service. You can customize this as needed.', '648.png', '2024-01-15 04:05:35', '2024-01-15 04:30:46', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `print_card_sections`
+--
+
+CREATE TABLE `print_card_sections` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `print_card_sections`
+--
+
+INSERT INTO `print_card_sections` (`id`, `image`, `title`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '590.png', 'Create your Custom Design1', '2024-01-15 05:16:42', '2024-01-15 05:20:43', NULL),
+(2, '210.jpg', '120 products to customize with your own designs', '2024-01-15 05:17:51', '2024-01-15 05:17:51', NULL),
+(3, '589.jpg', 'Fulfillment centers in USA, Europe, Australia, Uk & more locations', '2024-01-15 05:18:08', '2024-01-15 05:21:18', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `print_customer_feedback`
+--
+
+CREATE TABLE `print_customer_feedback` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `customer_id` bigint(20) UNSIGNED NOT NULL,
+  `customer_message` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `print_customer_feedback`
+--
+
+INSERT INTO `print_customer_feedback` (`id`, `customer_id`, `customer_message`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(2, 2, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"', '2024-01-15 06:12:09', '2024-01-15 06:12:09', NULL),
+(3, 1, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"', '2024-01-15 06:29:04', '2024-01-15 06:29:04', NULL),
+(4, 1, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"', '2024-01-15 06:29:13', '2024-01-15 06:36:25', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `print_video_sections`
+--
+
+CREATE TABLE `print_video_sections` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `text_large` varchar(255) DEFAULT NULL,
+  `text_small` varchar(255) DEFAULT NULL,
+  `video_link` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `print_video_sections`
+--
+
+INSERT INTO `print_video_sections` (`id`, `text_large`, `text_small`, `video_link`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'What is print-on-demand?', 'Print on demand is a more sustainable alternative to the fashion industry standard. Producing items on-demand means no over-production & wasteful-stock. Our core business model keeps our footprint smaller for a greener future.', 'tnzjLZO2vgM', '2024-01-15 04:40:54', '2024-01-15 04:44:24', NULL);
 
 -- --------------------------------------------------------
 
@@ -1069,6 +1167,31 @@ ALTER TABLE `phone_virtual_maps`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `printing_heroes`
+--
+ALTER TABLE `printing_heroes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `print_card_sections`
+--
+ALTER TABLE `print_card_sections`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `print_customer_feedback`
+--
+ALTER TABLE `print_customer_feedback`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `print_customer_feedback_customer_id_index` (`customer_id`);
+
+--
+-- Indexes for table `print_video_sections`
+--
+ALTER TABLE `print_video_sections`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
@@ -1235,7 +1358,7 @@ ALTER TABLE `llc_pricings`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `nfc_card_images`
@@ -1295,6 +1418,30 @@ ALTER TABLE `phone_number_services`
 -- AUTO_INCREMENT for table `phone_virtual_maps`
 --
 ALTER TABLE `phone_virtual_maps`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `printing_heroes`
+--
+ALTER TABLE `printing_heroes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `print_card_sections`
+--
+ALTER TABLE `print_card_sections`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `print_customer_feedback`
+--
+ALTER TABLE `print_customer_feedback`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `print_video_sections`
+--
+ALTER TABLE `print_video_sections`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
@@ -1390,6 +1537,12 @@ ALTER TABLE `divisions`
 --
 ALTER TABLE `permissions`
   ADD CONSTRAINT `permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `print_customer_feedback`
+--
+ALTER TABLE `print_customer_feedback`
+  ADD CONSTRAINT `print_customer_feedback_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `thanas`

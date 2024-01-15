@@ -75,4 +75,12 @@ class frontendController extends Controller
         $smartsmsservice = \App\Models\Backend\Website\SmartMail\SmartSmsService::first();
         return view('frontend.smartmailservice',compact('setting','smartmailhero','smartphonebook','smartworkservice','smartsmsservice'));
     }
+    public function printservice(){
+        $setting = \App\Models\Backend\Website\Setting::first();
+        $printinghero = \App\Models\Backend\Website\PrintingService\PrintingHero::first();
+        $printvideo = \App\Models\Backend\Website\PrintingService\PrintVideoSection::first();
+        $printfeature = \App\Models\Backend\Website\PrintingService\PrintCardSection::get();
+        $printfeedback = \App\Models\Backend\Website\PrintingService\PrintCustomerFeedback::get();
+        return view('frontend.printservice',compact('setting','printinghero','printvideo','printfeature','printfeedback'));
+    }
 }
