@@ -33,6 +33,8 @@ return new class extends Migration
             $table->string('nationality')->nullable();
             $table->string('id_no')->nullable();
             $table->string('id_no_type')->comment('0=>Passport, 1=>National ID, 2=>Driver License, 3=>Birth Certificate')->nullable();
+            $table->string('image')->nullable();
+            $table->string('cover_photo')->nullable();
             $table->string('photo_id')->nullable();
             $table->integer('is_photo_verified')->default(0)->comment('0=>No, 1=>Yes')->nullable();
             $table->string('address_proof_photo')->nullable();

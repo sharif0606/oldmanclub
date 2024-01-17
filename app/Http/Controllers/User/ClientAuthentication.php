@@ -32,6 +32,7 @@ class ClientAuthentication extends Controller
             $user->city = $request->city;
             $user->state = $request->state;
             $user->zip_code = $request->zp;
+            $user->status = 1;
             $user->password=Hash::make($request->password);
             if($user->save()){
                 $this->notice::success('Successfully Registered');
@@ -86,7 +87,7 @@ class ClientAuthentication extends Controller
 
     public function singOut(){
         request()->session()->flush();
-        return redirect('login')->with('danger','Succfully Logged Out');
+        return redirect()->route('clientlogin')->with('danger','Succfully Logged Out');
     }
 
 }

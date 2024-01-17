@@ -127,7 +127,9 @@ Route::post('client/login', [clientauth::class,'signInCheck'])->name('clientlogi
 Route::get('client/logout', [clientauth::class,'singOut'])->name('clientlogOut');
 
 Route::middleware(['checkclient'])->prefix('client')->group(function(){
-    Route::get('dashboard', [client::class,'index'])->name('clientdashboard'); 
+    Route::get('profile', [client::class,'index'])->name('clientdashboard');
+    Route::post('/profile/save', [client::class, 'save_profile'])->name('user_save_profile');
+    Route::post('/profile/savepass', [client::class, 'change_password'])->name('change_password');
 });
 
 Route::get('', [frontend::class, 'frontend'])->name('frontend');
