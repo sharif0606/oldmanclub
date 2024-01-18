@@ -167,8 +167,9 @@
                                 <span class="nav-text">Settings</span>
                             </a>
                             <ul aria-expanded="false">
-                                <li><a href="{{route('user.index')}}">User</a></li>
+                                <li><a href="{{route('user.index')}}">Admin</a></li>
                                 <li><a href="{{route('role.index')}}">Role</a></li>
+                                <li><a href="">User</a></li>
                             </ul>
                         </li>
                         <li>

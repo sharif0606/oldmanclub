@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Backend\Website\CustomerFeedback;
 use App\Models\Backend\Website\PrintingService\PrintCustomerFeedback;
-
+use App\Models\Chat;
 class Client extends Model
 {
     use HasFactory;
@@ -15,5 +15,8 @@ class Client extends Model
     }
     public function cusfeedback(){
         return $this->hasMany(PrintCustomerFeedback::class);
+    }
+    public function chat(){
+        return $this->hasMany(Chat::class);
     }
 }

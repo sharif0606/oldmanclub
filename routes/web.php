@@ -50,6 +50,7 @@ use App\Http\Controllers\User\ClientController as client;
 
 // landing page
 use App\Http\Controllers\Common\frontendController as frontend;
+use App\Http\Controllers\ChatController as chat;
 
 
 /*
@@ -142,3 +143,5 @@ Route::get('printservice', [frontend::class, 'printservice'])->name('printservic
 // Route::get('/', function () {
 //     return view('frontend.home');
 // });
+Route::get('/chat', [Chat::class, 'index'])->name('chat_index');
+Route::post('/chat/send', [Chat::class, 'sendMessage'])->name('chat_send');

@@ -67,5 +67,19 @@ return [
         ],
 
     ],
+    'options' => [
+        'cluster' => 'ap2',
+        'useTLS' => true
+    ],
+    'channels' => [
+        'chat' => [
+            'driver' => 'pusher',
+            'key' => env('PUSHER_APP_KEY'),
+            'options' => [
+                'cluster' => env('PUSHER_APP_CLUSTER'),
+                'encrypted' => true,
+            ],
+        ],
+    ],
 
 ];
