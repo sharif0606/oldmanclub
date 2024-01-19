@@ -17,21 +17,21 @@ class NewMessage implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public $chat;
-     public function __construct(Chat $chat)
+    public $username;
+    public $message;
+      public function __construct($username,$message)
     {
-        $this->chat = $chat;
+        $this->username = $username;
+        $this->message = $message;
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
-     */
-    public function broadcastOn(): array
+    public function broadcastOn()
     {
-        return [
-            new PrivateChannel('chat'),
-        ];
+        return new Channel('chat');
+    }
+
+    public function broadcastAs()
+    {
+        return 'newmessage';
     }
 }

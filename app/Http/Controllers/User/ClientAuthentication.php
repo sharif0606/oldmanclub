@@ -32,7 +32,7 @@ class ClientAuthentication extends Controller
             $user->city = $request->city;
             $user->state = $request->state;
             $user->zip_code = $request->zp;
-            $user->status = 1;
+            $user->status = 0;
             $user->password=Hash::make($request->password);
             if($user->save()){
                 $this->notice::success('Successfully Registered');

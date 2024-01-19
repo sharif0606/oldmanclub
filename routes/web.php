@@ -1,8 +1,10 @@
 <?php
 
+use App\Events\NewMessage;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\AuthenticationController as auth;
 use App\Http\Controllers\Backend\UserController as user;
+use App\Http\Controllers\Backend\ClientController as client;
 use App\Http\Controllers\Backend\RoleController as role;
 use App\Http\Controllers\Backend\DashboardController as dashboard;
 use App\Http\Controllers\Backend\PermissionController as permission;
@@ -44,9 +46,9 @@ use App\Http\Controllers\Backend\Website\PrintingService\PrintCardSectionControl
 use App\Http\Controllers\Backend\Website\PrintingService\PrintCustomerFeedbackController as printcus_feedback;
 
 
-
+//User
 use App\Http\Controllers\User\ClientAuthentication as clientauth;
-use App\Http\Controllers\User\ClientController as client;
+use App\Http\Controllers\User\ClientController as clientprofile;
 
 // landing page
 use App\Http\Controllers\Common\frontendController as frontend;
@@ -76,8 +78,10 @@ Route::middleware(['checkauth'])->prefix('admin')->group(function(){
 Route::middleware(['checkrole'])->prefix('admin')->group(function(){
     Route::resource('user', user::class);
     Route::resource('role', role::class);
+    Route::resource('client', client::class);
     Route::get('permission/{role}', [permission::class,'index'])->name('permission.list');
     Route::post('permission/{role}', [permission::class,'save'])->name('permission.save');
+    
     Route::resource('setting', setting::class);
     Route::resource('slider', slider::class);
     Route::resource('ourservice', ourservice::class);
@@ -114,8 +118,6 @@ Route::middleware(['checkrole'])->prefix('admin')->group(function(){
     Route::resource('printvideo', printvideo::class);
     Route::resource('printcard', printcard::class);
     Route::resource('printcus_feedback', printcus_feedback::class);
-
-
 });
 
 
@@ -127,10 +129,10 @@ Route::get('client/login', [clientauth::class,'signInForm'])->name('clientlogin'
 Route::post('client/login', [clientauth::class,'signInCheck'])->name('clientlogin.check');
 Route::get('client/logout', [clientauth::class,'singOut'])->name('clientlogOut');
 
-Route::middleware(['checkclient'])->prefix('client')->group(function(){
-    Route::get('profile', [client::class,'index'])->name('clientdashboard');
-    Route::post('/profile/save', [client::class, 'save_profile'])->name('user_save_profile');
-    Route::post('/profile/savepass', [client::class, 'change_password'])->name('change_password');
+Route::middleware(['checkclient'])->prefix('user')->group(function(){
+    Route::get('profile', [clientprofile::class,'index'])->name('clientdashboard');
+    Route::post('/profile/save', [clientprofile::class, 'save_profile'])->name('user_save_profile');
+    Route::post('/profile/savepass', [clientprofile::class, 'change_password'])->name('change_password');
 });
 
 Route::get('', [frontend::class, 'frontend'])->name('frontend');
@@ -143,5 +145,15 @@ Route::get('printservice', [frontend::class, 'printservice'])->name('printservic
 // Route::get('/', function () {
 //     return view('frontend.home');
 // });
-Route::get('/chat', [Chat::class, 'index'])->name('chat_index');
-Route::post('/chat/send', [Chat::class, 'sendMessage'])->name('chat_send');
+
+
+// Route::get('/chat', [Chat::class, 'index'])->name('chat_index');
+// Route::post('/chat/send', [Chat::class, 'sendMessage'])->name('chat_send');
+// Route::post('send-message',function (Request $request){
+//     event(new Message($request->username, $request->message));
+//     return ['success' => true];
+// });
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });

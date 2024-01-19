@@ -30,8 +30,8 @@
                                 {{$value->client?->middle_name_en}}  
                                 {{$value->client?->last_name_en}}  
                             </td>
-                            <td>
-                                {{$value->client?->image}}  
+                            <td><img src="{{asset('public/uploads/client/'.$value->client?->image)}}" class="img-fluid rounded-circle" alt="">
+                               
                             </td>
                             <td>{{$value->customer_message}} </td>
                             <td>

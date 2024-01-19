@@ -1,49 +1,32 @@
 import './bootstrap';
-// resources/js/app.js
 
-require('./bootstrap');
+$(document).ready(function(){
 
-import Vue from 'vue';
+    $(document).on('click','#send_message',function (e){
+        e.preventDefault();
 
-new Vue({
-    el: "#app",
-    data: {
-        message: "",
-    },
-    methods: {
-        sendMessage() {
-            if (this.message.trim() !== "") {
-                axios.post("/chat/send", {
-                    message: this.message,
-                    user_id: 1,
-                    client_id: 1, 
-                });
+        let username = $('#username').val();
+        let message = $('#message').val();
 
-                this.message = "";
+        if(username == '' || message == ''){
+            alert('Please enter both username and message')
+            return false;
+        }
+
+        $.ajax({
+            method:'post',
+            url:'/send-message',
+            data:{username:username, message:message},
+            success:function(res){
+                //
             }
-        },
-    },
-    directives: {
-        enter: {
-            inserted(el, binding) {
-                el.addEventListener("input", (event) => {
-                    if (event.key === "Enter") {
-                        binding.value(event);
-                    }
-                });
-            },
-        },
-    },
+        });
+
+    });
 });
 
-// Enable Laravel Echo
-import Echo from 'laravel-echo';
-
-window.Pusher = require('pusher-js');
-
-window.Echo = new Echo({
-    broadcaster: 'pusher',
-    key: process.env.MIX_PUSHER_APP_KEY,
-    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-    encrypted: true,
-});
+window.Echo.channel('chat')
+    .listen('.message',(e)=>{
+        $('#messages').append('<p><strong>'+e.username+'</strong>'+ ': ' + e.message+'</p>');
+        $('#message').val('');
+    });

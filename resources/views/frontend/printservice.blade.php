@@ -162,8 +162,8 @@
                 <span class="visually-hidden">Next</span>
               </button>
             </div>
-            <h2>Customer Reviews</h2>
-            <p>Some introductory text about customer reviews.</p>
+            <h2 class="text-center">Customer Reviews</h2>
+            <p class="text-center">Some introductory text about customer reviews.</p>
           </div>
         </div>
 
@@ -186,11 +186,7 @@
                     <div class="row">
                       <div class="col-md-3">
                         <div class="customer-image">
-                          <img
-                            src="assets/image/customer-1.jpg"
-                            alt="Customer 1"
-                            class="rounded-circle img-fluid"
-                          />
+                          <img src="{{asset('public/uploads/client/'.$feedback->client?->image)}}" class="img-fluid rounded-circle" alt="">
                         </div>
                       </div>
                       <div class="col-md-9">

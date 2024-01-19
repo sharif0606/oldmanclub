@@ -34,7 +34,6 @@
                             <td>{{$value->rate}} </td>
                             <td>{{$value->message}} </td>
                             <td>{{$value->show_hide}} </td>
-                       
                             <td>
                                 <div class="d-flex">
                                     <a href="{{route('cus_feedback.edit',encryptor('encrypt',$value->id))}}">

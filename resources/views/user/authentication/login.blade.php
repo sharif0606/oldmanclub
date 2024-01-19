@@ -1,5 +1,5 @@
 @extends('backend.layouts.appAuth')
-@section('title','Sign Up')
+@section('title','Login')
 @section('content')
     <div class="align">
 		<h2 class="">Welcome To Login Your Account</h2>

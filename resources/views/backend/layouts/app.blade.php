@@ -169,7 +169,7 @@
                             <ul aria-expanded="false">
                                 <li><a href="{{route('user.index')}}">Admin</a></li>
                                 <li><a href="{{route('role.index')}}">Role</a></li>
-                                <li><a href="">User</a></li>
+                                <li><a href="{{route('client.index')}}">User</a></li>
                             </ul>
                         </li>
                         <li>
@@ -357,6 +357,7 @@
         <script src="{{asset('public/dist/js/init.js')}}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" />
+         <script src="{{ asset('js/app.js') }}"></script>
         {!! Toastr::message() !!}
 
     </body>

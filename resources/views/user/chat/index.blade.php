@@ -9,7 +9,6 @@
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-header">Chat Interface</div>
-
                         <div class="card-body">
                             <div id="chat-messages">
                                 <div id="chat-messages">

@@ -12,6 +12,7 @@ class ClientController extends Controller
     /**
      * Display a listing of the resource.
      */
+    
     public function index()
     {
         $client = Client::find(currentUserId());
@@ -45,17 +46,19 @@ class ClientController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Client $client)
+    public function edit($id)
     {
-        //
+       
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Client $client)
+
+
+    public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
@@ -63,8 +66,10 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        
     }
+
+
     public function save_profile(Request $request)
     {
         try {
