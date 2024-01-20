@@ -1,87 +1,69 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Models\Chat;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Events\NewMessage;
+use App\Events\ChatEvent;
+use App\Models\Chat;
+
 
 class ChatController extends Controller
 {
-    public function index()
+    public function adminChat()
     {
-        // Fetch chat messages
-        $chats = Chat::with('user', 'client')->latest()->get();
-
-        return view('chat.index', compact('chats'));
+        $user= \App\Models\User\Client::get();
+        $chats = Chat::where('user_id', currentUserId())
+            ->orderBy('created_at', 'asc')
+            ->get();
+        
+        return view('backend.admin_chat', compact('chats','user'));
     }
 
-    public function sendMessage(Request $request)
+    public function adminSendMessage(Request $request)
     {
-        $this->validate($request, [
+        // dd($request->all());
+        
+        $request->validate([
             'message' => 'required|string',
-            'user_id' => 'required|exists:users,id',
-            'client_id' => 'required|exists:clients,id',
         ]);
+
+        $user_id = currentUserId();
 
         $chat = Chat::create([
+            'user_id' => $user_id,
             'message' => $request->input('message'),
-            'user_id' => $request->input('user_id'),
-            'client_id' => $request->input('client_id'),
         ]);
 
-        event(new NewMessage($chat));
-        broadcast(new NewMessage($chat));
+        event(new ChatEvent($chat));
 
-        return response()->json(['status' => 'Message sent successfully']);
+        return redirect()->back();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function userChat()
     {
-        //
+        
+        $chats = Chat::where('client_id', currentUserId())
+            ->orderBy('created_at', 'asc')
+            ->get();
+        
+        return view('user.user_chat', compact('chats'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function userSendMessage(Request $request)
     {
-        //
-    }
+        
+        $request->validate([
+            'message' => 'required|string',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Chat $chat)
-    {
-        //
-    }
+        $client_id = currentUserId();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Chat $chat)
-    {
-        //
-    }
+        $chat = Chat::create([
+            'client_id' => $client_id,
+            'message' => $request->input('message'),
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Chat $chat)
-    {
-        //
-    }
+        event(new ChatEvent($chat));
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Chat $chat)
-    {
-        //
+        return redirect()->back();
     }
 }

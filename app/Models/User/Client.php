@@ -16,7 +16,7 @@ class Client extends Model
     public function cusfeedback(){
         return $this->hasMany(PrintCustomerFeedback::class);
     }
-    public function chat(){
-        return $this->hasMany(Chat::class);
+    public function chats(){
+         return $this->hasMany(Chat::class, 'client_id');
     }
 }

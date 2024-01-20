@@ -21,6 +21,7 @@
                 @endforeach
                 </div>
             </div>
+            
             <div class="container user-location">
                 <div class="row">
                     <div class="col-md-6">

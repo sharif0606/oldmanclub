@@ -12,8 +12,8 @@ class User extends Model
     public function role(){
         return $this->belongsTo(Role::class);
     }
-    public function chat(){
-        return $this->hasMany(Chat::class);
+    public function chats(){
+        return $this->hasMany(Chat::class, 'user_id');
     }
     
 }

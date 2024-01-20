@@ -17,6 +17,7 @@
             crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
         <link href="{{asset('public/css/style.css')}}" rel="stylesheet">
+        <script src="{{ asset('js/app.js') }}" defer></script>
         @stack('styles')
 
 
@@ -89,38 +90,12 @@
 
                             <ul class="navbar-nav header-right">
                                 <li class="nav-item dropdown notification_dropdown">
-                                    <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                        <i class="mdi mdi-bell"></i>
+                                    <a class="nav-link" href="{{route('admin_chat')}}" role="button">
+                                        <!-- <i class="mdi mdi-bell"></i> -->
+                                        <i class="icon-envelope"></i>
                                         <div class="pulse-css"></div>
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <ul class="list-unstyled">
-                                            <li class="media dropdown-item">
-                                                <span class="success"><i class="ti-user"></i></span>
-                                                <div class="media-body">
-                                                    <a href="#">
-                                                        <p><strong>Martin</strong> has added a <strong>customer</strong>
-                                                            Successfully
-                                                        </p>
-                                                    </a>
-                                                </div>
-                                                <span class="notify-time">3:20 am</span>
-                                            </li>
-                                            <li class="media dropdown-item">
-                                                <span class="primary"><i class="ti-shopping-cart"></i></span>
-                                                <div class="media-body">
-                                                    <a href="#">
-                                                        <p><strong>Jennifer</strong> purchased Light Dashboard 2.0.</p>
-                                                    </a>
-                                                </div>
-                                                <span class="notify-time">3:20 am</span>
-                                            </li>
-
-                                        </ul>
-                                        <a class="all-notification" href="#">See all notifications
-                                            <i class="ti-arrow-right"></i>
-                                        </a>
-                                    </div>
+                                    
                                 </li>
                                 <li class="nav-item dropdown header-profile">
                                     <a class="nav-link" href="#" role="button" data-toggle="dropdown">
@@ -285,7 +260,9 @@
                         </div>
                     </div>
                     <!-- row -->
+                    
                     @yield('content')
+                   
                 </div>
             </div>
             <!--**********************************

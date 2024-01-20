@@ -1,32 +1,11 @@
-import './bootstrap';
+import Echo from "laravel-echo";
+import Pusher from "pusher-js";
 
-$(document).ready(function(){
+window.Pusher = Pusher;
 
-    $(document).on('click','#send_message',function (e){
-        e.preventDefault();
-
-        let username = $('#username').val();
-        let message = $('#message').val();
-
-        if(username == '' || message == ''){
-            alert('Please enter both username and message')
-            return false;
-        }
-
-        $.ajax({
-            method:'post',
-            url:'/send-message',
-            data:{username:username, message:message},
-            success:function(res){
-                //
-            }
-        });
-
-    });
+window.Echo = new Echo({
+    broadcaster: "pusher",
+    key: f8a5e1bc31ad4949f454,
+    cluster: ap2,
+    encrypted: true,
 });
-
-window.Echo.channel('chat')
-    .listen('.message',(e)=>{
-        $('#messages').append('<p><strong>'+e.username+'</strong>'+ ': ' + e.message+'</p>');
-        $('#message').val('');
-    });

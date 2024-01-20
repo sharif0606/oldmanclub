@@ -39,7 +39,7 @@ class ClientAuthentication extends Controller
                 return redirect()->route('clientlogin')->with('success','Successfully Registred');
             }else
                 $this->notice::error('something wrong! Please try again');
-                return redirect->route('clientlogin')->with('danger','Please try again');
+                return redirect()->route('clientlogin')->with('danger','Please try again');
         }catch(Exception $e){
             dd($e);
             $this->notice::error('something wrong! Please try again');
@@ -77,7 +77,7 @@ class ClientAuthentication extends Controller
     public function setSession($user){
         return request()->session()->put([
                 'userId'=>encryptor('encrypt',$user->id),
-                'userName'=>encryptor('encrypt',$user->name),
+                'userName'=>encryptor('encrypt',$user->first_name_en),
                 'accessType'=>encryptor('encrypt',$user->full_access),
                 'language'=>encryptor('encrypt',$user->language),
                 'image'=>$user->image ?? 'no-image.png'

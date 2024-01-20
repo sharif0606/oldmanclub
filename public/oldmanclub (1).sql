@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2024 at 04:22 PM
+-- Generation Time: Jan 20, 2024 at 04:50 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `oldmanclub`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chats`
+--
+
+CREATE TABLE `chats` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `client_id` bigint(20) UNSIGNED NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `chats`
+--
+
+INSERT INTO `chats` (`id`, `user_id`, `client_id`, `message`, `created_at`, `updated_at`) VALUES
+(1, 2, 5, 'hello', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -71,6 +93,8 @@ CREATE TABLE `clients` (
   `nationality` varchar(255) DEFAULT NULL,
   `id_no` varchar(255) DEFAULT NULL,
   `id_no_type` varchar(255) DEFAULT NULL COMMENT '0=>Passport, 1=>National ID, 2=>Driver License, 3=>Birth Certificate',
+  `image` varchar(255) DEFAULT NULL,
+  `cover_photo` varchar(255) DEFAULT NULL,
   `photo_id` varchar(255) DEFAULT NULL,
   `is_photo_verified` int(11) DEFAULT 0 COMMENT '0=>No, 1=>Yes',
   `address_proof_photo` varchar(255) DEFAULT NULL,
@@ -87,9 +111,9 @@ CREATE TABLE `clients` (
 -- Dumping data for table `clients`
 --
 
-INSERT INTO `clients` (`id`, `first_name_en`, `first_name_bn`, `middle_name_en`, `middle_name_bn`, `last_name_en`, `last_name_bn`, `date_of_birth`, `contact_en`, `contact_bn`, `email`, `password`, `address_line_1`, `address_line_2`, `country`, `city`, `state`, `zip_code`, `nationality`, `id_no`, `id_no_type`, `photo_id`, `is_photo_verified`, `address_proof_photo`, `address_proof_type`, `is_address_verified`, `is_email_verified`, `is_contact_verified`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Ibrahim', NULL, 'khalil', NULL, 'ahm', NULL, '2024-01-02', '123', NULL, 'ibrahim@gmail.com', '$2y$12$li52gF.m6RNtqB56hkC7x.zH/PVo0NtLAfoUoOBT4BOUdLb5Bs7M6', 'Hazi Para', 'Hazi Para', 'Bangladesh', 'Wazedia', 'dhaka', '4213', NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, 0, 0, 1, '2024-01-03 08:13:29', '2024-01-03 08:13:29'),
-(2, 'jasim', NULL, 'uddin', NULL, 'uddin', NULL, '1999-12-08', '1', NULL, 'jasim@gmail.com', '$2y$12$vhVbWfdHNs3AA4HSOuF1duqEoGRIuaBd/bPF0QxLzKoa6T1QBVjLm', 'Hazi Para', 'Hazi Para', 'Bangladesh', 'Wazedia', 'dhaka', '4213', NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, 0, 0, 1, '2024-01-03 08:20:18', '2024-01-03 08:20:18');
+INSERT INTO `clients` (`id`, `first_name_en`, `first_name_bn`, `middle_name_en`, `middle_name_bn`, `last_name_en`, `last_name_bn`, `date_of_birth`, `contact_en`, `contact_bn`, `email`, `password`, `address_line_1`, `address_line_2`, `country`, `city`, `state`, `zip_code`, `nationality`, `id_no`, `id_no_type`, `image`, `cover_photo`, `photo_id`, `is_photo_verified`, `address_proof_photo`, `address_proof_type`, `is_address_verified`, `is_email_verified`, `is_contact_verified`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'jasim', NULL, NULL, NULL, 'uddin', NULL, '2024-01-01', '123', NULL, 'jasim@gmail.com', '$2y$12$zDvdxrmqP08u.UMjhw9hveDydjtgFlhIDTqNiijbl/Y27qhMZ2vAy', 'Hazi Para', 'Hazi Para', 'Bangladesh', 'chattogram', 'chittagong', '4213', 'Bangladeshi', '123456789', '1', '7791705488098.jpg', '2841705488098.png', NULL, 0, NULL, NULL, 0, 0, 0, 1, '2024-01-17 02:44:46', '2024-01-19 06:32:38'),
+(5, 'kaiser', NULL, 'ahmed', NULL, 'ahmed', NULL, '2024-01-05', '147', NULL, 'kaiser@gmail.com', '$2y$12$64WoxpfIchgPd.FQtWGlQOoThdRw5XIsKYkiss00sYfJQj9WbyEwC', 'Hazi Para', 'Hazi Para', 'Bangladesh', 'Wazedia', 'chittagong', '4213', 'Bangladeshi', '987654321', '1', '7391705668341.jpg', NULL, NULL, 0, NULL, NULL, 0, 0, 0, 1, '2024-01-19 06:44:08', '2024-01-19 06:45:41');
 
 -- --------------------------------------------------------
 
@@ -124,16 +148,6 @@ CREATE TABLE `customer_feedback` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `customer_feedback`
---
-
-INSERT INTO `customer_feedback` (`id`, `customer_id`, `rate`, `message`, `show_hide`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, '4.6*', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took', 1, '2024-01-06 00:53:15', '2024-01-06 01:36:51', NULL),
-(2, 2, '4.5*', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took', 1, '2024-01-06 01:37:54', '2024-01-06 01:37:54', NULL),
-(3, 1, '4.5*', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took', 1, '2024-01-06 01:39:54', '2024-01-06 01:39:54', NULL),
-(4, 2, '4.6*', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took', 1, '2024-01-06 01:42:51', '2024-01-06 01:43:56', NULL);
 
 -- --------------------------------------------------------
 
@@ -394,7 +408,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (44, '2024_01_15_092440_create_printing_heroes_table', 28),
 (45, '2024_01_15_100723_create_print_video_sections_table', 29),
 (46, '2024_01_15_105721_create_print_card_sections_table', 30),
-(47, '2024_01_15_112242_create_print_customer_feedback_table', 31);
+(47, '2024_01_15_112242_create_print_customer_feedback_table', 31),
+(48, '2024_01_18_092205_create_chats_table', 32),
+(50, '2024_01_18_105432_create_chats_table', 33);
 
 -- --------------------------------------------------------
 
@@ -493,12 +509,12 @@ CREATE TABLE `our_services` (
 --
 
 INSERT INTO `our_services` (`id`, `title`, `link`, `image`, `details`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Product Shipping Service', 'https://www.google.com/', '508.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-05 21:59:22', '2024-01-09 08:00:10', NULL),
+(1, 'Product Shipping Service', 'shippingservice', '508.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-05 21:59:22', '2024-01-09 08:00:10', NULL),
 (2, 'E-commerce System', 'https://www.google.com/', '373.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-08 06:51:47', '2024-01-08 07:08:11', NULL),
-(3, 'NFC Business Card', 'https://www.google.com/', '547.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-08 06:52:21', '2024-01-08 07:08:36', NULL),
-(4, 'Printing Service', 'https://www.google.com/', '712.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-08 06:52:58', '2024-01-08 06:52:58', NULL),
+(3, 'NFC Business Card', 'nfccard', '547.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-08 06:52:21', '2024-01-08 07:08:36', NULL),
+(4, 'Printing Service', 'printservice', '712.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-08 06:52:58', '2024-01-08 06:52:58', NULL),
 (5, 'USA Company Registration', 'https://www.google.com/', '885.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-08 06:53:29', '2024-01-08 06:53:29', NULL),
-(6, 'Smart Mail Service', 'https://www.google.com/', '613.jpg', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-08 07:01:19', '2024-01-08 07:01:19', NULL);
+(6, 'Smart Mail Service', 'smartmailservice', '613.jpg', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-08 07:01:19', '2024-01-08 07:01:19', NULL);
 
 -- --------------------------------------------------------
 
@@ -695,9 +711,8 @@ CREATE TABLE `print_customer_feedback` (
 --
 
 INSERT INTO `print_customer_feedback` (`id`, `customer_id`, `customer_message`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(2, 2, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"', '2024-01-15 06:12:09', '2024-01-15 06:12:09', NULL),
-(3, 1, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"', '2024-01-15 06:29:04', '2024-01-15 06:29:04', NULL),
-(4, 1, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"', '2024-01-15 06:29:13', '2024-01-15 06:36:25', NULL);
+(5, 1, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"', '2024-01-19 08:49:41', '2024-01-19 08:49:41', NULL),
+(6, 5, '\"1Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"', '2024-01-19 08:50:12', '2024-01-19 08:50:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -741,7 +756,8 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `identity`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin', NULL, NULL);
+(1, 'Admin', 'admin', NULL, NULL),
+(2, 'User', 'user', '2024-01-20 02:29:43', '2024-01-20 02:29:43');
 
 -- --------------------------------------------------------
 
@@ -1011,6 +1027,14 @@ INSERT INTO `users` (`id`, `name_en`, `name_bn`, `email`, `contact_no_en`, `cont
 --
 
 --
+-- Indexes for table `chats`
+--
+ALTER TABLE `chats`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `chats_user_id_index` (`user_id`),
+  ADD KEY `chats_client_id_index` (`client_id`);
+
+--
 -- Indexes for table `choice_sections`
 --
 ALTER TABLE `choice_sections`
@@ -1277,6 +1301,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `chats`
+--
+ALTER TABLE `chats`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `choice_sections`
 --
 ALTER TABLE `choice_sections`
@@ -1286,7 +1316,7 @@ ALTER TABLE `choice_sections`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -1358,7 +1388,7 @@ ALTER TABLE `llc_pricings`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `nfc_card_images`
@@ -1436,7 +1466,7 @@ ALTER TABLE `print_card_sections`
 -- AUTO_INCREMENT for table `print_customer_feedback`
 --
 ALTER TABLE `print_customer_feedback`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `print_video_sections`
@@ -1448,7 +1478,7 @@ ALTER TABLE `print_video_sections`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `service_sections`
@@ -1519,6 +1549,13 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `chats`
+--
+ALTER TABLE `chats`
+  ADD CONSTRAINT `chats_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `chats_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `customer_feedback`

@@ -52,7 +52,7 @@ use App\Http\Controllers\User\ClientController as clientprofile;
 
 // landing page
 use App\Http\Controllers\Common\frontendController as frontend;
-use App\Http\Controllers\ChatController as chat;
+use App\Http\Controllers\ChatController;
 
 
 /*
@@ -74,6 +74,9 @@ Route::get('/logout', [auth::class,'singOut'])->name('logOut');
 
 Route::middleware(['checkauth'])->prefix('admin')->group(function(){
     Route::get('dashboard', [dashboard::class,'index'])->name('dashboard');
+    Route::get('admin/chat', [ChatController::class, 'adminChat'])->name('admin_chat');
+    Route::post('admin-chat', [ChatController::class, 'adminSendMessage'])->name('adminchat.store');
+   
 });
 Route::middleware(['checkrole'])->prefix('admin')->group(function(){
     Route::resource('user', user::class);
@@ -81,6 +84,7 @@ Route::middleware(['checkrole'])->prefix('admin')->group(function(){
     Route::resource('client', client::class);
     Route::get('permission/{role}', [permission::class,'index'])->name('permission.list');
     Route::post('permission/{role}', [permission::class,'save'])->name('permission.save');
+    
     
     Route::resource('setting', setting::class);
     Route::resource('slider', slider::class);
@@ -118,6 +122,7 @@ Route::middleware(['checkrole'])->prefix('admin')->group(function(){
     Route::resource('printvideo', printvideo::class);
     Route::resource('printcard', printcard::class);
     Route::resource('printcus_feedback', printcus_feedback::class);
+
 });
 
 
@@ -133,7 +138,10 @@ Route::middleware(['checkclient'])->prefix('user')->group(function(){
     Route::get('profile', [clientprofile::class,'index'])->name('clientdashboard');
     Route::post('/profile/save', [clientprofile::class, 'save_profile'])->name('user_save_profile');
     Route::post('/profile/savepass', [clientprofile::class, 'change_password'])->name('change_password');
+    Route::get('/user/chat', [ChatController::class, 'userChat'])->name('user_chat');
+    Route::post('/user/chat', [ChatController::class, 'userSendMessage'])->name('userchat_store');
 });
+Route::post('/send-message', [ChatController::class, 'sendMessage']);
 
 Route::get('', [frontend::class, 'frontend'])->name('frontend');
 Route::get('nfccard', [frontend::class, 'nfccard'])->name('nfccard');
@@ -142,17 +150,13 @@ Route::get('llcservice', [frontend::class, 'llcservice'])->name('llcservice');
 Route::get('phoneservice', [frontend::class, 'phoneservice'])->name('phoneservice');
 Route::get('smartmailservice', [frontend::class, 'smartmailservice'])->name('smartmailservice');
 Route::get('printservice', [frontend::class, 'printservice'])->name('printservice');
+
+
+
 // Route::get('/', function () {
 //     return view('frontend.home');
 // });
 
-
-// Route::get('/chat', [Chat::class, 'index'])->name('chat_index');
-// Route::post('/chat/send', [Chat::class, 'sendMessage'])->name('chat_send');
-// Route::post('send-message',function (Request $request){
-//     event(new Message($request->username, $request->message));
-//     return ['success' => true];
-// });
 
 // Route::get('/', function () {
 //     return view('welcome');
