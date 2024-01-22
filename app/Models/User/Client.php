@@ -19,4 +19,8 @@ class Client extends Model
     public function chats(){
          return $this->hasMany(Chat::class, 'client_id');
     }
+    public function phonebook()
+    {
+        return $this->hasMany(\App\Models\Backend\PhoneBook::class);
+    }
 }

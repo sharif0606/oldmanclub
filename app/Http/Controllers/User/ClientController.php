@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\User\Client;
+use App\Models\Backend\PhoneBook;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -18,6 +19,11 @@ class ClientController extends Controller
         $client = Client::find(currentUserId());
         return view('user.clientDashboard', compact('client'));
     }
+    // public function phonebook_list()
+    // {
+    //     $phonebook = PhoneBook::where('client_id',currentUserId())->find();
+    //     return view('user.clientDashboard', compact('phonebook'));
+    // }
 
     /**
      * Show the form for creating a new resource.

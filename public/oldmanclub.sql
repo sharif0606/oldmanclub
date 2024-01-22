@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2024 at 04:50 PM
+-- Generation Time: Jan 22, 2024 at 04:30 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -410,7 +410,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (46, '2024_01_15_105721_create_print_card_sections_table', 30),
 (47, '2024_01_15_112242_create_print_customer_feedback_table', 31),
 (48, '2024_01_18_092205_create_chats_table', 32),
-(50, '2024_01_18_105432_create_chats_table', 33);
+(50, '2024_01_18_105432_create_chats_table', 33),
+(52, '2024_01_22_085542_create_phone_books_table', 34);
 
 -- --------------------------------------------------------
 
@@ -548,6 +549,34 @@ CREATE TABLE `personal_access_tokens` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `phone_books`
+--
+
+CREATE TABLE `phone_books` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `client_id` bigint(20) UNSIGNED NOT NULL,
+  `name_en` varchar(255) NOT NULL,
+  `name_bn` varchar(255) DEFAULT NULL,
+  `contact_en` varchar(255) NOT NULL,
+  `contact_bn` varchar(255) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `phone_books`
+--
+
+INSERT INTO `phone_books` (`id`, `client_id`, `name_en`, `name_bn`, `contact_en`, `contact_bn`, `email`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 'jasim', NULL, '1234', NULL, 'jasim@gmail.com', NULL, '2024-01-22 05:29:23', NULL),
+(2, 1, 'Kaiser', NULL, '123456', NULL, 'kaiser@gmail.com', '2024-01-22 05:30:00', '2024-01-22 05:35:17', NULL),
+(3, 5, 'jasim', NULL, '123', NULL, 'jasim@gmail.com', '2024-01-22 07:29:54', '2024-01-22 07:29:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -1167,6 +1196,13 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `phone_books`
+--
+ALTER TABLE `phone_books`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `phone_books_client_id_index` (`client_id`);
+
+--
 -- Indexes for table `phone_customer_feedback`
 --
 ALTER TABLE `phone_customer_feedback`
@@ -1388,7 +1424,7 @@ ALTER TABLE `llc_pricings`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `nfc_card_images`
@@ -1425,6 +1461,12 @@ ALTER TABLE `permissions`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `phone_books`
+--
+ALTER TABLE `phone_books`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `phone_customer_feedback`
@@ -1574,6 +1616,12 @@ ALTER TABLE `divisions`
 --
 ALTER TABLE `permissions`
   ADD CONSTRAINT `permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `phone_books`
+--
+ALTER TABLE `phone_books`
+  ADD CONSTRAINT `phone_books_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `print_customer_feedback`

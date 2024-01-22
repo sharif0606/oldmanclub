@@ -154,6 +154,8 @@
                             </li>
                             <li class="nav-item"><a href="#password_tab" data-toggle="tab" class="nav-link">Change Password</a>
                             </li>
+                            <li class="nav-item"><a href="#phonebook_tab" data-toggle="tab" class="nav-link">Phone book</a>
+                            </li>
                         </ul>
                         <div class="tab-content">
                             <div id="my-posts" class="tab-pane fade active show">
@@ -397,6 +399,28 @@
                                     </div>
                                 </div>
                             </div>
+                          
+                            <!-- <div id="phonebook_tab" class="tab-pane fade">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Phonebook</h5>
+                                        <div class="row">
+                                            <div class="col-md-10 col-lg-6">
+                                                <table>
+                                                    <thead>
+                                                        <th>Name</th>
+                                                        <th>Contact</th>
+                                                        <th>E-mail</th>
+                                                    </thead>
+                                                    <tbody>
+                                                       
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
