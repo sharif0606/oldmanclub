@@ -47,7 +47,7 @@ class ChatEvent implements ShouldBroadcast
         return [
             'id' => $this->chat->id,
             'user_id' => $this->chat->user_id,
-            'admin_id' => $this->chat->admin_id,
+            'client_id' => $this->chat->client_id,
             'message' => $this->chat->message,
             'created_at' => $this->chat->created_at->toDateTimeString(),
         ];

@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\Backend\PhoneBook;
+use App\Models\User\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Response;
+use Excel;
 
 class PhoneBookController extends Controller
 {
@@ -13,8 +17,9 @@ class PhoneBookController extends Controller
      */
     public function index()
     {
+        $client = Client::find(currentUserId());
         $phonebook = PhoneBook::where('client_id',currentUserId())->get();
-        return view('user.phonebook.index',compact('phonebook'));
+        return view('user.phonebook.index',compact('phonebook','client'));
     }
 
     /**
@@ -62,8 +67,9 @@ class PhoneBookController extends Controller
      */
     public function edit($id)
     {
+        $client = Client::find(currentUserId());
         $phonebook = PhoneBook::findOrFail(encryptor('decrypt',$id));
-        return view('user.phonebook.edit',compact('phonebook'));
+        return view('user.phonebook.edit',compact('phonebook','client'));
     }
 
     /**
@@ -84,7 +90,7 @@ class PhoneBookController extends Controller
                 return redirect()->route('phonebook.index');
             }
         }catch(Exception $e){
-            dd($e);
+            //dd($e);
             $this->notice::error('Please try again');
             return redirect()->back()->withInput();
         }
@@ -100,5 +106,34 @@ class PhoneBookController extends Controller
             $this->notice::warning('Deleted Permanently!');
             return redirect()->back();
         }
+    }
+// $phonebookData = PhoneBook::where('client_id', currentUserId())->get();
+    public function downloadPhonebook()
+    {
+        $phonebook = PhoneBook::where('client_id', currentUserId())->get(); 
+        $headers = array(
+            "Content-type" => "text/csv",
+            "Content-Disposition" => "attachment; filename=phonebook.csv",
+            "Pragma" => "no-cache",
+            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+            "Expires" => "0"
+        );
+
+        $handle = fopen('php://output', 'w');
+        fputcsv($handle, array('#SL', 'Name', 'Contact No', 'E-mail'));
+
+        foreach ($phonebook as $index => $p) {
+            fputcsv($handle, [$index + 1, $p->name_en, $p->contact_en, $p->email]);
+        }
+
+        fclose($handle);
+
+        return response()->stream(
+            function () use ($handle) {
+                fclose($handle);
+            },
+            200,
+            $headers
+        );
     }
 }

@@ -9,10 +9,11 @@
             <!-- table bordered -->
             <div class="table-responsive">
                 <div>
+                    <!-- Inside your blade file -->
+                    <a href="{{ route('phonebook_download') }}" class="pull-right fs-1 mx-2" download>
+                        <i class="fa fa-download"></i>
+                    </a>
                     <a class="pull-right fs-1" href="{{route('phonebook.create')}}" data-toggle="modal" data-target="#phonecreatModal"><i class="fa fa-plus"></i></a>
-                    <!-- <li class="nav-item @@events text-dark">
-              <a class="nav-link" href="" data-toggle="modal" data-target="#signupModal">Login</a>
-            </li> -->
                 </div>
                 <table class="table table-bordered mb-0">
                     <thead>
@@ -59,7 +60,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content rounded-0 border-0 p-4">
                 <div class="modal-header border-0">
-                    <h3>Phonebook</h3>
+                    <h3 class="text-center">Phonebook</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

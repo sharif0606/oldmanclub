@@ -18,17 +18,13 @@
         <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
         <link href="{{asset('public/css/style.css')}}" rel="stylesheet">
         @stack('styles')
-
-
     </head>
 
     <body>
 
-        
-
         <!--**********************************
         Main wrapper start
-    ***********************************-->
+        ***********************************-->
         <div id="main-wrapper">
 
             <!--**********************************
@@ -42,11 +38,34 @@
             <!--**********************************
             Header start
         ***********************************-->
-            <div class="header">
+            <div class="header pl-0">
                 <div class="header-content">
                     <nav class="navbar navbar-expand">
                         <div class="collapse navbar-collapse justify-content-between">
                             <div class="header-left">
+                                <!-- <nav class="navbar navbar-expand-lg navbar-light">
+                                <div class="container-fluid">
+                                    <a class="navbar-brand" href="#">Navbar</a>
+                                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                    </button>
+                                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                        <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                        </li>
+                                        <li class="nav-item">
+                                        <a class="nav-link" href="#">Link</a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Dropdown
+                                        </a>
+                                        </li>
+                                    </ul>
+                                    </div>
+                                </div>
+                                </nav> -->
                             </div>
 
                             <ul class="navbar-nav header-right">
@@ -70,7 +89,7 @@
                                         <i class="mdi mdi-account"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a href="./app-profile.html" class="dropdown-item">
+                                        <a href="{{route('clientdashboard')}}" class="dropdown-item">
                                             <i class="icon-user"></i>
                                             <span class="ml-2">Profile </span>
                                         </a>
@@ -100,7 +119,7 @@
         ***********************************-->
             <div class="content-body" style="margin-left: 0px;">
                 <div class="container-fluid">
-                    <div class="row page-titles mx-0">
+                    <!-- <div class="row page-titles mx-0">
                         <div class="col-sm-6 p-md-0">
                             <div class="welcome-text">
                                 <h4>@yield('title')</h4>
@@ -112,8 +131,52 @@
                                 <li class="breadcrumb-item active"><a href="javascript:void(0)">@yield('page')</a></li>
                             </ol>
                         </div>
+                    </div> -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="profile">
+                                <div class="profile-head">
+                                    <div class="photo-content">
+                                        <div class="cover-photo"></div>
+                                        <div class="profile-photo">
+                                            <img src="{{asset('public/uploads/client/'.$client->image)}}" class="img-fluid rounded-circle" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="profile-info">
+                                        <div class="row justify-content-center">
+                                            <div class="col-xl-8">
+                                                <div class="row">
+                                                    <div class="col-xl-4 col-sm-4 border-right-1 prf-col">
+                                                        <div class="profile-name">
+                                                            <h4 class="text-primary">                   {{$client->first_name_en}}
+                                                            {{$client->last_name_en}}
+                                                            </h4>
+                                                            <p>{{$client->address_line_1}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-4 col-sm-4 border-right-1 prf-col">
+                                                        <div class="profile-email">
+                                                            <h4 class="text-muted text-primary">{{$client->email}}</h4>
+                                                            <p>Email</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-4 col-sm-4 prf-col">
+                                                        <div class="profile-call">
+                                                            <h4 class="text-muted">(+088) {{$client->contact_en}}</h4>
+                                                            <p>Phone No.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    
+                    <div class="row">
+                        
+                    </div>
                     <!-- row -->
                     @yield('content')
                 </div>

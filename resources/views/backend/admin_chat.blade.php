@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('js/bootstrap.js') }}"></script>
+    <script src="{{ asset('resources/js/bootstrap.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var chatForm = document.getElementById('chat-form');

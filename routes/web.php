@@ -142,11 +142,14 @@ Route::middleware(['checkclient'])->prefix('user')->group(function(){
     Route::resource('phonebook', phonebook::class);
     Route::post('/profile/save', [clientprofile::class, 'save_profile'])->name('user_save_profile');
     Route::post('/profile/savepass', [clientprofile::class, 'change_password'])->name('change_password');
-    Route::get('/phonebook/list', [clientprofile::class, 'phonebook_list'])->name('phonebook_list');
+    // Route::get('/phonebook/list', [clientprofile::class, 'phonebook_list'])->name('phonebook_list');
 
     Route::get('/user/chat', [ChatController::class, 'userChat'])->name('user_chat');
     Route::post('/user/chat', [ChatController::class, 'userSendMessage'])->name('userchat_store');
     Route::resource('phonebook', phonebook::class);
+
+    Route::get('/download-phonebook', [phonebook::class, 'downloadPhonebook'])->name('phonebook_download');
+
 });
 Route::post('/send-message', [ChatController::class, 'sendMessage']);
 

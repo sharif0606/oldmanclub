@@ -2,50 +2,9 @@
 @section('title','User Profile')
 @section('page','User Profile')
 @section('content')
+
 <div class="row">
-    <div class="col-lg-12">
-        <div class="profile">
-            <div class="profile-head">
-                <div class="photo-content">
-                    <div class="cover-photo"></div>
-                    <div class="profile-photo">
-                        <img src="{{asset('public/uploads/client/'.$client->image)}}" class="img-fluid rounded-circle" alt="">
-                    </div>
-                </div>
-                <div class="profile-info">
-                    <div class="row justify-content-center">
-                        <div class="col-xl-8">
-                            <div class="row">
-                                <div class="col-xl-4 col-sm-4 border-right-1 prf-col">
-                                    <div class="profile-name">
-                                        <h4 class="text-primary">                   {{$client->first_name_en}}
-                                        {{$client->last_name_en}}
-                                        </h4>
-                                        <p>{{$client->address_line_1}}</p>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-sm-4 border-right-1 prf-col">
-                                    <div class="profile-email">
-                                        <h4 class="text-muted">{{$client->email}}</h4>
-                                        <p>Email</p>
-                                    </div>
-                                </div>
-                                <!-- <div class="col-xl-4 col-sm-4 prf-col">
-                                    <div class="profile-call">
-                                        <h4 class="text-muted">(+1) 321-837-1030</h4>
-                                        <p>Phone No.</p>
-                                    </div>
-                                </div> -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-4">
+    <!-- <div class="col-lg-4">
         <div class="card">
             <div class="card-body">
                 <div class="profile-statistics">
@@ -139,8 +98,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-lg-8">
+    </div> -->
+    <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
                 <div class="profile-tab">
@@ -153,9 +112,7 @@
                             <li class="nav-item"><a href="#profile-settings" data-toggle="tab" class="nav-link">Setting</a>
                             </li>
                             <li class="nav-item"><a href="#password_tab" data-toggle="tab" class="nav-link">Change Password</a>
-                            </li>
-                            <li class="nav-item"><a href="#phonebook_tab" data-toggle="tab" class="nav-link">Phone book</a>
-                            </li>
+                            </li>                                      
                         </ul>
                         <div class="tab-content">
                             <div id="my-posts" class="tab-pane fade active show">

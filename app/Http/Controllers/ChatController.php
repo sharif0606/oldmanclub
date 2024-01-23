@@ -28,7 +28,7 @@ class ChatController extends Controller
         $user_id = currentUserId();
 
         $chat = Chat::create([
-            'user_id' => $user_id,
+            'client_id' => $client_id,
             'message' => $request->input('message'),
         ]);
 
@@ -39,12 +39,12 @@ class ChatController extends Controller
 
     public function userChat()
     {
-        
+        $client = \App\Models\User\Client::find(currentUserId());
         $chats = Chat::where('client_id', currentUserId())
             ->orderBy('created_at', 'asc')
             ->get();
         
-        return view('user.user_chat', compact('chats'));
+        return view('user.user_chat', compact('chats','client'));
     }
 
     public function userSendMessage(Request $request)
