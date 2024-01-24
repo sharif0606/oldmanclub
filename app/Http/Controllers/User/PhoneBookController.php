@@ -110,30 +110,26 @@ class PhoneBookController extends Controller
 // $phonebookData = PhoneBook::where('client_id', currentUserId())->get();
     public function downloadPhonebook()
     {
-        $phonebook = PhoneBook::where('client_id', currentUserId())->get(); 
-        $headers = array(
-            "Content-type" => "text/csv",
-            "Content-Disposition" => "attachment; filename=phonebook.csv",
-            "Pragma" => "no-cache",
-            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
-            "Expires" => "0"
-        );
-
-        $handle = fopen('php://output', 'w');
-        fputcsv($handle, array('#SL', 'Name', 'Contact No', 'E-mail'));
-
-        foreach ($phonebook as $index => $p) {
-            fputcsv($handle, [$index + 1, $p->name_en, $p->contact_en, $p->email]);
+        $phonebookData = PhoneBook::where('client_id', currentUserId())->get(); 
+        
+        
+        $csv = "";
+        $csv .= implode(',', array('Name', 'Contact No', 'E-mail','Given Name','Additional Name','Family Name','Yomi Name', 'Given Name', 'Yomi Additional Name' ,'Family Name Yomi',
+ 'Yomi', 'Name Prefix','Name Suffix', 'Initials Nickname', 'Short Name', 'Maiden Name', 'Birthday Gender', 'Location', 'Billing Information', 'Directory Server', 'Mileage', 'Occupation', 'Hobby', 'Sensitivity', 'Priority', 'Subject', 'Notes', 'Language', 'Photo', 'Group Membership', 'Phone 1 - Type', 'Phone 1 - Value'
+)) . "\n"; // Headers
+        foreach ($phonebookData as $row) {
+            $csv .= implode(',', array(
+                $row->name_en,
+                $row->contact_en,
+                $row->email,
+                $row->given_name,
+            )) . "\n";
         }
+        $response = Response::make($csv, 200);
+        $response->header('Content-Type', 'text/csv');
+        $response->header('Content-Disposition', 'attachment; filename="phonebook.csv"');
 
-        fclose($handle);
-
-        return response()->stream(
-            function () use ($handle) {
-                fclose($handle);
-            },
-            200,
-            $headers
-        );
+        return $response;
+    
     }
 }
