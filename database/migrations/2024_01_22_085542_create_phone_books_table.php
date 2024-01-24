@@ -20,11 +20,37 @@ return new class extends Migration
             $table->string('contact_en');
             $table->string('contact_bn')->nullable();
             $table->string('email')->uniqid();
+            $table->string('given_name')->nullable();
+            $table->string('additional_name')->nullable();
+            $table->string('family_name')->nullable();
+            $table->string('yomi_name')->nullable();
+            $table->string('given_name_yomi')->nullable();
+            $table->string('additional_name_yomi')->nullable();
+            $table->string('family_name_yomi')->nullable();
+            $table->string('name_prefix')->nullable();
+            $table->string('name_suffix')->nullable();
+            $table->string('initials')->nullable();
+            $table->string('short_name')->nullable();
+            $table->string('maiden_name')->nullable();
+            $table->string('birthday')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('location')->nullable();
+            $table->string('billing_information')->nullable();
+            $table->string('directory_server')->nullable();
+            $table->string('mileage_occupation')->nullable();
+            $table->string('hobby')->nullable();
+            $table->string('sensitivity')->nullable();
+            $table->string('priority')->nullable();
+            $table->string('subject_notes')->nullable();
+            $table->string('language')->nullable();
+            $table->string('photo')->nullable();
+            $table->string('group_membership')->nullable();
+            $table->string('phone_1_type')->nullable();
+            $table->string('Phone_1_value')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
     }
-
     /**
      * Reverse the migrations.
      */

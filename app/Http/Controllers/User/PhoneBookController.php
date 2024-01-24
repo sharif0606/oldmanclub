@@ -107,29 +107,24 @@ class PhoneBookController extends Controller
             return redirect()->back();
         }
     }
-// $phonebookData = PhoneBook::where('client_id', currentUserId())->get();
     public function downloadPhonebook()
     {
         $phonebookData = PhoneBook::where('client_id', currentUserId())->get(); 
-        
-        
-        $csv = "";
-        $csv .= implode(',', array('Name', 'Contact No', 'E-mail','Given Name','Additional Name','Family Name','Yomi Name', 'Given Name', 'Yomi Additional Name' ,'Family Name Yomi',
- 'Yomi', 'Name Prefix','Name Suffix', 'Initials Nickname', 'Short Name', 'Maiden Name', 'Birthday Gender', 'Location', 'Billing Information', 'Directory Server', 'Mileage', 'Occupation', 'Hobby', 'Sensitivity', 'Priority', 'Subject', 'Notes', 'Language', 'Photo', 'Group Membership', 'Phone 1 - Type', 'Phone 1 - Value'
-)) . "\n"; // Headers
+        // $csv = "";
+        $csv = mb_convert_encoding("", 'UTF-8', 'UTF-8');
+        $csv .= mb_convert_encoding(implode(',', array('Name','Name Bangla', 'Contact No', 'E-mail','Given Name',	'Additional Name','Family Name', 'Yomi Name', 'Given Name Yomi', 'Additional Name Yomi',' Family Name Yomi', 'Name Prefix',	'Name Suffix',	'Initials',	'Nickname',	'Short Name', 'Maiden Name',	'Birthday',	'Gender',	'Location', 'Billing Information',	'Directory Server',	'Mileage','Occupation',	'Hobby', 'Sensitivity', 'Priority', 'Subject', 'Notes', 'Language',	'Photo','Group Membership',	'Phone 1 - Type',	
+        )),'UTF-8', 'UTF-8') . "\n"; // Headers
         foreach ($phonebookData as $row) {
             $csv .= implode(',', array(
                 $row->name_en,
+                $row->name_bn,
                 $row->contact_en,
                 $row->email,
-                $row->given_name,
             )) . "\n";
         }
         $response = Response::make($csv, 200);
-        $response->header('Content-Type', 'text/csv');
-        $response->header('Content-Disposition', 'attachment; filename="phonebook.csv"');
-
+        $response->header('Content-Type', 'text/csv;  charset=UTF-8');
+        $response->header('Content-Disposition', 'attachment; filename="contacts.csv"');
         return $response;
-    
     }
 }

@@ -29,3 +29,6 @@ class SignupRequest extends FormRequest
         ];
     }
 }
+
+// 'password'=>['required','confirmed',Password::min(8)->mixedCase()->numbers()->symbols()->uncompromised()]
+// use Illuminate\Validation\Rules\Password;
