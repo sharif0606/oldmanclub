@@ -13,24 +13,22 @@
 				@csrf
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="step-1" role="tabpanel" aria-labelledby="step-1-tab">
-                        <div class="container">
-                            <div class="row">
-                                <h3>Select Your Registration Type</h3>
-                                <div class="col-md-8">      
-                                    <div class="col-md-12">
-                                            <p class="text-start">To begin this journey, tell us what type of account you'd be opening.</p>
-                                    </div>
-                                </div>
+                        <div class="row">
+                            <h3>Select Your Registration Type</h3>
+                            <div class="col-md-8">      
                                 <div class="col-md-12">
-                                    <div class="d-grid my-3">
-                                        <button type="button" class="btn btn-primary next-step py-2">Register With Email</button>
-                                        <h6 class="text-center mt-2">or</h6>
-                                        <a href="#" class="btn btn-outline-primary btn-block text-white py-2">
+                                    <p class="text-start">To begin this journey, tell us what type of account you'd be opening.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="d-grid my-3">
+                                    <button type="button" class="btn btn-primary next-step py-2">Register With Email</button>
+                                    <h6 class="text-center mt-2">or</h6>
+                                    <a href="#" class="btn btn-outline-primary btn-block text-white py-2">
                                         <i class="fa-brands fa-google float-start "></i>Register with Google
-                                        </a>
-                                    </div>
-                                </div> 
-                            </div>          
+                                    </a>
+                                </div>
+                            </div> 
                         </div>
                     </div>
                     <div class="tab-pane fade" id="step-2" role="tabpanel" aria-labelledby="step-2-tab">
@@ -40,8 +38,7 @@
                         </div>
                         <div>
                             <h2 class="">Register Your Account</h2>
-                            <p class="">To begin this journey! Tell us what type of account you'd be opening
-                            </p>
+                            <p class=""> To begin this journey! Tell us what type of account you'd be opening </p>
                             <div class="form-group">
                                 <label class="control-label mb-10" for="first_name">First Name</label>
                                 <input type="text" class="form-control rounded" name="fname_en" value="{{old('fname_en')}}" required="" id="first_name" placeholder="Your First Name">

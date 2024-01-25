@@ -4527,10 +4527,16 @@ h6.h1 {
 /* login/register */
 
 .hero{
+  display: flex;
   position: relative;
   text-align: center;
-  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  background: rgba(0, 0, 0, 0.5);
   color: #da74ec;
+  min-height: 100vh;
+  background-size: cover;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
 }
 
 .hero::before {
@@ -4545,12 +4551,16 @@ h6.h1 {
 }
 
 .hero-text{
-  position: absolute;
-  top: 30%;
-  left: 45%;
-  transform: translate(-50%, -50%);
+  margin:0 auto;
+  width:80%;
   text-align: left;
-  font-size: larger;
+  font-size: 21px;
+  line-height: 33px;
+}
+.hero-text p{
+  width:90%;
+  margin:0 auto;
+  color:#FFF;
 }
 .hero-heading{
   position: absolute;
