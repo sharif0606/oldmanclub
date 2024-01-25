@@ -17,7 +17,7 @@
     }
     .navbar {
         background-color: #2F0549;
-        overflow: hidden;
+        /* overflow: hidden; */
         /* position: relative; */
         /* padding: 80px 60px; */
     }
@@ -72,6 +72,14 @@
         border-radius: 5px;
         margin: 5px;
         cursor: pointer;
+    }
+    .dropdown-menu{
+        /* background: none; */
+        border: none;
+        margin-left: -70px;
+    }
+    .dropdown-menu li a{
+        color: #e09e24;
     }
     /* .sign-up-btn{
         background-color:  #2F0549;

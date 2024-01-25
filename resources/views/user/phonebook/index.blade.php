@@ -22,6 +22,7 @@
                         <tr>
                             <th scope="col">{{__('#SL')}}</th>
                             <th scope="col">{{__('Name')}}</th>
+                            <th scope="col">{{__('Group')}}</th>
                             <th scope="col">{{__('Contact No')}}</th>
                             <th scope="col">{{__('E-mail')}}</th>
                             <th class="white-space-nowrap">{{__('Action') }}</th>
@@ -32,6 +33,7 @@
                         <tr>
                             <th scope="row">{{ ++$loop->index }}</th>
                             <td>{{$p->name_en}}</td>
+                            <td>{{$p->phonegroup?->group_name}}</td>
                             <td>{{$p->contact_en}}</td>
                             <td>{{$p->email}}</td>
                             <td class="white-space-nowrap">
@@ -71,6 +73,14 @@
                     <div class="login">
                         <form action="{{route('phonebook.store')}}" method="post" class="row">
                             @csrf
+                            <div class="col-12">
+                                <select name="group_id" id="" class="form-control mb-3">
+                                    <option value="">Select Group</option>
+                                    @foreach($phonegroup as $group)
+                                    <option value="{{$group->id}}" {{ old('group_id')==$group->id?"selected":""}}>{{$group->group_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="col-12">
                                 <input type="text" class="form-control mb-3" id="Phone" name="contact_en" placeholder="Phone no">
                             </div>

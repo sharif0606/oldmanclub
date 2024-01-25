@@ -9,6 +9,14 @@
                 @method('Patch')
                 <div class="col-12">
                     <div class="col-12">
+                       <select name="group_id" id="" class="form-control mb-3">
+                            <option value="">Select Group</option>
+                        @foreach($phonegroup as $group)
+                            <option value="{{$group->id}}" {{ old('group_id', $phonebook->group_id)==$group->id?"selected":""}}>{{$group->group_name}}</option>
+                        @endforeach
+                        </select>
+                    </div>
+                    <div class="col-12">
                         <input type="text" class="form-control mb-3" id="Phone" name="contact_en" value="{{old('contact_en',$phonebook->contact_en)}}">
                     </div>
                     <div class="col-12">

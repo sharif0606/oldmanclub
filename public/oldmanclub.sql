@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2024 at 04:30 PM
+-- Generation Time: Jan 25, 2024 at 04:42 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -411,7 +411,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (47, '2024_01_15_112242_create_print_customer_feedback_table', 31),
 (48, '2024_01_18_092205_create_chats_table', 32),
 (50, '2024_01_18_105432_create_chats_table', 33),
-(52, '2024_01_22_085542_create_phone_books_table', 34);
+(55, '2024_01_25_103421_create_sms_packages_table', 35),
+(57, '2024_01_25_132307_create_phone_groups_table', 36),
+(58, '2024_01_22_085542_create_phone_books_table', 37);
 
 -- --------------------------------------------------------
 
@@ -510,12 +512,12 @@ CREATE TABLE `our_services` (
 --
 
 INSERT INTO `our_services` (`id`, `title`, `link`, `image`, `details`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Product Shipping Service', 'shippingservice', '508.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-05 21:59:22', '2024-01-09 08:00:10', NULL),
-(2, 'E-commerce System', 'https://www.google.com/', '373.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-08 06:51:47', '2024-01-08 07:08:11', NULL),
-(3, 'NFC Business Card', 'nfccard', '547.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-08 06:52:21', '2024-01-08 07:08:36', NULL),
-(4, 'Printing Service', 'printservice', '712.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-08 06:52:58', '2024-01-08 06:52:58', NULL),
-(5, 'USA Company Registration', 'https://www.google.com/', '885.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-08 06:53:29', '2024-01-08 06:53:29', NULL),
-(6, 'Smart Mail Service', 'smartmailservice', '613.jpg', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-08 07:01:19', '2024-01-08 07:01:19', NULL);
+(1, 'Product Shipping Service', '#', '508.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-05 21:59:22', '2024-01-09 08:00:10', NULL),
+(2, 'E-commerce System', '#', '373.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-08 06:51:47', '2024-01-08 07:08:11', NULL),
+(3, 'NFC Business Card', '#', '547.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-08 06:52:21', '2024-01-08 07:08:36', NULL),
+(4, 'Printing Service', '#', '712.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-08 06:52:58', '2024-01-08 06:52:58', NULL),
+(5, 'USA Company Registration', '#', '885.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-08 06:53:29', '2024-01-08 06:53:29', NULL),
+(6, 'Smart Mail Service', '#', '613.jpg', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-01-08 07:01:19', '2024-01-08 07:01:19', NULL);
 
 -- --------------------------------------------------------
 
@@ -559,11 +561,39 @@ CREATE TABLE `personal_access_tokens` (
 CREATE TABLE `phone_books` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `client_id` bigint(20) UNSIGNED NOT NULL,
+  `group_id` bigint(20) UNSIGNED NOT NULL,
   `name_en` varchar(255) NOT NULL,
   `name_bn` varchar(255) DEFAULT NULL,
   `contact_en` varchar(255) NOT NULL,
   `contact_bn` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
+  `given_name` varchar(255) DEFAULT NULL,
+  `additional_name` varchar(255) DEFAULT NULL,
+  `family_name` varchar(255) DEFAULT NULL,
+  `yomi_name` varchar(255) DEFAULT NULL,
+  `given_name_yomi` varchar(255) DEFAULT NULL,
+  `additional_name_yomi` varchar(255) DEFAULT NULL,
+  `family_name_yomi` varchar(255) DEFAULT NULL,
+  `name_prefix` varchar(255) DEFAULT NULL,
+  `name_suffix` varchar(255) DEFAULT NULL,
+  `initials` varchar(255) DEFAULT NULL,
+  `short_name` varchar(255) DEFAULT NULL,
+  `maiden_name` varchar(255) DEFAULT NULL,
+  `birthday` varchar(255) DEFAULT NULL,
+  `gender` varchar(255) DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `billing_information` varchar(255) DEFAULT NULL,
+  `directory_server` varchar(255) DEFAULT NULL,
+  `mileage_occupation` varchar(255) DEFAULT NULL,
+  `hobby` varchar(255) DEFAULT NULL,
+  `sensitivity` varchar(255) DEFAULT NULL,
+  `priority` varchar(255) DEFAULT NULL,
+  `subject_notes` varchar(255) DEFAULT NULL,
+  `language` varchar(255) DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `group_membership` varchar(255) DEFAULT NULL,
+  `phone_1_type` varchar(255) DEFAULT NULL,
+  `Phone_1_value` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -573,10 +603,8 @@ CREATE TABLE `phone_books` (
 -- Dumping data for table `phone_books`
 --
 
-INSERT INTO `phone_books` (`id`, `client_id`, `name_en`, `name_bn`, `contact_en`, `contact_bn`, `email`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 'jasim', NULL, '1234', NULL, 'jasim@gmail.com', NULL, '2024-01-22 05:29:23', NULL),
-(2, 1, 'Kaiser', NULL, '123456', NULL, 'kaiser@gmail.com', '2024-01-22 05:30:00', '2024-01-22 05:35:17', NULL),
-(3, 5, 'jasim', NULL, '123', NULL, 'jasim@gmail.com', '2024-01-22 07:29:54', '2024-01-22 07:29:54', NULL);
+INSERT INTO `phone_books` (`id`, `client_id`, `group_id`, `name_en`, `name_bn`, `contact_en`, `contact_bn`, `email`, `given_name`, `additional_name`, `family_name`, `yomi_name`, `given_name_yomi`, `additional_name_yomi`, `family_name_yomi`, `name_prefix`, `name_suffix`, `initials`, `short_name`, `maiden_name`, `birthday`, `gender`, `location`, `billing_information`, `directory_server`, `mileage_occupation`, `hobby`, `sensitivity`, `priority`, `subject_notes`, `language`, `photo`, `group_membership`, `phone_1_type`, `Phone_1_value`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 5, 1, 'kaiser', NULL, '88015155555555', NULL, 'kaiser@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-25 08:14:44', '2024-01-25 08:14:44', NULL);
 
 -- --------------------------------------------------------
 
@@ -602,6 +630,29 @@ INSERT INTO `phone_customer_feedback` (`id`, `customer_message`, `customer_name`
 (1, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"', 'Burhan Uddin Fuad', '217.jpg', '2024-01-13 05:12:34', '2024-01-13 05:17:37', NULL),
 (2, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"', 'Jasim uddin', '556.jpg', '2024-01-13 05:17:58', '2024-01-13 05:19:14', NULL),
 (4, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"', 'Burhan Uddin Fuad', '710.jpg', '2024-01-13 05:19:33', '2024-01-13 05:19:33', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `phone_groups`
+--
+
+CREATE TABLE `phone_groups` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `client_id` bigint(20) UNSIGNED NOT NULL,
+  `group_name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `phone_groups`
+--
+
+INSERT INTO `phone_groups` (`id`, `client_id`, `group_name`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 5, 'Family', '2024-01-25 07:46:50', '2024-01-25 07:52:18', NULL),
+(2, 5, 'Family1', '2024-01-25 07:51:36', '2024-01-25 07:52:00', '2024-01-25 07:52:00');
 
 -- --------------------------------------------------------
 
@@ -967,6 +1018,31 @@ INSERT INTO `smart_work_sections` (`id`, `text_large`, `text_small`, `image`, `c
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sms_packages`
+--
+
+CREATE TABLE `sms_packages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `number_of_sms` varchar(255) NOT NULL,
+  `validity` varchar(255) NOT NULL,
+  `price` double(8,2) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1=>active 0=>inactive',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sms_packages`
+--
+
+INSERT INTO `sms_packages` (`id`, `title`, `number_of_sms`, `validity`, `price`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Off Net', '100 SMS', '2 days', 10.00, 1, '2024-01-25 05:32:32', '2024-01-25 05:51:25', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `subscribe_sections`
 --
 
@@ -1200,13 +1276,21 @@ ALTER TABLE `personal_access_tokens`
 --
 ALTER TABLE `phone_books`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `phone_books_client_id_index` (`client_id`);
+  ADD KEY `phone_books_client_id_index` (`client_id`),
+  ADD KEY `phone_books_group_id_index` (`group_id`);
 
 --
 -- Indexes for table `phone_customer_feedback`
 --
 ALTER TABLE `phone_customer_feedback`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `phone_groups`
+--
+ALTER TABLE `phone_groups`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `phone_groups_client_id_index` (`client_id`);
 
 --
 -- Indexes for table `phone_number_heroes`
@@ -1300,6 +1384,12 @@ ALTER TABLE `smart_sms_services`
 -- Indexes for table `smart_work_sections`
 --
 ALTER TABLE `smart_work_sections`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sms_packages`
+--
+ALTER TABLE `sms_packages`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1424,7 +1514,7 @@ ALTER TABLE `llc_pricings`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `nfc_card_images`
@@ -1466,13 +1556,19 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `phone_books`
 --
 ALTER TABLE `phone_books`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `phone_customer_feedback`
 --
 ALTER TABLE `phone_customer_feedback`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `phone_groups`
+--
+ALTER TABLE `phone_groups`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `phone_number_heroes`
@@ -1565,6 +1661,12 @@ ALTER TABLE `smart_work_sections`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `sms_packages`
+--
+ALTER TABLE `sms_packages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `subscribe_sections`
 --
 ALTER TABLE `subscribe_sections`
@@ -1621,7 +1723,14 @@ ALTER TABLE `permissions`
 -- Constraints for table `phone_books`
 --
 ALTER TABLE `phone_books`
-  ADD CONSTRAINT `phone_books_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `phone_books_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `phone_books_group_id_foreign` FOREIGN KEY (`group_id`) REFERENCES `phone_groups` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `phone_groups`
+--
+ALTER TABLE `phone_groups`
+  ADD CONSTRAINT `phone_groups_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `print_customer_feedback`

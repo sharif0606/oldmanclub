@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Models\Backend\PhoneBook;
+use App\Models\User\PhoneBook;
 use App\Models\User\Client;
+use App\Models\User\PhoneGroup;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -17,9 +18,10 @@ class PhoneBookController extends Controller
      */
     public function index()
     {
+        $phonegroup = PhoneGroup::get();
         $client = Client::find(currentUserId());
         $phonebook = PhoneBook::where('client_id',currentUserId())->get();
-        return view('user.phonebook.index',compact('phonebook','client'));
+        return view('user.phonebook.index',compact('phonebook','client','phonegroup'));
     }
 
     /**
@@ -27,7 +29,8 @@ class PhoneBookController extends Controller
      */
     public function create()
     {
-        return view('user.phonebook.create');
+        $phonegroup = PhoneGroup::get();
+        return view('user.phonebook.create',compact('phonegroup'));
     }
 
     /**
@@ -38,10 +41,9 @@ class PhoneBookController extends Controller
         try{
             $phonebook = new PhoneBook;
             $phonebook->client_id = currentUserId();
+            $phonebook->group_id = $request->group_id;
             $phonebook->name_en = $request->name_en;
-            $phonebook->name_bn = $request->name_bn;
             $phonebook->contact_en = $request->contact_en;
-            $phonebook->contact_bn = $request->contact_bn;
             $phonebook->email = $request->email;
             if($phonebook->save()){
                 $this->notice::success('Phone number Successfully Saved');
@@ -67,9 +69,10 @@ class PhoneBookController extends Controller
      */
     public function edit($id)
     {
+        $phonegroup = PhoneGroup::get();
         $client = Client::find(currentUserId());
         $phonebook = PhoneBook::findOrFail(encryptor('decrypt',$id));
-        return view('user.phonebook.edit',compact('phonebook','client'));
+        return view('user.phonebook.edit',compact('phonebook','client','phonegroup'));
     }
 
     /**
@@ -80,10 +83,9 @@ class PhoneBookController extends Controller
         try{
             $phonebook = PhoneBook::findOrFail(encryptor('decrypt',$id));
             $phonebook->client_id = currentUserId();
+            $phonebook->group_id = $request->group_id;
             $phonebook->name_en = $request->name_en;
-            $phonebook->name_bn = $request->name_bn;
             $phonebook->contact_en = $request->contact_en;
-            $phonebook->contact_bn = $request->contact_bn;
             $phonebook->email = $request->email;
             if($phonebook->save()){
                 $this->notice::success('Phone number Successfully Saved');
@@ -112,12 +114,11 @@ class PhoneBookController extends Controller
         $phonebookData = PhoneBook::where('client_id', currentUserId())->get(); 
         // $csv = "";
         $csv = mb_convert_encoding("", 'UTF-8', 'UTF-8');
-        $csv .= mb_convert_encoding(implode(',', array('Name','Name Bangla', 'Contact No', 'E-mail','Given Name',	'Additional Name','Family Name', 'Yomi Name', 'Given Name Yomi', 'Additional Name Yomi',' Family Name Yomi', 'Name Prefix',	'Name Suffix',	'Initials',	'Nickname',	'Short Name', 'Maiden Name',	'Birthday',	'Gender',	'Location', 'Billing Information',	'Directory Server',	'Mileage','Occupation',	'Hobby', 'Sensitivity', 'Priority', 'Subject', 'Notes', 'Language',	'Photo','Group Membership',	'Phone 1 - Type',	
+        $csv .= mb_convert_encoding(implode(',', array('Name', 'Contact No', 'E-mail','Given Name',	'Additional Name','Family Name', 'Yomi Name', 'Given Name Yomi', 'Additional Name Yomi',' Family Name Yomi', 'Name Prefix',	'Name Suffix',	'Initials',	'Nickname',	'Short Name', 'Maiden Name',	'Birthday',	'Gender',	'Location', 'Billing Information',	'Directory Server',	'Mileage','Occupation',	'Hobby', 'Sensitivity', 'Priority', 'Subject', 'Notes', 'Language',	'Photo','Group Membership',	'Phone 1 - Type',	
         )),'UTF-8', 'UTF-8') . "\n"; // Headers
         foreach ($phonebookData as $row) {
             $csv .= implode(',', array(
                 $row->name_en,
-                $row->name_bn,
                 $row->contact_en,
                 $row->email,
             )) . "\n";

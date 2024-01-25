@@ -18,7 +18,7 @@
 <body class="h-100">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6 hero p-0" style="background-image:url({{asset('public/assets/images/login_register/Frame1.png')}})">
+            <div class="col-md-6 hero p-0" style="background-image:url({{asset('public/assets/images/login_register/Frame.png')}})">
                 <!-- <h5 class="hero-heading"><i class="fab fa-slack"></i> Old Club Man</h5> -->
                 <div class="hero-text text-white">
                     <i class="fas fa-quote-left"></i>

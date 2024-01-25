@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('client_id')->index();
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+            $table->unsignedBigInteger('group_id')->index();
+            $table->foreign('group_id')->references('id')->on('phone_groups')->onDelete('cascade');
             $table->string('name_en');
             $table->string('name_bn')->nullable();
             $table->string('contact_en');

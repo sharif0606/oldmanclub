@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{asset('public/frontend/assets/styles.css')}}">
     @stack('styles')
+    
 </head>
 <body>
     <!-- header start-->
@@ -29,8 +30,18 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav mx-auto me-auto mb-2 mb-lg-0">
                             <li class="nav-item"><a href="{{route('frontend')}}" class="nav-link">Home</a></li>
-                            <li class="nav-item"><a href="{{route('shippingservice')}}" class="nav-link">Service</a></li>
-                            <li class="nav-item"><a href="{{route('nfccard')}}" class="nav-link">Pricing</a></li>
+                            
+                            <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
+                            <li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Service</a>
+                                <ul class="dropdown-menu fs-4">
+                                    <li class=""><a class="dropdown-item " href="{{route('shippingservice')}}">Product Shipping</a></li>
+                                    <li><a class="dropdown-item" href="{{route('nfccard')}}">NFC Card</a></li>
+                                    <li><a class="dropdown-item" href="{{route('printservice')}}">Printing Service</a></li>
+                                    <li><a class="dropdown-item" href="{{route('smartmailservice')}}">Smart Mail Service</a></li>
+                                    <li><a class="dropdown-item" href="{{route('llcservice')}}">LLC Service</a></li>
+                                    <li><a class="dropdown-item" href="{{route('phoneservice')}}">Phone Service</a></li>
+                                </ul>
+                            </li>
                             <li class="nav-item"><a href="#" class="nav-link">Testimonials</a></li>
                             <li class="nav-item"><a href="#" class="nav-link">Contact Us</a></li>
                         </ul>

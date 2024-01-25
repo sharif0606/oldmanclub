@@ -8,6 +8,8 @@ use App\Http\Controllers\Backend\ClientController as client;
 use App\Http\Controllers\Backend\RoleController as role;
 use App\Http\Controllers\Backend\DashboardController as dashboard;
 use App\Http\Controllers\Backend\PermissionController as permission;
+use App\Http\Controllers\Backend\Admin\SmsPackageController as sms;
+
 // use App\Http\Controllers\Backend\PhoneBookController as phonebook;
 use App\Http\Controllers\Backend\Website\SettingController as setting;
 use App\Http\Controllers\Backend\Website\SliderController as slider;
@@ -50,7 +52,8 @@ use App\Http\Controllers\Backend\Website\PrintingService\PrintCustomerFeedbackCo
 //User
 use App\Http\Controllers\User\ClientAuthentication as clientauth;
 use App\Http\Controllers\User\ClientController as clientprofile;
-use App\Http\Controllers\user\PhoneBookController as phonebook;
+use App\Http\Controllers\User\PhoneBookController as phonebook;
+use App\Http\Controllers\User\PhoneGroupController as phonegroup;
 
 // landing page
 use App\Http\Controllers\Common\frontendController as frontend;
@@ -86,7 +89,7 @@ Route::middleware(['checkrole'])->prefix('admin')->group(function(){
     Route::resource('client', client::class);
     Route::get('permission/{role}', [permission::class,'index'])->name('permission.list');
     Route::post('permission/{role}', [permission::class,'save'])->name('permission.save');
-    // Route::resource('phonebook', phonebook::class);
+    Route::resource('sms', sms::class);
     
     
     Route::resource('setting', setting::class);
@@ -140,6 +143,7 @@ Route::get('client/logout', [clientauth::class,'singOut'])->name('clientlogOut')
 Route::middleware(['checkclient'])->prefix('user')->group(function(){
     Route::get('profile', [clientprofile::class,'index'])->name('clientdashboard');
     Route::resource('phonebook', phonebook::class);
+    Route::resource('phonegroup', phonegroup::class);
     Route::post('/profile/save', [clientprofile::class, 'save_profile'])->name('user_save_profile');
     Route::post('/profile/savepass', [clientprofile::class, 'change_password'])->name('change_password');
     // Route::get('/phonebook/list', [clientprofile::class, 'phonebook_list'])->name('phonebook_list');

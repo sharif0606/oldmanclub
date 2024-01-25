@@ -21,6 +21,10 @@ class Client extends Model
     }
     public function phonebook()
     {
-        return $this->hasMany(\App\Models\Backend\PhoneBook::class);
+        return $this->hasMany(\App\Models\User\PhoneBook::class);
+    }
+    public function phonegroup()
+    {
+        return $this->hasMany(\App\Models\User\PhoneGroup::class);
     }
 }
