@@ -33,13 +33,13 @@
                             
                             <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
                             <li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Service</a>
-                                <ul class="dropdown-menu fs-4">
-                                    <li class=""><a class="dropdown-item " href="{{route('shippingservice')}}">Product Shipping</a></li>
-                                    <li><a class="dropdown-item" href="{{route('nfccard')}}">NFC Card</a></li>
-                                    <li><a class="dropdown-item" href="{{route('printservice')}}">Printing Service</a></li>
-                                    <li><a class="dropdown-item" href="{{route('smartmailservice')}}">Smart Mail Service</a></li>
-                                    <li><a class="dropdown-item" href="{{route('llcservice')}}">LLC Service</a></li>
-                                    <li><a class="dropdown-item" href="{{route('phoneservice')}}">Phone Service</a></li>
+                                <ul class="dropdown-menu">
+                                    <li class="m-0 p-0"><a class="dropdown-item" href="{{route('shippingservice')}}">Product Shipping</a></li>
+                                    <li class="m-0 p-0"><a class="dropdown-item" href="{{route('nfccard')}}">NFC Card</a></li>
+                                    <li class="m-0 p-0"><a class="dropdown-item" href="{{route('printservice')}}">Printing Service</a></li>
+                                    <li class="m-0 p-0"><a class="dropdown-item" href="{{route('smartmailservice')}}">Smart Mail Service</a></li>
+                                    <li class="m-0 p-0"><a class="dropdown-item" href="{{route('llcservice')}}">LLC Service</a></li>
+                                    <li class="m-0 p-0"><a class="dropdown-item" href="{{route('phoneservice')}}">Phone Service</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item"><a href="#" class="nav-link">Testimonials</a></li>

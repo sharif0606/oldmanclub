@@ -9,7 +9,8 @@
             <!-- table bordered -->
             <div class="table-responsive">
                 <div>
-                    <button id="downloadVCard">Download vCard</button>
+                    <button id="downloadVCard"><i class="fa-solid fa-address-card"></i>
+                    </button>
                     <!-- Inside your blade file -->
                     <!-- <button class="btn btn-sm btn-primary float-end" onClick="get_print()"><i class="bi bi-file-excel"></i> Export Excel</button> -->
                     <a href="{{ route('phonebook_download') }}" class="pull-right fs-1 mx-2" download>
