@@ -18,7 +18,7 @@
     <!-- header start-->
     <div class="col-md-12">
         <div class="row">
-            <nav class="navbar navbar-expand-lg navbar-dark">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-white">
                 <div class="container">
                     <img src="{{asset('public/uploads/setting/'.$setting?->header_logo)}}" alt="Logo" class="logo">
                     <h4 class="text company">{{$setting?->company_name}}</h4>
@@ -33,7 +33,7 @@
                             
                             <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
                             <li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Service</a>
-                                <ul class="dropdown-menu">
+                                <ul class="dropdown-menu" id="service-dropdown">
                                     <li class="m-0 p-0"><a class="dropdown-item" href="{{route('shippingservice')}}">Product Shipping</a></li>
                                     <li class="m-0 p-0"><a class="dropdown-item" href="{{route('nfccard')}}">NFC Card</a></li>
                                     <li class="m-0 p-0"><a class="dropdown-item" href="{{route('printservice')}}">Printing Service</a></li>
