@@ -11,6 +11,8 @@ use App\Http\Controllers\Backend\PermissionController as permission;
 use App\Http\Controllers\Backend\Admin\SmsPackageController as sms;
 use App\Http\Controllers\Backend\Admin\MailBoxController as mailbox;
 use App\Http\Controllers\Backend\Admin\ShippingController;
+use App\Http\Controllers\Backend\Admin\ShippingStatusTypeController as shipstatus;
+use App\Http\Controllers\Backend\Admin\ShippingTrackingController as shiptrack;
 
 // use App\Http\Controllers\Backend\PhoneBookController as phonebook;
 use App\Http\Controllers\Backend\Website\SettingController as setting;
@@ -97,7 +99,8 @@ Route::middleware(['checkrole'])->prefix('admin')->group(function(){
     Route::get('shipping/list',[ShippingController::class, 'shipping_list'])->name('shipping_list');
     Route::get('shipping-edit/{id}',[ShippingController::class, 'shipping_edit'])->name('shipping_edit');
     Route::post('shippingUpdate/{id}',[ShippingController::class, 'shipping_update'])->name('shipping_update');
-    
+    Route::resource('shipstatus', shipstatus::class);
+    Route::resource('shiptrack', shiptrack::class);
     
     
     Route::resource('setting', setting::class);

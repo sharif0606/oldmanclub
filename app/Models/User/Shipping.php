@@ -13,4 +13,10 @@ class Shipping extends Model
     public function user(){
         return $this->belongsTo(Client::class,'client_id','id');
     }
+    public function shippingstatus(){
+        return $this->hasMany(ShippingStatusType::class,'shipping_id','id');
+    }
+    public function shippingtrack(){
+        return $this->hasMany(ShippingStatusType::class,'shipping_id','id');
+    }
 }

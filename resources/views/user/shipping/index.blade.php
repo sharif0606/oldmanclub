@@ -32,6 +32,7 @@
                             </td>
                             <td>{{$value->reject_note}}</td>
                             <td class="white-space-nowrap">
+                                @if($value->status !== 2)
                                 <a href="{{route('shipping.edit',encryptor('encrypt',$value->id))}}">
                                     <i class="fa fa-edit"></i>
                                 </a>
@@ -39,10 +40,12 @@
                                 <a href="javascript:void()" onclick="$('#form{{$value->id}}').submit()">
                                     <i class="fa fa-trash"></i>
                                 </a>
+                                 @endif
                                 <form id="form{{$value->id}}" action="{{route('shipping.destroy',encryptor('encrypt',$value->id))}}" method="post">
                                     @csrf
                                     @method('delete')
                                 </form>
+                               
                             </td>
                         </tr>
                         @empty

@@ -148,7 +148,8 @@
                                 <li><a href="{{route('sms.index')}}">SMS Service</a></li>
                                 <li><a href="{{route('mailbox.index')}}">Mail Service</a></li>
                                 <li><a href="{{route('shipping_list')}}">Shipping</a></li>
-                                
+                                <li><a href="{{route('shipstatus.index')}}">Shipping Status</a></li>
+                                <li><a href="{{route('shiptrack.index')}}">Shipping Tracking</a></li>
                             </ul>
                         </li>
                         <li>

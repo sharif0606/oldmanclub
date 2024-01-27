@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 25, 2024 at 04:42 PM
+-- Generation Time: Jan 27, 2024 at 04:49 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -356,6 +356,30 @@ INSERT INTO `llc_pricings` (`id`, `llcpricing_plan`, `llcprice`, `llcpricing_pac
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `mail_boxes`
+--
+
+CREATE TABLE `mail_boxes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `number_of_mail` varchar(255) DEFAULT NULL,
+  `validity` varchar(255) DEFAULT NULL,
+  `price` decimal(8,2) DEFAULT NULL,
+  `package_type` varchar(255) NOT NULL DEFAULT '1' COMMENT '1=>one time, 2=>monthly',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `mail_boxes`
+--
+
+INSERT INTO `mail_boxes` (`id`, `number_of_mail`, `validity`, `price`, `package_type`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '500', '30 days', 50.00, '2', '2024-01-27 03:06:23', '2024-01-27 03:19:34', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -412,8 +436,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (48, '2024_01_18_092205_create_chats_table', 32),
 (50, '2024_01_18_105432_create_chats_table', 33),
 (55, '2024_01_25_103421_create_sms_packages_table', 35),
-(57, '2024_01_25_132307_create_phone_groups_table', 36),
-(58, '2024_01_22_085542_create_phone_books_table', 37);
+(58, '2024_01_22_085542_create_phone_books_table', 37),
+(61, '2024_01_21_132307_create_phone_groups_table', 38),
+(63, '2024_01_27_081531_create_mail_boxes_table', 39),
+(64, '2024_01_27_092528_create_shippings_table', 40),
+(65, '2024_01_27_132106_create_shipping_status_types_table', 41),
+(66, '2024_01_27_145710_create_shipping_trackings_table', 42);
 
 -- --------------------------------------------------------
 
@@ -645,14 +673,6 @@ CREATE TABLE `phone_groups` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `phone_groups`
---
-
-INSERT INTO `phone_groups` (`id`, `client_id`, `group_name`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 5, 'Family', '2024-01-25 07:46:50', '2024-01-25 07:52:18', NULL),
-(2, 5, 'Family1', '2024-01-25 07:51:36', '2024-01-25 07:52:00', '2024-01-25 07:52:00');
 
 -- --------------------------------------------------------
 
@@ -894,6 +914,81 @@ CREATE TABLE `settings` (
 
 INSERT INTO `settings` (`id`, `header_logo`, `company_name`, `contact_no_en`, `contact_no_bn`, `email`, `facebook_icon`, `twitter_icon`, `linkedln_icon`, `instagram_icon`, `footer_text`, `footer_logo`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (2, '7741704716417.png', 'Old Club Man', '1', NULL, 'oldman@gmail.com', 'https://www.facebook.com', 'https://twitter.com', 'https://www.linkedin.com/', 'https://www.instagram.com/', 'Old Man Club is a Multipurpose Platform that serves unique service througout the world.', '7571704466145.png', '2024-01-05 08:49:05', '2024-01-09 08:58:45', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shippings`
+--
+
+CREATE TABLE `shippings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `client_id` bigint(20) UNSIGNED NOT NULL,
+  `shipping_title` varchar(255) DEFAULT NULL,
+  `shipping_description` varchar(255) DEFAULT NULL,
+  `status` varchar(255) NOT NULL DEFAULT '1' COMMENT '1=>pending,2=>approved,3=>reject',
+  `reject_note` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `shippings`
+--
+
+INSERT INTO `shippings` (`id`, `client_id`, `shipping_title`, `shipping_description`, `status`, `reject_note`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 5, 'Product name', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,', '2', 'afsdf', '2024-01-27 04:27:05', '2024-01-27 08:25:32', NULL),
+(2, 5, 'product name', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,', '3', 'asdfds', '2024-01-27 06:42:34', '2024-01-27 06:47:34', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shipping_status_types`
+--
+
+CREATE TABLE `shipping_status_types` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `shipping_id` bigint(20) UNSIGNED NOT NULL,
+  `shipping_address` varchar(255) DEFAULT NULL,
+  `delivery_address` varchar(255) DEFAULT NULL,
+  `shipping_method` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `shipping_status_types`
+--
+
+INSERT INTO `shipping_status_types` (`id`, `shipping_id`, `shipping_address`, `delivery_address`, `shipping_method`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 'abc', 'def', 'pickup', '2024-01-27 08:29:25', '2024-01-27 08:29:25', NULL),
+(2, 1, 'abcd', 'def', 'pickup', '2024-01-27 08:29:59', '2024-01-27 08:45:06', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shipping_trackings`
+--
+
+CREATE TABLE `shipping_trackings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `shipping_id` bigint(20) UNSIGNED NOT NULL,
+  `tracking_status` varchar(255) NOT NULL DEFAULT '1' COMMENT '1=>order,2=>delivered, 3=>received',
+  `location` varchar(255) NOT NULL,
+  `tracking_note` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `shipping_trackings`
+--
+
+INSERT INTO `shipping_trackings` (`id`, `shipping_id`, `tracking_status`, `location`, `tracking_note`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, '3', 'Agrabad,Chittagong', 'adsfdf', '2024-01-27 09:30:30', '2024-01-27 09:47:59', NULL);
 
 -- --------------------------------------------------------
 
@@ -1227,6 +1322,12 @@ ALTER TABLE `llc_pricings`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `mail_boxes`
+--
+ALTER TABLE `mail_boxes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -1355,6 +1456,27 @@ ALTER TABLE `service_sections`
 ALTER TABLE `settings`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `settings_contact_no_en_unique` (`contact_no_en`);
+
+--
+-- Indexes for table `shippings`
+--
+ALTER TABLE `shippings`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `shippings_client_id_index` (`client_id`);
+
+--
+-- Indexes for table `shipping_status_types`
+--
+ALTER TABLE `shipping_status_types`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `shipping_status_types_shipping_id_index` (`shipping_id`);
+
+--
+-- Indexes for table `shipping_trackings`
+--
+ALTER TABLE `shipping_trackings`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `shipping_trackings_shipping_id_index` (`shipping_id`);
 
 --
 -- Indexes for table `sliders`
@@ -1511,10 +1633,16 @@ ALTER TABLE `llc_pricings`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `mail_boxes`
+--
+ALTER TABLE `mail_boxes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `nfc_card_images`
@@ -1568,7 +1696,7 @@ ALTER TABLE `phone_customer_feedback`
 -- AUTO_INCREMENT for table `phone_groups`
 --
 ALTER TABLE `phone_groups`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `phone_number_heroes`
@@ -1629,6 +1757,24 @@ ALTER TABLE `service_sections`
 --
 ALTER TABLE `settings`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `shippings`
+--
+ALTER TABLE `shippings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `shipping_status_types`
+--
+ALTER TABLE `shipping_status_types`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `shipping_trackings`
+--
+ALTER TABLE `shipping_trackings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `sliders`
@@ -1737,6 +1883,24 @@ ALTER TABLE `phone_groups`
 --
 ALTER TABLE `print_customer_feedback`
   ADD CONSTRAINT `print_customer_feedback_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `shippings`
+--
+ALTER TABLE `shippings`
+  ADD CONSTRAINT `shippings_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `shipping_status_types`
+--
+ALTER TABLE `shipping_status_types`
+  ADD CONSTRAINT `shipping_status_types_shipping_id_foreign` FOREIGN KEY (`shipping_id`) REFERENCES `shippings` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `shipping_trackings`
+--
+ALTER TABLE `shipping_trackings`
+  ADD CONSTRAINT `shipping_trackings_shipping_id_foreign` FOREIGN KEY (`shipping_id`) REFERENCES `shippings` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `thanas`
