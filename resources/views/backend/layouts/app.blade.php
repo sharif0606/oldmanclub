@@ -146,6 +146,9 @@
                                 <li><a href="{{route('role.index')}}">Role</a></li>
                                 <li><a href="{{route('client.index')}}">User</a></li>
                                 <li><a href="{{route('sms.index')}}">SMS Service</a></li>
+                                <li><a href="{{route('mailbox.index')}}">Mail Service</a></li>
+                                <li><a href="{{route('shipping_list')}}">Shipping</a></li>
+                                
                             </ul>
                         </li>
                         <li>

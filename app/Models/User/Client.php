@@ -27,4 +27,8 @@ class Client extends Model
     {
         return $this->hasMany(\App\Models\User\PhoneGroup::class);
     }
+    public function shipping()
+    {
+        return $this->hasMany(Shipping::class, 'client_id','id');
+    }
 }
