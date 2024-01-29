@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\User\Shipping;
+use App\Models\User\ShippingComment;
 use App\Models\User\client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class ShippingController extends Controller
     public function index()
     {
         $client = Client::find(currentUserId());
-        $shipping = Shipping::get();
+        $shipping = Shipping::where('client_id',currentUserId())->get();
         return view('user.shipping.index',compact('shipping','client'));
     }
 

@@ -150,6 +150,7 @@
                                 <li><a href="{{route('shipping_list')}}">Shipping</a></li>
                                 <li><a href="{{route('shipstatus.index')}}">Shipping Status</a></li>
                                 <li><a href="{{route('shiptrack.index')}}">Shipping Tracking</a></li>
+                                <li><a href="{{route('comment_list')}}">Comment List</a></li>
                             </ul>
                         </li>
                         <li>

@@ -51,6 +51,9 @@
                                         <a class="nav-link active" aria-current="page" href="{{route('shipping.index')}}">Shipping</a>
                                         </li>
                                         <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="{{route('shipcomment.index')}}">comment</a>
+                                        </li>
+                                        <li class="nav-item">
                                         <a class="nav-link" href="#">Link</a>
                                         </li>
                                         <li class="nav-item dropdown">

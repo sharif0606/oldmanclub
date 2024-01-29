@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backend\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User\Shipping;
-use App\Models\User\client;
+use App\Models\User\Client;
 
 class ShippingController extends Controller
 {
