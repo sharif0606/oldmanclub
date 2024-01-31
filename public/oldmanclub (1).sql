@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2024 at 04:49 PM
+-- Generation Time: Jan 31, 2024 at 04:48 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -180,6 +180,34 @@ CREATE TABLE `divisions` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `email_sends`
+--
+
+CREATE TABLE `email_sends` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `sender_id` bigint(20) UNSIGNED NOT NULL,
+  `to_email` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `message` text DEFAULT NULL,
+  `file` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `email_sends`
+--
+
+INSERT INTO `email_sends` (`id`, `sender_id`, `to_email`, `subject`, `message`, `file`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 5, 'jasimuddinm180@gmail.com', 'abc', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to', NULL, '2024-01-31 07:52:33', '2024-01-31 07:52:33', NULL),
+(2, 5, 'kaiser@gmail.com', 'abc', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it', NULL, '2024-01-31 14:30:26', '2024-01-31 14:30:26', NULL),
+(3, 5, 'sss', 'jj', 'kk', NULL, '2024-01-31 14:43:02', '2024-01-31 14:43:02', NULL),
+(4, 5, 'jasimuddinm180@gmail.com', 'aaa', 'psum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '1451706712462.txt', '2024-01-31 14:47:42', '2024-01-31 14:47:42', NULL);
 
 -- --------------------------------------------------------
 
@@ -441,7 +469,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (63, '2024_01_27_081531_create_mail_boxes_table', 39),
 (64, '2024_01_27_092528_create_shippings_table', 40),
 (65, '2024_01_27_132106_create_shipping_status_types_table', 41),
-(66, '2024_01_27_145710_create_shipping_trackings_table', 42);
+(66, '2024_01_27_145710_create_shipping_trackings_table', 42),
+(69, '2024_01_29_083524_create_shipping_comments_table', 43),
+(71, '2024_01_31_110923_create_email_sends_table', 44);
 
 -- --------------------------------------------------------
 
@@ -673,6 +703,13 @@ CREATE TABLE `phone_groups` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `phone_groups`
+--
+
+INSERT INTO `phone_groups` (`id`, `client_id`, `group_name`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 5, 'Family', '2024-01-29 09:14:59', '2024-01-29 09:14:59', NULL);
 
 -- --------------------------------------------------------
 
@@ -939,7 +976,31 @@ CREATE TABLE `shippings` (
 
 INSERT INTO `shippings` (`id`, `client_id`, `shipping_title`, `shipping_description`, `status`, `reject_note`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 5, 'Product name', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,', '2', 'afsdf', '2024-01-27 04:27:05', '2024-01-27 08:25:32', NULL),
-(2, 5, 'product name', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,', '3', 'asdfds', '2024-01-27 06:42:34', '2024-01-27 06:47:34', NULL);
+(2, 5, 'product', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,', '3', 'asdfds', '2024-01-27 06:42:34', '2024-01-29 06:11:46', NULL),
+(3, 5, 'product name', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,', '1', NULL, '2024-01-29 07:17:53', '2024-01-29 07:17:53', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shipping_comments`
+--
+
+CREATE TABLE `shipping_comments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `shipping_id` bigint(20) UNSIGNED NOT NULL,
+  `client_message` text DEFAULT NULL,
+  `user_message` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `shipping_comments`
+--
+
+INSERT INTO `shipping_comments` (`id`, `shipping_id`, `client_message`, `user_message`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 'hello', 'hi', '2024-01-29 06:09:55', '2024-01-29 07:08:23', NULL);
 
 -- --------------------------------------------------------
 
@@ -964,7 +1025,7 @@ CREATE TABLE `shipping_status_types` (
 
 INSERT INTO `shipping_status_types` (`id`, `shipping_id`, `shipping_address`, `delivery_address`, `shipping_method`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 1, 'abc', 'def', 'pickup', '2024-01-27 08:29:25', '2024-01-27 08:29:25', NULL),
-(2, 1, 'abcd', 'def', 'pickup', '2024-01-27 08:29:59', '2024-01-27 08:45:06', NULL);
+(2, 1, 'abcd', 'def', 'pickup', '2024-01-27 08:29:59', '2024-01-29 02:21:39', '2024-01-29 02:21:39');
 
 -- --------------------------------------------------------
 
@@ -1280,6 +1341,13 @@ ALTER TABLE `divisions`
   ADD KEY `divisions_country_id_index` (`country_id`);
 
 --
+-- Indexes for table `email_sends`
+--
+ALTER TABLE `email_sends`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `email_sends_sender_id_index` (`sender_id`);
+
+--
 -- Indexes for table `global_net_work_images`
 --
 ALTER TABLE `global_net_work_images`
@@ -1465,6 +1533,13 @@ ALTER TABLE `shippings`
   ADD KEY `shippings_client_id_index` (`client_id`);
 
 --
+-- Indexes for table `shipping_comments`
+--
+ALTER TABLE `shipping_comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `shipping_comments_shipping_id_index` (`shipping_id`);
+
+--
 -- Indexes for table `shipping_status_types`
 --
 ALTER TABLE `shipping_status_types`
@@ -1591,6 +1666,12 @@ ALTER TABLE `divisions`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `email_sends`
+--
+ALTER TABLE `email_sends`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `global_net_work_images`
 --
 ALTER TABLE `global_net_work_images`
@@ -1642,7 +1723,7 @@ ALTER TABLE `mail_boxes`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `nfc_card_images`
@@ -1696,7 +1777,7 @@ ALTER TABLE `phone_customer_feedback`
 -- AUTO_INCREMENT for table `phone_groups`
 --
 ALTER TABLE `phone_groups`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `phone_number_heroes`
@@ -1762,7 +1843,13 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `shippings`
 --
 ALTER TABLE `shippings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `shipping_comments`
+--
+ALTER TABLE `shipping_comments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `shipping_status_types`
@@ -1860,6 +1947,12 @@ ALTER TABLE `divisions`
   ADD CONSTRAINT `divisions_country_id_foreign` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `email_sends`
+--
+ALTER TABLE `email_sends`
+  ADD CONSTRAINT `email_sends_sender_id_foreign` FOREIGN KEY (`sender_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `permissions`
 --
 ALTER TABLE `permissions`
@@ -1889,6 +1982,12 @@ ALTER TABLE `print_customer_feedback`
 --
 ALTER TABLE `shippings`
   ADD CONSTRAINT `shippings_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `shipping_comments`
+--
+ALTER TABLE `shipping_comments`
+  ADD CONSTRAINT `shipping_comments_shipping_id_foreign` FOREIGN KEY (`shipping_id`) REFERENCES `shippings` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `shipping_status_types`

@@ -2,7 +2,48 @@
 @section('title','User Profile')
 @section('page','User Profile')
 @section('content')
-
+<div class="row">
+    <div class="col-lg-12">
+        <div class="profile">
+            <div class="profile-head">
+                <div class="photo-content">
+                    <div class="cover-photo"></div>
+                    <div class="profile-photo">
+                        <img src="{{asset('public/uploads/client/'.$client->image)}}" class="img-fluid rounded-circle" alt="">
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-8">
+                            <div class="row">
+                                <div class="col-3 col-sm-3 border-right-1 prf-col">
+                                    <div class="profile-name">
+                                        <h4 class="text-primary">      {{$client->first_name_en}}
+                                        {{$client->last_name_en}}
+                                        </h4>
+                                        <p>{{$client->address_line_1}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-3 col-sm-3 border-right-1 prf-col">
+                                    <div class="profile-email">
+                                        <h4 class="text-muted text-primary">{{$client->email}}</h4>
+                                        <p>Email</p>
+                                    </div>
+                                </div>
+                                <div class="col-3 col-sm-3 prf-col">
+                                    <div class="profile-call">
+                                        <h4 class="text-muted">(+088) {{$client->contact_en}}</h4>
+                                        <p>Phone No.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
     <!-- <div class="col-lg-4">
         <div class="card">
@@ -99,6 +140,7 @@
             </div>
         </div>
     </div> -->
+    
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">

@@ -61,6 +61,7 @@ use App\Http\Controllers\User\PhoneBookController as phonebook;
 use App\Http\Controllers\User\PhoneGroupController as phonegroup;
 use App\Http\Controllers\User\ShippingController as shipping;
 use App\Http\Controllers\User\ShippingCommentController as shipcomment;
+use App\Http\Controllers\User\EmailSendController;
 
 // landing page
 use App\Http\Controllers\Common\frontendController as frontend;
@@ -162,10 +163,13 @@ Route::middleware(['checkclient'])->prefix('user')->group(function(){
     Route::resource('phonegroup', phonegroup::class);
     Route::resource('shipping', shipping::class);
     Route::get('shipping_comments/{shippingId}', [shipping::class, 'showShippingComments'])->name('shippingcomment');
-
-    // Route::get('shipping_message/{id}',[shipping::class, 'shipping_message'])->name('shipping_message');
-    // Route::post('ship_comment.store',[shipping::class, 'shipping_message'])->name('shipping_comment');
     Route::resource('shipcomment', shipcomment::class);
+
+    Route::get('inbox',[EmailSendController::class, 'inbox'])->name('inbox');
+    Route::get('sentbox',[EmailSendController::class, 'sentbox'])->name('sentbox');
+    Route::get('sent_email',[EmailSendController::class, 'sent_email'])->name('sent_email_create');
+    Route::post('store_email',[EmailSendController::class, 'store_email'])->name('store_email');
+
     Route::post('/profile/save', [clientprofile::class, 'save_profile'])->name('user_save_profile');
     Route::post('/profile/savepass', [clientprofile::class, 'change_password'])->name('change_password');
     // Route::get('/phonebook/list', [clientprofile::class, 'phonebook_list'])->name('phonebook_list');
