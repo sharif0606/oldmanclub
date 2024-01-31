@@ -19420,3 +19420,7 @@ body{
 .logo-abbr{
   max-width: 250px;
 }
+
+.usersidebar{
+  background-color: indigo;
+}

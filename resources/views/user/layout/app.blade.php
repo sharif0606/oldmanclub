@@ -14,7 +14,7 @@
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
             integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
+            crossorigin="anonymous" referrerpolicy="no-referrer"/>
         <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
         <link href="{{asset('public/css/style.css')}}" rel="stylesheet">
         @stack('styles')
@@ -30,7 +30,20 @@
             <!--**********************************
             Nav header start
         ***********************************-->
-           
+        <div class="nav-header">
+            <a href="index.html" class="brand-logo">
+                 <img class="logo-abbr" style="max-width: 250px;" src="{{asset('public/assets/images/Group.png')}}"
+                        alt="">
+                <!-- <img class="logo-compact" src="./images/logo-text.png" alt="">
+                <img class="brand-title" src="./images/logo-text.png" alt=""> -->
+            </a>
+
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
+        </div>
             <!--**********************************
             Nav header end
         ***********************************-->
@@ -43,7 +56,7 @@
                     <nav class="navbar navbar-expand">
                         <div class="collapse navbar-collapse justify-content-between">
                             <div class="header-left">
-                                <nav class="navbar navbar-expand-lg navbar-light">
+                                <!-- <nav class="navbar navbar-expand-lg navbar-light">
                                 <div class="container-fluid">
                                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -64,7 +77,7 @@
                                     </ul>
                                     </div>
                                 </div>
-                                </nav>
+                                </nav> -->
                             </div>
 
                             <ul class="navbar-nav header-right">
@@ -72,14 +85,6 @@
                                     <a class="nav-link" href="{{route('user_chat')}}" role="button">
                                         <!-- <i class="mdi mdi-bell"></i> -->
                                         <i class="icon-envelope"></i>
-                                        <div class="pulse-css"></div>
-                                    </a>
-                                </li>
-                               
-                                <li class="nav-item dropdown notification_dropdown">
-                                    <a class="nav-link" href="{{route('phonebook.index')}}" role="button">
-                                        <!-- <i class="mdi mdi-bell"></i> -->
-                                        <i class="icon-phone"></i>
                                         <div class="pulse-css"></div>
                                     </a>
                                 </li>
@@ -110,13 +115,43 @@
             <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="quixnav usersidebar">
+            <div class="quixnav-scroll">
+                <ul class="metismenu" id="menu">
+                    <li class="nav-label first">Main Menu</li>
+                    <!-- <li><a href="index.html"><i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
+                    </li> -->
+                    <li><a class="has-arrow" href="{{route('clientdashboard')}}" aria-expanded="false"><i
+                                class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
+                    </li>
+                    
+                   
+                    <li><a class="has-arrow" href="{{route('shipping.index')}}" aria-expanded="false"><i class="icon icon-app-store"></i><span class="nav-text">Shipping</span></a>
+                    </li>
+                    <li><a class="has-arrow" href="{{route('phonebook.index')}}" aria-expanded="false">
+                        <i class="icon-phone"></i><span class="nav-text">PhoneBook</span></a>
+                    </li>
+                    <li><a class="has-arrow" href="{{route('phonebook.index')}}" aria-expanded="false">
+                        <i class="icon-phone"></i><span class="nav-text">Phone-Group</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
+
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
            
 
         <!--**********************************
             Content body start
         ***********************************-->
-            <div class="content-body" style="margin-left: 0px;">
+            <div class="content-body">
                 <div class="container-fluid">
                     <!-- <div class="row page-titles mx-0">
                         <div class="col-sm-6 p-md-0">
@@ -145,21 +180,21 @@
                                         <div class="row justify-content-center">
                                             <div class="col-xl-8">
                                                 <div class="row">
-                                                    <div class="col-xl-4 col-sm-4 border-right-1 prf-col">
+                                                    <div class="col-3 col-sm-3 border-right-1 prf-col">
                                                         <div class="profile-name">
-                                                            <h4 class="text-primary">                   {{$client->first_name_en}}
+                                                            <h4 class="text-primary">      {{$client->first_name_en}}
                                                             {{$client->last_name_en}}
                                                             </h4>
                                                             <p>{{$client->address_line_1}}</p>
                                                         </div>
                                                     </div>
-                                                    <div class="col-xl-4 col-sm-4 border-right-1 prf-col">
+                                                    <div class="col-3 col-sm-3 border-right-1 prf-col">
                                                         <div class="profile-email">
                                                             <h4 class="text-muted text-primary">{{$client->email}}</h4>
                                                             <p>Email</p>
                                                         </div>
                                                     </div>
-                                                    <div class="col-xl-4 col-sm-4 prf-col">
+                                                    <div class="col-3 col-sm-3 prf-col">
                                                         <div class="profile-call">
                                                             <h4 class="text-muted">(+088) {{$client->contact_en}}</h4>
                                                             <p>Phone No.</p>
@@ -172,9 +207,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        
                     </div>
                     <!-- row -->
                     @yield('content')
