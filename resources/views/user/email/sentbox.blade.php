@@ -29,8 +29,8 @@
                         <a href="{{route('inbox')}}" class="list-group-item email-link">
                             <i class="fa fa-inbox font-18 align-middle mr-2"></i> Inbox <span class="badge badge-primary badge-sm float-right">198</span> 
                         </a>
-                        <a href="javascript:void()" class="list-group-item email-link"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i>Sent</a>
-                        <a href="{{route('sentbox')}}" class="list-group-item email-link"><i  class="fa fa-star font-18 align-middle mr-2"></i>Important <span class="badge badge-danger text-white badge-sm float-right">47</span>
+                        <a href="{{route('sentbox')}}" class="list-group-item email-link"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i>Sent</a>
+                        <a href="" class="list-group-item email-link"><i  class="fa fa-star font-18 align-middle mr-2"></i>Important <span class="badge badge-danger text-white badge-sm float-right">47</span>
                         </a>
                         <a href="javascript:void()" class="list-group-item email-link"><i
                                 class="mdi mdi-file-document-box font-18 align-middle mr-2"></i>Draft</a>
@@ -76,6 +76,7 @@
                     <div class="email-list">
                         <div class="row">
                             @foreach($send_email as $r_email)
+                                
                                 <div class="col-1">
                                     <input type="checkbox">
                                 </div>
@@ -83,7 +84,9 @@
                                     <button class="border-0 bg-transparent align-middle p-0"><i class="fa fa-star" aria-hidden="true"></i></button>
                                 </div>
                                 <div class="col-3">
+                                    <a href="{{route('sent_email_show',encryptor('encrypt',$r_email->id))}}">
                                     {{$r_email->to_email}}
+                                    </a>
                                 </div>
                                 <div class="col-6">
                                     <p class="message">{{$r_email->message}}</p>
@@ -91,6 +94,7 @@
                                 <div class="col-1">
                                     {{ $r_email->created_at->format('H:i') }}
                                 </div>
+                                
                             @endforeach
                         </div>
                     </div>

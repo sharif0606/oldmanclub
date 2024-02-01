@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\User\EmailSend;
+use App\Models\User\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -50,12 +51,17 @@ class EmailSendController extends Controller
         }
     }
 
+    public function sent_email_show($id){
+        $client = Client::find(currentUserId());
+        $sentmail = EmailSend::findOrFail(encryptor('decrypt',$id));
+        return view('user.email.sentmailshow',compact('sentmail','client'));
+    }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('user.email.create');
+        
     }
 
     /**

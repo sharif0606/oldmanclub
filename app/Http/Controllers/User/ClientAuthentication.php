@@ -89,5 +89,4 @@ class ClientAuthentication extends Controller
         request()->session()->flush();
         return redirect()->route('clientlogin')->with('danger','Succfully Logged Out');
     }
-
 }

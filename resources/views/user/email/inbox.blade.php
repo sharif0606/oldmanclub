@@ -83,17 +83,13 @@
                                     <button class="border-0 bg-transparent align-middle p-0"><i class="fa fa-star" aria-hidden="true"></i></button>
                                 </div>
                                 <div class="col-sm-2">
-                                   
                                     emailjasimuddin
                                 </div>
                                 <div class="col-sm-8">
                                     <p class="message">Ingredia Nutrisha, A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture</p>
                                 </div>
-                               
                             </div>
                         </div>
-                        
-                        
                     </div>
                     <!-- panel -->
                     <div class="row mt-4 m-4 mx-sm-4">
