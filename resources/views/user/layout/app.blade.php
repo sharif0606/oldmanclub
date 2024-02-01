@@ -139,7 +139,7 @@
                         </a>
                     </li>
                     <li><a class="has-arrow" href="{{route('inbox')}}" aria-expanded="false">
-                        <i class="icon-phone"></i><span class="nav-text">E-mail</span>
+                        <i class="icon-envelope"></i><span class="nav-text">E-mail</span>
                         </a>
                     </li>
                 </ul>
