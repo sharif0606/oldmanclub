@@ -19,10 +19,11 @@ class AuthenticationController extends Controller
     }
 
     public function signUpStore(SignupRequest $request){
+        dd($request);
         try{
             $user=new User;
-            $user->name_en=$request->FullName;
-            $user->contact_no_en=$request->contact_no_en;
+            $user->name=$request->FullName;
+            $user->contact_no=$request->contact_no;
             $user->email=$request->EmailAddress;
             $user->password=Hash::make($request->password);
             // $user->role_id=1;
@@ -46,7 +47,7 @@ class AuthenticationController extends Controller
 
     public function signInCheck(SigninRequest $request){
         try{
-            $user=User::where('contact_no_en',$request->username)
+            $user=User::where('contact_no',$request->username)
                         ->orWhere('email',$request->username)->first();
             if($user){
                 if($user->status==1){
@@ -77,7 +78,6 @@ class AuthenticationController extends Controller
                 'accessType'=>encryptor('encrypt',$user->full_access),
                 'role'=>encryptor('encrypt',$user->role->name),
                 'roleIdentity'=>encryptor('encrypt',$user->role->identity),
-                'language'=>encryptor('encrypt',$user->language),
                 'image'=>$user->image ?? 'no-image.png'
             ]
         );

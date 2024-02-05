@@ -105,9 +105,9 @@
                 <div class="profile-tab">
                     <div class="custom-tab-1">
                         <ul class="nav nav-tabs">
-                            <li class="nav-item"><a href="#my-posts" data-toggle="tab" class="nav-link active show">Posts</a>
-                            </li>
-                            <li class="nav-item"><a href="#about-me" data-toggle="tab" class="nav-link">About Me</a>
+                            {{-- <li class="nav-item"><a href="#my-posts" data-toggle="tab" class="nav-link active show">Posts</a>
+                            </li> --}}
+                            <li class="nav-item"><a href="#about-me" data-toggle="tab" class="nav-link active show">About Me</a>
                             </li>
                             <li class="nav-item"><a href="#profile-settings" data-toggle="tab" class="nav-link">Setting</a>
                             </li>
@@ -115,7 +115,7 @@
                             </li>                                      
                         </ul>
                         <div class="tab-content">
-                            <div id="my-posts" class="tab-pane fade active show">
+                            {{-- <div id="my-posts" class="tab-pane fade active show">
                                 <div class="my-post-content pt-3">
                                     <div class="post-input">
                                         <textarea name="textarea" id="textarea" cols="30" rows="5" class="form-control bg-transparent" placeholder="Please type what you want...."></textarea> <a href="javascript:void()"><i class="ti-clip"></i> </a>
@@ -161,8 +161,8 @@
                                     <div class="text-center mb-2"><a href="javascript:void()" class="btn btn-primary">Load More</a>
                                     </div>
                                 </div>
-                            </div>
-                            <div id="about-me" class="tab-pane fade">
+                            </div> --}}
+                            <div id="about-me" class="tab-pane fade active show">
                                 <div class="profile-about-me">
                                     <div class="pt-4 border-bottom-1 pb-4">
                                         <h4 class="text-primary">About Me</h4>

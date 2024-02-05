@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Backend\Website\CustomerFeedback;
 use App\Models\Backend\Website\PrintingService\PrintCustomerFeedback;
 use App\Models\Chat;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Client extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
     public function feedback(){
         return $this->hasMany(CustomerFeedback::class);
     }

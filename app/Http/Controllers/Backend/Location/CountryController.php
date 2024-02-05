@@ -42,7 +42,6 @@ class CountryController extends Controller
             $country=new Country;
             $country->name=$request->countryName;
             $country->code=$request->countryCode;
-            $country->name_bn=$request->countryBn;
             if($country->save())
                 return redirect()->route(currentUser().'.country.index')->with($this->resMessageHtml(true,null,'Successfully created'));
             else
@@ -89,7 +88,6 @@ class CountryController extends Controller
             $country=Country::findOrFail(encryptor('decrypt',$id));
             $country->name=$request->countryName;
             $country->code=$request->countryCode;
-            $country->name_bn=$request->countryBn;
             if($country->save())
                 return redirect()->route(currentUser().'.country.index')->with($this->resMessageHtml(true,null,'Successfully updated'));
             else

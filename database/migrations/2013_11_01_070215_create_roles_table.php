@@ -19,6 +19,16 @@ return new class extends Migration
             $table->string('identity',30)->unique();
             $table->timestamps();
         });
+        DB::table('roles')->insert(
+            [
+                'name' => 'Superadmin',
+                'identity' => 'superadmin',
+            ],
+            [
+                'name' => 'Client',
+                'identity' => 'Client',
+            ]
+        );
     }
 
     /**

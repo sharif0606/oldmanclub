@@ -9,7 +9,7 @@ use App\Http\Requests\User\SignupRequest;
 use App\Http\Requests\User\SigninRequest;
 use Illuminate\Support\Facades\Hash;
 use Exception;
-
+use Validator;
 class ClientAuthentication extends Controller
 {
     
@@ -17,23 +17,42 @@ class ClientAuthentication extends Controller
         return view('user.authentication.register');
     }
 
-    public function signUpStore(SignupRequest $request){
+
+    public function signUpStore(Request $request){
+        $validator = Validator::make($request->all(), [
+            'fname' => 'required',
+            'middle_name' => 'required',
+            'last_name' => 'required',
+            //'dob' => 'required',
+            'contact_no' => 'required|unique:clients,contact_no',
+            'email' => 'required|email|unique:clients,email',
+            'password' => 'required|min:8|confirmed',
+        ],[
+            'password.required' => 'The password field is required.',
+            'password.min' => 'The password must be at least 8 characters.',
+            'password.confirmed' => 'The password confirmation does not match.'
+        ]);
+        if ($validator->fails()) {
+            //return response()->json(['success' => false, 'errors' => $validator->errors()]);//for json
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
         try{
             $user=new Client;
-            $user->first_name_en=$request->fname_en;
-            $user->middle_name_en=$request->mname_en;
-            $user->last_name_en=$request->lname_en;
-            $user->contact_en=$request->ContactNumber_en;
-            $user->date_of_birth = $request->dob;
-            $user->email=$request->EmailAddress;
-            $user->address_line_1 = $request->PresentAddress;
-            $user->address_line_2 = $request->ParmanentAddress;
-            $user->country= $request->country;
-            $user->city = $request->city;
-            $user->state = $request->state;
-            $user->zip_code = $request->zp;
-            $user->status = 0;
+            $user->fname=$request->fname;
+            $user->middle_name=$request->middle_name;
+            $user->last_name=$request->last_name;
+            $user->contact_no=$request->contact_no;
+            $user->dob = $request->dob;
+            $user->email=$request->email;
+            $user->address_line_1 = $request->address_line_1;
+            $user->address_line_2 = $request->address_line_2;
+            $user->country_id= $request->country_id;
+            $user->city_id = $request->city_id;
+            $user->state_id = $request->state_id;
+            $user->zip_code = $request->zip_code;
+            $user->status = 1;
             $user->password=Hash::make($request->password);
+
             if($user->save()){
                 $this->notice::success('Successfully Registered');
                 return redirect()->route('clientlogin')->with('success','Successfully Registred');

@@ -147,6 +147,11 @@ Route::middleware(['checkrole'])->prefix('admin')->group(function(){
 
 Route::get('client/register',[clientauth::class,'signUpForm'])->name('clientregister');
 Route::post('client/register',[clientauth::class,'signUpStore'])->name('clientregister.store');
+
+Route::post('/register/step1', [clientauth::class, 'registerStep1'])->name('register.step1');
+Route::post('/register/step2', [clientauth::class, 'registerStep2'])->name('register.step2');
+Route::post('/register/step3', [clientauth::class, 'registerStep3'])->name('register.step3');
+
 Route::get('client/login', [clientauth::class,'signInForm'])->name('clientlogin');
 Route::post('client/login', [clientauth::class,'signInCheck'])->name('clientlogin.check');
 Route::get('client/logout', [clientauth::class,'singOut'])->name('clientlogOut');

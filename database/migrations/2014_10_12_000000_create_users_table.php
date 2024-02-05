@@ -15,15 +15,12 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name_en');
-            $table->string('name_bn')->nullable();
+            $table->string('name')->nullable();
             $table->string('email')->unique()->nullable();
-            $table->string('contact_no_en')->unique();
-            $table->string('contact_no_bn')->unique()->nullable();
+            $table->string('contact_no')->unique();
             $table->unsignedBigInteger('role_id')->index();
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->string('password');
-            $table->string('language')->default('en');
             $table->string('image')->nullable();
             $table->boolean('full_access')->default(false)->comment('1=>yes 0=>no');
             $table->integer('status')->default(1)->comment('1=>active 2=>inactive');
@@ -31,6 +28,14 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+        DB::table('users')->insert([
+            'name' => '',
+            'email' => 'jasim@gmail.com',
+            'contact_no' => '1',
+            'role_id' => '1',
+            'password' => Hash::make(1),
+            'status' => 1
+        ]);
     }
 
     /**

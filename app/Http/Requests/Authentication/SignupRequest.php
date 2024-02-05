@@ -23,9 +23,10 @@ class SignupRequest extends FormRequest
     {
         return [
             'FullName'=>'required|max:255',
-            'contact_no_en'=>'required|unique:users',
+            'contact_no'=>'required|unique:users,contact_no',
             'EmailAddress'=>'required|unique:users,email',
             'password'=>'required|confirmed'
         ];
     }
+    
 }
