@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\Admin\MailBoxController as mailbox;
 use App\Http\Controllers\Backend\Admin\ShippingController;
 use App\Http\Controllers\Backend\Admin\ShippingStatusTypeController as shipstatus;
 use App\Http\Controllers\Backend\Admin\ShippingTrackingController as shiptrack;
+use App\Http\Controllers\Backend\Admin\CommentController;
 
 // use App\Http\Controllers\Backend\PhoneBookController as phonebook;
 use App\Http\Controllers\Backend\Website\SettingController as setting;
@@ -59,6 +60,8 @@ use App\Http\Controllers\User\ClientController as clientprofile;
 use App\Http\Controllers\User\PhoneBookController as phonebook;
 use App\Http\Controllers\User\PhoneGroupController as phonegroup;
 use App\Http\Controllers\User\ShippingController as shipping;
+use App\Http\Controllers\User\ShippingCommentController as shipcomment;
+use App\Http\Controllers\User\EmailSendController;
 
 // landing page
 use App\Http\Controllers\Common\frontendController as frontend;
@@ -101,6 +104,9 @@ Route::middleware(['checkrole'])->prefix('admin')->group(function(){
     Route::post('shippingUpdate/{id}',[ShippingController::class, 'shipping_update'])->name('shipping_update');
     Route::resource('shipstatus', shipstatus::class);
     Route::resource('shiptrack', shiptrack::class);
+    Route::get('comment_list',[CommentController::class, 'comment_list'])->name('comment_list');
+    Route::get('comment_edit/{id}',[CommentController::class, 'comment_edit'])->name('comment_edit');
+    Route::post('comment_update/{id}',[CommentController::class, 'comment_update'])->name('comment_update');
     
     
     Route::resource('setting', setting::class);
@@ -161,6 +167,15 @@ Route::middleware(['checkclient'])->prefix('user')->group(function(){
     Route::resource('phonebook', phonebook::class);
     Route::resource('phonegroup', phonegroup::class);
     Route::resource('shipping', shipping::class);
+    Route::get('shipping_comments/{shippingId}', [shipping::class, 'showShippingComments'])->name('shippingcomment');
+    Route::resource('shipcomment', shipcomment::class);
+
+    Route::get('inbox',[EmailSendController::class, 'inbox'])->name('inbox');
+    Route::get('sentbox',[EmailSendController::class, 'sentbox'])->name('sentbox');
+    Route::get('sent_email',[EmailSendController::class, 'sent_email'])->name('sent_email_create');
+    Route::post('store_email',[EmailSendController::class, 'store_email'])->name('store_email');
+    Route::get('sent_email_show/{id}',[EmailSendController::class, 'sent_email_show'])->name('sent_email_show');
+
     Route::post('/profile/save', [clientprofile::class, 'save_profile'])->name('user_save_profile');
     Route::post('/profile/savepass', [clientprofile::class, 'change_password'])->name('change_password');
     // Route::get('/phonebook/list', [clientprofile::class, 'phonebook_list'])->name('phonebook_list');

@@ -19,4 +19,7 @@ class Shipping extends Model
     public function shippingtrack(){
         return $this->hasMany(ShippingStatusType::class,'shipping_id','id');
     }
+    public function shippingcomment(){
+        return $this->hasMany(ShippingComment::class,'shipping_id','id');
+    }
 }

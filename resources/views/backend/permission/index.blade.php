@@ -18,7 +18,7 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-            <h4>{{$role->type}}</h4>
+            <h4>{{$role->name}}</h4>
             @php 
                 $routes=array();
                 $auto_accept=array('GET',"DELETE");

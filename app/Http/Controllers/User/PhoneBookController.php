@@ -19,9 +19,9 @@ class PhoneBookController extends Controller
     public function index()
     {
         $phonegroup = PhoneGroup::get();
-        $client = Client::find(currentUserId());
+        
         $phonebook = PhoneBook::where('client_id',currentUserId())->get();
-        return view('user.phonebook.index',compact('phonebook','client','phonegroup'));
+        return view('user.phonebook.index',compact('phonebook','phonegroup'));
     }
 
     /**
@@ -70,9 +70,9 @@ class PhoneBookController extends Controller
     public function edit($id)
     {
         $phonegroup = PhoneGroup::get();
-        $client = Client::find(currentUserId());
+        
         $phonebook = PhoneBook::findOrFail(encryptor('decrypt',$id));
-        return view('user.phonebook.edit',compact('phonebook','client','phonegroup'));
+        return view('user.phonebook.edit',compact('phonebook','phonegroup'));
     }
 
     /**

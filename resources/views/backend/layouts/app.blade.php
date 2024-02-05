@@ -145,11 +145,12 @@
                                 <li><a href="{{route('user.index')}}">Admin</a></li>
                                 <li><a href="{{route('role.index')}}">Role</a></li>
                                 <li><a href="{{route('client.index')}}">User</a></li>
-                                <li><a href="{{route('sms.index')}}">SMS Service</a></li>
-                                <li><a href="{{route('mailbox.index')}}">Mail Service</a></li>
+                                <li><a href="{{route('sms.index')}}">SMS Package Service</a></li>
+                                <li><a href="{{route('mailbox.index')}}">Mail Package Service</a></li>
                                 <li><a href="{{route('shipping_list')}}">Shipping</a></li>
                                 <li><a href="{{route('shipstatus.index')}}">Shipping Status</a></li>
                                 <li><a href="{{route('shiptrack.index')}}">Shipping Tracking</a></li>
+                                <li><a href="{{route('comment_list')}}">Comment List</a></li>
                             </ul>
                         </li>
                         <li>
@@ -158,83 +159,88 @@
                                 <span class="nav-text">Website</span>
                             </a>
                             <ul aria-expanded="false">
-                                <li><a href="{{route('setting.index')}}">Settings</a></li>
-                                <li><a href="{{route('slider.index')}}">Slider</a></li>
-                                <li><a href="{{route('ourservice.index')}}">Our Service</a></li>
-                                <li><a href="{{route('homepage.index')}}">Home Page</a></li>
-                                <li><a href="{{route('cus_feedback.index')}}">Customer Feedback</a></li>
-                                <li><a href="{{route('globalnetwork.index')}}">Global Network</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="fa fa-globe"></i>
-                                <span class="nav-text">NFC</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="{{route('nfccard.index')}}">NFC Business Card</a></li>
-                                <li><a href="{{route('nfcpricesection.index')}}">NFC Price Section</a></li>
-                                <li><a href="{{route('nfccardprice.index')}}">NFC Card Price</a></li>
-                                <li><a href="{{route('subscribesection.index')}}">NFC Subscribe</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="fa fa-globe"></i>
-                                <span class="nav-text">Shipping Service</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="{{route('shippingheader.index')}}">Header Section</a></li>
-                                <li><a href="{{route('shippingservice.index')}}">Service Section</a></li>
-                                <li><a href="{{route('shippingchoice.index')}}">Choice Section</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="fa fa-globe"></i>
-                                <span class="nav-text">LLC Service</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="{{route('llchero.index')}}">Hero Section</a></li>
-                                <li><a href="{{route('llcservice.index')}}">LLC Service</a></li>
-                                <li><a href="{{route('llcpricing.index')}}">LLC Pricing</a></li>
-                                <li><a href="{{route('llccard.index')}}">LLC Card</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="fa fa-globe"></i>
-                                <span class="nav-text">Phone Number Service</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="{{route('phonehero.index')}}">Hero Section</a></li>
-                                <li><a href="{{route('phoneservice.index')}}">Service Section</a></li>
-                                <li><a href="{{route('phonemaps.index')}}">Virtual Maps Section</a></li>
-                                <li><a href="{{route('phonefeedback.index')}}">Customer Feedback</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="fa fa-globe"></i>
-                                <span class="nav-text">Printing Service</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="{{route('printhero.index')}}">Hero Section</a></li>
-                                <li><a href="{{route('printvideo.index')}}">Video Section</a></li>
-                                <li><a href="{{route('printcard.index')}}">Card image Section</a></li>
-                                <li><a href="{{route('printcus_feedback.index')}}">Customer Feedback</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="fa fa-globe"></i>
-                                <span class="nav-text">Smart Mail Service</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="{{route('smartmailhero.index')}}">Hero Section</a></li>
-                                <li><a href="{{route('smartwork.index')}}">Smart Work Section</a></li>
-                                <li><a href="{{route('smartsms.index')}}">Smart SMS Service</a></li>
-                                <li><a href="{{route('smartphonebook.index')}}">Smart PhoneBook Service</a></li>
+                                <li><a class="has-arrow" href="javascript:void()">
+                                    <i class="fa fa-home"></i> Home</a>
+                                    <ul aria-expanded="false">
+                                        <li><a href="{{route('setting.index')}}">Settings</a></li>
+                                        <li><a href="{{route('slider.index')}}">Slider</a></li>
+                                        <li><a href="{{route('ourservice.index')}}">Our Service</a></li>
+                                        <li><a href="{{route('homepage.index')}}">Home Page</a></li>
+                                        <li><a href="{{route('cus_feedback.index')}}">Customer Feedback</a></li>
+                                        <li><a href="{{route('globalnetwork.index')}}">Global Network</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                        <i class="fa fa-globe"></i>
+                                        <span class="nav-text">NFC</span>
+                                    </a>
+                                    <ul aria-expanded="false">
+                                        <li><a href="{{route('nfccard.index')}}">NFC Business Card</a></li>
+                                        <li><a href="{{route('nfcpricesection.index')}}">NFC Price Section</a></li>
+                                        <li><a href="{{route('nfccardprice.index')}}">NFC Card Price</a></li>
+                                        <li><a href="{{route('subscribesection.index')}}">NFC Subscribe</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                        <i class="fa fa-globe"></i>
+                                        <span class="nav-text">Shipping Service</span>
+                                    </a>
+                                    <ul aria-expanded="false">
+                                        <li><a href="{{route('shippingheader.index')}}">Header Section</a></li>
+                                        <li><a href="{{route('shippingservice.index')}}">Service Section</a></li>
+                                        <li><a href="{{route('shippingchoice.index')}}">Choice Section</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                        <i class="fa fa-globe"></i>
+                                        <span class="nav-text">LLC Service</span>
+                                    </a>
+                                    <ul aria-expanded="false">
+                                        <li><a href="{{route('llchero.index')}}">Hero Section</a></li>
+                                        <li><a href="{{route('llcservice.index')}}">LLC Service</a></li>
+                                        <li><a href="{{route('llcpricing.index')}}">LLC Pricing</a></li>
+                                        <li><a href="{{route('llccard.index')}}">LLC Card</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                        <i class="fa fa-globe"></i>
+                                        <span class="nav-text">Phone Number Service</span>
+                                    </a>
+                                    <ul aria-expanded="false">
+                                        <li><a href="{{route('phonehero.index')}}">Hero Section</a></li>
+                                        <li><a href="{{route('phoneservice.index')}}">Service Section</a></li>
+                                        <li><a href="{{route('phonemaps.index')}}">Virtual Maps Section</a></li>
+                                        <li><a href="{{route('phonefeedback.index')}}">Customer Feedback</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                        <i class="fa fa-globe"></i>
+                                        <span class="nav-text">Printing Service</span>
+                                    </a>
+                                    <ul aria-expanded="false">
+                                        <li><a href="{{route('printhero.index')}}">Hero Section</a></li>
+                                        <li><a href="{{route('printvideo.index')}}">Video Section</a></li>
+                                        <li><a href="{{route('printcard.index')}}">Card image Section</a></li>
+                                        <li><a href="{{route('printcus_feedback.index')}}">Customer Feedback</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                        <i class="fa fa-globe"></i>
+                                        <span class="nav-text">Smart Mail Service</span>
+                                    </a>
+                                    <ul aria-expanded="false">
+                                        <li><a href="{{route('smartmailhero.index')}}">Hero Section</a></li>
+                                        <li><a href="{{route('smartwork.index')}}">Smart Work Section</a></li>
+                                        <li><a href="{{route('smartsms.index')}}">Smart SMS Service</a></li>
+                                        <li><a href="{{route('smartphonebook.index')}}">Smart PhoneBook Service</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
                     </ul>

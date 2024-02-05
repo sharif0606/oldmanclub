@@ -2,7 +2,48 @@
 @section('title','User Profile')
 @section('page','User Profile')
 @section('content')
-
+<div class="row">
+    <div class="col-lg-12">
+        <div class="profile">
+            <div class="profile-head">
+                <div class="photo-content">
+                    <div class="cover-photo"></div>
+                    <div class="profile-photo">
+                        <img src="{{asset('public/uploads/client/'.$client->image)}}" class="img-fluid rounded-circle" alt="">
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-8">
+                            <div class="row flex-nowrap">
+                                <div class="col-3 col-sm-3 border-right-1 prf-col">
+                                    <div class="profile-name">
+                                        <h4 class="text-primary">      {{$client->first_name_en}}
+                                        {{$client->last_name_en}}
+                                        </h4>
+                                        <p>{{$client->address_line_1}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-3 col-sm-3 border-right-1 prf-col">
+                                    <div class="profile-email">
+                                        <h4 class="text-muted text-primary">{{$client->email}}</h4>
+                                        <p>Email</p>
+                                    </div>
+                                </div>
+                                <div class="col-3 col-sm-3 prf-col">
+                                    <div class="profile-call">
+                                        <h4 class="text-muted">(+088) {{$client->contact_en}}</h4>
+                                        <p>Phone No.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
     <!-- <div class="col-lg-4">
         <div class="card">
@@ -99,14 +140,18 @@
             </div>
         </div>
     </div> -->
+    
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
                 <div class="profile-tab">
                     <div class="custom-tab-1">
                         <ul class="nav nav-tabs">
+<<<<<<< HEAD
                             {{-- <li class="nav-item"><a href="#my-posts" data-toggle="tab" class="nav-link active show">Posts</a>
                             </li> --}}
+=======
+>>>>>>> 9401afbb7b8f21aa79410ff061cfe0e56c30ced2
                             <li class="nav-item"><a href="#about-me" data-toggle="tab" class="nav-link active show">About Me</a>
                             </li>
                             <li class="nav-item"><a href="#profile-settings" data-toggle="tab" class="nav-link">Setting</a>
@@ -115,6 +160,7 @@
                             </li>                                      
                         </ul>
                         <div class="tab-content">
+<<<<<<< HEAD
                             {{-- <div id="my-posts" class="tab-pane fade active show">
                                 <div class="my-post-content pt-3">
                                     <div class="post-input">
@@ -180,6 +226,10 @@
                                             class="flag-icon flag-icon-bd"></i> Bangla</a>
                                 </div>
                                 <div class="profile-personal-info">
+=======
+                            <div id="about-me" class="tab-pane fade active show">
+                                <div class="profile-personal-info mt-3">
+>>>>>>> 9401afbb7b8f21aa79410ff061cfe0e56c30ced2
                                     <h4 class="text-primary mb-4">Personal Information</h4>
                                     <div class="row mb-4">
                                         <div class="col-3">
@@ -356,7 +406,6 @@
                                     </div>
                                 </div>
                             </div>
-                          
                             <!-- <div id="phonebook_tab" class="tab-pane fade">
                                 <div class="card">
                                     <div class="card-body">
