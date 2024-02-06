@@ -15,10 +15,32 @@
                         <div class="row">
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label for="Identity">Name<i class="text-danger">*</i></label>
-                                    <input type="text" id="Identity" pattern="[A-Za-z]+" class="form-control" value="{{ old('Identity')}}" name="Identity">
-                                    @if($errors->has('Identity'))
-                                        <span class="text-danger"> {{ $errors->first('Identity') }}</span>
+                                    <label for="name">Name<i class="text-danger">*</i></label>
+                                    <input type="text" id="name" class="form-control" value="{{ old('name')}}" name="name">
+                                    @if($errors->has('name'))
+                                        <span class="text-danger"> {{ $errors->first('name') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="icon">Icon<i class="text-danger">*</i></label>
+                                    <input type="text" id="icon" class="form-control" value="{{ old('icon')}}" name="icon">
+                                    @if($errors->has('icon'))
+                                        <span class="text-danger"> {{ $errors->first('icon') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="status">Status<i class="text-danger">*</i></label>
+                                    <select id="status" class="form-control" name="status">
+                                        <option value="">select status</option>
+                                        <option value="1" @if(old('status')==1) selected @endif>Show</option>
+                                        <option value="2" @if(old('status')==2) selected @endif>Hide</option>
+                                    </select>
+                                    @if($errors->has('status'))
+                                        <span class="text-danger"> {{ $errors->first('status') }}</span>
                                     @endif
                                 </div>
                             </div>

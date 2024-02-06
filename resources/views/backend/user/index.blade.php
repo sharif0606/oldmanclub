@@ -27,7 +27,7 @@
                         @forelse($data as $p)
                         <tr>
                             <th scope="row">{{ ++$loop->index }}</th>
-                            <td>{{$p->name_en}}</td>
+                            <td>{{$p->name}}</td>
                             <td>{{$p->email}}</td>
                             <td>{{$p->contact_no_en}}</td>
                             <td>{{$p->role?->name}}</td>

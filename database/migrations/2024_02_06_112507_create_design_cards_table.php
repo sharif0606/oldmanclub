@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('design_name')->nullable();
             $table->string('image')->nullable();
+            $table->tinyInteger('template_id')->default(1)->comment('1=>Classic, 2=> Modern, 3=>Flat, 4=>Sleek');
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();

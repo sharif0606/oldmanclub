@@ -68,7 +68,7 @@ use App\Http\Controllers\Common\frontendController as frontend;
 use App\Http\Controllers\ChatController;
 
 //NFC Field
-use App\Http\Controllers\NfcFieldController as nfc_field;
+use App\Http\Controllers\Backend\Nfc\NfcFieldController as nfc_field;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,11 +106,13 @@ Route::prefix('admin')->group(function(){
     Route::post('shippingUpdate/{id}',[ShippingController::class, 'shipping_update'])->name('shipping_update');
     Route::resource('shipstatus', shipstatus::class);
     Route::resource('shiptrack', shiptrack::class);
+    Route::resource('nfc_field', nfc_field::class);
+
     Route::get('comment_list',[CommentController::class, 'comment_list'])->name('comment_list');
     Route::get('comment_edit/{id}',[CommentController::class, 'comment_edit'])->name('comment_edit');
     Route::post('comment_update/{id}',[CommentController::class, 'comment_update'])->name('comment_update');
     
-    
+//website  
     Route::resource('setting', setting::class);
     Route::resource('nfc-field', nfc_field::class);
     Route::resource('slider', slider::class);

@@ -15,5 +15,8 @@ class User extends Model
     public function chats(){
         return $this->hasMany(Chat::class, 'user_id');
     }
+    public function nfc(){
+        return $this->hasMany(NfcField::class);
+    }
     
 }

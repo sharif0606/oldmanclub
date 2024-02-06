@@ -11,14 +11,17 @@
             <!-- table bordered -->
             <div class="table-responsive">
                 <div>
-                    <a class="pull-right fs-1" href="{{route('nfc-field.create')}}"><i class="fa fa-plus"></i></a>
+                    <a class="pull-right fs-1" href="{{route('nfc_field.create')}}"><i class="fa fa-plus"></i></a>
                 </div>
                 <table class="table table-bordered mb-0">
                     <thead>
                         <tr>
                             <th scope="col">{{__('#SL')}}</th>
                             <th scope="col">{{__('Name')}}</th>
-                            <th scope="col">{{__('Identity')}}</th>
+                            <th scope="col">{{__('Icon')}}</th>
+                            <th scope="col">{{__('Status')}}</th>
+                            <th scope="col">{{__('Created_by')}}</th>
+                            <th scope="col">{{__('Updated_by')}}</th>
                             <th class="white-space-nowrap">{{__('Action') }}</th>
                         </tr>
                     </thead>
@@ -27,18 +30,19 @@
                         <tr>
                             <th scope="row">{{ ++$loop->index }}</th>
                             <td>{{$p->name}}</td>
-                            <td>{{$p->identity}}</td>
+                            <td>{{$p->icon}}</td>
+                            <td>@if($p->status==1) {{__('Show')}} @else {{__('Hide')}}
+                            @endif</td>
+                            <td>{{$p->user?->name}}</td>
+                            <td>{{$p->user?->name}}</td>
                             <td class="white-space-nowrap">
-                                <a href="{{route('role.edit',encryptor('encrypt',$p->id))}}">
+                                <a href="{{route('nfc_field.edit',encryptor('encrypt',$p->id))}}">
                                     <i class="fa fa-edit"></i>
-                                </a>
-                                <a href="{{route('permission.list',encryptor('encrypt',$p->id))}}">
-                                    <i class="fa fa-unlock"></i>
                                 </a>
                                 <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()">
                                     <i class="fa fa-trash"></i>
                                 </a>
-                                <form id="form{{$p->id}}" action="{{route('role.destroy',encryptor('encrypt',$p->id))}}" method="post">
+                                <form id="form{{$p->id}}" action="{{route('nfc_field.destroy',encryptor('encrypt',$p->id))}}" method="post">
                                     @csrf
                                     @method('delete')
                                 </form>
