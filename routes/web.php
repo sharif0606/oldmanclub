@@ -67,6 +67,8 @@ use App\Http\Controllers\User\EmailSendController;
 use App\Http\Controllers\Common\frontendController as frontend;
 use App\Http\Controllers\ChatController;
 
+//NFC Field
+use App\Http\Controllers\NfcFieldController as nfc_field;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,9 +91,9 @@ Route::middleware(['checkauth'])->prefix('admin')->group(function(){
     Route::get('dashboard', [dashboard::class,'index'])->name('dashboard');
     Route::get('admin/chat', [ChatController::class, 'adminChat'])->name('admin_chat');
     Route::post('admin-chat', [ChatController::class, 'adminSendMessage'])->name('adminchat.store');
-   
 });
-Route::middleware(['checkrole'])->prefix('admin')->group(function(){
+//middleware(['checkrole'])->
+Route::prefix('admin')->group(function(){
     Route::resource('user', user::class);
     Route::resource('role', role::class);
     Route::resource('client', client::class);
@@ -110,6 +112,7 @@ Route::middleware(['checkrole'])->prefix('admin')->group(function(){
     
     
     Route::resource('setting', setting::class);
+    Route::resource('nfc-field', nfc_field::class);
     Route::resource('slider', slider::class);
     Route::resource('ourservice', ourservice::class);
     Route::resource('homepage', homepage::class);

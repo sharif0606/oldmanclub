@@ -142,6 +142,7 @@
                         <i class="icon-envelope"></i><span class="nav-text">E-mail</span>
                         </a>
                     </li>
+                    
                 </ul>
             </div>
 

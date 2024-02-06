@@ -151,6 +151,7 @@
                                 <li><a href="{{route('shipstatus.index')}}">Shipping Status</a></li>
                                 <li><a href="{{route('shiptrack.index')}}">Shipping Tracking</a></li>
                                 <li><a href="{{route('comment_list')}}">Comment List</a></li>
+                                <li><a href="{{route('nfc-field.index')}}">NFC Field</a></li>
                             </ul>
                         </li>
                         <li>
