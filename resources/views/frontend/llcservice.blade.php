@@ -3,7 +3,7 @@
 @section('content')
       <!-- hero section start -->
       <section class="llc-hero">
-            <img src="{{asset('public/uploads/llcservice/'.$llcherosection->background_image)}}" alt="" class="llc-hero-image">
+            <img src="{{asset('public/uploads/llcservice/'.$llcherosection?->background_image)}}" alt="" class="llc-hero-image">
         <div class="llc-hero-text">
             <h2 class="fw-bold fs-1">{{$llcherosection?->text_large}}</h2>
             <p class="py-3 fw-medium">{{$llcherosection?->text_small}}</p>
@@ -124,7 +124,7 @@
                     <button class="btn llc-get-started-btn fw-medium mb-3 px-5 py-2">Get Started</button>
                 </div>
                 <div class="col-md-7 llc-our-card-image">
-                    <img src="{{asset('public/uploads/llcservice/'.$llccardsection->image)}}" alt="card-image" class="h-100">
+                    <img src="{{asset('public/uploads/llcservice/'.$llccardsection?->image)}}" alt="card-image" class="h-100">
                 </div>
             </div>
         </div>

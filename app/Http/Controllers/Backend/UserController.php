@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Backend\User\AddNewRequest;
 use App\Http\Requests\Backend\User\UpdateRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use File;
 use Exception;
 class UserController extends Controller
@@ -36,19 +37,17 @@ class UserController extends Controller
      */
     public function store(AddNewRequest $request)
     {
+
         try{
             $data=new User();
-            $data->name_en=$request->userName_en;
-            $data->name_bn=$request->userName_bn;
+            $data->name=$request->userName;
             $data->email=$request->EmailAddress;
-            $data->contact_no_en=$request->contactNumber_en;
-            $data->contact_no_bn=$request->contactNumber_bn;
+            $data->contact_no=$request->contactNumber;
             $data->role_id=$request->roleId;
             $data->status=$request->status;
             $data->full_access=$request->fullAccess;
-            $data->language='en';
             $data->password=Hash::make($request->password);
-
+            $data->remember_token = Str::random(60);
             if($request->hasFile('image')){
                 $imageName = rand(111,999).time().'.'.$request->image->extension();
                 $request->image->move(public_path('uploads/users'), $imageName);
@@ -91,15 +90,12 @@ class UserController extends Controller
     {
         try{
             $data=User::findOrFail(encryptor('decrypt',$id));
-            $data->name_en=$request->userName_en;
-            $data->name_bn=$request->userName_bn;
+            $data->name=$request->userName;
             $data->email=$request->EmailAddress;
-            $data->contact_no_en=$request->contactNumber_en;
-            $data->contact_no_bn=$request->contactNumber_bn;
+            $data->contact_no=$request->contactNumber;
             $data->role_id=$request->roleId;
             $data->status=$request->status;
             $data->full_access=$request->fullAccess;
-
             if($request->password)
                 $data->password=Hash::make($request->password);
 
