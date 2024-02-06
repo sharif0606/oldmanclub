@@ -24,11 +24,6 @@ class NfcFieldController extends Controller
     {
         return view('backend.nfc-field.create');
     }
-// name
-// icon
-// status
-// created_by
-// updated_by
     /**
      * Store a newly created resource in storage.
      */
@@ -80,7 +75,7 @@ class NfcFieldController extends Controller
             $nfcField->status = $request->status;
             $nfcField->updated_by = currentUserId();
             if($nfcField->save()){
-                $this->notice::success('Data Successfully saved');
+                $this->notice::success('Data Successfully Updated');
                 return redirect()->route('nfc_field.index');
             }
         }catch(Exception $e){

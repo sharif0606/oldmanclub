@@ -1,5 +1,5 @@
 @extends('backend.layouts.app')
-@section('title',trans('NFC Field'))
+@section('title',trans('Design Card'))
 @section('page',trans('List'))
 @section('content')
 
@@ -11,15 +11,15 @@
             <!-- table bordered -->
             <div class="table-responsive">
                 <div>
-                    <a class="pull-right fs-1" href="{{route('nfc_field.create')}}"><i class="fa fa-plus"></i></a>
+                    <a class="pull-right fs-1" href="{{route('design_card.create')}}"><i class="fa fa-plus"></i></a>
                 </div>
                 <table class="table table-bordered mb-0">
                     <thead>
                         <tr>
                             <th scope="col">{{__('#SL')}}</th>
-                            <th scope="col">{{__('Name')}}</th>
-                            <th scope="col">{{__('Icon')}}</th>
-                            <th scope="col">{{__('Status')}}</th>
+                            <th scope="col">{{__('Design Name')}}</th>
+                            <th scope="col">{{__('Image')}}</th>
+                            <th scope="col">{{__('Template')}}</th>
                             <th scope="col">{{__('Created_by')}}</th>
                             <th scope="col">{{__('Updated_by')}}</th>
                             <th class="white-space-nowrap">{{__('Action') }}</th>
@@ -29,20 +29,22 @@
                         @forelse($data as $p)
                         <tr>
                             <th scope="row">{{ ++$loop->index }}</th>
-                            <td>{{$p->name}}</td>
-                            <td>{{$p->icon}}</td>
-                            <td>@if($p->status==1) {{__('Show')}} @else {{__('Hide')}}
-                            @endif</td>
+                            <td>{{$p->design_name}}</td>
+                            <td><img width="50px" src="{{asset('public/uploads/cards/'.$p->image)}}" alt=""></td>
+                            <td>{{ $p->template_id == 1 ? __('Classic') : 
+                                    ($p->template_id == 2 ? __('Modern') : 
+                                    ($p->template_id == 3 ? __('Flat') : __('Sleek')))}}
+                            </td>
                             <td>{{$p->createdBy?->name}}</td>
                             <td>{{$p->updatedBy?->name}}</td>
                             <td class="white-space-nowrap">
-                                <a href="{{route('nfc_field.edit',encryptor('encrypt',$p->id))}}">
+                                <a href="{{route('design_card.edit',encryptor('encrypt',$p->id))}}">
                                     <i class="fa fa-edit"></i>
                                 </a>
                                 <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()">
                                     <i class="fa fa-trash"></i>
                                 </a>
-                                <form id="form{{$p->id}}" action="{{route('nfc_field.destroy',encryptor('encrypt',$p->id))}}" method="post">
+                                <form id="form{{$p->id}}" action="{{route('design_card.destroy',encryptor('encrypt',$p->id))}}" method="post">
                                     @csrf
                                     @method('delete')
                                 </form>

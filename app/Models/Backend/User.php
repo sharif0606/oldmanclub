@@ -18,5 +18,7 @@ class User extends Model
     public function nfc(){
         return $this->hasMany(NfcField::class);
     }
-    
+    public function design_card(){
+        return $this->hasMany(DesignCard::class);
+    } 
 }

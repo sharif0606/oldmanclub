@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('nfc_cards', function (Blueprint $table) {
             $table->id();
+            $table->
             $table->timestamps();
         });
     }
