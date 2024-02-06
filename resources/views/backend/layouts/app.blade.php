@@ -151,7 +151,13 @@
                                 <li><a href="{{route('shipstatus.index')}}">Shipping Status</a></li>
                                 <li><a href="{{route('shiptrack.index')}}">Shipping Tracking</a></li>
                                 <li><a href="{{route('comment_list')}}">Comment List</a></li>
-                                <li><a href="{{route('nfc-field.index')}}">NFC Field</a></li>
+                                <li>
+                                    <a class="has-arrow" href="javascript:void()">NFC</a>
+                                    <ul aria-expanded="false">
+                                        <li><a href="{{route('nfc-field.index')}}">NFC Field</a></li>
+                                        <li><a href="{{route('design_card.index')}}">Design Card</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
                         <li>
