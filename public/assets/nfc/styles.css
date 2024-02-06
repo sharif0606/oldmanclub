@@ -1,0 +1,172 @@
+body{
+    padding: 0px;
+    margin: 0px;
+}
+.card-body{
+    border-radius: 15px;
+}
+.header_section{
+    background: rgb(74, 74, 74);
+    color: rgb(255, 255, 255);
+    min-height: 5rem;
+    position: relative;
+    transition-duration: 300ms;
+}
+.header_text{
+    background: rgb(74, 74, 74);
+    bottom: 0px;
+    height: 1rem;
+    position: absolute;
+    width: 100%;
+    position: absolute;
+}
+.card_owner{
+    font-weight: bold;
+    color: #9c9a9a;
+}
+.list-group li{
+    border: none;
+}
+.list-group li a{
+    border: none;
+    text-decoration: none;
+    color: rgb(113, 116, 119);
+}
+
+/* classic */
+.card {
+    border-radius: 10px; /* Adjust the value as needed */
+    overflow: hidden; /* Ensure content stays within the rounded corners */
+}
+
+.classic_header_image{
+    position: relative;
+}
+.classic_svg{
+    bottom: 460px;
+    /* left: 0px; */
+    /* right: 0px; */
+    position: absolute;
+    width: calc(100% + -32px);
+}
+.classic_image{
+    bottom: 0px;
+    left: 80%;
+    position: absolute;
+    right: 0px;
+    top: 30%;
+    display: block;
+}
+/* Hide the image on mobile devices */
+@media (max-width: 576px) {
+    .image {
+        display: none;
+    }
+}
+
+/* Tablet styles */
+@media (min-width: 577px) and (max-width: 768px) {
+    .svg {
+        width: calc(100% + -16px);
+    }
+}
+
+/* Desktop styles */
+@media (min-width: 769px) {
+    .svg {
+        width: calc(100% + -32px);
+    }
+}
+.middle{
+    border-left: 2px dashed  black;
+}
+
+/* modern  */
+
+.modern_card_image{
+    height: var(--chakra-sizes-full);
+    max-height: 3rem;
+    max-width: var(--chakra-sizes-full);
+    object-fit: contain;
+    object-position: left center;
+    width: var(--chakra-sizes-full);
+}
+.CardAvatar{
+    float: right;
+    margin-right: 2rem;
+    /* aspect-ratio: 1 / 1;
+    border-radius: var(--chakra-radii-full);
+    display: inline;
+    float: right;
+    margin-right: -3rem;
+    mask-image: radial-gradient(white, black);
+    max-width: 55%;
+    object-fit: cover;
+    overflow: hidden;
+    shape-margin: 0.5rem;
+    shape-outside: content-box; */
+}
+.CardAvatar img{
+    border-radius: 50%;
+    width: 100%;
+}
+.modern_header{
+    /* background-color: #414141; */
+    margin-bottom: 1.5rem;
+    min-height: 6rem;
+    /* padding: 2rem 2rem 0px; */
+    padding: 50px;
+    position: relative;
+    color: #ffffff;
+    background: linear-gradient(-190deg, rgb(19, 18, 18) 80%, #fff 0%);
+}
+.header_body{
+    background-color: hsl(0, 6%, 90%); 
+}
+.modern_card{
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;/* Adjust the radius as needed */
+    overflow: hidden;
+}
+
+
+/* sleek */
+
+.header_sleek{
+ background-color: #e7e9e6;
+ border: none;
+}
+.sleek_header_image{
+    background: rgb(74, 74, 74);
+    clip-path: circle(100% at 50% 0%);
+    padding-top: 100%;
+    position: relative;
+}
+.css-79elbk{
+    height: var(--chakra-sizes-full);
+    position: absolute;
+    top: 0;
+    right: -60px;
+    /* width: var(--chakra-sizes-full); */
+}
+
+.css-1fbwa35 {
+    margin-top: -6rem;
+    object-fit: cover;
+    width: var(--chakra-sizes-full);
+}
+.sleek_card{
+    /* background: var(--chakra-colors-bg-surface); */
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px, rgba(0, 0, 0, 0.06) 0px 1px 2px;
+    margin: 0.75rem auto;
+    min-height: 4rem;
+    overflow: hidden;
+    padding: 0.5rem;
+    position: relative;
+    text-align: center;
+    width: 50%;
+}
+.background{
+    background-color: #e7e9e6;
+}

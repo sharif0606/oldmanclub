@@ -66,6 +66,7 @@ use App\Http\Controllers\User\EmailSendController;
 // landing page
 use App\Http\Controllers\Common\frontendController as frontend;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\PusherController;
 
 //NFC Field
 use App\Http\Controllers\Backend\Nfc\NfcFieldController as nfc_field;
@@ -212,3 +213,7 @@ Route::get('printservice', [frontend::class, 'printservice'])->name('printservic
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+/*==Chat controller == */
+Route::get('/chat', 'App\Http\Controllers\PusherController@index');
+Route::post('/broadcast', 'App\Http\Controllers\PusherController@broadcast');
+Route::post('/receive', 'App\Http\Controllers\PusherController@receive');
