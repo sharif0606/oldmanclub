@@ -8,5 +8,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class NfcField extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
+    protected $fillable = [
+        'name',
+        'icon',
+        'status'
+    ];
 }
