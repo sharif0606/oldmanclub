@@ -32,6 +32,30 @@
                     </select>
                 </div>
                 <div class="col-12">
+                    <h6 class="border-bottom">NFC Field</h6>
+                    @forelse ($nfc_fields as $value)
+                        <div class="mb-1">
+                            <label for="" class="form-label">{{$value->name}}</label>
+                            <input type="text" class="form-control mb-1" id="" name="nfc_field_id[]"
+                                placeholder="{{$value->name}}" required>
+
+                            <select class="form-control" id="" name="card_type" required>
+                                <option value="">No Label</option>
+                                <option value="1">Home</option>
+                                <option value="2">Personal</option>
+                                <option value="3">Work</option>
+                                <option value="3">Mobile</option>
+                                <option value="3">Main</option>
+                                <option value="3">Fax</option>
+                                <option value="3">Direct</option>
+                                <option value="3">Office</option>
+                            </select>
+                        </div>
+                    @empty
+                    @endforelse
+
+                </div>
+                <div class="col-12">
                     <button type="submit" class="btn btn-primary">Add New NFC Card</button>
                 </div>
             </form>

@@ -6,6 +6,7 @@ use App\Models\Backend\NfcCard;
 use App\Models\Backend\NfcField;
 use App\Models\Backend\NfcDesign;
 use App\Models\Backend\NfcInformation;
+use App\Models\Backend\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -27,7 +28,8 @@ class NfcCardController extends Controller
      */
     public function create()
     {
-        return view('user.nfc-card.create');
+        $nfc_fields = NfcField::all();
+        return view('user.nfc-card.create', compact('nfc_fields'));
     }
 
     /**
@@ -55,6 +57,14 @@ class NfcCardController extends Controller
                 $nfc_design->design_card_id = $request->design_card_id;
                 $nfc_design->created_by = currentUserId();
                 $nfc_design->save();
+
+                /*Nfc Field Data Insert */
+                $nfcFieldIds = $request->input('nfc_field_id');
+
+                $nfcCard = NfcCard::findOrFail($nfc->id);
+                $nfcFields = NfcField::findOrFail($nfcFieldIds);
+                print_r($nfcFields);die;
+                $nfcCard->nfcFields()->attach($nfcFields);
 
                 // Commit the transaction if all operations are successful
                 DB::commit();

@@ -1,6 +1,9 @@
 <header>
     <div class="classic_header_image">
+        @if($nfc_card->client?->image)
+        @else
         <img src="{{ asset('public/assets/nfc/images/123.png') }}" class="img-fluid" alt="" width="" />
+        @endif
     </div>
     <div class="classic_svg">
         <svg preserveAspectRatio="xMinYMax meet" viewBox="0 0 246 57" xmlns="http://www.w3.org/2000/svg" class="css-fxun4i">
@@ -15,7 +18,7 @@
                 fill="#4A4A4A" fill-rule="evenodd"></path>
         </svg>
         <div class="classic_image d-none d-sm-block">
-            <img src="{{ asset('public/assets/nfc/images/header_image.png') }}" alt="abc" width="100px"
+            <img src="{{ asset($nfc_card->card_design?->logo) }}" alt="abc" width="100px"
                 srcset="" />
         </div>
     </div>
@@ -24,32 +27,25 @@
     <div class="container-fluid mt-5">
         <div class="row">
             <div class="col-sm-12">
-                <span class="fs-3 fw-bold"> Dr. Md. Kaiser Uddin FCP </span><br />
-                <span class="fs-3 fw-bold">(Shuvo)</span>FCPs
+                <span class="fs-3 fw-bold"> {{$nfc_card->nfc_info?->prefix}} {{$nfc_card->client?->fname}} {{$nfc_card->client?->middle_name}} {{$nfc_card->client?->last_name}} {{$nfc_card->nfc_info?->suffix}}</span><br />
+                <span class="fs-3 fw-bold">({{$nfc_card->nfc_info?->maiden_name}})</span>&nbsp;{{$nfc_card->nfc_info?->accreditations}}
             </div>
         </div>
         <div class="row">
-            <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy text
-                ever since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book. It has survived not
-                only five centuries, but also the leap into electronic typesetting,
-                remaining essentially unchanged.
-            </p>
+            <p>{{$nfc_card->nfc_info?->title}}</p>
         </div>
         <div class="row">
             <div>
-                <span class="fs-5 fw-bold">Software Development</span><br />
-                <span>Muktodhara Technology Limited</span>
+                <span class="fs-5 fw-bold">{{$nfc_card->nfc_info?->department}}</span><br />
+                <span>{{$nfc_card->nfc_info?->company}}</span>
             </div>
         </div>
     </div>
 </section>
-<section>
+<section style="margin-left:20px;">
     <div class="container-fluid">
         <div class="row">
-            <p>Our Concern</p>
+            <p>{{$nfc_card->nfc_info?->headline}}</p>
         </div>
         <div class="row">
             <div class="d-flex">
@@ -60,9 +56,9 @@
                         clip-rule="evenodd" />
                 </svg>
                 <span>Goes by
-                    <span class="card_owner mx-1">Kaiser</span>
+                    <span class="card_owner mx-1">{{$nfc_card->nfc_info?->preferred_name}}</span>
                 </span>
-                <span>(Sam)</span>
+                <span>({{$nfc_card->nfc_info?->pronoun}})</span>
             </div>
         </div>
         <div class="row">
@@ -71,13 +67,13 @@
                     <a href="#" class="mx-1">
                         <img src="assets/images/email.png" alt="" srcset="" width="25px">
                     </a>
-                    <a href="#">kaiser@gmail.com</a>
+                    <a href="#">{{$nfc_card->client?->email}}</a>
                 </li>
                 <li class="list-group-item">
                     <a href="#" class="mx-1">
                         <img src="assets/images/phone-call.png" alt="" srcset="" width="25px">
                     </a>
-                    <a href="#">018581111111</a>
+                    <a href="#">{{$nfc_card->client?->contact_no}}</a>
                 </li>
                 <li class="list-group-item">
                     <a href="#" class="mx-1">

@@ -9,7 +9,15 @@
     <div class="row">
         <div class="col-6 offset-3">
             <div class="card">
-                @include('user.nfc-template.sleek-template')
+                @if ($nfc_card->card_design?->design_card_id == 1)
+                    @include('user.nfc-template.classic-template')
+                @elseif($nfc_card->card_design?->design_card_id == 2)
+                    @include('user.nfc-template.flat-template')
+                @elseif($nfc_card->card_design?->design_card_id == 3)
+                    @include('user.nfc-template.modern-template')
+                @elseif($nfc_card->card_design?->design_card_id == 4)
+                    @include('user.nfc-template.sleek-template')
+                @endif
             </div>
         </div>
     </div>

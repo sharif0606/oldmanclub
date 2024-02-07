@@ -43,11 +43,11 @@ body{
     position: relative;
 }
 .classic_svg{
-    bottom: 460px;
+    bottom: 575px;
     /* left: 0px; */
     /* right: 0px; */
     position: absolute;
-    width: calc(100% + -32px);
+    width: calc(100% + 0px);
 }
 .classic_image{
     bottom: 0px;
@@ -78,7 +78,8 @@ body{
     }
 }
 .middle{
-    border-left: 2px dashed  black;
+    border-left: 1px dashed  black;
+    margin-left: 20px;
 }
 
 /* modern  */
