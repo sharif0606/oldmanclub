@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('nfc_cards', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('client_id')->constrained('clients');
+            $table->string('card_name')->nullable();
+            $table->tinyInteger('card_type')->default(1)->comment('1=> Work, 2=> Personal');
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

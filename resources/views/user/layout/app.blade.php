@@ -17,6 +17,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     <link href="{{ asset('public/css/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('public/assets/nfc/styles.css') }}" />
     @stack('styles')
 </head>
 
@@ -145,17 +146,9 @@
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                                class="icon icon-app-store"></i><span class="nav-text">Apps</span></a>
+                                class="icon icon-app-store"></i><span class="nav-text">NFC</span></a>
                         <ul aria-expanded="false" class="mm-collapse">
-                            <li><a href="./app-profile.html">Profile</a></li>
-                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Email</a>
-                                <ul aria-expanded="false" class="mm-collapse">
-                                    <li><a href="./email-compose.html">Compose</a></li>
-                                    <li><a href="./email-inbox.html">Inbox</a></li>
-                                    <li><a href="./email-read.html">Read</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./app-calender.html">Calendar</a></li>
+                            <li><a href="{{ route('nfc_card.index') }}">NFC List</a></li>
                         </ul>
                     </li>
 

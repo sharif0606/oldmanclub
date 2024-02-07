@@ -83,42 +83,42 @@ use App\Http\Controllers\Backend\Nfc\NfcCardController as nfc_card;
 |
 */
 
-Route::get('/register', [auth::class,'signUpForm'])->name('register');
-Route::post('/register', [auth::class,'signUpStore'])->name('register.store');
-Route::get('/login', [auth::class,'signInForm'])->name('login');
-Route::post('/login', [auth::class,'signInCheck'])->name('login.check');
-Route::get('/logout', [auth::class,'singOut'])->name('logOut');
+Route::get('/register', [auth::class, 'signUpForm'])->name('register');
+Route::post('/register', [auth::class, 'signUpStore'])->name('register.store');
+Route::get('/login', [auth::class, 'signInForm'])->name('login');
+Route::post('/login', [auth::class, 'signInCheck'])->name('login.check');
+Route::get('/logout', [auth::class, 'singOut'])->name('logOut');
 
-Route::middleware(['checkauth'])->prefix('admin')->group(function(){
-    Route::get('dashboard', [dashboard::class,'index'])->name('dashboard');
+Route::middleware(['checkauth'])->prefix('admin')->group(function () {
+    Route::get('dashboard', [dashboard::class, 'index'])->name('dashboard');
     Route::get('admin/chat', [ChatController::class, 'adminChat'])->name('admin_chat');
     Route::post('admin-chat', [ChatController::class, 'adminSendMessage'])->name('adminchat.store');
 });
 //middleware(['checkrole'])->
-Route::prefix('admin')->group(function(){
+Route::prefix('admin')->group(function () {
     Route::resource('user', user::class);
     Route::resource('role', role::class);
     Route::resource('client', client::class);
-    Route::get('permission/{role}', [permission::class,'index'])->name('permission.list');
-    Route::post('permission/{role}', [permission::class,'save'])->name('permission.save');
+    Route::get('permission/{role}', [permission::class, 'index'])->name('permission.list');
+    Route::post('permission/{role}', [permission::class, 'save'])->name('permission.save');
     Route::resource('sms', sms::class);
     Route::resource('mailbox', mailbox::class);
-    Route::get('shipping/list',[ShippingController::class, 'shipping_list'])->name('shipping_list');
-    Route::get('shipping-edit/{id}',[ShippingController::class, 'shipping_edit'])->name('shipping_edit');
-    Route::post('shippingUpdate/{id}',[ShippingController::class, 'shipping_update'])->name('shipping_update');
+    Route::get('shipping/list', [ShippingController::class, 'shipping_list'])->name('shipping_list');
+    Route::get('shipping-edit/{id}', [ShippingController::class, 'shipping_edit'])->name('shipping_edit');
+    Route::post('shippingUpdate/{id}', [ShippingController::class, 'shipping_update'])->name('shipping_update');
     Route::resource('shipstatus', shipstatus::class);
     Route::resource('shiptrack', shiptrack::class);
-// Nfc
+    // Nfc
     Route::resource('nfc_field', nfc_field::class);
     Route::resource('design_card', design_card::class);
     Route::resource('nfc_card', nfc_card::class);
-    
 
-    Route::get('comment_list',[CommentController::class, 'comment_list'])->name('comment_list');
-    Route::get('comment_edit/{id}',[CommentController::class, 'comment_edit'])->name('comment_edit');
-    Route::post('comment_update/{id}',[CommentController::class, 'comment_update'])->name('comment_update');
-    
-//website  
+
+    Route::get('comment_list', [CommentController::class, 'comment_list'])->name('comment_list');
+    Route::get('comment_edit/{id}', [CommentController::class, 'comment_edit'])->name('comment_edit');
+    Route::post('comment_update/{id}', [CommentController::class, 'comment_update'])->name('comment_update');
+
+    //website  
     Route::resource('setting', setting::class);
     Route::resource('nfc-field', nfc_field::class);
     Route::resource('slider', slider::class);
@@ -126,66 +126,65 @@ Route::prefix('admin')->group(function(){
     Route::resource('homepage', homepage::class);
     Route::resource('cus_feedback', cus_feedback::class);
     Route::resource('globalnetwork', globalnetwork::class);
-    
-//NFC card section
+
+    //NFC card section
     Route::resource('nfccard', nfccard::class);
     Route::resource('nfcpricesection', nfcpricesection::class);
     Route::resource('nfccardprice', nfccardprice::class);
     Route::resource('subscribesection', subscribesection::class);
-//shipping service
+    //shipping service
     Route::resource('shippingheader', shippingheader::class);
     Route::resource('shippingservice', shippingservice::class);
     Route::resource('shippingchoice', shippingchoice::class);
-//LLc Service
+    //LLc Service
     Route::resource('llchero', llchero::class);
     Route::resource('llcservice', llcservice::class);
     Route::resource('llcpricing', llcpricing::class);
     Route::resource('llccard', llccard::class);
-//Phone Service
+    //Phone Service
     Route::resource('phonehero', phonehero::class);
     Route::resource('phoneservice', phoneservice::class);
     Route::resource('phonemaps', phonemaps::class);
     Route::resource('phonefeedback', phonefeedback::class);
-//Smart Mail Hero
+    //Smart Mail Hero
     Route::resource('smartmailhero', smartmailhero::class);
     Route::resource('smartwork', smartwork::class);
     Route::resource('smartsms', smartsms::class);
     Route::resource('smartphonebook', smartphonebook::class);
-//printing service 
+    //printing service 
     Route::resource('printhero', printhero::class);
     Route::resource('printvideo', printvideo::class);
     Route::resource('printcard', printcard::class);
     Route::resource('printcus_feedback', printcus_feedback::class);
-
 });
 
 
 // Client Controller
 
-Route::get('client/register',[clientauth::class,'signUpForm'])->name('clientregister');
-Route::post('client/register',[clientauth::class,'signUpStore'])->name('clientregister.store');
+Route::get('client/register', [clientauth::class, 'signUpForm'])->name('clientregister');
+Route::post('client/register', [clientauth::class, 'signUpStore'])->name('clientregister.store');
 
 Route::post('/register/step1', [clientauth::class, 'registerStep1'])->name('register.step1');
 Route::post('/register/step2', [clientauth::class, 'registerStep2'])->name('register.step2');
 Route::post('/register/step3', [clientauth::class, 'registerStep3'])->name('register.step3');
 
-Route::get('client/login', [clientauth::class,'signInForm'])->name('clientlogin');
-Route::post('client/login', [clientauth::class,'signInCheck'])->name('clientlogin.check');
-Route::get('client/logout', [clientauth::class,'singOut'])->name('clientlogOut');
+Route::get('client/login', [clientauth::class, 'signInForm'])->name('clientlogin');
+Route::post('client/login', [clientauth::class, 'signInCheck'])->name('clientlogin.check');
+Route::get('client/logout', [clientauth::class, 'singOut'])->name('clientlogOut');
 
-Route::middleware(['checkclient'])->prefix('user')->group(function(){
-    Route::get('profile', [clientprofile::class,'index'])->name('clientdashboard');
+Route::middleware(['checkclient'])->prefix('user')->group(function () {
+    Route::get('profile', [clientprofile::class, 'index'])->name('clientdashboard');
     Route::resource('phonebook', phonebook::class);
     Route::resource('phonegroup', phonegroup::class);
     Route::resource('shipping', shipping::class);
     Route::get('shipping_comments/{shippingId}', [shipping::class, 'showShippingComments'])->name('shippingcomment');
     Route::resource('shipcomment', shipcomment::class);
 
-    Route::get('inbox',[EmailSendController::class, 'inbox'])->name('inbox');
-    Route::get('sentbox',[EmailSendController::class, 'sentbox'])->name('sentbox');
-    Route::get('sent_email',[EmailSendController::class, 'sent_email'])->name('sent_email_create');
-    Route::post('store_email',[EmailSendController::class, 'store_email'])->name('store_email');
-    Route::get('sent_email_show/{id}',[EmailSendController::class, 'sent_email_show'])->name('sent_email_show');
+    Route::get('inbox', [EmailSendController::class, 'inbox'])->name('inbox');
+    Route::get('sentbox', [EmailSendController::class, 'sentbox'])->name('sentbox');
+    Route::get('sent_email', [EmailSendController::class, 'sent_email'])->name('sent_email_create');
+    Route::post('store_email', [EmailSendController::class, 'store_email'])->name('store_email');
+    Route::get('sent_email_show/{id}', [EmailSendController::class, 'sent_email_show'])->name('sent_email_show');
 
     Route::post('/profile/save', [clientprofile::class, 'save_profile'])->name('user_save_profile');
     Route::post('/profile/savepass', [clientprofile::class, 'change_password'])->name('change_password');
@@ -196,7 +195,7 @@ Route::middleware(['checkclient'])->prefix('user')->group(function(){
     Route::resource('phonebook', phonebook::class);
 
     Route::get('/download-phonebook', [phonebook::class, 'downloadPhonebook'])->name('phonebook_download');
-
+    Route::resource('nfc_card', nfc_card::class);
 });
 Route::post('/send-message', [ChatController::class, 'sendMessage']);
 
