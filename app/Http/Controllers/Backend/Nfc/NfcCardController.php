@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend\Nfc;
 
-use App\Models\NfcDesign;
+use App\Models\NfcCard;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class NfcDesignController extends Controller
+class NfcCardController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view('user.nfc.index');
     }
 
     /**
@@ -34,7 +35,7 @@ class NfcDesignController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(NfcDesign $nfcDesign)
+    public function show(NfcCard $nfcCard)
     {
         //
     }
@@ -42,7 +43,7 @@ class NfcDesignController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(NfcDesign $nfcDesign)
+    public function edit(NfcCard $nfcCard)
     {
         //
     }
@@ -50,7 +51,7 @@ class NfcDesignController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, NfcDesign $nfcDesign)
+    public function update(Request $request, NfcCard $nfcCard)
     {
         //
     }
@@ -58,7 +59,7 @@ class NfcDesignController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(NfcDesign $nfcDesign)
+    public function destroy(NfcCard $nfcCard)
     {
         //
     }

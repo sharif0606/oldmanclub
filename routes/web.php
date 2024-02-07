@@ -71,7 +71,7 @@ use App\Http\Controllers\PusherController;
 //NFC Field
 use App\Http\Controllers\Backend\Nfc\NfcFieldController as nfc_field;
 use App\Http\Controllers\Backend\Nfc\DesignCardController as design_card;
-
+use App\Http\Controllers\Backend\Nfc\NfcCardController as nfc_card;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -111,6 +111,8 @@ Route::prefix('admin')->group(function(){
 // Nfc
     Route::resource('nfc_field', nfc_field::class);
     Route::resource('design_card', design_card::class);
+    Route::resource('nfc_card', nfc_card::class);
+    
 
     Route::get('comment_list',[CommentController::class, 'comment_list'])->name('comment_list');
     Route::get('comment_edit/{id}',[CommentController::class, 'comment_edit'])->name('comment_edit');

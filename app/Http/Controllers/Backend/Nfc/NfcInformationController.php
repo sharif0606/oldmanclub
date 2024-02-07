@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend\Nfc;
 
+use App\Http\Controllers\Controller;
 use App\Models\NfcInformation;
 use Illuminate\Http\Request;
 
