@@ -22,9 +22,9 @@ class AddNewRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'userName_en'=>'required|max:255',
+            'userName'=>'required|max:255',
             'roleId'=>'required|max:2',
-            'contactNumber_en'=>'required|unique:users,contact_no_en',
+            'contactNumber'=>'required|unique:users,contact_no',
             'EmailAddress'=>'required|unique:users,email',
             'password'=>'required'
         ];

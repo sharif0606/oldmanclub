@@ -30,23 +30,13 @@
                             </div>
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label for="userName_en">Name (English) <i class="text-danger">*</i></label>
-                                    <input type="text" id="userName_en" class="form-control" value="{{ old('userName_en')}}" name="userName_en">
-                                    @if($errors->has('userName_en'))
-                                        <span class="text-danger"> {{ $errors->first('userName_en') }}</span>
+                                    <label for="userName">Name<i class="text-danger">*</i></label>
+                                    <input type="text" id="userName" class="form-control" value="{{ old('userName')}}" name="userName">
+                                    @if($errors->has('userName'))
+                                        <span class="text-danger"> {{ $errors->first('userName') }}</span>
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="userName_bn">Name (Bangla)</label>
-                                    <input type="text" id="userName_bn" class="form-control" value="{{ old('userName_bn')}}" name="userName_bn">
-                                    @if($errors->has('userName_bn'))
-                                        <span class="text-danger"> {{ $errors->first('userName_bn') }}</span>
-                                    @endif
-                                </div>
-                            </div>
-                        
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="EmailAddress">Email <i class="text-danger">*</i></label>
@@ -58,19 +48,10 @@
                             </div>
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label for="contactNumber_en">Contact Number (English) <i class="text-danger">*</i></label>
-                                    <input type="text" id="contactNumber_en" class="form-control" value="{{ old('contactNumber_en')}}" name="contactNumber_en">
-                                    @if($errors->has('contactNumber_en'))
-                                        <span class="text-danger"> {{ $errors->first('contactNumber_en') }}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="contactNumber_bn">Contact Number (Bangla)</label>
-                                    <input type="text" id="contactNumber_bn" class="form-control" value="{{ old('contactNumber_bn')}}" name="contactNumber_bn">
-                                    @if($errors->has('contactNumber_bn'))
-                                        <span class="text-danger"> {{ $errors->first('contactNumber_bn') }}</span>
+                                    <label for="contactNumber">Contact Number<i class="text-danger">*</i></label>
+                                    <input type="text" id="contactNumber" class="form-control" value="{{ old('contactNumber')}}" name="contactNumber">
+                                    @if($errors->has('contactNumber'))
+                                        <span class="text-danger"> {{ $errors->first('contactNumber') }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -78,8 +59,8 @@
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select id="status" class="form-control" name="status">
-                                        <option value="1" @if(old('status')==1) selected @endif>Active</option>
-                                        <option value="0" @if(old('status')==0) selected @endif>Inactive</option>
+                                        <option value="1" @if(old('status',1)==1) selected @endif>Active</option>
+                                        <option value="0" @if(old('status',1)==0) selected @endif>Inactive</option>
                                     </select>
                                     @if($errors->has('status'))
                                         <span class="text-danger"> {{ $errors->first('status') }}</span>
@@ -119,7 +100,6 @@
                         <div class="row">
                             <div class="col-12 d-flex justify-content-end">
                                 <button type="submit" class="btn btn-primary me-1 mb-1">Save</button>
-                                
                             </div>
                         </div>
                     </form>

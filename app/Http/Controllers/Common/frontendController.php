@@ -48,7 +48,7 @@ class frontendController extends Controller
         $heading = \App\Models\Backend\Website\ShippingService\Header_section::first();
         $service = \App\Models\Backend\Website\ShippingService\Service_section::get();
         $choice = \App\Models\Backend\Website\ShippingService\ChoiceSection::first();
-        $featureList = is_array($choice->feature_list)? $choice->feature_list:explode(',',$choice->feature_list);
+        $featureList = is_array($choice?->feature_list)? $choice->feature_list:explode(',',$choice?->feature_list);
         return view('frontend.shippingservice',compact('setting','heading','service','choice','featureList'));
     }
     public function llcservice(){

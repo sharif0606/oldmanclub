@@ -7,15 +7,15 @@
       <div class="row">
         <div class="col-md-12 print-hero-section">
           <div class="col-md-6 print-hero-content">
-            <h1 class="fw-bold py-2">{{$printinghero->text_large}}</h1>
-            <p class="fw-normal pt-1 pb-3">{{$printinghero->text_small}}
+            <h1 class="fw-bold py-2">{{$printinghero?->text_large}}</h1>
+            <p class="fw-normal pt-1 pb-3">{{$printinghero?->text_small}}
               
             </p>
             <a href="#" class="print-btn print-contact-btn me-3">Contact Us</a>
             <a href="#" class="print-btn print-learn-more-btn">Learn More</a>
           </div>
           <div class="col-md-6 print-hero-image">
-            <img src="{{asset('public/uploads/printservice/'.$printinghero->hero_image)}}" alt="Hero Image" />
+            <img src="{{asset('public/uploads/printservice/'.$printinghero?->hero_image)}}" alt="Hero Image" />
           </div>
         </div>
       </div>
@@ -34,8 +34,8 @@
         <div class="row py-3">
           <div class="col-md-7 col-sm-12 px-2">
             <!-- Full-width on small devices -->
-            <h2 class="fw-bold py-2">{{$printvideo->text_large}}</h2>
-            <p class="py-2">{{$printvideo->text_small}}.
+            <h2 class="fw-bold py-2">{{$printvideo?->text_large}}</h2>
+            <p class="py-2">{{$printvideo?->text_small}}.
             </p>
           </div>
           <div class="col-md-5 col-sm-12">
@@ -45,7 +45,7 @@
             >
               <iframe
                 class="embed-responsive-item"
-                src="https://www.youtube.com/embed/{{$printvideo->video_link}}"
+                src="https://www.youtube.com/embed/{{$printvideo?->video_link}}"
                 frameborder="0"
                 allowfullscreen
               ></iframe>
@@ -62,11 +62,11 @@
           @foreach($printfeature as $feature)
           <div class="col-md-4 feature-item py-2">
             <img
-              src="{{asset('public/uploads/printservice/'.$feature->image)}}"
+              src="{{asset('public/uploads/printservice/'.$feature?->image)}}"
               alt="Feature-Image-1"
               width="90px"
             />
-            <p class="print-feature-text pt-2">{{$feature->title}}</p>
+            <p class="print-feature-text pt-2">{{$feature?->title}}</p>
           </div>
           @endforeach
         </div>
@@ -179,7 +179,7 @@
                 <div class="print-custom-card testimonial-item col-md-4 me-1">
                   <div class="print-card-body">
                     <div class="customer-review">
-                      <p>"{{$feedback->customer_message}}"
+                      <p>"{{$feedback?->customer_message}}"
                       </p>
                     </div>
                     <hr />
@@ -228,6 +228,5 @@
         </div>
       </div>
     </div>
-<!-- printing service subscribe start -->
-   
+<!-- printing service subscribe start --> 
 @endsection

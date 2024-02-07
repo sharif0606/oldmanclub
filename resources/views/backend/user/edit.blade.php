@@ -31,23 +31,14 @@
                             </div>
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label for="userName_en">Name (English) <i class="text-danger">*</i></label>
-                                    <input type="text" id="userName_en" class="form-control" value="{{ old('userName_en',$user->name_en)}}" name="userName_en">
-                                    @if($errors->has('userName_en'))
-                                        <span class="text-danger"> {{ $errors->first('userName_en') }}</span>
+                                    <label for="userName">Name<i class="text-danger">*</i></label>
+                                    <input type="text" id="userName" class="form-control" value="{{ old('userName',$user->name)}}" name="userName">
+                                    @if($errors->has('userName'))
+                                        <span class="text-danger"> {{ $errors->first('userName') }}</span>
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="userName_bn">Name (Bangla)</label>
-                                    <input type="text" id="userName_bn" class="form-control" value="{{ old('userName_bn',$user->name_bn)}}" name="userName_bn">
-                                    @if($errors->has('userName_bn'))
-                                        <span class="text-danger"> {{ $errors->first('userName_bn') }}</span>
-                                    @endif
-                                </div>
-                            </div>
-                        
+                            
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="EmailAddress">Email <i class="text-danger">*</i></label>
@@ -59,19 +50,10 @@
                             </div>
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label for="contactNumber_en">Contact Number (English) <i class="text-danger">*</i></label>
-                                    <input type="text" id="contactNumber_en" class="form-control" value="{{ old('contactNumber_en',$user->contact_no_en)}}" name="contactNumber_en">
-                                    @if($errors->has('contactNumber_en'))
-                                        <span class="text-danger"> {{ $errors->first('contactNumber_en') }}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="contactNumber_bn">Contact Number (Bangla)</label>
-                                    <input type="text" id="contactNumber_bn" class="form-control" value="{{ old('contactNumber_bn',$user->contact_no_bn)}}" name="contactNumber_bn">
-                                    @if($errors->has('contactNumber_bn'))
-                                        <span class="text-danger"> {{ $errors->first('contactNumber_bn') }}</span>
+                                    <label for="contactNumber_en">Contact Number<i class="text-danger">*</i></label>
+                                    <input type="text" id="contactNumber" class="form-control" value="{{ old('contactNumber',$user->contact_no)}}" name="contactNumber">
+                                    @if($errors->has('contactNumber'))
+                                        <span class="text-danger"> {{ $errors->first('contactNumber') }}</span>
                                     @endif
                                 </div>
                             </div>

@@ -113,7 +113,7 @@
                  <div class="col-md-7 col-sm-12 col-xs-12">
                     <div class="video-container embed-responsive embed-responsive-16by9">
                         <iframe class="embed-responsive-item"
-                        src="https://www.youtube.com/embed/{{$choice->video_link}}"
+                        src="https://www.youtube.com/embed/{{$choice?->video_link}}"
                                 frameborder="0"
                                 allowfullscreen
                         ></iframe>
@@ -146,5 +146,4 @@
             </div>
         </div>
     </div>
-   
 @endsection

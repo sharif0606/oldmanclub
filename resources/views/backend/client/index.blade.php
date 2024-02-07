@@ -28,11 +28,11 @@
                         @forelse($client as $p)
                         <tr>
                             <th scope="row">{{ ++$loop->index }}</th>
-                            <td>{{$p->first_name_en}}
-                                {{$p->middle_name_en}}{{$p->last_name_en}}
+                            <td>{{$p->fname}}
+                                {{$p->middle_name}}{{$p->last_name}}
                             </td>
                             <td>{{$p->email}}</td>
-                            <td>{{$p->contact_en}}</td>
+                            <td>{{$p->contact_no}}</td>
                             <td>{{$p->date_of_birth}}</td>
                             <td>{{$p->address_line_1}}</td>
                             <td><img width="50px" src="{{asset('public/uploads/client/'.$p->image)}}" alt=""></td>
