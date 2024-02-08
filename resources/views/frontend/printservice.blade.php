@@ -1,7 +1,13 @@
 @extends('frontend.layouts.app')
 @section('title','Printing Service')
 @section('content')
+@push('styles')
 
+@endpush
+<style>
+  
+
+</style>
 <!-- printing service hero start -->
     <div class="container">
       <div class="row">
@@ -130,6 +136,35 @@
         </div>
       </div>
     </section>
+    <section class="print-product-section py-5">
+      <div class="container-fluid">
+        <div class="row py-3">
+          <h3 class="product-heading text-capitalize fw-bold">
+            Our Best Services
+          </h3>
+          <div class="print-product-cards py-3">
+            @foreach($printservices as $value)
+            <div class="print-product-card m-3 col-lg-3 col-md-6 col-sm-12">
+                @foreach($value->printing_service_image as $v)
+                    <div class="product-image-container">
+                        <img width="100%" src="{{ asset('public/uploads/printimages/'.$v->image) }}" alt="">
+                        <div class="hover-buttons d-flex">
+                            <button class="cart-button"><i class="fa-solid fa-cart-plus"></i></button>
+                            <button class="wish-button"><i class="fa-regular fa-heart"></i></button>
+                        </div>
+                    </div>
+                @endforeach
+                <h3 class="print-product-name">{{$value->service_name}}</h3>
+                <p class="print-product-price">${{$value->price}}</p>
+                <div class="print-product-review">⭐⭐⭐⭐⭐</div>
+            </div>
+            @endforeach
+          </div>
+
+        </div>
+      </div>
+    </section>
+    
 <!-- printing service product end -->
 <!-- printing service feedback start -->
     <section class="our-customer pt-2 pb-4">

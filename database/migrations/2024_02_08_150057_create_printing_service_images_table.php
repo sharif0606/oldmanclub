@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('printing_service_id')->constrained('printing_services');
             $table->string('image');
-            $table->boolean('is_featured');
+            $table->boolean('is_featured')->nullable();
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();

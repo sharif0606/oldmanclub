@@ -72,6 +72,11 @@ use App\Http\Controllers\PusherController;
 use App\Http\Controllers\Backend\Nfc\NfcFieldController as nfc_field;
 use App\Http\Controllers\Backend\Nfc\DesignCardController as design_card;
 use App\Http\Controllers\Backend\Nfc\NfcCardController as nfc_card;
+
+// printing_service admin panelBackend\Printingservice
+
+use App\Http\Controllers\Backend\Printingservice\PrintingServiceController as print_service;
+use App\Http\Controllers\Backend\Printingservice\PrintingServiceImageController as print_service_image;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -112,7 +117,9 @@ Route::prefix('admin')->group(function () {
     Route::resource('nfc_field', nfc_field::class);
     Route::resource('design_card', design_card::class);
     Route::resource('nfc_card', nfc_card::class);
-
+    // print_service admin panel
+    Route::resource('print_service', print_service::class);
+    Route::resource('print_service_image', print_service_image::class);
 
     Route::get('comment_list', [CommentController::class, 'comment_list'])->name('comment_list');
     Route::get('comment_edit/{id}', [CommentController::class, 'comment_edit'])->name('comment_edit');

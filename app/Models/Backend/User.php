@@ -21,4 +21,7 @@ class User extends Model
     public function design_card(){
         return $this->hasMany(DesignCard::class);
     } 
+    public function print_service(){
+        return $this->hasMany(PrintingService::class);
+    } 
 }
