@@ -81,7 +81,7 @@ class frontendController extends Controller
         $printvideo = \App\Models\Backend\Website\PrintingService\PrintVideoSection::first();
         $printfeature = \App\Models\Backend\Website\PrintingService\PrintCardSection::get();
         $printfeedback = \App\Models\Backend\Website\PrintingService\PrintCustomerFeedback::get();
-        $printservices = \App\Models\Backend\PrintingService::latest()->take(1)->get();
+        $printservices = \App\Models\Backend\PrintingService::latest()->take(4)->get();
         return view('frontend.printservice',compact('setting','printinghero','printvideo','printfeature','printfeedback','printservices'));
     }
 }

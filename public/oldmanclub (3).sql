@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 31, 2024 at 04:48 PM
+-- Generation Time: Feb 09, 2024 at 04:43 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,31 @@ SET time_zone = "+00:00";
 --
 -- Database: `oldmanclub`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart_items`
+--
+
+CREATE TABLE `cart_items` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `printing_service_id` bigint(20) UNSIGNED NOT NULL,
+  `quantity` int(11) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cart_items`
+--
+
+INSERT INTO `cart_items` (`id`, `printing_service_id`, `quantity`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 1, '2024-02-09 09:34:17', '2024-02-09 09:34:17', NULL),
+(2, 1, 1, '2024-02-09 09:34:23', '2024-02-09 09:34:23', NULL),
+(3, 1, 1, '2024-02-09 09:39:56', '2024-02-09 09:39:56', NULL),
+(4, 1, 1, '2024-02-09 09:42:25', '2024-02-09 09:42:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -73,22 +98,18 @@ INSERT INTO `choice_sections` (`id`, `feature_list`, `video_link`, `created_at`,
 
 CREATE TABLE `clients` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `first_name_en` varchar(255) NOT NULL,
-  `first_name_bn` varchar(255) DEFAULT NULL,
-  `middle_name_en` varchar(255) DEFAULT NULL,
-  `middle_name_bn` varchar(255) DEFAULT NULL,
-  `last_name_en` varchar(255) NOT NULL,
-  `last_name_bn` varchar(255) DEFAULT NULL,
-  `date_of_birth` date NOT NULL,
-  `contact_en` varchar(255) NOT NULL,
-  `contact_bn` varchar(255) DEFAULT NULL,
+  `fname` varchar(255) DEFAULT NULL,
+  `middle_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `contact_no` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `address_line_1` varchar(255) DEFAULT NULL,
   `address_line_2` varchar(255) DEFAULT NULL,
-  `country` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
-  `state` varchar(255) NOT NULL,
+  `country_id` int(11) DEFAULT NULL,
+  `city_id` int(11) DEFAULT NULL,
+  `state_id` int(11) DEFAULT NULL,
   `zip_code` varchar(255) DEFAULT NULL,
   `nationality` varchar(255) DEFAULT NULL,
   `id_no` varchar(255) DEFAULT NULL,
@@ -102,18 +123,19 @@ CREATE TABLE `clients` (
   `is_address_verified` int(11) NOT NULL DEFAULT 0 COMMENT '0=>No, 1=>Yes',
   `is_email_verified` int(11) NOT NULL DEFAULT 0 COMMENT '0=>No, 1=>Yes',
   `is_contact_verified` int(11) NOT NULL DEFAULT 0 COMMENT '0=>No, 1=>Yes',
-  `status` int(11) NOT NULL DEFAULT 0 COMMENT '1=>active, 0=>inactive',
+  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1=>active, 0=>inactive',
+  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `clients`
 --
 
-INSERT INTO `clients` (`id`, `first_name_en`, `first_name_bn`, `middle_name_en`, `middle_name_bn`, `last_name_en`, `last_name_bn`, `date_of_birth`, `contact_en`, `contact_bn`, `email`, `password`, `address_line_1`, `address_line_2`, `country`, `city`, `state`, `zip_code`, `nationality`, `id_no`, `id_no_type`, `image`, `cover_photo`, `photo_id`, `is_photo_verified`, `address_proof_photo`, `address_proof_type`, `is_address_verified`, `is_email_verified`, `is_contact_verified`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'jasim', NULL, NULL, NULL, 'uddin', NULL, '2024-01-01', '123', NULL, 'jasim@gmail.com', '$2y$12$zDvdxrmqP08u.UMjhw9hveDydjtgFlhIDTqNiijbl/Y27qhMZ2vAy', 'Hazi Para', 'Hazi Para', 'Bangladesh', 'chattogram', 'chittagong', '4213', 'Bangladeshi', '123456789', '1', '7791705488098.jpg', '2841705488098.png', NULL, 0, NULL, NULL, 0, 0, 0, 1, '2024-01-17 02:44:46', '2024-01-19 06:32:38'),
-(5, 'kaiser', NULL, 'ahmed', NULL, 'ahmed', NULL, '2024-01-05', '147', NULL, 'kaiser@gmail.com', '$2y$12$64WoxpfIchgPd.FQtWGlQOoThdRw5XIsKYkiss00sYfJQj9WbyEwC', 'Hazi Para', 'Hazi Para', 'Bangladesh', 'Wazedia', 'chittagong', '4213', 'Bangladeshi', '987654321', '1', '7391705668341.jpg', NULL, NULL, 0, NULL, NULL, 0, 0, 0, 1, '2024-01-19 06:44:08', '2024-01-19 06:45:41');
+INSERT INTO `clients` (`id`, `fname`, `middle_name`, `last_name`, `dob`, `contact_no`, `email`, `password`, `address_line_1`, `address_line_2`, `country_id`, `city_id`, `state_id`, `zip_code`, `nationality`, `id_no`, `id_no_type`, `image`, `cover_photo`, `photo_id`, `is_photo_verified`, `address_proof_photo`, `address_proof_type`, `is_address_verified`, `is_email_verified`, `is_contact_verified`, `status`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, NULL, NULL, NULL, NULL, '1', 'kaiser@gmail.com', '$2y$12$yZ.WDPnbq.KWtU71LSzMUufVoO1LR.RuM8HOpUEuPchpk8QS/680e', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, 0, 0, 1, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -144,6 +166,24 @@ CREATE TABLE `customer_feedback` (
   `rate` varchar(255) NOT NULL,
   `message` varchar(255) NOT NULL,
   `show_hide` int(11) NOT NULL DEFAULT 1 COMMENT '0=>hide 1=>show ',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `design_cards`
+--
+
+CREATE TABLE `design_cards` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `design_name` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `template_id` tinyint(4) NOT NULL DEFAULT 1 COMMENT '1=>Classic, 2=> Modern, 3=>Flat, 4=>Sleek',
+  `created_by` bigint(20) UNSIGNED NOT NULL,
+  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -428,10 +468,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2011_11_09_144244_create_upazilas_table', 1),
 (5, '2011_11_10_072650_create_thanas_table', 1),
 (6, '2013_11_01_070215_create_roles_table', 1),
-(7, '2014_10_12_000000_create_users_table', 1),
 (8, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (9, '2023_11_12_043129_create_permissions_table', 1),
-(13, '2024_01_02_133453_create_clients_table', 2),
 (15, '2024_01_05_121923_create_settings_table', 3),
 (16, '2024_01_05_145229_create_sliders_table', 4),
 (17, '2024_01_06_032524_create_our_services_table', 5),
@@ -471,7 +509,30 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (65, '2024_01_27_132106_create_shipping_status_types_table', 41),
 (66, '2024_01_27_145710_create_shipping_trackings_table', 42),
 (69, '2024_01_29_083524_create_shipping_comments_table', 43),
-(71, '2024_01_31_110923_create_email_sends_table', 44);
+(71, '2024_01_31_110923_create_email_sends_table', 44),
+(72, '2014_10_12_000000_create_users_table', 45),
+(73, '2024_01_02_133453_create_clients_table', 45),
+(75, '2024_02_05_116648_create_nfc_cards_table', 45),
+(76, '2024_02_06_112507_create_design_cards_table', 45),
+(77, '2024_02_06_122244_create_nfc_designs_table', 45),
+(78, '2024_02_06_123650_create_nfc_information_table', 45),
+(79, '2024_02_06_140343_create_nfc_field_nfc_card_table', 45),
+(80, '2024_02_05_114448_create_nfc_fields_table', 46),
+(81, '2024_02_08_150031_create_printing_services_table', 47),
+(82, '2024_02_08_150057_create_printing_service_images_table', 47),
+(83, '2024_02_09_150646_create_cart_items_table', 48);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nfc_cards`
+--
+
+CREATE TABLE `nfc_cards` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -547,6 +608,91 @@ CREATE TABLE `nfc_card_price_sections` (
 
 INSERT INTO `nfc_card_price_sections` (`id`, `text_large`, `text_small`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'NFC BUSINESS CARD PRICE', 'Choose from our affordable 3packages', '2024-01-09 03:19:16', '2024-01-09 03:32:37', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nfc_designs`
+--
+
+CREATE TABLE `nfc_designs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nfc_card_id` bigint(20) UNSIGNED NOT NULL,
+  `design_card_id` bigint(20) UNSIGNED NOT NULL,
+  `color` varchar(255) DEFAULT NULL,
+  `logo` varchar(255) DEFAULT NULL,
+  `badges` varchar(255) DEFAULT NULL,
+  `created_by` bigint(20) UNSIGNED NOT NULL,
+  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nfc_fields`
+--
+
+CREATE TABLE `nfc_fields` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `icon` varchar(50) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '1=> Show, 2=> Hide',
+  `created_by` bigint(20) UNSIGNED NOT NULL,
+  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `nfc_fields`
+--
+
+INSERT INTO `nfc_fields` (`id`, `name`, `icon`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Classicaaa', 'fa-solid fa-image', 1, 1, 2, '2024-02-06 13:25:16', '2024-02-06 13:26:56', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nfc_field_nfc_card`
+--
+
+CREATE TABLE `nfc_field_nfc_card` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nfc_field_id` bigint(20) UNSIGNED NOT NULL,
+  `nfc_card_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nfc_information`
+--
+
+CREATE TABLE `nfc_information` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nfc_card_id` bigint(20) UNSIGNED NOT NULL,
+  `prefix` varchar(50) DEFAULT NULL,
+  `suffix` varchar(50) DEFAULT NULL,
+  `accreditations` varchar(50) DEFAULT NULL,
+  `preferred_name` varchar(100) DEFAULT NULL,
+  `maiden_name` varchar(100) DEFAULT NULL,
+  `pronoun` varchar(100) DEFAULT NULL,
+  `title` text DEFAULT NULL,
+  `department` varchar(100) DEFAULT NULL,
+  `company` varchar(100) DEFAULT NULL,
+  `headline` text DEFAULT NULL,
+  `created_by` bigint(20) UNSIGNED NOT NULL,
+  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -807,6 +953,59 @@ INSERT INTO `printing_heroes` (`id`, `text_large`, `text_small`, `hero_image`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `printing_services`
+--
+
+CREATE TABLE `printing_services` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `service_name` varchar(255) DEFAULT NULL,
+  `service_details` varchar(255) DEFAULT NULL,
+  `qty` int(11) NOT NULL DEFAULT 1,
+  `price` decimal(10,2) NOT NULL DEFAULT 0.00 COMMENT 'Per Qty Price',
+  `created_by` bigint(20) UNSIGNED NOT NULL,
+  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `printing_services`
+--
+
+INSERT INTO `printing_services` (`id`, `service_name`, `service_details`, `qty`, `price`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'abc', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 1, 100.00, 1, NULL, '2024-02-08 15:09:01', '2024-02-08 15:09:01', NULL),
+(2, 'ABC', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 2, 200.00, 1, NULL, '2024-02-09 13:04:29', '2024-02-09 13:04:29', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `printing_service_images`
+--
+
+CREATE TABLE `printing_service_images` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `printing_service_id` bigint(20) UNSIGNED NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `is_featured` tinyint(1) DEFAULT NULL,
+  `created_by` bigint(20) UNSIGNED NOT NULL,
+  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `printing_service_images`
+--
+
+INSERT INTO `printing_service_images` (`id`, `printing_service_id`, `image`, `is_featured`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, '712.png', NULL, 1, NULL, NULL, NULL, NULL),
+(2, 2, '712.png', NULL, 1, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `print_card_sections`
 --
 
@@ -893,8 +1092,8 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `identity`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin', NULL, NULL),
-(2, 'User', 'user', '2024-01-20 02:29:43', '2024-01-20 02:29:43');
+(1, 'Super Admin', 'superadmin', NULL, '2024-02-06 13:20:21'),
+(2, 'Admin', 'admin', '2024-01-20 02:29:43', '2024-02-06 13:20:36');
 
 -- --------------------------------------------------------
 
@@ -1258,14 +1457,11 @@ CREATE TABLE `upazilas` (
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name_en` varchar(255) NOT NULL,
-  `name_bn` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `contact_no_en` varchar(255) NOT NULL,
-  `contact_no_bn` varchar(255) DEFAULT NULL,
-  `role_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `contact_no` varchar(255) NOT NULL,
+  `role_id` bigint(20) UNSIGNED NOT NULL,
   `password` varchar(255) NOT NULL,
-  `language` varchar(255) NOT NULL DEFAULT 'en',
   `image` varchar(255) DEFAULT NULL,
   `full_access` tinyint(1) NOT NULL DEFAULT 0 COMMENT '1=>yes 0=>no',
   `status` int(11) NOT NULL DEFAULT 1 COMMENT '1=>active 2=>inactive',
@@ -1279,13 +1475,20 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name_en`, `name_bn`, `email`, `contact_no_en`, `contact_no_bn`, `role_id`, `password`, `language`, `image`, `full_access`, `status`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(2, 'Jasim', 'জসিম', 'jasim@gmail.com', '1', '১', 1, '$2y$12$k5dBNGsrSScy.GYfyCcM8.oJOROAZrXmvjy9f2Ybm4N/lIE/xxdj2', 'en', '4361704190632.jpg', 1, 1, NULL, '2024-01-02 03:30:59', '2024-01-02 07:11:08', NULL),
-(3, 'Fuad', NULL, 'fuad@gmail.com', '2', '2', 1, '$2y$12$QnJQj4MjCpSno.nViz6NW.1fq3.HEuIv73KLYWanFsCnC1iSkGnYm', 'en', '9201704201108.jpg', 1, 1, NULL, '2024-01-02 07:11:48', '2024-01-02 07:11:48', NULL);
+INSERT INTO `users` (`id`, `name`, `email`, `contact_no`, `role_id`, `password`, `image`, `full_access`, `status`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Jasim', 'jasim@gmail.com', '1', 1, '$2y$12$CFgVbYUUSku1cObMtC6aYundnEQ1PY9DtKBJxTgwMVAMzzqOhs8Ye', NULL, 1, 1, NULL, NULL, '2024-02-06 13:20:59', NULL),
+(2, 'Raihan', 'raihan@gmail.com', '123', 2, '$2y$12$Z9WQK6MpYvajo/wN3MMTgeacctw7t/.Ebwx.HS..pRM2AayVz92Xq', '7031707225959.jpg', 1, 1, 'HnbksTxFXNx3pKRju9qSDYOMRBG8ae4QyP39HVVGfOQBd7i99HNcRMGW4nVu', '2024-02-06 13:25:59', '2024-02-06 13:26:19', NULL);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `cart_items`
+--
+ALTER TABLE `cart_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cart_items_printing_service_id_index` (`printing_service_id`);
 
 --
 -- Indexes for table `chats`
@@ -1306,6 +1509,7 @@ ALTER TABLE `choice_sections`
 --
 ALTER TABLE `clients`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `clients_contact_no_unique` (`contact_no`),
   ADD UNIQUE KEY `clients_email_unique` (`email`);
 
 --
@@ -1323,6 +1527,12 @@ ALTER TABLE `countries`
 ALTER TABLE `customer_feedback`
   ADD PRIMARY KEY (`id`),
   ADD KEY `customer_feedback_customer_id_index` (`customer_id`);
+
+--
+-- Indexes for table `design_cards`
+--
+ALTER TABLE `design_cards`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `districts`
@@ -1402,6 +1612,12 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `nfc_cards`
+--
+ALTER TABLE `nfc_cards`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `nfc_card_images`
 --
 ALTER TABLE `nfc_card_images`
@@ -1418,6 +1634,35 @@ ALTER TABLE `nfc_card_prices`
 --
 ALTER TABLE `nfc_card_price_sections`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `nfc_designs`
+--
+ALTER TABLE `nfc_designs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `nfc_designs_nfc_card_id_foreign` (`nfc_card_id`),
+  ADD KEY `nfc_designs_design_card_id_foreign` (`design_card_id`);
+
+--
+-- Indexes for table `nfc_fields`
+--
+ALTER TABLE `nfc_fields`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `nfc_field_nfc_card`
+--
+ALTER TABLE `nfc_field_nfc_card`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nfc_field_nfc_card_nfc_field_id_nfc_card_id_unique` (`nfc_field_id`,`nfc_card_id`),
+  ADD KEY `nfc_field_nfc_card_nfc_card_id_foreign` (`nfc_card_id`);
+
+--
+-- Indexes for table `nfc_information`
+--
+ALTER TABLE `nfc_information`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `nfc_information_nfc_card_id_foreign` (`nfc_card_id`);
 
 --
 -- Indexes for table `our_services`
@@ -1484,6 +1729,19 @@ ALTER TABLE `phone_virtual_maps`
 --
 ALTER TABLE `printing_heroes`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `printing_services`
+--
+ALTER TABLE `printing_services`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `printing_service_images`
+--
+ALTER TABLE `printing_service_images`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `printing_service_images_printing_service_id_foreign` (`printing_service_id`);
 
 --
 -- Indexes for table `print_card_sections`
@@ -1614,14 +1872,19 @@ ALTER TABLE `upazilas`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_contact_no_en_unique` (`contact_no_en`),
+  ADD UNIQUE KEY `users_contact_no_unique` (`contact_no`),
   ADD UNIQUE KEY `users_email_unique` (`email`),
-  ADD UNIQUE KEY `users_contact_no_bn_unique` (`contact_no_bn`),
   ADD KEY `users_role_id_index` (`role_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `cart_items`
+--
+ALTER TABLE `cart_items`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `chats`
@@ -1639,7 +1902,7 @@ ALTER TABLE `choice_sections`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -1652,6 +1915,12 @@ ALTER TABLE `countries`
 --
 ALTER TABLE `customer_feedback`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `design_cards`
+--
+ALTER TABLE `design_cards`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `districts`
@@ -1723,7 +1992,13 @@ ALTER TABLE `mail_boxes`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+
+--
+-- AUTO_INCREMENT for table `nfc_cards`
+--
+ALTER TABLE `nfc_cards`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `nfc_card_images`
@@ -1742,6 +2017,30 @@ ALTER TABLE `nfc_card_prices`
 --
 ALTER TABLE `nfc_card_price_sections`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `nfc_designs`
+--
+ALTER TABLE `nfc_designs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `nfc_fields`
+--
+ALTER TABLE `nfc_fields`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `nfc_field_nfc_card`
+--
+ALTER TABLE `nfc_field_nfc_card`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `nfc_information`
+--
+ALTER TABLE `nfc_information`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `our_services`
@@ -1801,6 +2100,18 @@ ALTER TABLE `phone_virtual_maps`
 -- AUTO_INCREMENT for table `printing_heroes`
 --
 ALTER TABLE `printing_heroes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `printing_services`
+--
+ALTER TABLE `printing_services`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `printing_service_images`
+--
+ALTER TABLE `printing_service_images`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -1921,18 +2232,17 @@ ALTER TABLE `upazilas`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `chats`
+-- Constraints for table `cart_items`
 --
-ALTER TABLE `chats`
-  ADD CONSTRAINT `chats_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `chats_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+ALTER TABLE `cart_items`
+  ADD CONSTRAINT `cart_items_printing_service_id_foreign` FOREIGN KEY (`printing_service_id`) REFERENCES `printing_services` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `customer_feedback`
@@ -1941,83 +2251,10 @@ ALTER TABLE `customer_feedback`
   ADD CONSTRAINT `customer_feedback_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `divisions`
+-- Constraints for table `printing_service_images`
 --
-ALTER TABLE `divisions`
-  ADD CONSTRAINT `divisions_country_id_foreign` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `email_sends`
---
-ALTER TABLE `email_sends`
-  ADD CONSTRAINT `email_sends_sender_id_foreign` FOREIGN KEY (`sender_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `permissions`
---
-ALTER TABLE `permissions`
-  ADD CONSTRAINT `permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `phone_books`
---
-ALTER TABLE `phone_books`
-  ADD CONSTRAINT `phone_books_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `phone_books_group_id_foreign` FOREIGN KEY (`group_id`) REFERENCES `phone_groups` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `phone_groups`
---
-ALTER TABLE `phone_groups`
-  ADD CONSTRAINT `phone_groups_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `print_customer_feedback`
---
-ALTER TABLE `print_customer_feedback`
-  ADD CONSTRAINT `print_customer_feedback_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `shippings`
---
-ALTER TABLE `shippings`
-  ADD CONSTRAINT `shippings_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `shipping_comments`
---
-ALTER TABLE `shipping_comments`
-  ADD CONSTRAINT `shipping_comments_shipping_id_foreign` FOREIGN KEY (`shipping_id`) REFERENCES `shippings` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `shipping_status_types`
---
-ALTER TABLE `shipping_status_types`
-  ADD CONSTRAINT `shipping_status_types_shipping_id_foreign` FOREIGN KEY (`shipping_id`) REFERENCES `shippings` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `shipping_trackings`
---
-ALTER TABLE `shipping_trackings`
-  ADD CONSTRAINT `shipping_trackings_shipping_id_foreign` FOREIGN KEY (`shipping_id`) REFERENCES `shippings` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `thanas`
---
-ALTER TABLE `thanas`
-  ADD CONSTRAINT `thanas_upazila_id_foreign` FOREIGN KEY (`upazila_id`) REFERENCES `thanas` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `upazilas`
---
-ALTER TABLE `upazilas`
-  ADD CONSTRAINT `upazilas_district_id_foreign` FOREIGN KEY (`district_id`) REFERENCES `districts` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `users`
---
-ALTER TABLE `users`
-  ADD CONSTRAINT `users_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
+ALTER TABLE `printing_service_images`
+  ADD CONSTRAINT `printing_service_images_printing_service_id_foreign` FOREIGN KEY (`printing_service_id`) REFERENCES `printing_services` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

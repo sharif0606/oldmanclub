@@ -14,6 +14,8 @@ use App\Http\Controllers\Backend\Admin\ShippingController;
 use App\Http\Controllers\Backend\Admin\ShippingStatusTypeController as shipstatus;
 use App\Http\Controllers\Backend\Admin\ShippingTrackingController as shiptrack;
 use App\Http\Controllers\Backend\Admin\CommentController;
+use App\Http\Controllers\Common\CartController;
+use App\Http\Controllers\Common\CheckOutController;
 
 // use App\Http\Controllers\Backend\PhoneBookController as phonebook;
 use App\Http\Controllers\Backend\Website\SettingController as setting;
@@ -215,7 +217,12 @@ Route::get('smartmailservice', [frontend::class, 'smartmailservice'])->name('sma
 Route::get('printservice', [frontend::class, 'printservice'])->name('printservice');
 
 
-
+// cart
+Route::get('cart', [CartController::class, 'cart'])->name('cart_page');
+Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('addto_cart');
+Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remove.from.cart');
+Route::get('checkout', [CheckOutController::class, 'index'])->name('checkout');
+Route::post('checkout', [CheckOutController::class, 'store'])->name('checkout.store');
 // Route::get('/', function () {
 //     return view('frontend.home');
 // });

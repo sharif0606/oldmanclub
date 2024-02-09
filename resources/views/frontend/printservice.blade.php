@@ -1,13 +1,6 @@
 @extends('frontend.layouts.app')
 @section('title','Printing Service')
 @section('content')
-@push('styles')
-
-@endpush
-<style>
-  
-
-</style>
 <!-- printing service hero start -->
     <div class="container">
       <div class="row">
@@ -149,7 +142,10 @@
                     <div class="product-image-container">
                         <img width="100%" src="{{ asset('public/uploads/printimages/'.$v->image) }}" alt="">
                         <div class="hover-buttons d-flex">
-                            <button class="cart-button"><i class="fa-solid fa-cart-plus"></i></button>
+                          
+                           <a href="{{route('addto_cart', $value->id)}}"
+                                    class="text-white button button-lg button--primary w-100">Add to Cart</a>
+                            <!-- <button class="cart-button"><i class="fa-solid fa-cart-plus"></i></button> -->
                             <button class="wish-button"><i class="fa-regular fa-heart"></i></button>
                         </div>
                     </div>

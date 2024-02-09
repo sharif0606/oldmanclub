@@ -19,4 +19,7 @@ class PrintingService extends Model
     public function printing_service_image(){
         return $this->hasMany(PrintingServiceImage::class,'printing_service_id','id');
     }
+    public function cartItem(){
+        return $this->hasMany(CartItem::class);
+    }
 }
