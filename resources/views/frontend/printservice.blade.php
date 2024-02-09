@@ -144,9 +144,9 @@
                         <div class="hover-buttons d-flex">
                           
                            <a href="{{route('addto_cart', $value->id)}}"
-                                    class="text-white button button-lg button--primary w-100">Add to Cart</a>
+                                    class=" btn btn-lg btn-info me-1"><i class="fa-solid fa-cart-plus"></i></a>
                             <!-- <button class="cart-button"><i class="fa-solid fa-cart-plus"></i></button> -->
-                            <button class="wish-button"><i class="fa-regular fa-heart"></i></button>
+                            <button class="btn btn-lg btn-warning wish-button"><i class="fa-regular fa-heart"></i></button>
                         </div>
                     </div>
                 @endforeach
