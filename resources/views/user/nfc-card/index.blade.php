@@ -21,15 +21,16 @@
                             </tr>
                         </thead>
                         <tbody>
+                        {{--$nfc_cards--}}
                             @forelse($nfc_cards as $value)
                                 <tr>
                                     <th scope="row">{{ ++$loop->index }}</th>
-                                    <td>{{ __($value->name) }}</td>
+                                    <td>{{ __($value->card_name) }}</td>
                                     <td>
-                                        @if ($value->type == 1)
+                                        @if ($value->card_type == 1)
                                             {{ __('Wrok') }}
-                                        @elseif($value->status == 2)
-                                            {{ __('Personal') }} @else{{ __('reject') }}
+                                        @else
+                                            {{ __('Personal') }}
                                         @endif
                                     </td>
                                     <td class="white-space-nowrap">
@@ -37,7 +38,7 @@
                                             <a href="{{ route('nfc_card.show', encryptor('encrypt', $value->id)) }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a href="{{ route('shipping.edit', encryptor('encrypt', $value->id)) }}">
+                                            <a href="{{ route('nfc_card.edit', encryptor('encrypt', $value->id)) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
 
@@ -46,7 +47,7 @@
                                             </a>
                                         @endif
                                         <form id="form{{ $value->id }}"
-                                            action="{{ route('shipping.destroy', encryptor('encrypt', $value->id)) }}"
+                                            action="{{ route('nfc_card.destroy', encryptor('encrypt', $value->id)) }}"
                                             method="post">
                                             @csrf
                                             @method('delete')

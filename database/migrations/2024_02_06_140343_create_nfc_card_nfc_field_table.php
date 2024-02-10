@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('nfc_field_nfc_card', function (Blueprint $table) {
+        Schema::create('nfc_card_nfc_field', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('nfc_field_id');
             $table->unsignedBigInteger('nfc_card_id');
+            $table->string('field_value');
             // Add additional fields if needed
             $table->timestamps();
 
@@ -22,8 +23,7 @@ return new class extends Migration
             $table->foreign('nfc_field_id')->references('id')->on('nfc_fields')->onDelete('cascade');
             $table->foreign('nfc_card_id')->references('id')->on('nfc_cards')->onDelete('cascade');
 
-            // Ensure uniqueness of pairs (nfc_field_id, nfc_card_id)
-            $table->unique(['nfc_field_id', 'nfc_card_id']);
+            
         });
     }
 
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('nfc_field_nfc_card');
+        Schema::dropIfExists('nfc_card_nfc_field');
     }
 };
