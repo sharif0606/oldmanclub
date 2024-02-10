@@ -128,7 +128,7 @@ class NfcCardController extends Controller
             $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
             $nfc_card->card_name = $request->card_name;
             $nfc_card->card_type = $request->card_type;
-            $nfc_card->updated_by = currentUserId();
+            //$nfc_card->updated_by = currentUserId();
 
             /* Update Data From Nfc Design */
             $nfc_design = NfcDesign::where('nfc_card_id', encryptor('decrypt', $id))->first();
