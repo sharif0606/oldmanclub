@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2024 at 04:43 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Feb 10, 2024 at 03:09 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -56,7 +56,7 @@ CREATE TABLE `chats` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `client_id` bigint(20) UNSIGNED NOT NULL,
-  `message` varchar(255) NOT NULL,
+  `message` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -76,8 +76,8 @@ INSERT INTO `chats` (`id`, `user_id`, `client_id`, `message`, `created_at`, `upd
 
 CREATE TABLE `choice_sections` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `feature_list` varchar(255) DEFAULT NULL,
-  `video_link` varchar(255) DEFAULT NULL,
+  `feature_list` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `video_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -98,27 +98,27 @@ INSERT INTO `choice_sections` (`id`, `feature_list`, `video_link`, `created_at`,
 
 CREATE TABLE `clients` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `fname` varchar(255) DEFAULT NULL,
-  `middle_name` varchar(255) DEFAULT NULL,
-  `last_name` varchar(255) DEFAULT NULL,
+  `fname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `middle_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `dob` date DEFAULT NULL,
-  `contact_no` varchar(255) NOT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `address_line_1` varchar(255) DEFAULT NULL,
-  `address_line_2` varchar(255) DEFAULT NULL,
+  `contact_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address_line_1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address_line_2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `country_id` int(11) DEFAULT NULL,
   `city_id` int(11) DEFAULT NULL,
   `state_id` int(11) DEFAULT NULL,
-  `zip_code` varchar(255) DEFAULT NULL,
-  `nationality` varchar(255) DEFAULT NULL,
-  `id_no` varchar(255) DEFAULT NULL,
-  `id_no_type` varchar(255) DEFAULT NULL COMMENT '0=>Passport, 1=>National ID, 2=>Driver License, 3=>Birth Certificate',
-  `image` varchar(255) DEFAULT NULL,
-  `cover_photo` varchar(255) DEFAULT NULL,
-  `photo_id` varchar(255) DEFAULT NULL,
+  `zip_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nationality` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id_no_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '0=>Passport, 1=>National ID, 2=>Driver License, 3=>Birth Certificate',
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cover_photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `is_photo_verified` int(11) DEFAULT 0 COMMENT '0=>No, 1=>Yes',
-  `address_proof_photo` varchar(255) DEFAULT NULL,
+  `address_proof_photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `address_proof_type` int(11) DEFAULT NULL COMMENT '0=>Utility, 1=>Bank Statement, 2=>Printed Letter',
   `is_address_verified` int(11) NOT NULL DEFAULT 0 COMMENT '0=>No, 1=>Yes',
   `is_email_verified` int(11) NOT NULL DEFAULT 0 COMMENT '0=>No, 1=>Yes',
@@ -145,10 +145,10 @@ INSERT INTO `clients` (`id`, `fname`, `middle_name`, `last_name`, `dob`, `contac
 
 CREATE TABLE `countries` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `code_en` varchar(255) NOT NULL,
-  `code_bn` varchar(255) NOT NULL,
-  `name_en` varchar(255) NOT NULL,
-  `name_bn` varchar(255) DEFAULT NULL,
+  `code_en` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `code_bn` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_en` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_bn` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -163,8 +163,8 @@ CREATE TABLE `countries` (
 CREATE TABLE `customer_feedback` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `customer_id` bigint(20) UNSIGNED NOT NULL,
-  `rate` varchar(255) NOT NULL,
-  `message` varchar(255) NOT NULL,
+  `rate` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `show_hide` int(11) NOT NULL DEFAULT 1 COMMENT '0=>hide 1=>show ',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -179,8 +179,8 @@ CREATE TABLE `customer_feedback` (
 
 CREATE TABLE `design_cards` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `design_name` varchar(255) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
+  `design_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `template_id` tinyint(4) NOT NULL DEFAULT 1 COMMENT '1=>Classic, 2=> Modern, 3=>Flat, 4=>Sleek',
   `created_by` bigint(20) UNSIGNED NOT NULL,
   `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
@@ -198,8 +198,8 @@ CREATE TABLE `design_cards` (
 CREATE TABLE `districts` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `division_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `name_en` varchar(255) NOT NULL,
-  `name_bn` varchar(255) DEFAULT NULL,
+  `name_en` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_bn` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -213,8 +213,8 @@ CREATE TABLE `districts` (
 
 CREATE TABLE `divisions` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name_en` varchar(255) NOT NULL,
-  `name_bn` varchar(255) DEFAULT NULL,
+  `name_en` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_bn` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `country_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -230,10 +230,10 @@ CREATE TABLE `divisions` (
 CREATE TABLE `email_sends` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `sender_id` bigint(20) UNSIGNED NOT NULL,
-  `to_email` varchar(255) NOT NULL,
-  `subject` varchar(255) NOT NULL,
-  `message` text DEFAULT NULL,
-  `file` varchar(255) DEFAULT NULL,
+  `to_email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `subject` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -257,9 +257,9 @@ INSERT INTO `email_sends` (`id`, `sender_id`, `to_email`, `subject`, `message`, 
 
 CREATE TABLE `global_net_work_images` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `link` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `link` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -280,9 +280,9 @@ INSERT INTO `global_net_work_images` (`id`, `title`, `link`, `image`, `created_a
 
 CREATE TABLE `header_sections` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `text_large` varchar(255) DEFAULT NULL,
-  `text_small` text DEFAULT NULL,
-  `header_image` varchar(255) DEFAULT NULL,
+  `text_large` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `text_small` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `header_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -303,13 +303,13 @@ INSERT INTO `header_sections` (`id`, `text_large`, `text_small`, `header_image`,
 
 CREATE TABLE `homepages` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `service_section_text` varchar(255) NOT NULL,
-  `special_offer_text` varchar(255) NOT NULL,
-  `special_offer_image` varchar(255) NOT NULL,
-  `special_offer_link` varchar(255) NOT NULL,
-  `global_network_text` varchar(255) NOT NULL,
-  `global_network_image` varchar(255) NOT NULL,
-  `customer_feedback_text` varchar(255) NOT NULL,
+  `service_section_text` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `special_offer_text` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `special_offer_image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `special_offer_link` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `global_network_text` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `global_network_image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `customer_feedback_text` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -330,10 +330,10 @@ INSERT INTO `homepages` (`id`, `service_section_text`, `special_offer_text`, `sp
 
 CREATE TABLE `llcservices` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `feature_list` varchar(255) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `video_link` varchar(255) DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `feature_list` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `video_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -354,11 +354,11 @@ INSERT INTO `llcservices` (`id`, `title`, `feature_list`, `image`, `video_link`,
 
 CREATE TABLE `llc_cardsections` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `text_large` varchar(255) DEFAULT NULL,
-  `text_small` varchar(255) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `contact_text_large` varchar(255) DEFAULT NULL,
-  `contact_text_small` varchar(255) DEFAULT NULL,
+  `text_large` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `text_small` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `contact_text_large` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `contact_text_small` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -379,9 +379,9 @@ INSERT INTO `llc_cardsections` (`id`, `text_large`, `text_small`, `image`, `cont
 
 CREATE TABLE `llc_hero_sections` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `text_large` varchar(255) DEFAULT NULL,
-  `text_small` varchar(255) DEFAULT NULL,
-  `background_image` varchar(255) DEFAULT NULL,
+  `text_large` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `text_small` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `background_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -402,10 +402,10 @@ INSERT INTO `llc_hero_sections` (`id`, `text_large`, `text_small`, `background_i
 
 CREATE TABLE `llc_pricings` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `llcpricing_plan` varchar(255) DEFAULT NULL,
-  `llcprice` varchar(255) DEFAULT NULL,
-  `llcpricing_package` varchar(255) DEFAULT NULL,
-  `llcpricingfeature_list` varchar(255) DEFAULT NULL,
+  `llcpricing_plan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `llcprice` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `llcpricing_package` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `llcpricingfeature_list` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -429,10 +429,10 @@ INSERT INTO `llc_pricings` (`id`, `llcpricing_plan`, `llcprice`, `llcpricing_pac
 
 CREATE TABLE `mail_boxes` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `number_of_mail` varchar(255) DEFAULT NULL,
-  `validity` varchar(255) DEFAULT NULL,
+  `number_of_mail` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `validity` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `price` decimal(8,2) DEFAULT NULL,
-  `package_type` varchar(255) NOT NULL DEFAULT '1' COMMENT '1=>one time, 2=>monthly',
+  `package_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1' COMMENT '1=>one time, 2=>monthly',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -443,7 +443,7 @@ CREATE TABLE `mail_boxes` (
 --
 
 INSERT INTO `mail_boxes` (`id`, `number_of_mail`, `validity`, `price`, `package_type`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, '500', '30 days', 50.00, '2', '2024-01-27 03:06:23', '2024-01-27 03:19:34', NULL);
+(1, '500', '30 days', '50.00', '2', '2024-01-27 03:06:23', '2024-01-27 03:19:34', NULL);
 
 -- --------------------------------------------------------
 
@@ -453,7 +453,7 @@ INSERT INTO `mail_boxes` (`id`, `number_of_mail`, `validity`, `price`, `package_
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -530,9 +530,21 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `nfc_cards` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `card_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `card_type` int(11) NOT NULL,
+  `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `nfc_cards`
+--
+
+INSERT INTO `nfc_cards` (`id`, `client_id`, `card_name`, `card_type`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Test', 1, 1, '2024-02-10 12:20:30', '2024-02-10 12:20:30'),
+(2, 1, 'Test2', 2, 1, '2024-02-10 12:21:20', '2024-02-10 13:53:09');
 
 -- --------------------------------------------------------
 
@@ -542,12 +554,12 @@ CREATE TABLE `nfc_cards` (
 
 CREATE TABLE `nfc_card_images` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `header_text_large` varchar(255) NOT NULL,
-  `header_text_small` text NOT NULL,
-  `header_image` varchar(255) NOT NULL,
-  `video_link` varchar(255) NOT NULL,
-  `feature_list` varchar(255) NOT NULL,
-  `feature_image` varchar(255) NOT NULL,
+  `header_text_large` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `header_text_small` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `header_image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `video_link` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `feature_list` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `feature_image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -563,16 +575,39 @@ INSERT INTO `nfc_card_images` (`id`, `header_text_large`, `header_text_small`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `nfc_card_nfc_field`
+--
+
+CREATE TABLE `nfc_card_nfc_field` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nfc_field_id` bigint(20) UNSIGNED NOT NULL,
+  `nfc_card_id` bigint(20) UNSIGNED NOT NULL,
+  `field_value` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `nfc_card_nfc_field`
+--
+
+INSERT INTO `nfc_card_nfc_field` (`id`, `nfc_field_id`, `nfc_card_id`, `field_value`, `created_at`, `updated_at`) VALUES
+(3, 3, 2, '01670429561', NULL, NULL),
+(11, 1, 2, 'www.google1.com', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `nfc_card_prices`
 --
 
 CREATE TABLE `nfc_card_prices` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `nfc_card_name` varchar(255) NOT NULL,
-  `card_price` varchar(255) NOT NULL,
-  `card_title` varchar(255) NOT NULL,
-  `payment_type` varchar(255) NOT NULL,
-  `card_feature_list` varchar(255) NOT NULL,
+  `nfc_card_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `card_price` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `card_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payment_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `card_feature_list` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -595,8 +630,8 @@ INSERT INTO `nfc_card_prices` (`id`, `nfc_card_name`, `card_price`, `card_title`
 
 CREATE TABLE `nfc_card_price_sections` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `text_large` varchar(255) DEFAULT NULL,
-  `text_small` varchar(255) DEFAULT NULL,
+  `text_large` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `text_small` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -619,15 +654,23 @@ CREATE TABLE `nfc_designs` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `nfc_card_id` bigint(20) UNSIGNED NOT NULL,
   `design_card_id` bigint(20) UNSIGNED NOT NULL,
-  `color` varchar(255) DEFAULT NULL,
-  `logo` varchar(255) DEFAULT NULL,
-  `badges` varchar(255) DEFAULT NULL,
+  `color` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `logo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `badges` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_by` bigint(20) UNSIGNED NOT NULL,
   `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `nfc_designs`
+--
+
+INSERT INTO `nfc_designs` (`id`, `nfc_card_id`, `design_card_id`, `color`, `logo`, `badges`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 1, NULL, NULL, NULL, 1, NULL, '2024-02-10 12:20:30', '2024-02-10 12:20:30', NULL),
+(2, 2, 2, NULL, NULL, NULL, 1, 1, '2024-02-10 12:21:20', '2024-02-10 13:53:09', NULL);
 
 -- --------------------------------------------------------
 
@@ -637,8 +680,8 @@ CREATE TABLE `nfc_designs` (
 
 CREATE TABLE `nfc_fields` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `icon` varchar(50) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `icon` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '1=> Show, 2=> Hide',
   `created_by` bigint(20) UNSIGNED NOT NULL,
   `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
@@ -652,21 +695,9 @@ CREATE TABLE `nfc_fields` (
 --
 
 INSERT INTO `nfc_fields` (`id`, `name`, `icon`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Classicaaa', 'fa-solid fa-image', 1, 1, 2, '2024-02-06 13:25:16', '2024-02-06 13:26:56', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `nfc_field_nfc_card`
---
-
-CREATE TABLE `nfc_field_nfc_card` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `nfc_field_id` bigint(20) UNSIGNED NOT NULL,
-  `nfc_card_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+(1, 'Web', 'fa-solid fa-image', 1, 1, 2, '2024-02-06 13:25:16', '2024-02-06 13:26:56', NULL),
+(2, 'Email', 'fa-solid fa-image', 1, 1, 2, '2024-02-06 13:25:16', '2024-02-06 13:26:56', NULL),
+(3, 'Contact', 'fa-solid fa-image', 1, 1, 2, '2024-02-06 13:25:16', '2024-02-06 13:26:56', NULL);
 
 -- --------------------------------------------------------
 
@@ -677,22 +708,30 @@ CREATE TABLE `nfc_field_nfc_card` (
 CREATE TABLE `nfc_information` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `nfc_card_id` bigint(20) UNSIGNED NOT NULL,
-  `prefix` varchar(50) DEFAULT NULL,
-  `suffix` varchar(50) DEFAULT NULL,
-  `accreditations` varchar(50) DEFAULT NULL,
-  `preferred_name` varchar(100) DEFAULT NULL,
-  `maiden_name` varchar(100) DEFAULT NULL,
-  `pronoun` varchar(100) DEFAULT NULL,
-  `title` text DEFAULT NULL,
-  `department` varchar(100) DEFAULT NULL,
-  `company` varchar(100) DEFAULT NULL,
-  `headline` text DEFAULT NULL,
+  `prefix` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `suffix` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `accreditations` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `preferred_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `maiden_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pronoun` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `department` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `company` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `headline` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_by` bigint(20) UNSIGNED NOT NULL,
   `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `nfc_information`
+--
+
+INSERT INTO `nfc_information` (`id`, `nfc_card_id`, `prefix`, `suffix`, `accreditations`, `preferred_name`, `maiden_name`, `pronoun`, `title`, `department`, `company`, `headline`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2024-02-10 12:20:30', '2024-02-10 12:20:30', NULL),
+(2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2024-02-10 12:21:20', '2024-02-10 12:21:20', NULL);
 
 -- --------------------------------------------------------
 
@@ -702,10 +741,10 @@ CREATE TABLE `nfc_information` (
 
 CREATE TABLE `our_services` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `link` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `details` varchar(255) NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `link` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `details` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -732,7 +771,7 @@ INSERT INTO `our_services` (`id`, `title`, `link`, `image`, `details`, `created_
 CREATE TABLE `permissions` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `role_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -745,11 +784,11 @@ CREATE TABLE `permissions` (
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) NOT NULL,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `token` varchar(64) NOT NULL,
-  `abilities` text DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -766,38 +805,38 @@ CREATE TABLE `phone_books` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `client_id` bigint(20) UNSIGNED NOT NULL,
   `group_id` bigint(20) UNSIGNED NOT NULL,
-  `name_en` varchar(255) NOT NULL,
-  `name_bn` varchar(255) DEFAULT NULL,
-  `contact_en` varchar(255) NOT NULL,
-  `contact_bn` varchar(255) DEFAULT NULL,
-  `email` varchar(255) NOT NULL,
-  `given_name` varchar(255) DEFAULT NULL,
-  `additional_name` varchar(255) DEFAULT NULL,
-  `family_name` varchar(255) DEFAULT NULL,
-  `yomi_name` varchar(255) DEFAULT NULL,
-  `given_name_yomi` varchar(255) DEFAULT NULL,
-  `additional_name_yomi` varchar(255) DEFAULT NULL,
-  `family_name_yomi` varchar(255) DEFAULT NULL,
-  `name_prefix` varchar(255) DEFAULT NULL,
-  `name_suffix` varchar(255) DEFAULT NULL,
-  `initials` varchar(255) DEFAULT NULL,
-  `short_name` varchar(255) DEFAULT NULL,
-  `maiden_name` varchar(255) DEFAULT NULL,
-  `birthday` varchar(255) DEFAULT NULL,
-  `gender` varchar(255) DEFAULT NULL,
-  `location` varchar(255) DEFAULT NULL,
-  `billing_information` varchar(255) DEFAULT NULL,
-  `directory_server` varchar(255) DEFAULT NULL,
-  `mileage_occupation` varchar(255) DEFAULT NULL,
-  `hobby` varchar(255) DEFAULT NULL,
-  `sensitivity` varchar(255) DEFAULT NULL,
-  `priority` varchar(255) DEFAULT NULL,
-  `subject_notes` varchar(255) DEFAULT NULL,
-  `language` varchar(255) DEFAULT NULL,
-  `photo` varchar(255) DEFAULT NULL,
-  `group_membership` varchar(255) DEFAULT NULL,
-  `phone_1_type` varchar(255) DEFAULT NULL,
-  `Phone_1_value` varchar(255) DEFAULT NULL,
+  `name_en` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_bn` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `contact_en` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact_bn` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `given_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `additional_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `family_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `yomi_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `given_name_yomi` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `additional_name_yomi` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `family_name_yomi` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_prefix` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_suffix` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `initials` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `short_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `maiden_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `birthday` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gender` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `location` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `billing_information` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `directory_server` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mileage_occupation` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `hobby` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sensitivity` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `priority` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `subject_notes` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `language` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `group_membership` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone_1_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Phone_1_value` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -818,9 +857,9 @@ INSERT INTO `phone_books` (`id`, `client_id`, `group_id`, `name_en`, `name_bn`, 
 
 CREATE TABLE `phone_customer_feedback` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `customer_message` varchar(255) DEFAULT NULL,
-  `customer_name` varchar(255) DEFAULT NULL,
-  `customer_image` varchar(255) DEFAULT NULL,
+  `customer_message` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -844,7 +883,7 @@ INSERT INTO `phone_customer_feedback` (`id`, `customer_message`, `customer_name`
 CREATE TABLE `phone_groups` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `client_id` bigint(20) UNSIGNED NOT NULL,
-  `group_name` varchar(255) NOT NULL,
+  `group_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -865,10 +904,10 @@ INSERT INTO `phone_groups` (`id`, `client_id`, `group_name`, `created_at`, `upda
 
 CREATE TABLE `phone_number_heroes` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `text_large` varchar(255) DEFAULT NULL,
-  `text_small` varchar(255) DEFAULT NULL,
-  `background_image` varchar(255) DEFAULT NULL,
-  `price` varchar(255) DEFAULT NULL,
+  `text_large` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `text_small` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `background_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `price` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -889,9 +928,9 @@ INSERT INTO `phone_number_heroes` (`id`, `text_large`, `text_small`, `background
 
 CREATE TABLE `phone_number_services` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `text_heading` varchar(255) DEFAULT NULL,
-  `text_small` text DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
+  `text_heading` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `text_small` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -912,9 +951,9 @@ INSERT INTO `phone_number_services` (`id`, `text_heading`, `text_small`, `image`
 
 CREATE TABLE `phone_virtual_maps` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `text_large` varchar(255) DEFAULT NULL,
-  `text_small` varchar(255) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
+  `text_large` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `text_small` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -935,9 +974,9 @@ INSERT INTO `phone_virtual_maps` (`id`, `text_large`, `text_small`, `image`, `cr
 
 CREATE TABLE `printing_heroes` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `text_large` varchar(255) DEFAULT NULL,
-  `text_small` varchar(255) DEFAULT NULL,
-  `hero_image` varchar(255) DEFAULT NULL,
+  `text_large` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `text_small` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `hero_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -958,8 +997,8 @@ INSERT INTO `printing_heroes` (`id`, `text_large`, `text_small`, `hero_image`, `
 
 CREATE TABLE `printing_services` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `service_name` varchar(255) DEFAULT NULL,
-  `service_details` varchar(255) DEFAULT NULL,
+  `service_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `service_details` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `qty` int(11) NOT NULL DEFAULT 1,
   `price` decimal(10,2) NOT NULL DEFAULT 0.00 COMMENT 'Per Qty Price',
   `created_by` bigint(20) UNSIGNED NOT NULL,
@@ -974,8 +1013,8 @@ CREATE TABLE `printing_services` (
 --
 
 INSERT INTO `printing_services` (`id`, `service_name`, `service_details`, `qty`, `price`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'abc', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 1, 100.00, 1, NULL, '2024-02-08 15:09:01', '2024-02-08 15:09:01', NULL),
-(2, 'ABC', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 2, 200.00, 1, NULL, '2024-02-09 13:04:29', '2024-02-09 13:04:29', NULL);
+(1, 'abc', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 1, '100.00', 1, NULL, '2024-02-08 15:09:01', '2024-02-08 15:09:01', NULL),
+(2, 'ABC', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 2, '200.00', 1, NULL, '2024-02-09 13:04:29', '2024-02-09 13:04:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -986,7 +1025,7 @@ INSERT INTO `printing_services` (`id`, `service_name`, `service_details`, `qty`,
 CREATE TABLE `printing_service_images` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `printing_service_id` bigint(20) UNSIGNED NOT NULL,
-  `image` varchar(255) NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_featured` tinyint(1) DEFAULT NULL,
   `created_by` bigint(20) UNSIGNED NOT NULL,
   `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
@@ -1011,8 +1050,8 @@ INSERT INTO `printing_service_images` (`id`, `printing_service_id`, `image`, `is
 
 CREATE TABLE `print_card_sections` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1036,7 +1075,7 @@ INSERT INTO `print_card_sections` (`id`, `image`, `title`, `created_at`, `update
 CREATE TABLE `print_customer_feedback` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `customer_id` bigint(20) UNSIGNED NOT NULL,
-  `customer_message` text DEFAULT NULL,
+  `customer_message` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1058,9 +1097,9 @@ INSERT INTO `print_customer_feedback` (`id`, `customer_id`, `customer_message`, 
 
 CREATE TABLE `print_video_sections` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `text_large` varchar(255) DEFAULT NULL,
-  `text_small` varchar(255) DEFAULT NULL,
-  `video_link` varchar(255) DEFAULT NULL,
+  `text_large` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `text_small` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `video_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1081,8 +1120,8 @@ INSERT INTO `print_video_sections` (`id`, `text_large`, `text_small`, `video_lin
 
 CREATE TABLE `roles` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(30) NOT NULL,
-  `identity` varchar(30) NOT NULL,
+  `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `identity` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1103,9 +1142,9 @@ INSERT INTO `roles` (`id`, `name`, `identity`, `created_at`, `updated_at`) VALUE
 
 CREATE TABLE `service_sections` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `service_image` varchar(255) DEFAULT NULL,
-  `service_title` varchar(255) DEFAULT NULL,
-  `service_description` text DEFAULT NULL,
+  `service_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `service_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `service_description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1128,17 +1167,17 @@ INSERT INTO `service_sections` (`id`, `service_image`, `service_title`, `service
 
 CREATE TABLE `settings` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `header_logo` varchar(255) NOT NULL,
-  `company_name` varchar(255) NOT NULL,
-  `contact_no_en` varchar(255) NOT NULL,
-  `contact_no_bn` varchar(255) DEFAULT NULL,
-  `email` varchar(255) NOT NULL,
-  `facebook_icon` varchar(255) DEFAULT NULL,
-  `twitter_icon` varchar(255) DEFAULT NULL,
-  `linkedln_icon` varchar(255) DEFAULT NULL,
-  `instagram_icon` varchar(255) DEFAULT NULL,
-  `footer_text` varchar(255) NOT NULL,
-  `footer_logo` varchar(255) NOT NULL,
+  `header_logo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `company_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact_no_en` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact_no_bn` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `facebook_icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `twitter_icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `linkedln_icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instagram_icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `footer_text` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `footer_logo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1160,10 +1199,10 @@ INSERT INTO `settings` (`id`, `header_logo`, `company_name`, `contact_no_en`, `c
 CREATE TABLE `shippings` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `client_id` bigint(20) UNSIGNED NOT NULL,
-  `shipping_title` varchar(255) DEFAULT NULL,
-  `shipping_description` varchar(255) DEFAULT NULL,
-  `status` varchar(255) NOT NULL DEFAULT '1' COMMENT '1=>pending,2=>approved,3=>reject',
-  `reject_note` text DEFAULT NULL,
+  `shipping_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shipping_description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1' COMMENT '1=>pending,2=>approved,3=>reject',
+  `reject_note` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1187,8 +1226,8 @@ INSERT INTO `shippings` (`id`, `client_id`, `shipping_title`, `shipping_descript
 CREATE TABLE `shipping_comments` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `shipping_id` bigint(20) UNSIGNED NOT NULL,
-  `client_message` text DEFAULT NULL,
-  `user_message` text DEFAULT NULL,
+  `client_message` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_message` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1210,9 +1249,9 @@ INSERT INTO `shipping_comments` (`id`, `shipping_id`, `client_message`, `user_me
 CREATE TABLE `shipping_status_types` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `shipping_id` bigint(20) UNSIGNED NOT NULL,
-  `shipping_address` varchar(255) DEFAULT NULL,
-  `delivery_address` varchar(255) DEFAULT NULL,
-  `shipping_method` varchar(255) DEFAULT NULL,
+  `shipping_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `delivery_address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shipping_method` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1235,9 +1274,9 @@ INSERT INTO `shipping_status_types` (`id`, `shipping_id`, `shipping_address`, `d
 CREATE TABLE `shipping_trackings` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `shipping_id` bigint(20) UNSIGNED NOT NULL,
-  `tracking_status` varchar(255) NOT NULL DEFAULT '1' COMMENT '1=>order,2=>delivered, 3=>received',
-  `location` varchar(255) NOT NULL,
-  `tracking_note` varchar(255) NOT NULL,
+  `tracking_status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1' COMMENT '1=>order,2=>delivered, 3=>received',
+  `location` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tracking_note` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1258,10 +1297,10 @@ INSERT INTO `shipping_trackings` (`id`, `shipping_id`, `tracking_status`, `locat
 
 CREATE TABLE `sliders` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `text_large` varchar(255) NOT NULL,
-  `text_small` varchar(255) NOT NULL,
-  `link` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
+  `text_large` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `text_small` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `link` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `order_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -1284,9 +1323,9 @@ INSERT INTO `sliders` (`id`, `text_large`, `text_small`, `link`, `image`, `order
 
 CREATE TABLE `smart_mail_heroes` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `text_large` varchar(255) DEFAULT NULL,
-  `text_small` varchar(255) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
+  `text_large` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `text_small` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1307,9 +1346,9 @@ INSERT INTO `smart_mail_heroes` (`id`, `text_large`, `text_small`, `image`, `cre
 
 CREATE TABLE `smart_phonebook_services` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `text_large` varchar(255) DEFAULT NULL,
-  `text_small` text DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
+  `text_large` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `text_small` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1330,9 +1369,9 @@ INSERT INTO `smart_phonebook_services` (`id`, `text_large`, `text_small`, `image
 
 CREATE TABLE `smart_sms_services` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `text_large` varchar(255) DEFAULT NULL,
-  `text_small` text DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
+  `text_large` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `text_small` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1353,9 +1392,9 @@ INSERT INTO `smart_sms_services` (`id`, `text_large`, `text_small`, `image`, `cr
 
 CREATE TABLE `smart_work_sections` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `text_large` varchar(255) DEFAULT NULL,
-  `text_small` varchar(255) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
+  `text_large` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `text_small` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1378,9 +1417,9 @@ INSERT INTO `smart_work_sections` (`id`, `text_large`, `text_small`, `image`, `c
 
 CREATE TABLE `sms_packages` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `number_of_sms` varchar(255) NOT NULL,
-  `validity` varchar(255) NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `number_of_sms` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `validity` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` double(8,2) NOT NULL,
   `status` int(11) NOT NULL DEFAULT 1 COMMENT '1=>active 0=>inactive',
   `created_at` timestamp NULL DEFAULT NULL,
@@ -1403,8 +1442,8 @@ INSERT INTO `sms_packages` (`id`, `title`, `number_of_sms`, `validity`, `price`,
 
 CREATE TABLE `subscribe_sections` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `text_large` varchar(255) DEFAULT NULL,
-  `text_small` varchar(255) DEFAULT NULL,
+  `text_large` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `text_small` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1425,8 +1464,8 @@ INSERT INTO `subscribe_sections` (`id`, `text_large`, `text_small`, `created_at`
 
 CREATE TABLE `thanas` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name_en` varchar(255) DEFAULT NULL,
-  `name_bn` varchar(255) DEFAULT NULL,
+  `name_en` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_bn` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `upazila_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -1441,8 +1480,8 @@ CREATE TABLE `thanas` (
 
 CREATE TABLE `upazilas` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name_en` varchar(255) NOT NULL,
-  `name_bn` varchar(255) DEFAULT NULL,
+  `name_en` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_bn` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `district_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -1457,15 +1496,15 @@ CREATE TABLE `upazilas` (
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `contact_no` varchar(255) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `contact_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `role_id` bigint(20) UNSIGNED NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `full_access` tinyint(1) NOT NULL DEFAULT 0 COMMENT '1=>yes 0=>no',
   `status` int(11) NOT NULL DEFAULT 1 COMMENT '1=>active 2=>inactive',
-  `remember_token` varchar(100) DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1624,6 +1663,12 @@ ALTER TABLE `nfc_card_images`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `nfc_card_nfc_field`
+--
+ALTER TABLE `nfc_card_nfc_field`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `nfc_card_prices`
 --
 ALTER TABLE `nfc_card_prices`
@@ -1648,14 +1693,6 @@ ALTER TABLE `nfc_designs`
 --
 ALTER TABLE `nfc_fields`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `nfc_field_nfc_card`
---
-ALTER TABLE `nfc_field_nfc_card`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nfc_field_nfc_card_nfc_field_id_nfc_card_id_unique` (`nfc_field_id`,`nfc_card_id`),
-  ADD KEY `nfc_field_nfc_card_nfc_card_id_foreign` (`nfc_card_id`);
 
 --
 -- Indexes for table `nfc_information`
@@ -1998,13 +2035,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `nfc_cards`
 --
 ALTER TABLE `nfc_cards`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `nfc_card_images`
 --
 ALTER TABLE `nfc_card_images`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `nfc_card_nfc_field`
+--
+ALTER TABLE `nfc_card_nfc_field`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `nfc_card_prices`
@@ -2022,25 +2065,19 @@ ALTER TABLE `nfc_card_price_sections`
 -- AUTO_INCREMENT for table `nfc_designs`
 --
 ALTER TABLE `nfc_designs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `nfc_fields`
 --
 ALTER TABLE `nfc_fields`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `nfc_field_nfc_card`
---
-ALTER TABLE `nfc_field_nfc_card`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `nfc_information`
 --
 ALTER TABLE `nfc_information`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `our_services`
