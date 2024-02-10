@@ -21,6 +21,48 @@
                 </div>
                 <div class="col-12">
                     <h6 class="border-bottom">NFC Information</h6>
+                     <div class="row">
+                        <div class="col-4 form-group">
+                            <label for="">Prefix</label>
+                            <input type="text" name="prefix" value="{{ $nfc_card->nfc_info->prefix }}" id="" class="form-control">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="">Preferred Name</label>
+                            <input type="text" name="preferred_name" value="{{ $nfc_card->nfc_info->preferred_name }}" id="" class="form-control">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="">Maiden Name</label>
+                            <input type="text" name="maiden_name" value="{{ $nfc_card->nfc_info->maiden_name }}" id="" class="form-control">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="">Suffix</label>
+                            <input type="text" name="suffix" value="{{ $nfc_card->nfc_info->suffix }}" id="" class="form-control">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="">Accreditations</label>
+                            <input type="text" name="accreditations" value="{{ $nfc_card->nfc_info->accreditations }}" id="" class="form-control">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="">Pronoun</label>
+                            <input type="text" name="pronoun" value="{{ $nfc_card->nfc_info->pronoun }}" id="" class="form-control">
+                        </div>
+                        <div class="col-6 form-group">
+                            <label for="">Department</label>
+                            <input type="text" name="department" value="{{ $nfc_card->nfc_info->department }}" id="" class="form-control">
+                        </div>
+                        <div class="col-6 form-group">
+                            <label for="">Company</label>
+                            <input type="text" name="company"  value="{{ $nfc_card->nfc_info->company }}" id="" class="form-control">
+                        </div>
+                        <div class="col-6 form-group">
+                            <label for="">Headline</label>
+                            <input type="text" name="headline" value="{{ $nfc_card->nfc_info->headline }}" id="" class="form-control">
+                        </div>
+                        <div class="col-6 form-group">
+                            <label for="">Title</label>
+                            <textarea name="title" id="" class="form-control" name="pronoun">{{ $nfc_card->nfc_info->title }}</textarea>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-12">
                     <h6 class="border-bottom">NFC Design</h6>

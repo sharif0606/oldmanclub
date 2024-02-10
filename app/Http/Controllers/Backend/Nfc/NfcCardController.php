@@ -50,6 +50,16 @@ class NfcCardController extends Controller
                 /* Insert Data To Nfc Information */
                 $nfc_info = new NfcInformation;
                 $nfc_info->nfc_card_id = $nfc->id;
+                $nfc_info->prefix = $request->prefix;
+                $nfc_info->suffix = $request->suffix;
+                $nfc_info->preferred_name = $request->preferred_name;
+                $nfc_info->maiden_name = $request->maiden_name;
+                $nfc_info->accreditations = $request->accreditations;
+                $nfc_info->pronoun = $request->pronoun;
+                $nfc_info->title = $request->title;
+                $nfc_info->department = $request->department;
+                $nfc_info->company = $request->company;
+                $nfc_info->headline = $request->headline;
                 $nfc_info->created_by = currentUserId();
                 $nfc_info->save();
 
@@ -111,8 +121,9 @@ class NfcCardController extends Controller
     public function edit($id)
     {
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
+        $nfc_info = NfcInformation::find($id);
         $nfc_fields = NfcField::all();
-        return view('user.nfc-card.edit', compact('nfc_fields', 'nfc_card'));
+        return view('user.nfc-card.edit', compact('nfc_fields', 'nfc_card','nfc_info'));
     }
 
     /**
@@ -137,6 +148,19 @@ class NfcCardController extends Controller
             $nfc_design->save();
 
             /* Update Data From Nfc Information */
+            $nfc_info = NfcInformation::where('nfc_card_id', encryptor('decrypt', $id))->first();
+            $nfc_info->prefix = $request->prefix;
+            $nfc_info->suffix = $request->suffix;
+            $nfc_info->preferred_name = $request->preferred_name;
+            $nfc_info->maiden_name = $request->maiden_name;
+            $nfc_info->accreditations = $request->accreditations;
+            $nfc_info->pronoun = $request->pronoun;
+            $nfc_info->title = $request->title;
+            $nfc_info->department = $request->department;
+            $nfc_info->company = $request->company;
+            $nfc_info->headline = $request->headline;
+            $nfc_info->updated_by = currentUserId();
+            $nfc_info->save();
 
             // Retrieve the existing pivot data associated with the NFC card
             $existingPivotData = $nfc_card->nfcFields()->pluck('nfc_field_id', 'nfc_field_id')->toArray();

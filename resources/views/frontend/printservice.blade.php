@@ -167,14 +167,13 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <div class="carousel-controls">
+            <!-- <div class="carousel-controls">
               <button
                 class="carousel-control-prev"
                 type="button"
                 data-bs-target="#testimonialCarousel"
                 data-bs-slide="prev"
-              >
-                <span
+              ><span
                   class="carousel-control-prev-icon"
                   aria-hidden="true"
                 ></span>
@@ -185,14 +184,13 @@
                 type="button"
                 data-bs-target="#testimonialCarousel"
                 data-bs-slide="next"
-              >
-                <span
+              ><span
                   class="carousel-control-next-icon"
                   aria-hidden="true"
                 ></span>
                 <span class="visually-hidden">Next</span>
               </button>
-            </div>
+            </div> -->
             <h2 class="text-center">Customer Reviews</h2>
             <p class="text-center">Some introductory text about customer reviews.</p>
           </div>

@@ -20,6 +20,49 @@
                 </div>
                 <div class="col-12">
                     <h6 class="border-bottom">NFC Information</h6>
+                    <div class="row">
+                        <div class="col-4 form-group">
+                            <label for="">Prefix</label>
+                            <input type="text" name="prefix" id="" class="form-control">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="">Preferred Name</label>
+                            <input type="text" name="preferred_name" id="" class="form-control">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="">Maiden Name</label>
+                            <input type="text" name="maiden_name" id="" class="form-control">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="">Suffix</label>
+                            <input type="text" name="suffix" id="" class="form-control">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="">Accreditations</label>
+                            <input type="text" name="accreditations" id="" class="form-control">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="">Pronoun</label>
+                            <input type="text" name="pronoun" id="" class="form-control">
+                        </div>
+                        <div class="col-6 form-group">
+                            <label for="">Department</label>
+                            <input type="text" name="department" id="" class="form-control">
+                        </div>
+                        <div class="col-6 form-group">
+                            <label for="">Company</label>
+                            <input type="text" name="company" id="" class="form-control">
+                        </div>
+                        <div class="col-6 form-group">
+                            <label for="">Headline</label>
+                            <input type="text" name="headline" id="" class="form-control">
+                        </div>
+                        <div class="col-6 form-group">
+                            <label for="">Title</label>
+                            <textarea name="title" id="" class="form-control" name="pronoun"></textarea>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="col-12">
                     <h6 class="border-bottom">NFC Design</h6>
