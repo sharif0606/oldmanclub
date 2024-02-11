@@ -20,6 +20,49 @@
                 </div>
                 <div class="col-12">
                     <h6 class="border-bottom">NFC Information</h6>
+                    <div class="row">
+                        <div class="col-4 form-group">
+                            <label for="">Prefix</label>
+                            <input type="text" name="prefix" id="" class="form-control">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="">Preferred Name</label>
+                            <input type="text" name="preferred_name" id="" class="form-control">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="">Maiden Name</label>
+                            <input type="text" name="maiden_name" id="" class="form-control">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="">Suffix</label>
+                            <input type="text" name="suffix" id="" class="form-control">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="">Accreditations</label>
+                            <input type="text" name="accreditations" id="" class="form-control">
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="">Pronoun</label>
+                            <input type="text" name="pronoun" id="" class="form-control">
+                        </div>
+                        <div class="col-6 form-group">
+                            <label for="">Department</label>
+                            <input type="text" name="department" id="" class="form-control">
+                        </div>
+                        <div class="col-6 form-group">
+                            <label for="">Company</label>
+                            <input type="text" name="company" id="" class="form-control">
+                        </div>
+                        <div class="col-6 form-group">
+                            <label for="">Headline</label>
+                            <input type="text" name="headline" id="" class="form-control">
+                        </div>
+                        <div class="col-6 form-group">
+                            <label for="">Title</label>
+                            <textarea name="title" id="" class="form-control" name="pronoun"></textarea>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="col-12">
                     <h6 class="border-bottom">NFC Design</h6>
@@ -33,27 +76,25 @@
                 </div>
                 <div class="col-12">
                     <h6 class="border-bottom">NFC Field</h6>
-                    @forelse ($nfc_fields as $value)
-                        <div class="mb-1">
-                            <label for="" class="form-label">{{$value->name}}</label>
-                            <input type="text" class="form-control mb-1" id="" name="nfc_field_id[]"
-                                placeholder="{{$value->name}}" required>
-
-                            <select class="form-control" id="" name="card_type" required>
-                                <option value="">No Label</option>
-                                <option value="1">Home</option>
-                                <option value="2">Personal</option>
-                                <option value="3">Work</option>
-                                <option value="3">Mobile</option>
-                                <option value="3">Main</option>
-                                <option value="3">Fax</option>
-                                <option value="3">Direct</option>
-                                <option value="3">Office</option>
-                            </select>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card bg-primary text-white" style="background-color: #ff6347;">
+                                <div class="card-body" id="selected-fields">
+                                    Click the field you want to add to your card.
+                                </div>
+                            </div>
                         </div>
-                    @empty
-                    @endforelse
+                        <div class="col-md-4" id="field-gallery">
+                            @forelse ($nfc_fields as $value)
+                                <button type="button" data-field="{{ $value->name }}" data-id="{{ $value->id }}"
+                                    style="margin:2px 1px"
+                                    class="field-item btn btn-secondary btn-sm text-white rounded-pill"><span
+                                        class="mx-1"><i class="fa fa-home"></i></span>{{ $value->name }}</button>
 
+                            @empty
+                            @endforelse
+                        </div>
+                    </div>
                 </div>
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary">Add New NFC Card</button>
@@ -63,3 +104,32 @@
     </div>
 
 @endsection
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            // Function to add selected field to another box
+            function addSelectedField(field, id) {
+                console.log(field);
+                console.log(id);
+                var selectedFieldHtml = '<div class="selected-field-item px-3 my-1">\
+                                                <label for="' + field.toLowerCase() +'" class="form-label d-flex justify-content-between">' + field + '<span class="delete-btn"><i class="fa fa-close"></i></span></label>\
+                                                <input type="text" class="form-control" id="' + field.toLowerCase() +
+                    '" name="field_value['+id+']" placeholder="' + field.toLowerCase() + '">\
+                                                <input type="hidden" class="form-control" value="' + id + '" name="nfc_field_id[]">\
+                                            </div>';
+                $('#selected-fields').append(selectedFieldHtml);
+            }
+
+            // Event handler for clicking on a field in the gallery
+            $('#field-gallery').on('click', '.field-item', function() {
+                var field = $(this).data('field');
+                var id = $(this).data('id');
+                addSelectedField(field, id);
+            });
+            // Event handler for clicking on delete button
+            $('#selected-fields').on('click', '.delete-btn', function() {
+                $(this).parents().parent('.selected-field-item').remove();
+            });
+        });
+    </script>
+@endpush
