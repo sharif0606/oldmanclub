@@ -19,7 +19,7 @@ class NfcCardController extends Controller
      */
     public function index()
     {
-        $nfc_cards = NfcCard::with(['client','card_design','nfcFields'])->paginate(10);
+        $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->paginate(10);
         return view('user.nfc-card.index', compact('nfc_cards'));
     }
 
@@ -123,7 +123,7 @@ class NfcCardController extends Controller
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
         $nfc_info = NfcInformation::find($id);
         $nfc_fields = NfcField::all();
-        return view('user.nfc-card.edit', compact('nfc_fields', 'nfc_card','nfc_info'));
+        return view('user.nfc-card.edit', compact('nfc_fields', 'nfc_card', 'nfc_info'));
     }
 
     /**
@@ -203,5 +203,10 @@ class NfcCardController extends Controller
     public function destroy(NfcCard $nfcCard)
     {
         //
+    }
+    public function showqrurl($id)
+    {
+        $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
+        return view('user.nfc-card.showqrurl', compact('nfc_card'));
     }
 }

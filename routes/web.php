@@ -206,6 +206,7 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::get('/download-phonebook', [phonebook::class, 'downloadPhonebook'])->name('phonebook_download');
     Route::resource('nfc_card', nfc_card::class);
 });
+Route::get('nfcqrurl/{id}', [nfc_card::class, 'showqrurl']);
 Route::post('/send-message', [ChatController::class, 'sendMessage']);
 
 Route::get('', [frontend::class, 'frontend'])->name('frontend');
