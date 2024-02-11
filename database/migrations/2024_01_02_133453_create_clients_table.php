@@ -44,11 +44,11 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-        DB::table('clients')->insert([
+        /*DB::table('clients')->insert([
             'email' => 'kaiser@gmail.com',
             'contact_no' => 1,
             'password' => Hash::make(123),
-        ]);
+        ]);*/
     }
 
     /**

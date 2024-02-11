@@ -23,6 +23,30 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+        DB::table('design_cards')->insert(
+            [
+                [
+                    'design_name' => 'Classic',
+                    'template_id' => '1',
+                    'created_by' => '1',
+                ],
+                [
+                    'design_name' => 'Modern',
+                    'template_id' => '2',
+                    'created_by' => '1',
+                ],
+                [
+                    'design_name' => 'Flat',
+                    'template_id' => '3',
+                    'created_by' => '1',
+                ],
+                [
+                    'design_name' => 'Sleek',
+                    'template_id' => '4',
+                    'created_by' => '1',
+                ]
+            ]
+        );
     }
 
     /**

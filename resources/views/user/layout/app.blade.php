@@ -136,8 +136,8 @@
                     <li><a class="has-arrow" href="{{ route('phonebook.index') }}" aria-expanded="false">
                             <i class="icon-phone"></i><span class="nav-text">PhoneBook</span></a>
                     </li>
-                    <li><a class="has-arrow" href="{{ route('phonebook.index') }}" aria-expanded="false">
-                            <i class="icon-phone"></i><span class="nav-text">Phone-Group</span>
+                    <li><a class="has-arrow" href="{{ route('phonegroup.index') }}" aria-expanded="false">
+                            <i class="icon-user"></i><span class="nav-text">Phone-Group</span>
                         </a>
                     </li>
                     <li><a class="has-arrow" href="{{ route('inbox') }}" aria-expanded="false">

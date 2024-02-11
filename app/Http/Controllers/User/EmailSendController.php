@@ -14,7 +14,7 @@ class EmailSendController extends Controller
      */
     public function index()
     {
-        $email = EmailSend::get();
+        $email = EmailSend::paginate(10);
         return view('user.email.index',compact('email'));
     }
     public function inbox(){
@@ -42,7 +42,7 @@ class EmailSendController extends Controller
             }
             if($email->save()){
                 $this->notice::success('Email Successfully send');
-                return redirect()->route('sentbox');
+                return redirect()->route('inbox');
             }
         }catch(Exception $e){
             //dd($e);

@@ -19,7 +19,7 @@ class AuthenticationController extends Controller
     }
 
     public function signUpStore(SignupRequest $request){
-        dd($request);
+        //dd($request);
         try{
             $user=new User;
             $user->name=$request->FullName;
