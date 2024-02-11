@@ -17,11 +17,12 @@
                                 <th scope="col">{{ __('#SL') }}</th>
                                 <th scope="col">{{ __('Card Name') }}</th>
                                 <th scope="col">{{ __('Card Type') }}</th>
+                                <th scope="col">{{ __('Qr Code') }}</th>
                                 <th class="white-space-nowrap">{{ __('Action') }}</th>
                             </tr>
                         </thead>
                         <tbody>
-                        {{--$nfc_cards--}}
+                            {{-- $nfc_cards --}}
                             @forelse($nfc_cards as $value)
                                 <tr>
                                     <th scope="row">{{ ++$loop->index }}</th>
@@ -33,6 +34,7 @@
                                             {{ __('Personal') }}
                                         @endif
                                     </td>
+                                    <td>{!! QrCode::size(100)->generate(Request::url()) !!}</td>
                                     <td class="white-space-nowrap">
                                         @if ($value->status !== 2)
                                             <a href="{{ route('nfc_card.show', encryptor('encrypt', $value->id)) }}">

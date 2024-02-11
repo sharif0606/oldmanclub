@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('nfc_fields', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('icon',50);
+            $table->string('icon', 100)->nullable();
             $table->tinyInteger('status')->default(1)->comment('1=> Show, 2=> Hide');
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by')->nullable();
