@@ -1,18 +1,21 @@
-body{
+body {
     padding: 0px;
     margin: 0px;
 }
-.card-body{
+
+.card-body {
     border-radius: 15px;
 }
-.header_section{
+
+.header_section {
     background: rgb(74, 74, 74);
     color: rgb(255, 255, 255);
     min-height: 5rem;
     position: relative;
     transition-duration: 300ms;
 }
-.header_text{
+
+.header_text {
     background: rgb(74, 74, 74);
     bottom: 0px;
     height: 1rem;
@@ -20,14 +23,17 @@ body{
     width: 100%;
     position: absolute;
 }
-.card_owner{
+
+.card_owner {
     font-weight: bold;
     color: #9c9a9a;
 }
-.list-group li{
+
+.list-group li {
     border: none;
 }
-.list-group li a{
+
+.list-group li a {
     border: none;
     text-decoration: none;
     color: rgb(113, 116, 119);
@@ -35,21 +41,32 @@ body{
 
 /* classic */
 .card {
-    border-radius: 10px; /* Adjust the value as needed */
-    overflow: hidden; /* Ensure content stays within the rounded corners */
+    border-radius: 10px;
+    /* Adjust the value as needed */
+    overflow: hidden;
+    /* Ensure content stays within the rounded corners */
 }
 
-.classic_header_image{
+.classic_header_image {
     position: relative;
 }
-.classic_svg{
-    bottom: 575px;
+
+.classic_header_image .main-img {
+    width: 100%;
+    height: 400px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.classic_svg {
+    bottom: 0px;
     /* left: 0px; */
     /* right: 0px; */
     position: absolute;
     width: calc(100% + 0px);
 }
-.classic_image{
+
+.classic_image {
     bottom: 0px;
     left: 80%;
     position: absolute;
@@ -57,6 +74,7 @@ body{
     top: 30%;
     display: block;
 }
+
 /* Hide the image on mobile devices */
 @media (max-width: 576px) {
     .image {
@@ -77,14 +95,15 @@ body{
         width: calc(100% + -32px);
     }
 }
-.middle{
-    border-left: 1px dashed  black;
+
+.middle {
+    border-left: 1px dashed black;
     margin-left: 20px;
 }
 
 /* modern  */
 
-.modern_card_image{
+.modern_card_image {
     height: var(--chakra-sizes-full);
     max-height: 3rem;
     max-width: var(--chakra-sizes-full);
@@ -92,7 +111,8 @@ body{
     object-position: left center;
     width: var(--chakra-sizes-full);
 }
-.CardAvatar{
+
+.CardAvatar {
     float: right;
     margin-right: 2rem;
     /* aspect-ratio: 1 / 1;
@@ -107,11 +127,13 @@ body{
     shape-margin: 0.5rem;
     shape-outside: content-box; */
 }
-.CardAvatar img{
+
+.CardAvatar img {
     border-radius: 50%;
     width: 100%;
 }
-.modern_header{
+
+.modern_header {
     /* background-color: #414141; */
     margin-bottom: 1.5rem;
     min-height: 6rem;
@@ -121,29 +143,34 @@ body{
     color: #ffffff;
     background: linear-gradient(-190deg, rgb(19, 18, 18) 80%, #fff 0%);
 }
-.header_body{
-    background-color: hsl(0, 6%, 90%); 
+
+.header_body {
+    background-color: hsl(0, 6%, 90%);
 }
-.modern_card{
+
+.modern_card {
     border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;/* Adjust the radius as needed */
+    border-bottom-right-radius: 15px;
+    /* Adjust the radius as needed */
     overflow: hidden;
 }
 
 
 /* sleek */
 
-.header_sleek{
- background-color: #e7e9e6;
- border: none;
+.header_sleek {
+    background-color: #e7e9e6;
+    border: none;
 }
-.sleek_header_image{
+
+.sleek_header_image {
     background: rgb(74, 74, 74);
     clip-path: circle(100% at 50% 0%);
     padding-top: 100%;
     position: relative;
 }
-.css-79elbk{
+
+.css-79elbk {
     height: var(--chakra-sizes-full);
     position: absolute;
     top: 0;
@@ -156,7 +183,8 @@ body{
     object-fit: cover;
     width: var(--chakra-sizes-full);
 }
-.sleek_card{
+
+.sleek_card {
     /* background: var(--chakra-colors-bg-surface); */
     border-radius: 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px, rgba(0, 0, 0, 0.06) 0px 1px 2px;
@@ -168,6 +196,7 @@ body{
     text-align: center;
     width: 50%;
 }
-.background{
+
+.background {
     background-color: #e7e9e6;
 }
