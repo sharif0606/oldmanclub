@@ -94,3 +94,26 @@
     </div>
     <!-- Cart Section Ends Here -->
 @endsection
+@push('scripts')
+<script>
+    $(".remove-from-cart").click(function(e) {
+            e.preventDefault();
+
+            var ele = $(this);
+
+            if (confirm("Are you sure want to remove?")) {
+                $.ajax({
+                    url: '{{route('remove.from.cart')}}',
+                    method: "DELETE",
+                    data: {
+                        _token: '{{csrf_token()}}',
+                        id: ele.data('id') // Use data-id attribute
+                    },
+                    success: function(response) {
+                        window.location.reload();
+                    }
+                });
+            }
+        });
+</script>
+@endpush

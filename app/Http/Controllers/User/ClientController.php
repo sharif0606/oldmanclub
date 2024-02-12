@@ -80,17 +80,17 @@ class ClientController extends Controller
     {
         try {
             $user=Client::find(currentUserId());
-            $user->first_name_en = $request->first_name_en;
-            $user->middle_name_en = $request->middle_name_en;
-            $user->last_name_en = $request->last_name_en;
-            $user->date_of_birth = $request->date_of_birth;
-            $user->contact_en = $request->contact_en;
+            $user->fname = $request->fname;
+            $user->middle_name = $request->middle_name;
+            $user->last_name = $request->last_name;
+            $user->dob = $request->dob;
+            $user->contact_no = $request->contact_no;
             $user->email = $request->email;
             $user->address_line_1 = $request->address_line_1;
             $user->address_line_2 = $request->address_line_2;
-            $user->country = $request->country;
-            $user->city = $request->city;
-            $user->state = $request->state;
+            $user->country_id = $request->country_id;
+            $user->city_id = $request->city_id;
+            $user->state_id = $request->state_id;
             $user->zip_code = $request->zip_code;
             $user->nationality = $request->nationality;
             $user->id_no = $request->id_no;

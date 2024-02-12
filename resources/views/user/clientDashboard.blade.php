@@ -7,10 +7,14 @@
             <div class="profile">
                 <div class="profile-head">
                     <div class="photo-content">
-                        <div class="cover-photo"></div>
+                        <div class="cover-photo">
+                                 <img src="{{ asset('public/uploads/client/' . $client->cover_photo) }}" class="cover"
+                                alt="">
+                        </div>
                         <div class="profile-photo">
                             <img src="{{ asset('public/uploads/client/' . $client->image) }}" class="img-fluid rounded-circle"
                                 alt="">
+                            <p class="badge"><img src="{{asset('public/images/varified.png')}}" alt=""></p> <!-- Add your badge here -->
                         </div>
                     </div>
                     <div class="profile-info">
@@ -20,7 +24,7 @@
                                     <div class="profile-name">
                                         <h5 class="text-primary"> {{ $client->fname }} {{ $client->middle_name }}
                                             {{ $client->last_name }}</h5>
-                                        <p>Name</p>
+                                        <p></p>
                                     </div>
                                 </div>
                                 <div class="col-3 col-sm-3 border-right-1 prf-col">
@@ -67,17 +71,13 @@
                                 <li class="nav-item"><a style="font-size: 14px !important;" href="#profile-settings"
                                         data-toggle="tab" class="nav-link">Setting</a>
                                 </li>
-                                <li class="nav-item"><a style="font-size: 14px !important;" href="#email_verify"
+                                <li class="nav-item"><a style="font-size: 14px !important;" href="#verify_email"
                                         data-toggle="tab" class="nav-link">
                                         Email Verification</a>
                                 </li>
                                 <li class="nav-item"><a style="font-size: 14px !important;" href="#address-verify"
                                         data-toggle="tab" class="nav-link">
                                         Address Verification</a>
-                                </li>
-                                <li class="nav-item"><a style="font-size: 14px !important;" href="#badge-verify"
-                                        data-toggle="tab" class="nav-link">
-                                        Badge Verification</a>
                                 </li>
                                 <li class="nav-item"><a style="font-size: 14px !important;" href="#password_tab"
                                         data-toggle="tab" class="nav-link">Change
@@ -119,7 +119,7 @@
                                                 <h5 class="f-w-500">Date Of Birth <span class="pull-right">:</span>
                                                 </h5>
                                             </div>
-                                            <div class="col-9"><span>{{ $client->date_of_birth }}</span>
+                                            <div class="col-9"><span>{{ date('d-F-Y', strtotime($client->dob)) }}</span>
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -144,20 +144,20 @@
                                                     <div class="form-group col-md-6">
                                                         <label>First Name</label>
                                                         <input type="text" placeholder=""
-                                                            value="{{ $client->first_name_en }}" class="form-control"
-                                                            name="first_name_en">
+                                                            value="{{ $client->fname }}" class="form-control"
+                                                            name="fname">
                                                     </div>
                                                     <div class="form-group col-md-6">
                                                         <label>Middle Name</label>
                                                         <input type="text" placeholder=""
-                                                            value="{{ $client->middle_name_en }}" class="form-control"
-                                                            name="middle_name_en">
+                                                            value="{{ $client->middle_name }}" class="form-control"
+                                                            name="middle_name">
                                                     </div>
                                                     <div class="form-group col-md-6">
                                                         <label>Last Name</label>
                                                         <input type="text" placeholder=""
-                                                            value="{{ $client->last_name_en }}" class="form-control"
-                                                            name="last_name_en">
+                                                            value="{{ $client->last_name}}" class="form-control"
+                                                            name="last_name">
                                                     </div>
                                                     <div class="form-group col-md-6">
                                                         <label>Email</label>
@@ -168,14 +168,14 @@
                                                     <div class="form-group col-md-6">
                                                         <label>Date Of Birth</label>
                                                         <input type="date" placeholder=""
-                                                            value="{{ $client->date_of_birth }}" class="form-control"
-                                                            name="date_of_birth">
+                                                            value="{{ $client->dob }}" class="form-control"
+                                                            name="dob">
                                                     </div>
                                                     <div class="form-group col-md-6">
                                                         <label>Contact No</label>
                                                         <input type="text" placeholder=""
-                                                            value="{{ $client->contact_en }}" class="form-control"
-                                                            name="contact_en">
+                                                            value="{{ $client->contact_no }}" class="form-control"
+                                                            name="contact_no">
                                                     </div>
 
 
@@ -191,7 +191,7 @@
                                                             value="{{ $client->id_no }}" class="form-control"
                                                             name="id_no">
                                                     </div>
-                                                    <div class="form-group col-md-6">
+                                                    <div class="form-group col-md-4">
                                                         <label>Id Type</label>
                                                         <select name="id_no_type" id=""
                                                             value="{{ $client->id_no_type }}" class="form-control">
@@ -209,29 +209,34 @@
                                                                 Birth Certificate</option>
                                                         </select>
                                                     </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label>Present Address</label>
+                                                        <input type="text" placeholder=""
+                                                            value="{{ $client->address_line_1 }}" class="form-control"
+                                                            name="address_line_1">
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label>Parmanent Address</label>
+                                                        <input type="text" placeholder=""
+                                                            value="{{ $client->address_line_2 }}" class="form-control"
+                                                            name="address_line_2">
+                                                    </div>
                                                     <div class="form-group col-md-6">
-                                                        <label>Image</label>
+                                                        <label>Profile Photo</label>
                                                         <input type="file" placeholder="" class="form-control"
-                                                            name="image">
+                                                            name="image" id="image">
+
+                                                        <img id="preview" src="#" alt="Preview" style="display: none; max-width: 100px;">
                                                     </div>
                                                     <div class="form-group col-md-6">
                                                         <label>Cover Photo</label>
                                                         <input type="file" placeholder="" class="form-control"
-                                                            name="cover_photo">
+                                                            name="cover_photo" id="cover_photo">
+
+                                                        <img id="preview_cover" src="#" alt="preview_cover" style="display: none; max-width: 100px;">
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label>Present Address</label>
-                                                    <input type="text" placeholder=""
-                                                        value="{{ $client->address_line_1 }}" class="form-control"
-                                                        name="address_line_1">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Parmanent Address</label>
-                                                    <input type="text" placeholder=""
-                                                        value="{{ $client->address_line_2 }}" class="form-control"
-                                                        name="address_line_2">
-                                                </div>
+                                                
                                                 <div class="form-row">
                                                     <div class="form-group col-md-3">
                                                         <label>Country</label>
@@ -275,8 +280,10 @@
                                         <div class="card-body">
                                             <h6 class="card-title">Verify Email</h6>
                                             <div class="row">
-                                                <div class="col-md-10 col-lg-6">
-                                                    Email Verification
+                                                <div class="col-sm-12 col-md-12">
+                                                    <form action="verify_email.php" method="post">
+                                                        <button type="submit" class="btn btn-danger mt-2">Verify Your Email</button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -288,19 +295,26 @@
                                             <h6 class="card-title">Verify Address</h6>
                                             <div class="row">
                                                 <div class="col-md-10 col-lg-6">
-                                                    Address Verification
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="badge-verify" class="tab-pane fade">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h6 class="card-title">Verify Badge</h6>
-                                            <div class="row">
-                                                <div class="col-md-10 col-lg-6">
-                                                    Badge Verification
+                                                    <form action="{{route('address_verify.store')}}" method="post" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <div class="form-group">
+                                                            <label for="id_image">Upload Your ID:</label>
+                                                            <input type="file" id="id_image" class="form-control"  name="id_image" required>
+                                                            <img id="preview_photo_id" src="#" alt="preview_photo_id" style="display: none; max-width: 200px;"> 
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="documents">Upload Documents (jpg, png, pdf, doc):</label>
+                                                            <input type="file" id="document" class="form-control" name="document[]" accept="image/jpeg,image/png,application/pdf,application/txt,application/msword,application/vnd.openxmlformats-officedcoument.wordprocessingml.document" multiple required>
+                                                        </div>
+
+
+                                                        <div class="form-group">
+                                                            <label for="">Your Mailling Address</label>
+                                                            <textarea name="address_1" id="" class="form-control"></textarea>
+                                                        </div>
+                                                        
+                                                        <button type="submit" class="btn btn-danger mt-2">Verify Your Address</button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -351,4 +365,77 @@
                 </div>
             </div>
         </div>
+
     @endsection
+    @push('scripts')
+     <script>
+        document.getElementById('photo_id').addEventListener('change', function(event) {
+            var input = event.target;
+            var preview = document.getElementById('preview_photo_id');
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block'; // Show the preview image
+                }
+
+                reader.readAsDataURL(input.files[0]); // Convert to data URL
+            }
+        });
+
+        document.getElementById('photo_id').addEventListener('change', function(event) {
+            var input = event.target;
+            var previewContainer = document.getElementById('preview_container');
+            previewContainer.innerHTML = '';
+
+            if (input.files) {
+                for (var i = 0; i < input.files.length; i++) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        var img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.style.maxWidth = '200px';
+                        previewContainer.appendChild(img);
+                    }
+
+                    reader.readAsDataURL(input.files[i]); // Convert to data URL
+                }
+            }
+        });
+
+        document.getElementById('image').addEventListener('change', function(event) {
+            var input = event.target;
+            var preview = document.getElementById('preview');
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block'; // Show the preview image
+                }
+
+                reader.readAsDataURL(input.files[0]); // Convert to data URL
+            }
+        });
+        document.getElementById('cover_photo').addEventListener('change', function(event) {
+            var input = event.target;
+            var preview = document.getElementById('preview_cover');
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block'; // Show the preview image
+                }
+
+                reader.readAsDataURL(input.files[0]); // Convert to data URL
+            }
+        });
+    </script>
+    @endpush('scripts')
+
