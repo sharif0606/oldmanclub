@@ -55,7 +55,7 @@ body {
     width: 100%;
     height: 400px;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
 }
 
 .classic_svg {
@@ -71,8 +71,14 @@ body {
     left: 80%;
     position: absolute;
     right: 0px;
-    top: 30%;
+    top: 15%;
     display: block;
+}
+
+
+
+.nfc-field span i.fa-brands {
+    font-size: 30px;
 }
 
 /* Hide the image on mobile devices */

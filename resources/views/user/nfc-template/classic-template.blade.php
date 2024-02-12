@@ -1,7 +1,8 @@
 <header>
+    <a href="{{ route('nfc_card.edit', encryptor('encrypt', $nfc_card->id)) }}">Edit</a>
     <div class="classic_header_image">
         @if ($nfc_card->client?->image)
-            <div class="main-img" style="background-image: url({{ asset('public/assets/nfc/images/123.png') }})"></div>
+            <div class="main-img" style="background-image: url({{ asset($nfc_card->client?->image) }})"></div>
         @else
             <div class="main-img" style="background-image: url({{ asset('public/assets/nfc/images/123.png') }})"></div>
         @endif
@@ -20,10 +21,10 @@
             </svg>
             <div class="classic_image d-none d-sm-block">
                 @if ($nfc_card->card_design?->logo)
-                    <img src="{{ asset($nfc_card->card_design?->logo) }}" alt="abc" width="80px"
+                    <img src="{{ asset($nfc_card->card_design?->logo) }}" alt="abc" width="60px"
                         srcset="" />
                 @else
-                    <img src="{{ asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="80px"
+                    <img src="{{ asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="60px"
                         srcset="" />
                 @endif
 
@@ -36,64 +37,93 @@
     <div class="container-fluid mt-5">
         <div class="row">
             <div class="col-sm-12">
-                <span class="fs-3 fw-bold"> {{ $nfc_card->nfc_info?->prefix }} {{ $nfc_card->client?->fname }}
-                    {{ $nfc_card->client?->middle_name }} {{ $nfc_card->client?->last_name }}
-                    {{ $nfc_card->nfc_info?->suffix }}</span><br />
-                <span
-                    class="fs-3 fw-bold">({{ $nfc_card->nfc_info?->maiden_name }})</span>&nbsp;{{ $nfc_card->nfc_info?->accreditations }}
+                @if ($nfc_card->nfc_info?->prefix)
+                    <span class="fs-4    fw-bold">{{ $nfc_card->nfc_info?->prefix }}</span>
+                @else
+                    <span class="fs-4 fw-bold">Dr.</span>
+                @endif
+
+                <span class="fs-4 fw-bold">{{ $nfc_card->client?->fname }}</span>
+                <span class="fs-4 fw-bold">{{ $nfc_card->client?->middle_name }}</span>
+                <span class="fs-4 fw-bold">{{ $nfc_card->client?->last_name }}</span>
+
+                <div>
+                    @if ($nfc_card->nfc_info?->suffix)
+                        <span class="fs-4 fw-bold">{{ $nfc_card->nfc_info?->suffix }}</span>
+                    @else
+                        <span class="fs-4 fw-bold">FCP</span>
+                    @endif
+                    <span class="fs-4 fw-bold">
+                        @if ($nfc_card->nfc_info?->maiden_name)
+                            ({{ $nfc_card->nfc_info?->maiden_name }})
+                        @else
+                            (Shuvo)
+                        @endif
+                    </span>
+                    @if ($nfc_card->nfc_info?->accreditations)
+                        <span>&nbsp;{{ $nfc_card->nfc_info?->accreditations }}</span>
+                    @else
+                        <span>&nbsp;FCPS</span>
+                    @endif
+                </div>
+
             </div>
         </div>
         <div class="row">
-            <p>{{ $nfc_card->nfc_info?->title }}</p>
+            @if ($nfc_card->nfc_info?->title)
+                <p class="text-justify">{{ $nfc_card->nfc_info?->title }}</p>
+            @else
+                <p class="text-justify">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda animi alias
+                    vitae! Magnam, esse consequatur culpa mollitia officiis at saepe cum iure. Reprehenderit voluptates
+                    ratione deserunt hic veritatis fuga quidem!Accusamus placeat dolore quis natus doloremque at
+                    incidunt recusandae error maiores autem maxime cupiditate, quasi aliquid cumque iste inventore,
+                    ullam fugit a minus blanditiis facere molestiae dicta illo assumenda. Eos?</p>
+            @endif
         </div>
         <div class="row">
             <div>
-                <span class="fs-5 fw-bold">{{ $nfc_card->nfc_info?->department }}</span><br />
-                <span>{{ $nfc_card->nfc_info?->company }}</span>
+                @if ($nfc_card->nfc_info?->department)
+                    <span class="fs-5 fw-bold">{{ $nfc_card->nfc_info?->department }}</span>
+                @else
+                    <span class="fs-5 fw-bold">Software Development</span>
+                @endif
+                @if ($nfc_card->nfc_info?->company)
+                    <p class="fs-6 fw-bold">{{ $nfc_card->nfc_info?->company }}</p>
+                @else
+                    <p class="fs-6 fst-italic">Muktodhara Technology Limited</p>
+                @endif
             </div>
         </div>
     </div>
 </section>
-<section style="margin-left:20px;">
-    <div class="container-fluid">
+<section>
+    <div class="container-fluid px-3">
         <div class="row">
-            <p>{{ $nfc_card->nfc_info?->headline }}</p>
-        </div>
-        <div class="row">
-            <div class="d-flex">
+            @if ($nfc_card->nfc_info?->headline)
+                <p class="my-1">{{ $nfc_card->nfc_info?->headline }}</p>
+            @else
+                <p class="my-1 fs-6 text-secondary">Our Concern</p>
+            @endif
+
+            <div class="d-flex my-1">
                 <svg class="text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     focusable="false" fill="currentColor" viewBox="0 0 24 24" width="25px">
                     <path fill-rule="evenodd"
                         d="M3 6c0-1.1.9-2 2-2h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 1.9h-6.6l-2.9 2.7c-1 .9-2.5.2-2.5-1v-1.7H5a2 2 0 0 1-2-2V6Zm5.7 3.8a1 1 0 1 0-1.4 1.4 1 1 0 1 0 1.4-1.4Zm2.6 0a1 1 0 1 1 0 1.4 1 1 0 0 1 0-1.4Zm5.4 0a1 1 0 1 0-1.4 1.4 1 1 0 1 0 1.4-1.4Z"
                         clip-rule="evenodd" />
                 </svg>
-                <span>Goes by
-                    <span class="card_owner mx-1">{{ $nfc_card->nfc_info?->preferred_name }}</span>
+                <span class="card_owner">Goes by
+                    @if ($nfc_card->nfc_info?->preferred_name)
+                        {{ $nfc_card->nfc_info?->preferred_name }}
+                    @else
+                        Kaisar (sam)
+                    @endif
                 </span>
-                <span>({{ $nfc_card->nfc_info?->pronoun }})</span>
             </div>
-        </div>
-        <div class="row">
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <a href="#" class="mx-1">
-                        <img src="assets/images/email.png" alt="" srcset="" width="25px">
-                    </a>
-                    <a href="#">{{ $nfc_card->client?->email }}</a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#" class="mx-1">
-                        <img src="assets/images/phone-call.png" alt="" srcset="" width="25px">
-                    </a>
-                    <a href="#">{{ $nfc_card->client?->contact_no }}</a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#" class="mx-1">
-                        <img src="assets/images/credit-card.png" alt="" srcset="" width="25px">
-                    </a>
-                    <a href="#">Google</a>
-                </li>
-            </ul>
+            @foreach ($nfc_card->nfcFields as $nfcField)
+                {{ $nfcField }}
+            @endforeach
         </div>
     </div>
 </section>
