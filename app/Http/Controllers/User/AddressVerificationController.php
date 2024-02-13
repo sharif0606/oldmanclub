@@ -60,17 +60,14 @@ class AddressVerificationController extends Controller
                 }
                 $address_verify->document = implode(',', $documentNames);
             }
+            // Update the address_line_1 directly in the clients table
+            $client = Client::where('id', currentUserId())->firstOrFail();
+            $client->address_line_1 = $request->address_line_1;
+            $client->save();
 
             if ($address_verify->save()) {
                 return redirect()->back()->with('success', 'Data Saved'); 
             }
-
-            // $client = Client::where('id',currentUserId());
-            // $client->address_line_1 = $request->address_line_1;
-            // $client->save();
-            // return redirect()->back()->with('success', 'Data Saved');
-            // DB::commit();
-            
            
         }catch(Exception $e){
             DB::rollback();

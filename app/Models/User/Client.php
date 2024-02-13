@@ -15,6 +15,9 @@ class Client extends Model
     public function feedback(){
         return $this->hasMany(CustomerFeedback::class);
     }
+    public function cus_feedback(){
+        return $this->hasMany(PhoneCustomerFeedback::class);
+    }
     public function cusfeedback(){
         return $this->hasMany(PrintCustomerFeedback::class);
     }

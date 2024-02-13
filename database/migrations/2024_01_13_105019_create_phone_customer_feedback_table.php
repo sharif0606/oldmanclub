@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('phone_customer_feedback', function (Blueprint $table) {
             $table->id();
             $table->string('customer_message')->nullable();
-            $table->string('customer_name')->nullable();
-            $table->string('customer_image')->nullable();
+             $table->unsignedBigInteger('customer_id')->index();
+            $table->foreign('customer_id')->references('id')->on('clients')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

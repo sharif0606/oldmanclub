@@ -27,13 +27,14 @@
                         <tr>
                             <td>{{ ++$loop->index }}</td>
                             <td>
-                                {{$value->client?->first_name_en}}  
-                                {{$value->client?->middle_name_en}}  
-                                {{$value->client?->last_name_en}}  
+                                {{$value->client?->fname}}  
+                                {{$value->client?->middle_name}}  
+                                {{$value->client?->last_name}}  
                             </td>
                             <td>{{$value->rate}} </td>
                             <td>{{$value->message}} </td>
-                            <td>{{$value->show_hide}} </td>
+                            {{-- @if($p->status == 1) {{__('Active') }} @else {{__('Inactive') }} @endif --}}
+                            <td>@if($value->show_hide==1){{__('Show')}} @else {{__('Hide')}} @endif </td>
                             <td>
                                 <div class="d-flex">
                                     <a href="{{route('cus_feedback.edit',encryptor('encrypt',$value->id))}}">

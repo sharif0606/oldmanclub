@@ -12859,13 +12859,13 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   .photo-content {
     position: relative; }
   .photo-content .cover-photo {
-    background: url(../images/profile/cover2.jpg);
+    /* background: url(../images/profile/cover2.jpg); */
     background-size: cover;
     background-position: center;
     min-height: 250px;
     width: 100%; }
   .photo-content .profile-photo {
-    bottom: -75px;
+    bottom: -32px;
     left: 100px;
     max-width: 150px;
     position: absolute; }

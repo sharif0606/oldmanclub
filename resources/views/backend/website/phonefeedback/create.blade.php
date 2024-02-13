@@ -15,10 +15,17 @@
                         <div class="row">
                             <div class="col-lg-6 mb-4">
                                 <div class="form-group">
-                                    <label class="text-label">Customer Name <span class="text-danger">*</span></label>
-                                    <input type="text" name="customer_name" value="{{ old('customer_name')}}" class="form-control">
-                                    @if($errors->has('customer_name'))
-                                        <span class="text-danger"> {{ $errors->first('customer_name') }}</span>
+                                     <label class="text-label">User Name*</label>
+                                    <select name="customer_id" id="" class="form-control">
+                                        <option value="">Select user</option>
+                                        @forelse($client as $c)
+                                            <option value="{{$c->id}}" {{ old('customer_id')==$c->id?"selected":""}}> {{$c->fname}} {{$c->middle_name}} {{$c->last_name}} </option>
+                                        @empty
+                                            <option value="">No User found</option>
+                                        @endforelse
+                                    </select>
+                                    @if($errors->has('roleId'))
+                                        <span class="text-danger"> {{ $errors->first('roleId') }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -31,15 +38,6 @@
                                     @endif
                                 </div>
                             </div>   
-                            <div class="col-lg-6 mb-4">
-                                <div class="form-group">
-                                    <label class="text-label">Image<span class="text-danger"> *</span></label>
-                                    <input type="file" name="customer_image" class="form-control" >
-                                    @if($errors->has('customer_image'))
-                                        <span class="text-danger"> {{ $errors->first('customer_image') }}</span>
-                                    @endif
-                                </div>
-                            </div>
                             <div class="col-lg-6 mb-4">
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary me-1 mb-1">Save</button>

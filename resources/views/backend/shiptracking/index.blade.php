@@ -26,9 +26,9 @@
                         <tr>
                             <th scope="row">{{ ++$loop->index }}</th>
                             <td>
-                                {{__($value->shipping?->user?->first_name_en)}}
-                                {{__($value->shipping?->user?->middle_name_en)}}
-                                {{__($value->shipping?->user?->last_name_en)}}
+                                {{__($value->shipping?->user?->fname)}}
+                                {{__($value->shipping?->user?->middle_name)}}
+                                {{__($value->shipping?->user?->last_name)}}
                             </td>
                             <td>{{__($value->shipping?->shipping_title)}}</td>
                             <td>

@@ -65,7 +65,7 @@
                                 <input type="text" class="form-control mb-3" id="Phone" name="group_name" placeholder="Phone no">
                             </div>
                             <div class="col-12">
-                                <button type="submit" class="btn btn-primary">Phone No Save</button>
+                                <button type="submit" class="btn btn-primary">Phone Group Save</button>
                             </div>
                         </form>
                     </div>

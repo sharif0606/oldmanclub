@@ -86,12 +86,14 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="customer-image">
-                                            <img src="{{asset('public/uploads/phoneservice/'.$feedback?->customer_image)}}" alt="Customer 1" class="rounded-circle img-fluid">
+                                            <img src="{{asset('public/uploads/client/'.$feedback?->client?->image)}}" alt="Customer 1" class="rounded-circle img-fluid">
                                         </div>
                                     </div>
                                    <div class="col-md-9">
                                         <div class="customer-details">
-                                            <h4>{{$feedback?->customer_name}}</h4>
+                                            <h4>{{$feedback?->client?->fname}}
+                                                {{$feedback?->client?->middle_name}}
+                                            </h4>
                                             <div class="phn-star-rating">
                                                 <span class="phn-star">&#9733;</span>
                                                 <span class="phn-star">&#9733;</span>

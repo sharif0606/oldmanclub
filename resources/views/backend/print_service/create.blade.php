@@ -1,10 +1,7 @@
 @extends('backend.layouts.app')
-
 @section('title',trans('Printing Service'))
 @section('page',trans('Create'))
-
 @section('content')
-
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -25,7 +22,8 @@
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="service_details">Service Details<i class="text-danger">*</i></label>
-                                    <input type="text" id="service_details" class="form-control" value="{{ old('service_details')}}" name="service_details">
+                                    <textarea name="service_details" id="service_details" class="form-control"></textarea>
+                                    <!-- <input type="text" id="service_details" class="form-control" value="{{ old('service_details')}}" name="service_details"> -->
                                     @if($errors->has('service_details'))
                                         <span class="text-danger"> {{ $errors->first('service_details') }}</span>
                                     @endif

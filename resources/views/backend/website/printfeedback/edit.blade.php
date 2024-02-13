@@ -20,7 +20,7 @@
                                     <select name="customer_id" id="" class="form-control">
                                         <option value="">Select user</option>
                                         @forelse($client as $c)
-                                            <option value="{{$c->id}}" {{ old('customer_id',$customerfeedback->customer_id)==$c->id?"selected":""}}> {{$c->first_name_en}} {{$c->middle_name_en}} {{$c->last_name_en}} </option>
+                                            <option value="{{$c->id}}" {{ old('customer_id',$customerfeedback->customer_id)==$c->id?"selected":""}}> {{$c->fname}} {{$c->middle_name}} {{$c->last_name}} </option>
                                         @empty
                                             <option value="">No User found</option>
                                         @endforelse

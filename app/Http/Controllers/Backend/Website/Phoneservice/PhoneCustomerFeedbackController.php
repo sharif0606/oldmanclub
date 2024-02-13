@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Website\Phoneservice;
 
 use App\Models\Backend\Website\PhoneService\PhoneCustomerFeedback;
 use App\Http\Controllers\Controller;
+use App\Models\User\Client;
 use Illuminate\Http\Request;
 
 class PhoneCustomerFeedbackController extends Controller
@@ -22,7 +23,8 @@ class PhoneCustomerFeedbackController extends Controller
      */
     public function create()
     {
-        return view('backend.website.phonefeedback.create');
+        $client = Client::get();
+        return view('backend.website.phonefeedback.create',compact('client'));
     }
 
     /**
@@ -32,13 +34,8 @@ class PhoneCustomerFeedbackController extends Controller
     {
         try{
             $phonefeedback = new PhoneCustomerFeedback;
-            $phonefeedback->customer_name = $request->customer_name;
+            $phonefeedback->customer_id = $request->customer_id;
             $phonefeedback->customer_message = $request->customer_message;
-            if($request->hasFile('customer_image')){
-                $imageName = rand(111,999).'.'.$request->customer_image->extension();
-                $request->customer_image->move(public_path('uploads/phoneservice'),$imageName);
-                $phonefeedback->customer_image=$imageName;
-            }
             if($phonefeedback->save()){
                 $this->notice::success('Data Successfully Saved');
                 return redirect()->route('phonefeedback.index');
@@ -63,8 +60,9 @@ class PhoneCustomerFeedbackController extends Controller
      */
     public function edit($id)
     {
+        $client = Client::get();
         $phonefeedback = PhoneCustomerFeedback::findOrFail(encryptor('decrypt',$id));
-        return view('backend.website.phonefeedback.edit',compact('phonefeedback'));
+        return view('backend.website.phonefeedback.edit',compact('phonefeedback','client'));
     }
 
     /**
@@ -74,14 +72,8 @@ class PhoneCustomerFeedbackController extends Controller
     {
         try{
             $phonefeedback = PhoneCustomerFeedback::findOrFail(encryptor('decrypt',$id));
-            $phonefeedback->customer_name = $request->customer_name;
+            $phonefeedback->customer_id = $request->customer_id;
             $phonefeedback->customer_message = $request->customer_message;
-            
-            if($request->hasFile('customer_image')){
-                $imageName = rand(111,999).'.'.$request->customer_image->extension();
-                $request->customer_image->move(public_path('uploads/phoneservice'),$imageName);
-                $phonefeedback->customer_image=$imageName;
-            }
             if($phonefeedback->save()){
                 $this->notice::success('Customer Feedback Successfully Updated');
                 return redirect()->route('phonefeedback.index');

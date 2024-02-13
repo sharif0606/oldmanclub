@@ -21,7 +21,7 @@
       <div class="row py-4">
         <div class="col-md-12">
           <h2 class="text-capitalize fw-bold text-center py-3">Trusted By</h2>
-          <img src="assets/image/Sponsor.png" alt="" />
+          <img src="{{asset('public/frontend/assets/image/Sponsored.png')}}" alt="" />
         </div>
       </div>
     </div>
@@ -84,7 +84,7 @@
           <div class="print-product-cards py-3">
             <div class="print-product-card m-3 col-lg-3 col-md-6 col-sm-12">
               <img
-                src="assets/image/product-1.jpg"
+                src="{{asset('public/frontend/assets/image/product-1.jpg')}}"
                 alt="Product 1"
                 class="print-product-image"
               />
@@ -95,7 +95,7 @@
 
             <div class="print-product-card m-3 col-lg-3 col-md-6 col-sm-12">
               <img
-                src="assets/image/product-2.jpg"
+                src="{{asset('public/frontend/assets/image/product-2.jpg')}}"
                 alt="Product 2"
                 class="print-product-image"
               />
@@ -106,7 +106,7 @@
 
             <div class="print-product-card m-3 col-lg-3 col-md-6 col-sm-12">
               <img
-                src="assets/image/product-3.jpg"
+                src="{{asset('public/frontend/assets/image/product-3.jpg')}}"
                 alt="Product 3"
                 class="print-product-image"
               />
@@ -117,7 +117,7 @@
 
             <div class="print-product-card m-3 col-lg-3 col-md-6 col-sm-12">
               <img
-                src="assets/image/product-4.jpg"
+                src="{{asset('public/frontend/assets/image/product-4.jpg')}}"
                 alt="Product 4"
                 class="print-product-image"
               />
@@ -137,9 +137,8 @@
           </h3>
           <div class="print-product-cards py-3">
             @foreach($printservices as $value)
-            <div class="print-product-card m-3 col-lg-3 col-md-6 col-sm-12">
+            <div class="product-image-container print-product-card m-3 col-lg-3 col-md-6 col-sm-12">
                 @foreach($value->printing_service_image as $v)
-                    <div class="product-image-container">
                         <img width="100%" src="{{ asset('public/uploads/printimages/'.$v->image) }}" alt="">
                         <div class="hover-buttons d-flex">
                           
@@ -147,12 +146,11 @@
                                     class=" btn btn-lg btn-info me-1"><i class="fa-solid fa-cart-plus"></i></a>
                             <!-- <button class="cart-button"><i class="fa-solid fa-cart-plus"></i></button> -->
                             <button class="btn btn-lg btn-warning wish-button"><i class="fa-regular fa-heart"></i></button>
-                        </div>
-                    </div>
+                        </div>  
                 @endforeach
                 <h3 class="print-product-name">{{$value->service_name}}</h3>
                 <p class="print-product-price">${{$value->price}}</p>
-                <div class="print-product-review">⭐⭐⭐⭐⭐</div>
+                <!-- <div class="print-product-review">⭐⭐⭐⭐⭐</div> -->
             </div>
             @endforeach
           </div>

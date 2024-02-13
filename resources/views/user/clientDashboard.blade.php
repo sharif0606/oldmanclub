@@ -8,13 +8,22 @@
                 <div class="profile-head">
                     <div class="photo-content">
                         <div class="cover-photo">
+                            @if($client->cover_photo)
                                  <img src="{{ asset('public/uploads/client/' . $client->cover_photo) }}" class="cover"
                                 alt="">
+                            @else
+                               <img src="{{ asset('public/images/profile/cover2.jpg') }}" alt="" class="cover">
+                            @endif
                         </div>
                         <div class="profile-photo">
+                            @if($client->image)
                             <img src="{{ asset('public/uploads/client/' . $client->image) }}" class="img-fluid rounded-circle"
-                                alt="sdfdsf">
-                            <p class="badge"><img src="{{asset('public/images/varified.png')}}" alt=""></p> <!-- Add your badge here -->
+                                alt="" class="bg-dark">
+                            <p class="badge"><img src="{{asset('public/images/varified.png')}}" alt=""></p><!-- Add your badge here -->
+                            @else
+                             <img src="{{ asset('public/images/download.jpg') }}" class="img-fluid rounded-circle"
+                                alt="asdfdf" class="">
+                            @endif
                         </div>
                     </div>
                     <div class="profile-info">
@@ -300,17 +309,19 @@
                                                         <div class="form-group">
                                                             <label for="id_image">Upload Your ID:</label>
                                                             <input type="file" id="id_image" class="form-control"  name="id_image" required>
-                                                            <img id="preview_photo_id" src="#" alt="preview_photo_id" style="display: none; max-width: 200px;"> 
+                                                            <img id="preview_photo_id" src="#" alt="preview_photo_id" style="display: none; max-width: 100px;"> 
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="documents">Upload Documents (jpg, png, pdf, doc):</label>
                                                             <input type="file" id="document" class="form-control" name="document[]" accept="image/jpeg,image/png,application/pdf,application/txt,application/msword,application/vnd.openxmlformats-officedcoument.wordprocessingml.document" multiple required>
+                                                            <div id="preview_container"></div>
+
                                                         </div>
 
 
                                                         <div class="form-group">
                                                             <label for="">Your Mailling Address</label>
-                                                            <textarea name="address_1" id="" class="form-control"></textarea>
+                                                            <textarea name="address_line_1" id="" class="form-control"></textarea>
                                                         </div>
                                                         
                                                         <button type="submit" class="btn btn-danger mt-2">Verify Your Address</button>
@@ -369,7 +380,7 @@
     @endsection
     @push('scripts')
      <script>
-        document.getElementById('photo_id').addEventListener('change', function(event) {
+        document.getElementById('id_image').addEventListener('change', function(event) {
             var input = event.target;
             var preview = document.getElementById('preview_photo_id');
 
@@ -384,28 +395,21 @@
                 reader.readAsDataURL(input.files[0]); // Convert to data URL
             }
         });
-
-        document.getElementById('photo_id').addEventListener('change', function(event) {
+        document.getElementById('document').addEventListener('change', function(event) {
             var input = event.target;
-            var previewContainer = document.getElementById('preview_container');
-            previewContainer.innerHTML = '';
+            var preview = document.getElementById('preview_document');
 
-            if (input.files) {
-                for (var i = 0; i < input.files.length; i++) {
-                    var reader = new FileReader();
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-                    reader.onload = function (e) {
-                        var img = document.createElement('img');
-                        img.src = e.target.result;
-                        img.style.maxWidth = '200px';
-                        previewContainer.appendChild(img);
-                    }
-
-                    reader.readAsDataURL(input.files[i]); // Convert to data URL
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block'; // Show the preview image
                 }
+
+                reader.readAsDataURL(input.files[0]); // Convert to data URL
             }
         });
-
         document.getElementById('image').addEventListener('change', function(event) {
             var input = event.target;
             var preview = document.getElementById('preview');
@@ -434,6 +438,31 @@
                 }
 
                 reader.readAsDataURL(input.files[0]); // Convert to data URL
+            }
+        });
+
+
+        document.getElementById('document').addEventListener('change', function(event) {
+            var input = event.target;
+            var previewContainer = document.getElementById('preview_container');
+
+            // Clear previous previews
+            previewContainer.innerHTML = '';
+
+            if (input.files && input.files.length > 0) {
+                for (var i = 0; i < input.files.length; i++) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        var preview = document.createElement('img');
+                        preview.src = e.target.result;
+                        preview.style.maxWidth = '100px';
+                        preview.style.marginRight = '5px'; // Add some space between images
+                        previewContainer.appendChild(preview); // Append each preview image
+                    }
+
+                    reader.readAsDataURL(input.files[i]); // Convert to data URL
+                }
             }
         });
     </script>

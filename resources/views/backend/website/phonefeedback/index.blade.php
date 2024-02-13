@@ -25,9 +25,11 @@
                         @forelse($phonefeedback as $value)
                         <tr>
                             <td>{{ ++$loop->index }}</td>
+                            <td>{{$value->client?->fname}}  
+                                {{$value->client?->middle_name}}  
+                                {{$value->client?->last_name}}  </td>
                             <td>{{$value->customer_message}} </td>
-                            <td>{{$value->customer_name}} </td>
-                            <td><img width="50px" src="{{asset('public/uploads/phoneservice/'.$value->customer_image)}}" alt=""> </td>
+                            <td><img width="50px" src="{{asset('public/uploads/client/'.$value->client?->image)}}" alt=""> </td>
                             <td>
                                 <div class="d-flex">
                                     <a href="{{route('phonefeedback.edit',encryptor('encrypt',$value->id))}}">

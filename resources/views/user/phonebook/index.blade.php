@@ -101,7 +101,6 @@
         </div>
     </div>
 </div>
-
 <script>
     document.getElementById('downloadVCard').addEventListener('click', function() {
         

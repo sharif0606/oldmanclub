@@ -4,8 +4,8 @@
 <!-- Hero section -->
 <div class="container-fluid heading">
         <div class="hero-text">
-            <h1 class="hero-heading">{{$nfccardhero->header_text_large}}</h1>
-            <p class="hero-description">{{$nfccardhero->header_text_small}}</p>
+            <h1 class="hero-heading">{{$nfccardhero?->header_text_large}}</h1>
+            <p class="hero-description">{{$nfccardhero?->header_text_small}}</p>
             <div class="hero-buttons">
                 <a href="#" class="btn shop-card-btn">Shop Card</a>
                 <a href="#" class="btn see-guide-btn">See Guide</a>
@@ -53,8 +53,8 @@
     <div class="container pricing-section">
         <div class="row">
             <div class="col-md-12 text-center">
-                <h2 class="text-uppercase fw-bold">{{$nfcsection->text_large}}</h2>
-                <p class="fw-medium mb-4">{{$nfcsection->text_small}}</p>
+                <h2 class="text-uppercase fw-bold">{{$nfcsection?->text_large}}</h2>
+                <p class="fw-medium mb-4">{{$nfcsection?->text_small}}</p>
             </div>
         </div>
         <div class="row">
@@ -62,19 +62,19 @@
             <div class="col-md-4 mt-3 nfccard">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-title text-start">{{$card->nfc_card_name}}</h5>
-                        <h2 class="card-price text-start">${{$card->card_price}}</h2>
-                        <p class="card-text text-start">{{$card->payment_type}}</p>
-                        <h5 class="card-subtitle text-start mb-3">{{$card->card_title}}</h5>
+                        <h5 class="card-title text-start">{{$card?->nfc_card_name}}</h5>
+                        <h2 class="card-price text-start">${{$card?->card_price}}</h2>
+                        <p class="card-text text-start">{{$card?->payment_type}}</p>
+                        <h5 class="card-subtitle text-start mb-3">{{$card?->card_title}}</h5>
                         <a href="#" class="btn btn-outline-primary">Buy Now</a>
                         <p class="fw-medium text-start mt-3 mb-3">What's included</p>
                         <ul class="text-start">
-                            @if (is_array($card->card_feature_list))
-                                @foreach($card->card_feature_list as $feature)
+                            @if (is_array($card?->card_feature_list))
+                                @foreach($card?->card_feature_list as $feature)
                                     <li>{{$feature}}</li>
                                 @endforeach
                             @else
-                                <li>{{$card->card_feature_list}}</li>
+                                <li>{{$card?->card_feature_list}}</li>
                             @endif
                         </ul>
                     </div>
@@ -89,8 +89,8 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="subscribe-content text-start">
-                    <h2 class="subscribe-heading text-uppercase fw-bold">{{$nfcsubscribe->text_large}}</h2>
-                    <p class="subscribe-text">{{$nfcsubscribe->text_large}}</p>
+                    <h2 class="subscribe-heading text-uppercase fw-bold">{{$nfcsubscribe?->text_large}}</h2>
+                    <p class="subscribe-text">{{$nfcsubscribe?->text_large}}</p>
                 </div>
             </div>
             <div class="col-md-6 subscribe-btn text-center">

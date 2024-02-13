@@ -14,7 +14,7 @@
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="number_of_sms">User Name<i class="text-danger">*</i></label>
-                                    <input type="text" id="client_id" class="form-control" value="{{ old('client_id',$shipping->user?->first_name_en)}} {{ old('client_id',$shipping->user?->middle_name_en)}} {{ old('client_id',$shipping->user?->last_name_en)}}" name="shipping_title" readonly>
+                                    <input type="text" id="client_id" class="form-control" value="{{ old('client_id',$shipping->user?->fname)}} {{ old('client_id',$shipping->user?->middle_name)}} {{ old('client_id',$shipping->user?->last_name)}}" name="shipping_title" readonly>
                                 </div>
                             </div>
                             <div class="col-md-6 col-12">
@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label for="price">Reject Note<i class="text-danger">*</i></label>
+                                    <label for="price">Note<i class="text-danger">*</i></label>
                                     <textarea name="reject_note"  class="form-control"  id="" required></textarea>
                                 </div>
                             </div>

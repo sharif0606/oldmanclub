@@ -17,7 +17,7 @@
                             <th scope="col">{{__('#SL')}}</th>
                             <th scope="col">{{__('Title')}}</th>
                             <th scope="col">{{__('Description')}}</th>
-                            <th scope="col">{{__('Image')}}</th>
+                            <th scope="col">{{__('Video')}}</th>
                             <th scope="col">{{__('Action')}}</th>
                         </tr>
                     </thead>

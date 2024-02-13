@@ -26,9 +26,9 @@
                         <tr>
                             <td>{{ ++$loop->index }}</td>
                             <td>
-                                {{$value->client?->first_name_en}}  
-                                {{$value->client?->middle_name_en}}  
-                                {{$value->client?->last_name_en}}  
+                                {{$value->client?->fname}}  
+                                {{$value->client?->middle_name}}  
+                                {{$value->client?->last_name}}  
                             </td>
                             <td><img src="{{asset('public/uploads/client/'.$value->client?->image)}}" class="img-fluid rounded-circle" alt="">
                                

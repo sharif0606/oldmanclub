@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Printingservice;
 
 use App\Http\Controllers\Controller;
 use App\Models\Backend\PrintingServiceImage;
+use App\Models\Backend\PrintingService;
 use Illuminate\Http\Request;
 
 class PrintingServiceImageController extends Controller
@@ -22,7 +23,7 @@ class PrintingServiceImageController extends Controller
      */
     public function create()
     {
-        $print_service = App\Models\Backend\PrintingService::get();
+        $print_service = PrintingService::get();
         return view('backend.print_service_image.create',compact('print_service'));
     }
 
@@ -33,7 +34,7 @@ class PrintingServiceImageController extends Controller
     {
         try{
             $print_image = new PrintingServiceImage;
-            $print_image->printing_service_id = $request->printing_service_id;
+            $print_image->printing_service_id  = $request->printing_service_id;
             if ($request->hasFile('image')) {
                 $imageName = rand(111,999) . time() . '.' .$request->image->extension();
                 $request->image->move(public_path('uploads/printimages'), $imageName);
@@ -45,8 +46,11 @@ class PrintingServiceImageController extends Controller
                 $print_image->is_featured = false;
             }
             $print_image->created_by = currentUserId();
-            $print_image->save();
-
+            if($print_image->save()){
+                $this->notice::success('Data Successfully saved');
+                return redirect()->route('print_service_image.index');
+            }
+            
         } catch(Exception $e) {
             // dd($e);
             $this->notice::error('Please try again');
