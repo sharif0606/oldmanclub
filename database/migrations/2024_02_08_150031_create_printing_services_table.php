@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('printing_services', function (Blueprint $table) {
             $table->id();
-            $table->string('service_name')->nullable();
-            $table->string('service_details')->nullable();
+            $table->string('service_name',255)->nullable();
+            $table->text('service_details')->nullable();
             $table->integer('qty')->default(1);
             $table->decimal('price',10,2)->default(0.00)->comment('Per Qty Price');
             $table->unsignedBigInteger('created_by');

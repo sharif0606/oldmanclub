@@ -33,7 +33,6 @@
                     @include('user.nfc-template.sleek-template')
                 @endif
             </div>
-
         @empty
             No Card Found
         @endforelse
