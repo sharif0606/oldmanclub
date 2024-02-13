@@ -17,6 +17,8 @@ return new class extends Migration
             $table->text('service_details')->nullable();
             $table->integer('qty')->default(1);
             $table->decimal('price',10,2)->default(0.00)->comment('Per Qty Price');
+            $table->tinyInteger('dis_type')->default(1)->comment('1 => Precentage, 2=> Flat');
+            $table->decimal('discount',10,2)->default(0.00);
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
