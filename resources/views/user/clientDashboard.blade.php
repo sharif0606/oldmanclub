@@ -13,7 +13,7 @@
                         </div>
                         <div class="profile-photo">
                             <img src="{{ asset('public/uploads/client/' . $client->image) }}" class="img-fluid rounded-circle"
-                                alt="">
+                                alt="sdfdsf">
                             <p class="badge"><img src="{{asset('public/images/varified.png')}}" alt=""></p> <!-- Add your badge here -->
                         </div>
                     </div>
