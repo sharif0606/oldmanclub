@@ -64,6 +64,7 @@ use App\Http\Controllers\User\PhoneGroupController as phonegroup;
 use App\Http\Controllers\User\ShippingController as shipping;
 use App\Http\Controllers\User\ShippingCommentController as shipcomment;
 use App\Http\Controllers\User\EmailSendController;
+use App\Http\Controllers\User\AddressVerificationController as address_verify;
 
 // landing page
 use App\Http\Controllers\Common\frontendController as frontend;
@@ -205,6 +206,7 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
 
     Route::get('/download-phonebook', [phonebook::class, 'downloadPhonebook'])->name('phonebook_download');
     Route::resource('nfc_card', nfc_card::class);
+    Route::resource('address_verify', address_verify::class);
 });
 Route::get('nfcqrurl/{id}', [nfc_card::class, 'showqrurl']);
 Route::post('save-contact', [nfc_card::class, 'save_contact'])->name('save_contact');
