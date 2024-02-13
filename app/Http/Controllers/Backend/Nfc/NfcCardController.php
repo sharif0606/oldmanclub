@@ -11,6 +11,7 @@ use App\Models\Backend\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 
 class NfcCardController extends Controller
 {
@@ -74,23 +75,22 @@ class NfcCardController extends Controller
 
                 /*Nfc Field Data Insert */
                 $nfcFieldIds = $request->input('nfc_field_id');
-                $nfcFieldValues = $request->input('field_value');
-                // Find the NFC card
-                $nfcCard = NfcCard::findOrFail($nfc->id);
-                // Find the NFC fields
-                $nfcFields = NfcField::whereIn('id', $nfcFieldIds)->get();
+                if ($nfcFieldIds) {
+                    $nfcFieldValues = $request->input('field_value');
+                    // Find the NFC card
+                    $nfcCard = NfcCard::findOrFail($nfc->id);
+                    // Find the NFC fields
+                    $nfcFields = NfcField::whereIn('id', $nfcFieldIds)->get();
 
-                // Attach NFC fields with values
-                foreach ($nfcFields as $nfcField) {
-                    // Get the value corresponding to the current NFC field ID
-                    $value = $nfcFieldValues[$nfcField->id];
+                    // Attach NFC fields with values
+                    foreach ($nfcFields as $nfcField) {
+                        // Get the value corresponding to the current NFC field ID
+                        $value = $nfcFieldValues[$nfcField->id];
 
-                    // Associate the NFC field with the NFC card along with the value
-                    $nfcCard->nfcFields()->attach($nfcField, ['field_value' => $value]);
+                        // Associate the NFC field with the NFC card along with the value
+                        $nfcCard->nfcFields()->attach($nfcField, ['field_value' => $value]);
+                    }
                 }
-
-
-
                 // Commit the transaction if all operations are successful
                 DB::commit();
 
@@ -168,17 +168,19 @@ class NfcCardController extends Controller
 
             // Retrieve the new data from the request
             $nfcFieldIds = $request->input('nfc_field_id');
-            $nfcFieldValues = $request->input('field_value');
+            if ($nfcFieldIds) {
+                $nfcFieldValues = $request->input('field_value');
 
-            // Prepare the data for sync
-            $nfcFieldData = [];
-            foreach ($nfcFieldIds as $index => $nfcFieldId) {
-                $value = $nfcFieldValues[$nfcFieldId];
-                $nfcFieldData[$nfcFieldId] = ['field_value' => $value];
+                // Prepare the data for sync
+                $nfcFieldData = [];
+                foreach ($nfcFieldIds as $index => $nfcFieldId) {
+                    $value = $nfcFieldValues[$nfcFieldId];
+                    $nfcFieldData[$nfcFieldId] = ['field_value' => $value];
+                }
+
+                // Synchronize the relationship, deleting any records not included in the new data
+                $nfc_card->nfcFields()->sync($nfcFieldData, true);
             }
-
-            // Synchronize the relationship, deleting any records not included in the new data
-            $nfc_card->nfcFields()->sync($nfcFieldData, true);
 
             // Save the NFC card
             $nfc_card->save();
@@ -208,5 +210,26 @@ class NfcCardController extends Controller
     {
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
         return view('user.nfc-card.showqrurl', compact('nfc_card'));
+    }
+    public function save_contact(Request $request)
+    {
+        $nfc_card = NfcCard::with(['nfc_info', 'client'])->where('client_id', currentUserId())->where('id', $request->id)->get();
+        //dd($nfc_card);
+        // $csv = "";
+        $csv = mb_convert_encoding("", 'UTF-8', 'UTF-8');
+        $csv .= mb_convert_encoding(implode(',', array(
+            'Name', 'Contact No', 'E-mail',
+        )), 'UTF-8', 'UTF-8') . "\n"; // Headers
+        foreach ($nfc_card as $row) {
+            $csv .= implode(',', array(
+                $row->client->fname . " " . $row->client->middle_name . "" . $row->client->last_name,
+                $row->client->contact_no,
+                $row->client->email,
+            )) . "\n";
+        }
+        $response = Response::make($csv, 200);
+        $response->header('Content-Type', 'text/csv;  charset=UTF-8');
+        $response->header('Content-Disposition', 'attachment; filename="contact.csv"');
+        return $response;
     }
 }

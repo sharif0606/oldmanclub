@@ -6,7 +6,7 @@
 @endpush
 @section('content')
     <div class="row">
-        <div class="col-5">
+        <div class="col-md-4 offset-md-4">
             <div class="card">
                 @if ($nfc_card->card_design?->design_card_id == 1)
                     @include('user.nfc-template.classic-template')
@@ -19,8 +19,26 @@
                 @endif
             </div>
         </div>
-        <div class="col-3">
-            {!! QrCode::size(300)->generate(Request::url()) !!}
+        <div class="col-md-4 offset-md-4">
+            {{-- {!! QrCode::size(300)->generate(Request::url()) !!} --}}
+            <button id="openDrawer" class="btn btn-secondary my-2">Save Contact</button>
+            <div class="modal fade bottom px-0" id="drawerModal" tabindex="-1" aria-labelledby="drawerTitle"
+                aria-hidden="true">
+                <div class="modal-dialog modal-fullscreen">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="drawerTitle">Save Contact</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" action="{{ route('save_contact') }}">
+                                <input type="hidden" name="id" value="{{ $nfc_card->id }}">
+                                @csrf
+                                <button type="submit" class="btn btn-primary">Save Contact</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-@endsection
+    @endsection

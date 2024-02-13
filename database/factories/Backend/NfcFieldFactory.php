@@ -17,10 +17,13 @@ class NfcFieldFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->word(),
-            'icon'  => fake()->word(),
-            'status' => fake()->boolean(),
-            'created_by' => 1,
+            [
+                'name' => 'Web',
+                'icon'  => 'fas fa-globe',
+                'status' => 1,
+                'created_by' => 1,
+            ]
+
         ];
     }
 }

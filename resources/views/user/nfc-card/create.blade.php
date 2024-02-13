@@ -62,7 +62,7 @@
                             <textarea name="title" id="" class="form-control" name="pronoun"></textarea>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="col-12">
                     <h6 class="border-bottom">NFC Design</h6>
@@ -78,7 +78,7 @@
                     <h6 class="border-bottom">NFC Field</h6>
                     <div class="row">
                         <div class="col-md-8">
-                            <div class="card bg-primary text-white" style="background-color: #ff6347;">
+                            <div class="card bg-primary text-white" style="max-height:400px;overflow-y:scroll;">
                                 <div class="card-body" id="selected-fields">
                                     Click the field you want to add to your card.
                                 </div>
@@ -89,7 +89,8 @@
                                 <button type="button" data-field="{{ $value->name }}" data-id="{{ $value->id }}"
                                     style="margin:2px 1px"
                                     class="field-item btn btn-secondary btn-sm text-white rounded-pill"><span
-                                        class="mx-1"><i class="fa fa-home"></i></span>{{ $value->name }}</button>
+                                        class="mx-1"><i
+                                            class="{{ $value->icon }}"></i></span>{{ $value->name }}</button>
 
                             @empty
                             @endforelse
@@ -112,11 +113,16 @@
                 console.log(field);
                 console.log(id);
                 var selectedFieldHtml = '<div class="selected-field-item px-3 my-1">\
-                                                <label for="' + field.toLowerCase() +'" class="form-label d-flex justify-content-between">' + field + '<span class="delete-btn"><i class="fa fa-close"></i></span></label>\
-                                                <input type="text" class="form-control" id="' + field.toLowerCase() +
-                    '" name="field_value['+id+']" placeholder="' + field.toLowerCase() + '">\
-                                                <input type="hidden" class="form-control" value="' + id + '" name="nfc_field_id[]">\
-                                            </div>';
+                                                                            <label for="' + field.toLowerCase() +
+                    '" class="form-label d-flex justify-content-between">' + field + '<span class="delete-btn"><i class="fa fa-close"></i></span></label>\
+                                                                            <input type="text" class="form-control" id="' +
+                    field
+                    .toLowerCase() +
+                    '" name="field_value[' + id + ']" placeholder="' + field.toLowerCase() +
+                    '">\
+                                                                            <input type="hidden" class="form-control" value="' +
+                    id + '" name="nfc_field_id[]">\
+                                                                        </div>';
                 $('#selected-fields').append(selectedFieldHtml);
             }
 

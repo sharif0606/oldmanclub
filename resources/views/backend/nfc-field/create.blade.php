@@ -30,8 +30,8 @@
                                         {{-- <input type="text" id="icon" class="form-control" value="{{ old('icon')}}" name="icon"> --}}
                                         <select class="form-control" name="icon">
                                             <option value="">Select Icon</option>
-                                            <option value="fa-brands fa-dribbble"></i>">Web</option>
-                                            <option value="fa-brands fa-dribbble"></i>">Email</option>
+                                            <option value="fas fa-globe">Web</option>
+                                            <option value="fas fa-envelope-open">Email</option>
                                         </select>
                                         @if ($errors->has('icon'))
                                             <span class="text-danger"> {{ $errors->first('icon') }}</span>
