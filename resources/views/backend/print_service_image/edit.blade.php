@@ -7,8 +7,9 @@
         <div class="card">
             <div class="card-content">
                 <div class="card-body">
-                    <form class="form" method="post" enctype="multipart/form-data" action="{{ route('print_service_image.store') }}">
+                    <form class="form" method="post" enctype="multipart/form-data" action="{{ route('print_service_image.update',encryptor('encrypt',$print_image->id))}}">
                         @csrf
+                        @method('PATCH')
                         <div class="row">
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
@@ -16,7 +17,7 @@
                                     <select name="printing_service_id" id="printing_service_id" class="form-control">
                                         <option value="">Select service</option>
                                         @foreach($print_service as $value)
-                                            <option value="{{ $value->id }}">{{ $value->service_name }}</option>
+                                            <option value="{{ $value->id }}" {{ old('printing_service_id',$print_image->printing_service_id)==$value->id ? "selected" : "" }}>{{ $value->service_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -30,7 +31,7 @@
                                     @endif
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="is_featured" name="is_featured" value="1">
+                                    <input class="form-check-input" type="checkbox" id="is_featured" name="is_featured" value="1" @if($print_image->is_featured) checked @endif>
                                     <label class="form-check-label" for="is_featured">Mark as Featured Image</label>
                                 </div>
                             </div>

@@ -223,7 +223,9 @@ Route::get('printservice', [frontend::class, 'printservice'])->name('printservic
 
 // cart
 Route::get('cart', [CartController::class, 'cart'])->name('cart_page');
+Route::post('update-cart', [CartController::class, 'updateCart'])->name('update.cart');
 Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('addto_cart');
+Route::post('add-to-cart/{id}', [CartController::class, 'addToCart_store'])->name('addto_cart_store');
 Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remove.from.cart');
 Route::get('checkout', [CheckOutController::class, 'index'])->name('checkout');
 Route::post('checkout', [CheckOutController::class, 'store'])->name('checkout.store');

@@ -36,4 +36,7 @@ class Client extends Model
     {
         return $this->hasMany(Shipping::class, 'client_id','id');
     }
+    public function cart(){
+        return $this->hasMany(Cart::class);
+    }
 }

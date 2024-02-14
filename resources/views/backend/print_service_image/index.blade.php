@@ -31,17 +31,17 @@
                             <th scope="row">{{ ++$loop->index }}</th>
                             <td>{{$p->print_service?->service_name}}</td>
                             <td><img width="50px" src="{{asset('public/uploads/printimages/'.$p->image)}}" alt=""> </td>
-                            <td></td>
+                            <td>{{$p->is_featured}}</td>
                             <td>{{$p->createdBy?->name}}</td>
                             <td>{{$p->updatedBy?->name}}</td>
                             <td class="white-space-nowrap">
-                                <a href="{{route('print_service.edit',encryptor('encrypt',$p->id))}}">
+                                <a href="{{route('print_service_image.edit',encryptor('encrypt',$p->id))}}">
                                     <i class="fa fa-edit"></i>
                                 </a>
                                 <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()">
                                     <i class="fa fa-trash"></i>
                                 </a>
-                                <form id="form{{$p->id}}" action="{{route('print_service.destroy',encryptor('encrypt',$p->id))}}" method="post">
+                                <form id="form{{$p->id}}" action="{{route('print_service_image.destroy',encryptor('encrypt',$p->id))}}" method="post">
                                     @csrf
                                     @method('delete')
                                 </form>

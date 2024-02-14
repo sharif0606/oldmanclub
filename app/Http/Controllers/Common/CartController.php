@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Common\CartItem;
 use App\Models\Backend\PrintingService;
+use App\Models\Backend\PrintingServiceImage;
 class CartController extends Controller
 {
     public function cart()
@@ -35,7 +36,9 @@ class CartController extends Controller
             return redirect()->back()->with('success', $message);
         }
     }
+    // public function addToCart(Request $request){
 
+    // }
     public function remove(Request $request)
     {
         if ($request->id) {
