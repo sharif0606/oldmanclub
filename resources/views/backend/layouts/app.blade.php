@@ -159,6 +159,9 @@
                                     </ul>
                                 </li>
                                 <li>
+                                    <a href="{{route('order_list')}}">Order List</a>
+                                </li>
+                                <li>
                                     <a class="has-arrow" href="javascript:void()">Print Service</a>
                                     <ul aria-expanded="false">
                                         <li><a href="{{route('print_service.index')}}">Printing Service</a></li>
