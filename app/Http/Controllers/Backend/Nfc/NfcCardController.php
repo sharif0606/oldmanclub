@@ -224,7 +224,7 @@ class NfcCardController extends Controller
 
         // Loop through each NFC card and create a vCard entry for each
         foreach ($nfc_cards as $nfc_card) {
-            $vCard .= "FN:" . $nfc_card->client->fname . " " . $nfc_card->client->last_name . "\r\n";
+            $vCard .= "FN:" . $nfc_card->client->fname . $nfc_card->client->middle_name . " " . " " . $nfc_card->client->last_name . "\r\n";
             $vCard .= "UID:" . uniqid() . "\r\n"; // Generate a unique identifier
         }
 
@@ -233,12 +233,12 @@ class NfcCardController extends Controller
         // Set headers for vCard file
         $headers = [
             'Content-Type' => 'text/vcard',
-            'Content-Disposition' => 'attachment; filename="' . $nfc_card->client->fname . " " . $nfc_card->client->last_name . '".vcf',
+            'Content-Disposition' => 'attachment; filename="' . $nfc_card->client->fname . $nfc_card->client->fname . " " . " " . $nfc_card->client->last_name . '".vcf',
         ];
 
         // Return vCard as a response
         return response()->streamDownload(function () use ($vCard) {
             echo $vCard;
-        }, $nfc_card->client->fname . " " . $nfc_card->client->last_name . '.vcf', $headers);
+        }, $nfc_card->client->fname . " " . $nfc_card->client->middle_name . " " . $nfc_card->client->last_name . '.vcf', $headers);
     }
 }
