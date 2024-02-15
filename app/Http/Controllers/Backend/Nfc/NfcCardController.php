@@ -233,12 +233,12 @@ class NfcCardController extends Controller
         // Set headers for vCard file
         $headers = [
             'Content-Type' => 'text/vcard',
-            'Content-Disposition' => 'attachment; filename="' . $nfc_card->client->fname . " " . $nfc_card->client->last_name . '"',
+            'Content-Disposition' => 'attachment; filename="' . $nfc_card->client->fname . " " . $nfc_card->client->last_name . '".vcf',
         ];
 
         // Return vCard as a response
         return response()->streamDownload(function () use ($vCard) {
             echo $vCard;
-        }, $nfc_card->client->fname . " " . $nfc_card->client->last_name, $headers);
+        }, $nfc_card->client->fname . " " . $nfc_card->client->last_name . '.vcf', $headers);
     }
 }
