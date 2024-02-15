@@ -213,7 +213,10 @@ class NfcCardController extends Controller
     }
     public function save_contact(Request $request)
     {
-        $nfc_cards = NfcCard::with(['nfc_info', 'client'])->where('client_id', currentUserId())->where('id', $request->id)->get();
+        $nfc_cards = NfcCard::with(['nfc_info', 'client'])
+            ->where('client_id', currentUserId())
+            ->where('id', $request->id)
+            ->get();
 
         // Initialize an empty vCard string
         $vCard = "";
@@ -237,6 +240,6 @@ class NfcCardController extends Controller
         ];
 
         // Return vCard as a response
-        return response()->make($vCard, 200, $headers);
+        return response($vCard, 200, $headers);
     }
 }
