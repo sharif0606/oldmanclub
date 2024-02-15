@@ -218,8 +218,8 @@ class NfcCardController extends Controller
         // Initialize an empty vCard string
         $vCard = "BEGIN:VCARD\r\n";
         $vCard .= "VERSION:3.0\r\n";
-        if ($nfc_card->client->fname || $nfc_card->client->fname || $nfc_card->client->last_name)
-            $file_name = $nfc_card->client->fname . $nfc_card->client->middle_name . " " . " " . $nfc_card->client->last_name . ".vcf";
+        if ($nfc_card->client->fname || $nfc_card->client->middle_name || $nfc_card->client->last_name)
+            $file_name = $nfc_card->client->fname . " " . $nfc_card->client->middle_name .  " " . $nfc_card->client->last_name . ".vcf";
         else
             $file_name =  'contact.vcf';
 
@@ -228,9 +228,11 @@ class NfcCardController extends Controller
         $vCard .= "VERSION:3.0\r\n";
         // Loop through each NFC card and create a vCard entry for each
 
-        $vCard .= "FN:" . $nfc_card->client->fname . " " . $nfc_card->client->last_name . "\r\n";
+        $vCard .= "FN:" . $nfc_card->client->fname . "\r\n";
         $vCard .= "UID:" . uniqid() . "\r\n"; // Generate a unique identifier
-
+        $vCard .= "N:" . $nfc_card->client->fname . " " . $nfc_card->client->middle_name .  " " . $nfc_card->client->last_name  . "\r\n";
+        $vCard .= "EMAIL:" . $nfc_card->client->email . "\r\n";
+        $vCard .= "TEL;TYPE=CELL:" . $nfc_card->client->contact_no . "\r\n";
 
         $vCard .= "END:VCARD\r\n";
 
