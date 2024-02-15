@@ -129,9 +129,9 @@ Route::prefix('admin')->group(function () {
     Route::get('comment_list', [CommentController::class, 'comment_list'])->name('comment_list');
     Route::get('comment_edit/{id}', [CommentController::class, 'comment_edit'])->name('comment_edit');
     Route::post('comment_update/{id}', [CommentController::class, 'comment_update'])->name('comment_update');
-    Route::get('order-list',[OrderController::class, 'order_list'])->name('order_list');
-    Route::get('order-edit/{id}',[OrderController::class, 'order_edit'])->name('order_edit');
-    Route::post('order-edit/{id}',[OrderController::class, 'order_store'])->name('order_update');
+    Route::get('order-list', [OrderController::class, 'order_list'])->name('order_list');
+    Route::get('order-edit/{id}', [OrderController::class, 'order_edit'])->name('order_edit');
+    Route::post('order-edit/{id}', [OrderController::class, 'order_store'])->name('order_update');
 
     //website  
     Route::resource('setting', setting::class);
