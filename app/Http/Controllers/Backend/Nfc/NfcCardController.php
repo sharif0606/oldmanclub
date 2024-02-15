@@ -219,19 +219,19 @@ class NfcCardController extends Controller
             ->get();
 
         // Initialize an empty vCard string
-        $vCard = "";
+        $vCard = "BEGIN:VCARD\r\n";
+        $vCard .= "VERSION:3.0\r\n";
 
         // Loop through each NFC card and create a vCard entry for each
         foreach ($nfc_cards as $nfc_card) {
             // Build vCard entry
-            $vCard .= "BEGIN:VCARD\n";
-            $vCard .= "VERSION:3.0\n";
-            $vCard .= "N:" . $nfc_card->client->last_name . ";" . $nfc_card->client->fname . ";;;\n";
-            $vCard .= "FN:" . $nfc_card->client->fname . " " . $nfc_card->client->last_name . "\n";
-            $vCard .= "TEL;TYPE=CELL:" . $nfc_card->client->contact_no . "\n";
-            $vCard .= "EMAIL:" . $nfc_card->client->email . "\n";
-            $vCard .= "END:VCARD\n";
+            $vCard .= "N:" . $nfc_card->client->last_name . ";" . $nfc_card->client->fname . ";;;\r\n";
+            $vCard .= "FN:" . $nfc_card->client->fname . " " . $nfc_card->client->last_name . "\r\n";
+            $vCard .= "TEL;TYPE=CELL:" . $nfc_card->client->contact_no . "\r\n";
+            $vCard .= "EMAIL:" . $nfc_card->client->email . "\r\n";
         }
+
+        $vCard .= "END:VCARD\r\n";
 
         // Set headers for vCard file
         $headers = [
@@ -240,6 +240,8 @@ class NfcCardController extends Controller
         ];
 
         // Return vCard as a response
-        return response($vCard, 200, $headers);
+        return response()->streamDownload(function () use ($vCard) {
+            echo $vCard;
+        }, 'contact.vcf', $headers);
     }
 }
