@@ -13,12 +13,9 @@ return new class extends Migration
     {
         Schema::create('shippings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('client_id')->index();
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
-            $table->string('shipping_title')->nullable();
-            $table->string('shipping_description')->nullable();
-            $table->string('status')->default('1')->comment('1=>pending,2=>approved,3=>reject');
-            $table->text('reject_note')->nullable();
+            $table->foreignId('client_id')->constrained('clients');
+            $table->string('status')->default('1')->comment('1=>pending,2=>approved,3=>cancel');
+            $table->text('cancel_note')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

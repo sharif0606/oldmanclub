@@ -211,28 +211,39 @@ class NfcCardController extends Controller
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
         return view('user.nfc-card.showqrurl', compact('nfc_card'));
     }
-    public function save_contact(Request $request)
+    public function save_contact($id)
     {
-        $nfc_card = NfcCard::with(['nfc_info', 'client'])
-            ->where('client_id', currentUserId())
-            ->where('id', $request->id)
-            ->first();
-        dd($nfc_card->client);
 
+        $nfc_card = NfcCard::with(['client', 'nfc_info'])->findOrFail(encryptor('decrypt', $id));
         // Initialize an empty vCard string
         $vCard = "BEGIN:VCARD\r\n";
         $vCard .= "VERSION:3.0\r\n";
         if ($nfc_card->client->fname || $nfc_card->client->middle_name || $nfc_card->client->last_name)
-            $file_name = $nfc_card->client->fname . $nfc_card->client->middle_name . " " . " " . $nfc_card->client->last_name . ".vcf";
+            $file_name = $nfc_card->client->fname . " " . $nfc_card->client->middle_name .  " " . $nfc_card->client->last_name . ".vcf";
         else
             $file_name =  'contact.vcf';
 
+        // Initialize an empty vCard string
+        $vCard = "BEGIN:VCARD\r\n";
+        $vCard .= "VERSION:3.0\r\n";
         // Loop through each NFC card and create a vCard entry for each
 
-        $vCard .= "FN:" . $nfc_card->client->fname . " " . $nfc_card->client->last_name . "\r\n";
+        $vCard .= "FN:" . $nfc_card->client->fname . "\r\n";
         $vCard .= "UID:" . uniqid() . "\r\n"; // Generate a unique identifier
+        $vCard .= "N:" . $nfc_card->client->fname . " " . $nfc_card->client->middle_name .  " " . $nfc_card->client->last_name  . "\r\n";
+        $vCard .= "EMAIL:" . $nfc_card->client->email . "\r\n";
+        $vCard .= "TEL;TYPE=CELL:" . $nfc_card->client->contact_no . "\r\n";
+        if ($nfc_card->client?->cover_photo)
+            $filePath = asset('public/uploads/client/' . $nfc_card->client?->cover_photo);
+        else
+            $filePath =  asset('public/images/profile/cover2.jpg');
+        // Read image file and encode it to base64
+        $imageData = base64_encode(file_get_contents($filePath));
 
+        // Get the image file extension
+        $imageExtension = pathinfo($filePath, PATHINFO_EXTENSION);
 
+        $vCard .= "PHOTO;TYPE=" . $imageExtension . ";ENCODING=BASE64:" . $imageData . "\r\n";
         $vCard .= "END:VCARD\r\n";
 
 

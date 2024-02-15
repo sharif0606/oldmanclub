@@ -215,7 +215,7 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::resource('address_verify', address_verify::class);
 });
 Route::get('nfcqrurl/{id}', [nfc_card::class, 'showqrurl']);
-Route::post('save-contact', [nfc_card::class, 'save_contact'])->name('save_contact');
+Route::get('save-contact/{id}', [nfc_card::class, 'save_contact'])->name('save_contact');
 Route::post('/send-message', [ChatController::class, 'sendMessage']);
 
 Route::get('', [frontend::class, 'frontend'])->name('frontend');
