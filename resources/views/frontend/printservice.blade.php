@@ -139,14 +139,16 @@
             @foreach($printservices as $value)
             <div class="product-image-container print-product-card m-3 col-lg-3 col-md-6 col-sm-12">
                 @foreach($value->printing_service_image as $v)
-                        <img width="100%" src="{{ asset('public/uploads/printimages/'.$v->image) }}" alt="">
+                    @if($v->is_featured)
+                        <img src="{{ asset('public/uploads/printimages/'.$v->image) }}" alt="" class="img-fluid w-75 h-50">
                         <div class="hover-buttons d-flex">
                           
                            <a href="{{route('addto_cart', $value->id)}}"
                                     class=" btn btn-lg btn-info me-1"><i class="fa-solid fa-cart-plus"></i></a>
                             <!-- <button class="cart-button"><i class="fa-solid fa-cart-plus"></i></button> -->
                             <button class="btn btn-lg btn-warning wish-button"><i class="fa-regular fa-heart"></i></button>
-                        </div>  
+                        </div>
+                     @endif  
                 @endforeach
                 <h3 class="print-product-name">{{$value->service_name}}</h3>
                 <p class="print-product-price">${{$value->price}}</p>

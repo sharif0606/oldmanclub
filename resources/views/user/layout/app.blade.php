@@ -133,6 +133,9 @@
                     <li><a class="has-arrow" href="{{ route('shipping.index') }}" aria-expanded="false"><i
                                 class="icon icon-app-store"></i><span class="nav-text">Shipping</span></a>
                     </li>
+                    <li><a class="has-arrow" href="{{ route('order.index') }}" aria-expanded="false"><i
+                                class="icon icon-app-store"></i><span class="nav-text">Order</span></a>
+                    </li>
                     <li><a class="has-arrow" href="{{ route('phonebook.index') }}" aria-expanded="false">
                             <i class="icon-phone"></i><span class="nav-text">PhoneBook</span></a>
                     </li>

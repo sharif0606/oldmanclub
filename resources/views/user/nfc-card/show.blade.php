@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="col-3">
-            {!! QrCode::size(300)->generate(Request::url()) !!}
+            {!! QrCode::size(300)->generate(url('nfcqrurl/' . encryptor('encrypt', $nfc_card->id))) !!}
         </div>
     </div>
 @endsection

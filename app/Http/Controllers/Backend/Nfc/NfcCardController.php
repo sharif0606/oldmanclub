@@ -211,25 +211,51 @@ class NfcCardController extends Controller
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
         return view('user.nfc-card.showqrurl', compact('nfc_card'));
     }
-    public function save_contact(Request $request)
+    public function save_contact($id)
     {
-        $nfc_card = NfcCard::with(['nfc_info', 'client'])->where('client_id', currentUserId())->where('id', $request->id)->get();
-        //dd($nfc_card);
-        // $csv = "";
-        $csv = mb_convert_encoding("", 'UTF-8', 'UTF-8');
-        $csv .= mb_convert_encoding(implode(',', array(
-            'Name', 'Contact No', 'E-mail',
-        )), 'UTF-8', 'UTF-8') . "\n"; // Headers
-        foreach ($nfc_card as $row) {
-            $csv .= implode(',', array(
-                $row->client->fname . " " . $row->client->middle_name . "" . $row->client->last_name,
-                $row->client->contact_no,
-                $row->client->email,
-            )) . "\n";
-        }
-        $response = Response::make($csv, 200);
-        $response->header('Content-Type', 'text/csv;  charset=UTF-8');
-        $response->header('Content-Disposition', 'attachment; filename="contact.csv"');
-        return $response;
+
+        $nfc_card = NfcCard::with(['client', 'nfc_info'])->findOrFail(encryptor('decrypt', $id));
+        // Initialize an empty vCard string
+        $vCard = "BEGIN:VCARD\r\n";
+        $vCard .= "VERSION:3.0\r\n";
+        if ($nfc_card->client->fname || $nfc_card->client->middle_name || $nfc_card->client->last_name)
+            $file_name = $nfc_card->client->fname . " " . $nfc_card->client->middle_name .  " " . $nfc_card->client->last_name . ".vcf";
+        else
+            $file_name =  'contact.vcf';
+
+        // Initialize an empty vCard string
+        $vCard = "BEGIN:VCARD\r\n";
+        $vCard .= "VERSION:3.0\r\n";
+        // Loop through each NFC card and create a vCard entry for each
+
+        $vCard .= "FN:" . $nfc_card->client->fname . "\r\n";
+        $vCard .= "UID:" . uniqid() . "\r\n"; // Generate a unique identifier
+        $vCard .= "N:" . $nfc_card->client->fname . " " . $nfc_card->client->middle_name .  " " . $nfc_card->client->last_name  . "\r\n";
+        $vCard .= "EMAIL:" . $nfc_card->client->email . "\r\n";
+        $vCard .= "TEL;TYPE=CELL:" . $nfc_card->client->contact_no . "\r\n";
+        if ($nfc_card->client?->cover_photo)
+            $filePath = asset('public/uploads/client/' . $nfc_card->client?->cover_photo);
+        else
+            $filePath =  asset('public/images/profile/cover2.jpg');
+        // Read image file and encode it to base64
+        $imageData = base64_encode(file_get_contents($filePath));
+
+        // Get the image file extension
+        $imageExtension = pathinfo($filePath, PATHINFO_EXTENSION);
+
+        $vCard .= "PHOTO;TYPE=" . $imageExtension . ";ENCODING=BASE64:" . $imageData . "\r\n";
+        $vCard .= "END:VCARD\r\n";
+
+
+        // Set headers for vCard file
+        $headers = [
+            'Content-Type' => 'text/vcard',
+            'Content-Disposition' => 'attachment; filename="' . $file_name . '"',
+        ];
+
+        // Return vCard as a response
+        return response()->streamDownload(function () use ($vCard) {
+            echo $vCard;
+        }, $file_name, $headers);
     }
 }

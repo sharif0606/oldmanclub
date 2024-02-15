@@ -22,4 +22,7 @@ class PrintingService extends Model
     public function cartItem(){
         return $this->hasMany(CartItem::class);
     }
+    public function cart(){
+        return $this->hasMany(Cart::class);
+    }
 }

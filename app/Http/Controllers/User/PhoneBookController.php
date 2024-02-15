@@ -19,7 +19,6 @@ class PhoneBookController extends Controller
     public function index()
     {
         $phonegroup = PhoneGroup::get();
-        
         $phonebook = PhoneBook::where('client_id',currentUserId())->get();
         return view('user.phonebook.index',compact('phonebook','phonegroup'));
     }

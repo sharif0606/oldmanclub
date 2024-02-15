@@ -11,7 +11,7 @@ class ShippingController extends Controller
 {
     public function shipping_list()
     {
-        $client = Client::find(currentUserId());
+        $client = Client::get();
         $shipping = Shipping::get();
         return view('backend.shipping.shipping_list',compact('shipping','client'));
     }

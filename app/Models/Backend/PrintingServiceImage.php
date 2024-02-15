@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class PrintingServiceImage extends Model
 {
     use HasFactory,SoftDeletes;
+    protected $fillable = [
+        'printing_service_id',
+        'is_featured', 
+    ];
     public function createdBy(){
         return $this->belongsTo(User::class, 'created_by','id');
     }
