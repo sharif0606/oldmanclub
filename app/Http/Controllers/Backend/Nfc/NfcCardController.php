@@ -213,23 +213,30 @@ class NfcCardController extends Controller
     }
     public function save_contact(Request $request)
     {
-        $nfc_card = NfcCard::with(['nfc_info', 'client'])->where('client_id', currentUserId())->where('id', $request->id)->get();
-        //dd($nfc_card);
-        // $csv = "";
-        $csv = mb_convert_encoding("", 'UTF-8', 'UTF-8');
-        $csv .= mb_convert_encoding(implode(',', array(
-            'Name', 'Contact No', 'E-mail',
-        )), 'UTF-8', 'UTF-8') . "\n"; // Headers
-        foreach ($nfc_card as $row) {
-            $csv .= implode(',', array(
-                $row->client->fname . " " . $row->client->middle_name . "" . $row->client->last_name,
-                $row->client->contact_no,
-                $row->client->email,
-            )) . "\n";
+        $nfc_cards = NfcCard::with(['nfc_info', 'client'])->where('client_id', currentUserId())->where('id', $request->id)->get();
+
+        // Initialize an empty vCard string
+        $vCard = "";
+
+        // Loop through each NFC card and create a vCard entry for each
+        foreach ($nfc_cards as $nfc_card) {
+            // Build vCard entry
+            $vCard .= "BEGIN:VCARD\n";
+            $vCard .= "VERSION:3.0\n";
+            $vCard .= "N:" . $nfc_card->client->last_name . ";" . $nfc_card->client->fname . ";;;\n";
+            $vCard .= "FN:" . $nfc_card->client->fname . " " . $nfc_card->client->last_name . "\n";
+            $vCard .= "TEL;TYPE=CELL:" . $nfc_card->client->contact_no . "\n";
+            $vCard .= "EMAIL:" . $nfc_card->client->email . "\n";
+            $vCard .= "END:VCARD\n";
         }
-        $response = Response::make($csv, 200);
-        $response->header('Content-Type', 'text/csv;  charset=UTF-8');
-        $response->header('Content-Disposition', 'attachment; filename="contact.csv"');
-        return $response;
+
+        // Set headers for vCard file
+        $headers = [
+            'Content-Type' => 'text/vcard',
+            'Content-Disposition' => 'attachment; filename="contact.vcf"',
+        ];
+
+        // Return vCard as a response
+        return response()->make($vCard, 200, $headers);
     }
 }
