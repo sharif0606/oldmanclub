@@ -217,6 +217,7 @@ class NfcCardController extends Controller
             ->where('client_id', currentUserId())
             ->where('id', $request->id)
             ->first();
+        dd($nfc_card->client);
 
         // Initialize an empty vCard string
         $vCard = "BEGIN:VCARD\r\n";
