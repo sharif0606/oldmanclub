@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('shipping_comments', function (Blueprint $table) {
+        Schema::create('shipping_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('shipping_id')->constrained('shippings');
-            $table->foreignId('client_id')->constrained('clients');
-            $table->text('body');
-            $table->foreignId('parent_id')->constrained('shipping_comments'); // Nullable for top-level comments
+            $table->string('shipping_title')->nullable();
+            $table->text('shipping_description')->nullable();
+            $table->decimal('price',10,2)->default(0.00);
+            $table->string('image_path')->nullable();
             $table->timestamps();
             $table->softDeletes();
-        });;
+        });
     }
 
     /**
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('shipping_comments');
+        Schema::dropIfExists('shipping_details');
     }
 };
