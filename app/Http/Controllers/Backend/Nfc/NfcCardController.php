@@ -211,22 +211,21 @@ class NfcCardController extends Controller
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
         return view('user.nfc-card.showqrurl', compact('nfc_card'));
     }
-    public function save_contact(Request $request)
+    public function save_contact($id)
     {
-        $nfc_card = NfcCard::with(['nfc_info', 'client'])
-            ->where('client_id', currentUserId())
-            ->where('id', $request->id)
-            ->first();
-        dd($nfc_card->client);
 
+        $nfc_card = NfcCard::with(['client', 'nfc_info'])->findOrFail(encryptor('decrypt', $id));
         // Initialize an empty vCard string
         $vCard = "BEGIN:VCARD\r\n";
         $vCard .= "VERSION:3.0\r\n";
-        if ($nfc_card->client->fname || $nfc_card->client->middle_name || $nfc_card->client->last_name)
+        if ($nfc_card->client->fname || $nfc_card->client->fname || $nfc_card->client->last_name)
             $file_name = $nfc_card->client->fname . $nfc_card->client->middle_name . " " . " " . $nfc_card->client->last_name . ".vcf";
         else
             $file_name =  'contact.vcf';
 
+        // Initialize an empty vCard string
+        $vCard = "BEGIN:VCARD\r\n";
+        $vCard .= "VERSION:3.0\r\n";
         // Loop through each NFC card and create a vCard entry for each
 
         $vCard .= "FN:" . $nfc_card->client->fname . " " . $nfc_card->client->last_name . "\r\n";

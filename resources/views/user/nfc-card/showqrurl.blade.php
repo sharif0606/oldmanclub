@@ -31,11 +31,8 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form method="post" action="{{ route('save_contact') }}">
-                                <input type="hidden" name="id" value="{{ $nfc_card->id }}">
-                                @csrf
-                                <button type="submit" class="btn btn-primary">Save Contact</button>
-                            </form>
+                            <a href="{{ route('save_contact', encryptor('encrypt', $nfc_card->id)) }}"
+                                class="btn btn-primary">Save Contact</a>
                         </div>
                     </div>
                 </div>
