@@ -213,32 +213,37 @@ class NfcCardController extends Controller
     }
     public function save_contact(Request $request)
     {
-        $nfc_cards = NfcCard::with(['nfc_info', 'client'])
+        $nfc_card = NfcCard::with(['nfc_info', 'client'])
             ->where('client_id', currentUserId())
             ->where('id', $request->id)
-            ->get();
+            ->first();
 
         // Initialize an empty vCard string
         $vCard = "BEGIN:VCARD\r\n";
         $vCard .= "VERSION:3.0\r\n";
+        if ($nfc_card->client->fname || $nfc_card->client->lname || $nfc_card->client->last_name)
+            $file_name = $nfc_card->client->fname . $nfc_card->client->middle_name . " " . " " . $nfc_card->client->last_name . ".vcf";
+        else
+            $file_name =  'contact.vcf';
 
         // Loop through each NFC card and create a vCard entry for each
-        foreach ($nfc_cards as $nfc_card) {
-            $vCard .= "FN:" . $nfc_card->client->fname . $nfc_card->client->middle_name . " " . " " . $nfc_card->client->last_name . "\r\n";
-            $vCard .= "UID:" . uniqid() . "\r\n"; // Generate a unique identifier
-        }
+
+        $vCard .= "FN:" . $nfc_card->client->fname . " " . $nfc_card->client->last_name . "\r\n";
+        $vCard .= "UID:" . uniqid() . "\r\n"; // Generate a unique identifier
+
 
         $vCard .= "END:VCARD\r\n";
+
 
         // Set headers for vCard file
         $headers = [
             'Content-Type' => 'text/vcard',
-            'Content-Disposition' => 'attachment; filename="' . $nfc_card->client->fname . $nfc_card->client->fname . " " . " " . $nfc_card->client->last_name . '".vcf',
+            'Content-Disposition' => 'attachment; filename="' . $file_name . '"',
         ];
 
         // Return vCard as a response
         return response()->streamDownload(function () use ($vCard) {
             echo $vCard;
-        }, $nfc_card->client->fname . " " . $nfc_card->client->middle_name . " " . $nfc_card->client->last_name . '.vcf', $headers);
+        }, $file_name, $headers);
     }
 }
