@@ -213,31 +213,42 @@ class NfcCardController extends Controller
     }
     public function save_contact(Request $request)
     {
-        $vCardData = "BEGIN:VCARD\r\n";
-        $vCardData .= "VERSION:3.0\r\n";
-        $vCardData .= "FN:Dr. Md Kaisar Uddin FCP\r\n";
-        $vCardData .= "UID:" . uniqid() . "\r\n"; // Generate a unique identifier
-        $vCardData .= "EMAIL:tawhid8995@gmail.com\r\n";
-        $vCardData .= "TEL;TYPE=WORK:+880 1670 429562\r\n";
-        $vCardData .= "ORG:Muktodhara Technology Limited;Software Development\r\n";
-        $vCardData .= "TITLE:Lorem Ipsum is simply dummy text of the printing and typesetting\r\n";
-        $vCardData .= "  industry. Lorem Ipsum has been the industry's standard dummy text ever\r\n";
-        $vCardData .= "  since the 1500s, when an unknown printer took a galley of type and\r\n";
-        $vCardData .= "  scrambled it to make a type specimen book. It has survived not only five\r\n";
-        $vCardData .= "  centuries, but also the leap into electronic typesetting, remaining\r\n";
-        $vCardData .= "  essentially unchanged.\r\n";
-        $vCardData .= "URL:https://hihello.me\r\n";
-        $vCardData .= "URL;TYPE=WEBSITE:https://www.google.com\r\n";
-        $vCardData .= "N:Uddin;Md;Kaisar;Dr.;FCP;\r\n";
-        $vCardData .= "END:VCARD\r\n";
+        $nfc_cards = NfcCard::with(['nfc_info', 'client'])
+            ->where('client_id', currentUserId())
+            ->where('id', $request->id)
+            ->get();
+
+        // Initialize an empty vCard string
+        $vCard = "";
+
+        // Loop through each NFC card and create a vCard entry for each
+        foreach ($nfc_cards as $nfc_card) {
+            // Build vCard entry for each contact
+            $vCard .= "BEGIN:VCARD\r\n";
+            $vCard .= "VERSION:3.0\r\n";
+            $vCard .= "FN:" . $nfc_card->client->fname . " " . $nfc_card->client->last_name . "\r\n";
+            $vCard .= "N:" . $nfc_card->client->last_name . ";" . $nfc_card->client->fname . ";;;\r\n";
+            $vCard .= "EMAIL:" . $nfc_card->client->email . "\r\n";
+            $vCard .= "TEL;TYPE=CELL:" . $nfc_card->client->contact_no . "\r\n";
+            $vCard .= "ORG:Muktodhara Technology Limited;Software Development\r\n";
+            $vCard .= "TITLE:Lorem Ipsum is simply dummy text of the printing and typesetting\r\n";
+            $vCard .= "  industry. Lorem Ipsum has been the industry's standard dummy text ever\r\n";
+            $vCard .= "  since the 1500s, when an unknown printer took a galley of type and\r\n";
+            $vCard .= "  scrambled it to make a type specimen book. It has survived not only five\r\n";
+            $vCard .= "  centuries, but also the leap into electronic typesetting, remaining\r\n";
+            $vCard .= "  essentially unchanged.\r\n";
+            $vCard .= "URL:https://hihello.me\r\n";
+            $vCard .= "URL;TYPE=WEBSITE:https://www.google.com\r\n";
+            $vCard .= "END:VCARD\r\n";
+        }
 
         // Set headers for vCard file
         $headers = [
             'Content-Type' => 'text/vcard',
-            'Content-Disposition' => 'attachment; filename="contact.vcf"',
+            'Content-Disposition' => 'attachment; filename="contacts.vcf"',
         ];
 
         // Return vCard as a response
-        return response()->make($vCardData, 200, $headers);
+        return response($vCard, 200, $headers);
     }
 }
