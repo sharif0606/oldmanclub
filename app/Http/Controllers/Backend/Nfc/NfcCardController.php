@@ -221,7 +221,7 @@ class NfcCardController extends Controller
         // Initialize an empty vCard string
         $vCard = "BEGIN:VCARD\r\n";
         $vCard .= "VERSION:3.0\r\n";
-        if ($nfc_card->client->fname || $nfc_card->client->lname || $nfc_card->client->last_name)
+        if ($nfc_card->client->fname || $nfc_card->client->middle_name || $nfc_card->client->last_name)
             $file_name = $nfc_card->client->fname . $nfc_card->client->middle_name . " " . " " . $nfc_card->client->last_name . ".vcf";
         else
             $file_name =  'contact.vcf';
