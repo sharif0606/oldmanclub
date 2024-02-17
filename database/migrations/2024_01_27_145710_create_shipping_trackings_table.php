@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('shipping_trackings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('shipping_id')->index();
-            $table->foreign('shipping_id')->references('id')->on('shippings')->onDelete('cascade');
+            $table->foreignId('shipping_id')->constrained('shippings');
             $table->string('tracking_status')->default('1')->comment('1=>order,2=>delivered, 3=>received');
-            $table->string('location');
-            $table->string('tracking_note');
+            // $table->string('location');
+            $table->string('tracking_note')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

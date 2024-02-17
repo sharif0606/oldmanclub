@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('shipping_id')->index();
             $table->foreign('shipping_id')->references('id')->on('shippings')->onDelete('cascade');
-            $table->string('shipping_address')->nullable();
+            // $table->string('shipping_address')->nullable();
             $table->string('delivery_address')->nullable();
-            $table->string('shipping_method')->nullable();
+            $table->integer('shipping_method')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
