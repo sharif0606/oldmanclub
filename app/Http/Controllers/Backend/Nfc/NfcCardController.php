@@ -233,10 +233,10 @@ class NfcCardController extends Controller
         $vCard .= "N:" . $nfc_card->client->fname . " " . $nfc_card->client->middle_name .  " " . $nfc_card->client->last_name  . "\r\n";
         $vCard .= "EMAIL:" . $nfc_card->client->email . "\r\n";
         $vCard .= "TEL;TYPE=CELL:" . $nfc_card->client->contact_no . "\r\n";
-        if ($nfc_card->client?->cover_photo)
-            $filePath = asset('public/uploads/client/' . $nfc_card->client?->cover_photo);
+        if ($nfc_card->client?->image)
+            $filePath = asset('public/uploads/client/' . $nfc_card->client?->image);
         else
-            $filePath =  asset('public/images/profile/cover2.jpg');
+            $filePath =  asset('public/images/download.jpg');
         // Read image file and encode it to base64
         $imageData = base64_encode(file_get_contents($filePath));
 

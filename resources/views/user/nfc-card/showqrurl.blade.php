@@ -19,7 +19,7 @@
                 @endif
             </div>
         </div>
-        <div class="col-md-4 offset-md-4">
+        <div class="col-md-4 offset-md-4 d-md-none">
             {{-- {!! QrCode::size(300)->generate(Request::url()) !!} --}}
             <button id="openDrawer" class="btn btn-secondary my-2">Save Contact</button>
             <div class="modal fade bottom px-0" id="drawerModal" tabindex="-1" aria-labelledby="drawerTitle"
@@ -38,4 +38,5 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
