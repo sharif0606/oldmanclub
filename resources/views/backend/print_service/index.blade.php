@@ -30,7 +30,8 @@
                         @forelse($data as $p)
                         <tr>
                             <th scope="row">{{ ++$loop->index }}</th>
-                            <td>{{$p->service_name}}</td>
+                            <td><a href="{{route('print_service_image.index')}}">{{$p->service_name}}</a>
+                                </td>
                             <td>{{$p->service_details}}</td>
                             <td>{{$p->qty}}</td>
                             <td>{{$p->price}}</td>
@@ -39,6 +40,9 @@
                             <td class="white-space-nowrap">
                                 <a href="{{route('print_service.edit',encryptor('encrypt',$p->id))}}">
                                     <i class="fa fa-edit"></i>
+                                </a>
+                                <a href="{{route('print_service.show',encryptor('encrypt',$p->id))}}">
+                                    <i class="fa fa-eye"></i>
                                 </a>
                                 <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()">
                                     <i class="fa fa-trash"></i>
