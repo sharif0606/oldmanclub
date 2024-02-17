@@ -21,6 +21,7 @@
                             <th scope="col">{{__('Service Details')}}</th>
                             <th scope="col">{{__('Quantity')}}</th>
                             <th scope="col">{{__('Price')}}</th>
+                            <th scope="col">{{__('Image')}}</th>
                             <th scope="col">{{__('Created_by')}}</th>
                             <th scope="col">{{__('Updated_by')}}</th>
                             <th class="white-space-nowrap">{{__('Action') }}</th>
@@ -32,9 +33,16 @@
                             <th scope="row">{{ ++$loop->index }}</th>
                             <td><a href="{{route('print_service_image.index')}}">{{$p->service_name}}</a>
                                 </td>
-                            <td>{{$p->service_details}}</td>
+                            <td>{!!$p->service_details!!}</td>
                             <td>{{$p->qty}}</td>
                             <td>{{$p->price}}</td>
+                            <td>
+                                @if($p->featuredImage)
+                                    <img src="{{ asset('public/uploads/printimages/' . $p->featuredImage->image) }}" alt="Featured Image" width="50px">
+                                @else
+                                    No Featured Image
+                                @endif
+                            </td>
                             <td>{{$p->createdBy?->name}}</td>
                             <td>{{$p->updatedBy?->name}}</td>
                             <td class="white-space-nowrap">
@@ -44,7 +52,10 @@
                                 <a href="{{route('print_service.show',encryptor('encrypt',$p->id))}}">
                                     <i class="fa fa-eye"></i>
                                 </a>
-                                <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()">
+                                <a href="{{route('uploadimage',encryptor('encrypt',$p->id))}}">
+                                    <i class="fas fa-file-upload"></i>
+                                </a>
+                                <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()" class="text-danger">
                                     <i class="fa fa-trash"></i>
                                 </a>
                                 <form id="form{{$p->id}}" action="{{route('print_service.destroy',encryptor('encrypt',$p->id))}}" method="post">

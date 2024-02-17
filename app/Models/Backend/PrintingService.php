@@ -19,6 +19,10 @@ class PrintingService extends Model
     public function printing_service_image(){
         return $this->hasMany(PrintingServiceImage::class,'printing_service_id','id');
     }
+    public function featuredImage()
+    {
+        return $this->hasOne(PrintingServiceImage::class)->where('is_featured', true);
+    }
     public function cartItem(){
         return $this->hasMany(CartItem::class);
     }

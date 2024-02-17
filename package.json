@@ -11,8 +11,10 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "ckeditor": "^4.12.1",
         "laravel-echo": "^1.15.3",
         "pusher": "^5.2.0",
-        "pusher-js": "^8.4.0-rc2"
+        "pusher-js": "^8.4.0-rc2",
+        "tinymce": "^6.8.3"
     }
 }

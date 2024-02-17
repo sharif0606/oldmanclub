@@ -147,7 +147,15 @@
                                 <li><a href="{{route('client.index')}}">User</a></li>
                                 <li><a href="{{route('sms.index')}}">SMS Package Service</a></li>
                                 <li><a href="{{route('mailbox.index')}}">Mail Package Service</a></li>
-                                <li><a href="{{route('shipping_list')}}">Shipping</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                <i class="fa-solid fa-truck-fast"></i>
+                                <span class="nav-text">Shipping</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="{{route('shipping_list')}}">Shipping List</a></li>
                                 <li><a href="{{route('shipstatus.index')}}">Shipping Status</a></li>
                                 <li><a href="{{route('shiptrack.index')}}">Shipping Tracking</a></li>
                                 <li><a href="{{route('comment_list')}}">Comment List</a></li>
@@ -169,6 +177,34 @@
                                     </ul>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                <i class="fa-solid fa-address-card"></i>
+                                <span class="nav-text">NFC</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="{{route('nfc-field.index')}}">NFC Field</a></li>
+                                <li><a href="{{route('design_card.index')}}">Design Card</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                <i class="fa-solid fa-print"></i>
+                                <span class="nav-text">Printing Service</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="{{route('print_service.index')}}">Printing Service List</a></li>
+                                <li><a href="{{route('print_service_image.index')}}">Printing Service Image</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="{{route('order_list')}}" aria-expanded="false">
+                                <i class="fa-solid fa-table-list"></i>
+                                <span class="nav-text">Order List</span>
+                            </a>
+                            <!-- <i class="fa fa-globe"></i>
+                            <a href="{{route('order_list')}}">Order List</a> -->
                         </li>
                         <li>
                             <a class="has-arrow" href="javascript:void()" aria-expanded="false">

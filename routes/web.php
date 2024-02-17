@@ -124,6 +124,8 @@ Route::prefix('admin')->group(function () {
     Route::resource('nfc_card', nfc_card::class);
     // print_service admin panel
     Route::resource('print_service', print_service::class);
+    Route::get('print_image/{id}', [print_service::class,'uploadfile'])->name('uploadimage');
+    Route::post('print_image/{id}', [print_service::class,'uploadfile_store'])->name('uploadfile_store');
     Route::resource('print_service_image', print_service_image::class);
 
     Route::get('comment_list', [CommentController::class, 'comment_list'])->name('comment_list');

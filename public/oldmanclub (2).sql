@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 13, 2024 at 04:32 PM
+-- Generation Time: Feb 17, 2024 at 04:56 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,13 +40,32 @@ CREATE TABLE `address_verifications` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `carts`
+--
+
+CREATE TABLE `carts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `printing_service_id` bigint(20) UNSIGNED NOT NULL,
+  `client_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `cart_items`
 --
 
 CREATE TABLE `cart_items` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `printing_service_id` bigint(20) UNSIGNED NOT NULL,
+  `cart_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL DEFAULT 1,
+  `price` decimal(10,2) NOT NULL,
+  `dis_type` tinyint(4) NOT NULL DEFAULT 1,
+  `discount` decimal(10,2) NOT NULL DEFAULT 1.00,
+  `sample_image` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -152,7 +171,7 @@ CREATE TABLE `clients` (
 
 INSERT INTO `clients` (`id`, `fname`, `middle_name`, `last_name`, `dob`, `contact_no`, `email`, `password`, `address_line_1`, `address_line_2`, `country_id`, `city_id`, `state_id`, `zip_code`, `nationality`, `id_no`, `id_no_type`, `image`, `cover_photo`, `photo_id`, `is_photo_verified`, `address_proof_photo`, `address_proof_type`, `is_address_verified`, `is_email_verified`, `is_contact_verified`, `status`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'jasim', 'uddin', 'uddin', '2000-01-01', '123', 'jasim@gmail.com', '$2y$12$B/YnzBpYaY7QDRICZnV7vOz2gOzeXwRyyhFRg6514Akxyn9K63Cny', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '4991707836139.jpg', '9251707836139.jpg', NULL, 0, NULL, NULL, 0, 0, 0, 1, NULL, '2024-02-13 10:44:46', '2024-02-13 14:55:39', NULL),
-(2, 'Kaiser', 'Ahmed', 'Kaiser', NULL, '012', 'kaiser@gmail.com', '$2y$12$rLzC7tGG0b.T9CTnTKlW8OS3ArAmQfHqCjnvYBpZek6rY8ShAY33y', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '8731707830235.jpg', NULL, NULL, 0, NULL, NULL, 0, 0, 0, 1, NULL, '2024-02-13 12:08:23', '2024-02-13 13:17:15', NULL);
+(2, 'Kaiser', 'Ahmed', 'Kaiser', NULL, '012', 'kaiser@gmail.com', '$2y$12$rLzC7tGG0b.T9CTnTKlW8OS3ArAmQfHqCjnvYBpZek6rY8ShAY33y', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '9021707923710.jpg', '9611707924492.jpg', NULL, 0, NULL, NULL, 0, 0, 0, 1, NULL, '2024-02-13 12:08:23', '2024-02-14 15:28:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -536,9 +555,14 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (55, '2024_02_06_140343_create_nfc_card_nfc_field_table', 1),
 (56, '2024_02_08_150031_create_printing_services_table', 1),
 (57, '2024_02_08_150057_create_printing_service_images_table', 1),
-(58, '2024_02_09_150646_create_cart_items_table', 1),
 (59, '2024_02_09_192936_create_check_outs_table', 1),
-(60, '2024_02_12_185955_create_address_verifications_table', 1);
+(60, '2024_02_12_185955_create_address_verifications_table', 1),
+(61, '2024_02_13_171234_create_shipping_addresses_table', 2),
+(62, '2024_02_13_174754_create_carts_table', 2),
+(63, '2024_02_13_174790_create_cart_items_table', 3),
+(64, '2024_02_13_180000_create_orders_table', 3),
+(65, '2024_02_13_180200_create_payments_table', 3),
+(66, '2024_02_14_111759_create_shipping_details_table', 4);
 
 -- --------------------------------------------------------
 
@@ -740,6 +764,32 @@ INSERT INTO `nfc_information` (`id`, `nfc_card_id`, `prefix`, `suffix`, `accredi
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tracking_no` varchar(255) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `shipping_address_id` bigint(20) UNSIGNED NOT NULL,
+  `cart_id` bigint(20) UNSIGNED NOT NULL,
+  `order_status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '1 => Processing,2 => Printing,3 => Complete,4 => Delivered,5=>Cancel',
+  `tax` double(8,2) DEFAULT 0.00,
+  `total` double(8,2) DEFAULT 0.00,
+  `discount` double(8,2) DEFAULT 0.00,
+  `payable` double(8,2) DEFAULT 0.00 COMMENT 'Total-discount=total+deliveryfee',
+  `additional_note` text DEFAULT NULL,
+  `order_cancel_note` text DEFAULT NULL,
+  `is_paid` tinyint(1) NOT NULL DEFAULT 0,
+  `is_delivered` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `our_services`
 --
 
@@ -765,6 +815,25 @@ INSERT INTO `our_services` (`id`, `title`, `link`, `image`, `details`, `created_
 (4, 'Printing Service', '#', '962.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-02-13 11:55:44', '2024-02-13 11:55:44', NULL),
 (5, 'USA Company Registration', '#', '687.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-02-13 11:57:25', '2024-02-13 11:57:25', NULL),
 (6, 'Smart Mail Service', '#', '529.jpg', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2024-02-13 11:58:45', '2024-02-13 11:58:45', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `client_id` bigint(20) UNSIGNED NOT NULL,
+  `order_id` bigint(20) UNSIGNED NOT NULL,
+  `total` double(8,2) DEFAULT 0.00,
+  `discount` double(8,2) DEFAULT 0.00,
+  `payable` double(8,2) DEFAULT 0.00 COMMENT 'Total-discount=total+deliveryfee',
+  `description` text DEFAULT NULL,
+  `payment_method` varchar(255) NOT NULL DEFAULT '1' COMMENT '1=>Cash On Delivery',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1020,8 +1089,7 @@ CREATE TABLE `printing_services` (
 --
 
 INSERT INTO `printing_services` (`id`, `service_name`, `service_details`, `qty`, `price`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'ABC', 'orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but al', 1, 100.00, 1, NULL, '2024-02-13 10:56:47', '2024-02-13 10:56:47', NULL),
-(2, 'Product Name', 'You can open a virtual office anywhere in the world. Clients and Partners will call you on their local phone number while you can be based anywhere in the world. Having a virtual phone number in a particular country gives your company a professional brand image and it reflects your sincereity about your customers\' experience. Not only virtual offices increase your regional or global visibility, but also it reduces technological costs significantly.', 2, 100.00, 1, NULL, '2024-02-13 14:44:52', '2024-02-13 14:44:52', NULL);
+(1, 'ABC', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</p>', 1, 10.00, 1, 1, '2024-02-17 13:43:19', '2024-02-17 15:11:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -1033,7 +1101,7 @@ CREATE TABLE `printing_service_images` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `printing_service_id` bigint(20) UNSIGNED NOT NULL,
   `image` varchar(255) NOT NULL,
-  `is_featured` tinyint(1) DEFAULT NULL,
+  `is_featured` tinyint(1) NOT NULL,
   `created_by` bigint(20) UNSIGNED NOT NULL,
   `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -1046,8 +1114,10 @@ CREATE TABLE `printing_service_images` (
 --
 
 INSERT INTO `printing_service_images` (`id`, `printing_service_id`, `image`, `is_featured`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, '4871707834704.png', 0, 1, NULL, '2024-02-13 14:31:44', '2024-02-13 14:31:44', NULL),
-(2, 2, '3721707834727.png', 0, 1, NULL, '2024-02-13 14:32:07', '2024-02-13 14:32:07', NULL);
+(1, 1, '1931708183781.png', 1, 1, NULL, '2024-02-17 15:29:41', '2024-02-17 15:29:41', NULL),
+(2, 1, '8541708183781.png', 0, 1, NULL, '2024-02-17 15:29:41', '2024-02-17 15:29:41', NULL),
+(3, 1, '4071708183781.png', 0, 1, NULL, '2024-02-17 15:29:41', '2024-02-17 15:29:41', NULL),
+(4, 1, '5151708183781.png', 0, 1, NULL, '2024-02-17 15:29:41', '2024-02-17 15:29:41', NULL);
 
 -- --------------------------------------------------------
 
@@ -1225,6 +1295,22 @@ INSERT INTO `shippings` (`id`, `client_id`, `shipping_title`, `shipping_descript
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `shipping_addresses`
+--
+
+CREATE TABLE `shipping_addresses` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `client_id` bigint(20) UNSIGNED NOT NULL,
+  `type` tinyint(4) NOT NULL DEFAULT 1 COMMENT '1 => Home, 2 => Work, 3 => Other',
+  `address` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `shipping_comments`
 --
 
@@ -1233,6 +1319,24 @@ CREATE TABLE `shipping_comments` (
   `shipping_id` bigint(20) UNSIGNED NOT NULL,
   `client_message` text DEFAULT NULL,
   `user_message` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shipping_details`
+--
+
+CREATE TABLE `shipping_details` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `shipping_id` bigint(20) UNSIGNED NOT NULL,
+  `shipping_title` varchar(255) DEFAULT NULL,
+  `shipping_description` text DEFAULT NULL,
+  `price` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `image_path` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -1519,11 +1623,18 @@ ALTER TABLE `address_verifications`
   ADD KEY `address_verifications_client_id_index` (`client_id`);
 
 --
+-- Indexes for table `carts`
+--
+ALTER TABLE `carts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `carts_printing_service_id_foreign` (`printing_service_id`),
+  ADD KEY `carts_client_id_foreign` (`client_id`);
+
+--
 -- Indexes for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `cart_items_printing_service_id_index` (`printing_service_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `chats`
@@ -1706,10 +1817,26 @@ ALTER TABLE `nfc_information`
   ADD KEY `nfc_information_nfc_card_id_foreign` (`nfc_card_id`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `orders_shipping_address_id_foreign` (`shipping_address_id`),
+  ADD KEY `orders_cart_id_foreign` (`cart_id`);
+
+--
 -- Indexes for table `our_services`
 --
 ALTER TABLE `our_services`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `payments_client_id_foreign` (`client_id`),
+  ADD KEY `payments_order_id_foreign` (`order_id`);
 
 --
 -- Indexes for table `permissions`
@@ -1832,11 +1959,25 @@ ALTER TABLE `shippings`
   ADD KEY `shippings_client_id_index` (`client_id`);
 
 --
+-- Indexes for table `shipping_addresses`
+--
+ALTER TABLE `shipping_addresses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `shipping_addresses_client_id_foreign` (`client_id`);
+
+--
 -- Indexes for table `shipping_comments`
 --
 ALTER TABLE `shipping_comments`
   ADD PRIMARY KEY (`id`),
   ADD KEY `shipping_comments_shipping_id_index` (`shipping_id`);
+
+--
+-- Indexes for table `shipping_details`
+--
+ALTER TABLE `shipping_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `shipping_details_shipping_id_foreign` (`shipping_id`);
 
 --
 -- Indexes for table `shipping_status_types`
@@ -1925,6 +2066,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `address_verifications`
 --
 ALTER TABLE `address_verifications`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `carts`
+--
+ALTER TABLE `carts`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -2045,7 +2192,7 @@ ALTER TABLE `mail_boxes`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `nfc_cards`
@@ -2096,10 +2243,22 @@ ALTER TABLE `nfc_information`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `our_services`
 --
 ALTER TABLE `our_services`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -2159,13 +2318,13 @@ ALTER TABLE `printing_heroes`
 -- AUTO_INCREMENT for table `printing_services`
 --
 ALTER TABLE `printing_services`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `printing_service_images`
 --
 ALTER TABLE `printing_service_images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `print_card_sections`
@@ -2210,9 +2369,21 @@ ALTER TABLE `shippings`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `shipping_addresses`
+--
+ALTER TABLE `shipping_addresses`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `shipping_comments`
 --
 ALTER TABLE `shipping_comments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `shipping_details`
+--
+ALTER TABLE `shipping_details`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -2298,10 +2469,11 @@ ALTER TABLE `address_verifications`
   ADD CONSTRAINT `address_verifications_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `cart_items`
+-- Constraints for table `carts`
 --
-ALTER TABLE `cart_items`
-  ADD CONSTRAINT `cart_items_printing_service_id_foreign` FOREIGN KEY (`printing_service_id`) REFERENCES `printing_services` (`id`) ON DELETE CASCADE;
+ALTER TABLE `carts`
+  ADD CONSTRAINT `carts_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`),
+  ADD CONSTRAINT `carts_printing_service_id_foreign` FOREIGN KEY (`printing_service_id`) REFERENCES `printing_services` (`id`);
 
 --
 -- Constraints for table `chats`
@@ -2355,6 +2527,20 @@ ALTER TABLE `nfc_information`
   ADD CONSTRAINT `nfc_information_nfc_card_id_foreign` FOREIGN KEY (`nfc_card_id`) REFERENCES `nfc_cards` (`id`);
 
 --
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_cart_id_foreign` FOREIGN KEY (`cart_id`) REFERENCES `carts` (`id`),
+  ADD CONSTRAINT `orders_shipping_address_id_foreign` FOREIGN KEY (`shipping_address_id`) REFERENCES `shipping_addresses` (`id`);
+
+--
+-- Constraints for table `payments`
+--
+ALTER TABLE `payments`
+  ADD CONSTRAINT `payments_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`),
+  ADD CONSTRAINT `payments_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
+
+--
 -- Constraints for table `permissions`
 --
 ALTER TABLE `permissions`
@@ -2392,10 +2578,22 @@ ALTER TABLE `shippings`
   ADD CONSTRAINT `shippings_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `shipping_addresses`
+--
+ALTER TABLE `shipping_addresses`
+  ADD CONSTRAINT `shipping_addresses_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`);
+
+--
 -- Constraints for table `shipping_comments`
 --
 ALTER TABLE `shipping_comments`
   ADD CONSTRAINT `shipping_comments_shipping_id_foreign` FOREIGN KEY (`shipping_id`) REFERENCES `shippings` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `shipping_details`
+--
+ALTER TABLE `shipping_details`
+  ADD CONSTRAINT `shipping_details_shipping_id_foreign` FOREIGN KEY (`shipping_id`) REFERENCES `shippings` (`id`);
 
 --
 -- Constraints for table `shipping_status_types`

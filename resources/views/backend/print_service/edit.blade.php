@@ -14,7 +14,7 @@
                         @csrf
                         @method('PATCH')
                         <div class="row">
-                            <div class="col-md-6 col-12">
+                            <div class="col-md-12 col-12">
                                 <div class="form-group">
                                     <label for="service_name">Service Name<i class="text-danger">*</i></label>
                                     <input type="text" id="name" class="form-control" value="{{ old('service_name',$print_service->service_name)}}" name="service_name">
@@ -23,7 +23,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-md-6 col-12">
+                            <div class="col-md-12 col-12">
                                 <div class="form-group">
                                     <label for="service_details">Service Details<i class="text-danger">*</i></label>
                                     <textarea name="service_details" id="service_details" class="form-control">{{$print_service->service_details}}</textarea>
@@ -50,10 +50,30 @@
                                     @endif
                                 </div>
                             </div>
+
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="image">Image<i class="text-danger">*</i></label>
+                                    <input type="file" id="image" class="form-control" value="{{ old('image',$print_service->image)}}" name="image">
+                                    <img id="preview_photo_id" src="#" alt="preview_photo_id" style="display: none; max-width: 100px;">
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="is_featured" name="is_featured" value="1">
+                                    <label class="form-check-label" for="is_featured">Mark as Featured Image</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                @if($print_image->isNotEmpty())
+                                    @foreach($print_image as $image)
+                                    <img width="100px" src="{{ asset('public/uploads/printimages/'.$image->image) }}" alt="">
+                                    <input class="form-check-input" type="checkbox" id="is_featured" name="is_featured" value="1" @if($image->is_featured) checked @endif>
+                                    @endforeach
+                                @endif
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-12 d-flex justify-content-end">
-                                <button type="submit" class="btn btn-primary me-1 mb-1">Save</button>
+                                <button type="submit" class="btn btn-primary me-1 mb-1">Update</button>
                             </div>
                         </div>
                     </form>
@@ -62,4 +82,42 @@
         </div>
     </div>
 </div>
+
+
+    <!-- Place the first <script> tag in your HTML's <head> -->
+    <script src="https://cdn.tiny.cloud/1/x4jk2jz64zffwc1fuef936e2b3z54jdbl9q6pb9rplm00ea2/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+    <script>
+    tinymce.init({
+        selector: 'textarea',
+        plugins: 'autolink lists link',
+        toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+        mergetags_list: [
+        { value: 'First.Name', title: 'First Name' },
+        { value: 'Email', title: 'Email' },
+        ],
+        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+    });
+    </script>
+
+    <script>
+        document.getElementById('image').addEventListener('change', function(event) {
+            var input = event.target;
+            var preview = document.getElementById('preview_photo_id');
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block'; // Show the preview image
+                }
+
+                reader.readAsDataURL(input.files[0]); // Convert to data URL
+            }
+        });
+    </script>
 @endsection
