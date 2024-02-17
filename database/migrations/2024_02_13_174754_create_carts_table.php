@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('printing_service_id')->constrained('printing_services');
             $table->foreignId('client_id')->constrained('clients');
             $table->timestamps();
             $table->softDeletes();

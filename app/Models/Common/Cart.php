@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Cart extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $fillable = ['printing_service_id', 'client_id'];
+    //protected $fillable = ['client_id'];
     public function print_service()
     {
         return $this->belongsTo(PrintingService::class,'printing_service_id','id');

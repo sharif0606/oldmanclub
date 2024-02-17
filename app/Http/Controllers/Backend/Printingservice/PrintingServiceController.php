@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Printingservice;
 
 use App\Http\Controllers\Controller;
 use App\Models\Backend\PrintingService;
+use App\Models\Backend\PrintingServiceImage;
 use Illuminate\Http\Request;
 
 class PrintingServiceController extends Controller
@@ -51,9 +52,12 @@ class PrintingServiceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PrintingService $printingService)
+    public function show($id)
     {
-        //
+        $print_service = PrintingService::findOrFail(encryptor('decrypt', $id));
+        $print_image = PrintingServiceImage::where('printing_service_id', $print_service->id)->get();
+        return view('backend.print_service.show', compact('print_image', 'print_service'));
+
     }
 
     /**

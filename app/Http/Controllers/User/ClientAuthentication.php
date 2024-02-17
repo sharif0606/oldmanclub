@@ -145,7 +145,8 @@ class ClientAuthentication extends Controller
 
     public function singOut()
     {
-        request()->session()->flush();
+        //request()->session()->flush();
+        request()->session()->forget(['userId', 'userName']);
         return redirect()->route('clientlogin')->with('danger', 'Succfully Logged Out');
     }
 }

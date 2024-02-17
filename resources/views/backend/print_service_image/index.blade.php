@@ -54,6 +54,9 @@
                         @endforelse
                     </tbody>
                 </table>
+                <span class="pull-right">
+                    {{$data->links()}}
+                </span>
             </div>
         </div>
     </div>

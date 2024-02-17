@@ -315,7 +315,6 @@
                                                             <label for="documents">Upload Documents (jpg, png, pdf, doc):</label>
                                                             <input type="file" id="document" class="form-control" name="document[]" accept="image/jpeg,image/png,application/pdf,application/txt,application/msword,application/vnd.openxmlformats-officedcoument.wordprocessingml.document" multiple required>
                                                             <div id="preview_container"></div>
-
                                                         </div>
 
 
