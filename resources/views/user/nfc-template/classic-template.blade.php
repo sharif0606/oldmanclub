@@ -2,7 +2,7 @@
     <header>
         <div class="classic_header_image">
             @if ($nfc_card->client?->image)
-                <div class="main-img" style="background-image: url({{ asset($nfc_card->client?->image) }})"></div>
+                <div class="main-img" style="background-image: url({{ asset('public/uploads/client/' . $nfc_card->client?->image) }})"></div>
             @else
                 <div class="main-img" style="background-image: url({{ asset('public/assets/nfc/images/123.png') }})">
                 </div>

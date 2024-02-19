@@ -44,7 +44,7 @@ class CheckOutController extends Controller
                     'address' => 'required',
                 ]
             );
-            if (!session()->get('userId'))
+            if (!session()->get('userId') && currentUser() !='user')
                 return redirect(route('clientlogin'));
             $cart_data = session()->get('cart');
             $cart = new Cart;
@@ -52,6 +52,7 @@ class CheckOutController extends Controller
             if ($cart->save()) {
                 foreach ($cart_data as $key => $serviceData) {
                     $cart_item = new CartItem;
+                    $cart_item->printing_service_id = $key;
                     $cart_item->cart_id = $cart->id;
                     $cart_item->quantity = $serviceData['quantity'];
                     $cart_item->price = $serviceData['price'];
