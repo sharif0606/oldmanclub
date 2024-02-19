@@ -5,7 +5,6 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-            
             <!-- table bordered -->
             <div class="table-responsive">
                 <table class="table table-bordered mb-0">
@@ -19,11 +18,8 @@
                             <th scope="col">{{__('Tax')}}</th>
                             <th scope="col">{{__('Total')}}</th>
                             <th scope="col">{{__('Discount')}}</th>
-                            <th scope="col">{{__('Order Status')}}</th>
-
                             <th scope="col">{{__('Payable')}}</th>
                             <th scope="col">{{__('Created_by')}}</th>
-                            <th scope="col">{{__('Updated_by')}}</th>
                             <th class="white-space-nowrap">{{__('Action') }}</th>
                         </tr>
                     </thead>
@@ -33,17 +29,22 @@
                             <th scope="row">{{ ++$loop->index }}</th>
                             <td>{{$value->tracking_no}}</td>
                             <td>{{$value->client?->fname}}</td>
-                            <td>{{$value->shipping_address_id}}</td>
-                            <td>{{$value->order_status}}</td>
+                            <td>{{$value->shipping?->type}}</td>
+                            <td>@if($value->order_status==1)
+                                {{'Processing'}}
+                                @elseif($value->order_status==2){{'Printing'}}
+                                @elseif($value->order_status==3){{'Complete'}}
+                                @elseif($value->order_status==2){{'Delivered'}}
+                                @endif
+                            </td>
                             <td>{{$value->tax}}</td>
                             <td>{{$value->total}}</td>
                             <td>{{$value->discount}}</td>
-                            <td>{{$value->order_status}}</td>
                             <td>{{$value->payable}}</td>
                             <td>{{$value->createdBy?->name}}</td>
                             <td>{{$value->updatedBy?->name}}</td>
                             <td class="white-space-nowrap">
-                                <a href="{{route('nfc_field.edit',encryptor('encrypt',$value->id))}}">
+                                <a href="{{route('order_edit',encryptor('encrypt',$value->id))}}">
                                     <i class="fa fa-edit"></i>
                                 </a>
                                 <a href="javascript:void()" onclick="$('#form{{$value->id}}').submit()">

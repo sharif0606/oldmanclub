@@ -115,13 +115,13 @@
                 <h3 class="product-heading text-capitalize fw-bold">
                     Our Best Services
                 </h3>
-                <div class="print-product-cards py-3">
+                <div class="print-product-cards py-1">
                     @foreach ($printservices as $value)
                         <div class="product-image-container print-product-card m-3 col-lg-3 col-md-6 col-sm-12">
                             @foreach ($value->printing_service_image as $v)
                                 @if ($v->is_featured)
                                     <img src="{{ asset('public/uploads/printimages/' . $v->image) }}" alt=""
-                                        class="img-fluid w-75 h-50">
+                                        class="img-fluid w-100 h-75">
                                     <div class="hover-buttons d-flex">
 
                                         <a href="{{ route('addto_cart', $value->id) }}"

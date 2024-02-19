@@ -91,10 +91,6 @@ class PrintingServiceController extends Controller
                 ->where('is_featured', true)
                 ->first();
             
-            if ($existing_featured_item) {
-                $existing_featured_item->update(['is_featured' => false]);
-            }
-
             foreach ($files as $index => $file) {
                 $print_image = new PrintingServiceImage;
                 $print_image->printing_service_id  = $print_service->id;
@@ -103,8 +99,14 @@ class PrintingServiceController extends Controller
                     $file->move(public_path('uploads/printimages'), $imageName);
                     $print_image->image = $imageName;
                 }
-                // Check if is_featured value exists for the current index
-                $is_featured = isset($is_featured_values[$index]) ? $is_featured_values[$index] : false;
+                
+                // Check if is_featured checkbox is checked
+                $is_featured = isset($is_featured_values[$index]) && $is_featured_values[$index] === "1";
+
+                // If there is already a featured item, only update if the current image is marked as featured
+                if ($existing_featured_item && $is_featured) {
+                    $existing_featured_item->update(['is_featured' => false]);
+                }
 
                 $print_image->is_featured = $is_featured;
                 $print_image->created_by = currentUserId();
@@ -122,6 +124,7 @@ class PrintingServiceController extends Controller
             $this->notice::error('Please try again');
             return redirect()->back()->withInput();
         }
+
 
     }
     /**

@@ -173,7 +173,7 @@
                                     <a class="has-arrow" href="javascript:void()">Print Service</a>
                                     <ul aria-expanded="false">
                                         <li><a href="{{route('print_service.index')}}">Printing Service</a></li>
-                                        <li><a href="{{route('print_service_image.index')}}">Printing Service Image</a></li>
+                                        <!-- <li><a href="{{route('print_service_image.index')}}">Printing Service Image</a></li> -->
                                     </ul>
                                 </li>
                             </ul>

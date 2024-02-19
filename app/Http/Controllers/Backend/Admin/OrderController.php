@@ -17,7 +17,7 @@ class OrderController extends Controller
     public function order_edit($id){
         $client = Client::get();
         $order = Order::findOrFail(encryptor('decrypt',$id));
-        return view('backend.order.create',compact('client','order'));
+        return view('backend.order.edit',compact('client','order'));
     }
     public function order_update(Request $request, $id){
         try{

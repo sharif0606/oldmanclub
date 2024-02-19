@@ -39,4 +39,9 @@ class Client extends Model
     public function cart(){
         return $this->hasMany(Cart::class);
     }
+    public function order(){
+        return $this->hasMany(Order::class);
+    }
+
+
 }

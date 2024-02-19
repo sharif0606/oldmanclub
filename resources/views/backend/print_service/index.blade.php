@@ -31,8 +31,7 @@
                         @forelse($data as $p)
                         <tr>
                             <th scope="row">{{ ++$loop->index }}</th>
-                            <td><a href="{{route('print_service_image.index')}}">{{$p->service_name}}</a>
-                                </td>
+                            <td>{{$p->service_name}}</td>
                             <td>{!!$p->service_details!!}</td>
                             <td>{{$p->qty}}</td>
                             <td>{{$p->price}}</td>
