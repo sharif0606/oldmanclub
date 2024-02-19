@@ -138,15 +138,15 @@
                                 <div class="row">
                                     <div class="col-md-2">
                                         <div class="customer-info">
-                                            <img src="assets/image/customer-1.jpg" alt="Customer 1" class="rounded-circle customer-image" width="50px">
+                                            <img src="{{asset('public/uploads/client/'.$value->client?->image)}}" alt="Customer 1" class="rounded-circle customer-image" width="50px">
                                         </div>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="customer-details">
                                             <h4>
-                                                {{$value->client?->first_name_en}}  
-                                                {{$value->client?->middle_name_en}}  
-                                                {{$value->client?->last_name_en}}  
+                                                {{$value->client?->fname}}  
+                                                {{$value->client?->middle_name}}  
+                                                {{$value->client?->last_name}}  
                                             </h4>
                                             <p>
                                                 {{$value->client?->address_line_1}}
