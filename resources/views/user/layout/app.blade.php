@@ -147,6 +147,10 @@
                             <i class="icon-envelope"></i><span class="nav-text">E-mail</span>
                         </a>
                     </li>
+                    <li><a class="has-arrow" href="{{ route('company.index') }}" aria-expanded="false">
+                            <i class="icon-envelope"></i><span class="nav-text">Requested Company</span>
+                        </a>
+                    </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                 class="icon icon-app-store"></i><span class="nav-text">NFC</span></a>

@@ -17,6 +17,7 @@ use App\Http\Controllers\Backend\Admin\CommentController;
 use App\Http\Controllers\Common\CartController;
 use App\Http\Controllers\Common\CheckOutController;
 use App\Http\Controllers\Backend\Admin\OrderController;
+use App\Http\Controllers\Backend\Admin\CompanyController;
 
 // use App\Http\Controllers\Backend\PhoneBookController as phonebook;
 use App\Http\Controllers\Backend\Website\SettingController as setting;
@@ -67,6 +68,7 @@ use App\Http\Controllers\User\ShippingCommentController as shipcomment;
 use App\Http\Controllers\User\EmailSendController;
 use App\Http\Controllers\OrderController as order;
 use App\Http\Controllers\User\AddressVerificationController as address_verify;
+use App\Http\Controllers\User\CompanyController as company;
 
 // landing page
 use App\Http\Controllers\Common\frontendController as frontend;
@@ -134,6 +136,9 @@ Route::prefix('admin')->group(function () {
     Route::get('order-list', [OrderController::class, 'order_list'])->name('order_list');
     Route::get('order-edit/{id}', [OrderController::class, 'order_edit'])->name('order_edit');
     Route::post('order-edit/{id}', [OrderController::class, 'order_store'])->name('order_update');
+    Route::get('company_list',[CompanyController::class, 'company'])->name('company_list');
+    Route::get('company_edit/{id}',[CompanyController::class, 'company_edit'])->name('company_edit');
+    Route::post('company_update/{id}',[CompanyController::class, 'company_update'])->name('company_update');
 
     //website  
     Route::resource('setting', setting::class);
@@ -215,6 +220,7 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::get('/download-phonebook', [phonebook::class, 'downloadPhonebook'])->name('phonebook_download');
     Route::resource('nfc_card', nfc_card::class);
     Route::resource('address_verify', address_verify::class);
+    Route::resource('company', company::class);
 });
 Route::get('nfcqrurl/{id}', [nfc_card::class, 'showqrurl']);
 Route::get('save-contact/{id}', [nfc_card::class, 'save_contact'])->name('save_contact');
