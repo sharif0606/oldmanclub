@@ -139,6 +139,8 @@ Route::prefix('admin')->group(function () {
     Route::get('company_list',[CompanyController::class, 'company'])->name('company_list');
     Route::get('company_edit/{id}',[CompanyController::class, 'company_edit'])->name('company_edit');
     Route::post('company_update/{id}',[CompanyController::class, 'company_update'])->name('company_update');
+    Route::get('company_show/{id}',[CompanyController::class, 'show'])->name('company_show');
+
 
     //website  
     Route::resource('setting', setting::class);

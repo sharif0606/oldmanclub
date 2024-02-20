@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 19, 2024 at 10:39 AM
+-- Generation Time: Feb 20, 2024 at 04:38 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -36,6 +36,13 @@ CREATE TABLE `address_verifications` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `address_verifications`
+--
+
+INSERT INTO `address_verifications` (`id`, `client_id`, `id_image`, `document`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 2, '9781708427975.png', '5841708427976.pdf', '2024-02-20 11:19:36', '2024-02-20 11:19:36', NULL);
 
 -- --------------------------------------------------------
 
@@ -188,7 +195,46 @@ CREATE TABLE `clients` (
 
 INSERT INTO `clients` (`id`, `fname`, `middle_name`, `last_name`, `dob`, `contact_no`, `email`, `password`, `address_line_1`, `address_line_2`, `country_id`, `city_id`, `state_id`, `zip_code`, `nationality`, `id_no`, `id_no_type`, `image`, `cover_photo`, `photo_id`, `is_photo_verified`, `address_proof_photo`, `address_proof_type`, `is_address_verified`, `is_email_verified`, `is_contact_verified`, `status`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'jasim', 'uddin', 'uddin', '2000-01-01', '123', 'jasim@gmail.com', '$2y$12$B/YnzBpYaY7QDRICZnV7vOz2gOzeXwRyyhFRg6514Akxyn9K63Cny', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '4991707836139.jpg', '9251707836139.jpg', NULL, 0, NULL, NULL, 0, 0, 0, 1, NULL, '2024-02-13 10:44:46', '2024-02-13 14:55:39', NULL),
-(2, 'Kaiser', 'Ahmed', 'Kaiser', NULL, '012', 'kaiser@gmail.com', '$2y$12$rLzC7tGG0b.T9CTnTKlW8OS3ArAmQfHqCjnvYBpZek6rY8ShAY33y', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '9021707923710.jpg', '9611707924492.jpg', NULL, 0, NULL, NULL, 0, 0, 0, 1, NULL, '2024-02-13 12:08:23', '2024-02-14 15:28:12', NULL);
+(2, 'Kaiser', 'Ahmed', 'Kaiser', NULL, '012', 'kaiser@gmail.com', '$2y$12$rLzC7tGG0b.T9CTnTKlW8OS3ArAmQfHqCjnvYBpZek6rY8ShAY33y', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '9021707923710.jpg', '9611707924492.jpg', NULL, 0, NULL, NULL, 0, 0, 0, 1, NULL, '2024-02-13 12:08:23', '2024-02-14 15:28:12', NULL),
+(3, 'Robiul', 'Hossain', 'Robiul', NULL, '01', 'robiul@gmail.com', '$2y$12$qujgVDfGb0z8pkrIAWdjauElizCeBoB6GrO9MxX/Ee2cIMqZp3tGO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, 0, 0, 1, NULL, '2024-02-20 15:33:54', '2024-02-20 15:33:54', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `companies`
+--
+
+CREATE TABLE `companies` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `qrcode` varchar(50) DEFAULT NULL,
+  `company_name` varchar(255) NOT NULL,
+  `company_logo` varchar(255) NOT NULL,
+  `contact_no` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone_number` varchar(255) NOT NULL,
+  `address` text NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `state` varchar(255) NOT NULL,
+  `zip_code` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `contact_person_name` varchar(255) DEFAULT NULL,
+  `contact_person_email` varchar(255) DEFAULT NULL,
+  `contact_person_phone` varchar(255) DEFAULT NULL,
+  `company_document` varchar(255) NOT NULL,
+  `client_id` bigint(20) UNSIGNED NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '1 => Pending, 2 => Accepted, 3 => Rejected',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `companies`
+--
+
+INSERT INTO `companies` (`id`, `qrcode`, `company_name`, `company_logo`, `contact_no`, `email`, `phone_number`, `address`, `city`, `state`, `zip_code`, `description`, `contact_person_name`, `contact_person_email`, `contact_person_phone`, `company_document`, `client_id`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'com-409334', 'company', '2081708429323.png', '012', 'company@gmail.com', '014', 'Lorem ipsum dolor sit amet, consectetaur adipisicing elit, sed do eiusmod tempor', 'Chattogram', 'xyz', '4213', 'Lorem ipsum dolor sit amet, consectetaur adipisicing elit, sed do eiusmod tempor', NULL, NULL, NULL, '2891708439335.jpg,7191708439335.jpg,5901708439335.jpg,7921708439335.jpg,3941708439651.png,7761708439651.png,6491708439651.png', 2, 2, '2024-02-20 11:42:03', '2024-02-20 14:34:11', NULL),
+(2, 'ABC-384965', 'ABCDEF', '3321708439810.png', '0123', 'abcder@gmail.com', '01', 'Lorem ipsum dolor sit amet, consectetaur adipisicing elit, sed do', 'Dhaka', 'Dhaka', '5213', 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In posuere felis nec tortor. Pellentesque faucibus. Ut accumsan ultricies elit. Maecenas at justo id velit placerat molestie. Donec dictum lectus non odio. Cras a ante vitae enim iaculis aliquam. Mauris nunc quam, venenatis nec, euismod sit amet, egestas placerat, est. Pellentesque habitant morbi tristique', NULL, NULL, NULL, '1721708439810.jpg,9491708439810.jpg,1361708439810.jpg', 2, 2, '2024-02-20 14:36:50', '2024-02-20 14:51:05', NULL);
 
 -- --------------------------------------------------------
 
@@ -579,7 +625,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (64, '2024_02_13_180000_create_orders_table', 3),
 (65, '2024_02_13_180200_create_payments_table', 3),
 (66, '2024_02_14_111759_create_shipping_details_table', 4),
-(67, '2024_02_13_174754_create_carts_table', 5);
+(67, '2024_02_13_174754_create_carts_table', 5),
+(71, '2024_02_19_165828_create_companies_table', 6);
 
 -- --------------------------------------------------------
 
@@ -605,7 +652,8 @@ CREATE TABLE `nfc_cards` (
 
 INSERT INTO `nfc_cards` (`id`, `client_id`, `card_name`, `card_type`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 1, NULL, 1, 1, NULL, '2024-02-13 10:44:46', '2024-02-13 10:44:46', NULL),
-(2, 2, NULL, 1, 2, NULL, '2024-02-13 12:08:23', '2024-02-13 12:08:23', NULL);
+(2, 2, NULL, 1, 2, NULL, '2024-02-13 12:08:23', '2024-02-13 12:08:23', NULL),
+(3, 3, NULL, 1, 3, NULL, '2024-02-20 15:33:54', '2024-02-20 15:33:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -723,7 +771,8 @@ CREATE TABLE `nfc_designs` (
 
 INSERT INTO `nfc_designs` (`id`, `nfc_card_id`, `design_card_id`, `color`, `logo`, `badges`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 1, 1, NULL, NULL, NULL, 1, NULL, '2024-02-13 10:44:46', '2024-02-13 10:44:46', NULL),
-(2, 2, 1, NULL, NULL, NULL, 2, NULL, '2024-02-13 12:08:23', '2024-02-13 12:08:23', NULL);
+(2, 2, 1, NULL, NULL, NULL, 2, NULL, '2024-02-13 12:08:23', '2024-02-13 12:08:23', NULL),
+(3, 3, 1, NULL, NULL, NULL, 3, NULL, '2024-02-20 15:33:54', '2024-02-20 15:33:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -776,7 +825,8 @@ CREATE TABLE `nfc_information` (
 
 INSERT INTO `nfc_information` (`id`, `nfc_card_id`, `prefix`, `suffix`, `accreditations`, `preferred_name`, `maiden_name`, `pronoun`, `title`, `department`, `company`, `headline`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2024-02-13 10:44:46', '2024-02-13 10:44:46', NULL),
-(2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2024-02-13 12:08:23', '2024-02-13 12:08:23', NULL);
+(2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2024-02-13 12:08:23', '2024-02-13 12:08:23', NULL),
+(3, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, '2024-02-20 15:33:54', '2024-02-20 15:33:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -1124,8 +1174,8 @@ CREATE TABLE `printing_services` (
 INSERT INTO `printing_services` (`id`, `service_name`, `service_details`, `qty`, `price`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'ABC', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</p>', 1, 10.00, 1, 1, '2024-02-17 13:43:19', '2024-02-17 15:11:29', NULL),
 (2, 'Product Name', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.&nbsp;</p>', 2, 100.00, 1, 1, '2024-02-19 08:27:11', '2024-02-19 09:26:35', NULL),
-(3, 'Product Name', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.&nbsp;</p>', 1, 500.00, 1, NULL, '2024-02-19 08:28:56', '2024-02-19 08:28:56', NULL),
-(4, 'XYZ', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.&nbsp;</p>', 1, 100.00, 1, NULL, '2024-02-19 08:29:43', '2024-02-19 08:29:43', NULL);
+(3, 'Product Name', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.&nbsp;</p>', 1, 500.00, 1, 1, '2024-02-19 08:28:56', '2024-02-19 10:18:35', NULL),
+(4, 'XYZ', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.&nbsp;</p>', 1, 100.00, 1, 1, '2024-02-19 08:29:43', '2024-02-19 10:04:31', NULL);
 
 -- --------------------------------------------------------
 
@@ -1152,8 +1202,8 @@ CREATE TABLE `printing_service_images` (
 INSERT INTO `printing_service_images` (`id`, `printing_service_id`, `image`, `is_featured`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 1, '7781708330922.jpg', 1, 1, NULL, '2024-02-19 08:22:02', '2024-02-19 09:38:04', NULL),
 (2, 2, '490.jpg', 1, 1, NULL, '2024-02-19 08:27:11', '2024-02-19 09:26:35', NULL),
-(3, 3, '197.png', 1, 1, NULL, '2024-02-19 08:28:56', '2024-02-19 08:28:56', NULL),
-(4, 4, '679.png', 1, 1, NULL, '2024-02-19 08:29:43', '2024-02-19 08:29:43', NULL),
+(3, 3, '197.png', 1, 1, NULL, '2024-02-19 08:28:56', '2024-02-19 10:20:31', NULL),
+(4, 4, '704.png', 1, 1, NULL, '2024-02-19 08:29:43', '2024-02-19 10:14:03', NULL),
 (5, 1, '5421708334464.png', 0, 1, NULL, '2024-02-19 09:21:04', '2024-02-19 09:21:04', NULL),
 (6, 1, '7271708334464.png', 0, 1, NULL, '2024-02-19 09:21:04', '2024-02-19 09:21:04', NULL),
 (7, 1, '1671708334464.png', 0, 1, NULL, '2024-02-19 09:21:04', '2024-02-19 09:21:04', NULL),
@@ -1341,7 +1391,7 @@ CREATE TABLE `shippings` (
 --
 
 INSERT INTO `shippings` (`id`, `client_id`, `shipping_title`, `shipping_description`, `status`, `reject_note`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 2, 'product', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,', '2', 'dfgdsg', '2024-02-13 14:47:56', '2024-02-13 14:49:50', NULL);
+(1, 2, 'product', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,', '3', 'gfhgfgh', '2024-02-13 14:47:56', '2024-02-20 09:45:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -1721,6 +1771,17 @@ ALTER TABLE `clients`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `clients_contact_no_unique` (`contact_no`),
   ADD UNIQUE KEY `clients_email_unique` (`email`);
+
+--
+-- Indexes for table `companies`
+--
+ALTER TABLE `companies`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `companies_contact_no_unique` (`contact_no`),
+  ADD UNIQUE KEY `companies_email_unique` (`email`),
+  ADD UNIQUE KEY `companies_phone_number_unique` (`phone_number`),
+  ADD UNIQUE KEY `companies_qrcode_unique` (`qrcode`),
+  ADD KEY `companies_client_id_index` (`client_id`);
 
 --
 -- Indexes for table `countries`
@@ -2124,7 +2185,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `address_verifications`
 --
 ALTER TABLE `address_verifications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `carts`
@@ -2160,6 +2221,12 @@ ALTER TABLE `choice_sections`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `companies`
+--
+ALTER TABLE `companies`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -2250,13 +2317,13 @@ ALTER TABLE `mail_boxes`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `nfc_cards`
 --
 ALTER TABLE `nfc_cards`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `nfc_card_images`
@@ -2286,7 +2353,7 @@ ALTER TABLE `nfc_card_price_sections`
 -- AUTO_INCREMENT for table `nfc_designs`
 --
 ALTER TABLE `nfc_designs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `nfc_fields`
@@ -2298,7 +2365,7 @@ ALTER TABLE `nfc_fields`
 -- AUTO_INCREMENT for table `nfc_information`
 --
 ALTER TABLE `nfc_information`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -2538,6 +2605,12 @@ ALTER TABLE `carts`
 ALTER TABLE `chats`
   ADD CONSTRAINT `chats_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `chats_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `companies`
+--
+ALTER TABLE `companies`
+  ADD CONSTRAINT `companies_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `customer_feedback`

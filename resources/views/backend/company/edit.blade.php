@@ -11,7 +11,7 @@
                         @csrf
                         @method('POST')
                         <div class="row">
-                            <div class="col-md-6 col-12">
+                            <!-- <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="title">Company Name <i class="text-danger">*</i></label>
                                     <input type="text" id="company_name" class="form-control" value="{{ old('company_name',$company->company_name)}}" name="company_name">
@@ -75,7 +75,7 @@
                                     <label for="description">Description<i class="text-danger">*</i></label>
                                     <input type="text" id="description" class="form-control" value="{{ old('description',$company->description)}}" name="description">
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="status">Status<i class="text-danger">*</i></label>

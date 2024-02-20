@@ -20,31 +20,43 @@ class CompanyController extends Controller
         return view('backend.company.edit',compact('company'));
     }
     public function company_update(Request $request,$id){
-        try{
-            // dd($request->all());
-            $company = Company::findOrFail(encryptor('decrypt',$id));
-            $company->company_name = $request->company_name;
-            if($request->hasFile('company_logo')){
-                $imageName = rand(111,999).time().'.'.$request->company_logo->extension();
-                $request->company_logo->move(public_path('uploads/Company'), $imageName);
-                $company->company_logo=$imageName;
+        try {
+            $company = Company::findOrFail(encryptor('decrypt', $id));
+            if ($request->status == 2) {
+                // Get the first three letters of the company name
+                $companyNameLetters = substr($company->company_name, 0, 3);
+                
+                // Generate a random four-digit number
+                $randomNumber = rand(100000, 999999);
+
+                // Concatenate the company name letters with the random number
+                $number = $companyNameLetters .- $randomNumber;
+                
+                // Check if the generated number already exists
+                while ($this->qrCodeExists($number)) {
+                    // Regenerate the number until it's unique
+                    $randomNumber = rand(1000, 9999);
+                    $number = $companyNameLetters .- $randomNumber;
+                }
+                // Assign the unique number to the company's qrcode attribute
+                $company->qrcode = $number;
             }
-            $company->contact_no = $request->contact_no;
-            $company->email = $request->email;
-            $company->phone_number = $request->phone_number;
-            $company->address = $request->address;
-            $company->city = $request->city;
-            $company->state = $request->state;
-            $company->zip_code = $request->zip_code;
-            $company->description = $request->description;
             $company->status = $request->status;
-            if($company->save()){
+            if ($company->save()) {
                 $this->notice::success('Company Requested Successfully Update');
                 return redirect()->route('company_list');
             }
-        }catch(Exception $e){
+        } catch (Exception $e) {
             $this->notice::error('Something Wrong! Please try again');
             return redirect()->back()->withInput();
         }
+    }
+    public function qrCodeExists($number){
+        return Company::where('qrcode', $number)->exists();
+    }
+    public function show($id)
+    {
+        $company = Company::findOrFail(encryptor('decrypt',$id));
+        return view('backend.company.show',compact('company'));
     }
 }

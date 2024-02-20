@@ -44,12 +44,7 @@
                                     <input type="text" id="phone_number" class="form-control" value="{{ old('phone_number')}}" name="phone_number">
                                 </div>
                             </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="address">Address<i class="text-danger">*</i></label>
-                                    <input type="text" id="address" class="form-control" value="{{ old('address')}}" name="address">
-                                </div>
-                            </div>
+                            
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="city">City<i class="text-danger">*</i></label>
@@ -62,17 +57,30 @@
                                     <input type="text" id="state" class="form-control" value="{{ old('state')}}" name="state">
                                 </div>
                             </div>
-                            
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="zip_code">Zip Code<i class="text-danger">*</i></label>
                                     <input type="text" id="zip_code" class="form-control" value="{{ old('zip_code')}}" name="zip_code">
                                 </div>
                             </div>
-                            <div class="col-md-6 col-12">
+                            
+                            <div class="col-md-12 col-12">
+                                <div class="form-group">
+                                    <label for="address">Address<i class="text-danger">*</i></label>
+                                    <textarea name="address" id="address" cols="30" rows="5" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-12">
                                 <div class="form-group">
                                     <label for="description">Description<i class="text-danger">*</i></label>
-                                    <input type="text" id="description" class="form-control" value="{{ old('description')}}" name="description">
+                                    <textarea name="description" id="description" cols="30" rows="5" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="documents">Upload Documents (jpg, png, pdf, doc):</label>
+                                    <input type="file" id="company_document" class="form-control" name="company_document[]" accept="image/jpeg,image/png,application/pdf,application/txt,application/msword,application/vnd.openxmlformats-officedcoument.wordprocessingml.document" multiple required>
+                                    <div id="preview_container"></div>
                                 </div>
                             </div>
                         </div>
@@ -88,4 +96,31 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    document.getElementById('company_document').addEventListener('change', function(event) {
+            var input = event.target;
+            var previewContainer = document.getElementById('preview_container');
+
+            // Clear previous previews
+            previewContainer.innerHTML = '';
+
+            if (input.files && input.files.length > 0) {
+                for (var i = 0; i < input.files.length; i++) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        var preview = document.createElement('img');
+                        preview.src = e.target.result;
+                        preview.style.maxWidth = '100px';
+                        preview.style.marginRight = '5px'; // Add some space between images
+                        previewContainer.appendChild(preview); // Append each preview image
+                    }
+
+                    reader.readAsDataURL(input.files[i]); // Convert to data URL
+                }
+            }
+        });
+</script>
 @endsection

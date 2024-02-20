@@ -19,9 +19,6 @@
                             <th scope="col">{{__('Phone Number')}}</th>
                             <th scope="col">{{__('Address')}}</th>
                             <th scope="col">{{__('City')}}</th>
-                            <th scope="col">{{__('State')}}</th>
-                            <th scope="col">{{__('Zip Code')}}</th>
-                            <th scope="col">{{__('Description')}}</th>
                             <th scope="col">{{__('Status')}}</th>
                             <th class="white-space-nowrap">{{__('Action') }}</th>
                         </tr>
@@ -30,24 +27,28 @@
                         @forelse($data as $value)
                         <tr>
                             <th scope="row">{{ ++$loop->index }}</th>
-                            <td>{{$value->qrcode}}</td>
+                            <td>{{$value->qrcode}}
+                                <!-- @if (!empty($value->qrcode))
+                                    {!! DNS2D::getBarcodeHTML($value->qrcode, 'QRCODE') !!}
+                                @endif -->
+                            </td>
                             <td>{{$value->company_name}}</td>
-                            <td><img src="{{asset('public/uploads/company/'.$value->company_logo)}}" alt="">
+                            <td><img src="{{asset('public/uploads/company/'.$value->company_logo)}}" alt="" width="50px">
                             </td>
                             <td>{{$value->contact_no}}</td>
                             <td>{{$value->email}}</td>
                             <td>{{$value->phone_number}}</td>
                             <td>{{$value->address}}</td>
-                            <td>{{$value->city}}</td>
-                            <td>{{$value->state}}</td>
                             <td>{{$value->zip_code}}</td>
-                            <td>{{$value->description}}</td>
-                            <td>
+                            <td style="color: @if($value->status==1) #FFC107 @elseif($value->status==2) #15CE73 @elseif($value->status==3) red @endif; font-weight:bold;">
                                 {{ $value->status == 1 ? __('Pending') : ($value->status == 2 ? __('Accepted') : __('Rejected')) }}
                             </td>
                             <td class="white-space-nowrap">
                                 <a href="{{route('company_edit',encryptor('encrypt',$value->id))}}">
                                     <i class="fa fa-edit"></i>
+                                </a>
+                                <a href="{{route('company_show',encryptor('encrypt',$value->id))}}" class="">
+                                    <i class="fa fa-eye"></i>
                                 </a>
                                 <!-- <a href="javascript:void()" onclick="$('#form{{$value->id}}').submit()">
                                     <i class="fa fa-trash"></i>

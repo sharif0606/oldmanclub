@@ -159,23 +159,6 @@
                                 <li><a href="{{route('shipstatus.index')}}">Shipping Status</a></li>
                                 <li><a href="{{route('shiptrack.index')}}">Shipping Tracking</a></li>
                                 <li><a href="{{route('comment_list')}}">Comment List</a></li>
-                                <li>
-                                    <a class="has-arrow" href="javascript:void()">NFC</a>
-                                    <ul aria-expanded="false">
-                                        <li><a href="{{route('nfc-field.index')}}">NFC Field</a></li>
-                                        <li><a href="{{route('design_card.index')}}">Design Card</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="{{route('order_list')}}">Order List</a>
-                                </li>
-                                <li>
-                                    <a class="has-arrow" href="javascript:void()">Print Service</a>
-                                    <ul aria-expanded="false">
-                                        <li><a href="{{route('print_service.index')}}">Printing Service</a></li>
-                                        <!-- <li><a href="{{route('print_service_image.index')}}">Printing Service Image</a></li> -->
-                                    </ul>
-                                </li>
                             </ul>
                         </li>
                         <li>
@@ -195,7 +178,6 @@
                             </a>
                             <ul aria-expanded="false">
                                 <li><a href="{{route('print_service.index')}}">Printing Service List</a></li>
-                                <li><a href="{{route('print_service_image.index')}}">Printing Service Image</a></li>
                             </ul>
                         </li>
                         <li>
