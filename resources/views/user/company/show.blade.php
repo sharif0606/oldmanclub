@@ -5,7 +5,7 @@
     <div class="col-sm-6">
         <div class="card">
             <div class="card-header">
-                <h1 class="mx-auto">Company Information</h1>
+                <h3 class="mx-auto">Company Information</h3>
             </div>
             <hr>
             <div class="card-body">
@@ -51,7 +51,7 @@
     <div class="col-sm-6">
         <div class="card">
             <div class="card-header">
-                <h1 class="mx-auto">Address Information</h1>
+                <h3 class="mx-auto">Address Information</h3>
             </div>
             <hr>
             <div class="card-body">

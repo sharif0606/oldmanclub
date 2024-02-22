@@ -20,6 +20,8 @@
                             <th scope="col">{{__('Birth Date')}}</th>
                             <th scope="col">{{__('Address')}}</th>
                             <th scope="col">{{__('Image')}}</th>
+                            <th scope="col">{{__('Address Verified')}}</th>
+
                             <th scope="col">{{__('Status')}}</th>
                             <th class="white-space-nowrap">{{__('Action') }}</th>
                         </tr>
@@ -29,15 +31,16 @@
                         <tr>
                             <th scope="row">{{ ++$loop->index }}</th>
                             <td>{{$p->fname}}
-                                {{$p->middle_name}}{{$p->last_name}}
+                                {{$p->middle_name}} {{$p->last_name}}
                             </td>
                             <td>{{$p->email}}</td>
                             <td>{{$p->contact_no}}</td>
-                            <td>{{$p->date_of_birth}}</td>
+                            <td>{{ date('d-F-Y', strtotime($p->dob)) }}</td>
                             <td>{{$p->address_line_1}}</td>
                             <td><img width="50px" src="{{asset('public/uploads/client/'.$p->image)}}" alt=""></td>
+                            <td style="color: @if($p->is_address_verified==1) Green @else red @endif; font-weight:bold;">@if($p->is_address_verified==1){{__('Verified')}}@else{{__('Not Verified')}}@endif</td>
                             
-                            <td>@if($p->status == 1) {{__('Active') }} @else {{__('Inactive') }} @endif</td>
+                            <td style="color: @if($p->status==1) Green @else red @endif; font-weight:bold;">@if($p->status == 1) {{__('Active') }} @else {{__('Inactive') }} @endif</td>
                             <!-- or <td>{{ $p->status == 1?"Active":"Inactive" }}</td>-->
                             <td class="white-space-nowrap">
                                 <a href="{{route('client.edit',encryptor('encrypt',$p->id))}}">

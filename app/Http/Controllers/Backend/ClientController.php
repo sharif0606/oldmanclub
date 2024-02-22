@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\User\Client;
+use App\Models\User\AddressVerification;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -40,7 +41,8 @@ class ClientController extends Controller
     public function show($id)
     {
         $client = Client::findOrFail(encryptor('decrypt',$id));
-        return view('backend.client.show', compact('client'));
+        $client_address = AddressVerification::where('client_id',$client->id)->get();
+        return view('backend.client.show', compact('client','client_address'));
     }
 
     /**
@@ -102,6 +104,19 @@ class ClientController extends Controller
         }
     }
 
+    public function verification($id){
+        $client = Client::findOrFail(encryptor('decrypt',$id));
+        $client_address = AddressVerification::where('client_id',$client->id)->get();
+        return view('backend.client.verify', compact('client','client_address'));
+    }
+    public function verification_update(Request $request, $id){
+        $client = Client::findOrFail(encryptor('decrypt',$id));
+        $client->is_address_verified = $request->is_address_verified;
+        if($client->save()){
+            $this->notice::success('Address successfully Verified');
+            return redirect()->route('client.index');
+        }
+    }
     /**
      * Remove the specified resource from storage.
      */

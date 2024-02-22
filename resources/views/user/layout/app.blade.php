@@ -148,7 +148,11 @@
                         </a>
                     </li>
                     <li><a class="has-arrow" href="{{ route('company.index') }}" aria-expanded="false">
-                            <i class="icon-envelope"></i><span class="nav-text">Requested Company</span>
+                            <i class="fa-solid fa-building"></i><span class="nav-text">Requested Company</span>
+                        </a>
+                    </li>
+                    <li><a class="has-arrow" href="{{ route('bank.index') }}" aria-expanded="false">
+                            <i class="fa-solid fa-dollar-sign"></i><span class="nav-text">Requested bank</span>
                         </a>
                     </li>
                     <li>

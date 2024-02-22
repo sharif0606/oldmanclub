@@ -18,6 +18,7 @@ use App\Http\Controllers\Common\CartController;
 use App\Http\Controllers\Common\CheckOutController;
 use App\Http\Controllers\Backend\Admin\OrderController;
 use App\Http\Controllers\Backend\Admin\CompanyController;
+use App\Http\Controllers\Backend\Admin\BankController;
 
 // use App\Http\Controllers\Backend\PhoneBookController as phonebook;
 use App\Http\Controllers\Backend\Website\SettingController as setting;
@@ -69,6 +70,7 @@ use App\Http\Controllers\User\EmailSendController;
 use App\Http\Controllers\OrderController as order;
 use App\Http\Controllers\User\AddressVerificationController as address_verify;
 use App\Http\Controllers\User\CompanyController as company;
+use App\Http\Controllers\User\BankController as bank;
 
 // landing page
 use App\Http\Controllers\Common\frontendController as frontend;
@@ -111,6 +113,9 @@ Route::prefix('admin')->group(function () {
     Route::resource('user', user::class);
     Route::resource('role', role::class);
     Route::resource('client', client::class);
+    Route::get('addressverification/{id}',[client::class, 'verification'])->name('address_verify');
+    Route::post('addressverification/{id}',[client::class, 'verification_update'])->name('address_verify_saved');
+
     Route::get('permission/{role}', [permission::class, 'index'])->name('permission.list');
     Route::post('permission/{role}', [permission::class, 'save'])->name('permission.save');
     Route::resource('sms', sms::class);
@@ -136,10 +141,14 @@ Route::prefix('admin')->group(function () {
     Route::get('order-list', [OrderController::class, 'order_list'])->name('order_list');
     Route::get('order-edit/{id}', [OrderController::class, 'order_edit'])->name('order_edit');
     Route::post('order-edit/{id}', [OrderController::class, 'order_store'])->name('order_update');
+
     Route::get('company_list',[CompanyController::class, 'company'])->name('company_list');
     Route::get('company_edit/{id}',[CompanyController::class, 'company_edit'])->name('company_edit');
     Route::post('company_update/{id}',[CompanyController::class, 'company_update'])->name('company_update');
     Route::get('company_show/{id}',[CompanyController::class, 'show'])->name('company_show');
+    Route::get('bank_list',[BankController::class,'bank'])->name('bank_list');
+    Route::get('bank_edit/{id}',[BankController::class,'bank_edit'])->name('bank_edit');
+    Route::post('bank_update/{id}',[BankController::class,'bank_update'])->name('bank_update');
 
 
     //website  
@@ -223,6 +232,7 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::resource('nfc_card', nfc_card::class);
     Route::resource('address_verify', address_verify::class);
     Route::resource('company', company::class);
+    Route::resource('bank', bank::class);
 });
 Route::get('nfcqrurl/{id}', [nfc_card::class, 'showqrurl']);
 Route::get('save-contact/{id}', [nfc_card::class, 'save_contact'])->name('save_contact');

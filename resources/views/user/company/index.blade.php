@@ -54,13 +54,6 @@
                                         @csrf
                                         @method('delete')
                                     </form>
-                                @elseif($value->status==2)
-                                    <a href="{{route('company.edit',encryptor('encrypt',$value->id))}}">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <a href="{{route('company.show',encryptor('encrypt',$value->id))}}" class="">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
                                 @else
                                     <a href="{{route('company.show',encryptor('encrypt',$value->id))}}" class="">
                                         <i class="fa fa-eye"></i>

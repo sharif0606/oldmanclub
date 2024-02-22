@@ -4,10 +4,13 @@
 @section('content')
     <style>
         .checkout {
-            background-color: #F85606;
+            background-color: #2F0549;
         }
 
         .checkout:hover {
+            background-color: #F85606 ;
+        }
+        .bg{
             background-color: #2F0549;
         }
     </style>
@@ -16,8 +19,11 @@
         @if (session('cart'))
             <div class="row">
                 <div class="col-lg-12">
-                    <h5 class="text-center">Cart Details</h5>
-                    <h6 class="cart-area__label text-center">{{ count(session('cart', [])) }} Printing Service in Cart</h6>
+                    <div class="card shadow mb-3 bg text-white">
+                        <h5 class="text-center">Cart Details</h5>
+                        <h6 class="cart-area__label text-center">{{ count(session('cart', [])) }} Printing Service in Cart</h6>
+                    </div>
+                   
                     <div class="">
                         @php
                             $total = 0;
@@ -32,8 +38,8 @@
                         @endforeach
                         <div class="row">
                             <div class="col-md-8">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered">
+                                <div class="table-responsive shadow">
+                                    <table class="table table-bordered radius">
                                         <thead>
                                             <tr>
                                                 <th>SL.</th>

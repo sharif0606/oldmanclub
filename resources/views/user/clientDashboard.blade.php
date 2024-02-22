@@ -39,8 +39,14 @@
                                 <div class="col-3 col-sm-3 border-right-1 prf-col">
                                     <div class="profile-name">
                                         <h5 class="text-primary">Address</h5>
-                                        <p>{{ $client->address_line_1 }}&nbsp;<small class="text-warning">(Not
-                                                Verified)</small>
+                                        <p>{{ $client->address_line_1 }}&nbsp;
+                                            <small style="color: @if($client->is_address_verified==1) Green @else red @endif; font-weight:bold;">
+                                                @if($client->is_address_verified==1)
+                                                    (Verified)
+                                                @else
+                                                    (Not Verified)
+                                                @endif
+                                            </small>
                                         </p>
                                     </div>
                                 </div>
@@ -103,7 +109,7 @@
                                                 </h5>
                                             </div>
                                             <div class="col-9"><span>{{ $client->fname }}
-                                                    {{ $client->middle_name }}{{ $client->last_name }}
+                                                    {{ $client->middle_name }} {{ $client->last_name }}
                                                 </span>
                                             </div>
                                         </div>
@@ -301,9 +307,9 @@
                                 <div id="address-verify" class="tab-pane fade">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h6 class="card-title">Verify Address</h6>
+                                            <h2 class="card-title text-center text-success"><i>Upload Your Document for Account verification</i> </h2>
                                             <div class="row">
-                                                <div class="col-md-10 col-lg-6">
+                                                <div class="col-md-10 col-lg-8 mx-auto">
                                                     <form action="{{route('address_verify.store')}}" method="post" enctype="multipart/form-data">
                                                         @csrf
                                                         <div class="form-group">
@@ -333,9 +339,9 @@
                                 <div id="password_tab" class="tab-pane fade">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h6 class="card-title">Change Password</h6>
+                                            <h2 class="card-title text-center">Change Password</h2>
                                             <div class="row">
-                                                <div class="col-md-10 col-lg-6">
+                                                <div class="col-md-10 col-lg-8 mx-auto">
                                                     <form action="{{ route('change_password') }}" method="post">
                                                         @csrf
                                                         <div class="form-group">

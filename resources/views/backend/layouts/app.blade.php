@@ -185,8 +185,18 @@
                                 <i class="fa-solid fa-table-list"></i>
                                 <span class="nav-text">Order List</span>
                             </a>
-                            <!-- <i class="fa fa-globe"></i>
-                            <a href="{{route('order_list')}}">Order List</a> -->
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="{{route('company_list')}}" aria-expanded="false">
+                                <i class="fa-solid fa-table-list"></i>
+                                <span class="nav-text">Company List</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="{{route('bank_list')}}" aria-expanded="false">
+                                <i class="fa-solid fa-table-list"></i>
+                                <span class="nav-text">Bank List</span>
+                            </a>
                         </li>
                         <li>
                             <a class="has-arrow" href="javascript:void()" aria-expanded="false">

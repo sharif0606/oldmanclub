@@ -156,8 +156,12 @@ class CompanyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Company $company)
+    public function destroy($id)
     {
-        //
+        $company = Company::findOrFail(encryptor('decrypt',$id));
+        if($company->delete()){
+            $this->notice::warning('Data Deleted!');
+            return redirect()->back();
+        }
     }
 }

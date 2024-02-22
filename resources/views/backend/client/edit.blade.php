@@ -16,65 +16,39 @@
                         <div class="row">
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label for="first_name_en">First Name(English) <i class="text-danger">*</i></label>
-                                    <input type="text" id="first_name_en" class="form-control" value="{{ old('first_name_en',$client->first_name_en)}}" name="first_name_en">
-                                    @if($errors->has('first_name_en'))
-                                        <span class="text-danger"> {{ $errors->first('first_name_en') }}</span>
+                                    <label for="fname">First Name<i class="text-danger">*</i></label>
+                                    <input type="text" id="fname" class="form-control" value="{{ old('fname',$client->fname)}}" name="fname">
+                                    @if($errors->has('fname'))
+                                        <span class="text-danger"> {{ $errors->first('fname') }}</span>
                                     @endif
                                 </div>
                             </div>
+                            
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label for="first_name_bn">First Name(Bangla) <i class="text-danger">*</i></label>
-                                    <input type="text" id="first_name_bn" class="form-control" value="{{ old('first_name_bn',$client->first_name_bn)}}" name="first_name_bn">
-                                    @if($errors->has('first_name_bn'))
-                                        <span class="text-danger"> {{ $errors->first('first_name_bn') }}</span>
+                                    <label for="middle_name">Middle Name<i class="text-danger">*</i></label>
+                                    <input type="text" id="middle_name" class="form-control" value="{{ old('middle_name',$client->middle_name)}}" name="middle_name">
+                                    @if($errors->has('middle_name'))
+                                        <span class="text-danger"> {{ $errors->first('middle_name') }}</span>
                                     @endif
                                 </div>
                             </div>
+                            
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label for="middle_name_en">Middle Name(English) <i class="text-danger">*</i></label>
-                                    <input type="text" id="middle_name_en" class="form-control" value="{{ old('middle_name_en',$client->middle_name_en)}}" name="middle_name_en">
-                                    @if($errors->has('middle_name_en'))
-                                        <span class="text-danger"> {{ $errors->first('middle_name_en') }}</span>
+                                    <label for="last_name">Last Name<i class="text-danger">*</i></label>
+                                    <input type="text" id="last_name" class="form-control" value="{{ old('last_name',$client->last_name)}}" name="last_name">
+                                    @if($errors->has('last_name'))
+                                        <span class="text-danger"> {{ $errors->first('last_name') }}</span>
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="middle_name_bn">Middle Name(Bangla) <i class="text-danger">*</i></label>
-                                    <input type="text" id="middle_name_bn" class="form-control" value="{{ old('middle_name_bn',$client->middle_name_bn)}}" name="middle_name_bn">
-                                    @if($errors->has('middle_name_bn'))
-                                        <span class="text-danger"> {{ $errors->first('middle_name_bn') }}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="last_name_en">Last Name(English) <i class="text-danger">*</i></label>
-                                    <input type="text" id="last_name_en" class="form-control" value="{{ old('last_name_en',$client->last_name_en)}}" name="last_name_en">
-                                    @if($errors->has('last_name_en'))
-                                        <span class="text-danger"> {{ $errors->first('last_name_en') }}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="last_name_bn">Last Name(Bangla) <i class="text-danger">*</i></label>
-                                    <input type="text" id="last_name_bn" class="form-control" value="{{ old('last_name_bn',$client->last_name_bn)}}" name="last_name_bn">
-                                    @if($errors->has('last_name_bn'))
-                                        <span class="text-danger"> {{ $errors->first('last_name_bn') }}</span>
-                                    @endif
-                                </div>
-                            </div>
-
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="Dob">Date Of Birth <i class="text-danger">*</i></label>
-                                    <input type="text" id="Dob" class="form-control" value="{{ old('date_of_birth',$client->date_of_birth)}}" name="date_of_birth">
-                                    @if($errors->has('date_of_birth'))
-                                        <span class="text-danger"> {{ $errors->first('date_of_birth') }}</span>
+                                    <input type="text" id="Dob" class="form-control" value="{{ old('dob',$client->dob)}}" name="dob">
+                                    @if($errors->has('dob'))
+                                        <span class="text-danger"> {{ $errors->first('dob') }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -89,22 +63,14 @@
                             </div>
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label for="contact_en">Contact Number (English) <i class="text-danger">*</i></label>
-                                    <input type="text" id="contact_en" class="form-control" value="{{ old('contact_en',$client->contact_en)}}" name="contact_en">
-                                    @if($errors->has('contact_en'))
-                                        <span class="text-danger"> {{ $errors->first('contact_en') }}</span>
+                                    <label for="contact_no">Contact Number<i class="text-danger">*</i></label>
+                                    <input type="text" id="contact_no" class="form-control" value="{{ old('contact_no',$client->contact_no)}}" name="contact_no">
+                                    @if($errors->has('contact_no'))
+                                        <span class="text-danger"> {{ $errors->first('contact_no') }}</span>
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="contact_bn">Contact Number (Bangla) <i class="text-danger">*</i></label>
-                                    <input type="text" id="contact_bn" class="form-control" value="{{ old('contact_en',$client->contact_bn)}}" name="contact_bn">
-                                    @if($errors->has('contact_bn'))
-                                        <span class="text-danger"> {{ $errors->first('contact_bn') }}</span>
-                                    @endif
-                                </div>
-                            </div>
+                           
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="address_line_1">Address 1<i class="text-danger">*</i></label>
@@ -219,7 +185,6 @@
                                     <input type="file" id="image" class="form-control" placeholder="Image" name="image">
                                 </div>
                             </div>
-                            
                         </div>
                         <div class="row">
                             <div class="col-12 d-flex justify-content-end">
