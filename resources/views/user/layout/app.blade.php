@@ -148,11 +148,11 @@
                         </a>
                     </li>
                     <li><a class="has-arrow" href="{{ route('company.index') }}" aria-expanded="false">
-                            <i class="fa-solid fa-building"></i><span class="nav-text">Requested Company</span>
+                            <i class="fa fa-building"></i><span class="nav-text">Requested Company</span>
                         </a>
                     </li>
                     <li><a class="has-arrow" href="{{ route('bank.index') }}" aria-expanded="false">
-                            <i class="fa-solid fa-dollar-sign"></i><span class="nav-text">Requested bank</span>
+                           <i class="fa fa-dollar"></i><span class="nav-text">Requested bank</span>
                         </a>
                     </li>
                     <li>
@@ -162,8 +162,6 @@
                             <li><a href="{{ route('nfc_card.index') }}">NFC List</a></li>
                         </ul>
                     </li>
-
-
                 </ul>
             </div>
 

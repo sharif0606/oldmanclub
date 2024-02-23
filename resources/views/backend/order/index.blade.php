@@ -19,7 +19,6 @@
                             <th scope="col">{{__('Total')}}</th>
                             <th scope="col">{{__('Discount')}}</th>
                             <th scope="col">{{__('Payable')}}</th>
-                            <th scope="col">{{__('Created_by')}}</th>
                             <th class="white-space-nowrap">{{__('Action') }}</th>
                         </tr>
                     </thead>
@@ -28,7 +27,7 @@
                         <tr>
                             <th scope="row">{{ ++$loop->index }}</th>
                             <td>{{$value->tracking_no}}</td>
-                            <td>{{$value->client?->fname}}</td>
+                            <td>{{$value->client?->fname}} {{$value->client?->middle_name}} {{$value->client?->last_name}}</td>
                             <td>{{$value->shipping?->type}}</td>
                             <td>@if($value->order_status==1)
                                 {{'Processing'}}
@@ -41,8 +40,6 @@
                             <td>{{$value->total}}</td>
                             <td>{{$value->discount}}</td>
                             <td>{{$value->payable}}</td>
-                            <td>{{$value->createdBy?->name}}</td>
-                            <td>{{$value->updatedBy?->name}}</td>
                             <td class="white-space-nowrap">
                                 <a href="{{route('order_edit',encryptor('encrypt',$value->id))}}">
                                     <i class="fa fa-edit"></i>
