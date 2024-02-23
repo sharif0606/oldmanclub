@@ -2,7 +2,138 @@
 @section('title', 'Old Club Man')
 @section('body-attr', 'style="background-color: #ebebf2;"')
 @section('content')
-   
+    <style>
+        .checkout {
+            background-color: #66298B;
+        }
+
+        .checkout:hover {
+            background-color: #3fc6db ;
+        }
+        .bg{
+            background-color: #2F0549;
+        }
+    </style>
+    <div class="container  my-5">
+        @if (session('cart'))
+        <div class="row">
+            <h2 class="text-center mt-2 fw-bold">Shopping Cart</h2>
+            <p class="text-end fw-bold">({{ count(session('cart', [])) }})Items</p>
+             <div class="table-responsive ">
+                @php
+                    $total = 0;
+                    //echo '<pre>';
+                    $cart = session()->get('cart');
+                    //print_r($cart);die;
+                @endphp
+                @foreach ($cart as $c)
+                    @php
+                        $total += $c['price'] * $c['quantity'];
+                    @endphp
+                @endforeach
+                <table class="table table-striped table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                        <th scope="col">SL</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Unit Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @if(session('cart'))
+                        @foreach(session('cart') as $id=>$details)
+                        <tr>
+                            <th scope="row">{{$loop->iteration}}</th>
+                            <td>
+                                @if(isset($details['image']) && !empty($details['image']))
+                                    <img src="{{ asset('public/uploads/printimages/' . $details['image']) }}" alt="">
+                                    
+                                @endif
+                                {{ $details['service_name'] }}
+                            </td>
+                            <td>
+                                ${{$details['price']}}
+                            </td>
+                            <td>
+                                <div class="d-flex">
+                                    <form action="{{ route('addto_cart', $id) }}">
+                                        <input type="hidden" name="type" value="1">
+                                        <input name="quantity" type="hidden" value="1">
+                                        <input type="submit" name="op" value="+"
+                                            style="padding:2px 8px;"
+                                            class="">
+                                            {{ $details['quantity'] }}
+                                        <input type="submit" name="op" value="-"
+                                            style="padding:2px 8px;"
+                                            class="">
+                                    </form>
+
+                                    <form method="POST"
+                                        action="{{ route('remove.from.cart') }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="hidden" name="id"
+                                            value="{{ $id }}">
+                                        <button type="submit" style="padding:2px 8px;"
+                                            class="mx-2"><i class="bi bi-x"></i></button>
+                                    </form>
+                                </div>
+                            </td>
+                            <td>${{$details['quantity']*$details['price']}}</td>
+                        </tr>
+                        @endforeach
+                    @endif
+                    </tbody>
+                </table>
+             </div>
+        </div>
+       
+        <div class="row mt-2">
+            <div class="col-sm-6">
+                <h5>Promo Code</h5>
+                <div class="d-flex">
+                    <input type="text" name="" id="" placeholder="Coupon Code" class="form-control m-0">
+                    <button class="btn checkout mx-1 py-0 rounded-pill w-25 text-white">Apply</button>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <h5>Cart Totals</h5>
+                <div class="card shadow">
+                    <table class="table table-responsive table-bordered">
+                        <tr>
+                            <th>Subtotal</th>
+                            <td>{{'$'.number_format((float) session('cart_details')['cart_total'],2)}}</td>
+                        </tr>
+                        <tr>
+                            <th>Coupon Discount ({{ session('cart_details')['discount'] ?? 0.0 }}%)</th>
+                            <td>{{ '$' . number_format((float) isset(session('cart_details')['discount_amount']) ? session('cart_details')['discount_amount'] : 0.0, 2) }}</td>
+                        </tr>
+                        <tr>
+                            <th>Total</th>
+                            <td>{{ '$' . number_format((float) session('cart_details')['total_amount'], 2) }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="">
+                    <form action="" method="post">
+                        @csrf
+                        <a href="{{ route('checkout') }}"
+                            class="btn btn-sm checkout mt-2 mb-lg-3 py-1 text-white rounded-pill w-25">Checkout</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        @else
+        <div class="container text-center mb-3">
+            <div class="card">
+                <h1>Your Cart is Empty</h1>
+                <h5>No Item in Your Cart Yet</h5>
+            </div>
+        </div>
+        @endif
+    </div>
     <!-- Cart Section Starts Here -->
     
     <!-- Cart Section Ends Here -->
