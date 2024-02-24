@@ -32,6 +32,7 @@
                                             <option value="">Select Icon</option>
                                             <option value="fas fa-globe">Web</option>
                                             <option value="fas fa-envelope-open">Email</option>
+                                            <option value="fas fa-phone">Phone</option>
                                         </select>
                                         @if ($errors->has('icon'))
                                             <span class="text-danger"> {{ $errors->first('icon') }}</span>

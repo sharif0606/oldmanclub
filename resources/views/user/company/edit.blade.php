@@ -81,7 +81,7 @@
                              <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="documents">Upload Documents (jpg, png, pdf, doc):</label>
-                                    <input type="file" id="company_document" class="form-control" name="company_document[]" accept="image/jpeg,image/png,application/pdf,application/txt,application/msword,application/vnd.openxmlformats-officedcoument.wordprocessingml.document" multiple required>
+                                    <input type="file" id="company_document" class="form-control" name="company_document[]" accept="image/jpeg,image/png,application/pdf,application/txt,application/msword,application/vnd.openxmlformats-officedcoument.wordprocessingml.document" multiple>
                                     <div id="preview_container"></div>
                                 </div>
                             </div>

@@ -47,7 +47,7 @@ class AddressVerificationController extends Controller
                 
                 foreach ($request->file('document') as $file) {
                     $validator = Validator::make(['document' => $file], [
-                        'document' => 'required|mimes:jpg,png,pdf,doc,docx|max:2048'
+                        'document' => 'required|mimes:jpeg,jpg,png,pdf,doc,docx|max:2048'
                     ]);
 
                     if ($validator->fails()) {
