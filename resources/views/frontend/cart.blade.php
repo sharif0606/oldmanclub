@@ -31,7 +31,7 @@
                         $total += $c['price'] * $c['quantity'];
                     @endphp
                 @endforeach
-                <table class="table table-striped table-bordered">
+                <table class="table table-bordered">
                     <thead class="table-dark">
                         <tr>
                         <th scope="col">SL</th>
@@ -49,9 +49,11 @@
                             <td>
                                 @if(isset($details['image']) && !empty($details['image']))
                                     <img src="{{ asset('public/uploads/printimages/' . $details['image']) }}" alt="">
-                                    
                                 @endif
                                 {{ $details['service_name'] }}
+                                @if(isset($details['service_details']))
+                                    {!! implode(' ', array_slice(explode(' ', $details['service_details']), 0, 5)) !!}
+                                @endif
                             </td>
                             <td>
                                 ${{$details['price']}}

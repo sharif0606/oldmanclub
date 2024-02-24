@@ -20,8 +20,6 @@
                             <th scope="col">{{__('Name')}}</th>
                             <th scope="col">{{__('Icon')}}</th>
                             <th scope="col">{{__('Status')}}</th>
-                            <th scope="col">{{__('Created_by')}}</th>
-                            <th scope="col">{{__('Updated_by')}}</th>
                             <th class="white-space-nowrap">{{__('Action') }}</th>
                         </tr>
                     </thead>
@@ -33,8 +31,6 @@
                             <td>{{$p->icon}}</td>
                             <td>@if($p->status==1) {{__('Show')}} @else {{__('Hide')}}
                             @endif</td>
-                            <td>{{$p->createdBy?->name}}</td>
-                            <td>{{$p->updatedBy?->name}}</td>
                             <td class="white-space-nowrap">
                                 <a href="{{route('nfc_field.edit',encryptor('encrypt',$p->id))}}">
                                     <i class="fa fa-edit"></i>

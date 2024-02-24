@@ -2,10 +2,12 @@
     <header>
         <div class="classic_header_image">
             @if ($nfc_card->client?->image)
-                <div class="main-img" style="background-image: url({{ asset('public/uploads/client/' . $nfc_card->client?->image) }})"></div>
+                <img src="{{ asset('public/uploads/client/' . $nfc_card->client?->image)}}" alt="" width="100%">
+                <!-- <div class="main-img" style="background-image: url({{ asset('public/uploads/client/' . $nfc_card->client?->image) }})"></div> -->
             @else
-                <div class="main-img" style="background-image: url({{ asset('public/assets/nfc/images/123.png') }})">
-                </div>
+                <img src="{{ asset('public/assets/nfc/images/123.png')}}" alt="" width="100%">
+                <!-- <div class="main-img" style="background-image: url({{ asset('public/assets/nfc/images/123.png') }})">
+                </div> -->
             @endif
             <div class="classic_svg">
                 <svg preserveAspectRatio="xMinYMax meet" viewBox="0 0 246 57" xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +45,6 @@
                     @else
                         <span class="fs-4 fw-bold">Dr.</span>
                     @endif
-
                     <span class="fs-4 fw-bold">{{ $nfc_card->client?->fname }}</span>
                     <span class="fs-4 fw-bold">{{ $nfc_card->client?->middle_name }}</span>
                     <span class="fs-4 fw-bold">{{ $nfc_card->client?->last_name }}</span>
