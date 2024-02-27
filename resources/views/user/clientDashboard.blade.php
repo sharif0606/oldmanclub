@@ -18,11 +18,16 @@
                         <div class="profile-photo">
                             @if($client->image)
                             <img src="{{ asset('public/uploads/client/' . $client->image) }}" class="img-fluid rounded-circle"
-                                alt="" class="bg-dark">
-                            <p class="badge"><img src="{{asset('public/images/varified.png')}}" alt=""></p><!-- Add your badge here -->
+                                alt="" class="bg-dark" width="500px">
+                                @if($client->is_address_verified==1) 
+                                    <p class="badge"><img src="{{asset('public/images/varified.png')}}" alt=""></p><!-- Add your badge here -->
+                                @else
+                                    <p class="badge"><img src="{{asset('public/images/unverified.png')}}" alt=""></p>
+                                @endif
                             @else
                              <img src="{{ asset('public/images/download.jpg') }}" class="img-fluid rounded-circle"
                                 alt="asdfdf" class="">
+                                <p class="badge"><img src="{{asset('public/images/unverified.png')}}" alt=""></p>
                             @endif
                         </div>
                     </div>
@@ -40,7 +45,7 @@
                                     <div class="profile-name">
                                         <h5 class="text-primary">Address</h5>
                                         <p>{{ $client->address_line_1 }}&nbsp;
-                                            <small style="color: @if($client->is_address_verified==1) Green @else red @endif; font-weight:bold;">
+                                            <small style="color: @if($client->is_address_verified==1) #26d66c @else red @endif; font-weight:bold;">
                                                 @if($client->is_address_verified==1)
                                                     (Verified)
                                                 @else
@@ -52,14 +57,14 @@
                                 </div>
                                 <div class="col-3 col-sm-3 border-right-1 prf-col">
                                     <div class="profile-email">
-                                        <h5 class="text-muted text-primary">{{ $client->email }}</h5>
-                                        <p>Email<small class="text-warning">&nbsp;(Not Verified)</small></p>
+                                        <h5 class="text-primary">Email<small class="text-warning">&nbsp;(Not Verified)</small></h5>
+                                        <h5 class="text-muted">{{ $client->email }}</h5>
                                     </div>
                                 </div>
                                 <div class="col-3 col-sm-3 prf-col">
                                     <div class="profile-call">
+                                        <h5 class="text-primary">Phone No.</h5>
                                         <h5 class="text-muted">(+088) {{ $client->contact_no }}</h5>
-                                        <p>Phone No.</p>
                                     </div>
                                 </div>
                             </div>

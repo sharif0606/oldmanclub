@@ -133,8 +133,8 @@
                     <div class="testimonial-slider">
                         <!-- Testimonial 1 -->
                         @foreach($feedback as $value)
-                        <div class="card testimonial-item h-100">
-                            <div class="card-body">
+                        <div class="card testimonial-item">
+                            <div class="card-body ">
                                 <div class="row">
                                     <div class="col-md-2">
                                         <div class="customer-info">
@@ -143,11 +143,11 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="customer-details">
-                                            <h4>
+                                            <p class="fw-bold">
                                                 {{$value->client?->fname}}  
                                                 {{$value->client?->middle_name}}  
                                                 {{$value->client?->last_name}}  
-                                            </h4>
+                                            </p>
                                             <p>
                                                 {{$value->client?->address_line_1}}
                                             </p>                                 

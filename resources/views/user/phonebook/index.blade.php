@@ -13,10 +13,10 @@
                     </button>
                     <!-- Inside your blade file -->
                     <!-- <button class="btn btn-sm btn-primary float-end" onClick="get_print()"><i class="bi bi-file-excel"></i> Export Excel</button> -->
-                    <a href="{{ route('phonebook_download') }}" class="pull-right fs-1 mx-2" download>
+                    <a href="{{ route('phonebook_download') }}" class="pull-right fs-5 mx-2" download>
                         <i class="fa fa-download"></i>
                     </a>
-                    <a class="pull-right fs-1" href="{{route('phonebook.create')}}" data-toggle="modal" data-target="#phonecreatModal"><i class="fa fa-plus"></i></a>
+                    <a class="pull-right fs-5" href="{{route('phonebook.create')}}" data-toggle="modal" data-target="#phonecreatModal"><i class="fa fa-plus"></i></a>
                 </div>
                 <table class="table table-bordered mb-0" id="phone_book">
                     <thead>

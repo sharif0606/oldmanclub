@@ -5,7 +5,7 @@
     <div class="col-12">
         <div class="card">
             <div class="table-responsive">
-                <a class="pull-right fs-1" href="{{route('bank.create')}}"><i class="fa fa-plus"></i></a>
+                <a class="pull-right fs-5" href="{{route('bank.create')}}"><i class="fa fa-plus"></i></a>
             </div>
             <!-- table bordered -->
             <div class="table-responsive">

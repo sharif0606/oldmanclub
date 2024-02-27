@@ -9,7 +9,7 @@
             <!-- table bordered -->
             <div class="table-responsive">
                 <div>
-                    <a class="pull-right fs-1" href="{{route('phonegroup.create')}}" data-toggle="modal" data-target="#phonegroupModal"><i class="fa fa-plus"></i></a>
+                    <a class="pull-right fs-5" href="{{route('phonegroup.create')}}" data-toggle="modal" data-target="#phonegroupModal"><i class="fa fa-plus"></i></a>
                 </div>
                 <table class="table table-bordered mb-0" id="phone_book">
                     <thead>
