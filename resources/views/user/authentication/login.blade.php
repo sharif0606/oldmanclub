@@ -10,13 +10,12 @@
     <div class="align shadow">
 		 <p class="text-center text-primary fs-4 fw-bolder"><img src="{{asset('public/images/Group1301.png')}}" alt=""></p>
 		<h4 class="text-center">Welcome to Login your account</h4>
-		<div class="mt-5">
+		<div class="mt-4">
 			<form action="{{route('clientlogin.check')}}" method="POST">
 				@csrf
 				<div class="form-group">
 					<label class="control-label fs-6 fw-bold" for="username">Contact Number / Email Address</label>
 					<input type="text" class="form-control rounded" id="username" name="username" value="{{ old('username') }}" placeholder="+123456789/example@gmail.com">
-
 					@if($errors->has('username'))
 						<small class="d-block text-danger">
 							{{$errors->first('username')}}
@@ -35,7 +34,7 @@
 						@endif
 					</div>
 				</div>
-				<div class="form-group text-center mt-5">
+				<div class="form-group text-center mt-3">
 					<a href="#" class="text-danger fw-bold">Forgot Email Or Password?</a>
 				</div>
 

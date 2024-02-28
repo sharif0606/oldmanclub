@@ -9,12 +9,12 @@
 </style>
 	<div class="align shadow">
 		<p class="text-center text-primary fs-4 fw-bolder"><img src="{{asset('public/images/Group1301.png')}}" alt=""></p>
-		<h2 class="">Welcome To Admin Login</h2>
-		<div class="">
+		<h4 class="text-center">Welcome To Admin Login</h4>
+		<div class="mt-4">
 			<form action="{{route('login.check')}}" method="POST">
 				@csrf
 				<div class="form-group">
-					<label class="control-label mb-10" for="username">Contact Number / Email Address</label>
+					<label class="control-label fs-6 fw-bold" for="username">Contact Number / Email Address</label>
 					<input type="text" class="form-control rounded" required="" id="username" name="username" value="{{ old('username') }}" placeholder="+123456789/example@gmail.com">
 					
 					@if($errors->has('username'))
@@ -24,7 +24,7 @@
 					@endif
 				</div>
 				<div class="form-group">
-					<label class="pull-left control-label mb-10" for="exampleInputpwd_2">Password</label>
+					<label class="pull-left control-label fs-6 fw-bold" for="exampleInputpwd_2">Password</label>
 					<div class="input-group">
 						<input type="password" class="form-control rounded" required="" id="password" name="password" placeholder="..................">
 						<button type="button" class="button" id="togglePassword"><i class="fa fa-eye"></i></button>
@@ -35,7 +35,7 @@
 						@endif
 					</div>
 				</div>
-				<div class="form-group text-center mt-5">
+				<div class="form-group text-center mt-2">
 					<a href="#" class="text-danger fw-bold">Forgot Email Or Password?</a>
 				</div>
 

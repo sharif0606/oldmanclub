@@ -101,12 +101,12 @@
                             <div class="input-group">
                                 <input type="password" class="form-control rounded" id="password" name="password" placeholder="Password">
                                 <button type="button" class="button" id="togglePassword"><i class="fa fa-eye"></i></button>
-                                @if ($errors->has('password'))
-                                    <small class="d-block text-danger">
-                                        {{ $errors->first('password') }}
-                                    </small>
-                                @endif
                             </div>
+                            @if ($errors->has('password'))
+                                <small class="d-block text-danger">
+                                    {{ $errors->first('password') }}
+                                </small>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="password_confirmation" class="fs-6 fw-bold">Verify Password</label>
