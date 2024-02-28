@@ -15,33 +15,55 @@
                         @endif
                     </div>
                     <div class="profile-photo">
-                       @if($client->image)
-                            <img src="{{ asset('public/uploads/client/' . $client->image) }}" class="img-fluid rounded-circle"
-                                alt="" class="bg-dark">
-                            <p class="badge"><img src="{{asset('public/images/varified.png')}}" alt=""></p><!-- Add your badge here -->
+                        @if($client->image)
+                        <img src="{{ asset('public/uploads/client/' . $client->image) }}" class="img-fluid rounded-circle"
+                            alt="" class="bg-dark" width="500px">
+                            @if($client->is_address_verified==1) 
+                                <p class="badge"><img src="{{asset('public/images/varified.png')}}" alt=""></p><!-- Add your badge here -->
                             @else
-                             <img src="{{ asset('public/images/download.jpg') }}" class="img-fluid rounded-circle"
-                                alt="asdfdf" class="">
+                                <p class="badge"><img src="{{asset('public/images/unverified.png')}}" alt=""></p>
                             @endif
+                        @else
+                            <img src="{{ asset('public/images/download.jpg') }}" class="img-fluid rounded-circle"
+                            alt="asdfdf" class="">
+                            <p class="badge"><img src="{{asset('public/images/unverified.png')}}" alt=""></p>
+                        @endif
                     </div>
                 </div>
                 <div class="profile-info">
                     <div class="row justify-content-center">
-                        <div class="col-xl-8">
-                            <div class="row">
-                                <div class="col-xl-4 col-sm-4 border-right-1 prf-col">
-                                    <div class="profile-name">
-                                        <h4 class="text-primary">                   {{$client->fname}}
-                                        {{$client->last_name}}
-                                        </h4>
-                                        <p>{{$client->address_line_1}}</p>
-                                    </div>
+                        <div class="row flex-nowrap">
+                            <div class="col-3 col-sm-3 border-right-1 prf-col">
+                                <div class="profile-name">
+                                    <h5 class="text-primary"> {{ $client->fname }} {{ $client->middle_name }}
+                                        {{ $client->last_name }}</h5>
+                                    <p></p>
                                 </div>
-                                <div class="col-xl-4 col-sm-4 border-right-1 prf-col">
-                                    <div class="profile-email">
-                                        <h4 class="text-muted">{{$client->email}}</h4>
-                                        <p>Email</p>
-                                    </div>
+                            </div>
+                            <div class="col-3 col-sm-3 border-right-1 prf-col">
+                                <div class="profile-name">
+                                    <h5 class="text-primary">Address</h5>
+                                    <p>{{ $client->address_line_1 }}&nbsp;
+                                        <small style="color: @if($client->is_address_verified==1) #26d66c @else red @endif; font-weight:bold;">
+                                            @if($client->is_address_verified==1)
+                                                (Verified)
+                                            @else
+                                                (Not Verified)
+                                            @endif
+                                        </small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-3 col-sm-3 border-right-1 prf-col">
+                                <div class="profile-email">
+                                    <h5 class="text-primary">Email<small class="text-warning">&nbsp;(Not Verified)</small></h5>
+                                    <h5 class="text-muted">{{ $client->email }}</h5>
+                                </div>
+                            </div>
+                            <div class="col-3 col-sm-3 prf-col">
+                                <div class="profile-call">
+                                    <h5 class="text-primary">Phone No.</h5>
+                                    <h5 class="text-muted">(+088) {{ $client->contact_no }}</h5>
                                 </div>
                             </div>
                         </div>

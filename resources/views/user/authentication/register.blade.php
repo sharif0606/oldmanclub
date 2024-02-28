@@ -1,135 +1,139 @@
 @extends('backend.layouts.appAuth')
 @section('title', 'Sign Up')
 @section('content')
+<style>
+	.button {
+        border: none;
+        cursor: pointer;
+    }
+</style>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" crossorigin="anonymous"></script>
-    <div class="row">
-        <div class="col-md-12 col-sm-12 text-end mt-0">
-            <p class="mb-0">Already have an account? <a href="{{ route('clientlogin') }}" class="text-primary">Sign In</a>
-            </p>
-        </div>
-    </div>
-    <div class="align">
+    <div class="align shadow">
         <div>
-            
-{{--@if ($errors->any())
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif--}}
+            {{--@if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif--}}
             <form action="{{ route('clientregister.store') }}" method="POST">
                 @csrf
-               
-                        <div class="row">
-                            <h3>Select Your Registration Type</h3>
-                            <div class="col-md-8">
-                                <div class="col-md-12">
-                                    <p class="text-start">To begin this journey, tell us what type of account you'd be
-                                        opening.</p>
-                                </div>
-                            </div>
+                    {{--<div class="row">
+                        <h3>Select Your Registration Type</h3>
+                        <div class="col-md-8">
                             <div class="col-md-12">
-                                <div class="d-grid my-3">
-                                    <button type="button" class="btn btn-primary next-step py-2">Register With
-                                        Email</button>
-                                    <h6 class="text-center mt-2">or</h6>
-                                    <a href="#" class="btn btn-outline-primary btn-block text-white py-2">
-                                        <i class="fa-brands fa-google float-start "></i>Register with Google
-                                    </a>
-                                </div>
+                                <p class="text-start">To begin this journey, tell us what type of account you'd be
+                                    opening.</p>
                             </div>
                         </div>
-                    </div>
-                  
-
-                        {{-- <div class="col-sm-6">
-                            <button type="button" class="btn btn-primary prev-step"><i class="fa-solid fa-arrow-left"></i> Back</button>
-                        </div> --}}
-                        <div>
-                            <h2 class="">Register Your Account</h2>
-                            <p class=""> To begin this journey! Tell us what type of account you'd be opening </p>
-                            <div class="form-group">
-                                <label class="control-label mb-10" for="fname">First Name</label>
-                                <input type="text" class="form-control rounded" name="fname"
-                                    value="{{ old('fname') }}" id="fname" placeholder="Your First Name">
-                                @if ($errors->has('fname'))
-                                    <small class="d-block text-danger">
-                                        {{ $errors->first('fname') }}
-                                    </small>
-                                @endif
+                        <div class="col-md-12">
+                            <div class="d-grid my-3">
+                                <button type="button" class="btn btn-primary next-step py-2">Register With
+                                    Email</button>
+                                <h6 class="text-center mt-2">or</h6>
+                                <a href="#" class="btn btn-outline-primary btn-block text-white py-2">
+                                    <i class="fa-brands fa-google float-start "></i>Register with Google
+                                </a>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label mb-10" for="middle_name">Middle Name</label>
-                                <input type="text" class="form-control rounded" name="middle_name"
-                                    value="{{ old('middle_name') }}" id="middle_name"
-                                    placeholder="Your Middle Name">
-                                @if ($errors->has('middle_name'))
-                                    <small class="d-block text-danger">
-                                        {{ $errors->first('middle_name') }}
-                                    </small>
-                                @endif
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label mb-10" for="last_name">Last Name</label>
-                                <input type="text" class="form-control rounded" name="last_name"
-                                    value="{{ old('last_name') }}" id="last_name"
-                                    placeholder="Your Last Name">
-                                @if ($errors->has('last_name'))
-                                    <small class="d-block text-danger">
-                                        {{ $errors->first('last_name') }}
-                                    </small>
-                                @endif
-                            </div>
-                            <div class="mb-3">
-                                <label for="contact_no" class="form-label">Contact Number</label>
-                                <input type="text" class="form-control" id="contact_no" name="contact_no">
-                                @if ($errors->has('contact_no'))
-                                    <small class="d-block text-danger">
-                                        {{ $errors->first('contact_no') }}
-                                    </small>
-                                @endif
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email">
-                                @if ($errors->has('email'))
-                                    <small class="d-block text-danger">
-                                        {{ $errors->first('email') }}
-                                    </small>
-                                @endif
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" name="password">
+                        </div>
+                    </div>--}}
+                    {{-- <div class="col-sm-6">
+                        <button type="button" class="btn btn-primary prev-step"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                    </div> --}}
+                    <div>
+                        <p class="text-center text-primary fs-4 fw-bolder"><img src="{{asset('public/images/Group1301.png')}}" alt=""></p>
+                        <h4 class="text-center mb-3">Create an account to get started!</h4>
+                        <div class="form-group">
+                            <label class="control-label mb-10 fs-6 fw-bold" for="fname">First Name</label>
+                            <input type="text" class="form-control rounded" name="fname"
+                                value="{{ old('fname') }}" id="fname" placeholder="Your First Name">
+                            @if ($errors->has('fname'))
+                                <small class="d-block text-danger">
+                                    {{ $errors->first('fname') }}
+                                </small>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label mb-10 fs-6 fw-bold" for="middle_name">Middle Name</label>
+                            <input type="text" class="form-control rounded" name="middle_name"
+                                value="{{ old('middle_name') }}" id="middle_name"
+                                placeholder="Your Middle Name">
+                            @if ($errors->has('middle_name'))
+                                <small class="d-block text-danger">
+                                    {{ $errors->first('middle_name') }}
+                                </small>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label mb-10 fs-6 fw-bold" for="last_name">Last Name</label>
+                            <input type="text" class="form-control rounded" name="last_name"
+                                value="{{ old('last_name') }}" id="last_name"
+                                placeholder="Your Last Name">
+                            @if ($errors->has('last_name'))
+                                <small class="d-block text-danger">
+                                    {{ $errors->first('last_name') }}
+                                </small>
+                            @endif
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="contact_no" class="form-label fs-6 fw-bold">Contact Number</label>
+                            <input type="text" class="form-control rounded" id="contact_no" name="contact_no" placeholder="+123456789">
+                            @if ($errors->has('contact_no'))
+                                <small class="d-block text-danger">
+                                    {{ $errors->first('contact_no') }}
+                                </small>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label fs-6 fw-bold">Email</label>
+                            <input type="email" class="form-control rounded" id="email" name="email" placeholder="example@gmail.com">
+                            @if ($errors->has('email'))
+                                <small class="d-block text-danger">
+                                    {{ $errors->first('email') }}
+                                </small>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="form-label fs-6 fw-bold">Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control rounded" id="password" name="password" placeholder="Password">
+                                <button type="button" class="button" id="togglePassword"><i class="fa fa-eye"></i></button>
                                 @if ($errors->has('password'))
                                     <small class="d-block text-danger">
                                         {{ $errors->first('password') }}
                                     </small>
                                 @endif
                             </div>
-                            <div class="mb-3">
-                                <label for="password_confirmation">Confirm Password</label>
-                                <input type="password" class="form-control rounded" id="password_confirmation"
-                                    name="password_confirmation" placeholder="Confirm Password">
-                            </div>
-                            {{-- <div class="form-group">
-                                <label class="control-label mb-10" for="dob">Date Of Birth</label>
-                                <input type="date" class="form-control rounded" required="" id="dob" name="dob" value="{{old('dob')}}">
-                                @if ($errors->has('dob'))
-                                    <small class="d-block text-danger">
-                                        {{$errors->first('dob')}}
-                                    </small>
-                                @endif
-                            </div> --}}
                         </div>
-                        <div class="d-grid gap-2 mt-1">
-                            <button class="btn btn-primary" type="submit">Save</button>
+                        <div class="form-group">
+                            <label for="password_confirmation" class="fs-6 fw-bold">Verify Password</label>
+                           <div class="input-group">
+                                <input type="password" class="form-control rounded" id="password_confirmation" name="password_confirmation" placeholder="confirm password">
+                                <button type="button" class="button" id="toggleConfirmPassword"><i class="fa fa-eye"></i></button>
+						    </div>
                         </div>
-                        {{-- <button type="button" class="btn btn-danger next-step float-end">Next <i class="fa-solid fa-arrow-right"></i></button> --}}
+                        {{-- <div class="form-group">
+                            <label class="control-label mb-10" for="dob">Date Of Birth</label>
+                            <input type="date" class="form-control rounded" required="" id="dob" name="dob" value="{{old('dob')}}">
+                            @if ($errors->has('dob'))
+                                <small class="d-block text-danger">
+                                    {{$errors->first('dob')}}
+                                </small>
+                            @endif
+                        </div> --}}
                     </div>
+                    <div class="form-group fw-bold">
+						<input type="checkbox" name="" id="">
+						<span>I agree to the <a href="#" class="text-primary">Terms of Service</a> and <br><a href="#" class="text-primary">Acceptable Use Policy</a></span>
+					</div>
+                    <div class="d-grid gap-2 mt-1">
+                        <button class="btn btn-primary" type="submit">Save</button>
+                    </div>
+                    {{-- <button type="button" class="btn btn-danger next-step float-end">Next <i class="fa-solid fa-arrow-right"></i></button> --}}
+                    
                     {{-- <div class="tab-pane fade" id="step-3" role="tabpanel" aria-labelledby="step-3-tab">
                         <button type="button" class="btn btn-primary prev-step"><i class="fa-solid fa-arrow-left"></i> Back</button>
                         <div>
@@ -232,17 +236,29 @@
                             </div>
                         </div>
                     </div> --}}
-                </div>
             </form>
-            <div>
-
-            </div>
+             <p class="mb-0 text-center mt-3">Already have an account? <a href="{{ route('clientlogin') }}" class="text-primary">Sign In</a>
+            </p>
+            
         </div>
     </div>
 
-    <script>
-        $(document).ready(function() {
-
-        });
-    </script>
+   <script>
+		const togglePassButton = document.getElementById('togglePassword');
+		const inputPass = document.getElementById('password');
+		togglePassButton.addEventListener('click', function(){
+			const newType = inputPass.type === 'password'?'text':'password';
+			inputPass.type = newType;
+			togglePassButton.querySelector('i').classList.toggle('fa-solid fa-eye-slash')
+		});
+	</script>
+	<script>
+		const toggleConfirmPassButton = document.getElementById('toggleConfirmPassword');
+		const inputConfirmPass = document.getElementById('password_confirmation');
+		toggleConfirmPassButton.addEventListener('click', function(){
+			const newType = inputConfirmPass.type === 'password'?'text':'password';
+			inputConfirmPass.type = newType;
+			toggleConfirmPassButton.querySelector('i').classList.toggle('fa-solid fa-eye-slash')
+		});
+	</script>
 @endsection

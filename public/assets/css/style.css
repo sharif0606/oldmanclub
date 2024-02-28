@@ -1938,10 +1938,10 @@ footer p {
 .form-control:focus,
 .form-control.active {
   box-shadow: none;
-  border-color: #878787;
+  border-color: #2069bd;
 }
 .input-default {
-  border-radius: 4px;
+  /* border-radius: 4px; */
 }
 .input-flat {
   border-radius: 0px;
@@ -4552,6 +4552,7 @@ h6.h1 {
 
 .hero-text{
   margin:0 auto;
+  margin-top: -60px;
   width:80%;
   text-align: left;
   font-size: 21px;
@@ -4578,5 +4579,18 @@ img{
   background-color: rgb(95, 21, 95);
 }
 .align{
-  margin: 70px;
+  margin: 50px 100px;
+  justify-content: center;
+  border: 2px white black;
+  background-color: white;
+  padding: 50px;
+  border-radius: 15px;
+  justify-content: center;
 }
+@media (max-width: 575.98px) {
+  .align {
+    margin: 20px; /* Reset margin for mobile view */
+  }
+}
+
+
