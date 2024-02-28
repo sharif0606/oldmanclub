@@ -1,6 +1,12 @@
 @extends('backend.layouts.appAuth')
 @section('title','Login')
 @section('content')
+<style>
+	.button {
+        border: none;
+        cursor: pointer;
+    }
+</style>
     <div class="align shadow">
 		 <p class="text-center text-primary fs-4 fw-bolder"><img src="{{asset('public/images/Group1301.png')}}" alt=""></p>
 		<h4 class="text-center">Welcome to Login your account</h4>
