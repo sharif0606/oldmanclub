@@ -7,7 +7,7 @@
         cursor: pointer;
     }
 </style>
-    <div class="align shadow">
+    <div class="align shadow-lg">
 		 <p class="text-center text-primary fs-4 fw-bolder"><img src="{{asset('public/images/Group1301.png')}}" alt="" class="img-fluid"></p>
 		<h4 class="text-center">Welcome to Login your account</h4>
 		<div class="mt-4">

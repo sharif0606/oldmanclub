@@ -8,7 +8,7 @@
     }
 </style>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" crossorigin="anonymous"></script>
-    <div class="align shadow">
+    <div class="align shadow-lg">
         <div>
             {{--@if ($errors->any())
             <div class="alert alert-danger">
@@ -19,7 +19,7 @@
                 </ul>
             </div>
             @endif--}}
-            <form action="{{ route('clientregister.store') }}" method="POST">
+            <form action="{{ route('clientregister.store') }}" method="POST" id="signupForm">
                 @csrf
                     {{--<div class="row">
                         <h3>Select Your Registration Type</h3>
@@ -126,7 +126,7 @@
                         </div> --}}
                     </div>
                     <div class="form-group fw-bold">
-						<input type="checkbox" name="" id="">
+						<input type="checkbox" name="" id="terms_agreement">
 						<span>I agree to the <a href="#" class="text-primary">Terms of Service</a> and <br><a href="#" class="text-primary">Acceptable Use Policy</a></span>
 					</div>
                     <div class="d-grid gap-2 mt-1">
@@ -244,6 +244,7 @@
     </div>
 
    <script>
+    // show/hede password
 		const togglePassButton = document.getElementById('togglePassword');
 		const inputPass = document.getElementById('password');
 		togglePassButton.addEventListener('click', function(){
@@ -251,8 +252,7 @@
 			inputPass.type = newType;
 			togglePassButton.querySelector('i').classList.toggle('fa-solid fa-eye-slash')
 		});
-	</script>
-	<script>
+    // show/hede confirm password
 		const toggleConfirmPassButton = document.getElementById('toggleConfirmPassword');
 		const inputConfirmPass = document.getElementById('password_confirmation');
 		toggleConfirmPassButton.addEventListener('click', function(){
@@ -260,5 +260,14 @@
 			inputConfirmPass.type = newType;
 			toggleConfirmPassButton.querySelector('i').classList.toggle('fa-solid fa-eye-slash')
 		});
+    //Checked Terms of Condition & Policy
+        const signupForm = document.getElementById('signupForm');
+        signupForm.addEventListener('submit', function(event) {
+            const termsAgreement = document.getElementById('terms_agreement');
+            if (!termsAgreement.checked) {
+                alert('Please agree to the Terms of Condition & Policy.');
+                event.preventDefault(); // Prevent form submission
+            }
+        });
 	</script>
 @endsection

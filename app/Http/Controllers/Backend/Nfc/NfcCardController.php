@@ -20,7 +20,7 @@ class NfcCardController extends Controller
      */
     public function index()
     {
-        $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->paginate(10);
+        $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id',currentUserId())->paginate(10);
         return view('user.nfc-card.index', compact('nfc_cards'));
     }
 

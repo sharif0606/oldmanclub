@@ -1,17 +1,19 @@
 @extends('backend.layouts.appAuth')
 @section('title','Sign Up')
 @section('content')
+@push('styles')
 <style>
 	.button {
         border: none;
         cursor: pointer;
     }
 </style>
-	<div class="align shadow">
+@endpush
+	<div class="align shadow-lg">
 		<div>
 			<p class="text-center text-primary fs-4 fw-bolder"><img src="{{asset('public/images/Group1301.png')}}" alt="" class="img-fluid"></p>
 			<h4 class="text-center mb-3">Create an account to get started!</h4>
-				<form action="{{route('register.store')}}" method="POST">
+				<form action="{{route('register.store')}}" method="POST" id="signupForm">
 					@csrf
 					<div class="form-group">
 						<label class="fs-6 fw-bold" for="FullName">Full Name</label>
@@ -60,18 +62,22 @@
 						</div>
 					</div>
 					<div class="form-group fw-bold">
-						<input type="checkbox" name="" id="">
+						<input type="checkbox" name="" id="terms_agreement">
 						<span>I agree to the <a href="#" class="text-primary">Terms of Service</a> and <br><a href="#" class="text-primary">Acceptable Use Policy</a></span>
 					</div>
 					
 					<div class="text-center mt-4">
-						<button type="submit" class="btn btn-primary btn-block form-control rounded">Sign Up</button>
+						<button type="submit" class="btn btn-primary btn-block form-control rounded" id="signupButton">Sign Up</button>
 					</div>
 				</form>
 				<p class="text-center mt-3 mb-0">Already have an account?<a href="{{route('login')}}" class="text-primary">Sign In</a></p>
 		</div>
 	</div>
+	
+@endsection
+@push('scripts')
 	<script>
+		// show/hede password
 		const togglePassButton = document.getElementById('togglePassword');
 		const inputPass = document.getElementById('password');
 		togglePassButton.addEventListener('click', function(){
@@ -79,8 +85,7 @@
 			inputPass.type = newType;
 			togglePassButton.querySelector('i').classList.toggle('fa-solid fa-eye-slash')
 		});
-	</script>
-	<script>
+		// show/hede confirm password
 		const toggleConfirmPassButton = document.getElementById('toggleConfirmPassword');
 		const inputConfirmPass = document.getElementById('password_confirmation');
 		toggleConfirmPassButton.addEventListener('click', function(){
@@ -88,9 +93,15 @@
 			inputConfirmPass.type = newType;
 			toggleConfirmPassButton.querySelector('i').classList.toggle('fa-solid fa-eye-slash')
 		});
-	</script>
-@endsection
-@section('scripts')
-
-@endsection
+	//Checked Terms of Condition & Policy
+        const signupForm = document.getElementById('signupForm');
+        signupForm.addEventListener('submit', function(event) {
+            const termsAgreement = document.getElementById('terms_agreement');
+            if (!termsAgreement.checked) {
+                alert('Please agree to the Terms of Condition & Policy.');
+                event.preventDefault(); // Prevent form submission
+            }
+        });
+    </script>
+@endpush
 

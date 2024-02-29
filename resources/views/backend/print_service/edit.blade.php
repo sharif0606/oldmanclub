@@ -83,7 +83,8 @@
     </div>
 </div>
 
-
+@endsection
+@push('scripts')
     <!-- Place the first <script> tag in your HTML's <head> -->
     <script src="https://cdn.tiny.cloud/1/x4jk2jz64zffwc1fuef936e2b3z54jdbl9q6pb9rplm00ea2/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
@@ -120,4 +121,4 @@
             }
         });
     </script>
-@endsection
+@endpush

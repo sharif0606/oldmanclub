@@ -1,13 +1,15 @@
 @extends('backend.layouts.appAuth')
 @section('title','Login')
 @section('content')
+@push('styles')
 <style>
 	.button {
         border: none;
         cursor: pointer;
     }
 </style>
-	<div class="align shadow">
+@endpush
+	<div class="align shadow-lg">
 		<p class="text-center text-primary fs-4 fw-bolder"><img src="{{asset('public/images/Group1301.png')}}" alt="" class="img-fluid"></p>
 		<h4 class="text-center">Welcome To Admin Login</h4>
 		<div class="mt-4">
@@ -48,8 +50,8 @@
 			</form>
 		</div>
 	</div>
-
-
+@endsection
+@push('scripts')
 	<script>
 		const togglePassButton = document.getElementById('togglePassword');
 		const inputPass = document.getElementById('password');
@@ -59,8 +61,4 @@
 			togglePassButton.querySelector('i').classList.toggle('fa-solid fa-eye-slash')
 		});
 	</script>
-@endsection
-
-@section('scripts')
-	
-@endsection
+@endpush

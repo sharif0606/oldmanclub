@@ -15,7 +15,6 @@
     
     <link rel="stylesheet" href="{{asset('public/frontend/assets/styles.css')}}">
     @stack('styles')
-    
 </head>
 <body @yield('body-attr')>
     <!-- header start-->

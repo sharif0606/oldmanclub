@@ -2,21 +2,34 @@
         <div class="header_section">
             <div>
                 @if ($nfc_card->client?->image)
-                    <img src="{{ asset('public/uploads/client/' . $nfc_card->client?->image)}}" alt="" width="100%">
+                    <img src="{{ asset('public/uploads/client/' . $nfc_card->client?->image)}}" alt="" width="350px" height="300px">
                     <!-- <div class="main-img" style="background-image: url({{ asset('public/uploads/client/' . $nfc_card->client?->image)}});"></div> -->
                 @else
-                    <div class="main-img" style="background-image: url({{ asset('public/assets/nfc/images/123.png') }})">
+                    <div class="main-img" style="background-image: url({{ asset('public/assets/nfc/images/123.png') }}) width:350px;" >
                     </div>
                 @endif
             </div>
             <div class="header_text"></div>
         </div>
-        <div class="">
-            <img src="{{ asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="100px"
-                srcset="" />
+        <div class="d-none d-sm-block">
+            @if ($nfc_card->card_design?->logo)
+                <img src="{{ asset($nfc_card->card_design?->logo) }}" alt="abc" width="60px"
+                    srcset="" />
+            @else
+                <img src="{{ asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="60px"
+                    srcset="" />
+            @endif
+        </div>
+        <div>
+            <p class="text-center fs-6 fw-bold m-0">
+                @if($nfc_card->card_type==1){{__('Work')}}
+                @else
+                    {{__('Personal')}}
+                @endif
+            </p>
         </div>
     </header>
-    <section class="section">
+    {{--<section class="section">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
@@ -129,4 +142,4 @@
                 </ul>
             </div>
         </div>
-    </section>
+    </section>--}}
