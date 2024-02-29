@@ -6,10 +6,13 @@
 @endpush
 @section('content')
     <div class="row">
-        <div class="col-5">
+        <div>
+            <a href="{{ route('nfc_card.edit', encryptor('encrypt', $nfc_card->id)) }}"><i class="fa fa-edit"></i></a>
+        </div>
+        <div class="col-md-4">
             <div class="card">
                 @if ($nfc_card->card_design?->design_card_id == 1)
-                    @include('user.nfc-template.classic-template')
+                    @include('user.nfc-template_show.classic-template')
                 @elseif($nfc_card->card_design?->design_card_id == 2)
                     @include('user.nfc-template.flat-template')
                 @elseif($nfc_card->card_design?->design_card_id == 3)
@@ -19,7 +22,7 @@
                 @endif
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-md-4">
             {!! QrCode::size(300)->generate(url('nfcqrurl/' . encryptor('encrypt', $nfc_card->id))) !!}
         </div>
     </div>

@@ -8,7 +8,6 @@
         transition: transform 0.3s ease;
         
     }
-
     .card:hover {
         transform: scale(1.05); /* Adjust the value to change the amount of upward flow */
     }
