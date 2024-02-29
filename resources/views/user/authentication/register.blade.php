@@ -44,7 +44,7 @@
                         <button type="button" class="btn btn-primary prev-step"><i class="fa-solid fa-arrow-left"></i> Back</button>
                     </div> --}}
                     <div>
-                        <p class="text-center text-primary fs-4 fw-bolder"><img src="{{asset('public/images/Group1301.png')}}" alt=""></p>
+                        <p class="text-center text-primary fs-4 fw-bolder"><img src="{{asset('public/images/Group1301.png')}}" alt="" class="img-fluid"></p>
                         <h4 class="text-center mb-3">Create an account to get started!</h4>
                         <div class="form-group">
                             <label class="control-label mb-10 fs-6 fw-bold" for="fname">First Name</label>

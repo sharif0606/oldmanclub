@@ -9,7 +9,7 @@
 </style>
 	<div class="align shadow">
 		<div>
-			<p class="text-center text-primary fs-4 fw-bolder"><img src="{{asset('public/images/Group1301.png')}}" alt=""></p>
+			<p class="text-center text-primary fs-4 fw-bolder"><img src="{{asset('public/images/Group1301.png')}}" alt="" class="img-fluid"></p>
 			<h4 class="text-center mb-3">Create an account to get started!</h4>
 				<form action="{{route('register.store')}}" method="POST">
 					@csrf

@@ -4579,18 +4579,20 @@ img{
   background-color: rgb(95, 21, 95);
 }
 .align{
-  margin: 50px 100px;
+  margin: 20px 0px;
   justify-content: center;
   border: 2px white black;
   background-color: white;
   padding: 50px;
   border-radius: 15px;
   justify-content: center;
+  
 }
 @media (max-width: 575.98px) {
   .align {
-    margin: 20px; /* Reset margin for mobile view */
+    margin: 20px;
   }
 }
+
 
 
