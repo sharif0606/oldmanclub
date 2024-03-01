@@ -111,16 +111,18 @@ body {
 
 .modern_card_image {
     height: var(--chakra-sizes-full);
-    max-height: 3rem;
+    max-height: 6rem;
     max-width: var(--chakra-sizes-full);
     object-fit: contain;
     object-position: left center;
     width: var(--chakra-sizes-full);
+     /* margin-top: -263px; */
+    position: relative;
 }
 
 .CardAvatar {
     float: right;
-    margin-right: 2rem;
+    /* margin-right: 2rem; */
     /* aspect-ratio: 1 / 1;
     border-radius: var(--chakra-radii-full);
     display: inline;
@@ -147,11 +149,14 @@ body {
     padding: 50px;
     position: relative;
     color: #ffffff;
-    background: linear-gradient(-190deg, rgb(19, 18, 18) 80%, #fff 0%);
+    /* background: linear-gradient(-190deg, rgb(19, 18, 18) 90%, #CAC4C4 0%); */
+    clip-path: polygon(0px 0px, 100% 0px, 100% calc(100% - 7rem), 0px 100%);
+    background: linear-gradient(251.74deg, rgb(4, 4, 5) -20.73%, rgb(5, 4, 5) 127.58%);
+    height: 450px;
 }
 
 .header_body {
-    background-color: hsl(0, 6%, 90%);
+    background-color: #CAC4C4; ;
 }
 
 .modern_card {
@@ -167,6 +172,8 @@ body {
 .header_sleek {
     background-color: #e7e9e6;
     border: none;
+    width: 320px;
+    height: 276px;
 }
 
 .sleek_header_image {
@@ -180,13 +187,15 @@ body {
     height: var(--chakra-sizes-full);
     position: absolute;
     top: 0;
-    right: -60px;
+    width: 100%;
+    /* right: -60px; */
     /* width: var(--chakra-sizes-full); */
 }
 
 .css-1fbwa35 {
-    margin-top: -6rem;
+    margin-top: -50px;
     object-fit: cover;
+    width: 100%;
     width: var(--chakra-sizes-full);
 }
 
@@ -194,10 +203,10 @@ body {
     /* background: var(--chakra-colors-bg-surface); */
     border-radius: 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px, rgba(0, 0, 0, 0.06) 0px 1px 2px;
-    margin: 0.75rem auto;
+    /* margin: 0.75rem auto; */
     min-height: 4rem;
     overflow: hidden;
-    padding: 0.5rem;
+    /* padding: 0.5rem; */
     position: relative;
     text-align: center;
     width: 50%;

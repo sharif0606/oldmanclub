@@ -62,7 +62,7 @@
                 </div>
             </div>
             <div class="row">
-                 @if ($nfc_card->nfc_info?->title)
+                @if ($nfc_card->nfc_info?->title)
                     <p class="text-justify">{{ $nfc_card->nfc_info?->title }}</p>
                 @else
                     <p class="text-justify">

@@ -33,7 +33,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
-                     @if ($nfc_card->nfc_info?->prefix)
+                    @if ($nfc_card->nfc_info?->prefix)
                         <span class="fs-4    fw-bold">{{ $nfc_card->nfc_info?->prefix }}</span>
                     @else
                         <span class="fs-4 fw-bold">Dr.</span>
@@ -76,7 +76,7 @@
             </div>
             <div class="row">
                 <div>
-                     @if ($nfc_card->nfc_info?->department)
+                    @if ($nfc_card->nfc_info?->department)
                         <span class="fs-5 fw-bold">{{ $nfc_card->nfc_info?->department }}</span>
                     @else
                         <span class="fs-5 fw-bold">Software Development</span>

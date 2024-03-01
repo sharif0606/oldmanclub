@@ -32,7 +32,7 @@
     <div class="row">
             <div class="col-md-4">
                 <a href="{{ route('nfc_card.create') }}">
-                    <div class="card addNew" style="height: 400px; overflow:hidden;">
+                    <div class="card addNew" style="height: 400px; overflow:hidden; width: 320px;">
                         <div class="card-body text-center" style="padding-top: 175px">
                             <i class="fa fa-plus"></i>
                             Add Card
@@ -42,7 +42,7 @@
             </div>
             @forelse ($nfc_cards as $nfc_card)
             <div class="col-md-4">
-                <div class="card" style="height: 400px; overflow:hidden">
+                <div class="card" style="height: 400px; overflow:hidden; width: 320px;">
                     <div class="d-flex justify-content-between">
                         <a href="{{ route('nfc_card.show', encryptor('encrypt', $nfc_card->id)) }}">  
                             @if ($nfc_card->card_design?->design_card_id == 1)

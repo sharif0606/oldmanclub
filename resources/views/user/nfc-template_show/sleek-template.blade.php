@@ -1,39 +1,75 @@
-<div class="background">
     <div class="">
         <div class="header_sleek">
             <div class="sleek_header_image">
                 <div class="css-79elbk">
-                    <img src="{{ asset('public/assets/nfc/images/123.png') }}" alt="" srcset="">
+                    @if ($nfc_card->client?->image)
+                    <img src="{{ asset('public/uploads/client/' . $nfc_card->client?->image)}}" alt="" srcset="" class="" width="100%">
+                    @else
+                    <img src="{{ asset('public/assets/nfc/images/123.png')}}" alt="" srcset="" class="" width="100%">
+                    @endif
                 </div>
             </div>
             <div class="css-1fbwa35">
-                <div class="card sleek_card">
-                    <div class="card_img mx-auto">
-                        <img src="{{ asset('public/assets/nfc/images/header_image.png') }}" width="100px"
-                            alt="" srcset="">
+                <div class="card sleek_card mx-auto mb-3">
+                    <div class="card_img">
+                    @if ($nfc_card->card_design?->logo)
+                    <img src="{{ asset($nfc_card->card_design?->logo) }}" alt="abc" width="50px"
+                        />
+                    @else
+                        <img src="{{ asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="50px"
+                            srcset="" />
+                    @endif
+                        <!-- <img src="assets/images/header_image.png" width="50px" alt="" srcset=""> -->
                     </div>
                     <div class="CardBox mx-auto">
-                        <span class="CardName CardName--full css- fs-3 fw-bold">Dr. Md Kaisar Uddin FCP <br>
-                            <span class="CardName CardName--maiden css-1oyqnxm">(shuvo)</span>
-                        </span>
+                        <p class="text-center fs-4 fw-bold">
+                           {{ $nfc_card->client?->fname }}
+                        </p>
+                        <!-- <span class="css- fs-6 fw-bold">Dr. Md Kaisar Uddin FCP <br>
+                        <span class="css-1oyqnxm">(shuvo)</span>
+                        </span> -->
                     </div>
-                    <div class="CardBox mx-auto">
-                        <span class="CardName CardName--accreditations css-19tw5ve">FCPS</span>
-                    </div>
-                    <div class="CardBox">
-                        <p class="CardTitle css-70iv32 mx-auto">Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the
-                            1500s, when an unknown printer took a galley of type and scrambled it to make a type
-                            specimen book. It has survived not only five centuries, but also the leap into electronic
-                            typesetting, remaining essentially unchanged.</p>
-                    </div>
-                    <div class="fs-6 fw-bold">Software Development</div>
-                    <div class="CardCompany css-ikxe0g" variant="italic">Muktodhara Technology Limited</div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container" style="margin-top: 100px;">
+        <div class="row">
+                <div class="col-sm-12">
+                    @if ($nfc_card->nfc_info?->prefix)
+                        <span class="fs-4    fw-bold">{{ $nfc_card->nfc_info?->prefix }}</span>
+                    @else
+                        <span class="fs-4 fw-bold">Dr.</span>
+                    @endif
+                    <span class="fs-4 fw-bold">{{ $nfc_card->client?->fname }}</span>
+                    <span class="fs-4 fw-bold">{{ $nfc_card->client?->middle_name }}</span>
+                    <span class="fs-4 fw-bold">{{ $nfc_card->client?->last_name }}</span>
+
+                    <div>
+                        @if ($nfc_card->nfc_info?->suffix)
+                            <span class="fs-4 fw-bold">{{ $nfc_card->nfc_info?->suffix }}</span>
+                        @else
+                            <span class="fs-4 fw-bold">FCP</span>
+                        @endif
+                        <span class="fs-4 fw-bold">
+                            @if ($nfc_card->nfc_info?->maiden_name)
+                                ({{ $nfc_card->nfc_info?->maiden_name }})
+                            @else
+                                (Shuvo)
+                            @endif
+                        </span>
+                        @if ($nfc_card->nfc_info?->accreditations)
+                            <span>&nbsp;{{ $nfc_card->nfc_info?->accreditations }}</span>
+                        @else
+                            <span>&nbsp;FCPS</span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div class="container" style="margin-top: 0px;
+  position: relative;
+  background-color: lightgray;">
         <div class="row">
             <p class="ps-4">Our Concern</p>
             <div class="d-flex ps-4">
@@ -50,11 +86,20 @@
             </div>
         </div>
     </div>
-    <div class="card">
-        <div class="card-body">
+    <div class="">
+        <div class="">
             <div class="container">
                 <ul class="list-group">
-                    <li class="list-group-item">
+                     @foreach ($nfc_card->nfcFields as $nfcField)
+                        <li class="list-group-item">
+                            <i class="{{$nfcField->icon}}"></i>
+                            <a href="#" class="mx-1">
+                                <img src="assets/images/email.png" alt="" srcset="" width="25px">
+                            </a>
+                            <a href="#">{{ $nfcField->pivot->field_value}}</a>
+                        </li>
+                    @endforeach
+                    <!-- <li class="list-group-item">
                         <a href="#" class="mx-1">
                             <img src="assets/images/email.png" alt="" srcset="" width="25px">
                         </a>
@@ -71,10 +116,10 @@
                             <img src="assets/images/credit-card.png" alt="" srcset="" width="25px">
                         </a>
                         <a href="#">Google</a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
 
         </div>
     </div>
-</div>
+

@@ -88,7 +88,6 @@
                             <span>&nbsp;FCPS</span>
                         @endif
                     </div>
-
                 </div>
             </div>
             <div class="row">
@@ -144,9 +143,31 @@
                         @endif
                     </span>
                 </div>
-                @foreach ($nfc_card->nfcFields as $nfcField)
-                    {{ $nfcField }}
-                @endforeach
+            </div>
+            <div class="row">
+                <ul class="list-group">
+                    @foreach ($nfc_card->nfcFields as $nfcField)
+                    <li class="list-group-item">
+                        <i class="{{$nfcField->icon}}"></i>
+                        <a href="#" class="mx-1">
+                            <img src="assets/images/email.png" alt="" srcset="" width="25px">
+                        </a>
+                        <a href="#">{{ $nfcField->pivot->field_value}}</a>
+                    </li>
+                    @endforeach
+                    <!-- <li class="list-group-item">
+                        <a href="#" class="mx-1">
+                            <img src="assets/images/phone-call.png" alt="" srcset="" width="25px">
+                        </a>
+                        <a href="#">018581111111</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#" class="mx-1">
+                            <img src="assets/images/credit-card.png" alt="" srcset="" width="25px">
+                        </a>
+                        <a href="#">Google</a>
+                    </li> -->
+                </ul>
             </div>
         </div>
     </section>

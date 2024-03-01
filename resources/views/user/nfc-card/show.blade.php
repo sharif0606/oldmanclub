@@ -14,11 +14,11 @@
                 @if ($nfc_card->card_design?->design_card_id == 1)
                     @include('user.nfc-template_show.classic-template')
                 @elseif($nfc_card->card_design?->design_card_id == 2)
-                    @include('user.nfc-template.flat-template')
+                    @include('user.nfc-template_show.flat-template')
                 @elseif($nfc_card->card_design?->design_card_id == 3)
-                    @include('user.nfc-template.modern-template')
+                    @include('user.nfc-template_show.modern-template')
                 @elseif($nfc_card->card_design?->design_card_id == 4)
-                    @include('user.nfc-template.sleek-template')
+                    @include('user.nfc-template_show.sleek-template')
                 @endif
             </div>
         </div>
