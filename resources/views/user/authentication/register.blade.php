@@ -12,7 +12,7 @@
         /* margin: 0px 5px; */
     }
     .form-group{
-        margin-bottom:10px;
+        /* margin-bottom:10px; */
     }
 </style>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" crossorigin="anonymous"></script>
@@ -63,7 +63,7 @@
                             <input type="text" class="form-control rounded p-2" name="fname"
                                 value="{{ old('fname') }}" id="fname" placeholder="Your First Name">
                             @if ($errors->has('fname'))
-                                <small class="d-block text-danger">
+                                <small class="d-block text-danger fw-bold">
                                     {{ $errors->first('fname') }}
                                 </small>
                             @endif
@@ -91,7 +91,7 @@
                         <div class="col-sm-6 col-md-6 form-group pt-0 pb-0 ">
                             <input type="text" class="form-control rounded" id="contact_no" name="contact_no" placeholder="+123456789">
                             @if ($errors->has('contact_no'))
-                                <small class="d-block text-danger">
+                                <small class="d-block text-danger fw-bold">
                                     {{ $errors->first('contact_no') }}
                                 </small>
                             @endif
@@ -99,7 +99,7 @@
                         <div class="col-sm-6 col-md-6 form-group pt-0 pb-0 ">
                             <input type="email" class="form-control rounded" id="email" name="email" placeholder="example@gmail.com">
                             @if ($errors->has('email'))
-                                <small class="d-block text-danger">
+                                <small class="d-block text-danger fw-bold">
                                     {{ $errors->first('email') }}
                                 </small>
                             @endif
@@ -110,7 +110,7 @@
                                 <button type="button" class="button rounded" id="togglePassword"><i class="fa fa-eye"></i></button>
                             </div>
                             @if ($errors->has('password'))
-                                <small class="d-block text-danger">
+                                <small class="d-block text-danger fw-bold">
                                     {{ $errors->first('password') }}
                                 </small>
                             @endif
@@ -136,7 +136,7 @@
 						<span>I agree to the <a href="#" class="text-primary">Terms of Service</a> and <a href="#" class="text-primary">Acceptable Use Policy</a></span>
 					</div>
                     <div class="gap-2 mt-1 text-center">
-                        <button class="btn btn-primary rounded px-5" type="submit">SignUp</button>
+                        <button class="btn btn-primary rounded px-5 fw-bold" type="submit">SignUp</button>
                     </div>
                     {{-- <button type="button" class="btn btn-danger next-step float-end">Next <i class="fa-solid fa-arrow-right"></i></button> --}}
                     

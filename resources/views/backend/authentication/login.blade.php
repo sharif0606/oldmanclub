@@ -28,7 +28,7 @@
 					<input type="text" class="form-control rounded" id="username" name="username" value="{{ old('username') }}" placeholder="+123456789/example@gmail.com">
 					
 					@if($errors->has('username'))
-						<small class="d-block text-danger">
+						<small class="d-block text-danger fw-bold">
 							{{$errors->first('username')}}
 						</small>
 					@endif
@@ -40,7 +40,7 @@
 						<button type="button" class="button" id="togglePassword"><i class="fa fa-eye-slash"></i></button>
 					</div>
 					@if($errors->has('password'))
-						<small class="d-block text-danger">
+						<small class="d-block text-danger fw-bold">
 							{{$errors->first('password')}}
 						</small>
 					@endif
@@ -53,7 +53,7 @@
 					<p class="text-center fw-bold ">I Don't have an account?<a href="{{route('register')}}" class="text-primary">Sign Up</a></p>
 				</div>
 				<div class="text-center">
-					<button type="submit" class="btn btn-primary btn-block form-control rounded">Login</button>
+					<button type="submit" class="btn btn-primary btn-block form-control rounded fw-bold">Login</button>
 				</div>
 			</form>
 		</div>

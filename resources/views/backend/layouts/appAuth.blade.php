@@ -19,6 +19,9 @@
             body{
                  font-family: 'Poppins';
             }
+            .form-group{
+                margin-bottom:10px;
+            }
     </style>
 </head>
 <body class="h-100 bg-color">
