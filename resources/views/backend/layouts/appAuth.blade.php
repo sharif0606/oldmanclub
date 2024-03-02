@@ -12,8 +12,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link rel="stylesheet" href="{{asset('public/assets/css/style.css')}}">
     @stack('styles')
+    <style>
+            .bg-color{
+                /* background-color:#EBF2FA; */
+            }
+            body{
+                 font-family: 'Poppins';
+            }
+    </style>
 </head>
-<body class="h-100">
+<body class="h-100 bg-color">
     <div class="container-fluid">
         <div class="row">
             {{--<div class="col-sm-6 col-12 hero p-0" style="background-image:url({{asset('public/assets/images/login_register/Frame.png')}})">
@@ -27,11 +35,11 @@
                 </div> 
             </div>
             <style>
-                .appAuth{
-                    /* padding: 100px; */
+                .bg-color{
+                    background-color:#FEFCFE
                 }
             </style>--}}
-            <div class="col-sm-6 col-md-6 col-lg-4 appAuth mx-auto">
+            <div class="">
                 @yield('content')
             </div>
         </div>

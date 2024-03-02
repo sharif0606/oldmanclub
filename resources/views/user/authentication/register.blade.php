@@ -5,10 +5,15 @@
 	.button {
         border: none;
         cursor: pointer;
+        /* background-color: white; */
+    }
+    .head{
+        /* border-bottom: 3px solid #FF87A0; */
+        /* margin: 0px 5px; */
     }
 </style>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" crossorigin="anonymous"></script>
-    <div class="align shadow-lg">
+    <div class="col-sm-6 col-md-6 col-lg-5 appAuth mx-auto align shadow-lg">
         <div>
             {{--@if ($errors->any())
             <div class="alert alert-danger">
@@ -43,12 +48,16 @@
                     {{-- <div class="col-sm-6">
                         <button type="button" class="btn btn-primary prev-step"><i class="fa-solid fa-arrow-left"></i> Back</button>
                     </div> --}}
-                    <div>
-                        <p class="text-center text-primary fs-4 fw-bolder"><img src="{{asset('public/images/Group1301.png')}}" alt="" class="img-fluid"></p>
-                        <h4 class="text-center mb-3">Create an account to get started!</h4>
-                        <div class="form-group">
-                            <label class="control-label mb-10 fs-6 fw-bold" for="fname">First Name</label>
-                            <input type="text" class="form-control rounded" name="fname"
+                    <div class="row">
+                        <div class="head mb-2">
+                            <p class="fs-2 fw-bolder text-center text-info mb-0">Old Man Club</p>
+                            <!-- <p class="fs-2 fw-bolder text-center">SignUp</p> -->
+                             <!-- <p class="text-center text-primary fs-4 fw-bolder"><img src="{{asset('public/images/Group1301.png')}}" alt="" class="img-fluid"></p> -->
+                            <p class="text-center mb-3 text-dark fw-bold">Create an account to get started!</p>
+                        </div>
+                       
+                        <div class="col-sm-6 col-md-4 form-group pb-0">
+                            <input type="text" class="form-control rounded p-2" name="fname"
                                 value="{{ old('fname') }}" id="fname" placeholder="Your First Name">
                             @if ($errors->has('fname'))
                                 <small class="d-block text-danger">
@@ -56,30 +65,27 @@
                                 </small>
                             @endif
                         </div>
-                        <div class="form-group">
-                            <label class="control-label mb-10 fs-6 fw-bold" for="middle_name">Middle Name</label>
-                            <input type="text" class="form-control rounded" name="middle_name"
+                        <div class="col-sm-6 col-md-4 form-group pb-0">
+                            <input type="text" class="form-control rounded p-2" name="middle_name"
                                 value="{{ old('middle_name') }}" id="middle_name"
                                 placeholder="Your Middle Name">
-                            @if ($errors->has('middle_name'))
+                            <!-- @if ($errors->has('middle_name'))
                                 <small class="d-block text-danger">
                                     {{ $errors->first('middle_name') }}
                                 </small>
-                            @endif
+                            @endif -->
                         </div>
-                        <div class="form-group">
-                            <label class="control-label mb-10 fs-6 fw-bold" for="last_name">Last Name</label>
-                            <input type="text" class="form-control rounded" name="last_name"
+                        <div class="col-sm-6 col-md-4 form-group pb-0">
+                            <input type="text" class="form-control rounded p-2" name="last_name"
                                 value="{{ old('last_name') }}" id="last_name"
                                 placeholder="Your Last Name">
-                            @if ($errors->has('last_name'))
+                            <!-- @if ($errors->has('last_name'))
                                 <small class="d-block text-danger">
                                     {{ $errors->first('last_name') }}
                                 </small>
-                            @endif
+                            @endif -->
                         </div>
-                        <div class="form-group mb-3">
-                            <label for="contact_no" class="form-label fs-6 fw-bold">Contact Number</label>
+                        <div class="col-sm-6 col-md-6 form-group pt-0 pb-0 ">
                             <input type="text" class="form-control rounded" id="contact_no" name="contact_no" placeholder="+123456789">
                             @if ($errors->has('contact_no'))
                                 <small class="d-block text-danger">
@@ -87,8 +93,7 @@
                                 </small>
                             @endif
                         </div>
-                        <div class="form-group">
-                            <label for="email" class="form-label fs-6 fw-bold">Email</label>
+                        <div class="col-sm-6 col-md-6 form-group pt-0 pb-0 ">
                             <input type="email" class="form-control rounded" id="email" name="email" placeholder="example@gmail.com">
                             @if ($errors->has('email'))
                                 <small class="d-block text-danger">
@@ -97,10 +102,9 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="password" class="form-label fs-6 fw-bold">Password</label>
                             <div class="input-group">
                                 <input type="password" class="form-control rounded" id="password" name="password" placeholder="Password">
-                                <button type="button" class="button" id="togglePassword"><i class="fa fa-eye"></i></button>
+                                <button type="button" class="button rounded" id="togglePassword"><i class="fa fa-eye"></i></button>
                             </div>
                             @if ($errors->has('password'))
                                 <small class="d-block text-danger">
@@ -109,10 +113,9 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="password_confirmation" class="fs-6 fw-bold">Verify Password</label>
                            <div class="input-group">
                                 <input type="password" class="form-control rounded" id="password_confirmation" name="password_confirmation" placeholder="confirm password">
-                                <button type="button" class="button" id="toggleConfirmPassword"><i class="fa fa-eye"></i></button>
+                                <button type="button" class="button rounded" id="toggleConfirmPassword"><i class="fa fa-eye"></i></button>
 						    </div>
                         </div>
                         {{-- <div class="form-group">
@@ -125,12 +128,12 @@
                             @endif
                         </div> --}}
                     </div>
-                    <div class="form-group fw-bold">
+                    <div class="form-group fw-bold text-dark">
 						<input type="checkbox" name="" id="terms_agreement">
-						<span>I agree to the <a href="#" class="text-primary">Terms of Service</a> and <br><a href="#" class="text-primary">Acceptable Use Policy</a></span>
+						<span>I agree to the <a href="#" class="text-primary">Terms of Service</a> and <a href="#" class="text-primary">Acceptable Use Policy</a></span>
 					</div>
-                    <div class="d-grid gap-2 mt-1">
-                        <button class="btn btn-primary" type="submit">Save</button>
+                    <div class="gap-2 mt-1 text-center">
+                        <button class="btn btn-primary rounded px-5" type="submit">SignUp</button>
                     </div>
                     {{-- <button type="button" class="btn btn-danger next-step float-end">Next <i class="fa-solid fa-arrow-right"></i></button> --}}
                     
@@ -236,8 +239,9 @@
                             </div>
                         </div>
                     </div> --}}
+                    
             </form>
-             <p class="mb-0 text-center mt-3">Already have an account? <a href="{{ route('clientlogin') }}" class="text-primary">Sign In</a>
+             <p class="mb-0 text-center mt-3 text-dark fw-bold">Already have an account? <a href="{{ route('clientlogin') }}" class="text-primary">Sign In</a>
             </p>
             
         </div>

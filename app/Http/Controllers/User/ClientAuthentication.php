@@ -30,8 +30,8 @@ class ClientAuthentication extends Controller
     {
         $validator = Validator::make($request->all(), [
             'fname' => 'required',
-            'middle_name' => 'required',
-            'last_name' => 'required',
+            // 'middle_name' => 'required',
+            // 'last_name' => 'required',
             //'dob' => 'required',
             'contact_no' => 'required|unique:clients,contact_no',
             'email' => 'required|email|unique:clients,email',

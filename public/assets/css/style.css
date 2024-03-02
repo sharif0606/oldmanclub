@@ -4576,16 +4576,32 @@ img{
   filter: hue-rotate(240deg);
 }
 .btn{
-  background-color: rgb(95, 21, 95);
+  /* background-color: rgb(95, 21, 95); */
+  background-color: #FF6F94;
+  outline: none;
+  border: none;
+  text-align: center;
 }
+.btn:hover{
+  background-color: #4d1172;
+}
+.head{
+        border-bottom: 3px solid #FF87A0;
+        /* margin: 0px 5px; */
+    }
 .align{
-  margin: 20px 0px;
+  margin: 50px 0px;
   justify-content: center;
   border: 2px white black;
-  background-color: white;
-  padding: 50px;
+  background-color: #EBF2FA;
+  padding: 20px;
   border-radius: 15px;
   justify-content: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.align input{
+  /* background-color: #F8F9FE; */
+  /* padding: 0px; */
 }
 @media (max-width: 575.98px) {
   .align {
