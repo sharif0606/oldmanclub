@@ -9,11 +9,12 @@
 	.login{
 		color:#FF87A0
 	}
+	
 </style>
     <div class="col-sm-6 col-md-4 col-lg-4 appAuth mx-auto align shadow-lg">
 		 <div class="head mb-2">
 			<p class="fs-2 fw-bolder text-center text-info mb-0">Old Man Club</p>
-			<p class="fs-3 fw-bolder text-center mb-0 login">User Login</p>
+			<p class="fs-3 fw-bolder text-center mb-0 login">Login</p>
 			<!-- <p class="text-center mb-3 text-dark fw-bold">Welcome to Login your account</p> -->
 		</div>
 		 <!-- <p class="text-center text-primary fs-4 fw-bolder"><img src="{{asset('public/images/Group1301.png')}}" alt="" class="img-fluid"></p>
@@ -22,7 +23,7 @@
 			<form action="{{route('clientlogin.check')}}" method="POST">
 				@csrf
 				<div class="form-group">
-					<label class="control-label fs-6 fw-bold text-dark" for="username">Contact Number / Email Address</label>
+					<!-- <label class="control-label fs-6 fw-bold text-dark" for="username">Contact Number / Email Address</label> -->
 					<input type="text" class="form-control rounded" id="username" name="username" value="{{ old('username') }}" placeholder="+123456789/example@gmail.com">
 					@if($errors->has('username'))
 						<small class="d-block text-danger fw-bold">
@@ -31,7 +32,7 @@
 					@endif
 				</div>
 				<div class="form-group">
-					<label class="pull-left control-label fs-6 fw-bold text-dark" for="exampleInputpwd_2">Password</label>
+					<!-- <label class="pull-left control-label fs-6 fw-bold text-dark" for="exampleInputpwd_2">Password</label> -->
 					<div class="input-group">
 						<input type="password" class="form-control rounded"  id="password" name="password" placeholder="..................">
 						<button type="button" class="button" id="togglePassword"><i class="fa fa-eye"></i></button>

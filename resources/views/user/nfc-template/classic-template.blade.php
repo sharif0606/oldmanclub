@@ -44,13 +44,13 @@
                     @endif
                 </div>
             </div>
-            <p class="text-center fs-4 fw-bold">
-                @if($nfc_card->card_type==1){{__('Work')}}
-                @else
-                    {{__('Personal')}}
-                @endif
-            </p>
         </div>
+        <p class="text-center fs-4 fw-bold pt-2">
+            @if($nfc_card->card_type==1){{__('Work')}}
+            @else
+                {{__('Personal')}}
+            @endif
+        </p>
     </header>
     {{--<section class="middle">
         <div class="container-fluid mt-5">

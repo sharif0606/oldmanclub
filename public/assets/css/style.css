@@ -4608,6 +4608,9 @@ img{
     margin: 20px;
   }
 }
+::placeholder{
+  font-size:14px;
+}
 
 
 

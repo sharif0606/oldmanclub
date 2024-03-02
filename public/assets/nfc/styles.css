@@ -48,6 +48,9 @@ body {
 }
 
 .classic_header_image {
+    /* position: relative; */
+}
+.classic_header_image_show {
     position: relative;
 }
 
@@ -59,7 +62,7 @@ body {
 }
 
 .classic_svg {
-    bottom: 35px;
+    bottom: 50px;
     /* left: 0px; */
     /* right: 0px; */
     position: absolute;

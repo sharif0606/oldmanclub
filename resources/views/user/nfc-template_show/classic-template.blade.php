@@ -9,7 +9,7 @@
 </style>
 <div>
     <header>
-        <div class="classic_header_image">
+        <div class="classic_header_image_show">
             @if ($nfc_card->client?->image)
                 <img src="{{ asset('public/uploads/client/' . $nfc_card->client?->image)}}" alt="" width="350px" height="350px">
                 <!-- <div class="main-img" style="background-image: url({{ asset('public/uploads/client/' . $nfc_card->client?->image) }})"></div> -->
