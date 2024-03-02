@@ -21,7 +21,7 @@
 							<!-- <p class="text-center text-primary fs-4 fw-bolder"><img src="{{asset('public/images/Group1301.png')}}" alt="" class="img-fluid"></p> -->
 						<!-- <p class="text-center mb-3 text-dark fw-bold">Create an account to get started!</p> -->
 					</div>
-					<div class="row">
+					<div class="row gx-2">
 						<div class="col-sm-6 col-md-4 form-group pb-0">
 							<!-- <label class="fs-6 fw-bold" for="FullName">Full Name</label> -->
 							<input type="text" class="form-control rounded" name="FullName" value="{{old('FullName')}}" id="FullName" placeholder="Your Full Name">

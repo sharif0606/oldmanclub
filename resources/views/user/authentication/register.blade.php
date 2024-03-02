@@ -11,6 +11,9 @@
         /* border-bottom: 3px solid #FF87A0; */
         /* margin: 0px 5px; */
     }
+    .form-group{
+        margin-bottom:10px;
+    }
 </style>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" crossorigin="anonymous"></script>
     <div class="col-sm-6 col-md-6 col-lg-5 appAuth mx-auto align shadow-lg">
@@ -48,12 +51,12 @@
                     {{-- <div class="col-sm-6">
                         <button type="button" class="btn btn-primary prev-step"><i class="fa-solid fa-arrow-left"></i> Back</button>
                     </div> --}}
-                    <div class="row">
+                    <div class="row gx-2">
                         <div class="head mb-2">
-                            <p class="fs-2 fw-bolder text-center text-info mb-0">Old Man Club</p>
+                            <p class="fs-3 fw-bolder text-center text-info mb-0">Old Man Club</p>
                             <!-- <p class="fs-2 fw-bolder text-center">SignUp</p> -->
                              <!-- <p class="text-center text-primary fs-4 fw-bolder"><img src="{{asset('public/images/Group1301.png')}}" alt="" class="img-fluid"></p> -->
-                            <p class="text-center mb-3 text-dark fw-bold">Create an account to get started!</p>
+                            <p class="text-center mb-3 text-dark fw-bold mb-0">Create an account to get started!</p>
                         </div>
                        
                         <div class="col-sm-6 col-md-4 form-group pb-0">
