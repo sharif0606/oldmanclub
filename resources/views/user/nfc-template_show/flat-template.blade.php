@@ -20,16 +20,8 @@
                     srcset="" />
             @endif
         </div>
-        <div>
-            <p class="text-center fs-6 fw-bold m-0">
-                @if($nfc_card->card_type==1){{__('Work')}}
-                @else
-                    {{__('Personal')}}
-                @endif
-            </p>
-        </div>
     </header>
-    {{--<section class="section">
+ <section class="section">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
@@ -142,4 +134,4 @@
                 </ul>
             </div>
         </div>
-    </section>--}}
+    </section>

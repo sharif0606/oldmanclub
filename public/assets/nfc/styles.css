@@ -63,7 +63,7 @@ body {
     /* left: 0px; */
     /* right: 0px; */
     position: absolute;
-    width: calc(100% + -32px);
+    width: calc(100% + 0px);
 }
 
 .classic_image {

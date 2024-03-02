@@ -29,7 +29,7 @@
 					<label class="pull-left control-label fs-6 fw-bold" for="exampleInputpwd_2">Password</label>
 					<div class="input-group">
 						<input type="password" class="form-control rounded" id="password" name="password" placeholder="..................">
-						<button type="button" class="button" id="togglePassword"><i class="fa fa-eye"></i></button>
+						<button type="button" class="button" id="togglePassword"><i class="fa fa-eye-slash"></i></button>
 					</div>
 					@if($errors->has('password'))
 						<small class="d-block text-danger">
@@ -53,12 +53,19 @@
 @endsection
 @push('scripts')
 	<script>
-		const togglePassButton = document.getElementById('togglePassword');
-		const inputPass = document.getElementById('password');
+		let togglePassButton = document.getElementById('togglePassword');
+		let inputPass = document.getElementById('password');
 		togglePassButton.addEventListener('click', function(){
-			const newType = inputPass.type === 'password'?'text':'password';
+			let newType = inputPass.type === 'password'?'text':'password';
 			inputPass.type = newType;
-			togglePassButton.querySelector('i').classList.toggle('fa-solid fa-eye-slash')
-		});
+			togglePassButton.querySelector('i').classList.add('fa fa-eye');
+		})
+		// const togglePassButton = document.getElementById('togglePassword');
+		// const inputPass = document.getElementById('password');
+		// togglePassButton.addEventListener('click', function(){
+		// 	const newType = inputPass.type === 'password'?'text':'password';
+		// 	inputPass.type = newType;
+		// 	togglePassButton.querySelector('i').classList.toggle('fa-solid fa-eye-slash')
+		// });
 	</script>
 @endpush
