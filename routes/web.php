@@ -210,8 +210,9 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::resource('phonebook', phonebook::class);
     Route::resource('phonegroup', phonegroup::class);
     Route::resource('shipping', shipping::class);
+    Route::get('shipp_comment/{id}',[shipping::class, 'shipp_comment'])->name('shipp_comment');
     Route::resource('order', order::class);
-    Route::get('order_edit/{id}',[order::class,'order_edit'])->name('order_edit');
+    Route::get('order_edit/{id}',[order::class,'order_edit'])->name('order_edit_sampleimg');
     Route::post('order_update/{id}',[order::class,'order_update'])->name('order_update');
     Route::get('shipping_comments/{shippingId}', [shipping::class, 'showShippingComments'])->name('shippingcomment');
     Route::resource('shipcomment', shipcomment::class);

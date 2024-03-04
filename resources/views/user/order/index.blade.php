@@ -42,7 +42,7 @@
                                 ($value->order_status == 4 ? __('Delivered') : '')))}}
                             </td>
                             <td class="white-space-nowrap">
-                                <a href="{{route('order_edit',$value->id)}}">
+                                <a href="{{route('order_edit_sampleimg',$value->id)}}">
                                    <i class="fa fa-upload"></i>
                                 </a>
                                 {{--<a href="javascript:void()" onclick="$('#form{{$value->id}}').submit()">

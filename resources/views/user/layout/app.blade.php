@@ -33,7 +33,7 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="index.html" class="brand-logo">
+            <a href="{{route('frontend')}}" class="brand-logo">
                 <img class="logo-abbr" style="max-width: 250px;" src="{{ asset('public/assets/images/Group.png') }}"
                     alt="">
                 <!-- <img class="logo-compact" src="./images/logo-text.png" alt="">

@@ -9,7 +9,7 @@
             <div class="table-responsive">
                 <div>
                     <a class="pull-right fs-5" href="{{route('shipping.create')}}"><i class="fa fa-plus"></i></a>
-                    <a class="pull-right fs-5" href="{{route('shipcomment.index')}}">Comment</a>
+                    <!-- <a class="pull-right fs-5" href="{{route('shipcomment.index')}}">Comment</a> -->
                 </div>
                 <table class="table table-bordered mb-0" id="phone_book">
                     <thead>
@@ -36,6 +36,9 @@
                                 @if($value->status !== 2)
                                 <a href="{{route('shipping.edit',encryptor('encrypt',$value->id))}}">
                                     <i class="fa fa-edit"></i>
+                                </a>
+                                <a href="{{route('shipp_comment',encryptor('encrypt',$value->id))}}">
+                                    comment
                                 </a>
                                 
                                 <a href="javascript:void()" onclick="$('#form{{$value->id}}').submit()">

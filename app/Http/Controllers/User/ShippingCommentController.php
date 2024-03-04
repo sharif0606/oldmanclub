@@ -21,6 +21,7 @@ class ShippingCommentController extends Controller
         return view('user.shippingcomment.index',compact('shipping','shippingcomment','client'));
     }
 
+    
     /**
      * Show the form for creating a new resource.
      */

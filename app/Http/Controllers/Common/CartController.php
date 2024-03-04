@@ -18,7 +18,6 @@ class CartController extends Controller
     public function addToCart(Request $r, $id)
     {
         //session()->flush();
-
         //echo $r->quantity;die;
         $product = PrintingService::findOrFail($id);
         $msg = "Congratulation! Product added to cart.";

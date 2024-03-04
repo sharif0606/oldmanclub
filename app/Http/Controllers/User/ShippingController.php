@@ -116,6 +116,12 @@ class ShippingController extends Controller
         }
     }
 
+    public function shipp_comment($id){
+        $client = Client::find(currentUserId());
+        $comment = ShippingComment::where('shipping_id',$id)->get();
+        $shipping = Shipping::findOrFail(encryptor('decrypt', $id));
+        return view('user.shipping.comment', compact('shipping', 'client','comment'));
+    }
     /**
      * Remove the specified resource from storage.
      */
