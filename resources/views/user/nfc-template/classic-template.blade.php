@@ -2,17 +2,18 @@
     <header>
         <div class="classic_header_image">
             @if ($nfc_card->client?->image)
-                <img src="{{ asset('public/uploads/client/' . $nfc_card->client?->image)}}" alt="" width="350px" height="350px">
+                <img src="{{ asset('public/uploads/client/' . $nfc_card->client?->image) }}" alt="" width="350px"
+                    height="350px">
                 <!-- <div class="main-img" style="background-image: url({{ asset('public/uploads/client/' . $nfc_card->client?->image) }})"></div> -->
             @else
-                <img src="{{ asset('public/assets/nfc/images/123.png')}}" alt="" width="100%">
+                <img src="{{ asset('public/assets/nfc/images/123.png') }}" alt="" width="100%">
                 <!-- <div class="main-img" style="background-image: url({{ asset('public/assets/nfc/images/123.png') }})">
                 </div> -->
             @endif
             <div class="classic_svg">
                 <svg preserveAspectRatio="xMinYMax meet" viewBox="0 0 246 57" xmlns="http://www.w3.org/2000/svg"
                     class="css-fxun4i">
-                    @if($nfc_card->card_type==1)
+                    @if ($nfc_card->card_type == 1)
                         <path clip-rule="evenodd"
                             d="M 214.7168,6.1113281 C 195.65271,5.9023124 172.37742,11.948182 137.87305,32.529297 110.16613,49.05604 86.980345,56.862784 65.015625,57 H 65 v 1 H 246 V 11.453125 C 236.0775,8.6129313 226.15525,6.2367376 214.7168,6.1113281 Z"
                             fill="white" fill-rule="evenodd"></path>
@@ -46,13 +47,14 @@
             </div>
         </div>
         <p class="text-center fs-4 fw-bold pt-2">
-            @if($nfc_card->card_type==1){{__('Work')}}
+            @if ($nfc_card->card_type == 1)
+                {{ __('Work') }}
             @else
-                {{__('Personal')}}
+                {{ __('Personal') }}
             @endif
         </p>
     </header>
-    {{--<section class="middle">
+    {{-- <section class="middle">
         <div class="container-fluid mt-5">
             <div class="row">
                 <div class="col-sm-12">
@@ -145,5 +147,5 @@
                 @endforeach
             </div>
         </div>
-    </section>--}}
+    </section> --}}
 </div>

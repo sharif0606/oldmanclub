@@ -15,15 +15,15 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('nfc_field_id');
             $table->unsignedBigInteger('nfc_card_id');
-            $table->string('field_value');
+            $table->string('field_value')->nullable();
+            $table->string('display_text')->nullable();
+            $table->tinyInteger('type')->default(1)->comment('1 => work, 2=> personal');
             // Add additional fields if needed
             $table->timestamps();
 
             // Define foreign keys
             $table->foreign('nfc_field_id')->references('id')->on('nfc_fields')->onDelete('cascade');
             $table->foreign('nfc_card_id')->references('id')->on('nfc_cards')->onDelete('cascade');
-
-            
         });
     }
 

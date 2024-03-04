@@ -50,6 +50,7 @@ body {
 .classic_header_image {
     /* position: relative; */
 }
+
 .classic_header_image_show {
     position: relative;
 }
@@ -71,10 +72,10 @@ body {
 
 .classic_image {
     bottom: 0px;
-    left: 80%;
+    /*left: 80%;*/
     position: absolute;
     right: 0px;
-    top: 15%;
+    top: 28%;
     display: block;
 }
 
@@ -119,7 +120,7 @@ body {
     object-fit: contain;
     object-position: left center;
     width: var(--chakra-sizes-full);
-     /* margin-top: -263px; */
+    /* margin-top: -263px; */
     position: relative;
 }
 
@@ -159,7 +160,8 @@ body {
 }
 
 .header_body {
-    background-color: #CAC4C4; ;
+    background-color: #CAC4C4;
+    ;
 }
 
 .modern_card {
