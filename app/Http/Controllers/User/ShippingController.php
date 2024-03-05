@@ -118,9 +118,24 @@ class ShippingController extends Controller
 
     public function shipp_comment($id){
         $client = Client::find(currentUserId());
-        $comment = ShippingComment::where('shipping_id',$id)->get();
+        $ship_comment = ShippingComment::where('client_id',$id)->get();
         $shipping = Shipping::findOrFail(encryptor('decrypt', $id));
-        return view('user.shipping.comment', compact('shipping', 'client','comment'));
+        return view('user.shipping.comment', compact('shipping', 'client','ship_comment'));
+    }
+    public function storeComment(Request $request, $id)
+    {
+        try {
+            $shipping = Shipping::findOrFail(encryptor('decrypt', $id));
+            $comment = new ShippingComment;
+            $comment->shipping_id = $shipping->id;
+            $comment->client_id = currentUserId(); // Assuming you have a function to get the current user ID
+            $comment->body = $request->body;
+            $comment->save();
+
+            return redirect()->route('shipp_comment_store');
+        }catch (Exception $e) {
+            return redirect()->back()->with('error', 'Failed to add comment');
+        }
     }
     /**
      * Remove the specified resource from storage.

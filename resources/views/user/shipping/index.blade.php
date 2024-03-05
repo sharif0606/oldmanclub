@@ -9,7 +9,6 @@
             <div class="table-responsive">
                 <div>
                     <a class="pull-right fs-5" href="{{route('shipping.create')}}"><i class="fa fa-plus"></i></a>
-                    <!-- <a class="pull-right fs-5" href="{{route('shipcomment.index')}}">Comment</a> -->
                 </div>
                 <table class="table table-bordered mb-0" id="phone_book">
                     <thead>
