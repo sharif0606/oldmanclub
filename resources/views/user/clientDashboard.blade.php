@@ -65,7 +65,6 @@
                             showActiveTheme(theme)
                         })
                     })
-
             }
         })
     </script>
