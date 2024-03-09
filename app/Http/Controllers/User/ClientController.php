@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\User\Client;
+use App\Models\User\Post;
 use App\Models\Backend\PhoneBook;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,11 +14,12 @@ class ClientController extends Controller
     /**
      * Display a listing of the resource.
      */
-    
+
     public function index()
     {
         $client = Client::find(currentUserId());
-        return view('user.clientDashboard', compact('client'));
+        $post = Post::where('client_id',currentUserId())->orderBy('created_at', 'desc')->get();
+        return view('user.clientDashboard', compact('client','post'));
     }
     // public function phonebook_list()
     // {
@@ -54,7 +56,7 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-       
+
     }
 
     /**
@@ -64,7 +66,7 @@ class ClientController extends Controller
 
     public function update(Request $request, $id)
     {
-        
+
     }
 
     /**
@@ -72,7 +74,7 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        
+
     }
 
 
@@ -128,7 +130,7 @@ class ClientController extends Controller
                 $this->setSession($data);
                 $this->notice::success('Data Saved');
                 return redirect()->back()->with('success', 'Data Saved');
-            } 
+            }
         } catch (Exception $e) {
             dd($e);
             $this->notice::error('Please try again');
@@ -143,7 +145,7 @@ class ClientController extends Controller
                 'userName' => encryptor('encrypt', $client->first_name_en),
                 'emailAddress' => encryptor('encrypt', $client->email),
                 'userLogin' => 1,
-                'image' => $client->image ?? 'No Image Found' 
+                'image' => $client->image ?? 'No Image Found'
             ]
         );
     }

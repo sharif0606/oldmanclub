@@ -45,6 +45,9 @@ class Client extends Model
     public function company(){
         return $this->hasMany(Company::class,'client_id','id');
     }
+    public function post(){
+        return $this->hasMany(Post::class,'client_id','id');
+    }
     public function addres_verify(){
         return $this->hasOne(AddressVerification::class,'client_id','id');
     }
