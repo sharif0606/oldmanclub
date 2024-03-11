@@ -71,6 +71,7 @@ use App\Http\Controllers\OrderController as order;
 use App\Http\Controllers\User\AddressVerificationController as address_verify;
 use App\Http\Controllers\User\CompanyController as company;
 use App\Http\Controllers\User\BankController as bank;
+use App\Http\Controllers\User\PostController as post;
 
 // landing page
 use App\Http\Controllers\Common\frontendController as frontend;
@@ -151,7 +152,7 @@ Route::prefix('admin')->group(function () {
     Route::post('bank_update/{id}',[BankController::class,'bank_update'])->name('bank_update');
 
 
-    //website  
+    //website
     Route::resource('setting', setting::class);
     Route::resource('nfc-field', nfc_field::class);
     Route::resource('slider', slider::class);
@@ -184,7 +185,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('smartwork', smartwork::class);
     Route::resource('smartsms', smartsms::class);
     Route::resource('smartphonebook', smartphonebook::class);
-    //printing service 
+    //printing service
     Route::resource('printhero', printhero::class);
     Route::resource('printvideo', printvideo::class);
     Route::resource('printcard', printcard::class);
@@ -235,6 +236,7 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::resource('address_verify', address_verify::class);
     Route::resource('company', company::class);
     Route::resource('bank', bank::class);
+    Route::resource('post', post::class);
 });
 Route::get('nfcqrurl/{id}', [nfc_card::class, 'showqrurl']);
 Route::get('save-contact/{id}', [nfc_card::class, 'save_contact'])->name('save_contact');
