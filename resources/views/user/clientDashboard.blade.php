@@ -65,7 +65,6 @@
                             showActiveTheme(theme)
                         })
                     })
-
             }
         })
     </script>
@@ -302,7 +301,12 @@ Header START -->
                         <a class="nav-link btn icon-md p-0" href="#" id="profileDropdown" role="button"
                             data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            <img class="avatar-img rounded-2" src="{{asset('public/user/assets/images/avatar/07.jpg')}}" alt="">
+                            @if($client->image)
+                            <img src="{{ asset('public/uploads/client/' . $client->image) }}" class="avatar-img rounded-2"
+                                alt="">
+                            @else
+                                <img class="avatar-img rounded-2" src="{{asset('public/user/assets/images/avatar/07.jpg')}}" alt="">
+                            @endif
                         </a>
                         <ul class="dropdown-menu dropdown-animation dropdown-menu-end pt-3 small me-md-n3"
                             aria-labelledby="profileDropdown">
@@ -399,14 +403,11 @@ Header END -->
 
     <!-- **************** MAIN CONTENT START **************** -->
     <main>
-
         <!-- Container START -->
         <div class="container">
             <div class="row g-4">
-
                 <!-- Sidenav START -->
                 <div class="col-lg-3">
-
                     <!-- Advanced filter responsive toggler START -->
                     <div class="d-flex align-items-center d-lg-none">
                         <button class="border-0 bg-transparent" type="button" data-bs-toggle="offcanvas"
@@ -439,13 +440,25 @@ Header END -->
                                         <div class="text-center">
                                             <!-- Avatar -->
                                             <div class="avatar avatar-lg mt-n5 mb-3">
-                                                <a href="#!"><img
-                                                        class="avatar-img rounded border border-white border-3"
-                                                        src="{{asset('public/user/assets/images/avatar/07.jpg')}}" alt=""></a>
+                                                <a href="#!">
+                                                @if($client->image)
+                                                 <img src="{{ asset('public/uploads/client/' . $client->image) }}" class="rounded" alt="" class="bg-dark" >
+                                                    @if($client->is_address_verified==1)
+                                                        <p class="badge"><img src="{{asset('public/images/varified.png')}}" alt=""></p><!-- Add your badge here -->
+                                                    @else
+                                                        <p class="badge"><img src="{{asset('public/images/unverified.png')}}" alt=""></p>
+                                                    @endif
+                                                    {{-- <img class="avatar-img rounded border order-white border-3" src="{{asset('public/user/assets/images/avatar/07.jpg')}}" alt=""> --}}
+                                                    @else
+                                                        <img src="{{ asset('public/images/download.jpg') }}" class="img-fluid rounded-circle" alt="asdfdf" class="">
+                                                        <img src="{{ asset('public/images/download.jpg') }}" class="img-fluid rounded-circle" alt="asdfdf" class="">
+                                                        <p class="badge"><img src="{{asset('public/images/unverified.png')}}" alt=""></p>
+                                                     @endif
+                                                </a>
                                             </div>
                                             <!-- Info -->
-                                            <h5 class="mb-0"> <a href="#!">Sam Lanson </a> </h5>
-                                            <small>Web Developer</small>
+                                            <h5 class="mb-0"> <a href="#!">{{$client->fname}} {{$client->middle_name}} {{$client->last_name}}</a> </h5>
+                                            {{-- <small>Web Developer</small> --}}
                                             <p class="mt-3">I'd love to change the world, but they won’t give me the
                                                 source code.</p>
 
@@ -534,22 +547,22 @@ Header END -->
                                 <!-- Helper link START -->
                                 <ul class="nav small mt-4 justify-content-center lh-1">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="my-profile-about.html">About</a>
+                                        <a class="nav-link" href="#">About</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="settings.html">Settings</a>
+                                        <a class="nav-link" href="#">Settings</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" target="_blank" href="">Support </a>
+                                        <a class="nav-link" href="#">Support </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" target="_blank" href="docs/index.html">Docs </a>
+                                        <a class="nav-link"  href="#">Docs </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="help.html">Help</a>
+                                        <a class="nav-link" href="#">Help</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="privacy-and-terms.html">Privacy & terms</a>
+                                        <a class="nav-link" href="#">Privacy & terms</a>
                                     </li>
                                 </ul>
                                 <!-- Helper link END -->
@@ -590,12 +603,18 @@ Header END -->
                         <div class="d-flex mb-3">
                             <!-- Avatar -->
                             <div class="avatar avatar-xs me-2">
-                                <a href="#"> <img class="avatar-img rounded-circle"
+                                <a href="#">
+                                @if($client->image)
+                                    <img src="{{ asset('public/uploads/client/' . $client->image) }}" class="avatar-img rounded-circle" alt="" class="bg-dark" width="500px">
+                                @else
+                                    <img class="avatar-img rounded-circle"
                                         src="{{asset('public/user/assets/images/avatar/03.jpg')}}" alt=""> </a>
+                                @endif
                             </div>
                             <!-- Post input -->
-                            <form class="w-100">
-                                <textarea class="form-control pe-4 border-0" rows="2" data-autoresize placeholder="Share your thoughts..."></textarea>
+                            <form action="{{route('post.store')}}" class="w-100" method="POST">
+                                @csrf
+                                <textarea class="form-control pe-4 border-0" rows="2" data-autoresize placeholder="Share your thoughts..." name="message"></textarea>
                             </form>
                         </div>
                         <!-- Share feed toolbar START -->
@@ -644,6 +663,7 @@ Header END -->
                     <!-- Share feed END -->
 
                     <!-- Card feed item START -->
+                    @foreach ($post as $p)
                     <div class="card">
                         <!-- Card header START -->
                         <div class="card-header border-0 pb-0">
@@ -651,17 +671,25 @@ Header END -->
                                 <div class="d-flex align-items-center">
                                     <!-- Avatar -->
                                     <div class="avatar avatar-story me-2">
-                                        <a href="#!"> <img class="avatar-img rounded-circle"
-                                                src="{{asset('public/user/assets/images/avatar/04.jpg')}}" alt=""> </a>
+                                        <a href="#!">
+                                            @if($client->image)
+                                                <img src="{{ asset('public/uploads/client/' . $client->image) }}" class="avatar-img rounded-circle" alt="" class="bg-dark" width="500px">
+                                            @else
+                                                <img class="avatar-img rounded-circle"
+                                                    src="{{asset('public/user/assets/images/avatar/03.jpg')}}" alt=""> </a>
+                                            @endif
+                                        </a>
                                     </div>
                                     <!-- Info -->
                                     <div>
                                         <div class="nav nav-divider">
-                                            <h6 class="nav-item card-title mb-0"> <a href="#!"> Lori Ferguson
+                                            <h6 class="nav-item card-title mb-0">
+                                                <a href="#!">{{$client->fname}} {{$client->middle_name}} {{$client->last_name}}
+                                                    {{-- Lori Ferguson --}}
                                                 </a></h6>
                                             <span class="nav-item small"> 2hr</span>
                                         </div>
-                                        <p class="mb-0 small">Web Developer</p>
+                                        {{-- <p class="mb-0 small">Web Developer</p> --}}
                                     </div>
                                 </div>
                                 <!-- Card feed action dropdown START -->
@@ -694,10 +722,10 @@ Header END -->
                         <!-- Card header END -->
                         <!-- Card body START -->
                         <div class="card-body">
-                            <p>I'm thrilled to share that I've completed a graduate certificate course in project
-                                management with the president's honor roll.</p>
+                            <p>{{$p->message}}</p>
                             <!-- Card img -->
-                            <img class="card-img" src="{{asset('public/user/assets/images/post/3by2/01.jpg')}}" alt="Post">
+                            <img class="" src="{{asset('public/uploads/post/' . $p->image)}}" alt="Post" width="100%" height="250px">
+                            {{-- <img class="card-img" src="{{asset('public/user/assets/images/post/3by2/01.jpg')}}" alt="Post"> --}}
                             <!-- Feed react START -->
                             {{-- <ul class="nav nav-stack py-3 small">
                                 <li class="nav-item">
@@ -927,6 +955,7 @@ Header END -->
                         </div>
                         <!-- Card footer END -->
                     </div>
+                    @endforeach
                     <!-- Card feed item END -->
 
                     <!-- Card feed item START -->
@@ -2393,7 +2422,7 @@ Header END -->
 									<a class="btn btn-primary rounded-circle icon-md ms-auto" href="#"><i class="bi bi-person-check-fill"> </i></a>
 								</div>
 								<!-- Connection item END -->
-								
+
 								<!-- Connection item START -->
 								<div class="hstack gap-2 mb-3">
 									<!-- Avatar -->
@@ -3216,58 +3245,66 @@ Header END -->
         </div>
     </div>
     <!-- Modal create feed END -->
-
+<!--post model-->
     <!-- Modal create Feed photo START -->
     <div class="modal fade" id="feedActionPhoto" tabindex="-1" aria-labelledby="feedActionPhotoLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <!-- Modal feed header START -->
-                <div class="modal-header">
-                    <h5 class="modal-title" id="feedActionPhotoLabel">Add post photo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <!-- Modal feed header END -->
 
-                <!-- Modal feed body START -->
-                <div class="modal-body">
-                    <!-- Add Feed -->
-                    <div class="d-flex mb-3">
-                        <!-- Avatar -->
-                        <div class="avatar avatar-xs me-2">
-                            <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/03.jpg')}}"
-                                alt="">
-                        </div>
-                        <!-- Feed box  -->
-                        <form class="w-100">
-                            <textarea class="form-control pe-4 fs-3 lh-1 border-0" rows="2" placeholder="Share your thoughts..."></textarea>
-                        </form>
+                    <!-- Modal feed header START -->
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="feedActionPhotoLabel">Add post photo</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
+                    <!-- Modal feed header END -->
+                    <!-- Modal feed body START -->
+                    <form action="{{route('post.store')}}" method="POST" class="w-100" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                            <!-- Add Feed -->
+                                <div class="d-flex mb-3">
+                                    <!-- Avatar -->
+                                    <div class="avatar avatar-xs me-2">
+                                        @if($client->image)
+                                        <img src="{{ asset('public/uploads/client/' . $client->image) }}" class="img-fluid rounded-circle"
+                                        alt="" class="bg-dark" width="500px">
+                                        @else
+                                        <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/03.jpg')}}"
+                                            alt="">
+                                        @endif
+                                    </div>
+                                    <!-- Feed box  -->
+                                        <textarea class="form-control pe-4 fs-3 lh-1 border-0" rows="2" placeholder="Share your thoughts..." name="message"></textarea>
 
-                    <!-- Dropzone photo START -->
-                    <div>
-                        <label class="form-label">Upload attachment</label>
-                        <div class="dropzone dropzone-default card shadow-none" data-dropzone='{"maxFiles":2}'>
-                            <div class="dz-message">
-                                <i class="bi bi-images display-3"></i>
-                                <p>Drag here or click to upload photo.</p>
+                                </div>
+
+                            <!-- Dropzone photo START -->
+                            <div>
+                                <label class="form-label">Upload attachment</label>
+                                {{-- <input type="file" name="image" id="" class="form-control"> --}}
+                                <div class="dropzone dropzone-default card shadow-none" data-dropzone='{"maxFiles":2}'>
+                                    <div class="dz-message">
+                                        <i class="bi bi-images display-3"></i>
+                                        <p>Drag here or click to upload photo.</p>
+                                    </div>
+                                </div>
                             </div>
+                            <!-- Dropzone photo END -->
+
                         </div>
-                    </div>
-                    <!-- Dropzone photo END -->
+                        <!-- Modal feed body END -->
 
-                </div>
-                <!-- Modal feed body END -->
-
-                <!-- Modal feed footer -->
-                <div class="modal-footer ">
-                    <!-- Button -->
-                    <button type="button" class="btn btn-danger-soft me-2"
-                        data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-success-soft">Post</button>
-                </div>
-                <!-- Modal feed footer -->
+                        <!-- Modal feed footer -->
+                        <div class="modal-footer ">
+                            <!-- Button -->
+                            <button type="button" class="btn btn-danger-soft me-2"
+                                data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-success-soft">Post</button>
+                        </div>
+                    <!-- Modal feed footer -->
+                    </form>
             </div>
         </div>
     </div>
