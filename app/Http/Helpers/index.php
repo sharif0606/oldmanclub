@@ -86,3 +86,10 @@ function fullAccess(){
 function currentUser(){
 	return encryptor('decrypt', request()->session()->get('roleIdentity'));
 }
+function default_image(){
+    return "public/user/assets/images/avatar/03.jpg";
+}
+function default_bg_image(){
+    return "public/user/assets/images/bg/05.jpg";
+}
+
