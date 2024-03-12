@@ -21,6 +21,22 @@ class ClientController extends Controller
         $post = Post::where('client_id',currentUserId())->orderBy('created_at', 'desc')->get();
         return view('user.clientDashboard', compact('client','post'));
     }
+    public function myProfile()
+    {
+        $client = Client::find(currentUserId());
+        $post = Post::where('client_id',currentUserId())->orderBy('created_at', 'desc')->get();
+        return view('user.myProfile', compact('client','post'));
+    }
+    public function myProfileAbout()
+    {
+        $client = Client::find(currentUserId());
+        return view('user.myProfileAbout', compact('client'));
+    }
+    public function accountSetting()
+    {
+        $client = Client::find(currentUserId());
+        return view('user.accountSetting', compact('client'));
+    }
     // public function phonebook_list()
     // {
     //     $phonebook = PhoneBook::where('client_id',currentUserId())->find();
