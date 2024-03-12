@@ -186,8 +186,14 @@
                     <a class="nav-link btn icon-md p-0" href="#" id="profileDropdown" role="button"
                         data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <img class="avatar-img rounded-2"
-                            src="{{ asset($client->image?$client->image:default_image()) }}" alt="">
+                        @if($client->image)
+                        <img class="avatar-img rounded-circle border border-white border-3"
+                            src="{{asset('public/uploads/client/' . $client->image)}}" alt="">
+                        @else
+                        <img class="avatar-img rounded-circle border border-white border-3"
+                            src="{{asset('public/images/download.jpg')}}" alt="">
+                        @endif
+                        {{-- <img class="avatar-img rounded-2" src="{{ asset($client->image?$client->image:default_image()) }}" alt=""> --}}
                     </a>
                     <ul class="dropdown-menu dropdown-animation dropdown-menu-end pt-3 small me-md-n3"
                         aria-labelledby="profileDropdown">
@@ -212,7 +218,7 @@
                         <li><a class="dropdown-item" href="{{route('accountSetting')}}"><i class="bi bi-gear fa-fw me-2"></i>Settings
                                 & Privacy</a></li>
                         <li class="dropdown-divider"></li>
-                        <li><a class="dropdown-item bg-danger-soft-hover" href="sign-in-advance.html"><i
+                        <li><a class="dropdown-item bg-danger-soft-hover" href="{{route('clientlogOut')}}"><i
                                     class="bi bi-power fa-fw me-2"></i>Sign Out</a></li>
                         <li>
                             <hr class="dropdown-divider">
