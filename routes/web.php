@@ -207,7 +207,10 @@ Route::post('client/login', [clientauth::class, 'signInCheck'])->name('clientlog
 Route::get('client/logout', [clientauth::class, 'singOut'])->name('clientlogOut');
 
 Route::middleware(['checkclient'])->prefix('user')->group(function () {
-    Route::get('profile', [clientprofile::class, 'index'])->name('clientdashboard');
+    Route::get('dashboard', [clientprofile::class, 'index'])->name('clientdashboard');
+    Route::get('my-profile', [clientprofile::class, 'myProfile'])->name('myProfile');
+    Route::get('my-profile-about', [clientprofile::class, 'myProfileAbout'])->name('myProfileAbout');
+    Route::get('account-setting', [clientprofile::class, 'accountSetting'])->name('accountSetting');
     Route::resource('phonebook', phonebook::class);
     Route::resource('phonegroup', phonegroup::class);
     Route::resource('shipping', shipping::class);
