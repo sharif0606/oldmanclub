@@ -59,8 +59,11 @@
                     </li>
 
                     <!-- Nav item 4 Mega menu -->
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="">My network</a>
+                    </li> --}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('nfc_card.index') }}">NFC Card</a>
                     </li>
                 </ul>
             </div>
