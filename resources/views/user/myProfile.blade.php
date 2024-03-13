@@ -40,7 +40,12 @@
                                 </div>
                                 <div class="ms-sm-4 mt-sm-3">
                                     <!-- Info -->
-                                    <h1 class="mb-0 h5">{{$client->middle_name}} {{$client->last_name}}<i class="bi bi-patch-check-fill text-success small"></i>
+                                    <h1 class="mb-0 h5">{{$client->middle_name}} {{$client->last_name}}
+                                    @if($client->is_address_verified==1)
+                                        <i class="bi bi-patch-check-fill text-success small"></i>
+                                    @else
+                                        <i class="bi bi-patch-check-fill text-danger small"></i>
+                                    @endif
                                     </h1>
                                     {{-- <p>250 connections</p> --}}
                                 </div>

@@ -37,10 +37,11 @@
                     <li class="nav-item" data-bs-dismiss="offcanvas" role="presentation">
                       <a class="nav-link d-flex mb-0 active" href="#nav-setting-tab-1" data-bs-toggle="tab" aria-selected="true" role="tab"> <img class="me-2 h-20px fa-fw" src="{{asset('public/user/assets/images/icon/person-outline-filled.svg')}}" alt=""><span>Account </span></a>
                     </li>
-                    {{-- <li class="nav-item" data-bs-dismiss="offcanvas" role="presentation">
-                      <a class="nav-link d-flex mb-0" href="#nav-setting-tab-2" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1"> <img class="me-2 h-20px fa-fw" src="{{asset('public/user/assets/images/icon/notification-outlined-filled.svg')}}" alt=""><span>Notification </span></a>
+
+                   <li class="nav-item" data-bs-dismiss="offcanvas" role="presentation">
+                      <a class="nav-link d-flex mb-0" href="#nav-setting-tab-2" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1"> <img class="me-2 h-20px fa-fw" src="{{asset('public/user/assets/images/icon/notification-outlined-filled.svg')}}" alt=""><span>Address Verification </span></a>
                     </li>
-                    <li class="nav-item" data-bs-dismiss="offcanvas" role="presentation">
+                    {{--  <li class="nav-item" data-bs-dismiss="offcanvas" role="presentation">
                       <a class="nav-link d-flex mb-0" href="#nav-setting-tab-3" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1"> <img class="me-2 h-20px fa-fw" src="{{asset('public/user/assets/images/icon/shield-outline-filled.svg')}}" alt=""><span>Privacy and safety </span></a>
                     </li>
                     <li class="nav-item" data-bs-dismiss="offcanvas" role="presentation">
@@ -59,7 +60,7 @@
                 <!-- Card body END -->
                 <!-- Card footer -->
                 <div class="card-footer text-center py-2">
-                  <a class="btn btn-link text-secondary btn-sm" href="{{route('myProfile')}}">View Profile </a>
+                  <a class="btn btn-link  btn-sm" href="{{route('myProfile')}}">View Profile </a>
                 </div>
                 </div>
               <!-- Card END -->
@@ -322,13 +323,34 @@
                 <div class="card">
                   <!-- Card header START -->
                   <div class="card-header border-0 pb-0">
-                    <h5 class="card-title">Notification</h5>
+                    <h3 class="card-title text-center">Upload Your Document for Account verification</h3>
                     <p class="mb-0">Tried law yet style child. The bore of true of no be deal. Frequently sufficient to be unaffected. The furnished she concluded depending procuring concealed. </p>
                   </div>
                   <!-- Card header START -->
                   <!-- Card body START -->
                   <div class="card-body pb-0">
-                    <!-- Notification START -->
+                    <form action="{{route('address_verify.store')}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <label for="id_image" class="fw-bold mb-2">Upload Your ID:</label>
+                            <input type="file" id="id_image" class="form-control"  name="id_image" required>
+                            <img id="preview_photo_id" src="#" alt="preview_photo_id" style="display: none; max-width: 100px;">
+                        </div>
+                        <div class="form-group">
+                            <label for="documents" class="fw-bold mb-2">Upload Documents (jpg, png, pdf, doc):</label>
+                            <input type="file" id="document" class="form-control" name="document[]" accept="image/jpeg,image/jpg,image/png,application/pdf,application/txt,application/msword,application/vnd.openxmlformats-officedcoument.wordprocessingml.document" multiple required>
+                            <div id="preview_container"></div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="">Your Mailling Address</label>
+                            <textarea name="address_line_1" id="" class="form-control"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-success mt-2">Verify Your Address</button>
+                    </form>
+                    {{-- <!-- Notification START -->
                     <ul class="list-group list-group-flush">
                       <!-- Notification list item -->
                       <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-3">
@@ -472,15 +494,15 @@
                     <!-- Notification END -->
 
                   </div>
-                <!-- Card body END -->
-                <!-- Button save -->
-                <div class="card-footer pt-0 text-end border-0">
-                  <button type="submit" class="btn btn-sm btn-primary mb-0">Save changes</button>
+                    <!-- Card body END -->
+                    <!-- Button save -->
+                    <div class="card-footer pt-0 text-end border-0">
+                    <button type="submit" class="btn btn-sm btn-primary mb-0">Save changes</button>
+                    </div>
                 </div>
-              </div>
                 <!-- Notification END -->
               </div>
-              <!-- Notification tab END -->
+              <!-- Notification tab END --> --}}
 
               <!-- Privacy and safety tab START -->
               <div class="tab-pane fade" id="nav-setting-tab-3" role="tabpanel">
