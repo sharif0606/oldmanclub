@@ -32,14 +32,24 @@ class PostController extends Controller
     public function store(Request $request)
     {
         try{
-            $post = new Post;
-            $post->message = $request->message;
-            if($request->hasFile('image')){
-                $imageName = rand(111,999).time().'.'.$request->image->extension();
-                $request->image->move(public_path('uploads/post'), $imageName);
-                $post->image=$imageName;
-            }
-            $post->client_id = currentUserId();
+            // validate data
+        $request->validate([
+            'message' => 'required',
+            'file' => 'mimes:png,jpg,jpeg,gif|max:5000'
+        ]);
+         // create db entry
+         $post = Post::create([
+            'message' => $request->message,
+            'client_id' => currentUserId()
+        ]);
+        if($request->hasFile('image')){
+            $imageName = rand(111,999).time().'.'.$request->image->extension();
+            $request->image->move(public_path('uploads/post'), $imageName);
+            $post->image=$imageName;
+        }
+      
+
+        
             if($post->save()){
                 $this->notice::success('Your Post Successfully created');
                 return redirect()->route('clientdashboard');

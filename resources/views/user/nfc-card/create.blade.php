@@ -1,5 +1,5 @@
-@extends('user.layout.app')
-@section('title', 'create')
+@extends('user.layout.base')
+@section('title', 'create NFC Card')
 @section('content')
 
     <div class="card col-sm-12 shadow-lg">

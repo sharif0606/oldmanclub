@@ -858,6 +858,7 @@
     <!-- Modal create feed END -->
 
     <!-- Modal create Feed photo START -->
+    @include('user.includes.add-post-photo')
     <div class="modal fade" id="feedActionPhoto" tabindex="-1" aria-labelledby="feedActionPhotoLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -1101,10 +1102,11 @@ JS libraries, plugins and custom scripts -->
     <script src="{{ asset('public/user/assets/vendor/dropzone/dist/min/dropzone.min.js') }}"></script>
     <script src="{{ asset('public/user/assets/vendor/zuck.js/dist/zuck.min.js') }}"></script>
     <script src="{{ asset('public/user/assets/js/zuck-stories.js') }}"></script>
+    <script src="{{ asset('public/user/assets/vendor/pswmeter/pswmeter.min.js') }}"></script>
 
     <!-- Theme Functions -->
     <script src="{{ asset('public/user/assets/js/functions.js') }}"></script>
-
+    
     @stack('scripts')
 </body>
 
