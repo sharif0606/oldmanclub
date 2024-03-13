@@ -9,7 +9,7 @@
 	.login{
 		color:#FF87A0
 	}
-	
+
 </style>
     <div class="col-sm-6 col-md-4 col-lg-4 appAuth mx-auto align shadow-lg">
 		 <div class="head mb-2">
@@ -35,7 +35,10 @@
 					<!-- <label class="pull-left control-label fs-6 fw-bold text-dark" for="exampleInputpwd_2">Password</label> -->
 					<div class="input-group">
 						<input type="password" class="form-control rounded"  id="password" name="password" placeholder="..................">
-						<button type="button" class="button" id="togglePassword"><i class="fa fa-eye"></i></button>
+                        <span class="input-group-text p-0" id="togglePassword">
+                            <i class="fakepasswordicon fa-solid fa-eye-slash cursor-pointer px-1 w-40px"></i>
+                        </span>
+						{{-- <button type="button" class="button" id="togglePassword"><i class="fa fa-eye"></i></button> --}}
 					</div>
 					@if($errors->has('password'))
 						<small class="d-block text-danger fw-bold">
@@ -63,7 +66,8 @@
 		togglePassButton.addEventListener('click', function(){
 			const newType = inputPass.type === 'password'?'text':'password';
 			inputPass.type = newType;
-			togglePassButton.querySelector('i').classList.toggle('fa-solid fa-eye-slash')
+			togglePassButton.querySelector('i').classList.toggle('fa-eye-slash')
+			togglePassButton.querySelector('i').classList.toggle('fa-eye')
 		});
 	</script>
 @endsection

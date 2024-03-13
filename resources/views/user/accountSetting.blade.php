@@ -267,28 +267,28 @@
                     <form action="{{ route('change_password') }}" method="post" class="row g-3">
                          @csrf
                       <!-- Current password -->
-                      <div class="col-12">
-                        <label class="form-label">Current password</label>
-                            <div class="input-group">
-                                <input type="password" name="current_password" class="form-control" placeholder="Old password" required id="currentPassword">
-                                    <span class="input-group-text p-0" id="toggleCurrentPassword">
-                                        <i class="fakepasswordicon fa-solid fa-eye-slash cursor-pointer p-2 w-40px"></i>
-                                    </span>
-                                @if ($errors->has('current_password'))
-                                    <small class="d-block text-danger">
-                                        {{ $errors->first('current_password') }}
-                                    </small>
-                                @endif
-                            </div>
-                      </div>
+                    <div class="col-12">
+                    <label class="form-label">Current password</label>
+                        <div class="input-group">
+                            <input type="password" name="current_password" class="form-control" placeholder="Old password" required id="Oldpassword">
+                                <span class="input-group-text p-0" id="toggleOldPassword">
+                                    <i class="fakepasswordicon fa-solid fa-eye-slash cursor-pointer px-1 w-40px"></i>
+                                </span>
+                            @if ($errors->has('current_password'))
+                                <small class="d-block text-danger">
+                                    {{ $errors->first('current_password') }}
+                                </small>
+                            @endif
+                        </div>
+                    </div>
                       <!-- New password -->
                       <div class="col-12">
                         <label class="form-label">New password</label>
                         <!-- Input group -->
                         <div class="input-group">
-                          <input type="password" name="password"class="form-control" placeholder="new password" required id="password">
-                            <span class="input-group-text p-0" id="togglePassword">
-                                <i class="fakepasswordicon fa-solid fa-eye-slash cursor-pointer p-2 w-40px"></i>
+                          <input type="password" name="password"class="form-control" placeholder="new password" required id="Newpassword">
+                            <span class="input-group-text p-0" id="toggleNewPassword">
+                                <i class="fakepasswordicon fa-solid fa-eye-slash cursor-pointer px-1 w-40px"></i>
                             </span>
                         </div>
                         <!-- Pswmeter -->
@@ -300,8 +300,8 @@
                         <label class="form-label">Confirm password</label>
                             <div class="input-group">
                                 <input type="password" name="password_confirmation"class="form-control" placeholder="Confirm password" required id="password">
-                                <span class="input-group-text p-0" id="togglePassword">
-                                    <i class="fakepasswordicon fa-solid fa-eye-slash cursor-pointer p-2 w-40px"></i>
+                                <span class="input-group-text p-0" id="toggleConfirmPassword">
+                                    <i class="fakepasswordicon fa-solid fa-eye-slash cursor-pointer px-1 w-40px"></i>
                                 </span>
                         </div>
                       </div>
@@ -886,49 +886,110 @@
     <!-- Container END -->
 
   </main>
-
-
-  <script>
-    document.getElementById('image').addEventListener('change', function(event) {
-            var input = event.target;
-            var preview = document.getElementById('preview');
-
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    preview.src = e.target.result;
-                    preview.style.display = 'block'; // Show the preview image
-                }
-
-                reader.readAsDataURL(input.files[0]); // Convert to data URL
-            }
-        });
-        document.getElementById('cover_photo').addEventListener('change', function(event) {
-            var input = event.target;
-            var preview = document.getElementById('preview_cover');
-
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    preview.src = e.target.result;
-                    preview.style.display = 'block'; // Show the preview image
-                }
-
-                reader.readAsDataURL(input.files[0]); // Convert to data URL
-            }
-        });
-
-  </script>
-  <script>
-		const togglePassButton = document.getElementById('toggleCurrentPassword');
-		const inputPass = document.getElementById('currentPassword');
-		togglePassButton.addEventListener('click', function(){
-			const newType = inputPass.type === 'password'?'text':'password';
-			inputPass.type = newType;
-			togglePassButton.querySelector('i').classList.toggle('fa-solid fa-eye-slash')
-		});
-	</script>
 @endsection
+@push('scripts')
+<script>
+    document.getElementById('image').addEventListener('change', function(event) {
+        var input = event.target;
+        var preview = document.getElementById('preview');
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block'; // Show the preview image
+            }
+
+            reader.readAsDataURL(input.files[0]); // Convert to data URL
+        }
+    });
+    document.getElementById('cover_photo').addEventListener('change', function(event) {
+        var input = event.target;
+        var preview = document.getElementById('preview_cover');
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block'; // Show the preview image
+            }
+
+            reader.readAsDataURL(input.files[0]); // Convert to data URL
+        }
+    });
+
+
+// change password
+    const toggleOldPassButton = document.getElementById('toggleOldPassword');
+    const toggleNewPassButton = document.getElementById('toggleNewPassword');
+    const toggleConfirmPassButton = document.getElementById('toggleConfirmPassword');
+    const oldPassInput = document.getElementById('Oldpassword');
+    const newPassInput = document.getElementById('Newpassword');
+    const confirmPassInput = document.getElementById('password');
+// for old password
+    toggleOldPassButton.addEventListener('click', function(){
+        const oldType = oldPassInput.type === 'password' ? 'text' : 'password';
+        oldPassInput.type = oldType;
+        toggleOldPassButton.querySelector('i').classList.toggle('fa-eye-slash');
+        toggleOldPassButton.querySelector('i').classList.toggle('fa-eye');
+    });
+// for new password
+    toggleNewPassButton.addEventListener('click', function(){
+        const newType = newPassInput.type === 'password' ? 'text' : 'password';
+        newPassInput.type = newType;
+        toggleNewPassButton.querySelector('i').classList.toggle('fa-eye-slash');
+        toggleNewPassButton.querySelector('i').classList.toggle('fa-eye');
+    });
+// for confirm password
+    toggleConfirmPassButton.addEventListener('click', function(){
+        const newType = confirmPassInput.type === 'password' ? 'text' : 'password';
+        confirmPassInput.type = newType;
+        toggleConfirmPassButton.querySelector('i').classList.toggle('fa-eye-slash');
+        toggleConfirmPassButton.querySelector('i').classList.toggle('fa-eye');
+    });
+
+
+    // for address verification
+    document.getElementById('id_image').addEventListener('change', function(event) {
+        var input = event.target;
+        var preview = document.getElementById('preview_photo_id');
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block'; // Show the preview image
+            }
+
+            reader.readAsDataURL(input.files[0]); // Convert to data URL
+        }
+    });
+    document.getElementById('document').addEventListener('change', function(event) {
+        var input = event.target;
+        var previewContainer = document.getElementById('preview_container');
+
+        // Clear previous previews
+        previewContainer.innerHTML = '';
+
+        if (input.files && input.files.length > 0) {
+            for (var i = 0; i < input.files.length; i++) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var preview = document.createElement('img');
+                    preview.src = e.target.result;
+                    preview.style.maxWidth = '100px';
+                    preview.style.marginRight = '5px'; // Add some space between images
+                    previewContainer.appendChild(preview); // Append each preview image
+                }
+
+                reader.readAsDataURL(input.files[i]); // Convert to data URL
+            }
+        }
+    });
+</script>
+@endpush
 

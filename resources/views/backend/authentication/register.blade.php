@@ -51,7 +51,7 @@
 						<div class="form-group">
 							<div class="input-group">
 								<input type="password" class="form-control rounded" id="password" name="password" placeholder="Enter password">
-								<button type="button" class="button rounded" id="togglePassword"><i class="fa fa-eye"></i></button>
+								<button type="button" class="button rounded" id="togglePassword"><i class="fa fa-eye-slash"></i></button>
 							</div>
 							@if($errors->has('password'))
 								<small class="d-block text-danger fw-bold">
@@ -62,14 +62,14 @@
 						<div class="form-group">
 							<div class="input-group">
 								<input type="password" class="form-control rounded" id="password_confirmation" name="password_confirmation" placeholder="confirm password">
-								<button type="button" class="button rounded" id="toggleConfirmPassword"><i class="fa fa-eye"></i></button>
+								<button type="button" class="button rounded" id="toggleConfirmPassword"><i class="fa fa-eye-slash"></i></button>
 							</div>
 						</div>
 						<div class="form-group fw-bold text-dark">
 							<input type="checkbox" name="" id="terms_agreement">
 							<span>I agree to the <a href="#" class="text-primary">Terms of Service</a> and <a href="#" class="text-primary">Acceptable Use Policy</a></span>
 						</div>
-						
+
 						<div class="text-center mt-4">
 							<button type="submit" class="btn btn-primary btn-block rounded px-4 fw-bold" id="signupButton">Sign Up</button>
 						</div>
@@ -78,7 +78,7 @@
 				<p class="text-center mt-3 mb-0 text-dark fw-bold">Already have an account?<a href="{{route('login')}}" class="text-primary">Sign In</a></p>
 		</div>
 	</div>
-	
+
 @endsection
 @push('scripts')
 	<script>
@@ -88,7 +88,8 @@
 		togglePassButton.addEventListener('click', function(){
 			const newType = inputPass.type === 'password'?'text':'password';
 			inputPass.type = newType;
-			togglePassButton.querySelector('i').classList.toggle('fa-solid fa-eye-slash')
+			togglePassButton.querySelector('i').classList.toggle('fa-eye-slash')
+			togglePassButton.querySelector('i').classList.toggle('fa-eye')
 		});
 		// show/hede confirm password
 		const toggleConfirmPassButton = document.getElementById('toggleConfirmPassword');
@@ -96,7 +97,8 @@
 		toggleConfirmPassButton.addEventListener('click', function(){
 			const newType = inputConfirmPass.type === 'password'?'text':'password';
 			inputConfirmPass.type = newType;
-			toggleConfirmPassButton.querySelector('i').classList.toggle('fa-solid fa-eye-slash')
+			toggleConfirmPassButton.querySelector('i').classList.toggle('fa-eye-slash')
+			toggleConfirmPassButton.querySelector('i').classList.toggle('fa-eye')
 		});
 	//Checked Terms of Condition & Policy
         const signupForm = document.getElementById('signupForm');
