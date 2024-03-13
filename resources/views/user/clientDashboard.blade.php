@@ -37,9 +37,14 @@
                             <div class="text-center">
                                 <!-- Avatar -->
                                 <div class="avatar avatar-lg mt-n5 mb-3">
-                                    <a href="#!"><img
-                                            class="avatar-img rounded border border-white border-3"
-                                            src="{{asset($client->image?$client->image:default_image())}}" alt=""></a>
+                                    <a href="#!">
+                                        @if($client->image)
+                                            <img class="avatar-img rounded-circle border border-white border-3" src="{{asset('public/uploads/client/' . $client->image)}}" alt="">
+                                        @else
+                                            <img class="avatar-img rounded-circle border border-white border-3" src="{{asset('public/images/download.jpg')}}" alt="">
+                                        @endif
+                                        {{-- <img class="avatar-img rounded border border-white border-3" src="{{asset($client->image?$client->image:default_image())}}" alt=""> --}}
+                                    </a>
                                 </div>
                                 <!-- Info -->
                                 <h5 class="mb-0"> <a href="#!">{{$client->middle_name}} {{$client->last_name}}</a> </h5>
@@ -348,8 +353,18 @@
             <div class="d-flex mb-3">
                 <!-- Avatar -->
                 <div class="avatar avatar-xs me-2">
-                    <a href="#"> <img class="avatar-img rounded-circle"
-                            src="{{asset($client->image?$client->image:default_image())}}" alt=""> </a>
+                    <a href="#">
+                        @if($client->image)
+                            <img class="avatar-img rounded-circle"
+                            src="{{asset('public/uploads/client/' . $client->image)}}" alt="">
+                        @else
+                            <img class="avatar-img rounded-circle"
+                            src="{{asset('public/images/download.jpg')}}" alt="">
+
+                        @endif
+                        {{-- <img class="avatar-img rounded-circle"
+                        src="{{asset($client->image?$client->image:default_image())}}" alt=""> --}}
+                    </a>
                 </div>
                 <!-- Post input -->
                 <form class="w-100">
@@ -404,18 +419,27 @@
         <!-- Card feed item START -->
         <div class="card">
             <!-- Card header START -->
+             @foreach ($post as $value )
             <div class="card-header border-0 pb-0">
                 <div class="d-flex align-items-center justify-content-between">
                     <div class="d-flex align-items-center">
                         <!-- Avatar -->
                         <div class="avatar avatar-story me-2">
-                            <a href="#!"> <img class="avatar-img rounded-circle"
-                                    src="{{asset($client->image?$client->image:default_image())}}" alt=""> </a>
+                            <a href="#!">
+                                @if($client->image)
+                                    <img class="avatar-img rounded-circle"
+                                    src="{{asset('public/uploads/client/' . $client->image)}}" alt="">
+                                @else
+                                    <img class="avatar-img rounded-circle"
+                                    src="{{asset('public/images/download.jpg')}}" alt="">
+                                @endif
+                                {{-- <img class="avatar-img rounded-circle" src="{{asset($client->image?$client->image:default_image())}}" alt=""> --}}
+                            </a>
                         </div>
                         <!-- Info -->
                         <div>
                             <div class="nav nav-divider">
-                                <h6 class="nav-item card-title mb-0"> <a href="#!"> Lori Ferguson
+                                <h6 class="nav-item card-title mb-0"> <a href="#!">{{$client->fname}} {{$client->middle_name}} {{$client->last_name}}
                                     </a></h6>
                                 <span class="nav-item small"> 2hr</span>
                             </div>
@@ -452,10 +476,12 @@
             <!-- Card header END -->
             <!-- Card body START -->
             <div class="card-body">
-                <p>I'm thrilled to share that I've completed a graduate certificate course in project
-                    management with the president's honor roll.</p>
+
+
+                <p>{{$value->message}}.</p>
                 <!-- Card img -->
-                <img class="card-img" src="assets/images/post/3by2/01.jpg" alt="Post">
+                <img class="card-img" src="{{asset('public/uploads/post/' . $value->image)}}" alt="Post">
+                {{-- <img class="card-img" src="assets/images/post/3by2/01.jpg" alt="Post"> --}}
                 <!-- Feed react START -->
                 {{-- <ul class="nav nav-stack py-3 small">
                     <li class="nav-item">
@@ -667,6 +693,7 @@
                     <!-- Comment item END -->
                 </ul> --}}
                 <!-- Comment wrap END -->
+
             </div>
             <!-- Card body END -->
             <!-- Card footer START -->
@@ -684,6 +711,7 @@
                 </a>
             </div> --}}
             <!-- Card footer END -->
+            @endforeach
         </div>
         <!-- Card feed item END -->
 

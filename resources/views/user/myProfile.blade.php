@@ -12,22 +12,40 @@
                     <!-- My profile START -->
                     <div class="card">
                         <!-- Cover image -->
-                        <div class="h-200px rounded-top"
-                            style="background-image:url({{asset(default_bg_image())}}); background-position: center; background-size: cover; background-repeat: no-repeat;">
-                        </div>
+                        @if($client->cover_photo)
+                            <div class="h-200px rounded-top"
+                                style="background-image:url({{asset('public/uploads/client/' . $client->cover_photo)}}); background-position: center; background-size: cover; background-repeat: no-repeat;">
+                            </div>
+                        @else
+                            <div class="h-200px rounded-top"
+                                style="background-image:url({{asset(default_bg_image())}}); background-position: center; background-size: cover; background-repeat: no-repeat;">
+                            </div>
+                        @endif
                         <!-- Card body START -->
                         <div class="card-body py-0">
                             <div class="d-sm-flex align-items-start text-center text-sm-start">
                                 <div>
                                     <!-- Avatar -->
                                     <div class="avatar avatar-xxl mt-n5 mb-3">
+                                        @if($client->image)
                                         <img class="avatar-img rounded-circle border border-white border-3"
-                                            src="{{asset($client->image?$client->image:default_image())}}" alt="">
+                                            src="{{asset('public/uploads/client/' . $client->image)}}" alt="">
+                                        @else
+                                        <img class="avatar-img rounded-circle border border-white border-3"
+                                            src="{{asset('public/images/download.jpg')}}" alt="">
+                                        {{-- <img class="avatar-img rounded-circle border border-white border-3"
+                                            src="{{asset($client->image?$client->image:default_image())}}" alt=""> --}}
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="ms-sm-4 mt-sm-3">
                                     <!-- Info -->
-                                    <h1 class="mb-0 h5">{{$client->middle_name}} {{$client->last_name}}<i class="bi bi-patch-check-fill text-success small"></i>
+                                    <h1 class="mb-0 h5">{{$client->middle_name}} {{$client->last_name}}
+                                    @if($client->is_address_verified==1)
+                                        <i class="bi bi-patch-check-fill text-success small"></i>
+                                    @else
+                                        <i class="bi bi-patch-check-fill text-danger small"></i>
+                                    @endif
                                     </h1>
                                     {{-- <p>250 connections</p> --}}
                                 </div>
@@ -62,10 +80,19 @@
                             </div>
                             <!-- List profile -->
                             <ul class="list-inline mb-0 text-center text-sm-start mt-3 mt-sm-0">
-                                <li class="list-inline-item"><i class="bi bi-briefcase me-1"></i> Lead Developer</li>
-                                <li class="list-inline-item"><i class="bi bi-geo-alt me-1"></i> New Hampshire</li>
-                                <li class="list-inline-item"><i class="bi bi-calendar2-plus me-1"></i> Joined on Nov 26,
-                                    2019</li>
+                                <li class="list-inline-item"><i class="bi bi-briefcase me-1"></i>
+                                    {{$client->email}}
+                                    {{-- Lead Developer --}}
+                                </li>
+                                <li class="list-inline-item"><i class="bi bi-geo-alt me-1"></i>
+                                    {{$client->address_line_1}}
+                                    {{-- New Hampshire --}}
+                                </li>
+                                <li class="list-inline-item"><i class="bi bi-calendar2-plus me-1"></i>
+                                    Joined on {{ $client->created_at->format('M,Y')}}
+                                    {{-- Nov 26,
+                                    2019 --}}
+                                </li>
                             </ul>
                         </div>
                         <!-- Card body END -->
@@ -78,8 +105,18 @@
                         <div class="d-flex mb-3">
                             <!-- Avatar -->
                             <div class="avatar avatar-xs me-2">
-                                <a href="#"> <img class="avatar-img rounded-circle" src="{{asset($client->image?$client->image:default_image())}}"
-                                        alt=""> </a>
+                                <a href="#">
+                                 @if($client->image)
+                                    <img class="avatar-img rounded-circle"
+                                    src="{{asset('public/uploads/client/' . $client->image)}}" alt="">
+                                @else
+                                    <img class="avatar-img rounded-circle"
+                                    src="{{asset('public/images/download.jpg')}}" alt="">
+
+                                @endif
+                                 {{-- <img class="avatar-img rounded-circle" src="{{asset($client->image?$client->image:default_image())}}"
+                                        alt="">  --}}
+                                    </a>
                             </div>
                             <!-- Post input -->
                             <form class="w-100">
@@ -135,13 +172,24 @@
                     <!-- Card feed item START -->
                     <div class="card">
                         <!-- Card header START -->
+                        @foreach ($post as $value )
                         <div class="card-header border-0 pb-0">
                             <div class="d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <!-- Avatar -->
                                     <div class="avatar avatar-story me-2">
-                                        <a href="#!"> <img class="avatar-img rounded-circle"
-                                                src="{{asset($client->image?$client->image:default_image())}}" alt=""> </a>
+                                        <a href="#!">
+                                            @if($client->image)
+                                                <img class="avatar-img rounded-circle"
+                                                src="{{asset('public/uploads/client/' . $client->image)}}" alt="">
+                                            @else
+                                                <img class="avatar-img rounded-circle"
+                                                src="{{asset('public/images/download.jpg')}}" alt="">
+
+                                            @endif
+                                            {{-- <img class="avatar-img rounded-circle"
+                                                src="{{asset($client->image?$client->image:default_image())}}" alt=""> --}}
+                                            </a>
                                     </div>
                                     <!-- Info -->
                                     <div>
@@ -182,10 +230,12 @@
                         <!-- Card header END -->
                         <!-- Card body START -->
                         <div class="card-body">
-                            <p>I'm thrilled to share that I've completed a graduate certificate course in project management
+                            <p>{{$value->message}}
+                                I'm thrilled to share that I've completed a graduate certificate course in project management
                                 with the president's honor roll.</p>
                             <!-- Card img -->
-                            <img class="card-img" src="{{asset('public/user/assets/images/post/3by2/01.jpg')}}" alt="Post">
+                            <img class="card-img" src="{{asset('public/uploads/post/' . $value->image)}}" alt="Post">
+                            {{-- <img class="card-img" src="{{asset('public/user/assets/images/post/3by2/01.jpg')}}" alt="Post"> --}}
                             <!-- Feed react START -->
                             {{-- <ul class="nav nav-stack py-3 small">
                                 <li class="nav-item">
@@ -403,6 +453,7 @@
                             </a>
                         </div> --}}
                         <!-- Card footer END -->
+                        @endforeach
                     </div>
                     <!-- Card feed item END -->
 
@@ -539,12 +590,27 @@
                                         difficulty gay assistance joy.</p>
                                     <!-- Date time -->
                                     <ul class="list-unstyled mt-3 mb-0">
-                                        <li class="mb-2"> <i class="bi bi-calendar-date fa-fw pe-1"></i> Born: <strong>
-                                                October 20, 1990 </strong> </li>
+                                        <li class="mb-2"> <i class="bi bi-calendar-date fa-fw pe-1"></i> Born: <strong>{{ \Carbon\Carbon::parse($client->dob)->format('M-d-Y') }}</strong>
+                                        </li>
                                         <li class="mb-2"> <i class="bi bi-heart fa-fw pe-1"></i> Status: <strong> Single
-                                            </strong> </li>
-                                        <li> <i class="bi bi-envelope fa-fw pe-1"></i> Email: <strong> webestica@gmail.com
-                                            </strong> </li>
+                                            </strong>
+                                        </li>
+                                        <li>
+                                            <i class="bi bi-envelope fa-fw pe-1"></i> Email: <strong> {{$client->email}}
+                                            </strong>
+                                        </li>
+                                        <li>
+                                            <i class="bi bi-envelope fa-fw pe-1"></i> Contact: <strong> {{$client->contact_no}}
+                                            </strong>
+                                        </li>
+                                        <li>
+                                            <i class="bi bi-envelope fa-fw pe-1"></i> Address: <strong> {{$client->address_line_1}}
+                                            </strong>
+                                        </li>
+                                        <li>
+                                            <i class="bi bi-envelope fa-fw pe-1"></i> ID NO: <strong> {{$client->id_no}}
+                                            </strong>
+                                        </li>
                                     </ul>
                                 </div>
                                 <!-- Card body END -->
