@@ -4,7 +4,7 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <!-- Logo START -->
-            <a class="navbar-brand" href="index-2.html">
+            <a class="navbar-brand" href="{{route('clientdashboard')}}">
                 <img class="light-mode-item navbar-brand-item"
                     src="{{ asset('public/user/assets/images/logo.svg') }}" alt="logo">
                 <img class="dark-mode-item navbar-brand-item"
@@ -62,9 +62,9 @@
                     {{-- <li class="nav-item">
                         <a class="nav-link" href="">My network</a>
                     </li> --}}
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="{{ route('nfc_card.index') }}">NFC Card</a>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
             <!-- Main navbar END -->

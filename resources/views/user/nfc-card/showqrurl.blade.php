@@ -1,4 +1,4 @@
-@extends('user.layout.nfc')
+@extends('user.layout.base')
 @section('title', 'NFC Card Preview')
 @push('styles')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"

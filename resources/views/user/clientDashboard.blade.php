@@ -56,7 +56,7 @@
                                 <div class="hstack gap-2 gap-xl-3 justify-content-center">
                                     <!-- User stat item -->
                                     <div>
-                                        <h6 class="mb-0">256</h6>
+                                        <h6 class="mb-0">{{ $postCount}}</h6>
                                         <small>Post</small>
                                     </div>
                                     <!-- Divider -->
@@ -441,7 +441,7 @@
                             <div class="nav nav-divider">
                                 <h6 class="nav-item card-title mb-0"> <a href="#!">{{$client->fname}} {{$client->middle_name}} {{$client->last_name}}
                                     </a></h6>
-                                <span class="nav-item small"> 2hr</span>
+                                <span class="nav-item small">{{$value->created_at->diffForHumans()}}</span>
                             </div>
                             {{-- <p class="mb-0 small">Web Developer at Webestica</p> --}}
                         </div>

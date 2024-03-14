@@ -19,7 +19,8 @@ class ClientController extends Controller
     {
         $client = Client::find(currentUserId());
         $post = Post::where('client_id',currentUserId())->orderBy('created_at', 'desc')->get();
-        return view('user.clientDashboard', compact('client','post'));
+        $postCount = Post::where('client_id', currentUserId())->count();
+        return view('user.clientDashboard', compact('client','post','postCount'));
     }
     public function myProfile()
     {
