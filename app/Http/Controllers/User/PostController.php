@@ -31,34 +31,26 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        try{
-            // validate data
-        $request->validate([
-            'message' => 'required',
-            'file' => 'mimes:png,jpg,jpeg,gif|max:5000'
-        ]);
-         // create db entry
-         $post = Post::create([
-            'message' => $request->message,
-            'client_id' => currentUserId()
-        ]);
+     
         if($request->hasFile('image')){
             $imageName = rand(111,999).time().'.'.$request->image->extension();
             $request->image->move(public_path('uploads/post'), $imageName);
-            $post->image=$imageName;
+        }else{
+            $imageName = '';
         }
+         // create db entry
+         $post = Post::create([
+            'message' => $request->message,
+            'image'=>$imageName,
+            'client_id' => currentUserId()
+        ]);
+        
+        return response()->json($post);
       
 
         
-            if($post->save()){
-                $this->notice::success('Your Post Successfully created');
-                return redirect()->route('clientdashboard');
-            }
-        }catch(Exception $e){
-            // dd($e);
-            $this->notice::error('Something Wrong! Please try again');
-            return redirect()->back()->withInput();
-        }
+          
+         
     }
 
     /**
@@ -90,6 +82,6 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post = Post::findOrFail
+        
     }
 }

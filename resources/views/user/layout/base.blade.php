@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="">
     <meta name="description" content="Social Media Network and Community">
-
     <!-- Dark mode -->
     <script>
         const storedTheme = localStorage.getItem('theme')
@@ -1088,7 +1087,74 @@
 
     <!-- =======================
 JS libraries, plugins and custom scripts -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+    
+    $(document).ready(function() {
+        // Initialize Dropzone
+        var myDropzone = new Dropzone("#postDropzone", {
+            url: "{{ route('post.store') }}",
+            paramName: 'image',
+            maxFilesize: 5,
+            maxFiles: 1,
+            acceptedFiles: 'image/*',
+            addRemoveLinks: true,
+            autoProcessQueue: false,
+            headers: {
+        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+    }
+        });
+        $("#submitBtn").on('click', function() {
+             // Check if Dropzone has files
+             if (myDropzone.getQueuedFiles().length > 0) {
+                myDropzone.processQueue(); // Process Dropzone queue
+            } else {
+                submitForm(); // Submit form if no files are selected
+            }
+        });
+        // Handle form submission
+        function submitForm() {
+                var formData = new FormData($("#formSubmit")[0]);
+                // Append CSRF token to form data
+                formData.append('_token', '{{ csrf_token() }}');
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('post.store') }}", // Change this URL to your Laravel route
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        // Handle success response
+                        console.log(response);
+                        // Optionally, close the modal
+                        $('#feedActionPhoto').modal('hide');
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error response
+                        console.error(xhr.responseText);
+                        // Display error message to the user
+                        alert("Error: " + xhr.responseText);
+                    }
+                });
+            }
+            // Handle Dropzone success event
+        myDropzone.on('success', function(file, response) {
+            // Optionally, you can handle success event for Dropzone here
+            console.log(response);
+            // Optionally, close the modal
+            $('#feedActionPhoto').modal('hide');
+        });
 
+        // Handle Dropzone error event
+        myDropzone.on('error', function(file, errorMessage) {
+            // Optionally, you can handle error event for Dropzone here
+            console.error(errorMessage);
+            // Display error message to the user
+            alert("Error: " + errorMessage);
+        });
+
+    });
+</script>
     <!-- Bootstrap JS -->
     <script src="{{ asset('public/user/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 
@@ -1102,11 +1168,10 @@ JS libraries, plugins and custom scripts -->
     <script src="{{ asset('public/user/assets/vendor/dropzone/dist/min/dropzone.min.js') }}"></script>
     <script src="{{ asset('public/user/assets/vendor/zuck.js/dist/zuck.min.js') }}"></script>
     <script src="{{ asset('public/user/assets/js/zuck-stories.js') }}"></script>
-    <script src="{{ asset('public/user/assets/vendor/pswmeter/pswmeter.min.js') }}"></script>
 
     <!-- Theme Functions -->
     <script src="{{ asset('public/user/assets/js/functions.js') }}"></script>
-    
+
     @stack('scripts')
 </body>
 

@@ -324,18 +324,24 @@
                               <!-- Title START -->
                               <div class="card-body">
                                 <!-- Settings START -->
-                                <form class="row g-3">
+                                <form class="row g-3" action="{{ route('change_password') }}" method="post">
+                                @csrf
                                   <!-- Current password -->
                                   <div class="col-12">
                                     <label class="form-label">Current password</label>
-                                    <input type="text" class="form-control" placeholder="">
+                                    <input type="text" class="form-control" placeholder="" name="current_password">
+                                    @if ($errors->has('current_password'))
+                                        <small class="d-block text-danger">
+                                            {{ $errors->first('current_password') }}
+                                        </small>
+                                    @endif
                                   </div>
                                   <!-- New password -->
                                   <div class="col-12">
                                     <label class="form-label">New password</label>
                                     <!-- Input group -->
                                     <div class="input-group">
-                                      <input class="form-control fakepassword" type="password" id="psw-input" placeholder="Enter new password">
+                                      <input class="form-control fakepassword" type="password" name="password" required id="psw-input" placeholder="Enter new password">
                                       <span class="input-group-text p-0">
                                         <i class="fakepasswordicon fa-solid fa-eye-slash cursor-pointer p-2 w-40px"></i>
                                       </span>
@@ -347,7 +353,7 @@
                                   <!-- Confirm password -->
                                   <div class="col-12">
                                     <label class="form-label">Confirm password</label>
-                                    <input type="text" class="form-control" placeholder="">
+                                    <input type="text" class="form-control" placeholder="" name="password_confirmation" required>
                                   </div>
                                   <!-- Button  -->
                                   <div class="col-12 text-end">
