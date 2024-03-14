@@ -48,6 +48,7 @@
                         <ul class="dropdown-menu" aria-labelledby="postMenu">
                             <li> <a class="dropdown-item" href="{{route('myProfile')}}">Profile</a></li>
                             <li> <a class="dropdown-item" href="{{route('myProfileAbout')}}">About</a></li>
+                            <li> <a class="dropdown-item" href="{{route('order.index')}}">Order</a></li>
                             <!-- dropdown submenu open left -->
                             {{-- <li class="dropdown-submenu dropstart">
                                 <a class="dropdown-item dropdown-toggle" href="#">Drop child</a>
@@ -65,6 +66,19 @@
                     {{-- <li class="nav-item">
                         <a class="nav-link" href="{{ route('nfc_card.index') }}">NFC Card</a>
                     </li> --}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('phonegroup.index') }}">Phone Group</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('phonebook.index') }}">Phone Book</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('company.index') }}">Company</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('bank.index') }}">Bank</a>
+                    </li>
+
                 </ul>
             </div>
             <!-- Main navbar END -->

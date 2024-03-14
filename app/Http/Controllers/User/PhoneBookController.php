@@ -18,9 +18,10 @@ class PhoneBookController extends Controller
      */
     public function index()
     {
-        $phonegroup = PhoneGroup::get();
+        $client = Client::find(currentUserId());
+        $phonegroup = PhoneGroup::where('client_id',currentUserId())->get();
         $phonebook = PhoneBook::where('client_id',currentUserId())->get();
-        return view('user.phonebook.index',compact('phonebook','phonegroup'));
+        return view('user.phonebook.index',compact('phonebook','phonegroup','client'));
     }
 
     /**
@@ -28,7 +29,7 @@ class PhoneBookController extends Controller
      */
     public function create()
     {
-        $phonegroup = PhoneGroup::get();
+        $phonegroup = PhoneGroup::where('client_id',currentUserId())->get();
         return view('user.phonebook.create',compact('phonegroup'));
     }
 
@@ -68,10 +69,11 @@ class PhoneBookController extends Controller
      */
     public function edit($id)
     {
-        $phonegroup = PhoneGroup::get();
-        
+        $data = PhoneBook::where('client_id',currentUserId())->get();
+        $client = Client::find(currentUserId());
+        $phonegroup = PhoneGroup::where('client_id',currentUserId())->get();
         $phonebook = PhoneBook::findOrFail(encryptor('decrypt',$id));
-        return view('user.phonebook.edit',compact('phonebook','phonegroup'));
+        return view('user.phonebook.edit',compact('phonebook','phonegroup','data','client'));
     }
 
     /**
@@ -110,10 +112,10 @@ class PhoneBookController extends Controller
     }
     public function downloadPhonebook()
     {
-        $phonebookData = PhoneBook::where('client_id', currentUserId())->get(); 
+        $phonebookData = PhoneBook::where('client_id', currentUserId())->get();
         // $csv = "";
         $csv = mb_convert_encoding("", 'UTF-8', 'UTF-8');
-        $csv .= mb_convert_encoding(implode(',', array('Name', 'Contact No', 'E-mail','Given Name',	'Additional Name','Family Name', 'Yomi Name', 'Given Name Yomi', 'Additional Name Yomi',' Family Name Yomi', 'Name Prefix',	'Name Suffix',	'Initials',	'Nickname',	'Short Name', 'Maiden Name',	'Birthday',	'Gender',	'Location', 'Billing Information',	'Directory Server',	'Mileage','Occupation',	'Hobby', 'Sensitivity', 'Priority', 'Subject', 'Notes', 'Language',	'Photo','Group Membership',	'Phone 1 - Type',	
+        $csv .= mb_convert_encoding(implode(',', array('Name', 'Contact No', 'E-mail','Given Name',	'Additional Name','Family Name', 'Yomi Name', 'Given Name Yomi', 'Additional Name Yomi',' Family Name Yomi', 'Name Prefix',	'Name Suffix',	'Initials',	'Nickname',	'Short Name', 'Maiden Name',	'Birthday',	'Gender',	'Location', 'Billing Information',	'Directory Server',	'Mileage','Occupation',	'Hobby', 'Sensitivity', 'Priority', 'Subject', 'Notes', 'Language',	'Photo','Group Membership',	'Phone 1 - Type',
         )),'UTF-8', 'UTF-8') . "\n"; // Headers
         foreach ($phonebookData as $row) {
             $csv .= implode(',', array(

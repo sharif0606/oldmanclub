@@ -96,7 +96,7 @@ class CheckOutController extends Controller
             $this->notice::error('Something wrong! Please try again');
             return redirect()->back()->withInput();
         }
-        
+
     }
     function generateOrderTrackingNumber()
     {

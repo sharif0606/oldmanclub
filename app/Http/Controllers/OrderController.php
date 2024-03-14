@@ -14,8 +14,9 @@ class OrderController extends Controller
      */
     public function index()
     {
+        $client = Client::find(currentUserId());
         $order = Order::where('client_id',currentUserID())->get();
-        return view('user.order.index',compact('order'));
+        return view('user.order.index',compact('order','client'));
     }
 
     /**
@@ -38,7 +39,7 @@ class OrderController extends Controller
             return redirect()->route('order.index');
         }
     }
-    
+
     public function create()
     {
         //
