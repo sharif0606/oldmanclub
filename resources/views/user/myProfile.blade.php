@@ -586,8 +586,8 @@
                                 </div>
                                 <!-- Card body START -->
                                 <div class="card-body position-relative pt-0">
-                                    <p>He moonlights difficult engrossed it, sportsmen. Interested has all Devonshire
-                                        difficulty gay assistance joy.</p>
+                                    {{-- <p>He moonlights difficult engrossed it, sportsmen. Interested has all Devonshire
+                                        difficulty gay assistance joy.</p> --}}
                                     <!-- Date time -->
                                     <ul class="list-unstyled mt-3 mb-0">
                                         <li class="mb-2"> <i class="bi bi-calendar-date fa-fw pe-1"></i> Born: <strong>{{ \Carbon\Carbon::parse($client->dob)->format('M-d-Y') }}</strong>
@@ -595,20 +595,20 @@
                                         <li class="mb-2"> <i class="bi bi-heart fa-fw pe-1"></i> Status: <strong> Single
                                             </strong>
                                         </li>
-                                        <li>
+                                        <li class="mb-2">
                                             <i class="bi bi-envelope fa-fw pe-1"></i> Email: <strong> {{$client->email}}
                                             </strong>
                                         </li>
-                                        <li>
-                                            <i class="bi bi-envelope fa-fw pe-1"></i> Contact: <strong> {{$client->contact_no}}
+                                        <li class="mb-2">
+                                            <i class="bi bi-phone fa-fw pe-1"></i> Contact: <strong> {{$client->contact_no}}
                                             </strong>
                                         </li>
-                                        <li>
-                                            <i class="bi bi-envelope fa-fw pe-1"></i> Address: <strong> {{$client->address_line_1}}
+                                        <li class="mb-2">
+                                            <i class="bi bi-house fa-fw pe-1"></i> Address: <strong> {{$client->address_line_1}}
                                             </strong>
                                         </li>
-                                        <li>
-                                            <i class="bi bi-envelope fa-fw pe-1"></i> ID NO: <strong> {{$client->id_no}}
+                                        <li class="mb-2">
+                                            <i class="bi bi-card-text fa-fw pe-1"></i> ID NO: <strong> {{$client->id_no}}
                                             </strong>
                                         </li>
                                     </ul>

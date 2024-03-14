@@ -9,7 +9,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Post extends Model
 {
     use HasFactory , SoftDeletes;
-
+    protected $fillable = [
+        'message',
+        'client_id',
+        'image',
+    ];
     public function client(){
         return $this->belongsTo(Client::class ,'client_id','id');
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Nfc;
 
+use App\Models\User\Client;
 use App\Models\Backend\NfcCard;
 use App\Models\Backend\NfcField;
 use App\Models\Backend\NfcDesign;
@@ -21,7 +22,8 @@ class NfcCardController extends Controller
     public function index()
     {
         $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id',currentUserId())->paginate(10);
-        return view('user.nfc-card.index', compact('nfc_cards'));
+        $client = Client::find(currentUserId());
+        return view('user.nfc-card.index', compact('nfc_cards','client'));
     }
 
     /**
@@ -30,7 +32,8 @@ class NfcCardController extends Controller
     public function create()
     {
         $nfc_fields = NfcField::all();
-        return view('user.nfc-card.create', compact('nfc_fields'));
+        $client = Client::find(currentUserId());
+        return view('user.nfc-card.create', compact('nfc_fields','client'));
     }
 
     /**
@@ -111,8 +114,9 @@ class NfcCardController extends Controller
      */
     public function show($id)
     {
+        $client = Client::find(currentUserId());
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
-        return view('user.nfc-card.show', compact('nfc_card'));
+        return view('user.nfc-card.show', compact('nfc_card','client'));
     }
 
     /**
@@ -120,10 +124,11 @@ class NfcCardController extends Controller
      */
     public function edit($id)
     {
+        $client = Client::find(currentUserId());
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
         $nfc_info = NfcInformation::find($id);
         $nfc_fields = NfcField::all();
-        return view('user.nfc-card.edit', compact('nfc_fields', 'nfc_card', 'nfc_info'));
+        return view('user.nfc-card.edit', compact('nfc_fields', 'nfc_card', 'nfc_info','client'));
     }
 
     /**
@@ -208,8 +213,9 @@ class NfcCardController extends Controller
     }
     public function showqrurl($id)
     {
+        $client = Client::find(currentUserId());
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
-        return view('user.nfc-card.showqrurl', compact('nfc_card'));
+        return view('user.nfc-card.showqrurl', compact('nfc_card','client'));
     }
     public function save_contact($id)
     {
