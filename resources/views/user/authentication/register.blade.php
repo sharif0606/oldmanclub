@@ -58,7 +58,7 @@
                              <!-- <p class="text-center text-primary fs-4 fw-bolder"><img src="{{asset('public/images/Group1301.png')}}" alt="" class="img-fluid"></p> -->
                             <p class="text-center mb-3 text-dark fw-bold mb-0">Create an account to get started!</p>
                         </div>
-                       
+
                         <div class="col-sm-6 col-md-4 form-group pb-0">
                             <input type="text" class="form-control rounded p-2" name="fname"
                                 value="{{ old('fname') }}" id="fname" placeholder="Your First Name">
@@ -107,7 +107,10 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <input type="password" class="form-control rounded" id="password" name="password" placeholder="Password">
-                                <button type="button" class="button rounded" id="togglePassword"><i class="fa fa-eye"></i></button>
+                                <span class="input-group-text p-0" id="togglePassword">
+                                    <i class="fakepasswordicon fa-solid fa-eye-slash cursor-pointer px-1 w-40px"></i>
+                                </span>
+                                {{-- <button type="button" class="button rounded" id="togglePassword"><i class="fa fa-eye"></i></button> --}}
                             </div>
                             @if ($errors->has('password'))
                                 <small class="d-block text-danger fw-bold">
@@ -118,7 +121,10 @@
                         <div class="form-group">
                            <div class="input-group">
                                 <input type="password" class="form-control rounded" id="password_confirmation" name="password_confirmation" placeholder="confirm password">
-                                <button type="button" class="button rounded" id="toggleConfirmPassword"><i class="fa fa-eye"></i></button>
+                                <span class="input-group-text p-0" id="toggleConfirmPassword">
+                                    <i class="fakepasswordicon fa-solid fa-eye-slash cursor-pointer px-1 w-40px"></i>
+                                </span>
+                                {{-- <button type="button" class="button rounded" id="toggleConfirmPassword"><i class="fa fa-eye"></i></button> --}}
 						    </div>
                         </div>
                         {{-- <div class="form-group">
@@ -139,7 +145,7 @@
                         <button class="btn btn-primary rounded px-5 fw-bold" type="submit">SignUp</button>
                     </div>
                     {{-- <button type="button" class="btn btn-danger next-step float-end">Next <i class="fa-solid fa-arrow-right"></i></button> --}}
-                    
+
                     {{-- <div class="tab-pane fade" id="step-3" role="tabpanel" aria-labelledby="step-3-tab">
                         <button type="button" class="btn btn-primary prev-step"><i class="fa-solid fa-arrow-left"></i> Back</button>
                         <div>
@@ -242,11 +248,11 @@
                             </div>
                         </div>
                     </div> --}}
-                    
+
             </form>
              <p class="mb-0 text-center mt-3 text-dark fw-bold">Already have an account? <a href="{{ route('clientlogin') }}" class="text-primary">Sign In</a>
             </p>
-            
+
         </div>
     </div>
 
@@ -257,7 +263,8 @@
 		togglePassButton.addEventListener('click', function(){
 			const newType = inputPass.type === 'password'?'text':'password';
 			inputPass.type = newType;
-			togglePassButton.querySelector('i').classList.toggle('fa-solid fa-eye-slash')
+			togglePassButton.querySelector('i').classList.toggle('fa-eye-slash')
+			togglePassButton.querySelector('i').classList.toggle('fa-eye')
 		});
     // show/hede confirm password
 		const toggleConfirmPassButton = document.getElementById('toggleConfirmPassword');
@@ -265,7 +272,8 @@
 		toggleConfirmPassButton.addEventListener('click', function(){
 			const newType = inputConfirmPass.type === 'password'?'text':'password';
 			inputConfirmPass.type = newType;
-			toggleConfirmPassButton.querySelector('i').classList.toggle('fa-solid fa-eye-slash')
+			toggleConfirmPassButton.querySelector('i').classList.toggle('fa-eye-slash')
+			toggleConfirmPassButton.querySelector('i').classList.toggle('fa-eye')
 		});
     //Checked Terms of Condition & Policy
         const signupForm = document.getElementById('signupForm');
