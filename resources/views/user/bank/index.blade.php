@@ -11,7 +11,7 @@
 </style>
 <div class="row">
     <div class="col-12">
-        <div class="card">
+        <div class="card p-5">
             <h5 class="text-center">Bank List</h5>
             <div class="table-responsive">
                 <a class="pull-right px-2 fs-4" href="{{route('bank.create')}}"><i class="fa fa-plus"></i></a>

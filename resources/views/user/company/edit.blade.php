@@ -3,8 +3,9 @@
 @section('content')
 <div class="row">
     <div class="col-12">
-        <div class="card">
+        <div class="card p-5">
             <div class="card-content">
+                <h4 class="text-center">Add A New Company Information</h4>
                 <div class="card-body">
                     <form class="form" method="post" enctype="multipart/form-data" action="{{route('company.update',encryptor('encrypt',$company->id))}}">
                         @csrf

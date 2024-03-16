@@ -49,6 +49,8 @@
                             <li> <a class="dropdown-item" href="{{route('myProfile')}}">Profile</a></li>
                             <li> <a class="dropdown-item" href="{{route('myProfileAbout')}}">About</a></li>
                             <li> <a class="dropdown-item" href="{{route('order.index')}}">Order</a></li>
+                            <li> <a class="dropdown-item" href="{{route('shipping.index')}}">Shipping</a></li>
+                            <li> <a class="dropdown-item" href="{{route('inbox')}}">Email</a></li>
                             <!-- dropdown submenu open left -->
                             {{-- <li class="dropdown-submenu dropstart">
                                 <a class="dropdown-item dropdown-toggle" href="#">Drop child</a>

@@ -3,7 +3,7 @@
 @section('content')
 <style>
     table{
-        background-color: white;
+        /* background-color: white; */
     }
     .anchor{
         float:right;
@@ -11,9 +11,10 @@
 </style>
 <div class="row">
     <div class="col-12">
-        <div class="card">
-            <p class="fs-4 text-center">Company List</p>
+        <div class="card p-5">
+
             <div class="table-responsive">
+                <span class="fs-4">Company List</span>
                 <a class="anchor px-2 fs-4" href="{{route('company.create')}}"><i class="fa fa-plus"></i></a>
             </div>
             <!-- table bordered -->
@@ -34,7 +35,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($company as $value)
+                        @forelse($companys as $value)
                         <tr>
                             <th scope="row">{{ ++$loop->index }}</th>
                             <td>{{$value->qrcode}}</td>

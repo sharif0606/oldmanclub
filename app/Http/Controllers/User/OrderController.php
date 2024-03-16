@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\User\Client;
 use App\Models\Common\CartItem;
@@ -15,7 +16,7 @@ class OrderController extends Controller
     public function index()
     {
         $client = Client::find(currentUserId());
-        $order = Order::where('client_id',currentUserID())->get();
+        $order = Order::where('client_id',currentUserId())->get();
         return view('user.order.index',compact('order','client'));
     }
 
