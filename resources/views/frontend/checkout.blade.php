@@ -118,8 +118,8 @@
                                     <option value="1" selected>Home</option>
                                 </select>
                             </div>
-                        </div> 
-                        <div class="col-sm-6">   
+                        </div>
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="name">Address<i class="text-danger">*</i></label>
                                 <textarea class="form-control" name="address" rows="5" required></textarea>

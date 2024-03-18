@@ -3,18 +3,74 @@
 @section('content')
 <!-- Bordered table start -->
 <style>
-    .card{
-        bac
+    .add{
+        float: right;
     }
 </style>
-<div class="row">
+<main>
+  <!-- Container START -->
+    <div class="container">
+        <div class="row g-4">
+        <!-- Main content START -->
+            <div class="col-lg-10 mx-auto">
+                <div class="bg-mode p-4">
+                    <div class="compose-content">
+                        <div class="table-responsive">
+                            <div>
+                                <span class="fs-4">
+                                    Group List
+                                </span>
+                                <a class="fs-5 add" href="{{route('phonegroup.create')}}" data-toggle="modal" data-target="#phonegroupModal"><i class="fa fa-plus"></i></a>
+                            </div>
+                            <table class="table table-striped mb-0" id="phone_book">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">{{__('#SL')}}</th>
+                                        <th scope="col">{{__('Group Name')}}</th>
+                                        <th class="white-space-nowrap">{{__('Action') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse($phonegroup as $p)
+                                    <tr>
+                                        <th scope="row">{{ ++$loop->index }}</th>
+                                        <td>{{$p->group_name}}</td>
+                                        <td class="white-space-nowrap">
+                                            <a href="{{route('phonegroup.edit',encryptor('encrypt',$p->id))}}" class="text-warning">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+
+                                            <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()" class="text-danger">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                            <form id="form{{$p->id}}" action="{{route('phonegroup.destroy',encryptor('encrypt',$p->id))}}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @empty
+                                    <tr>
+                                        <th colspan="8" class="text-center">No Pruduct Found</th>
+                                    </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{{--  <div class="row">
     <div class="col-6">
         <div class="card">
             <!-- table bordered -->
             <div class="table-responsive">
                 <div>
                     <h3 class="text-center">Phone Group</h3>
-                    {{-- <a class="pull-right fs-5" href="{{route('phonegroup.create')}}" data-toggle="modal" data-target="#phonegroupModal"><i class="fa fa-plus"></i></a> --}}
+                    <a class="pull-right fs-5" href="{{route('phonegroup.create')}}" data-toggle="modal" data-target="#phonegroupModal"><i class="fa fa-plus"></i></a>
                 </div>
                 <table class="table table-striped mb-0" id="phone_book">
                     <thead>
@@ -66,7 +122,7 @@
             </form>
         </div>
     </div>
-    {{-- <div class="modal fade" id="phonegroupModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="phonegroupModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content rounded-0 border-0 p-4">
                 <div class="modal-header border-0">
@@ -90,7 +146,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
-</div>
+    </div>
+</div>  --}}
 @endsection
 

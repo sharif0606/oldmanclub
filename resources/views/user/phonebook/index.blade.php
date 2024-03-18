@@ -1,8 +1,95 @@
 @extends('user.layout.base')
 @section('title','Phonebook')
 @section('content')
+<style>
+    .button{
+        float: right;
+
+    }
+    .paginate{
+        float: right;
+    }
+</style>
 <!-- Bordered table start -->
-<div class="row">
+<main>
+  <!-- Container START -->
+  <div class="container">
+    <div class="row g-4">
+      <!-- Main content START -->
+      <div class="col-lg-12">
+        <div class="bg-mode p-4">
+            <div class="compose-content">
+                <div class="table-responsive">
+                    <div class="mb-2 ">
+                        <span class="fs-4">
+                            Contact List
+                        </span>
+                        <p class="button">
+                            <a href="#" id="downloadVCard" class="fs-5 mx-2 text-success"><i class="fa fa-address-card"></i></a>
+                            {{--  <button id="downloadVCard"><i class="fa fa-address-card text-info"></i>
+                            </button>  --}}
+                            <!-- Inside your blade file -->
+
+                            <a href="{{ route('phonebook_download') }}" class="fs-5 mx-2 text-success" download>
+                                <i class="fa fa-download"></i>
+                            </a>
+                            <a class="pull-right fs-5" href="{{route('phonebook.create')}}" data-toggle="modal" data-target="#phonecreatModal"><i class="fa fa-plus"></i></a>
+                        </p>
+
+                    </div>
+                    <table class="table table-striped table-hover mb-0" id="phone_book">
+                        <thead>
+                            <tr>
+                                <th scope="col">{{__('#SL')}}</th>
+                                <th scope="col">{{__('Name')}}</th>
+                                <th scope="col">{{__('Group')}}</th>
+                                <th scope="col">{{__('Contact No')}}</th>
+                                <th scope="col">{{__('E-mail')}}</th>
+                                <th class="white-space-nowrap">{{__('Action') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($phonebook as $p)
+                            <tr>
+                                <th scope="row">{{ ++$loop->index }}</th>
+                                <td>{{$p->name_en}}</td>
+                                <td>{{$p->phonegroup?->group_name}}</td>
+                                <td>{{$p->contact_en}}</td>
+                                <td>{{$p->email}}</td>
+                                <td class="white-space-nowrap">
+                                    <a href="{{route('phonebook.edit',encryptor('encrypt',$p->id))}}" class="text-warning">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+
+                                    <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()" class="text-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                    <form id="form{{$p->id}}" action="{{route('phonebook.destroy',encryptor('encrypt',$p->id))}}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                    </form>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <th colspan="8" class="text-center">No Pruduct Found</th>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                    <div class="paginate pt-3">
+                        {{ $phonebook->links() }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Container END -->
+</main>
+{{--  <div class="row">
     <div class="col-7">
         <div class="card">
             <h3 class="text-center m-0">Phone Book</h3>
@@ -127,7 +214,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>  --}}
 <script>
     document.getElementById('downloadVCard').addEventListener('click', function() {
 

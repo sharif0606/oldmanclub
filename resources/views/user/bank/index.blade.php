@@ -10,15 +10,16 @@
     }
 </style>
 <div class="row">
-    <div class="col-12">
-        <div class="card p-5">
-            <h5 class="text-center">Bank List</h5>
+    <div class="col-10 mx-auto">
+        <div class="card py-4 px-2">
+            {{--  <h5 class="text-center">Bank List</h5>  --}}
             <div class="table-responsive">
+                <span class="fs-4">Bank List</span>
                 <a class="pull-right px-2 fs-4" href="{{route('bank.create')}}"><i class="fa fa-plus"></i></a>
             </div>
             <!-- table bordered -->
             <div class="table-responsive">
-                <table class="table table-striped table-bordered mb-0" id="bank">
+                <table class="table table-striped  mb-0" id="bank">
                     <thead>
                         <tr>
                             <th scope="col">{{__('#SL')}}</th>
@@ -29,10 +30,10 @@
                             <th scope="col">{{__('SWIFT Code')}}</th>
                             <th scope="col">{{__('Email')}}</th>
                             <th scope="col">{{__('Contact No')}}</th>
-                            <th scope="col">{{__('SWIFT Code')}}</th>
-                            <th scope="col">{{__('Address')}}</th>
+                            {{--  <th scope="col">{{__('Address')}}</th>
                             <th scope="col">{{__('City')}}</th>
                             <th scope="col">{{__('State')}}</th>
+                            <th scope="col">{{__('Zip Code')}}</th>  --}}
                             <th scope="col">{{__('Status')}}</th>
                             <th class="white-space-nowrap">{{__('Action') }}</th>
                         </tr>
@@ -49,16 +50,16 @@
                             <td>{{$value->swift_code}}</td>
                             <td>{{$value->email}}</td>
                             <td>{{$value->contact_no}}</td>
-                            <td>{{$value->address}}</td>
+                            {{--  <td>{{$value->address}}</td>
                             <td>{{$value->city}}</td>
                             <td>{{$value->state}}</td>
-                            <td>{{$value->zip_code}}</td>
+                            <td>{{$value->zip_code}}</td>  --}}
                             <td style="color: @if($value->status==1) #FFC107 @elseif($value->status==2) #15CE73 @elseif($value->status==3) red @endif; font-weight:bold;">
                                 {{ $value->status == 1 ? __('Pending') : ($value->status == 2 ? __('Accepted') : __('Rejected')) }}
                             </td>
                             <td class="white-space-nowrap">
 
-                                <a href="{{route('bank.edit',encryptor('encrypt',$value->id))}}">
+                                <a href="{{route('bank.edit',encryptor('encrypt',$value->id))}}" class="text-warning">
                                     <i class="fa fa-edit"></i>
                                 </a>
                                 <a href="{{route('bank.show',encryptor('encrypt',$value->id))}}" class="">

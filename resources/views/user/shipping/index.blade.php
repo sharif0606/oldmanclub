@@ -12,13 +12,13 @@
 <!-- Bordered table start -->
 <div class="row">
     <div class="col-12">
-        <div class="card">
+        <div class="card p-4">
             <!-- table bordered -->
             <div class="table-responsive">
                 <div>
                     <a class="anchor pull-right fs-5 px-2 " href="{{route('shipping.create')}}"><i class="fa fa-plus"></i></a>
                 </div>
-                <table class="table table-bordered mb-0" id="phone_book">
+                <table class="table table-bordered table-striped mb-0" id="phone_book">
                     <thead>
                         <tr>
                             <th scope="col">{{__('#SL')}}</th>

@@ -2,7 +2,7 @@
 @section('title','Phonebook')
 @section('content')
     <div class="row">
-        <div class="col-6">
+        {{--  <div class="col-6">
             <div class="card">
                 <!-- table bordered -->
                 <div class="table-responsive">
@@ -58,9 +58,10 @@
                     </table>
                 </div>
             </div>
-        </div>
-        <div class="col-6 card">
+        </div>  --}}
+        <div class="col-sm-6 mx-auto card">
             <div class="card-body">
+                <p class="fs-4 text-center">Update Contact</p>
                 <form action="{{route('phonebook.update',encryptor('encrypt',$phonebook->id))}}" method="post" class="row">
                     @csrf
                     @method('Patch')

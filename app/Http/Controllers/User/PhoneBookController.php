@@ -20,7 +20,7 @@ class PhoneBookController extends Controller
     {
         $client = Client::find(currentUserId());
         $phonegroup = PhoneGroup::where('client_id',currentUserId())->get();
-        $phonebook = PhoneBook::where('client_id',currentUserId())->get();
+        $phonebook = PhoneBook::where('client_id',currentUserId())->paginate(3);
         return view('user.phonebook.index',compact('phonebook','phonegroup','client'));
     }
 
@@ -29,8 +29,9 @@ class PhoneBookController extends Controller
      */
     public function create()
     {
+        $client = Client::find(currentUserId());
         $phonegroup = PhoneGroup::where('client_id',currentUserId())->get();
-        return view('user.phonebook.create',compact('phonegroup'));
+        return view('user.phonebook.create',compact('phonegroup','client'));
     }
 
     /**

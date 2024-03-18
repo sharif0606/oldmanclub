@@ -2,19 +2,19 @@
 @section('title','Order List')
 @section('content')
 <div class="row">
-    <div class="col-12">
-        <div class="card">
+    <div class="col-10 mx-auto">
+        <div class="card p-4">
             <!-- table bordered -->
             <div class="table-responsive">
                 <div>
                 </div>
-                <table class="table table-bordered mb-0" id="phone_book">
+                <table class="table table-bordered table-striped mb-0" id="phone_book">
                     <thead>
                         <tr>
                             <th scope="col">{{__('#SL')}}</th>
                             <th scope="col">{{__('Tracking No')}}</th>
                             <th scope="col">{{__('User Name')}}</th>
-                            <th scope="col">{{__('Shipping Name')}}</th>
+                            <th scope="col">{{__('Shipping Address')}}</th>
                             <th scope="col">{{__('Tax')}}</th>
                             <th scope="col">{{__('Total')}}</th>
                             <th scope="col">{{__('Discount')}}</th>

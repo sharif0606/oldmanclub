@@ -11,7 +11,7 @@
 </style>
 <div class="row">
     <div class="col-12">
-        <div class="card p-5">
+        <div class="card py-4 px-2">
 
             <div class="table-responsive">
                 <span class="fs-4">Company List</span>
@@ -35,7 +35,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($companys as $value)
+                        @forelse($company as $value)
                         <tr>
                             <th scope="row">{{ ++$loop->index }}</th>
                             <td>{{$value->qrcode}}</td>
@@ -51,7 +51,7 @@
                             </td>
                             <td class="white-space-nowrap">
                                 @if($value->status==1)
-                                    <a href="{{route('company.edit',encryptor('encrypt',$value->id))}}">
+                                    <a href="{{route('company.edit',encryptor('encrypt',$value->id))}}" class="text-warning">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                     <a href="{{route('company.show',encryptor('encrypt',$value->id))}}" class="">

@@ -24,8 +24,8 @@ class PhoneGroupController extends Controller
      */
     public function create()
     {
-        
-        return view('user.phonegroup.create');
+        $client = Client::find(currentUserId());
+        return view('user.phonegroup.create',compact('client'));
     }
 
     /**

@@ -11,7 +11,7 @@
                         <input type="file" name="sample_image" id="" class="form-control">
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-primary mt-2">Update</button>
                     </div>
                 </div>
             </form>

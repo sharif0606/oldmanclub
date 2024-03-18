@@ -25,8 +25,9 @@ class OrderController extends Controller
      */
 
     public function order_edit(Request $request, $id){
+        $client = Client::find(currentUserId());
         $order = Order::where('cart_id',$id)->first();
-        return view('user.order.edit',compact('order'));
+        return view('user.order.edit',compact('order','client'));
     }
     public function order_update(Request $request, $id){
         $cartItem = CartItem::where('cart_id',$id)->first();
