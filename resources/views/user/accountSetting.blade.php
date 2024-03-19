@@ -373,10 +373,8 @@
                             <div class="card">
                                 <!-- Card header START -->
                                 <div class="card-header border-0 pb-0">
-                                    <h3 class="card-title text-center">Upload Your Document for Account verification</h3>
-                                    <p class="mb-0">Tried law yet style child. The bore of true of no be deal. Frequently
-                                        sufficient to be unaffected. The furnished she concluded depending procuring
-                                        concealed. </p>
+                                    <h1 class="h5 card-title">Upload Your Document for Account verification</h1>
+                                    <p class="mb-0">
                                 </div>
                                 <!-- Card header START -->
                                 <!-- Card body START -->
@@ -385,14 +383,14 @@
                                         enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
-                                            <label for="id_image" class="fw-bold mb-2">Upload Your ID:</label>
+                                            <label for="id_image" class="mb-2">Upload Your ID:</label>
                                             <input type="file" id="id_image" class="form-control" name="id_image"
                                                 required>
                                             <img id="preview_photo_id" src="#" alt="preview_photo_id"
                                                 style="display: none; max-width: 100px;">
                                         </div>
                                         <div class="form-group">
-                                            <label for="documents" class="fw-bold mb-2">Upload Documents (jpg, png, pdf,
+                                            <label for="documents" class="mb-2">Upload Documents (jpg, png, pdf,
                                                 doc):</label>
                                             <input type="file" id="document" class="form-control" name="document[]"
                                                 accept="image/jpeg,image/jpg,image/png,application/pdf,application/txt,application/msword,application/vnd.openxmlformats-officedcoument.wordprocessingml.document"
