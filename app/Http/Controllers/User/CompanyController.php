@@ -15,8 +15,9 @@ class CompanyController extends Controller
      */
     public function index()
     {
+        $client = Client::find(currentUserId());
         $company = Company::where('client_id',currentUserId())->get();
-        return view('user.company.index',compact('company'));
+        return view('user.company.index',compact('company','client'));
     }
 
     /**
@@ -24,7 +25,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        $client = Client::get();
+        $client = Client::find(currentUserId());
         return view('user.company.create',compact('client'));
     }
 
@@ -51,7 +52,7 @@ class CompanyController extends Controller
                     if ($validator->fails()) {
                         throw new \Exception('Invalid file format or size');
                     }
-                    
+
                     $imageName = rand(111, 999) . time() . '.' . $file->getClientOriginalExtension();
                     $file->move(public_path('uploads/company'), $imageName);
                     $documentNames[] = $imageName;
@@ -85,8 +86,9 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
+        $client = Client::find(currentUserId());
         $company = Company::findOrFail(encryptor('decrypt',$id));
-        return view('user.company.show',compact('company'));
+        return view('user.company.show',compact('company','client'));
     }
 
     /**
@@ -94,8 +96,9 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
+        $client = Client::find(currentUserId());
         $company = Company::findOrFail(encryptor('decrypt',$id));
-        return view('user.company.edit',compact('company'));
+        return view('user.company.edit',compact('company','client'));
     }
 
     /**
@@ -113,7 +116,7 @@ class CompanyController extends Controller
             }
             if ($request->hasFile('company_document')) {
                 $documentNames = []; // Array to store document file names
-                
+
                 foreach ($request->file('company_document') as $file) {
                     $validator = Validator::make(['company_document' => $file], [
                         'company_document' => 'required|mimes:jpg,png,pdf,doc,docx|max:2048'
@@ -122,7 +125,7 @@ class CompanyController extends Controller
                     if ($validator->fails()) {
                         throw new \Exception('Invalid file format or size');
                     }
-                    
+
                     $imageName = rand(111, 999) . time() . '.' . $file->getClientOriginalExtension();
                     $file->move(public_path('uploads/company'), $imageName);
                     $documentNames[] = $imageName;

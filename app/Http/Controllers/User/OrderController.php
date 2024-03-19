@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\User\Client;
 use App\Models\Common\CartItem;
@@ -14,8 +15,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $order = Order::where('client_id',currentUserID())->get();
-        return view('user.order.index',compact('order'));
+        $client = Client::find(currentUserId());
+        $order = Order::where('client_id',currentUserId())->get();
+        return view('user.order.index',compact('order','client'));
     }
 
     /**
@@ -23,8 +25,9 @@ class OrderController extends Controller
      */
 
     public function order_edit(Request $request, $id){
+        $client = Client::find(currentUserId());
         $order = Order::where('cart_id',$id)->first();
-        return view('user.order.edit',compact('order'));
+        return view('user.order.edit',compact('order','client'));
     }
     public function order_update(Request $request, $id){
         $cartItem = CartItem::where('cart_id',$id)->first();
@@ -38,7 +41,7 @@ class OrderController extends Controller
             return redirect()->route('order.index');
         }
     }
-    
+
     public function create()
     {
         //
