@@ -14,8 +14,9 @@ class BankController extends Controller
      */
     public function index()
     {
+        $client = Client::find(currentUserId());
         $data = Bank::where('client_id',currentUserID())->get();
-        return view('user.bank.index',compact('data'));
+        return view('user.bank.index',compact('data','client'));
 
     }
 
@@ -24,7 +25,7 @@ class BankController extends Controller
      */
     public function create()
     {
-        $client = Client::get();
+        $client = Client::find(currentUserId());
         return view('user.bank.create',compact('client'));
     }
 
@@ -64,9 +65,11 @@ class BankController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Bank $bank)
+    public function show($id)
     {
-        //
+        $client = Client::find(currentUserId());
+        $bank = Bank::findOrFail(encryptor('decrypt',$id));
+        return view('user.bank.show',compact('bank','client'));
     }
 
     /**
@@ -74,8 +77,9 @@ class BankController extends Controller
      */
     public function edit($id)
     {
+        $client = Client::find(currentUserId());
         $bank = Bank::findOrFail(encryptor('decrypt',$id));
-        return view('user.bank.edit',compact('bank'));
+        return view('user.bank.edit',compact('bank','client'));
     }
 
     /**

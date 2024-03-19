@@ -24,7 +24,8 @@ class PhoneGroupController extends Controller
      */
     public function create()
     {
-        return view('user.phonegroup.create');
+        $client = Client::find(currentUserId());
+        return view('user.phonegroup.create',compact('client'));
     }
 
     /**
@@ -60,9 +61,10 @@ class PhoneGroupController extends Controller
      */
     public function edit($id)
     {
+        $data = PhoneGroup::where('client_id',currentUserId())->get();
         $client = Client::find(currentUserId());
         $phonegroup = PhoneGroup::findOrFail(encryptor('decrypt',$id));
-        return view('user.phonegroup.edit',compact('phonegroup','client'));
+        return view('user.phonegroup.edit',compact('phonegroup','client','data'));
     }
 
     /**

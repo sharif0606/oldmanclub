@@ -18,15 +18,17 @@ class EmailSendController extends Controller
         return view('user.email.index',compact('email'));
     }
     public function inbox(){
+        $client = Client::find(currentUserId());
         $receive_email = EmailSend::get();
-        return view('user.email.inbox',compact('receive_email'));
+        return view('user.email.inbox',compact('receive_email','client'));
     }
     public function sentbox(){
         $send_email = EmailSend::where('sender_id',currentUserId())->get();
         return view('user.email.sentbox',compact('send_email'));
     }
     public function sent_email(){
-        return view('user.email.sentemail');
+        $client = Client::find(currentUserId());
+        return view('user.email.sentemail',compact('client'));
     }
     public function store_email(Request $request){
         try{
@@ -50,7 +52,6 @@ class EmailSendController extends Controller
             return redirect()->back()->withInput();
         }
     }
-
     public function sent_email_show($id){
         $client = Client::find(currentUserId());
         $sentmail = EmailSend::findOrFail(encryptor('decrypt',$id));
@@ -61,7 +62,7 @@ class EmailSendController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
