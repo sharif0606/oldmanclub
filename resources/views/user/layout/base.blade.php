@@ -1089,7 +1089,6 @@
 JS libraries, plugins and custom scripts -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script>
-    
     $(document).ready(function() {
         // Initialize Dropzone
         var myDropzone = new Dropzone("#postDropzone", {
@@ -1101,59 +1100,73 @@ JS libraries, plugins and custom scripts -->
             addRemoveLinks: true,
             autoProcessQueue: false,
             headers: {
-        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-    }
-        });
-        $("#submitBtn").on('click', function() {
-             // Check if Dropzone has files
-             if (myDropzone.getQueuedFiles().length > 0) {
-                myDropzone.processQueue(); // Process Dropzone queue
-            } else {
-                submitForm(); // Submit form if no files are selected
-            }
-        });
-        // Handle form submission
-        function submitForm() {
-                var formData = new FormData($("#formSubmit")[0]);
-                // Append CSRF token to form data
-                formData.append('_token', '{{ csrf_token() }}');
-                $.ajax({
-                    type: 'POST',
-                    url: "{{ route('post.store') }}", // Change this URL to your Laravel route
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        // Handle success response
-                        console.log(response);
-                        // Optionally, close the modal
-                        $('#feedActionPhoto').modal('hide');
-                    },
-                    error: function(xhr, status, error) {
-                        // Handle error response
-                        console.error(xhr.responseText);
-                        // Display error message to the user
-                        alert("Error: " + xhr.responseText);
-                    }
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            init: function() {
+                this.on("sending", function(file, xhr, formData) {
+                    // Append additional form data to Dropzone request
+                    formData.append('message', $('#message').val());
                 });
             }
-            // Handle Dropzone success event
+        });
+
+        // Handle form submission
+        $("#submitBtn").on('click', function() {
+            // Check if Dropzone has files
+            if (myDropzone.getQueuedFiles().length > 0) {
+                // Process Dropzone queue
+                myDropzone.processQueue();
+            } else {
+                // If no files in Dropzone queue, submit the form
+                submitForm();
+            }
+        });
+
+        // Handle Dropzone success event
         myDropzone.on('success', function(file, response) {
-            // Optionally, you can handle success event for Dropzone here
+            // Handle success response
             console.log(response);
             // Optionally, close the modal
             $('#feedActionPhoto').modal('hide');
+            window.location.href = "{{route('clientdashboard')}}";
         });
 
         // Handle Dropzone error event
         myDropzone.on('error', function(file, errorMessage) {
-            // Optionally, you can handle error event for Dropzone here
+            // Handle error event
             console.error(errorMessage);
             // Display error message to the user
             alert("Error: " + errorMessage);
         });
 
+        // Handle form submission
+        function submitForm() {
+            var formData = new FormData($("#formSubmit")[0]);
+            // Append CSRF token to form data
+            formData.append('_token', '{{ csrf_token() }}');
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('post.store') }}",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    // Handle success response
+                    console.log(response);
+                    // Optionally, close the modal
+                    $('#feedActionPhoto').modal('hide');
+                    window.location.href = "{{route('clientdashboard')}}";
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    console.error(xhr.responseText);
+                    // Display error message to the user
+                    alert("Error: " + xhr.responseText);
+                }
+            });
+        }
     });
+
 </script>
     <!-- Bootstrap JS -->
     <script src="{{ asset('public/user/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>

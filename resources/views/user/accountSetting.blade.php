@@ -166,7 +166,7 @@
                                 <div class="card-body">
                                     <!-- Form settings START -->
                                     <form method="post" enctype="multipart/form-data"
-                                        action="{{ route('user_save_profile') }}" class="row g-3">
+                                        action="{{ route('user_save_profile') }}" class="row g-2">
                                         @csrf
                                         <!-- First name -->
                                         <div class="col-sm-6 col-lg-4">
@@ -229,13 +229,11 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label">Present Address </label>
-                                            <input type="text" placeholder="" value="{{ $client->address_line_1 }}"
-                                                class="form-control" name="address_line_1">
+                                            <textarea class="form-control" name="address_line_1" rows="6">{{ $client->address_line_1 }}</textarea>
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label">Parmanent Address </label>
-                                            <input type="text" placeholder="" value="{{ $client->address_line_2 }}"
-                                                class="form-control" name="address_line_2">
+                                            <textarea class="form-control" name="address_line_2" rows="6">{{  $client->address_line_2 }}</textarea>
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label">Profile Photo </label>
@@ -1046,7 +1044,7 @@
                     </div>
                     <!-- Container END -->
 
-    </main>
+    </main> 
 
 
     <script>
