@@ -229,10 +229,11 @@
                         </div>
                         <!-- Card header END -->
                         <!-- Card body START -->
+
                         <div class="card-body">
-                            <p>{{$value->message}}
-                                I'm thrilled to share that I've completed a graduate certificate course in project management
-                                with the president's honor roll.</p>
+                            <p>
+                                {{$value->message}}
+                            </p>
                             <!-- Card img -->
                             <img class="card-img" src="{{asset('public/uploads/post/' . $value->image)}}" alt="Post">
                             {{-- <img class="card-img" src="{{asset('public/user/assets/images/post/3by2/01.jpg')}}" alt="Post"> --}}

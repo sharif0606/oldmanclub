@@ -67,7 +67,7 @@ use App\Http\Controllers\User\PhoneGroupController as phonegroup;
 use App\Http\Controllers\User\ShippingController as shipping;
 use App\Http\Controllers\User\ShippingCommentController as shipcomment;
 use App\Http\Controllers\User\EmailSendController;
-use App\Http\Controllers\OrderController as order;
+use App\Http\Controllers\User\OrderController as order;
 use App\Http\Controllers\User\AddressVerificationController as address_verify;
 use App\Http\Controllers\User\CompanyController as company;
 use App\Http\Controllers\User\BankController as bank;
