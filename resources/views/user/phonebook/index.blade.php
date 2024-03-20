@@ -16,27 +16,41 @@
   <div class="container">
     <div class="row g-4">
       <!-- Main content START -->
-      <div class="col-lg-12">
-        <div class="bg-mode p-4">
-            <div class="compose-content">
-                <div class="table-responsive">
-                    <div class="mb-2 ">
-                        <span class="fs-4">
-                            Contact List
-                        </span>
-                        <p class="button">
-                            <a href="#" id="downloadVCard" class="fs-5 mx-2 text-success"><i class="fa fa-address-card"></i></a>
+      <div class="col-md-8 col-lg-6 vstack gap-4">
+          <!-- Card START -->
+          <div class="card">
+            <!-- Card header START -->
+            <div class="card-header border-0 pb-0">
+              <div class="row g-2">
+                <div class="col-lg-2">
+                  <!-- Card title -->
+                  <h1 class="h4 card-title mb-lg-0">Contact List</h1>
+                </div>
+                {{--  <div class="col-sm-6 col-lg-3 ms-lg-auto">
+                  <!-- Select Groups -->
+                  <select class="form-select js-choice choice-select-text-none" data-search-enabled="false">
+                    <option value="AB">Alphabetical</option>
+                    <option value="NG">Newest group</option>
+                    <option value="RA">Recently active</option>
+                    <option value="SG">Suggested</option>
+                  </select>
+                </div>  --}}
+                  <div class="col-sm-6 col-lg-3 ms-auto">
+                  <!-- Button modal -->
+                  <a href="#" id="downloadVCard" class="fs-5 mx-2 text-success"><i class="fa fa-address-card"></i></a>
                             {{--  <button id="downloadVCard"><i class="fa fa-address-card text-info"></i>
                             </button>  --}}
                             <!-- Inside your blade file -->
 
-                            <a href="{{ route('phonebook_download') }}" class="fs-5 mx-2 text-success" download>
+                    <a href="{{ route('phonebook_download') }}" class="fs-5 mx-2 text-success" download>
                                 <i class="fa fa-download"></i>
                             </a>
-                            <a class="pull-right fs-5" href="{{route('phonebook.create')}}" data-toggle="modal" data-target="#phonecreatModal"><i class="fa fa-plus"></i></a>
-                        </p>
-
-                    </div>
+                  <a class="btn btn-primary-soft ms-auto" href="{{route('phonebook.create')}}"> <i class="fa-solid fa-plus pe-1"></i> Create Group</a>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
                     <table class="table table-striped table-hover mb-0" id="phone_book">
                         <thead>
                             <tr>
@@ -82,13 +96,12 @@
                     </div>
                 </div>
             </div>
-
         </div>
       </div>
     </div>
   </div>
-  <!-- Container END -->
 </main>
+
 {{--  <div class="row">
     <div class="col-7">
         <div class="card">

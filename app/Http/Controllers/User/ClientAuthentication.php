@@ -52,7 +52,7 @@ class ClientAuthentication extends Controller
             $user->middle_name = $request->middle_name;
             $user->last_name = $request->last_name;
             $user->contact_no = $request->contact_no;
-            $user->dob = $request->dob;
+            // $user->dob = $request->dob;
             $user->email = $request->email;
             // $user->address_line_1 = $request->address_line_1;
             // $user->address_line_2 = $request->address_line_2;

@@ -28,7 +28,7 @@
                 </div>
             </div>
             <!-- Card feed action dropdown START -->
-            <div class="dropdown">
+            {{-- <div class="dropdown">
                 <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2"
                     id="cardFeedAction" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bi bi-three-dots"></i>
@@ -50,7 +50,7 @@
                     <li><a class="dropdown-item" href="#"> <i
                                 class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
                 </ul>
-            </div>
+            </div> --}}
             <!-- Card feed action dropdown END -->
         </div>
     </div>
