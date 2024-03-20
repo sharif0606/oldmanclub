@@ -23,17 +23,17 @@ return new class extends Migration
             $table->string('password');
             $table->string('address_line_1')->nullable();
             $table->string('address_line_2')->nullable();
-            $table->unsignedBigInteger('current_country_id')->index();
+            $table->unsignedBigInteger('current_country_id')->nullable();
             $table->foreign('current_country_id')->references('id')->on('countries')->onDelete('cascade')->nullable();
-            $table->unsignedBigInteger('current_state_id')->index();
+            $table->unsignedBigInteger('current_state_id')->nullable();
             $table->foreign('current_state_id')->references('id')->on('states')->onDelete('cascade')->nullable();
-            $table->unsignedBigInteger('current_city_id')->index();
+            $table->unsignedBigInteger('current_city_id')->nullable();
             $table->foreign('current_city_id')->references('id')->on('cities')->onDelete('cascade')->nullable();
-            $table->unsignedBigInteger('from_country_id')->index();
+            $table->unsignedBigInteger('from_country_id')->nullable();
             $table->foreign('from_country_id')->references('id')->on('countries')->onDelete('cascade')->nullable();
-            $table->unsignedBigInteger('from_state_id')->index();
+            $table->unsignedBigInteger('from_state_id')->nullable();
             $table->foreign('from_state_id')->references('id')->on('states')->onDelete('cascade')->nullable();
-            $table->unsignedBigInteger('fromt_city_id')->index();
+            $table->unsignedBigInteger('from_city_id')->nullable();
             $table->foreign('from_city_id')->references('id')->on('cities')->onDelete('cascade')->nullable();
            
             // $table->integer('city_id')->nullable();
