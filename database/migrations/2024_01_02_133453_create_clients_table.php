@@ -23,11 +23,25 @@ return new class extends Migration
             $table->string('password');
             $table->string('address_line_1')->nullable();
             $table->string('address_line_2')->nullable();
-            $table->integer('country_id')->nullable();
-            $table->integer('city_id')->nullable();
-            $table->integer('state_id')->nullable();
+            $table->unsignedBigInteger('current_country_id')->nullable();
+            $table->foreign('current_country_id')->references('id')->on('countries')->onDelete('cascade')->nullable();
+            $table->unsignedBigInteger('current_state_id')->nullable();
+            $table->foreign('current_state_id')->references('id')->on('states')->onDelete('cascade')->nullable();
+            $table->unsignedBigInteger('current_city_id')->nullable();
+            $table->foreign('current_city_id')->references('id')->on('cities')->onDelete('cascade')->nullable();
+            $table->unsignedBigInteger('from_country_id')->nullable();
+            $table->foreign('from_country_id')->references('id')->on('countries')->onDelete('cascade')->nullable();
+            $table->unsignedBigInteger('from_state_id')->nullable();
+            $table->foreign('from_state_id')->references('id')->on('states')->onDelete('cascade')->nullable();
+            $table->unsignedBigInteger('from_city_id')->nullable();
+            $table->foreign('from_city_id')->references('id')->on('cities')->onDelete('cascade')->nullable();
+           
+            // $table->integer('city_id')->nullable();
+            // $table->integer('state_id')->nullable();
             $table->string('zip_code')->nullable();
             $table->string('nationality')->nullable();
+            $table->string('designation')->nullable();
+
             $table->string('id_no')->nullable();
             $table->string('id_no_type')->comment('0=>Passport, 1=>National ID, 2=>Driver License, 3=>Birth Certificate')->nullable();
             $table->string('image')->nullable();
@@ -44,11 +58,11 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-        /*DB::table('clients')->insert([
-            'email' => 'kaiser@gmail.com',
-            'contact_no' => 1,
-            'password' => Hash::make(123),
-        ]);*/
+        // DB::table('clients')->insert([
+        //     'email' => 'kaiser@gmail.com',
+        //     'contact_no' => 1,
+        //     'password' => Hash::make(123),
+        // ]);
     }
 
     /**
