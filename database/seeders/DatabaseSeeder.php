@@ -15,9 +15,12 @@ class DatabaseSeeder extends Seeder
         $this->call(
             [
                 NfcFieldSeeder::class,
-                NfcInformationSeeder::class
+                NfcInformationSeeder::class,
             ]
         );
+        $this->call(CountriesSeeder::class);
+        $this->call(StateSeeder::class);
+        $this->call(CitiesSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

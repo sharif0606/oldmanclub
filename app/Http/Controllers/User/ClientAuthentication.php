@@ -54,12 +54,12 @@ class ClientAuthentication extends Controller
             $user->contact_no = $request->contact_no;
             $user->dob = $request->dob;
             $user->email = $request->email;
-            $user->address_line_1 = $request->address_line_1;
-            $user->address_line_2 = $request->address_line_2;
-            $user->country_id = $request->country_id;
-            $user->city_id = $request->city_id;
-            $user->state_id = $request->state_id;
-            $user->zip_code = $request->zip_code;
+            // $user->address_line_1 = $request->address_line_1;
+            // $user->address_line_2 = $request->address_line_2;
+            // $user->country_id = $request->country_id;
+            // $user->city_id = $request->city_id;
+            // $user->state_id = $request->state_id;
+            // $user->zip_code = $request->zip_code;
             $user->status = 1;
             $user->password = Hash::make($request->password);
 
