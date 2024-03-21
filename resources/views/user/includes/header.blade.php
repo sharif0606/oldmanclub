@@ -259,9 +259,16 @@
                             <div class="d-flex align-items-center position-relative">
                                 <!-- Avatar -->
                                 <div class="avatar me-3">
+                                    @if($client->image)
                                     <img class="avatar-img rounded-circle"
+                                        src="{{asset('public/uploads/client/' . $client->image)}}" alt="">
+                                    @else
+                                    <img class="avatar-img rounded-circle "
+                                        src="{{asset('public/images/download.jpg')}}" alt="">
+                                    @endif
+                                    {{--<img class="avatar-img rounded-circle"
                                         src="{{ asset($client->image?$client->image:default_image()) }}"
-                                        alt="avatar">
+                                        alt="avatar">--}}
                                 </div>
                                 <div>
                                     <a class="h6 stretched-link" href="#">{{$client->middle_name}} {{$client->last_name}}</a>

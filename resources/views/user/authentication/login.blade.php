@@ -1,73 +1,65 @@
-@extends('backend.layouts.appAuth')
+@extends('user.layout.auth')
 @section('title','Login')
 @section('content')
-<style>
-	.button {
-        border: none;
-        cursor: pointer;
-    }
-	.login{
-		color:#FF87A0
-	}
-
-</style>
-    <div class="col-sm-6 col-md-4 col-lg-4 appAuth mx-auto align shadow-lg">
-		 <div class="head mb-2">
-			<p class="fs-2 fw-bolder text-center text-info mb-0">Old Man Club</p>
-			<p class="fs-3 fw-bolder text-center mb-0 login">Login</p>
-			<!-- <p class="text-center mb-3 text-dark fw-bold">Welcome to Login your account</p> -->
-		</div>
-		 <!-- <p class="text-center text-primary fs-4 fw-bolder"><img src="{{asset('public/images/Group1301.png')}}" alt="" class="img-fluid"></p>
-		<h4 class="text-center">Welcome to Login your account</h4> -->
-		<div class="mt-4">
-			<form action="{{route('clientlogin.check')}}" method="POST">
+<main>
+  
+  <!-- Container START -->
+  <div class="container">
+    <div class="row justify-content-center align-items-center vh-100 py-5">
+      <!-- Main content START -->
+      <div class="col-sm-10 col-md-8 col-lg-7 col-xl-6 col-xxl-5">
+        <!-- Sign in START -->
+        <div class="card card-body text-center p-4 p-sm-5">
+          <!-- Title -->
+          <h1 class="mb-2">Sign in</h1>
+          <p class="mb-0">Don't have an account?<a href="{{ route('clientregister') }}"> Click here to sign up</a></p>
+          <!-- Form START -->
+		  <form action="{{route('clientlogin.check')}}" method="POST" class="mt-sm-4">
 				@csrf
-				<div class="form-group">
-					<!-- <label class="control-label fs-6 fw-bold text-dark" for="username">Contact Number / Email Address</label> -->
-					<input type="text" class="form-control rounded" id="username" name="username" value="{{ old('username') }}" placeholder="+123456789/example@gmail.com">
-					@if($errors->has('username'))
-						<small class="d-block text-danger fw-bold">
-							{{$errors->first('username')}}
-						</small>
-					@endif
-				</div>
-				<div class="form-group">
-					<!-- <label class="pull-left control-label fs-6 fw-bold text-dark" for="exampleInputpwd_2">Password</label> -->
-					<div class="input-group">
-						<input type="password" class="form-control rounded"  id="password" name="password" placeholder="..................">
-                        <span class="input-group-text p-0" id="togglePassword">
-                            <i class="fakepasswordicon fa-solid fa-eye-slash cursor-pointer px-1 w-40px"></i>
-                        </span>
-						{{-- <button type="button" class="button" id="togglePassword"><i class="fa fa-eye"></i></button> --}}
-					</div>
-					@if($errors->has('password'))
-						<small class="d-block text-danger fw-bold">
-							{{$errors->first('password')}}
-						</small>
-					@endif
-				</div>
-				<div class="form-group text-center mt-3">
-					<a href="#" class="text-danger fw-bold">Forgot Email Or Password?</a>
-				</div>
+            <!-- Email -->
+            <div class="mb-3 input-group-lg">
+              <input type="email" class="form-control" name="username" placeholder="Enter email">
+			  	@if($errors->has('username'))
+					<small class="d-block text-danger fw-bold">
+						{{$errors->first('username')}}
+					</small>
+				@endif
+            </div>
+            <!-- New password -->
+            <div class="mb-3 position-relative">
+              <!-- Password -->
+              <div class="input-group input-group-lg">
+                <input class="form-control fakepassword" type="password" name="password" id="psw-input" placeholder="Enter password">
+                <span class="input-group-text p-0">
+                  <i class="fakepasswordicon fa-solid fa-eye-slash cursor-pointer p-2 w-40px"></i>
+                </span>
+				@if($errors->has('password'))
+					<small class="d-block text-danger fw-bold">
+						{{$errors->first('password')}}
+					</small>
+				@endif
+              </div>
+            </div>
+            <!-- Remember me -->
+            <div class="mb-3 d-sm-flex justify-content-between">
+              <div>
+                <input type="checkbox" class="form-check-input" id="rememberCheck">
+                <label class="form-check-label" for="rememberCheck">Remember me?</label>
+              </div>
+              <a href="forgot-password.html">Forgot password?</a>
+            </div>
+            <!-- Button -->
+            <div class="d-grid"><button type="submit" class="btn btn-lg btn-primary">Login</button></div>
+            <!-- Copyright -->
+            <p class="mb-0 mt-3">©{{ date("Y") }} <a target="_blank" href="https://muktomart.com.bd/">OldClubMan.</a> All rights reserved</p>
+          </form>
+          <!-- Form END -->
+        </div>
+        <!-- Sign in START -->
+      </div>
+    </div> <!-- Row END -->
+  </div>
+  <!-- Container END -->
 
-				<div class="form-group">
-					<p class="text-center fw-bold">I Don't have an account?<a href="{{route('clientregister')}}" class="text-primary">Sign Up</a></p>
-				</div>
-				<div class="text-center">
-					<button type="submit" class="btn btn-primary btn-block form-control rounded fw-bold">Login</button>
-				</div>
-			</form>
-		</div>
-	</div>
-
-	<script>
-		const togglePassButton = document.getElementById('togglePassword');
-		const inputPass = document.getElementById('password');
-		togglePassButton.addEventListener('click', function(){
-			const newType = inputPass.type === 'password'?'text':'password';
-			inputPass.type = newType;
-			togglePassButton.querySelector('i').classList.toggle('fa-eye-slash')
-			togglePassButton.querySelector('i').classList.toggle('fa-eye')
-		});
-	</script>
+</main>
 @endsection

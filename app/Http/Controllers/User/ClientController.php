@@ -4,6 +4,9 @@ namespace App\Http\Controllers\User;
 
 use App\Models\User\Client;
 use App\Models\User\Post;
+use App\Models\User\Country;
+use App\Models\User\City;
+use App\Models\User\State;
 use App\Models\Backend\PhoneBook;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -36,7 +39,10 @@ class ClientController extends Controller
     public function accountSetting()
     {
         $client = Client::find(currentUserId());
-        return view('user.accountSetting', compact('client'));
+        $country = Country::get();
+        $city = City::get();
+        $state = State::get();
+        return view('user.accountSetting', compact('client','country','city','state'));
     }
     // public function phonebook_list()
     // {
@@ -107,13 +113,19 @@ class ClientController extends Controller
             $user->email = $request->email;
             $user->address_line_1 = $request->address_line_1;
             $user->address_line_2 = $request->address_line_2;
-            $user->country_id = $request->country_id;
-            $user->city_id = $request->city_id;
-            $user->state_id = $request->state_id;
-            $user->zip_code = $request->zip_code;
+            $user->current_country_id = $request->current_country_id;
+            $user->current_city_id = $request->current_city_id;
+            $user->current_state_id = $request->current_state_id;
+            $user->current_zip_code = $request->current_zip_code;
+            $user->from_country_id = $request->from_country_id;
+            $user->from_city_id = $request->from_city_id;
+            $user->from_state_id = $request->from_state_id;
+            $user->from_zip_code = $request->from_zip_code;
             $user->nationality = $request->nationality;
             $user->id_no = $request->id_no;
             $user->id_no_type = $request->id_no_type;
+            $user->marital_status = $request->marital_status;
+            $user->designation = $request->designation;
             if ($request->hasFile('cover_photo')) {
                 $imageName = rand(111, 999) . time() . '.' . $request->cover_photo->extension();
                 $request->cover_photo->move(public_path('uploads/client'), $imageName);
