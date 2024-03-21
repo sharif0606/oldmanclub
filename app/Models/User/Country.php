@@ -13,4 +13,7 @@ class Country extends Model
         'name',
         'phonecode',
     ];
+    public function client(){
+        return $this->hasMany(Client::class);
+    }
 }
