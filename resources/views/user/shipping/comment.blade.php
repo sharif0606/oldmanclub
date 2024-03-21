@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-sm-6">
         <div class="card p-3">
-            <h3>Shipping Title : {{$shipping->shipping_title}}</h3>
+            <h3>Shipping Title : {{$shipping->shippingdetail->shipping_title}}</h3>
             <table>
                 <tr>
                     <th>Client Comment</th>
