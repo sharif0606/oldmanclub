@@ -29,7 +29,7 @@ class ClientAuthentication extends Controller
     public function signUpStore(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'fname' => 'required',
+            // 'fname' => 'required',
             // 'middle_name' => 'required',
             // 'last_name' => 'required',
             //'dob' => 'required',

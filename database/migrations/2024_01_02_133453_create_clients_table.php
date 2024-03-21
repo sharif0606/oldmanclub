@@ -35,13 +35,15 @@ return new class extends Migration
             $table->foreign('from_state_id')->references('id')->on('states')->onDelete('cascade')->nullable();
             $table->unsignedBigInteger('from_city_id')->nullable();
             $table->foreign('from_city_id')->references('id')->on('cities')->onDelete('cascade')->nullable();
-           
+
             // $table->integer('city_id')->nullable();
             // $table->integer('state_id')->nullable();
             $table->string('zip_code')->nullable();
             $table->string('nationality')->nullable();
             $table->string('designation')->nullable();
-
+            $table->integer('marital_status')->default(1)->comment('1=>Unmarried, 2=>Married')->nullable();
+            $table->stirng('profile_overview')->nullable();
+            $table->stirng('tagline')->nullable();
             $table->string('id_no')->nullable();
             $table->string('id_no_type')->comment('0=>Passport, 1=>National ID, 2=>Driver License, 3=>Birth Certificate')->nullable();
             $table->string('image')->nullable();
