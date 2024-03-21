@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User\City;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use DB;
 
 class CitiesSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class CitiesSeeder extends Seeder
      */
     public function run(): void
     {
-        City::create(array(
+        $cities = array(
             array('name' => "Bombuflat",'state_id' => 1),
             array('name' => "Garacharma",'state_id' => 1),
             array('name' => "Port Blair",'state_id' => 1),
@@ -48393,6 +48394,7 @@ class CitiesSeeder extends Seeder
             array('name' => "Lewisburg",'state_id' => 3976),
             array('name' => "Ravenswood",'state_id' => 3976),
             array('name' => "Summersville",'state_id' => 3976),
-		));
+		);
+        DB::table('cities')->insert($cities8);
     }
 }
