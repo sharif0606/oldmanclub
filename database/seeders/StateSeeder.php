@@ -13,7 +13,7 @@ class StateSeeder extends Seeder
      */
     public function run(): void
     {
-        State::create(array(
+        State::insert(array(
             array('name' => "Andaman and Nicobar Islands",'country_id' => 101),
             array('name' => "Andhra Pradesh",'country_id' => 101),
             array('name' => "Arunachal Pradesh",'country_id' => 101),
