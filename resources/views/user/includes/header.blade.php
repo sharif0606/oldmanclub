@@ -55,6 +55,7 @@
                             <li> <a class="dropdown-item" href="{{route('phonebook.index')}}">Phone Book</a></li>
                             <li> <a class="dropdown-item" href="{{route('company.index')}}">Company</a></li>
                             <li> <a class="dropdown-item" href="{{route('bank.index')}}">Bank</a></li>
+                            <li> <a class="dropdown-item" href="{{route('purchase.index')}}">Purchase Sms</a></li>
                             <!-- dropdown submenu open left -->
                             {{-- <li class="dropdown-submenu dropstart">
                                 <a class="dropdown-item dropdown-toggle" href="#">Drop child</a>
