@@ -24,7 +24,7 @@
                             </a></h6>
                         <span class="nav-item small">{{$value->created_at->diffForHumans()}}</span>
                     </div>
-                    {{-- <p class="mb-0 small">Web Developer at Webestica</p> --}}
+                    <p class="mb-0 small"><i class="bi bi-briefcase-fill me-1"></i>{{$client->designation}}Author and Business Consultant</p>
                 </div>
             </div>
             <!-- Card feed action dropdown START -->

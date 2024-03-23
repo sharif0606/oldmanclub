@@ -1,68 +1,121 @@
 @extends('user.layout.base')
 @section('title', 'NFC Card')
-@section('content')
 @push('styles')
-<style>
-    .card {
-        /* background-color: #f0f0f0; */
-        transition: transform 0.3s ease;
-        
-    }
-    .card:hover {
-        transform: scale(1.05); /* Adjust the value to change the amount of upward flow */
-    }
-    .addNew{
-        border:1px dashed black;
-    }
-</style>
+    <style>
+        .card {
+            /* background-color: #f0f0f0; */
+            /*transition: transform 0.3s ease;*/
+
+        }
+
+        .card:hover {
+            /*transform: scale(1.05);*/
+            /* Adjust the value to change the amount of upward flow */
+        }
+
+        .addNew {
+            /*border: 1px dashed black;*/
+        }
+    </style>
 @endpush
-    <!-- Bordered table start -->
-    {{--<div class="row">
-        <div class="col-3">
-            <div class="card">
-                <a href="{{ route('nfc_card.create') }}">
-                    <div class="card-body">
-                        <i class="fa fa-plus"></i>
-                        Add Card
-                    </div>
-                </a>
+@section('content')
+    <div class="row g-4">
+        <!-- Sidenav START -->
+        <div class="col-lg-3">
+            <!-- Advanced filter responsive toggler START -->
+            <div class="d-flex align-items-center d-lg-none">
+                <button class="border-0 bg-transparent" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasSideNavbar" aria-controls="offcanvasSideNavbar">
+                    <span class="btn btn-primary"><i class="fa-solid fa-sliders-h"></i></span>
+                    <span class="h6 mb-0 fw-bold d-lg-none ms-2">My profile</span>
+                </button>
             </div>
+            <!-- Advanced filter responsive toggler END -->
+            <!-- Navbar START-->
+            @include('user.includes.profile-navbar')
+            <!-- Navbar END-->
         </div>
-    </div>--}}
-    <div class="row">
-            <div class="col-sm-6 col-md-6 col-lg-4">
-                <a href="{{ route('nfc_card.create') }}">
-                    <div class="card addNew" style="height: 400px; overflow:hidden; width: 320px;">
-                        <div class="card-body text-center" style="padding-top: 175px">
-                            <i class="fa fa-plus"></i>
-                            Add Card
-                        </div>
-                    </div>
-                </a>
-            </div>
-            @forelse ($nfc_cards as $nfc_card)
-            <div class="col-sm-6 col-md-6 col-lg-4">
-                <div class="card" style="height: 400px; overflow:hidden; width: 320px;">
-                    <div class="d-flex justify-content-between">
-                        <a href="{{ route('nfc_card.show', encryptor('encrypt', $nfc_card->id)) }}">  
-                            @if ($nfc_card->card_design?->design_card_id == 1)
-                                @include('user.nfc-template.classic-template')
-                            @elseif($nfc_card->card_design?->design_card_id == 2)
-                                @include('user.nfc-template.flat-template')
-                            @elseif($nfc_card->card_design?->design_card_id == 3)
-                                @include('user.nfc-template.modern-template')
-                            @elseif($nfc_card->card_design?->design_card_id == 4)
-                                @include('user.nfc-template.sleek-template')
-                            @endif
-                        </a>
-                        {{--<a href="{{ route('nfc_card.edit', encryptor('encrypt', $nfc_card->id)) }}"></a>--}}
-                    </div>
-                    
+        <!-- Sidenav END -->
+        <!-- Main content START -->
+        <div class="col-md-8 col-lg-6 vstack gap-4">
+            <!-- Card START -->
+            <div class="card">
+                <!-- Card header START -->
+                <div class="card-header d-sm-flex text-center align-items-center justify-content-between border-0 pb-0">
+                    <h1 class="card-title h4">NFC Card</h1>
+                    <!-- Button modal -->
+                    <a class="btn btn-primary-soft" href="{{ route('nfc_card.create') }}"> <i
+                            class="fa-solid fa-plus pe-1"></i> Create NFC Card</a>
                 </div>
-                
+                <!-- Card header START -->
+                <!-- Card body START -->
+                <div class="card-body">
+
+
+
+                    <!-- Album Tab content START -->
+                    <div class="mb-0 pb-0">
+
+
+
+                        <div class="row g-3">
+
+                            <!-- Add nfc START -->
+                            <div class="col-6 col-lg-3">
+                                <div
+                                    class="border border-2 border-dashed h-100 rounded text-center d-flex align-items-center justify-content-center position-relative">
+                                    <a class="stretched-link" href="{{ route('nfc_card.create') }}">
+                                        <i class="fa-solid fa-id-card fs-1"></i>
+                                        <h6 class="mt-2">Add NFC Card</h6>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- Add Nfc END -->
+                            <!-- Nfc item START -->
+                            @forelse ($nfc_cards as $nfc_card)
+                            <div class="col-6 col-lg-3 position-relative">
+                                <div class="position-absolute bottom-0 end-0">
+                                    <!-- Dropdown START -->
+                                    <div class="dropdown mb-2 me-3">
+                                        <a href="#" class="icon-sm bg-primary text-white rounded-circle show"
+                                            id="photoActionEdit" data-bs-toggle="dropdown" aria-expanded="true">
+                                            <i class="bi bi-pencil-fill"></i>
+                                        </a>
+                                        <!-- Dropdown menu -->
+                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="photoActionEdit">
+                                            <li><a class="dropdown-item" href="#"> <i
+                                                        class="bi bi-tag fa-fw pe-1"></i> Remove Tag</a></li>
+                                            <li><a class="dropdown-item" href="#"> <i
+                                                        class="bi bi-download fa-fw pe-1"></i> Download </a></li>
+                                            <li><a class="dropdown-item" href="#"> <i
+                                                        class="bi bi-person fa-fw pe-1"></i> Make Profile Picture</a></li>
+                                            <li><a class="dropdown-item" href="#"> <i
+                                                        class="bi bi-person-bounding-box fa-fw pe-1"></i> Make Cover
+                                                    Photo</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a class="dropdown-item" href="#"> <i
+                                                        class="bi bi-flag fa-fw pe-1"></i> Report photo</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- Dropdown END -->
+                                <img class="rounded img-fluid" src="{{ asset('public/user/assets/images/albums/01.jpg') }}"
+                                    alt="">
+                            </div>
+                            @empty
+                            No Card Made Yet
+                            @endforelse
+                            <!-- Photo item END -->
+                        </div>
+                        <!-- Photos of you tab END -->
+                    </div>
+                    <!-- Album Tab content END -->
+                </div>
+                <!-- Card body END -->
             </div>
-        @empty
-            No Card Found
-        @endforelse
-    </div>
+            <!-- Card END -->
+        </div>
+    </div><!-- Row END -->
 @endsection

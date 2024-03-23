@@ -10,90 +10,7 @@
                 <!-- Main content START -->
                 <div class="col-lg-8 vstack gap-4">
                     <!-- My profile START -->
-                    <div class="card">
-                        <!-- Cover image -->
-                        @if($client->cover_photo)
-                            <div class="h-200px rounded-top"
-                                style="background-image:url({{asset('public/uploads/client/' . $client->cover_photo)}}); background-position: center; background-size: cover; background-repeat: no-repeat;">
-                            </div>
-                        @else
-                            <div class="h-200px rounded-top"
-                                style="background-image:url({{asset(default_bg_image())}}); background-position: center; background-size: cover; background-repeat: no-repeat;">
-                            </div>
-                        @endif
-                        <!-- Card body START -->
-                        <div class="card-body py-0">
-                            <div class="d-sm-flex align-items-start text-center text-sm-start">
-                                <div>
-                                    <!-- Avatar -->
-                                    <div class="avatar avatar-xxl mt-n5 mb-3">
-                                        @if($client->image)
-                                        <img class="avatar-img rounded-circle border border-white border-3"
-                                            src="{{asset('public/uploads/client/' . $client->image)}}" alt="">
-                                        @else
-                                        <img class="avatar-img rounded-circle border border-white border-3"
-                                            src="{{asset('public/images/download.jpg')}}" alt="">
-                                        @endif
-                                        {{-- <img class="avatar-img rounded-circle border border-white border-3"
-                                            src="{{ asset($client->image ? $client->image : default_image()) }}" alt=""> --}}
-                                    </div>
-                                </div>
-                                <div class="ms-sm-4 mt-sm-3">
-                                    <!-- Info -->
-                                    <h1 class="mb-0 h5">{{ $client->middle_name }} {{ $client->last_name }}<i
-                                            class="bi bi-patch-check-fill text-success small"></i>
-                                    </h1>
-                                    {{-- <p>250 connections</p> --}}
-                                </div>
-                                <!-- Button -->
-                                <div class="d-flex mt-3 justify-content-center ms-sm-auto">
-                                    <a class="btn btn-danger-soft me-2" href="{{route('accountSetting')}}"> <i
-                                        class="bi bi-pencil-fill pe-1"></i> Edit profile </a>
-                                    {{-- <div class="dropdown">
-                                        <!-- Card share action menu -->
-                                        <button class="icon-md btn btn-light" type="button" id="profileAction2"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="bi bi-three-dots"></i>
-                                        </button>
-                                        <!-- Card share action dropdown menu -->
-                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileAction2">
-                                            <li><a class="dropdown-item" href="#"> <i
-                                                        class="bi bi-bookmark fa-fw pe-2"></i>Share profile in a message</a>
-                                            </li>
-                                            <li><a class="dropdown-item" href="#"> <i
-                                                        class="bi bi-file-earmark-pdf fa-fw pe-2"></i>Save your profile to
-                                                    PDF</a></li>
-                                            <li><a class="dropdown-item" href="#"> <i
-                                                        class="bi bi-lock fa-fw pe-2"></i>Lock profile</a></li>
-                                            <li>
-                                                <hr class="dropdown-divider">
-                                            </li>
-                                            <li><a class="dropdown-item" href="#"> <i
-                                                        class="bi bi-gear fa-fw pe-2"></i>Profile settings</a></li>
-                                        </ul>
-                                    </div> --}}
-                                </div>
-                            </div>
-                            <!-- List profile -->
-                            <ul class="list-inline mb-0 text-center text-sm-start mt-3 mt-sm-0">
-                                <li class="list-inline-item"><i class="bi bi-briefcase me-1"></i>
-                                    {{$client->email}}
-                                    {{-- Lead Developer --}}
-                                </li>
-                                <li class="list-inline-item"><i class="bi bi-geo-alt me-1"></i>
-                                    {{$client->address_line_1}}
-                                    {{-- New Hampshire --}}
-                                </li>
-                                <li class="list-inline-item"><i class="bi bi-calendar2-plus me-1"></i>
-                                    Joined on {{ $client->created_at->format('M,Y')}}
-                                    {{-- Nov 26,
-                                    2019 --}}
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- Card body END -->
-                        @include('user/includes/navigation')
-                    </div>
+                    @include('user.includes.profile')
                     <!-- My profile END -->
 
                     <!-- Share feed START -->
@@ -196,7 +113,7 @@
                                         <p class="mb-0">
                                             <i class="bi bi-calendar-date fa-fw me-2"></i> Born: <strong>{{ \Carbon\Carbon::parse($client->dob)->format('M-d-Y') }}</strong>
                                         </p>
-                                        {{-- <div class="dropdown ms-auto">
+                                        <div class="dropdown ms-auto">
                                             <!-- Card share action menu -->
                                             <a class="nav nav-link text-secondary mb-0" href="#" id="aboutAction2"
                                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -209,7 +126,7 @@
                                                 <li><a class="dropdown-item" href="#"> <i
                                                             class="bi bi-trash fa-fw pe-2"></i>Delete</a></li>
                                             </ul>
-                                        </div> --}}
+                                        </div>
                                     </div>
                                     <!-- Birthday END -->
                                 </div>
@@ -220,7 +137,7 @@
                                         <p class="mb-0">
                                             <i class="bi bi-heart fa-fw me-2"></i> Status: <strong> Single </strong>
                                         </p>
-                                        {{-- <div class="dropdown ms-auto">
+                                        <div class="dropdown ms-auto">
                                             <!-- Card share action menu -->
                                             <a class="nav nav-link text-secondary mb-0" href="#" id="aboutAction3"
                                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -234,7 +151,7 @@
                                                 <li><a class="dropdown-item" href="#"> <i
                                                             class="bi bi-trash fa-fw pe-2"></i>Delete</a></li>
                                             </ul>
-                                        </div> --}}
+                                        </div>
                                     </div>
                                     <!-- Status END -->
                                 </div>
@@ -245,7 +162,7 @@
                                         <p class="mb-0">
                                             <i class="bi bi-briefcase fa-fw me-2"></i>Contact: <strong>{{$client->contact_no}}</strong>
                                         </p>
-                                        {{-- <div class="dropdown ms-auto">
+                                        <div class="dropdown ms-auto">
                                             <!-- Card share action menu -->
                                             <a class="nav nav-link text-secondary mb-0" href="#" id="aboutAction4"
                                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -258,7 +175,7 @@
                                                 <li><a class="dropdown-item" href="#"> <i
                                                             class="bi bi-trash fa-fw pe-2"></i>Delete</a></li>
                                             </ul>
-                                        </div> --}}
+                                        </div>
                                     </div>
                                     <!-- Designation END -->
                                 </div>
@@ -292,7 +209,7 @@
                                     <div class="d-flex align-items-center rounded border px-3 py-2">
                                         <!-- Date -->
                                         <p class="mb-0">
-                                            <i class="bi bi-geo-alt fa-fw me-2"></i> Joined on: <strong> {{ $client->created_at->format('M,Y')}}
+                                            <i class="bi bi-geo-alt fa-fw me-2"></i> Joined on: <strong> {{ $client->created_at->format('d M,Y')}}
                                             </strong>
                                         </p>
                                         {{-- <div class="dropdown ms-auto">
@@ -383,7 +300,7 @@
                 <!-- Main content END -->
 
                 <!-- Right sidebar START -->
-                <div class="col-lg-4">
+                {{-- <div class="col-lg-4">
 
                     <div class="row g-4">
 
@@ -396,8 +313,8 @@
                                 </div>
                                 <!-- Card body START -->
                                 <div class="card-body position-relative pt-0">
-                                    {{--  <p>He moonlights difficult engrossed it, sportsmen. Interested has all Devonshire
-                                        difficulty gay assistance joy.</p>  --}}
+                                    <p>He moonlights difficult engrossed it, sportsmen. Interested has all Devonshire
+                                        difficulty gay assistance joy.</p> 
                                     <!-- Date time -->
                                     <ul class="list-unstyled mt-3 mb-0">
                                         <li class="mb-2"> <i class="bi bi-calendar-date fa-fw pe-1"></i> Born: <strong>{{ \Carbon\Carbon::parse($client->dob)->format('M-d-Y') }}</strong>
@@ -429,7 +346,7 @@
                         <!-- Card END -->
 
                         <!-- Card START -->
-                        {{-- <div class="col-md-6 col-lg-12">
+                        <div class="col-md-6 col-lg-12">
                             <div class="card">
                                 <!-- Card header START -->
                                 <div class="card-header d-flex justify-content-between border-0">
@@ -492,11 +409,11 @@
                                 </div>
                                 <!-- Card body END -->
                             </div>
-                        </div> --}}
+                        </div>
                         <!-- Card END -->
 
                         <!-- Card START -->
-                        {{-- <div class="col-md-6 col-lg-12">
+                        <div class="col-md-6 col-lg-12">
                             <div class="card">
                                 <!-- Card header START -->
                                 <div class="card-header d-sm-flex justify-content-between border-0">
@@ -552,11 +469,11 @@
                                 </div>
                                 <!-- Card body END -->
                             </div>
-                        </div> --}}
+                        </div>
                         <!-- Card END -->
 
                         <!-- Card START -->
-                        {{-- <div class="col-md-6 col-lg-12">
+                        <div class="col-md-6 col-lg-12">
                             <div class="card">
                                 <!-- Card header START -->
                                 <div class="card-header d-sm-flex justify-content-between align-items-center border-0">
@@ -685,11 +602,11 @@
                                 </div>
                                 <!-- Card body END -->
                             </div>
-                        </div> --}}
+                        </div>
                         <!-- Card END -->
                     </div>
 
-                </div>
+                </div> --}}
                 <!-- Right sidebar END -->
 
             </div> <!-- Row END -->

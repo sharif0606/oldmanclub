@@ -11,7 +11,8 @@
         <!-- Sign in START -->
         <div class="card card-body text-center p-4 p-sm-5">
           <!-- Title -->
-          <h1 class="mb-2">Sign in</h1>
+          <h2 class="mb-2">OLD CLUB MAN </h2>
+          <h3 class="mb-2">SIGN IN</h3>
           <p class="mb-0">Don't have an account?<a href="{{ route('clientregister') }}"> Click here to sign up</a></p>
           <!-- Form START -->
 		  <form action="{{route('clientlogin.check')}}" method="POST" class="mt-sm-4">
@@ -51,7 +52,7 @@
             <!-- Button -->
             <div class="d-grid"><button type="submit" class="btn btn-lg btn-primary">Login</button></div>
             <!-- Copyright -->
-            <p class="mb-0 mt-3">©{{ date("Y") }} <a target="_blank" href="https://muktomart.com.bd/">OldClubMan.</a> All rights reserved</p>
+            <p class="mb-0 mt-3">©{{ date("Y") }} <a target="_blank" href="https://muktomart.com.bd/">OLD CLUB MAN.</a> All rights reserved</p>
           </form>
           <!-- Form END -->
         </div>
