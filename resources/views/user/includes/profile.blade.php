@@ -71,20 +71,19 @@
             <li class="my-1"><i class="bi bi-calendar2-plus me-1"></i>
                 Joined on {{ $client->created_at->format('d M,Y')}}
             </li>
-            {{-- @if ($client->designation) --}}
+            @if ($client->designation)
             <li><i class="bi bi-briefcase-fill me-1"></i>
                 {{$client->designation}}
-                Author and Business Consultant
             </li>
+            @endif
             <li>
-                <i class="bi bi-geo-alt me-1"></i>{{$client->designation}}
+                <i class="bi bi-geo-alt me-1"></i>
                 Lives In New York, NY
             </li>
             <li class="ps-4">
-                {{$client->designation}}
                 Form Dhaka, Bangladesh
             </li>
-            {{-- @endif --}}
+            
         </ul>
     </div>
     <!-- Card body END -->

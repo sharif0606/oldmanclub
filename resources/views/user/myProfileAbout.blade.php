@@ -209,7 +209,7 @@
                                     <div class="d-flex align-items-center rounded border px-3 py-2">
                                         <!-- Date -->
                                         <p class="mb-0">
-                                            <i class="bi bi-geo-alt fa-fw me-2"></i> Joined on: <strong> {{ $client->created_at->format('M,Y')}}
+                                            <i class="bi bi-geo-alt fa-fw me-2"></i> Joined on: <strong> {{ $client->created_at->format('d M,Y')}}
                                             </strong>
                                         </p>
                                         {{-- <div class="dropdown ms-auto">

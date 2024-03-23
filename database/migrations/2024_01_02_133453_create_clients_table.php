@@ -42,8 +42,8 @@ return new class extends Migration
             $table->string('nationality')->nullable();
             $table->string('designation')->nullable();
             $table->integer('marital_status')->default(1)->comment('1=>Unmarried, 2=>Married')->nullable();
-            $table->stirng('profile_overview')->nullable();
-            $table->stirng('tagline')->nullable();
+            $table->text('profile_overview')->nullable();
+            $table->text('tagline')->nullable();
             $table->string('id_no')->nullable();
             $table->string('id_no_type')->comment('0=>Passport, 1=>National ID, 2=>Driver License, 3=>Birth Certificate')->nullable();
             $table->string('image')->nullable();

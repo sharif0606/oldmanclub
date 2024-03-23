@@ -30,7 +30,10 @@
                         </div>
                         <!-- Info -->
                         <h5 class="mb-0"> <a href="#!">{{$client->middle_name}} {{$client->last_name}}</a> </h5>
-                        <small><i class="bi bi-briefcase-fill me-1"></i>{{$client->designation}}Author and Business Consultant</small>
+                        @if ($client->designation)
+                            <small><i class="bi bi-briefcase-fill me-1"></i>{{$client->designation}}</small>
+                        @endif
+                        
                         <p class="mt-3">I'd love to change the world, but they won’t give me the
                             source code.</p>
 

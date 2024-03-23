@@ -57,8 +57,9 @@ use App\Http\Controllers\Backend\Website\PrintingService\PrintingHeroController 
 use App\Http\Controllers\Backend\Website\PrintingService\PrintVideoSectionController as printvideo;
 use App\Http\Controllers\Backend\Website\PrintingService\PrintCardSectionController as printcard;
 use App\Http\Controllers\Backend\Website\PrintingService\PrintCustomerFeedbackController as printcus_feedback;
-
-
+//Country City and State
+use App\Http\Controllers\Backend\Location\CityController;
+use App\Http\Controllers\Backend\Location\StateController;
 //User
 use App\Http\Controllers\User\ClientAuthentication as clientauth;
 use App\Http\Controllers\User\ClientController as clientprofile;
@@ -240,6 +241,7 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::resource('company', company::class);
     Route::resource('bank', bank::class);
     Route::resource('post', post::class);
+    
 });
 Route::get('nfcqrurl/{id}', [nfc_card::class, 'showqrurl']);
 Route::get('save-contact/{id}', [nfc_card::class, 'save_contact'])->name('save_contact');
@@ -274,3 +276,9 @@ Route::post('checkout', [CheckOutController::class, 'store'])->name('checkout.st
 Route::get('/chat', 'App\Http\Controllers\PusherController@index');
 Route::post('/broadcast', 'App\Http\Controllers\PusherController@broadcast');
 Route::post('/receive', 'App\Http\Controllers\PusherController@receive');
+
+/*===City and State ====*/
+Route::get('/states', [StateController::class,'getStatesByCountry'])->name('getStatesByCountry');
+Route::get('/cities', [CityController::class,'getCitiesByStates'])->name('getCitiesByStates');
+
+
