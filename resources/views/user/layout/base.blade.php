@@ -3,7 +3,7 @@
 
 
 <head>
-    <title> OLDMANCLUB- Network, Community and Event</title>
+    <title>OLD CLUB MAN - Network, Community</title>
 
     <!-- Meta Tags -->
     <meta charset="utf-8">
@@ -1088,6 +1088,7 @@
     <!-- =======================
 JS libraries, plugins and custom scripts -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+@stack('scripts')
 <script>
     $(document).ready(function() {
         // Initialize Dropzone
@@ -1185,7 +1186,7 @@ JS libraries, plugins and custom scripts -->
     <!-- Theme Functions -->
     <script src="{{ asset('public/user/assets/js/functions.js') }}"></script>
 
-    @stack('scripts')
+    
 </body>
 
 

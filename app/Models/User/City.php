@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 class City extends Model
 {
     use HasFactory;
-    public function client(){
-        return $this->hasMany(Client::class);
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
     }
 }

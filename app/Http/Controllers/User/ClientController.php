@@ -39,10 +39,8 @@ class ClientController extends Controller
     public function accountSetting()
     {
         $client = Client::find(currentUserId());
-        $country = Country::get();
-        $city = City::get();
-        $state = State::get();
-        return view('user.accountSetting', compact('client','country','city','state'));
+        $countries = Country::get();
+        return view('user.accountSetting', compact('client','countries'));
     }
     // public function phonebook_list()
     // {
@@ -116,11 +114,12 @@ class ClientController extends Controller
             $user->current_country_id = $request->current_country_id;
             $user->current_city_id = $request->current_city_id;
             $user->current_state_id = $request->current_state_id;
-            $user->current_zip_code = $request->current_zip_code;
+            //$user->current_zip_code = $request->current_zip_code;
             $user->from_country_id = $request->from_country_id;
             $user->from_city_id = $request->from_city_id;
             $user->from_state_id = $request->from_state_id;
-            $user->from_zip_code = $request->from_zip_code;
+            //$user->from_zip_code = $request->from_zip_code;
+            $user->zip_code = $request->zip_code;
             $user->nationality = $request->nationality;
             $user->id_no = $request->id_no;
             $user->id_no_type = $request->id_no_type;
