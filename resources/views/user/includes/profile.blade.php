@@ -76,14 +76,17 @@
                 {{$client->designation}}
             </li>
             @endif
+            @if ($client->current_country_id)
             <li>
                 <i class="bi bi-geo-alt me-1"></i>
-                Lives In New York, NY
+                Lives In {{$client->currentcountry?->name}}@if($client->current_city_id), {{$client->currentstate?->name}} @endif
             </li>
+            @endif
+            @if ($client->from_country_id)
             <li class="ps-4">
-                Form Dhaka, Bangladesh
+                Form {{$client->fromcountry?->name}}@if($client->current_city_id), {{$client->fromstate?->name}} @endif
             </li>
-            
+            @endif
         </ul>
     </div>
     <!-- Card body END -->

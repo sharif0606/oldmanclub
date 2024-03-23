@@ -8,7 +8,7 @@
     }
 </style>
 <div>
-    <header>
+    <div class="col-md-12">
         <div class="classic_header_image_show">
             @if ($nfc_card->client?->image)
                 <img src="{{ asset('public/uploads/client/' . $nfc_card->client?->image) }}" alt="" width="350px"
@@ -56,7 +56,7 @@
                 </div>
             </div>
         </div>
-    </header>
+    </div>
     <section class="middle">
         <div class="container-fluid mt-5">
             <div class="row">
