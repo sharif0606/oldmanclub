@@ -94,8 +94,13 @@
                                     </div>
                                 </div>
                                 <!-- Dropdown END -->
+                                @if($client->image)
                                 <img class="rounded img-fluid" src="{{ asset('public/uploads/client/' . $nfc_card->client?->image) }}"
-                                    alt="">
+                                alt="">
+                                @else
+                                <img class="avatar-img" src="{{asset('public/user/assets/images/avatar/03.jpg')}}" alt="">
+                                @endif
+                               
                                     {{-- asset('public/user/assets/images/albums/01.jpg') --}}
                             </div>
                             @empty
