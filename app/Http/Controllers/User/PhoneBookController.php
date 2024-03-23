@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Models\User\PhoneBook;
 use App\Models\User\Client;
+use App\Models\User\SendSms;
 use App\Models\User\PhoneGroup;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -129,5 +130,25 @@ class PhoneBookController extends Controller
         $response->header('Content-Type', 'text/csv;  charset=UTF-8');
         $response->header('Content-Disposition', 'attachment; filename="contacts.csv"');
         return $response;
+    }
+
+    public function sendsms(){
+        $client = Client::find(currentUserId());
+        $data = SendSms::where('client_id',currentUserId())->get();
+        return view('user.phonebook.smslist',compact('data','client'));
+    }
+    public function sms_create(){
+        $client = Client::find(currentUserId());
+        return view('user.phonebook.smscreate',compact('client'));
+    }
+    public function sms_store(Request $request){
+        $sms = new SendSms;
+        $sms->client_id = currentUserId();
+        $sms->contact_no = $request->contact_no;
+        $sms->message_body = $request->message_body;
+        if($sms->save()){
+            $this->notice::success('sms successfully send');
+            return redirect()->route('sms_create');
+        }
     }
 }
