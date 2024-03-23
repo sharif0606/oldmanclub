@@ -51,13 +51,19 @@ class Client extends Model
     public function addres_verify(){
         return $this->hasOne(AddressVerification::class,'client_id','id');
     }
-    public function country(){
-        return $this->belongsTo(Country::class);
+    public function currentcountry(){
+        return $this->belongsTo(Country::class,'current_country_id','id');
+    }
+    public function currentstate(){
+        return $this->belongsTo(State::class,'current_state_id','id');
+    }
+    public function fromcountry(){
+        return $this->belongsTo(Country::class,'from_country_id','id');
+    }
+    public function fromstate(){
+        return $this->belongsTo(State::class,'from_state_id','id');
     }
     public function city(){
         return $this->belongsTo(City::class);
-    }
-    public function state(){
-        return $this->belongsTo(State::class);
     }
 }

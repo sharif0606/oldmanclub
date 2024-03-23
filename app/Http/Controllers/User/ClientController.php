@@ -125,6 +125,8 @@ class ClientController extends Controller
             $user->id_no_type = $request->id_no_type;
             $user->marital_status = $request->marital_status;
             $user->designation = $request->designation;
+            $user->profile_overview = $request->profile_overview;
+            $user->tagline = $request->tagline;
             if ($request->hasFile('cover_photo')) {
                 $imageName = rand(111, 999) . time() . '.' . $request->cover_photo->extension();
                 $request->cover_photo->move(public_path('uploads/client'), $imageName);

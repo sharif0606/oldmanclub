@@ -50,16 +50,9 @@
                 <!-- Card header START -->
                 <!-- Card body START -->
                 <div class="card-body">
-
-
-
                     <!-- Album Tab content START -->
                     <div class="mb-0 pb-0">
-
-
-
                         <div class="row g-3">
-
                             <!-- Add nfc START -->
                             <div class="col-6 col-lg-3">
                                 <div
@@ -83,11 +76,11 @@
                                         </a>
                                         <!-- Dropdown menu -->
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="photoActionEdit">
-                                            <li><a class="dropdown-item" href="#"> <i
-                                                        class="bi bi-tag fa-fw pe-1"></i> Remove Tag</a></li>
-                                            <li><a class="dropdown-item" href="#"> <i
+                                            <li><a class="dropdown-item" href="{{ route('nfc_card.edit', encryptor('encrypt', $nfc_card->id)) }}"> <i
+                                                        class="bi bi-tag fa-fw pe-1"></i>Edit</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('nfc_card.show', encryptor('encrypt', $nfc_card->id)) }}"> <i
                                                         class="bi bi-download fa-fw pe-1"></i> Download </a></li>
-                                            <li><a class="dropdown-item" href="#"> <i
+                                            {{--<li><a class="dropdown-item" href="#"> <i
                                                         class="bi bi-person fa-fw pe-1"></i> Make Profile Picture</a></li>
                                             <li><a class="dropdown-item" href="#"> <i
                                                         class="bi bi-person-bounding-box fa-fw pe-1"></i> Make Cover
@@ -96,13 +89,14 @@
                                                 <hr class="dropdown-divider">
                                             </li>
                                             <li><a class="dropdown-item" href="#"> <i
-                                                        class="bi bi-flag fa-fw pe-1"></i> Report photo</a></li>
+                                                        class="bi bi-flag fa-fw pe-1"></i> Report photo</a></li> --}}
                                         </ul>
                                     </div>
                                 </div>
                                 <!-- Dropdown END -->
-                                <img class="rounded img-fluid" src="{{ asset('public/user/assets/images/albums/01.jpg') }}"
+                                <img class="rounded img-fluid" src="{{ asset('public/uploads/client/' . $nfc_card->client?->image) }}"
                                     alt="">
+                                    {{-- asset('public/user/assets/images/albums/01.jpg') --}}
                             </div>
                             @empty
                             No Card Made Yet

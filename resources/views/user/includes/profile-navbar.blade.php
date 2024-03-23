@@ -34,8 +34,7 @@
                             <small><i class="bi bi-briefcase-fill me-1"></i>{{$client->designation}}</small>
                         @endif
                         
-                        <p class="mt-3">I'd love to change the world, but they won’t give me the
-                            source code.</p>
+                        <p class="mt-3">{{$client->tagline}}</p>
 
                         <!-- User stat START -->
                         <div class="hstack gap-2 gap-xl-3 justify-content-center">
