@@ -19,13 +19,12 @@
                             <!-- Avatar -->
                             <div class="avatar avatar-xs me-2">
                                 <a href="#">
-                                 @if($client->image)
+                                @if($client->image)
                                     <img class="avatar-img rounded-circle"
                                     src="{{asset('public/uploads/client/' . $client->image)}}" alt="">
                                 @else
                                     <img class="avatar-img rounded-circle"
                                     src="{{asset('public/images/download.jpg')}}" alt="">
-
                                 @endif
                                  {{-- <img class="avatar-img rounded-circle" src="{{asset($client->image?$client->image:default_image())}}"
                                         alt="">  --}}

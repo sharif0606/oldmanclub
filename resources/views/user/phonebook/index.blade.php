@@ -15,6 +15,24 @@
   <!-- Container START -->
   <div class="container">
     <div class="row g-4">
+        <!-- Sidenav START -->
+      <div class="col-lg-3">
+
+        <!-- Advanced filter responsive toggler START -->
+        <div class="d-flex align-items-center d-lg-none">
+          <button class="border-0 bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSideNavbar" aria-controls="offcanvasSideNavbar">
+            <span class="btn btn-primary"><i class="fa-solid fa-sliders-h"></i></span>
+            <span class="h6 mb-0 fw-bold d-lg-none ms-2">My profile</span>
+          </button>
+        </div>
+        <!-- Advanced filter responsive toggler END -->
+        
+        <!-- Navbar START-->
+         @include('user.includes.profile-navbar')
+        <!-- Navbar END-->
+      </div>
+      <!-- Sidenav END -->
+
       <!-- Main content START -->
       <div class="col-md-8 col-lg-6 vstack gap-4">
           <!-- Card START -->
@@ -35,9 +53,9 @@
                     <option value="SG">Suggested</option>
                   </select>
                 </div>  --}}
-                  <div class="col-sm-6 col-lg-4 ms-auto">
+                  <div class="col-sm-6 col-lg-6">
                   <!-- Button modal -->
-                  <a class="btn btn-primary-soft ms-auto" href="{{route('sms_create')}}">sms</a>
+                  <a class="btn btn-primary-soft" href="{{route('sms_create')}}">sms</a>
                   <a href="#" id="downloadVCard" class="fs-5 mx-2 text-success"><i class="fa fa-address-card"></i></a>
                             {{--  <button id="downloadVCard"><i class="fa fa-address-card text-info"></i>
                             </button>  --}}
@@ -102,7 +120,6 @@
     </div>
   </div>
 </main>
-
 {{--  <div class="row">
     <div class="col-7">
         <div class="card">

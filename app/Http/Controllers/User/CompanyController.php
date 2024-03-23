@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Models\User\Company;
 use App\Models\User\Client;
+use App\Models\User\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -16,8 +17,9 @@ class CompanyController extends Controller
     public function index()
     {
         $client = Client::find(currentUserId());
+        $postCount = Post::where('client_id', currentUserId())->count();
         $company = Company::where('client_id',currentUserId())->get();
-        return view('user.company.index',compact('company','client'));
+        return view('user.company.index',compact('company','client','postCount'));
     }
 
     /**
