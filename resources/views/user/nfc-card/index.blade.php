@@ -81,7 +81,7 @@
                                             <li><a class="dropdown-item" href="{{ route('nfc_card.show', encryptor('encrypt', $nfc_card->id)) }}"> <i
                                                         class="bi bi-download fa-fw pe-1"></i> Download </a></li>
                                             {{--<li><a class="dropdown-item" href="#"> <i
-                                                        class="bi bi-person fa-fw pe-1"></i> Make Profile Picture</a></li>
+                                                        class="bi bi-person fa-fw pe-1"></i> Make Profile Picture</a></li> 
                                             <li><a class="dropdown-item" href="#"> <i
                                                         class="bi bi-person-bounding-box fa-fw pe-1"></i> Make Cover
                                                     Photo</a></li>
