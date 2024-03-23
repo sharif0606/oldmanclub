@@ -35,7 +35,8 @@ class NfcCardController extends Controller
     {
         $nfc_fields = NfcField::all();
         $client = Client::find(currentUserId());
-        return view('user.nfc-card.create', compact('nfc_fields','client'));
+        $postCount = Post::where('client_id', currentUserId())->count();
+        return view('user.nfc-card.create', compact('nfc_fields','client','postCount'));
     }
 
     /**
@@ -118,7 +119,8 @@ class NfcCardController extends Controller
     {
         $client = Client::find(currentUserId());
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
-        return view('user.nfc-card.show', compact('nfc_card','client'));
+        $postCount = Post::where('client_id', currentUserId())->count();
+        return view('user.nfc-card.show', compact('nfc_card','client','postCount'));
     }
 
     /**
@@ -130,7 +132,8 @@ class NfcCardController extends Controller
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
         $nfc_info = NfcInformation::find($id);
         $nfc_fields = NfcField::all();
-        return view('user.nfc-card.edit', compact('nfc_fields', 'nfc_card', 'nfc_info','client'));
+        $postCount = Post::where('client_id', currentUserId())->count();
+        return view('user.nfc-card.edit', compact('nfc_fields', 'nfc_card', 'nfc_info','client','postCount'));
     }
 
     /**
