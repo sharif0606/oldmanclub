@@ -73,6 +73,7 @@ use App\Http\Controllers\User\AddressVerificationController as address_verify;
 use App\Http\Controllers\User\CompanyController as company;
 use App\Http\Controllers\User\BankController as bank;
 use App\Http\Controllers\User\PostController as post;
+use App\Http\Controllers\PurchaseSmsController as purchase;
 
 // landing page
 use App\Http\Controllers\Common\frontendController as frontend;
@@ -236,12 +237,20 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::resource('phonebook', phonebook::class);
 
     Route::get('/download-phonebook', [phonebook::class, 'downloadPhonebook'])->name('phonebook_download');
+    Route::get('/sms-send', [phonebook::class, 'sendsms'])->name('sms_send');
+    Route::get('/sms-create', [phonebook::class, 'sms_create'])->name('sms_create');
+    Route::post('/sms-create', [phonebook::class, 'sms_store'])->name('sms_store');
+
     Route::resource('nfc_card', nfc_card::class);
     Route::resource('address_verify', address_verify::class);
     Route::resource('company', company::class);
     Route::resource('bank', bank::class);
     Route::resource('post', post::class);
+
+    Route::resource('purchase', purchase::class);
+
     
+
 });
 Route::get('nfcqrurl/{id}', [nfc_card::class, 'showqrurl']);
 Route::get('save-contact/{id}', [nfc_card::class, 'save_contact'])->name('save_contact');

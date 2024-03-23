@@ -10,4 +10,8 @@ class SmsPackage extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function purchase(){
+        return $this->hasMany(PurchaseSms::class,"smspachage_id",'id');
+    }
 }
