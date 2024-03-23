@@ -35,8 +35,9 @@
                     <option value="SG">Suggested</option>
                   </select>
                 </div>  --}}
-                  <div class="col-sm-6 col-lg-3 ms-auto">
+                  <div class="col-sm-6 col-lg-4 ms-auto">
                   <!-- Button modal -->
+                  <a class="btn btn-primary-soft ms-auto" href="{{route('sms_create')}}">sms</a>
                   <a href="#" id="downloadVCard" class="fs-5 mx-2 text-success"><i class="fa fa-address-card"></i></a>
                             {{--  <button id="downloadVCard"><i class="fa fa-address-card text-info"></i>
                             </button>  --}}
@@ -45,7 +46,7 @@
                     <a href="{{ route('phonebook_download') }}" class="fs-5 mx-2 text-success" download>
                                 <i class="fa fa-download"></i>
                             </a>
-                  <a class="btn btn-primary-soft ms-auto" href="{{route('phonebook.create')}}"> <i class="fa-solid fa-plus pe-1"></i> Create Group</a>
+                  <a class="btn btn-primary-soft ms-auto" href="{{route('phonebook.create')}}"> <i class="fa-solid fa-plus pe-1"></i> Create Contact</a>
                 </div>
               </div>
             </div>
