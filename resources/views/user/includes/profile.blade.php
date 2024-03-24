@@ -32,16 +32,56 @@
                 @if($client->is_address_verified==1)
                     <i class="bi bi-patch-check-fill text-success small"></i>
                 @else
-                    <i class="bi bi-file-x-fill text-danger small"></i>
+                    {{-- <i class="bi bi-file-x-fill text-danger small"></i> --}}
                 @endif
                 </h1>
                 <p class="mb-1"><span>1.2M Followers</span><span class="mx-2" style="border-right: 2px solid #EFF2F6;"></span><span>2.5K Following</span></p>
+                <div class="w-100">
+                  <!-- Connections START -->
+                  <ul class="avatar-group mt-1 list-unstyled align-items-sm-center">
+                    <li class="avatar avatar-xxs">
+                      <img class="avatar-img rounded-circle" src="{{ asset('public/user/assets/images/avatar/01.jpg')}}" alt="avatar">
+                    </li>
+                    <li class="avatar avatar-xxs">
+                      <img class="avatar-img rounded-circle" src="{{ asset('public/user/assets/images/avatar/02.jpg')}}" alt="avatar">
+                    </li>
+                    <li class="avatar avatar-xxs">
+                      <img class="avatar-img rounded-circle" src="{{ asset('public/user/assets/images/avatar/03.jpg')}}" alt="avatar">
+                    </li>
+                    <li class="avatar avatar-xxs">
+                      <img class="avatar-img rounded-circle" src="{{ asset('public/user/assets/images/avatar/04.jpg')}}" alt="avatar">
+                    </li>
+                    <li class="avatar avatar-xxs">
+                        <img class="avatar-img rounded-circle" src="{{ asset('public/user/assets/images/avatar/01.jpg')}}" alt="avatar">
+                      </li>
+                      <li class="avatar avatar-xxs">
+                        <img class="avatar-img rounded-circle" src="{{ asset('public/user/assets/images/avatar/02.jpg')}}" alt="avatar">
+                      </li>
+                      <li class="avatar avatar-xxs">
+                        <img class="avatar-img rounded-circle" src="{{ asset('public/user/assets/images/avatar/03.jpg')}}" alt="avatar">
+                      </li>
+                      <li class="avatar avatar-xxs">
+                        <img class="avatar-img rounded-circle" src="{{ asset('public/user/assets/images/avatar/04.jpg')}}" alt="avatar">
+                      </li>
+                    <li class="avatar avatar-xxs">
+                      <div class="avatar-img rounded-circle bg-primary"><span class="smaller text-white position-absolute top-50 start-50 translate-middle">+2</span></div>
+                    </li>
+                    {{-- <li class="small ms-3">
+                      Carolyn Ortiz, Frances Guerrero, and 20 other shared connections
+                    </li> --}}
+                  </ul>
+                  <!-- Connections END -->
+                </div>
             </div>
             <!-- Button -->
             <div class="d-flex mt-3 justify-content-center ms-sm-auto">
-                <a class="btn btn-danger-soft me-2" href="{{route('accountSetting')}}"> <i
-                        class="bi bi-pencil-fill pe-1"></i> Edit profile </a>
-                {{-- <div class="dropdown">
+                <a class="btn btn-primary me-2" href="{{route('accountSetting')}}" style="padding: 8px 12px;font-size:12px"> <i
+                        class="bi bi-pencil-fill pe-1"></i>Edit</a>
+                <a class="btn btn-primary me-2" href="" style="padding: 8px 12px;font-size:12px"> <i
+                            class="bi bi-tools pe-1"></i>View Tools</a>
+                <a class="btn btn-primary me-2" href="" style="padding: 8px 12px;font-size:12px"> <i
+                                class="bi bi-megaphone pe-1"></i>Promote Profile</a>
+                <div class="dropdown">
                     <!-- Card share action menu -->
                     <button class="icon-md btn btn-light" type="button" id="profileAction2"
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -63,7 +103,7 @@
                         <li><a class="dropdown-item" href="#"> <i
                                     class="bi bi-gear fa-fw pe-2"></i>Profile settings</a></li>
                     </ul>
-                </div> --}}
+                </div>
             </div>
         </div>
         <!-- List profile -->
