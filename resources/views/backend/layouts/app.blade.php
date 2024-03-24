@@ -393,7 +393,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" />
          <script src="{{ asset('js/app.js') }}"></script>
         {!! Toastr::message() !!}
-
     </body>
 
 </html>

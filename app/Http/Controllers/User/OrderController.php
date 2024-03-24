@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\User\Client;
+use App\Models\User\Post;
 use App\Models\Common\CartItem;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,8 @@ class OrderController extends Controller
     {
         $client = Client::find(currentUserId());
         $order = Order::where('client_id',currentUserId())->get();
-        return view('user.order.index',compact('order','client'));
+        $postCount = Post::where('client_id', currentUserId())->count();
+        return view('user.order.index',compact('order','client','postCount'));
     }
 
     /**

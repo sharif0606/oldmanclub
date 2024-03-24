@@ -53,7 +53,7 @@
                     <option value="SG">Suggested</option>
                   </select>
                 </div>  --}}
-                  <div class="col-sm-6 col-lg-6">
+                  <div class="col-sm-6 col-lg-6 ms-auto">
                   <!-- Button modal -->
                   <a class="btn btn-primary-soft" href="{{route('sms_create')}}">sms</a>
                   <a href="#" id="downloadVCard" class="fs-5 mx-2 text-success"><i class="fa fa-address-card"></i></a>
@@ -97,7 +97,7 @@
                                     <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()" class="text-danger">
                                         <i class="fa fa-trash"></i>
                                     </a>
-                                    <form id="form{{$p->id}}" action="{{route('phonebook.destroy',encryptor('encrypt',$p->id))}}" method="post">
+                                    <form id="form{{$p->id}}" action="{{route('phonebook.destroy',encryptor('encrypt',$p->id))}}" method="post" onsubmit="return confirm('Are you sure you want to delete this item?');">
                                         @csrf
                                         @method('delete')
                                     </form>
@@ -248,11 +248,9 @@
 </div>  --}}
 <script>
     document.getElementById('downloadVCard').addEventListener('click', function() {
-
         var $phonebook = @json($phonebook);
         function generateVCard(phonebook) {
             var vCard = "BEGIN:VCARD\nVERSION:3.0";
-
             phonebook.forEach(function(contact) {
                 var Name = contact.name_en;
                 var Phone = contact.contact_en;
@@ -272,7 +270,6 @@
             link.setAttribute('download', 'phonebook.vcf');
             link.click();
     });
-
 </script>
 
 <script>

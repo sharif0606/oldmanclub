@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User\PurchaseSms;
 use App\Models\User\Client;
+use App\Models\User\Post;
 use App\Models\Backend\Admin\SmsPackage;
 
 use App\Http\Controllers\Controller;
@@ -18,7 +19,8 @@ class PurchaseSmsController extends Controller
     {
         $client = Client::find(currentUserId());
         $data = PurchaseSms::where('client_id',currentUserId())->get();
-        return view('user.purchase.index',compact('data','client'));
+        $postCount = Post::where('client_id', currentUserId())->count();
+        return view('user.purchase.index',compact('data','client','postCount'));
     }
 
     /**

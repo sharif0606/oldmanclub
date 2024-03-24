@@ -8,7 +8,6 @@
     }
 </style>
 <main>
-  
   <!-- Container START -->
   <div class="container">
     <div class="row g-4">

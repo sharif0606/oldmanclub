@@ -5,7 +5,7 @@
     <div class="col-12">
         <div class="card p-5">
             <div class="card-content">
-                <h4 class="text-center">Add New Bank</h4>
+                <h4 class="">Add New Bank</h4>
                 <div class="card-body">
                     <form class="form" method="post" enctype="multipart/form-data" action="{{route('bank.store')}}">
                         @csrf
