@@ -22,8 +22,6 @@
                             <th scope="col">{{__('Quantity')}}</th>
                             <th scope="col">{{__('Price')}}</th>
                             <th scope="col">{{__('Image')}}</th>
-                            <th scope="col">{{__('Created_by')}}</th>
-                            <th scope="col">{{__('Updated_by')}}</th>
                             <th class="white-space-nowrap">{{__('Action') }}</th>
                         </tr>
                     </thead>
@@ -42,8 +40,6 @@
                                     No Featured Image
                                 @endif
                             </td>
-                            <td>{{$p->createdBy?->name}}</td>
-                            <td>{{$p->updatedBy?->name}}</td>
                             <td class="white-space-nowrap">
                                 <a href="{{route('print_service.edit',encryptor('encrypt',$p->id))}}">
                                     <i class="fa fa-edit"></i>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Models\User\Bank;
 use App\Models\User\Client;
+use App\Models\User\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -15,8 +16,9 @@ class BankController extends Controller
     public function index()
     {
         $client = Client::find(currentUserId());
+        $postCount = Post::where('client_id', currentUserId())->count();
         $data = Bank::where('client_id',currentUserID())->get();
-        return view('user.bank.index',compact('data','client'));
+        return view('user.bank.index',compact('data','client','postCount'));
 
     }
 
