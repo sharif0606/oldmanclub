@@ -149,4 +149,8 @@ class ClientAuthentication extends Controller
         request()->session()->forget(['userId', 'userName']);
         return redirect()->route('clientlogin')->with('danger', 'Succfully Logged Out');
     }
+    public function forget_password()
+    {
+        return view('user.authentication.forget-password');
+    }
 }
