@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Models\User\PhoneBook;
 use App\Models\User\Client;
+use App\Models\User\Post;
 use App\Models\User\SendSms;
 use App\Models\User\PhoneGroup;
 use App\Http\Controllers\Controller;
@@ -21,8 +22,9 @@ class PhoneBookController extends Controller
     {
         $client = Client::find(currentUserId());
         $phonegroup = PhoneGroup::where('client_id',currentUserId())->get();
+        $postCount = Post::where('client_id', currentUserId())->count();
         $phonebook = PhoneBook::where('client_id',currentUserId())->paginate(3);
-        return view('user.phonebook.index',compact('phonebook','phonegroup','client'));
+        return view('user.phonebook.index',compact('phonebook','phonegroup','client','postCount'));
     }
 
     /**

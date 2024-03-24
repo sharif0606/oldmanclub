@@ -8,6 +8,7 @@ use App\Models\Backend\Admin\ShippingStatusType;
 use App\Models\Backend\Admin\ShippingTracking;
 use App\Models\User\ShippingComment;
 use App\Models\User\client;
+use App\Models\User\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
@@ -20,8 +21,9 @@ class ShippingController extends Controller
     public function index()
     {
         $client = Client::find(currentUserId());
+        $postCount = Post::where('client_id', currentUserId())->count();
         $shipping = Shipping::where('client_id', currentUserId())->get();
-        return view('user.shipping.index', compact('shipping', 'client'));
+        return view('user.shipping.index', compact('shipping', 'client','postCount'));
     }
 
     /**
