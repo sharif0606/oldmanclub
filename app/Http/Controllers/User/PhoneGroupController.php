@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\User\PhoneGroup;
+use App\Models\User\PhoneBook;
 use App\Models\User\Client;
+use App\Models\User\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -16,7 +18,14 @@ class PhoneGroupController extends Controller
     {
         $client = Client::find(currentUserId());
         $phonegroup = PhoneGroup::where('client_id',currentUserId())->get();
-        return view('user.phonegroup.index',compact('phonegroup','client'));
+        $postCount = Post::where('client_id', currentUserId())->count();
+        $contactbygroup=[];
+        foreach($phonegroup as $group){
+            $count = PhoneBook::where('group_id',$group->id)->count();
+            $contactbygroup[$group->id]=$count;
+        }
+        $phone = PhoneBook::where('group_id')->count();
+        return view('user.phonegroup.index',compact('phonegroup','client','contactbygroup','postCount'));
     }
 
     /**
