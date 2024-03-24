@@ -106,6 +106,7 @@ Route::get('/login', [auth::class, 'signInForm'])->name('login');
 Route::post('/login', [auth::class, 'signInCheck'])->name('login.check');
 Route::get('/logout', [auth::class, 'singOut'])->name('logOut');
 
+
 Route::middleware(['checkauth'])->prefix('admin')->group(function () {
     Route::get('dashboard', [dashboard::class, 'index'])->name('dashboard');
     Route::get('admin/chat', [ChatController::class, 'adminChat'])->name('admin_chat');
@@ -207,6 +208,7 @@ Route::post('/register/step3', [clientauth::class, 'registerStep3'])->name('regi
 Route::get('client/login', [clientauth::class, 'signInForm'])->name('clientlogin');
 Route::post('client/login', [clientauth::class, 'signInCheck'])->name('clientlogin.check');
 Route::get('client/logout', [clientauth::class, 'singOut'])->name('clientlogOut');
+Route::get('client/forget-password', [clientauth::class, 'forget_password'])->name('client_forget_password');
 
 Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::get('dashboard', [clientprofile::class, 'index'])->name('clientdashboard');
