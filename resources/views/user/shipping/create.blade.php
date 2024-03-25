@@ -1,54 +1,130 @@
 @extends('user.layout.base')
 @section('title', 'create')
 @section('content')
-
-    <div class="card col-sm-10 shadow-lg mx-auto">
-        <div class="card-body">
-            <form action="{{ route('shipping.store') }}" method="post" class="row">
-                @csrf
-                <div class="col-12">
-                    <input type="text" class="form-control mb-3" id="" name="shipping_title"
-                        placeholder="Product Title">
-                </div>
-                <div class="col-12">
-                    <textarea name="shipping_description" class="form-control mb-3" placeholder="Order Details" rows="5"></textarea>
-                </div>
-                <div class="col-12">
-                    <textarea name="delivery_address" class="form-control mb-3" placeholder="Delivery Address" rows="5"></textarea>
-                </div>
-                <div class="col-12">
-                    <input type="text" class="form-control mb-3" id="" name="price" placeholder="Price">
-                </div>
-                <div class="col-12">
-                    <label>Select Shipping Method</label>
-                    <select name="shipping_method" class="form-control mb-3">
-                        <option value="">Select</option>
-                        <option value="1">Option1</option>
-                    </select>
-                </div>
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary">Order Product With Shipping</button>
-                </div>
-            </form>
+<div class="row g-4">
+    <!-- Sidenav START -->
+    <div class="col-lg-3">
+        <!-- Advanced filter responsive toggler START -->
+        <div class="d-flex align-items-center d-lg-none">
+            <button class="border-0 bg-transparent" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasSideNavbar" aria-controls="offcanvasSideNavbar">
+                <span class="btn btn-primary"><i class="fa-solid fa-sliders-h"></i></span>
+                <span class="h6 mb-0 fw-bold d-lg-none ms-2">My profile</span>
+            </button>
         </div>
+        <!-- Advanced filter responsive toggler END -->
+        <!-- Navbar START-->
+        @include('user.includes.profile-navbar')
+        <!-- Navbar END-->
     </div>
+    <!-- Sidenav END -->
+    <!-- Main content START -->
+    <div class="col-md-8 col-lg-6 vstack gap-4">
+        <!-- Card START -->
+        <div class="card">
+            <!-- Card header START -->
+            <div class="card-header d-sm-flex text-center align-items-center justify-content-between border-0 pb-0">
+                <h4 class="card-title h4">Shipping</h4>
+                <!-- Button modal -->
+                <a class="btn btn-primary-soft" href="{{ route('shipping.index') }}"> <i
+                        class="fas fa-list pe-1"></i>All Shipping</a>
+            </div>
+            <!-- Card header START -->
+            <!-- Card body START -->
+            <div class="card-body">
+                <!-- Album Tab content START -->
+                <div class="mb-0 pb-0">
+                    <div class="row g-3">
+                        <div class="card col-sm-12 shadow-lg">
+                            <div class="card-body">
+                                <form action="{{ route('shipping.store') }}" enctype="multipart/form-data" method="post" class="row">
+                                    @csrf
+                                    <div class="col-12">
+                                        <input type="text" class="form-control mb-3" id="" name="shipping_title"
+                                            placeholder="Product Title">
+                                    </div>
+                                    <div class="col-12">
+                                        <textarea name="shipping_description" class="form-control mb-3" placeholder="Order Details" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <textarea name="delivery_address" class="form-control mb-3" placeholder="Delivery Address" rows="5"></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="text" class="form-control mb-3" id="" name="price" placeholder="Price">
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="file" class="form-control mb-3" id="" name="image" >
+                                    </div>
+                                    <div class="col-12">
+                                        <label>Select Shipping Method</label>
+                                        <select name="shipping_method" class="form-control mb-3">
+                                            <option value="">Select</option>
+                                            <option value="1">Option1</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary">Order Product With Shipping</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Photos of you tab END -->
+                </div>
+                <!-- Album Tab content END -->
+            </div>
+            <!-- Card body END -->
+        </div>
+        <!-- Card END -->
+    </div>
+</div><!-- Row END -->
+{{-- <div class="card col-sm-10 shadow-lg mx-auto">
+    <div class="card-body">
+        <form action="{{ route('shipping.store') }}" enctype="multipart/form-data" method="post" class="row">
+            @csrf
+            <div class="col-12">
+                <input type="text" class="form-control mb-3" id="" name="shipping_title"
+                    placeholder="Product Title">
+            </div>
+            <div class="col-12">
+                <textarea name="shipping_description" class="form-control mb-3" placeholder="Order Details" rows="5"></textarea>
+            </div>
+            <div class="col-12">
+                <textarea name="delivery_address" class="form-control mb-3" placeholder="Delivery Address" rows="5"></textarea>
+            </div>
+            <div class="col-12">
+                <input type="text" class="form-control mb-3" id="" name="price" placeholder="Price">
+            </div>
+            <div class="col-12">
+                <input type="file" class="form-control mb-3" id="" name="image" >
+            </div>
+            <div class="col-12">
+                <label>Select Shipping Method</label>
+                <select name="shipping_method" class="form-control mb-3">
+                    <option value="">Select</option>
+                    <option value="1">Option1</option>
+                </select>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Order Product With Shipping</button>
+            </div>
+        </form>
+    </div>
+</div> --}}
 @endsection
 @push('scripts')
 <!-- Place the first <script> tag in your HTML's <head> -->
 <script src="{{ asset('public/assets/tinymc.js') }}"></script>
 <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
-    <script>
+<!-- Place the first <script> tag in your HTML's <head> -->
+<script src="https://cdn.tiny.cloud/1/x4jk2jz64zffwc1fuef936e2b3z54jdbl9q6pb9rplm00ea2/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+<!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+<script>
   tinymce.init({
     selector: 'textarea',
-    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
-    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-    tinycomments_mode: 'embedded',
-    tinycomments_author: 'Author name',
-    mergetags_list: [
-      { value: 'First.Name', title: 'First Name' },
-      { value: 'Email', title: 'Email' },
-    ],
-    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount linkchecker markdown',
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
   });
 </script>
 @endpush

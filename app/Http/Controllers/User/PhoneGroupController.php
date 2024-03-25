@@ -33,8 +33,9 @@ class PhoneGroupController extends Controller
      */
     public function create()
     {
+        $postCount = Post::where('client_id', currentUserId())->count();
         $client = Client::find(currentUserId());
-        return view('user.phonegroup.create',compact('client'));
+        return view('user.phonegroup.create',compact('client','postCount'));
     }
 
     /**
@@ -46,6 +47,11 @@ class PhoneGroupController extends Controller
             $phonegroup = new PhoneGroup;
             $phonegroup->client_id = currentUserId();
             $phonegroup->group_name = $request->group_name;
+            if ($request->hasFile('image')) {
+                $imageName = rand(111, 999) . time() . '.' . $request->image->extension();
+                $request->image->move(public_path('uploads/phonegroup'), $imageName);
+                $phonegroup->image = $imageName;
+            }
             if($phonegroup->save()){
                 $this->notice::success('Phone Group Successfully Saved');
                 return redirect()->route('phonegroup.index');
@@ -60,9 +66,20 @@ class PhoneGroupController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PhoneGroup $phoneGroup)
+    public function show($id)
     {
-        //
+        $postCount = Post::where('client_id', currentUserId())->count();
+        $data = PhoneGroup::where('client_id',currentUserId())->get();
+        $client = Client::find(currentUserId());
+        $phonegroup = PhoneGroup::where('client_id',currentUserId())->get();
+        $contactbygroup=[];
+        foreach($phonegroup as $group){
+            $count = PhoneBook::where('group_id',$group->id)->count();
+            $contactbygroup[$group->id]=$count;
+        }
+        $phonegroup = PhoneGroup::findOrFail(encryptor('decrypt',$id));
+        $phonebook = PhoneBook::where('group_id',$phonegroup->id)->get();
+        return view('user.phonegroup.show',compact('phonegroup','client','data','postCount','contactbygroup','phonebook'));
     }
 
     /**
@@ -70,10 +87,11 @@ class PhoneGroupController extends Controller
      */
     public function edit($id)
     {
+        $postCount = Post::where('client_id', currentUserId())->count();
         $data = PhoneGroup::where('client_id',currentUserId())->get();
         $client = Client::find(currentUserId());
         $phonegroup = PhoneGroup::findOrFail(encryptor('decrypt',$id));
-        return view('user.phonegroup.edit',compact('phonegroup','client','data'));
+        return view('user.phonegroup.edit',compact('phonegroup','client','data','postCount'));
     }
 
     /**
@@ -85,6 +103,11 @@ class PhoneGroupController extends Controller
             $phonegroup = PhoneGroup::findOrFail(encryptor('decrypt',$id));
             $phonegroup->client_id = currentUserId();
             $phonegroup->group_name = $request->group_name;
+            if ($request->hasFile('image')) {
+                $imageName = rand(111, 999) . time() . '.' . $request->image->extension();
+                $request->image->move(public_path('uploads/phonegroup'), $imageName);
+                $phonegroup->image = $imageName;
+            }
             if($phonegroup->save()){
                 $this->notice::success('Phone Group Successfully Updated');
                 return redirect()->route('phonegroup.index');

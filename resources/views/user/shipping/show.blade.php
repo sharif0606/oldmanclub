@@ -11,59 +11,61 @@
 </style>
 
 <main>
-  <div class="container">
-    <div class="row g-4">
-      <div class="col-lg-3">
-        <div class="d-flex align-items-center d-lg-none">
-          <button class="border-0 bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSideNavbar" aria-controls="offcanvasSideNavbar">
-            <span class="btn btn-primary"><i class="fa-solid fa-sliders-h"></i></span>
-            <span class="h6 mb-0 fw-bold d-lg-none ms-2">My profile</span>
-          </button>
-        </div>
-        @include('user.includes.profile-navbar')
-      </div>
-      <div class="col-md-8 col-lg-6 vstack gap-4">
-          <div class="card">
-            <div class="card-header d-sm-flex align-items-center text-center justify-content-sm-between border-0 pb-0">
-              <h1 class="h4 card-title">Shipping</h1>
-              <a class="btn btn-primary-soft" href="{{ route('shipping.create') }}" > <i class="fa-solid fa-plus pe-1"></i> Create shipping</a>
-            </div>
-            <div class="card-body">
-              <div class="tab-content mb-0 pb-0">
-                <div class="tab-pane fade show active" id="tab-1">
-                  <div class="row g-4">
-                    @forelse($shipping as $value)
-                    <div class="col-sm-6 col-xl-4">
-                      <a href="{{route('shipping.show',encryptor('encrypt',$value->id))}}" class="text-warning">
-                      <div class="card h-100">
-                        <div class="position-relative">
-                          @if($value->shippingdetail->image)
-                          <img class="img-fluid rounded-top w-100" src="{{ asset('public/uploads/shipping/'.$value->shippingdetail->image) }}" alt="">
-                          @else
-                          <img class="img-fluid rounded-top" src="{{ asset('public/user/assets/images/events/01.jpg') }}" alt="">
-                          @endif
-                        </div>
-                        <div class="card-body position-relative pt-0">
-                          <h6 class="mt-3"> <a href="#">{{__($value->shippingdetail?->shipping_title)}}</a> </h6>
-                           <p class="small"></i>{{__($value->shippingdetail?->price)}}</p>
-                          <p class="mb-0 small"> <i class="bi bi-calendar-check pe-1"></i>{{ $value->created_at->format('d M,Y')}}</p>
-                        </div>
-                          <a href="{{route('shipping.edit',encryptor('encrypt',$value->id))}}" class="btn btn-primary text-center">Edit Shipping
-                          </a>
-                     </div>
-                      </a>
-                    </div>
-                    @endforeach
-                  </div>
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-3">
+                <div class="d-flex align-items-center d-lg-none">
+                <button class="border-0 bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSideNavbar" aria-controls="offcanvasSideNavbar">
+                    <span class="btn btn-primary"><i class="fa-solid fa-sliders-h"></i></span>
+                    <span class="h6 mb-0 fw-bold d-lg-none ms-2">My profile</span>
+                </button>
                 </div>
+                @include('user.includes.profile-navbar')
             </div>
-          </div>
+            <div class="col-md-8 col-lg-6 vstack gap-4">
+                <div class="card">
+                    <div class="card-header d-sm-flex align-items-center text-center justify-content-sm-between border-0 pb-0">
+                        <h1 class="h4 card-title">Shipping</h1>
+                        <a class="btn btn-primary-soft" href="{{ route('shipping.index') }}" ><i
+                        class="fas fa-list pe-1"></i> All shipping</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content mb-0 pb-0">
+                            <div class="tab-pane fade show active" id="tab-1">
+                                <div class="row g-4">
+                                    <div class="col-sm-6 col-xl-4">
+                                        <div class="card h-100">
+                                            <div class="position-relative">
+                                            @if($shipping->shippingdetail->image)
+                                            <img class="img-fluid rounded-top w-100" src="{{ asset('public/uploads/shipping/'.$shipping->shippingdetail->image) }}" alt="">
+                                            @else
+                                            <img class="img-fluid rounded-top" src="{{ asset('public/user/assets/images/events/01.jpg') }}" alt="">
+                                            @endif
+                                            </div>
+                                            <div class="card-body position-relative pt-0">
+                                            <h6 class="mt-3"> <a href="#">{{__($shipping->shippingdetail?->shipping_title)}}</a> </h6>
+                                            <p class="small"></i>{{__($shipping->shippingdetail?->price)}}</p>
+                                            <p class="mb-0 small"> <i class="bi bi-calendar-check pe-1"></i>{{ $shipping->created_at->format('d M,Y')}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-xl-6">
+                                        <div class="card h-100 p-2">
+                                            <p>
+                                               {!!__($shipping->shippingdetail?->shipping_description)!!}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
         </div>
-      </div>
-    </div> 
-  </div>
+    </div>
 </main>
-<!-- Bordered table start -->
+
 {{-- <main>
   <div class="container">
     <div class="row g-4">
