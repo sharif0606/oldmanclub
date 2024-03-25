@@ -89,6 +89,12 @@ use App\Http\Controllers\Backend\Nfc\NfcCardController as nfc_card;
 
 use App\Http\Controllers\Backend\Printingservice\PrintingServiceController as print_service;
 use App\Http\Controllers\Backend\Printingservice\PrintingServiceImageController as print_service_image;
+
+/*== for Mail and other Send Purpose ==*/
+use App\Http\Controllers\TestController as test;
+/*Test controler */
+Route::get('/mail', [test::class, 'index'])->name('mail');
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
