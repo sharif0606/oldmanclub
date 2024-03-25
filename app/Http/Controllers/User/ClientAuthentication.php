@@ -13,6 +13,7 @@ use App\Models\Backend\NfcInformation;
 use App\Http\Requests\User\SignupRequest;
 use App\Http\Requests\User\SigninRequest;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon; 
 use Exception;
 use Validator;
 use DB;
