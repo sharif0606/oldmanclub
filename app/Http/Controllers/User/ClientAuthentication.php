@@ -154,7 +154,7 @@ class ClientAuthentication extends Controller
     }
     public function forget_password()
     {
-        return view('user.authentication.forget-password');
+        return view('auth.forget-password');
     }
     public function submitForgetPasswordForm(Request $request)
     {
@@ -180,5 +180,34 @@ class ClientAuthentication extends Controller
         });
 
         return back()->with('message', 'We have e-mailed your password reset link!');
+    }
+    public function showResetPasswordForm($token) { 
+        return view('auth.forgetPasswordLink', ['token' => $token]);
+    }
+    public function submitResetPasswordForm(Request $request)
+    {
+          $request->validate([
+              'email' => 'required|email|exists:clients',
+              'password' => 'required|string|min:6|confirmed',
+              'password_confirmation' => 'required'
+          ]);
+  
+          $updatePassword = DB::table('password_resets')
+                              ->where([
+                                'email' => $request->email, 
+                                'token' => $request->token
+                              ])
+                              ->first();
+  
+          if(!$updatePassword){
+              return back()->withInput()->with('error', 'Invalid token!');
+          }
+  
+          $user = User::where('email', $request->email)
+                      ->update(['password' => Hash::make($request->password)]);
+ 
+          DB::table('password_resets')->where(['email'=> $request->email])->delete();
+  
+          return redirect()->route('clientlogin')->with('message', 'Your password has been changed!');
     }
 }
