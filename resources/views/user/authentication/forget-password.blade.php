@@ -38,6 +38,7 @@
             @endif
             <!-- form START -->
             <form class="mt-3" action="{{ route('forget.password.post') }}" method="POST">
+              @csrf
               <!-- New password -->
               <div class="mb-3">
                 <!-- Input group -->
