@@ -1,4 +1,4 @@
-@extends('layout.auth')
+@extends('user.layout.auth')
 @section('siteTitle', 'Reset Forget Password')   
 @section('content')
 <main class="login-form">
