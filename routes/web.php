@@ -216,6 +216,8 @@ Route::post('client/login', [clientauth::class, 'signInCheck'])->name('clientlog
 Route::get('client/logout', [clientauth::class, 'singOut'])->name('clientlogOut');
 Route::get('client/forget-password', [clientauth::class, 'forget_password'])->name('client_forget_password');
 Route::post('forget-password', [clientauth::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
+Route::get('reset-password/{token}', [clientauth::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::post('reset-password', [clientauth::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
 Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::get('dashboard', [clientprofile::class, 'index'])->name('clientdashboard');
