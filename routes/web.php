@@ -215,6 +215,7 @@ Route::get('client/login', [clientauth::class, 'signInForm'])->name('clientlogin
 Route::post('client/login', [clientauth::class, 'signInCheck'])->name('clientlogin.check');
 Route::get('client/logout', [clientauth::class, 'singOut'])->name('clientlogOut');
 Route::get('client/forget-password', [clientauth::class, 'forget_password'])->name('client_forget_password');
+Route::post('forget-password', [clientauth::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
 
 Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::get('dashboard', [clientprofile::class, 'index'])->name('clientdashboard');
