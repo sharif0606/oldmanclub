@@ -31,33 +31,41 @@
             <!-- Title -->
             <h1 class="mb-2">Forgot password?</h1>
             <p>Enter the email address associated with account.</p>
+            @if (Session::has('message'))
+              <div class="alert alert-success" role="alert">
+                {{ Session::get('message') }}
+              </div>
+            @endif
             <!-- form START -->
-            <form class="mt-3">
+            <form class="mt-3" action="{{ route('forget.password.post') }}" method="POST">
               <!-- New password -->
               <div class="mb-3">
                 <!-- Input group -->
                 <div class="input-group input-group-lg">
-                  <input class="form-control fakepassword" type="password" id="psw-input" placeholder="Enter new password">
-                  <span class="input-group-text p-0">
+                  <input class="form-control fakepassword" type="text" name="email" id="psw-input" placeholder="Enter new Email">
+                  {{-- <span class="input-group-text p-0">
                     <i class="fakepasswordicon fa-solid fa-eye-slash cursor-pointer p-2 w-40px"></i>
-                  </span>
+                  </span> --}}
+                  @if ($errors->has('email'))
+                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                  @endif
                 </div>
                 <!-- Pswmeter -->
-                <div id="pswmeter" class="mt-2 password-strength-meter"><div class="password-strength-meter-score"></div></div>
+                {{-- <div id="pswmeter" class="mt-2 password-strength-meter"><div class="password-strength-meter-score"></div></div>
                 <div class="d-flex mt-1">
                   <div id="pswmeter-message" class="rounded">Write your password...</div>
                   <!-- Password message notification -->
                   <div class="ms-auto">
                     <i class="bi bi-info-circle ps-1" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Include at least one uppercase, one lowercase, one special character, one number and 8 characters long." data-bs-original-title="" title=""></i>
                   </div>
-                </div>
+                </div> --}}
               </div>
               <!-- Back to sign in -->
               <div class="mb-3">
                 <p>Back to <a href="{{route('clientlogin')}}">Sign in</a></p>
               </div>
               <!-- Button -->
-              <div class="d-grid"><button type="submit" class="btn btn-lg btn-primary">Reset password</button></div>
+              <div class="d-grid"><button type="submit" class="btn btn-lg btn-primary">Send Password Reset Link</button></div>
               <!-- Copyright -->
               <p class="mb-0 mt-3">©2024 <a target="_blank" href="https://muktomart.com.bd/">OLD CLUB MAN.</a> All rights reserved</p>
             </form>

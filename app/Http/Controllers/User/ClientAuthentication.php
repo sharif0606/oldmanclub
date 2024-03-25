@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Hash;
 use Exception;
 use Validator;
 use DB;
+use Mail; 
+use Illuminate\Support\Str;
 
 class ClientAuthentication extends Controller
 {
@@ -152,5 +154,30 @@ class ClientAuthentication extends Controller
     public function forget_password()
     {
         return view('user.authentication.forget-password');
+    }
+    public function submitForgetPasswordForm(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users',
+        ], 
+        [
+          'email.exists' => 'The email address does not exists.', // Customize the error message
+        ]);
+
+        $token = Str::random(64);
+
+          DB::table('password_resets')->insert([
+            'email' => $request->email, 
+            'token' => $token, 
+            'created_at' => Carbon::now()
+          ]);
+
+        Mail::send('email.forgetPassword', ['token' => $token], function($message) use($request){
+            $message->from('info@icarjapan.com', 'Icarjapan');
+            $message->to($request->email);
+            $message->subject('Reset Password');
+        });
+
+        return back()->with('message', 'We have e-mailed your password reset link!');
     }
 }
