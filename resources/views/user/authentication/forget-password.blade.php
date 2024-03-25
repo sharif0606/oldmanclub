@@ -48,7 +48,7 @@
                     <i class="fakepasswordicon fa-solid fa-eye-slash cursor-pointer p-2 w-40px"></i>
                   </span> --}}
                   @if ($errors->has('email'))
-                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                    <p><span class="text-danger">{{ $errors->first('email') }}</span></p>
                   @endif
                 </div>
                 <!-- Pswmeter -->
