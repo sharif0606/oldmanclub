@@ -48,8 +48,18 @@
                            <p class="small"></i>{{__($value->shippingdetail?->price)}}</p>
                           <p class="mb-0 small"> <i class="bi bi-calendar-check pe-1"></i>{{ $value->created_at->format('d M,Y')}}</p>
                         </div>
-                          <a href="{{route('shipping.edit',encryptor('encrypt',$value->id))}}" class="btn btn-primary text-center">Edit Shipping
+                        <div class="d-flex">
+                          <a href="{{route('shipping.edit',encryptor('encrypt',$value->id))}}" class="btn btn-success-soft text-center w-50">Edit
                           </a>
+                          <a href="javascript:void()" onclick="$('#form{{$value->id}}').submit()" class="btn btn-danger-soft text-center w-50">Delete
+                                        {{-- <i class="fa fa-trash"></i> --}}
+                              </a>
+                            <form id="form{{$value->id}}" action="{{route('shipping.destroy',encryptor('encrypt',$value->id))}}" method="post">
+                                @csrf
+                                @method('delete')
+                            </form>
+                        </div>
+                          
                      </div>
                       </a>
                     </div>
@@ -119,7 +129,6 @@
                                         @csrf
                                         @method('delete')
                                     </form>
-
                                 </td>
                             </tr>
                             @empty

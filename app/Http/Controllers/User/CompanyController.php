@@ -28,7 +28,8 @@ class CompanyController extends Controller
     public function create()
     {
         $client = Client::find(currentUserId());
-        return view('user.company.create',compact('client'));
+        $postCount = Post::where('client_id', currentUserId())->count();
+        return view('user.company.create',compact('client','postCount'));
     }
 
     /**
@@ -39,6 +40,11 @@ class CompanyController extends Controller
         try{
             $company = new Company;
             $company->company_name = $request->company_name;
+            if($request->hasFile('company_image')){
+                $imageName = rand(111,999).time().'.'.$request->company_image->extension();
+                $request->company_image->move(public_path('uploads/Company'), $imageName);
+                $company->company_image=$imageName;
+            }
             if($request->hasFile('company_logo')){
                 $imageName = rand(111,999).time().'.'.$request->company_logo->extension();
                 $request->company_logo->move(public_path('uploads/Company'), $imageName);
@@ -89,8 +95,9 @@ class CompanyController extends Controller
     public function show($id)
     {
         $client = Client::find(currentUserId());
+        $postCount = Post::where('client_id', currentUserId())->count();
         $company = Company::findOrFail(encryptor('decrypt',$id));
-        return view('user.company.show',compact('company','client'));
+        return view('user.company.show',compact('company','client','postCount'));
     }
 
     /**
@@ -100,7 +107,8 @@ class CompanyController extends Controller
     {
         $client = Client::find(currentUserId());
         $company = Company::findOrFail(encryptor('decrypt',$id));
-        return view('user.company.edit',compact('company','client'));
+        $postCount = Post::where('client_id', currentUserId())->count();
+        return view('user.company.edit',compact('company','client','postCount'));
     }
 
     /**
@@ -115,6 +123,11 @@ class CompanyController extends Controller
                 $imageName = rand(111,999).time().'.'.$request->company_logo->extension();
                 $request->company_logo->move(public_path('uploads/Company'), $imageName);
                 $company->company_logo=$imageName;
+            }
+            if($request->hasFile('company_image')){
+                $imageName = rand(111,999).time().'.'.$request->company_image->extension();
+                $request->company_image->move(public_path('uploads/Company'), $imageName);
+                $company->company_image=$imageName;
             }
             if ($request->hasFile('company_document')) {
                 $documentNames = []; // Array to store document file names

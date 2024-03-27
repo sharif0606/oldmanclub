@@ -65,21 +65,23 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-lg-6">
+                                <div class="col-sm-6 col-lg-8">
                                     <div class="card p-2">
-                                        <table class="w-100 text-center">
+                                        <table class="table w-100 text-center">
                                             <tr>
                                                 <th>#</th>
+                                                <th>Name</th>
                                                 <th>Contact</th>
                                             </tr>
                                             @forelse($phonebook as $p)
                                                 <tr>
                                                     <td>{{++$loop->index}}</td>
+                                                    <td>{{$p->name_en}}</td>
                                                     <td>{{$p->contact_en}}</td>
                                                 </tr>
                                             @empty
                                                 <tr>
-                                                    <th colspan="2" class="text-center">Contact Not  Found</th>
+                                                    <th colspan="3" class="text-center">Contact Not  Found</th>
                                                 </tr>
                                             @endforelse
                                         </table>

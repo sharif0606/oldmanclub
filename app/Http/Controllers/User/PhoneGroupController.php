@@ -17,7 +17,7 @@ class PhoneGroupController extends Controller
     public function index()
     {
         $client = Client::find(currentUserId());
-        $phonegroup = PhoneGroup::where('client_id',currentUserId())->get();
+        $phonegroup = PhoneGroup::where('client_id',currentUserId())->orderBy('group_name')->get();
         $postCount = Post::where('client_id', currentUserId())->count();
         $contactbygroup=[];
         foreach($phonegroup as $group){

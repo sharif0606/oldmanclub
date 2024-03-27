@@ -2,11 +2,9 @@
 @section('content')
     <!-- Main content START -->
     <main>
-
         <!-- Container START -->
         <div class="container">
             <div class="row g-4">
-
                 <!-- Main content START -->
                 <div class="col-lg-8 vstack gap-4">
                     <!-- My profile START -->

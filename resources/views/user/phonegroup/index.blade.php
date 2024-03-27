@@ -96,7 +96,16 @@
                                 </div>
                               </div>
                           </div>
-                          <a href="{{route('phonegroup.edit',encryptor('encrypt',$p->id))}}" class="btn btn-primary text-center">Edit Group</a>
+                          <div class="d-flex">
+                            <a href="{{route('phonegroup.edit',encryptor('encrypt',$p->id))}}" class="btn btn-success-soft text-center w-50">Edit Group</a>
+                            <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()" class="btn btn-danger-soft text-center w-50">Delete
+                              {{-- <i class="fa fa-trash"></i> --}}
+                            </a>
+                              <form id="form{{$p->id}}" action="{{route('phonegroup.destroy',encryptor('encrypt',$p->id))}}" method="post">
+                                  @csrf
+                                  @method('delete')
+                              </form>
+                          </div>
                       </div>
                       </a>
                     </div>
