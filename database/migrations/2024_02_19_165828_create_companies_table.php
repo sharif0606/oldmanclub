@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('qrcode')->unique()->nullable();
             $table->string('company_name');
+            $table->string('company_image');
             $table->string('company_logo');
             $table->string('contact_no')->unique();
             $table->string('email')->unique();

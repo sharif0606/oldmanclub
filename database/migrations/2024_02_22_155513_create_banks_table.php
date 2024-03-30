@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('bank_name');
             $table->string('branch_name')->nullable();
+            $table->string('bank_image')->nullable();
             $table->string('bank_logo')->nullable();
             $table->string('rtn_number')->unique(); // ABA routing number/Routing Transit Number
             $table->string('swift_code')->nullable(); // SWIFT/BIC code for international transactions

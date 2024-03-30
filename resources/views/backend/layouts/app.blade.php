@@ -199,6 +199,12 @@
                             </a>
                         </li>
                         <li>
+                            <a class="has-arrow" href="{{route('post_list')}}" aria-expanded="false">
+                                <i class="fa-solid fa-table-list"></i>
+                                <span class="nav-text">Post List</span>
+                            </a>
+                        </li>
+                        <li>
                             <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                                 <i class="fa fa-globe"></i>
                                 <span class="nav-text">Website</span>
@@ -393,7 +399,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" />
          <script src="{{ asset('js/app.js') }}"></script>
         {!! Toastr::message() !!}
-
     </body>
 
 </html>

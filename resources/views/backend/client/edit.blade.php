@@ -46,7 +46,7 @@
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="Dob">Date Of Birth <i class="text-danger">*</i></label>
-                                    <input type="text" id="Dob" class="form-control" value="{{ old('dob',$client->dob)}}" name="dob">
+                                    <input type="date" id="Dob" class="form-control" value="{{ old('dob',$client->dob)}}" name="dob">
                                     @if($errors->has('dob'))
                                         <span class="text-danger"> {{ $errors->first('dob') }}</span>
                                     @endif
@@ -89,7 +89,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-md-6 col-12">
+                            {{-- <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="country">Country<i class="text-danger">*</i></label>
                                     <input type="text" id="country" class="form-control" value="{{ old('country',$client->country)}}" name="country">
@@ -124,7 +124,7 @@
                                         <span class="text-danger"> {{ $errors->first('zip_code') }}</span>
                                     @endif
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="nationality">nationality<i class="text-danger">*</i></label>

@@ -2,22 +2,76 @@
 @section('title','Edit')
 @section('content')
 
-    <div class="card col-sm-8 shadow-lg mx-auto">
-        <div class="card-body">
-            <form action="{{route('shipping.update',encryptor('encrypt',$shipping->id))}}" method="post" class="row">
-                @csrf
-                @method('PATCH')
-                    <div class="col-12">
-                        <input type="text" class="form-control mb-3" id="" name="shipping_title" value="{{old('shipping_title',$shipping->shipping_title)}}" placeholder="shipping tittle">
+<div class="row g-4">
+    <div class="col-lg-3">
+        <div class="d-flex align-items-center d-lg-none">
+            <button class="border-0 bg-transparent" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasSideNavbar" aria-controls="offcanvasSideNavbar">
+                <span class="btn btn-primary"><i class="fa-solid fa-sliders-h"></i></span>
+                <span class="h6 mb-0 fw-bold d-lg-none ms-2">My profile</span>
+            </button>
+        </div>
+        @include('user.includes.profile-navbar')
+    </div>
+    <div class="col-md-8 col-lg-6 vstack gap-4">
+        <div class="card">
+            <div class="card-header d-sm-flex text-center align-items-center justify-content-between border-0 pb-0">
+                <h4 class="card-title h4">Shipping</h4>
+                <a class="btn btn-primary-soft" href="{{ route('shipping.index') }}"><i class="fas fa-list pe-1"></i>All Shipping</a>
+            </div>
+            <div class="card-body">
+                <div class="mb-0 pb-0">
+                    <div class="row g-3">
+                        <div class="card col-sm-12 shadow-lg">
+                            <div class="card-body">
+                                <form action="{{route('shipping.update',encryptor('encrypt',$shipping->id))}}" method="post" class="row">
+                                @csrf
+                                @method('PATCH')
+                                    <div class="col-12">
+                                        <input type="text" class="form-control mb-3" id="" name="shipping_title" value="{{old('shipping_title',$shipping->shippingdetail?->shipping_title)}}" placeholder="shipping tittle">
+                                    </div>
+                                    <div class="col-12">
+                                        <textarea name="shipping_description" class="form-control mb-3" placeholder="Order Details" rows="5">{{ $shipping->shippingdetail?->shipping_description }}</textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <textarea name="delivery_address" class="form-control mb-3" placeholder="Delivery Address" rows="5">{{ $shipping->shippingstatus?->delivery_address }}</textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="text" class="form-control mb-3" id="" name="price"  value="{{old('price',$shipping->shippingdetail?->price)}}" placeholder="Price">
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="file" class="form-control mb-3" id="" name="image" >
+                                    </div>
+                                    <div class="col-12">
+                                        <label>Select Shipping Method</label>
+                                        <select name="shipping_method" class="form-control mb-3">
+                                            <option value="1" @if($shipping->shippingstatus->shipping_method==1)seleceted @endif>Option1</option>
+                                            <option value="2" @if($shipping->shippingstatus->shipping_method ==2)seleceted @endif>Option2</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary">Order Product With Shipping</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-12">
-                        <input type="text" class="form-control mb-3" id="" name="shipping_description" value="{{old('shipping_description',$shipping->shipping_description)}}"  placeholder="shipping description">
-                    </div>
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-primary">Update</button>
-                    </div>
-            </form>
+                </div>
+            </div>
         </div>
     </div>
-
+</div>
 @endsection
+@push('scripts')
+<script src="{{ asset('public/assets/tinymc.js') }}"></script>
+<script src="https://cdn.tiny.cloud/1/x4jk2jz64zffwc1fuef936e2b3z54jdbl9q6pb9rplm00ea2/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+  tinymce.init({
+    selector: 'textarea',
+    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount linkchecker markdown',
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+  });
+</script>
+
+
+

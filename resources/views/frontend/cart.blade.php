@@ -47,13 +47,16 @@
                         <tr>
                             <th scope="row">{{$loop->iteration}}</th>
                             <td>
-                                @if(isset($details['image']) && !empty($details['image']))
-                                    <img src="{{ asset('public/uploads/printimages/' . $details['image']) }}" alt="">
+                                @if(isset($details['printing_service_image']['image']))
+                                    <img src="{{ asset('public/uploads/printimages/' . $details['printing_service_image']['image']) }}" alt="">
                                 @endif
+                                    {{-- <img src="{{ asset('public/uploads/printimages/' . $details->printing_service_image['image']) }}" alt=""> --}}
                                 {{ $details['service_name'] }}
-                                @if(isset($details['service_details']))
+                                {!! \Illuminate\Support\Str::limit($details['service_details'], 50, '...') !!}
+                                {{-- @if(isset($details['service_details']))
+
                                     {!! implode(' ', array_slice(explode(' ', $details['service_details']), 0, 5)) !!}
-                                @endif
+                                @endif --}}
                             </td>
                             <td>
                                 ${{$details['price']}}

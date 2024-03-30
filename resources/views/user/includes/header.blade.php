@@ -84,6 +84,7 @@
                             <ul class="dropdown-menu" aria-labelledby="postMenu">
                                 <li> <a class="dropdown-item" href="{{route('phonegroup.index')}}">Create Phone Group</a></li>
                                 <li> <a class="dropdown-item" href="{{route('phonebook.index')}}">Phone Book Group</a></li>
+                                <li> <a class="dropdown-item" href="{{route('purchase.index')}}">Purchase SMS</a></li>
                                 <li class="dropdown-submenu dropstart">
                                     <a class="dropdown-item dropdown-toggle" href="#">Social Contact</a>
                                     <ul class="dropdown-menu dropdown-menu-end" data-bs-popper="none">
@@ -116,7 +117,8 @@
                         <a class="nav-link dropdown-toggle" href="#" id="postMenu" data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">Shipping</a>
                             <ul class="dropdown-menu" aria-labelledby="postMenu">
-                                <li> <a class="dropdown-item" href="{{route('shipping.index')}}">Order</a></li>
+                                <li> <a class="dropdown-item" href="{{route('shipping.index')}}">Shipping Order</a></li>
+                                <li> <a class="dropdown-item" href="{{route('order.index')}}">Order List</a></li>
                             </ul>
                     </li>
                 </ul>

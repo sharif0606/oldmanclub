@@ -23,7 +23,7 @@ class PhoneBookController extends Controller
         $client = Client::find(currentUserId());
         $phonegroup = PhoneGroup::where('client_id',currentUserId())->get();
         $postCount = Post::where('client_id', currentUserId())->count();
-        $phonebook = PhoneBook::where('client_id',currentUserId())->paginate(3);
+        $phonebook = PhoneBook::where('client_id',currentUserId())->orderBy('group_id')->paginate(6);
         return view('user.phonebook.index',compact('phonebook','phonegroup','client','postCount'));
     }
 
@@ -34,7 +34,8 @@ class PhoneBookController extends Controller
     {
         $client = Client::find(currentUserId());
         $phonegroup = PhoneGroup::where('client_id',currentUserId())->get();
-        return view('user.phonebook.create',compact('phonegroup','client'));
+        $postCount = Post::where('client_id', currentUserId())->count();
+        return view('user.phonebook.create',compact('phonegroup','client','postCount'));
     }
 
     /**
@@ -77,7 +78,8 @@ class PhoneBookController extends Controller
         $client = Client::find(currentUserId());
         $phonegroup = PhoneGroup::where('client_id',currentUserId())->get();
         $phonebook = PhoneBook::findOrFail(encryptor('decrypt',$id));
-        return view('user.phonebook.edit',compact('phonebook','phonegroup','data','client'));
+        $postCount = Post::where('client_id', currentUserId())->count();
+        return view('user.phonebook.edit',compact('phonebook','phonegroup','data','client','postCount'));
     }
 
     /**
@@ -136,21 +138,29 @@ class PhoneBookController extends Controller
 
     public function sendsms(){
         $client = Client::find(currentUserId());
-        $data = SendSms::where('client_id',currentUserId())->get();
-        return view('user.phonebook.smslist',compact('data','client'));
+        $data = SendSms::where('client_id',currentUserId())->orderBy('id','desc')->paginate('5');
+        $postCount = Post::where('client_id', currentUserId())->count();
+        $phonebook = PhoneBook::where('client_id',currentUserId())->get();
+        return view('user.phonebook.smslist',compact('data','client','postCount','phonebook'));
     }
     public function sms_create(){
         $client = Client::find(currentUserId());
-        return view('user.phonebook.smscreate',compact('client'));
+        $postCount = Post::where('client_id', currentUserId())->count();
+        $phonebook = PhoneBook::where('client_id',currentUserId())->get();
+        return view('user.phonebook.smscreate',compact('client','postCount','phonebook'));
     }
     public function sms_store(Request $request){
         $sms = new SendSms;
         $sms->client_id = currentUserId();
-        $sms->contact_no = $request->contact_no;
-        $sms->message_body = $request->message_body;
-        if($sms->save()){
-            $this->notice::success('sms successfully send');
-            return redirect()->route('sms_create');
+        $contact_nos = explode(',', $request->contact_no);
+        foreach($contact_nos as $contact_no){
+            $sms = new SendSms;
+            $sms->client_id = currentUserId();
+            $sms->contact_no = $contact_no;
+            $sms->message_body = $request->message_body;
+            $sms->save();
         }
+        $this->notice::success('sms successfully send');
+        return redirect()->route('sms_send');
     }
 }

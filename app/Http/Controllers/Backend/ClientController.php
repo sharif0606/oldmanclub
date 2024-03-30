@@ -63,27 +63,22 @@ class ClientController extends Controller
     {
         try{
             $client = Client::findOrFail(encryptor('decrypt',$id));
-            $client->first_name_en=$request->first_name_en;
-            $client->first_name_bn=$request->first_name_bn;
-            $client->middle_name_en=$request->middle_name_en;
-            $client->middle_name_bn=$request->middle_name_bn;
-            $client->last_name_en=$request->last_name_en;
-            $client->last_name_bn=$request->last_name_bn;
-            $client->date_of_birth=$request->date_of_birth;
-            $client->contact_en=$request->contact_en;
-            $client->contact_bn=$request->contact_bn;
+            $client->fname=$request->fname;
+            $client->middle_name=$request->middle_name;
+            $client->last_name=$request->last_name;
+            $client->dob=$request->dob;
+            $client->contact_no=$request->contact_no;
             $client->email=$request->email;
             $client->address_line_1=$request->address_line_1;
             $client->address_line_2=$request->address_line_2;
-            $client->country=$request->country;
-            $client->city=$request->city;
-            $client->state=$request->state;
-            $client->zip_code=$request->zip_code;
+            // $client->country=$request->country;
+            // $client->city=$request->city;
+            // $client->state=$request->state;
+            // $client->zip_code=$request->zip_code;
             $client->nationality=$request->nationality;
             $client->id_no=$request->id_no;
             $client->id_no_type=$request->id_no_type;
             $client->status=$request->status;
-
             if($request->password)
                 $client->password=Hash::make($request->password);
 

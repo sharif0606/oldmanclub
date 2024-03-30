@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('client_id')->index();
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->string('group_name');
+            $table->string('image')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
