@@ -90,6 +90,12 @@ use App\Http\Controllers\Backend\Nfc\NfcCardController as nfc_card;
 
 use App\Http\Controllers\Backend\Printingservice\PrintingServiceController as print_service;
 use App\Http\Controllers\Backend\Printingservice\PrintingServiceImageController as print_service_image;
+
+/*== for Mail and other Send Purpose ==*/
+use App\Http\Controllers\TestController as test;
+/*Test controler */
+Route::get('/mail', [test::class, 'index'])->name('mail');
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -106,6 +112,7 @@ Route::post('/register', [auth::class, 'signUpStore'])->name('register.store');
 Route::get('/login', [auth::class, 'signInForm'])->name('login');
 Route::post('/login', [auth::class, 'signInCheck'])->name('login.check');
 Route::get('/logout', [auth::class, 'singOut'])->name('logOut');
+
 
 Route::middleware(['checkauth'])->prefix('admin')->group(function () {
     Route::get('dashboard', [dashboard::class, 'index'])->name('dashboard');
@@ -209,6 +216,10 @@ Route::post('/register/step3', [clientauth::class, 'registerStep3'])->name('regi
 Route::get('client/login', [clientauth::class, 'signInForm'])->name('clientlogin');
 Route::post('client/login', [clientauth::class, 'signInCheck'])->name('clientlogin.check');
 Route::get('client/logout', [clientauth::class, 'singOut'])->name('clientlogOut');
+Route::get('client/forget-password', [clientauth::class, 'forget_password'])->name('client_forget_password');
+Route::post('forget-password', [clientauth::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
+Route::get('reset-password/{token}', [clientauth::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::post('reset-password', [clientauth::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
 Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::get('dashboard', [clientprofile::class, 'index'])->name('clientdashboard');
