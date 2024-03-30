@@ -6,7 +6,6 @@
   <div class="container">
     <div class="row g-4">
       <div class="col-lg-3">
-
         <!-- Advanced filter responsive toggler START -->
         <div class="d-flex align-items-center d-lg-none">
           <button class="border-0 bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSideNavbar" aria-controls="offcanvasSideNavbar">
@@ -29,7 +28,7 @@
             <!-- Card header START -->
             <div class="card-header border-0 pb-0">
               <div class="row g-2">
-                <div class="col-lg-2">
+                <div class="col-lg-3">
                   <!-- Card title -->
                   <h1 class="h4 card-title mb-lg-0">Purchase List</h1>
                 </div>
@@ -44,7 +43,7 @@
                 </div>  --}}
                   <div class="col-sm-6 col-lg-3 ms-auto">
                   <!-- Button modal -->
-                  <a class="btn btn-primary-soft ms-auto w-100" href="{{route('purchase.create')}}"> <i class="fa-solid fa-plus pe-1"></i> Create SMS</a>
+                  <a class="btn btn-primary-soft ms-auto w-100" href="{{route('purchase.create')}}"> <i class="fa-solid fa-plus pe-1"></i> Purchase SMS</a>
                 </div>
               </div>
             </div>
@@ -57,18 +56,18 @@
                                 <th scope="col">{{__('Title')}}</th>
                                 <th scope="col">{{__('Number of SMS')}}</th>
                                 <th scope="col">{{__('Validity')}}</th>
-                                <th class="white-space-nowrap">{{__('Action') }}</th>
+                                {{-- <th class="white-space-nowrap">{{__('Action') }}</th> --}}
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($data as $p)
                             <tr>
                                 <th scope="row">{{ ++$loop->index }}</th>
-                                <td>{{ $p->package->title }}</td>
+                                <td>{{ $p->package?->title }}</td>
                                 <td>{{ $p->number_of_sms }}</td>
                                 <td>{{ $p->package->validity_days }} day</td>
-                                <td class="white-space-nowrap">
-                                    {{-- <a href="{{route('phonegroup.edit',encryptor('encrypt',$p->id))}}" class="text-warning">
+                                {{-- <td class="white-space-nowrap">
+                                    <a href="{{route('phonegroup.edit',encryptor('encrypt',$p->id))}}" class="text-warning">
                                         <i class="fa fa-edit"></i>
                                     </a>
 
@@ -77,9 +76,9 @@
                                     </a>
                                     <form id="form{{$p->id}}" action="{{route('phonegroup.destroy',encryptor('encrypt',$p->id))}}" method="post">
                                         @csrf
-                                        @method('delete') --}}
+                                        @method('delete')
                                     </form>
-                                </td>
+                                </td> --}}
                             </tr>
                             @empty
                             <tr>

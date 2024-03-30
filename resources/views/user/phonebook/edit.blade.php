@@ -37,7 +37,7 @@
                     <div class="row g-3">
                         <div class="card col-sm-12 shadow-lg">
                             <div class="card-body">
-                                <form action="{{route('phonebook.update',encryptor('encrypt',$phonebook->id))}}" method="post" class="row">
+                                <form action="{{route('phonebook.update',encryptor('encrypt',$phonebook->id))}}" method="post" class="row" enctype="multipart/form-data">
                                     @csrf
                                     @method('Patch')
                                     <div class="col-12">
@@ -57,6 +57,15 @@
                                         </div>
                                         <div class="col-12">
                                             <input type="email" class="form-control mb-3" id="Email" name="email" value="{{old('contact_en',$phonebook->email)}}">
+                                        </div>
+                                        <div class="col-12">
+                                            <input type="text" class="form-control mb-3" id="description" name="description" value="{{old('description',$phonebook->description)}}">
+                                        </div>
+                                        <div class="col-12">
+                                            <input type="text" class="form-control mb-3" id="Email" name="company_name" value="{{old('company_name',$phonebook->company_name)}}">
+                                        </div>
+                                        <div class="col-12">
+                                            <input type="file" class="form-control mb-3" id="Email" name="image">
                                         </div>
                                         <div class="col-12">
                                             <button type="submit" class="btn btn-primary">Update</button>

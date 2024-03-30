@@ -97,9 +97,9 @@
                               </div>
                           </div>
                           <div class="d-flex">
-                            <a href="{{route('phonegroup.edit',encryptor('encrypt',$p->id))}}" class="btn btn-success-soft text-center w-50">Edit Group</a>
+                            <a href="{{route('phonegroup.edit',encryptor('encrypt',$p->id))}}" class="btn btn-success-soft text-center w-50"><i class="fa fa-edit"></i></a>
                             <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()" class="btn btn-danger-soft text-center w-50">Delete
-                              {{-- <i class="fa fa-trash"></i> --}}
+                              <i class="fa fa-trash"></i>
                             </a>
                               <form id="form{{$p->id}}" action="{{route('phonegroup.destroy',encryptor('encrypt',$p->id))}}" method="post">
                                   @csrf

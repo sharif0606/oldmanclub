@@ -32,10 +32,19 @@ class SmsPackageController extends Controller
     {
         try{
             $sms = new SmsPackage;
+            $sms->package_type = $request->package_type;
             $sms->title = $request->title;
+            if($request->hasFile('image')){
+                $imageName = rand(111,999).'.'.$request->image->extension();
+                $request->image->move(public_path('uploads/sms'),$imageName);
+                $sms->image=$imageName;
+            }
             $sms->number_of_sms = $request->number_of_sms;
-            $sms->validity = $request->validity;
+            $sms->validity_days = $request->validity_days;
             $sms->price = $request->price;
+            $sms->discount = $request->discount;
+            $sms->discount_price = $request->discount_price;
+            $sms->per_sms_charge = $request->per_sms_charge;
             $sms->status = 1;
              if($sms->save()){
                 $this->notice::success('Successfully updated');
@@ -72,11 +81,20 @@ class SmsPackageController extends Controller
     {
         try{
             $sms = SmsPackage::findOrFail(encryptor('decrypt',$id));
+            $sms->package_type = $request->package_type;
             $sms->title = $request->title;
+            if($request->hasFile('image')){
+                $imageName = rand(111,999).'.'.$request->image->extension();
+                $request->image->move(public_path('uploads/sms'),$imageName);
+                $sms->image=$imageName;
+            }
             $sms->number_of_sms = $request->number_of_sms;
-            $sms->validity = $request->validity;
+            $sms->validity_days = $request->validity_days;
             $sms->price = $request->price;
-            $sms->status = 1;
+            $sms->discount = $request->discount;
+            $sms->discount_price = $request->discount_price;
+            $sms->per_sms_charge = $request->per_sms_charge;
+            $sms->status = $request->status;
              if($sms->save()){
                 $this->notice::success('Successfully updated');
                 return redirect()->route('sms.index');

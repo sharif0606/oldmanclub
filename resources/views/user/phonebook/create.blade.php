@@ -37,7 +37,7 @@
                     <div class="row g-3">
                         <div class="card col-sm-12 shadow-lg">
                             <div class="card-body">
-                                <form action="{{route('phonebook.store')}}" method="post" class="row">
+                                <form action="{{route('phonebook.store')}}" method="post" class="row" enctype="multipart/form-data">
                                     @csrf
                                     <div class="col-12">
                                         <select name="group_id" id="" class="form-control mb-3">
@@ -55,6 +55,15 @@
                                     </div>
                                     <div class="col-12">
                                         <input type="email" class="form-control mb-3" id="Email" name="email" placeholder="Email">
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="company" class="form-control mb-3" id="Email" name="company_name" placeholder="Company name">
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="text" class="form-control mb-3" id="Email" name="description" placeholder="Description">
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="file" class="form-control mb-3" id="Email" name="image">
                                     </div>
                                     <div class="col-12">
                                         <button type="submit" class="btn btn-primary">Phone No Save</button>

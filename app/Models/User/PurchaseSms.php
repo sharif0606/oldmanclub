@@ -11,4 +11,7 @@ class PurchaseSms extends Model
     public function package(){
         return $this->belongsTo(SmsPackage::class,'smspackage_id','id');
     }
+    public function sendsms(){
+        return $this->hasMany(SendSms::class);
+    }
 }
