@@ -32,7 +32,8 @@ class ShippingController extends Controller
     public function create()
     {
         $client = Client::find(currentUserId());
-        return view('user.shipping.create', compact('client'));
+        $postCount = Post::where('client_id', currentUserId())->count();
+        return view('user.shipping.create', compact('client','postCount'));
     }
 
     /**
@@ -55,6 +56,11 @@ class ShippingController extends Controller
                 $shipping_detail->shipping_title = $request->shipping_title;
                 $shipping_detail->shipping_description = $request->shipping_description;
                 $shipping_detail->price = $request->price;
+                if ($request->hasFile('image')) {
+                    $imageName = rand(111, 999) . time() . '.' . $request->image->extension();
+                    $request->image->move(public_path('uploads/shipping'), $imageName);
+                    $shipping_detail->image = $imageName;
+                }
                 if ($shipping_detail->save()) {
                     /*Insert Data Into Shipping Status */
                     $ShippingStatusType = new ShippingStatusType;
@@ -83,9 +89,12 @@ class ShippingController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Shipping $shipping)
+    public function show($id)
     {
-        //
+        $client = Client::find(currentUserId());
+        $postCount = Post::where('client_id', currentUserId())->count();
+        $shipping = Shipping::findOrFail(encryptor('decrypt', $id));
+        return view('user.shipping.show', compact('shipping', 'client','postCount'));
     }
 
     /**
@@ -95,7 +104,8 @@ class ShippingController extends Controller
     {
         $client = Client::find(currentUserId());
         $shipping = Shipping::findOrFail(encryptor('decrypt', $id));
-        return view('user.shipping.edit', compact('shipping', 'client'));
+        $postCount = Post::where('client_id', currentUserId())->count();
+        return view('user.shipping.edit', compact('shipping', 'client','postCount'));
     }
 
     /**

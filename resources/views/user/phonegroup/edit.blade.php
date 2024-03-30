@@ -1,70 +1,89 @@
 @extends('user.layout.base')
-@section('title','Phone Group')
+@section('title','Phonebook')
 @section('content')
-    <div class="row">
-        <div class="col-6">
-            <div class="card">
-                <!-- table bordered -->
-                <div class="table-responsive">
-                    <div>
-                        <h3 class="text-center">Phone Group</h3>
-                        {{-- <a class="pull-right fs-5" href="{{route('phonegroup.create')}}" data-toggle="modal" data-target="#phonegroupModal"><i class="fa fa-plus"></i></a> --}}
-                    </div>
-                    <table class="table table-striped mb-0" id="phone_book">
-                        <thead>
-                            <tr>
-                                <th scope="col">{{__('#SL')}}</th>
-                                <th scope="col">{{__('Group Name')}}</th>
-                                <th class="white-space-nowrap">{{__('Action') }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse($data as $p)
-                            <tr>
-                                <th scope="row">{{ ++$loop->index }}</th>
-                                <td>{{$p->group_name}}</td>
-                                <td class="white-space-nowrap">
-                                    <a href="{{route('phonegroup.edit',encryptor('encrypt',$p->id))}}">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-
-                                    <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                    <form id="form{{$p->id}}" action="{{route('phonegroup.destroy',encryptor('encrypt',$p->id))}}" method="post">
-                                        @csrf
-                                        @method('delete')
-                                    </form>
-                                </td>
-                            </tr>
-                            @empty
-                            <tr>
-                                <th colspan="8" class="text-center">No Pruduct Found</th>
-                            </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+<div class="row g-4">
+    <!-- Sidenav START -->
+    <div class="col-lg-3">
+        <!-- Advanced filter responsive toggler START -->
+        <div class="d-flex align-items-center d-lg-none">
+            <button class="border-0 bg-transparent" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasSideNavbar" aria-controls="offcanvasSideNavbar">
+                <span class="btn btn-primary"><i class="fa-solid fa-sliders-h"></i></span>
+                <span class="h6 mb-0 fw-bold d-lg-none ms-2">My profile</span>
+            </button>
         </div>
-        <div class="col-6">
-            <div class="card shadow-lg">
-                <div class="card-body">
-                    <form action="{{route('phonegroup.update',encryptor('encrypt',$phonegroup->id))}}" method="post" class="row">
-                        @csrf
-                        @method('Patch')
-                        <div class="col-12">
-                            <div class="col-12">
-                                <input type="text" class="form-control mb-3" id="Phone" name="group_name" value="{{old('group_name',$phonegroup->group_name)}}">
-                            </div>
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-primary">Update</button>
+        <!-- Advanced filter responsive toggler END -->
+        <!-- Navbar START-->
+        @include('user.includes.profile-navbar')
+        <!-- Navbar END-->
+    </div>
+    <!-- Sidenav END -->
+    <!-- Main content START -->
+    <div class="col-md-8 col-lg-6 vstack gap-4">
+        <!-- Card START -->
+        <div class="card">
+            <!-- Card header START -->
+            <div class="card-header d-sm-flex text-center align-items-center justify-content-between border-0 pb-0">
+                <h4 class="card-title h4">Phone Group</h4>
+                <!-- Button modal -->
+                <a class="btn btn-primary-soft" href="{{ route('phonegroup.index') }}"> <i
+                        class="fas fa-list pe-1"></i>All Shipping</a>
+            </div>
+            <!-- Card header START -->
+            <!-- Card body START -->
+            <div class="card-body">
+                <!-- Album Tab content START -->
+                <div class="mb-0 pb-0">
+                    <div class="row g-3">
+                        <div class="card col-sm-12 shadow-lg">
+                            <div class="card-body">
+                                <form action="{{ route('phonegroup.update',encryptor('encrypt',$phonegroup->id)) }}" enctype="multipart/form-data" method="post" class="row">
+                                    @csrf
+                                    @method('PATCH')
+                                    <div class="form-group">
+                                        <input type="text" class="form-control mb-3" id="Phone" name="group_name" value="{{old('group_name',$phonegroup->group_name)}}"  placeholder="Phone Group">
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="file" class="form-control mb-3" id="" name="image" >
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary px-3">Save</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </form>
+                    </div>
+                    <!-- Photos of you tab END -->
+                </div>
+                <!-- Album Tab content END -->
+            </div>
+            <!-- Card body END -->
+        </div>
+        <!-- Card END -->
+    </div>
+</div><!-- Row END -->
+
+{{-- <main>
+  <!-- Container START -->
+    <div class="container">
+        <div class="row g-4">
+        <!-- Main content START -->
+            <div class="col-lg-8 mx-auto">
+                <div class="bg-mode p-4">
+                    <div class="compose-content">
+                        <form action="{{route('phonegroup.store')}}" method="post" class="row">
+                            @csrf
+                            <div class="form-group">
+                                <input type="text" class="form-control mb-3" id="Phone" name="group_name" placeholder="Phone Group">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary px-3">Save</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
+</main> --}}
 @endsection

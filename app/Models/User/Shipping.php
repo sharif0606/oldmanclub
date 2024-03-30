@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\ShippingDetail;
+use App\Models\Backend\Admin\ShippingStatusType;
 
 class Shipping extends Model
 {
@@ -15,7 +16,7 @@ class Shipping extends Model
         return $this->belongsTo(Client::class,'client_id','id');
     }
     public function shippingstatus(){
-        return $this->hasMany(ShippingStatusType::class,'shipping_id','id');
+        return $this->hasOne(ShippingStatusType::class,'shipping_id','id');
     }
     public function shippingtrack(){
         return $this->hasMany(ShippingTracking::class,'shipping_id','id');

@@ -1,64 +1,85 @@
 @extends('user.layout.base')
 @section('title','Phonebook')
 @section('content')
-    <div class="row">
-        {{--  <div class="col-6">
-            <div class="card">
-                <!-- table bordered -->
-                <div class="table-responsive">
-                    <div>
-                        <button id="downloadVCard"><i class="fa-solid fa-address-card"></i>
-                        </button>
-                        <!-- Inside your blade file -->
-                        <!-- <button class="btn btn-sm btn-primary float-end" onClick="get_print()"><i class="bi bi-file-excel"></i> Export Excel</button> -->
-                        <a href="{{ route('phonebook_download') }}" class="pull-right fs-5 mx-2" download>
-                            <i class="fa fa-download"></i>
-                        </a>
-                        <a class="pull-right fs-5" href="{{route('phonebook.create')}}" data-toggle="modal" data-target="#phonecreatModal"><i class="fa fa-plus"></i></a>
-                    </div>
-                    <table class="table table-bordered mb-0" id="phone_book">
-                        <thead>
-                            <tr>
-                                <th scope="col">{{__('#SL')}}</th>
-                                <th scope="col">{{__('Name')}}</th>
-                                <th scope="col">{{__('Group')}}</th>
-                                <th scope="col">{{__('Contact No')}}</th>
-                                <th scope="col">{{__('E-mail')}}</th>
-                                <th class="white-space-nowrap">{{__('Action') }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse($data as $p)
-                            <tr>
-                                <th scope="row">{{ ++$loop->index }}</th>
-                                <td>{{$p->name_en}}</td>
-                                <td>{{$p->phonegroup?->group_name}}</td>
-                                <td>{{$p->contact_en}}</td>
-                                <td>{{$p->email}}</td>
-                                <td class="white-space-nowrap">
-                                    <a href="{{route('phonebook.edit',encryptor('encrypt',$p->id))}}">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-
-                                    <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                    <form id="form{{$p->id}}" action="{{route('phonebook.destroy',encryptor('encrypt',$p->id))}}" method="post">
-                                        @csrf
-                                        @method('delete')
-                                    </form>
-                                </td>
-                            </tr>
-                            @empty
-                            <tr>
-                                <th colspan="8" class="text-center">No Pruduct Found</th>
-                            </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
+<div class="row g-4">
+    <!-- Sidenav START -->
+    <div class="col-lg-3">
+        <!-- Advanced filter responsive toggler START -->
+        <div class="d-flex align-items-center d-lg-none">
+            <button class="border-0 bg-transparent" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasSideNavbar" aria-controls="offcanvasSideNavbar">
+                <span class="btn btn-primary"><i class="fa-solid fa-sliders-h"></i></span>
+                <span class="h6 mb-0 fw-bold d-lg-none ms-2">My profile</span>
+            </button>
+        </div>
+        <!-- Advanced filter responsive toggler END -->
+        <!-- Navbar START-->
+        @include('user.includes.profile-navbar')
+        <!-- Navbar END-->
+    </div>
+    <!-- Sidenav END -->
+    <!-- Main content START -->
+    <div class="col-md-8 col-lg-6 vstack gap-4">
+        <!-- Card START -->
+        <div class="card">
+            <!-- Card header START -->
+            <div class="card-header d-sm-flex text-center align-items-center justify-content-between border-0 pb-0">
+                <h4 class="card-title h4">Update Contact</h4>
+                <!-- Button modal -->
+                <a class="btn btn-primary-soft" href="{{ route('phonebook.index') }}"> <i
+                        class="fas fa-list pe-1"></i>All Contact</a>
             </div>
-        </div>  --}}
+            <!-- Card header START -->
+            <!-- Card body START -->
+            <div class="card-body">
+                <!-- Album Tab content START -->
+                <div class="mb-0 pb-0">
+                    <div class="row g-3">
+                        <div class="card col-sm-12 shadow-lg">
+                            <div class="card-body">
+                                <form action="{{route('phonebook.update',encryptor('encrypt',$phonebook->id))}}" method="post" class="row">
+                                    @csrf
+                                    @method('Patch')
+                                    <div class="col-12">
+                                        <div class="col-12">
+                                        <select name="group_id" id="" class="form-control mb-3">
+                                                <option value="">Select Group</option>
+                                            @foreach($phonegroup as $group)
+                                                <option value="{{$group->id}}" {{ old('group_id', $phonebook->group_id)==$group->id?"selected":""}}>{{$group->group_name}}</option>
+                                            @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <input type="text" class="form-control mb-3" id="Phone" name="contact_en" value="{{old('contact_en',$phonebook->contact_en)}}">
+                                        </div>
+                                        <div class="col-12">
+                                            <input type="text" class="form-control mb-3" id="Name" name="name_en" value="{{old('contact_en',$phonebook->name_en)}}">
+                                        </div>
+                                        <div class="col-12">
+                                            <input type="email" class="form-control mb-3" id="Email" name="email" value="{{old('contact_en',$phonebook->email)}}">
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary">Update</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Photos of you tab END -->
+                </div>
+                <!-- Album Tab content END -->
+            </div>
+            <!-- Card body END -->
+        </div>
+        <!-- Card END -->
+    </div>
+</div><!-- Row END -->
+
+
+
+
+    {{-- <div class="row">
         <div class="col-sm-6 mx-auto card">
             <div class="card-body">
                 <p class="fs-4 text-center">Update Contact</p>
@@ -90,5 +111,5 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection

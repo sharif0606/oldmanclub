@@ -28,7 +28,8 @@ class BankController extends Controller
     public function create()
     {
         $client = Client::find(currentUserId());
-        return view('user.bank.create',compact('client'));
+        $postCount = Post::where('client_id', currentUserId())->count();
+        return view('user.bank.create',compact('client','postCount'));
     }
 
     /**
@@ -40,6 +41,11 @@ class BankController extends Controller
             $bank = new Bank;
             $bank->bank_name = $request->bank_name;
             $bank->branch_name = $request->branch_name;
+            if($request->hasFile('bank_image')){
+                $imageName = rand(111,999).time().'.'.$request->bank_image->extension();
+                $request->bank_image->move(public_path('uploads/bank'), $imageName);
+                $bank->bank_image=$imageName;
+            }
             if($request->hasFile('bank_logo')){
                 $imageName = rand(111,999).time().'.'.$request->bank_logo->extension();
                 $request->bank_logo->move(public_path('uploads/bank'), $imageName);
@@ -71,7 +77,8 @@ class BankController extends Controller
     {
         $client = Client::find(currentUserId());
         $bank = Bank::findOrFail(encryptor('decrypt',$id));
-        return view('user.bank.show',compact('bank','client'));
+        $postCount = Post::where('client_id', currentUserId())->count();
+        return view('user.bank.show',compact('bank','client','postCount'));
     }
 
     /**
@@ -81,7 +88,8 @@ class BankController extends Controller
     {
         $client = Client::find(currentUserId());
         $bank = Bank::findOrFail(encryptor('decrypt',$id));
-        return view('user.bank.edit',compact('bank','client'));
+        $postCount = Post::where('client_id', currentUserId())->count();
+        return view('user.bank.edit',compact('bank','client','postCount'));
     }
 
     /**
@@ -93,6 +101,11 @@ class BankController extends Controller
             $bank = Bank::findOrFail(encryptor('decrypt',$id));
             $bank->bank_name = $request->bank_name;
             $bank->branch_name = $request->branch_name;
+            if($request->hasFile('bank_image')){
+                $imageName = rand(111,999).time().'.'.$request->bank_image->extension();
+                $request->bank_image->move(public_path('uploads/bank'), $imageName);
+                $bank->bank_image=$imageName;
+            }
             if($request->hasFile('bank_logo')){
                 $imageName = rand(111,999).time().'.'.$request->bank_logo->extension();
                 $request->bank_logo->move(public_path('uploads/bank'), $imageName);

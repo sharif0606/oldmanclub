@@ -10,249 +10,167 @@
         float: right;
     }
 </style>
-<!-- Bordered table start -->
 <main>
-  <!-- Container START -->
-  <div class="container">
-    <div class="row g-4">
-        <!-- Sidenav START -->
-      <div class="col-lg-3">
-
-        <!-- Advanced filter responsive toggler START -->
-        <div class="d-flex align-items-center d-lg-none">
-          <button class="border-0 bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSideNavbar" aria-controls="offcanvasSideNavbar">
-            <span class="btn btn-primary"><i class="fa-solid fa-sliders-h"></i></span>
-            <span class="h6 mb-0 fw-bold d-lg-none ms-2">My profile</span>
-          </button>
-        </div>
-        <!-- Advanced filter responsive toggler END -->
-        
-        <!-- Navbar START-->
-         @include('user.includes.profile-navbar')
-        <!-- Navbar END-->
-      </div>
-      <!-- Sidenav END -->
-
-      <!-- Main content START -->
-      <div class="col-md-8 col-lg-6 vstack gap-4">
-          <!-- Card START -->
-          <div class="card">
-            <!-- Card header START -->
-            <div class="card-header border-0 pb-0">
-              <div class="row g-2">
-                <div class="col-lg-2">
-                  <!-- Card title -->
-                  <h1 class="h4 card-title mb-lg-0">Contact List</h1>
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-3">
+                <div class="d-flex align-items-center d-lg-none">
+                <button class="border-0 bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSideNavbar" aria-controls="offcanvasSideNavbar">
+                    <span class="btn btn-primary"><i class="fa-solid fa-sliders-h"></i></span>
+                    <span class="h6 mb-0 fw-bold d-lg-none ms-2">My profile</span>
+                </button>
                 </div>
-                {{--  <div class="col-sm-6 col-lg-3 ms-lg-auto">
-                  <!-- Select Groups -->
-                  <select class="form-select js-choice choice-select-text-none" data-search-enabled="false">
-                    <option value="AB">Alphabetical</option>
-                    <option value="NG">Newest group</option>
-                    <option value="RA">Recently active</option>
-                    <option value="SG">Suggested</option>
-                  </select>
-                </div>  --}}
-                  <div class="col-sm-6 col-lg-6">
-                  <!-- Button modal -->
-                  <a class="btn btn-primary-soft" href="{{route('sms_create')}}">sms</a>
-                  <a href="#" id="downloadVCard" class="fs-5 mx-2 text-success"><i class="fa fa-address-card"></i></a>
-                            {{--  <button id="downloadVCard"><i class="fa fa-address-card text-info"></i>
-                            </button>  --}}
-                            <!-- Inside your blade file -->
-
-                    <a href="{{ route('phonebook_download') }}" class="fs-5 mx-2 text-success" download>
-                                <i class="fa fa-download"></i>
-                            </a>
-                  <a class="btn btn-primary-soft ms-auto" href="{{route('phonebook.create')}}"> <i class="fa-solid fa-plus pe-1"></i> Create Contact</a>
-                </div>
-              </div>
+                @include('user.includes.profile-navbar')
             </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover mb-0" id="phone_book">
-                        <thead>
-                            <tr>
-                                <th scope="col">{{__('#SL')}}</th>
-                                <th scope="col">{{__('Name')}}</th>
-                                <th scope="col">{{__('Group')}}</th>
-                                <th scope="col">{{__('Contact No')}}</th>
-                                <th scope="col">{{__('E-mail')}}</th>
-                                <th class="white-space-nowrap">{{__('Action') }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse($phonebook as $p)
-                            <tr>
-                                <th scope="row">{{ ++$loop->index }}</th>
-                                <td>{{$p->name_en}}</td>
-                                <td>{{$p->phonegroup?->group_name}}</td>
-                                <td>{{$p->contact_en}}</td>
-                                <td>{{$p->email}}</td>
-                                <td class="white-space-nowrap">
-                                    <a href="{{route('phonebook.edit',encryptor('encrypt',$p->id))}}" class="text-warning">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
+            <div class="col-md-8 col-lg-6 vstack gap-4">
+            <div class="card">
+                <div class="card-header border-0 pb-0">
+                    <div class="row g-2">
+                        <div class="col-lg-3">
+                            <h1 class="h4 card-title mb-lg-0">Phone Book</h1>
+                        </div>
+                        <div class="col-sm-6 col-lg-6 ms-auto">
+                        <a href="#" id="downloadVCard" class="fs-5 mx-2 text-success"><i class="fa fa-address-card"></i></a>
+                        <a href="{{ route('phonebook_download') }}" class="fs-5 mx-2 text-success" download><i class="fa fa-download"></i></a>
+                         <a class="btn btn-primary-soft" href="{{route('sms_send')}}">send sms</a>
+                        <a class="btn btn-primary-soft ms-auto" href="{{ route('phonebook.create') }}"> <i class="fa-solid fa-plus pe-1"></i> Create contact</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content mb-0 pb-0">
+                        <div class="tab-pane fade show active" id="tab-1">
+                            <div class="row g-4">
+                                @foreach($phonebook as $p)
+                                <div class="col-sm-6 col-lg-4">
+                                    {{-- <a href="{{route('phonebook.show',encryptor('encrypt',$p->id))}}" class=""> </a> --}}
+                                    <div class="card">
+                                        @if($p->phonegroup?->image)
+                                        <div class="h-80px rounded-top" style="background-image: url({{asset('public/uploads/phonegroup/'.$p->phonegroup?->image)}}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+                                        @else
+                                        <div class="h-80px rounded-top" style="background-image: url({{asset('public/user/assets/images/bg/firstimg.jpg')}}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+                                        @endif
+                                        <div class="card-body text-center pt-0">
+                                            {{-- <div class="avatar avatar-lg mt-n5 mb-3">
+                                                <a href="#"><img class="avatar-img rounded-circle border border-white border-3 bg-white" src="{{ asset('public/user/assets/images/logo/08.svg') }}" alt=""></a>
+                                            </div> --}}
+                                            
+                                            <h5 class="mb-0"> <a href="#">{{ $p->name_en }}</a> </h5>
+                                            <h6 class="mb-0"> <a href="#">{{ $p->contact_en }}</a> </h6>
+                                            <h6 class="mb-0"> <a href="#">{{ $p->email }}</a> </h6>
+                                            <small> <i class="bi bi-lock pe-1"></i> {{$p->phonegroup?->group_name}}</small>
+                                        </div>
+                                        <div class="d-flex">
+                                            <a href="{{route('phonebook.edit',encryptor('encrypt',$p->id))}}" class="btn btn-success-soft text-center w-50">Edit Group</a>
 
-                                    <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()" class="text-danger">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                    <form id="form{{$p->id}}" action="{{route('phonebook.destroy',encryptor('encrypt',$p->id))}}" method="post">
-                                        @csrf
-                                        @method('delete')
-                                    </form>
-                                </td>
-                            </tr>
-                            @empty
-                            <tr>
-                                <th colspan="8" class="text-center">No Pruduct Found</th>
-                            </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                    <div class="paginate pt-3">
-                        {{ $phonebook->links() }}
+                                            <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()" class="btn btn-danger-soft text-center w-50">Delete
+                                            {{-- <i class="fa fa-trash"></i> --}}
+                                            </a>
+                                            <form id="form{{$p->id}}" action="{{route('phonebook.destroy',encryptor('encrypt',$p->id))}}" method="post" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                                @csrf
+                                                @method('delete')
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                            <div class="paginate pt-3">
+                                {{ $phonebook->links() }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
       </div>
     </div>
-  </div>
 </main>
-{{--  <div class="row">
-    <div class="col-7">
-        <div class="card">
-            <h3 class="text-center m-0">Phone Book</h3>
-            <!-- table bordered -->
-            <div class="table-responsive">
-                <div class="mb-2">
-                    <button id="downloadVCard"><i class="fa-solid fa-address-card"></i>
-                    </button>
-                    <!-- Inside your blade file -->
-                    <!-- <button class="btn btn-sm btn-primary float-end" onClick="get_print()"><i class="bi bi-file-excel"></i> Export Excel</button> -->
-                    <a href="{{ route('phonebook_download') }}" class="pull-right fs-5 mx-2" download>
-                        <i class="fa fa-download"></i>
-                    </a>
-                    <a class="pull-right fs-5" href="{{route('phonebook.create')}}" data-toggle="modal" data-target="#phonecreatModal"><i class="fa fa-plus"></i></a>
-                </div>
-                <table class="table table-bordered mb-0" id="phone_book">
-                    <thead>
-                        <tr>
-                            <th scope="col">{{__('#SL')}}</th>
-                            <th scope="col">{{__('Name')}}</th>
-                            <th scope="col">{{__('Group')}}</th>
-                            <th scope="col">{{__('Contact No')}}</th>
-                            <th scope="col">{{__('E-mail')}}</th>
-                            <th class="white-space-nowrap">{{__('Action') }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($phonebook as $p)
-                        <tr>
-                            <th scope="row">{{ ++$loop->index }}</th>
-                            <td>{{$p->name_en}}</td>
-                            <td>{{$p->phonegroup?->group_name}}</td>
-                            <td>{{$p->contact_en}}</td>
-                            <td>{{$p->email}}</td>
-                            <td class="white-space-nowrap">
-                                <a href="{{route('phonebook.edit',encryptor('encrypt',$p->id))}}">
-                                    <i class="fa fa-edit"></i>
-                                </a>
 
-                                <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()">
-                                    <i class="fa fa-trash"></i>
-                                </a>
-                                <form id="form{{$p->id}}" action="{{route('phonebook.destroy',encryptor('encrypt',$p->id))}}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                </form>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <th colspan="8" class="text-center">No Pruduct Found</th>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="col-5">
-        <div class="card p-3">
-            <form action="{{route('phonebook.store')}}" method="post" class="row">
-                @csrf
-                <div class="col-12">
-                    <select name="group_id" id="" class="form-control mb-3">
-                        <option value="">Select Group</option>
-                        @foreach($phonegroup as $group)
-                        <option value="{{$group->id}}" {{ old('group_id')==$group->id?"selected":""}}>{{$group->group_name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-12">
-                    <input type="text" class="form-control mb-3" id="Phone" name="contact_en" placeholder="Phone no">
-                </div>
-                <div class="col-12">
-                    <input type="text" class="form-control mb-3" id="Name" name="name_en" placeholder="Name">
-                </div>
-                <div class="col-12">
-                    <input type="email" class="form-control mb-3" id="Email" name="email" placeholder="Email">
-                </div>
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary">Phone No Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="modal fade" id="phonecreatModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content rounded-0 border-0 p-4">
-                <div class="modal-header border-0">
-                    <h3 class="text-center">Phonebook</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+{{-- <main>
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-3">
+                <div class="d-flex align-items-center d-lg-none">
+                    <button class="border-0 bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSideNavbar" aria-controls="offcanvasSideNavbar">
+                        <span class="btn btn-primary"><i class="fa-solid fa-sliders-h"></i></span>
+                        <span class="h6 mb-0 fw-bold d-lg-none ms-2">My profile</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="login">
-                        <form action="{{route('phonebook.store')}}" method="post" class="row">
-                            @csrf
-                            <div class="col-12">
-                                <select name="group_id" id="" class="form-control mb-3">
-                                    <option value="">Select Group</option>
-                                    @foreach($phonegroup as $group)
-                                    <option value="{{$group->id}}" {{ old('group_id')==$group->id?"selected":""}}>{{$group->group_name}}</option>
-                                    @endforeach
-                                </select>
+                    @include('user.includes.profile-navbar')
+            </div>
+            <div class="col-md-8 col-lg-6 vstack gap-4">
+                <div class="card">
+                    <div class="card-header border-0 pb-0">
+                        <div class="row g-2">
+                            <div class="col-lg-2">
+                            <h1 class="h4 card-title mb-lg-0">Contact List</h1>
                             </div>
-                            <div class="col-12">
-                                <input type="text" class="form-control mb-3" id="Phone" name="contact_en" placeholder="Phone no">
+                            <div class="col-sm-6 col-lg-6 ms-auto">
+                                <a class="btn btn-primary-soft" href="{{route('sms_create')}}">sms</a>
+                                <a href="#" id="downloadVCard" class="fs-5 mx-2 text-success"><i class="fa fa-address-card"></i></a>
+                                    <a href="{{ route('phonebook_download') }}" class="fs-5 mx-2 text-success" download><i class="fa fa-download"></i></a>
+                                <a class="btn btn-primary-soft ms-auto" href="{{route('phonebook.create')}}"> <i class="fa-solid fa-plus pe-1"></i> Create Contact</a>
                             </div>
-                            <div class="col-12">
-                                <input type="text" class="form-control mb-3" id="Name" name="name_en" placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover mb-0" id="phone_book">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">{{__('#SL')}}</th>
+                                        <th scope="col">{{__('Name')}}</th>
+                                        <th scope="col">{{__('Group')}}</th>
+                                        <th scope="col">{{__('Contact No')}}</th>
+                                        <th scope="col">{{__('E-mail')}}</th>
+                                        <th class="white-space-nowrap">{{__('Action') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse($phonebook as $p)
+                                    <tr>
+                                        <th scope="row">{{ ++$loop->index }}</th>
+                                        <td>{{$p->name_en}}</td>
+                                        <td>{{$p->phonegroup?->group_name}}</td>
+                                        <td>{{$p->contact_en}}</td>
+                                        <td>{{$p->email}}</td>
+                                        <td class="white-space-nowrap">
+                                            <a href="{{route('phonebook.edit',encryptor('encrypt',$p->id))}}" class="text-warning">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+
+                                            <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()" class="text-danger">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                            <form id="form{{$p->id}}" action="{{route('phonebook.destroy',encryptor('encrypt',$p->id))}}" method="post" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                                @csrf
+                                                @method('delete')
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @empty
+                                    <tr>
+                                        <th colspan="8" class="text-center">No Pruduct Found</th>
+                                    </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                            <div class="paginate pt-3">
+                                {{ $phonebook->links() }}
                             </div>
-                            <div class="col-12">
-                                <input type="email" class="form-control mb-3" id="Email" name="email" placeholder="Email">
-                            </div>
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-primary">Phone No Save</button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>  --}}
+</main> --}}
 <script>
     document.getElementById('downloadVCard').addEventListener('click', function() {
-
         var $phonebook = @json($phonebook);
         function generateVCard(phonebook) {
             var vCard = "BEGIN:VCARD\nVERSION:3.0";
-
             phonebook.forEach(function(contact) {
                 var Name = contact.name_en;
                 var Phone = contact.contact_en;
@@ -272,7 +190,6 @@
             link.setAttribute('download', 'phonebook.vcf');
             link.click();
     });
-
 </script>
 
 <script>

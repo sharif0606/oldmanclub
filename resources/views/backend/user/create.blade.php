@@ -1,8 +1,6 @@
 @extends('backend.layouts.app')
-
 @section('title',trans('Users'))
 @section('page',trans('Create'))
-
 @section('content')
 <div class="row">
     <div class="col-12">

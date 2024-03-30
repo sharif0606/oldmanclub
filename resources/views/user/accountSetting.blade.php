@@ -1065,7 +1065,6 @@
                                         <!-- Messaging experience END -->
                                     </div>
                                     <!-- Messaging tab END -->
-
                                     <!-- Close account tab START -->
                                     <div class="tab-pane fade" id="nav-setting-tab-6" role="tabpanel">
                                         <!-- Card START -->
@@ -1229,7 +1228,7 @@
                 }
             });
         }
-        if(currentCityId){
+        if(currentStateId){
             $.ajax({
                 url: "{{route('getCitiesByStates')}}",
                 type: 'GET',

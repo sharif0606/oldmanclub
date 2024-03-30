@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('shipping_id')->constrained('shippings');
             $table->string('shipping_title')->nullable();
             $table->text('shipping_description')->nullable();
+            $table->string('image')->nullable();
             $table->decimal('price',10,2)->default(0.00);
             $table->string('image_path')->nullable();
             $table->timestamps();
