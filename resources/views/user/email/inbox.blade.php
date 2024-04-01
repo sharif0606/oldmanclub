@@ -1,8 +1,6 @@
 @extends('user.layout.base')
 @section('title', 'Inbox')
 @section('content')
-
-
     <div class="p-0">
         <a href="{{ route('sent_email_create') }}" class="btn btn-primary mb-2">Compose</a>
     </div>
@@ -33,7 +31,6 @@
             @empty
                 <p>No Email Found</p>
             @endforelse
-
         </div>
         <!-- panel -->
         <div class="row mt-4 m-4 mx-sm-4">
