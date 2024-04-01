@@ -198,7 +198,7 @@ class ClientAuthentication extends Controller
                                 'token' => $request->token
                               ])
                               ->first();
-  dd($updatePassword);
+  
           if(!$updatePassword){
               return back()->withInput()->with('error', 'Invalid token!');
           }
