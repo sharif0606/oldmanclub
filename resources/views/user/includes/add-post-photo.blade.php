@@ -15,8 +15,13 @@
                     <div class="d-flex mb-3">
                         <!-- Avatar -->
                         <div class="avatar avatar-xs me-2">
+                             @if ($client->image)
+                                        <img class="avatar-img rounded-circle"
+                                            src="{{ asset('public/uploads/client/' . $client->image) }}" alt="">
+                                    @else
                             <img class="avatar-img rounded-circle"
                                 src="{{ asset('public/user/assets/images/avatar/03.jpg') }}" alt="">
+                            @endif
                         </div>
                         <!-- Feed box  -->
 
