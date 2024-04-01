@@ -43,7 +43,7 @@
               <div class="mb-3">
                 <!-- Input group -->
                 <div class="input-group input-group-lg">
-                  <input class="form-control fakepassword" type="text" name="email" id="psw-input" placeholder="Enter new Email">
+                  <input class="form-control fakepassword" type="email" name="email" id="psw-input" placeholder="Enter Email">
                   {{-- <span class="input-group-text p-0">
                     <i class="fakepasswordicon fa-solid fa-eye-slash cursor-pointer p-2 w-40px"></i>
                   </span> --}}
