@@ -32,10 +32,41 @@
             <!-- Card header START -->
             <!-- Card body START -->
             <div class="card-body">
-                <!-- Album Tab content START -->
                 <div class="mb-0 pb-0">
                     <div class="row g-3">
-                        <div class="card col-sm-12 shadow-lg">
+                        @forelse($sms as $p)
+                            <div class="col-sm-6 col-lg-4">
+                                <form action="{{ route('purchase.store') }}" method="post" class="row">
+                                    @csrf
+                                    <div class="card">
+                                        @if($p->image)
+                                        <div class="h-80px rounded-top" style="background-image: url({{asset('public/uploads/sms/'.$p->image)}}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+                                        @else
+                                        <div class="h-80px rounded-top" style="background-image: url({{asset('public/user/assets/images/bg/firstimg.jpg')}}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+                                        @endif
+                                        <div class="card-body text-center pt-0">
+                                            
+                                            <h5 class="mb-0"><a href="#">@if($p->package_type == 1){{ 'Regular' }} @else {{ 'Validity' }} @endif</a> </h5>
+                                            <span class="fs-6 fw-bold text-dark px-2">Title:</span><span>{{ $p->title }}</span><br>
+                                            <span class="fs-6 fw-bold text-dark px-2">Number Of SMS:</span><span>{{ $p->number_of_sms }}</span><br>
+                                            <span class="fs-6 fw-bold text-dark px-2">Validity:</span><span>{{ $p->validity_days }}</span><br>
+                                            <span class="fs-6 fw-bold text-dark px-2">Price:</span><span>{{ $p->price }}</span>
+                                            <span class="fs-6 fw-bold text-dark px-2">Discount:</span><span>{{ $p->discount }}%</span>
+                                            <h6 class="mb-0">Discount Price: <a href="#">{{ $p->discount_price }}</a> </h6>
+                                        </div>
+                                        <div class="d-flex">
+                                            <input type="hidden" name="smspackage_id" value="{{ $p->id }}">
+                                            <input type="hidden" name="number_of_sms" value="{{ $p->number_of_sms }}">
+                                            {{-- <input type="hidden" name="validity_count" value="{{ $p->validity_days }}"> --}}
+                                            <button type="submit" class="btn btn-success-soft w-100 px-3 ">Purchase</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            @empty
+                            <p>Package Not Found</p>
+                            @endforelse
+                        {{-- <div class="card col-sm-12 shadow-lg">
                             <div class="card-body">
                                 <form action="{{ route('purchase.store') }}" method="post" class="row">
                                     @csrf
@@ -58,15 +89,11 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
-                    <!-- Photos of you tab END -->
                 </div>
-                <!-- Album Tab content END -->
             </div>
-            <!-- Card body END -->
         </div>
-        <!-- Card END -->
     </div>
 </div>
 <main>
@@ -104,7 +131,7 @@
     </div> --}}
   <!-- Container END -->
 </main>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
         $("#smspackage_id").change(function() {
@@ -120,5 +147,5 @@
             $("#validity_count").val(differenceInDays);
         });
     });
-</script>
+</script> --}}
 @endsection

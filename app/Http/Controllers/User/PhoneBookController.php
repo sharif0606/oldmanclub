@@ -192,6 +192,7 @@ class PhoneBookController extends Controller
             return redirect()->route('sms_send');
         }
         $purchase->number_of_sms -= $smsCount;
+        $purchase->uses_sms += $smsCount;
         $purchase->save();
 
         foreach($contact_nos as $contact_no){
