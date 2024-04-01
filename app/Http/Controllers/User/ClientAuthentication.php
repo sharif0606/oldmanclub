@@ -207,7 +207,7 @@ class ClientAuthentication extends Controller
                       ->update(['password' => Hash::make($request->password)]);
  
           DB::table('password_resets')->where(['email'=> $request->email])->delete();
-  
+  echo 'ok';die;
           return redirect()->route('clientlogin')->with('message', 'Your password has been changed!');
     }
 }
