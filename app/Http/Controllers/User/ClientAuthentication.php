@@ -188,7 +188,7 @@ class ClientAuthentication extends Controller
     {
           $request->validate([
               'email' => 'required|email|exists:clients',
-              'password' => 'required|string|min:6|confirmed',
+              'password' => 'required|string|confirmed'/*min:6|*/,
               'password_confirmation' => 'required'
           ]);
   

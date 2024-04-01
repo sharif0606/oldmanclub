@@ -25,7 +25,7 @@
                 <div class="mb-3">
                     <!-- Input group -->
                     <div class="input-group input-group-lg">
-                      <input class="form-control" type="email" name="email" placeholder="Enter Email" required>
+                      <input class="form-control w-100" type="email" name="email" placeholder="Enter Email" required>
                       @if ($errors->has('email'))
                         <p><span class="text-danger">{{ $errors->first('email') }}</span></p>
                       @endif
@@ -34,7 +34,7 @@
                 <div class="mb-3">
                     <!-- Input group -->
                     <div class="input-group input-group-lg">
-                      <input class="form-control" type="text" name="password" placeholder="Enter Pasword" required>
+                      <input class="form-control w-100" type="text" name="password" placeholder="Enter Pasword" required>
                       @if ($errors->has('password'))
                         <p><span class="text-danger">{{ $errors->first('password') }}</span></p>
                       @endif
@@ -43,7 +43,7 @@
                 <div class="mb-3">
                     <!-- Input group -->
                     <div class="input-group input-group-lg">
-                      <input class="form-control" type="text" name="password_confirmation" placeholder="Enter Confirm Pasword" required>
+                      <input class="form-control w-100" type="text" name="password_confirmation" placeholder="Enter Confirm Pasword" required>
                       @if ($errors->has('password_confirmation'))
                         <p><span class="text-danger">{{ $errors->first('password_confirmation') }}</span></p>
                       @endif
