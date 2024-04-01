@@ -49,6 +49,8 @@
                       @endif
                     </div>
                 </div>
+                <!-- Button -->
+                <div class="d-grid"><button type="submit" class="btn btn-lg btn-primary">Reset Password</button></div>
             </form>
             <!-- form END -->
           </div>
@@ -59,7 +61,7 @@
     <!-- Container END -->
   
   </main>
-<main class="login-form">
+{{-- <main class="login-form">
   <div class="cotainer">
       <div class="row justify-content-center">
           <div class="col-md-8">
@@ -111,5 +113,5 @@
           </div>
       </div>
   </div>
-</main>
+</main> --}}
 @endsection
