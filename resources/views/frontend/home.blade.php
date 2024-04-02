@@ -68,7 +68,7 @@
                         </p>
                 </div>
             </div>
-            <div class="col-md-10 offset-md-2">  
+            <div class="col-md-10 offset-md-1">  
                     <div class="row gx-1 pt-2">
                         @forelse($services as $value)
                         <div class="col-md-4 mb-2">
