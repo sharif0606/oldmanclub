@@ -7,6 +7,7 @@ use App\Models\User\Client;
 use App\Models\User\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Mail; 
 
 class EmailSendController extends Controller
 {
