@@ -27,10 +27,10 @@
         <div class="card">
             <!-- Card header START -->
             <div class="card-header d-sm-flex text-center align-items-center justify-content-between border-0 pb-0">
-                <h4 class="card-title h4">Preview NFC Card</h4>
+                <h4 class="card-title h4">PREVIEW NFC CARD</h4>
                 <!-- Button modal -->
                 <a class="btn btn-primary-soft" href="{{ route('nfc_card.index') }}"> <i
-                        class="fas fa-list pe-1"></i>All NFC Card</a>
+                        class="fas fa-list pe-1"></i>All NFC CARD</a>
             </div>
             <!-- Card header START -->
             <!-- Card body START -->
@@ -41,7 +41,7 @@
                             <div>
                                 <a href="{{ route('nfc_card.edit', encryptor('encrypt', $nfc_card->id)) }}"><i class="fa fa-edit"></i></a>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                     @if ($nfc_card->card_design?->design_card_id == 1)
                                         @include('user.nfc-template_show.classic-template')
                                     @elseif($nfc_card->card_design?->design_card_id == 2)

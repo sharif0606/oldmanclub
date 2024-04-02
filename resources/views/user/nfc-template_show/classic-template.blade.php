@@ -58,7 +58,7 @@
         </div>
     </div>
     <section class="middle">
-        <div class="container-fluid mt-5">
+        <div class="container-fluid mt-2">
             <div class="row">
                 <div class="col-sm-12">
                     @if ($nfc_card->nfc_info?->prefix)
