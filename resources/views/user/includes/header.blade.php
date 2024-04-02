@@ -10,9 +10,9 @@
                 <img class="dark-mode-item navbar-brand-item"
                     src="{{ asset('public/user/assets/images/logo.svg') }}" alt="logo"> --}}
                 <img class="light-mode-item navbar-brand-item"
-                    src="{{ asset('public/user/assets/images/oldman-logo.png') }}" alt="logo">
+                    src="{{ asset('public/assets/images/oldman-logo.png') }}" alt="logo">
                 <img class="dark-mode-item navbar-brand-item"
-                    src="{{ asset('public/user/assets/images/oldman-logo.png') }}" alt="logo">
+                    src="{{ asset('public/assets/images/oldman-logo.png') }}" alt="logo">
             </a>
             <!-- Logo END -->
 
