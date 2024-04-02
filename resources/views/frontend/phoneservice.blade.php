@@ -6,7 +6,7 @@
     <section class="phn-hero">
         <img src="{{asset('public/uploads/phoneservice/'.$phonehero?->background_image)}}" alt="" class="phn-hero-image">
         <div class="phn-hero-text">
-            <h2 class="fw-bold fs-1">{{$phonehero?->text_large}}</h2>
+            <h2 class="fw-bold fs-1 text-uppercase">{{$phonehero?->text_large}}</h2>
             <p class="py-3 fw-medium">{{$phonehero?->text_small}}</p>
             <div class="phn-hero-content mt-4">
                 <div class="row">
@@ -38,7 +38,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-5 phn-our-service-text">
-                    <h2 class="text-capitalize">{{$phoneservice?->text_heading}}</h2>
+                    <h2 class="text-uppercase">{{$phoneservice?->text_heading}}</h2>
                     <p class="text-start py-2 fw-medium">{{$phoneservice?->text_small}}</p>
                     <button class="btn phn-pricing-btn fw-medium mb-3 px-5 py-2">Pricing</button>
                 </div>
@@ -54,7 +54,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 offset-md-2 text-center">
-                    <h2 class="fw-bold">{{$phonemaps?->text_large}}</h2>
+                    <h2 class="fw-bold text-uppercase">{{$phonemaps?->text_large}}</h2>
                     <p class="py-2 fw-medium">{{$phonemaps?->text_small}}</p>
                 </div>
             </div>
@@ -71,7 +71,7 @@
    
     <!-- customre feedback start -->
     <section class="phn-our-customer py-5">
-        <h2 class="fw-bold text-center py-4">Trusted by millions of customers worldwide</h2>
+        <h2 class="fw-bold text-center py-4 text-uppercase">Trusted by millions of customers worldwide</h2>
         <div class="container">
             <div class="row">
                 <div class="phn-testimonial-slider-container">
