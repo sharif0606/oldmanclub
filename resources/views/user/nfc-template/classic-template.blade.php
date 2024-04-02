@@ -1,6 +1,6 @@
 <div>
     <header>
-        <div class="classic_header_image">
+        <div class="classic_header_image" style="position: relative !important">
             @if ($nfc_card->client?->image)
                 <img src="{{ asset('public/uploads/client/' . $nfc_card->client?->image) }}" alt="" width="350px"
                     height="350px">
@@ -10,7 +10,7 @@
                 <!-- <div class="main-img" style="background-image: url({{ asset('public/assets/nfc/images/123.png') }})">
                 </div> -->
             @endif
-            <div class="classic_svg">
+            <div class="classic_svg" style="bottom: 0px !important;">
                 <svg preserveAspectRatio="xMinYMax meet" viewBox="0 0 246 57" xmlns="http://www.w3.org/2000/svg"
                     class="css-fxun4i">
                     @if ($nfc_card->card_type == 1)
