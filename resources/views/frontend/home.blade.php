@@ -61,13 +61,15 @@
     <!-- Our Service section start -->
     <div class="container mt-5">
         <div class="row">
-            <div class="col-md-8 offset-md-2">                  
+            <div class="col-md-12">                  
                 <div class="our-service-details mt-5 text-center">
                     <h2>OUR SERVICE</h2>
                     <p class="px-5 mb-5">{{$homepage?->service_section_text}}
                         </p>
                 </div>
-                    <div class="row gx-0 pt-2">
+            </div>
+            <div class="col-md-10 offset-md-2">  
+                    <div class="row gx-1 pt-2">
                         @forelse($services as $value)
                         <div class="col-md-4 mb-2">
                             <a href="{{$value->link}}" class="card-link service">
