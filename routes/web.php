@@ -269,7 +269,7 @@ Route::get('nfcqrurl/{id}/{client_id}', [nfc_card::class, 'showqrurl']);
 Route::get('save-contact/{id}', [nfc_card::class, 'save_contact'])->name('save_contact');
 Route::post('/send-message', [ChatController::class, 'sendMessage']);
 
-Route::get('', [frontend::class, 'frontend'])->name('frontend');
+Route::get('/', [frontend::class, 'frontend'])->name('frontend');
 Route::get('nfccard', [frontend::class, 'nfccard'])->name('nfccard');
 Route::get('shippingservice', [frontend::class, 'shippingservice'])->name('shippingservice');
 Route::get('llcservice', [frontend::class, 'llcservice'])->name('llcservice');
