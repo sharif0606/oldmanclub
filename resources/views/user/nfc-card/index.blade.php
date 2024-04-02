@@ -76,6 +76,23 @@
                                         </a>
                                         <!-- Dropdown menu -->
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="photoActionEdit">
+                                           
+                                        {{-- asset('public/user/assets/images/albums/01.jpg') --}}
+                                        <span class="fs-4 fw-bold">{{ $nfc_card->client?->fname }}</span>
+                                        <span class="fs-4 fw-bold">{{ $nfc_card->client?->middle_name }}</span>
+                                        <span class="fs-4 fw-bold">{{ $nfc_card->client?->last_name }}</span>
+                                            <li><a class="dropdown-item"> 
+                                                @if ($nfc_card->card_type == 1)
+                                                <p>{{ __('Work') }}</p>
+                                                @else
+                                                <p>{{ __('Personal') }}</p>
+                                                @endif</a>
+                                            </li>
+                                            <li><a class="dropdown-item"> 
+                                                <span class="fs-6 fw-bold">{{ $nfc_card->client?->fname }}</span>
+                                                <span class="fs-6 fw-bold">{{ $nfc_card->client?->middle_name }}</span>
+                                                <span class="fs-6 fw-bold">{{ $nfc_card->client?->last_name }}</span>
+                                            </li>
                                             <li><a class="dropdown-item" href="{{ route('nfc_card.edit', encryptor('encrypt', $nfc_card->id)) }}"> <i
                                                         class="bi bi-tag fa-fw pe-1"></i>Edit</a></li>
                                             <li><a class="dropdown-item" href="{{ route('nfc_card.show', encryptor('encrypt', $nfc_card->id)) }}"> <i
@@ -100,15 +117,6 @@
                                 @else
                                 <img class="avatar-img" src="{{asset('public/user/assets/images/avatar/03.jpg')}}" alt="">
                                 @endif
-                                @if ($nfc_card->card_type == 1)
-                                    <p>{{ __('Work') }}</p>
-                                @else
-                                    <p>{{ __('Personal') }}</p>
-                                @endif
-                                {{-- asset('public/user/assets/images/albums/01.jpg') --}}
-                                <span class="fs-4 fw-bold">{{ $nfc_card->client?->fname }}</span>
-                                <span class="fs-4 fw-bold">{{ $nfc_card->client?->middle_name }}</span>
-                                <span class="fs-4 fw-bold">{{ $nfc_card->client?->last_name }}</span>
                             </div>
                             @empty
                             No Card Made Yet
