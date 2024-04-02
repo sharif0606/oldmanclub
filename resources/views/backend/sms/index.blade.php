@@ -37,7 +37,7 @@
                             <td>{{$p->number_of_sms}}</td>
                             <td>{{$p->validity_days}}</td>
                             <td>{{$p->price}}</td>
-                            <td>{{$p->discount}}%</td>
+                            <td>{{$p->discount_percentage}}%</td>
                             <td>{{$p->discount_price}}</td>
                             <td>
                                 <img src="{{ asset('public/uploads/sms/'.$p->image) }}" alt="" width="50px">
