@@ -108,7 +108,6 @@ body {
 
 .middle {
     border-left: 1px dashed black;
-    margin-left: 20px;
 }
 
 /* modern  */
@@ -219,4 +218,9 @@ body {
 
 .background {
     background-color: #e7e9e6;
+}
+li.list-group-item {
+    display: flex;
+    justify-content: start;
+    align-items: center;
 }
