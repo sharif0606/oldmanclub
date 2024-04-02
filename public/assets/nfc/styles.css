@@ -224,6 +224,3 @@ li.list-group-item {
     justify-content: start;
     align-items: center;
 }
-.middle + section{
-    padding: 0 !important;
-}
