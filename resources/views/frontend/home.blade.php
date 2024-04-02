@@ -1,5 +1,14 @@
 @extends('frontend.layouts.app')
 @section('title','Old Club Man')
+@push('styles')
+    <style>
+        /* Add hover effect */
+        .card.fixed-size-card:hover {
+            box-shadow: 0px 0px 20px rgba(252, 214, 214, 0.1); /* Example shadow effect */
+            transition: box-shadow 0.3s ease; /* Smooth transition effect */
+        }
+    </style>
+@endpush
 @section('content')
 
     <!-- Hero section start -->
@@ -58,13 +67,12 @@
                     <p class="px-5 mb-5">{{$homepage?->service_section_text}}
                         </p>
                 </div>
-                    <div class="row pt-4">
+                    <div class="row gx-1 pt-4">
                         @forelse($services as $value)
                         <div class="col-md-4 mb-4">
                             <a href="{{$value->link}}" class="card-link service">
                                 <div class="card fixed-size-card">
                                     <img src="{{asset('public/uploads/ourservices/'.$value->image)}}" class="card-img-top" alt="Product Shipping Service">
-                                    <hr class="my-3">
                                     <div class="card-body ">
                                         <p class="card-text text-decoration-none">
                                             {{$value->title}}    
