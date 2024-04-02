@@ -24,6 +24,7 @@
                             <div class="tab-pane fade show active" id="tab-1">
                                 <div class="row g-4">
                                     @forelse ($receive_email as $e)
+                                        <a href="{{route('sent_email_show',$e->id)}}">
                                         <div class="message">
                                             <div class="row">
                                                 <div class="col-sm-1">
@@ -45,6 +46,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </a>
                                     @empty
                                         <p>No Email Found</p>
                                     @endforelse

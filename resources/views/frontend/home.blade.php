@@ -62,7 +62,7 @@
             <div class="col-md-10 offset-md-1">  
                     <div class="row gx-1 pt-2">
                         @forelse($services as $value)
-                        <div class="col-md-4 mb-2">
+                        <div class="col-md-4 mb-3">
                             <a href="{{$value->link}}" class="card-link service">
                                 <div class="card fixed-size-card">
                                     <img src="{{asset('public/uploads/ourservices/'.$value->image)}}" class="card-img-top" alt="Product Shipping Service">
