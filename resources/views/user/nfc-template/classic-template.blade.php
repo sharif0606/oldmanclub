@@ -1,4 +1,4 @@
-<div>
+<div class="card p-2">
     <header>
         <div class="classic_header_image" style="position: relative !important">
             @if ($nfc_card->client?->image)
