@@ -5,7 +5,7 @@
 
         <!-- Container START -->
         <div class="container">
-            <div class="row g-4">
+            <div class="row g-2">
 
                 <!-- Main content START -->
                 <div class="col-lg-12 vstack gap-4">
@@ -16,7 +16,7 @@
 
                 <!-- Right sidebar START -->
                 <div class="col-lg-4">
-                    <div class="row g-4">
+                    <div class="row g-2">
                         <!-- Card START -->
                         <div class="col-md-6 col-lg-12">
                             <div class="card">
