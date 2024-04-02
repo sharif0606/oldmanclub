@@ -61,7 +61,7 @@
     <!-- Our Service section start -->
     <div class="container mt-5">
         <div class="row">
-            <div class="col-md-12">                  
+            <div class="col-md-8 offset-md-2">                  
                 <div class="our-service-details mt-5 text-center">
                     <h2>OUR SERVICE</h2>
                     <p class="px-5 mb-5">{{$homepage?->service_section_text}}
