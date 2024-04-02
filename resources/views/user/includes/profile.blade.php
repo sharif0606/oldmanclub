@@ -1,7 +1,7 @@
 <div class="card">
     <!-- Cover image -->
     @if($client->cover_photo)
-        <div class="h-200px rounded-top"
+        <div class="h-250px rounded-top"
             style="background-image:url({{asset('public/uploads/client/' . $client->cover_photo)}}); background-position: center; background-size: cover; background-repeat: no-repeat;">
         </div>
     @else
