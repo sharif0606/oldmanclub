@@ -34,7 +34,7 @@
                                         <textarea name="shipping_description" class="form-control mb-3 content" placeholder="Order Details" rows="5">{{ $shipping->shippingdetail?->shipping_description }}</textarea>
                                     </div>
                                     <div class="col-12">
-                                        <textarea name="delivery_address" class="form-control mb-3 content" placeholder="Delivery Address" rows="5">{{ $shipping->shippingstatus?->delivery_address }}</textarea>
+                                        <textarea name="delivery_address" class="form-control mb-3 content`" placeholder="Delivery Address" rows="5">{{ $shipping->shippingstatus?->delivery_address }}</textarea>
                                     </div>
                                     <div class="col-12">
                                         <input type="text" class="form-control mb-3" id="" name="price"  value="{{old('price',$shipping->shippingdetail?->price)}}" placeholder="Price">
