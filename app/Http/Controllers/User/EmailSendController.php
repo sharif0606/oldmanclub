@@ -48,6 +48,13 @@ class EmailSendController extends Controller
             }
             if($email->save()){
                 $this->notice::success('Email Successfully send');
+                $client = Client::find(currentUserId());
+                $sentmail = EmailSend::findOrFail(encryptor('decrypt',$email->id));
+                Mail::send('user.email.sentmailshow', ['client' => $client,'sentmail' => $sentmail], function($message) use($request){
+                    $message->from('noreply@muktomart.com.bd', 'Old Man Club');
+                    $message->to($request->email);
+                    $message->subject('$request->subject');
+                });
                 return redirect()->route('inbox');
             }
         }catch(Exception $e){
