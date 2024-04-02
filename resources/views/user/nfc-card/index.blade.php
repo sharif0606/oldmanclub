@@ -100,8 +100,15 @@
                                 @else
                                 <img class="avatar-img" src="{{asset('public/user/assets/images/avatar/03.jpg')}}" alt="">
                                 @endif
-                               
-                                    {{-- asset('public/user/assets/images/albums/01.jpg') --}}
+                                @if ($nfc_card->card_type == 1)
+                                    <p>{{ __('Work') }}</p>
+                                @else
+                                    <p>{{ __('Personal') }}</p>
+                                @endif
+                                {{-- asset('public/user/assets/images/albums/01.jpg') --}}
+                                <span class="fs-4 fw-bold">{{ $nfc_card->client?->fname }}</span>
+                                <span class="fs-4 fw-bold">{{ $nfc_card->client?->middle_name }}</span>
+                                <span class="fs-4 fw-bold">{{ $nfc_card->client?->last_name }}</span>
                             </div>
                             @empty
                             No Card Made Yet
