@@ -110,6 +110,11 @@
 
         gtag('config', 'G-GMKQ4P9YMZ');
     </script>
+<style>
+    .btn-primary-soft{
+        font-size: 0.6rem;
+    }
+</style>   
  @stack('styles')
 </head>
 

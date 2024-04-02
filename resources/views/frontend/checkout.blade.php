@@ -36,6 +36,7 @@
                         </thead>
                         <tbody>
                         @if(session('cart'))
+                        {{session('cart')}}
                             @foreach(session('cart') as $id=>$details)
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
