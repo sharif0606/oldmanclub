@@ -24,10 +24,10 @@
         <div class="card">
             <!-- Card header START -->
             <div class="card-header d-sm-flex text-center align-items-center justify-content-between border-0 pb-0">
-                <h4 class="card-title h4">Add New Contact</h4>
+                <h4 class="card-title h4">ADD NEW CONTACT</h4>
                 <!-- Button modal -->
                 <a class="btn btn-primary-soft" href="{{ route('phonebook.index') }}"> <i
-                        class="fas fa-list pe-1"></i>All Contact</a>
+                        class="fas fa-list pe-1"></i>All CONTACT</a>
             </div>
             <!-- Card header START -->
             <!-- Card body START -->

@@ -24,7 +24,7 @@
         <div class="card">
             <!-- Card header START -->
             <div class="card-header d-sm-flex text-center align-items-center justify-content-between border-0 pb-0">
-                <h4 class="card-title h4">Phone Group</h4>
+                <h4 class="card-title h4">PHONE GROUP CREAT</h4>
                 <!-- Button modal -->
                 <a class="btn btn-primary-soft" href="{{ route('phonegroup.index') }}"> <i
                         class="fas fa-list pe-1"></i>All Group</a>

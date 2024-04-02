@@ -21,9 +21,9 @@
       <div class="col-md-8 col-lg-6 vstack gap-4">
           <div class="card">
               <div class="card-header d-sm-flex text-center align-items-center justify-content-between border-0 pb-0">
-                  <h4 class="card-title h4">SMS List</h4>
+                  <h4 class="card-title h4">SMS LIST</h4>
                   <a class="btn btn-primary-soft" href="{{ route('sms_create') }}">
-                    <i class="fa-solid fa-plus pe-1"></i>Send SMS</a>
+                    <i class="fa-solid fa-plus pe-1"></i>SEND SMS</a>
               </div>
               <div class="card-body">
                   <div class="mb-0 pb-0">

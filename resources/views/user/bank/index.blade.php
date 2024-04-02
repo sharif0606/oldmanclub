@@ -24,7 +24,7 @@
             <div class="card-header border-0 pb-0">
                 <div class="row g-2">
                     <div class="col-lg-2">
-                        <h1 class="h4 card-title mb-lg-0">Bank</h1>
+                        <h1 class="h4 card-title mb-lg-0">BANK LIST</h1>
                     </div>
                     <div class="col-sm-6 col-lg-3 ms-lg-auto">
                         <select class="form-select js-choice choice-select-text-none" data-search-enabled="false">
@@ -35,7 +35,7 @@
                         </select>
                     </div>
                     <div class="col-sm-6 col-lg-3">
-                    <a class="btn btn-primary-soft ms-auto w-100" href="{{ route('bank.create') }}"> <i class="fa-solid fa-plus pe-1"></i> Create Bank</a>
+                    <a class="btn btn-primary-soft ms-auto w-100" href="{{ route('bank.create') }}"> <i class="fa-solid fa-plus pe-1"></i> CREATE BANK</a>
                     </div>
                 </div>
             </div>

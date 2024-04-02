@@ -15,7 +15,7 @@
     <div class="col-md-8 col-lg-6 vstack gap-4">
         <div class="card">
             <div class="card-header d-sm-flex text-center align-items-center justify-content-between border-0 pb-0">
-                <h4 class="card-title h4">Send SMS</h4>
+                <h4 class="card-title h4">SEND SMS</h4>
                 <a class="btn btn-primary-soft" href="{{ route('sms_send') }}"> <i
                         class="fas fa-list pe-1"></i>All SMS</a>
             </div>
@@ -32,7 +32,7 @@
                             <p class="ps-4"><strong>{{ $p->contact_en }}</strong></p>
                         </div>
                         @empty
-                            <p>Phonebook Not Found</p>
+                            <p>PHONEBOOK NOT FOUND</p>
                         @endforelse
                     </div>
                     <div class="card col-sm-7 shadow-lg ms-2">

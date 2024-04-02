@@ -24,7 +24,7 @@
         <div class="card">
             <!-- Card header START -->
             <div class="card-header d-sm-flex text-center align-items-center justify-content-between border-0 pb-0">
-                <h4 class="card-title h4">Purchase SMS</h4>
+                <h4 class="card-title h4">PURCHASE SMS</h4>
                 <!-- Button modal -->
                 <a class="btn btn-primary-soft" href="{{ route('purchase.index') }}"> <i
                         class="fas fa-list pe-1"></i>All Purchase Package</a>
@@ -36,29 +36,32 @@
                     <div class="row g-3">
                         @forelse($sms as $p)
                             <div class="col-sm-6 col-lg-4">
-                                <form action="{{ route('purchase.store') }}" method="post" class="row">
+                                <form action="{{ route('purchase.store') }}" method="post">
                                     @csrf
-                                    <div class="card">
+                                <div class="card h-100">
                                         @if($p->image)
                                         <div class="h-80px rounded-top" style="background-image: url({{asset('public/uploads/sms/'.$p->image)}}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
                                         @else
                                         <div class="h-80px rounded-top" style="background-image: url({{asset('public/user/assets/images/bg/firstimg.jpg')}}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
                                         @endif
                                         <div class="card-body text-center pt-0">
-                                            
                                             <h5 class="mb-0"><a href="#">@if($p->package_type == 1){{ 'Regular' }} @else {{ 'Validity' }} @endif</a> </h5>
                                             <span class="fs-6 fw-bold text-dark px-2">Title:</span><span>{{ $p->title }}</span><br>
                                             <span class="fs-6 fw-bold text-dark px-2">Number Of SMS:</span><span>{{ $p->number_of_sms }}</span><br>
+                                            @if($p->package_type==2)
                                             <span class="fs-6 fw-bold text-dark px-2">Validity:</span><span>{{ $p->validity_days }}</span><br>
-                                            <span class="fs-6 fw-bold text-dark px-2">Price:</span><span>{{ $p->price }}</span>
+                                            @else
+                                            <br>
+                                            @endif
+                                            {{-- <span class="fs-6 fw-bold text-dark px-2">Price:</span><span>{{ $p->price }}</span><br>
                                             <span class="fs-6 fw-bold text-dark px-2">Discount:</span><span>{{ $p->discount }}%</span>
-                                            <h6 class="mb-0">Discount Price: <a href="#">{{ $p->discount_price }}</a> </h6>
+                                            <h6 class="mb-0">Discount Price: <a href="#">{{ $p->discount_price }}</a> </h6> --}}
                                         </div>
                                         <div class="d-flex">
                                             <input type="hidden" name="smspackage_id" value="{{ $p->id }}">
                                             <input type="hidden" name="number_of_sms" value="{{ $p->number_of_sms }}">
                                             {{-- <input type="hidden" name="validity_count" value="{{ $p->validity_days }}"> --}}
-                                            <button type="submit" class="btn btn-success-soft w-100 px-3 ">Purchase</button>
+                                            <button type="submit" class="btn btn-success-soft w-100">Purchase</button>
                                         </div>
                                     </div>
                                 </form>

@@ -15,9 +15,9 @@
     <div class="col-md-8 col-lg-6 vstack gap-4">
         <div class="card">
             <div class="card-header d-sm-flex text-center align-items-center justify-content-between border-0 pb-0">
-                <h4 class="card-title h4">Update Bank</h4>
+                <h4 class="card-title h4">UPDATE BANK</h4>
                 <a class="btn btn-primary-soft" href="{{ route('bank.index') }}"> <i
-                        class="fas fa-list pe-1"></i>All bank</a>
+                        class="fas fa-list pe-1"></i>ALL BANK</a>
             </div>
             <div class="card-body">
                 <div class="mb-0 pb-0">

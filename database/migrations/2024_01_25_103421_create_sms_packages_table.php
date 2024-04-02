@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('package_type')->comment('1=>Regular,2=>validity');
             $table->string('title');
             $table->string('number_of_sms');
-            $table->integer('validity_days')->nullable();
+            $table->integer('validity_days')->default('Unlimited')->nullable();
             $table->double('per_sms_charge',3,2);
             $table->string('image')->nullable();
             $table->double('price',8,2);
