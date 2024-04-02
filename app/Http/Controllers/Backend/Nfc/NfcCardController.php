@@ -220,6 +220,7 @@ class NfcCardController extends Controller
     {
         $client = Client::find(currentUserId());
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
+        dd($client);
         return view('user.nfc-card.showqrurl', compact('nfc_card','client'));
     }
     public function save_contact($id)

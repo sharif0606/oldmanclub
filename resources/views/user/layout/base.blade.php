@@ -112,7 +112,7 @@
     </script>
 <style>
     .btn-primary-soft{
-        font-size: 0.6rem;
+        font-size: 0.8rem;
     }
 </style>   
  @stack('styles')
