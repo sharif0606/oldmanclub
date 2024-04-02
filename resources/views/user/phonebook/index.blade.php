@@ -27,13 +27,17 @@
                 <div class="card-header border-0 pb-0">
                     <div class="row g-2">
                         <div class="col-lg-3">
-                            <h1 class="h4 card-title mb-lg-0">PHONEBOOK LIST</h1>
+                            <h1 class="h4 card-title mb-lg-0">CONTACT LIST</h1>
                         </div>
                         <div class="col-sm-6 col-lg-6 ms-auto">
-                        <a href="#" id="downloadVCard" class="fs-5 mx-2 text-success"><i class="fa fa-address-card"></i></a>
-                        <a href="{{ route('phonebook_download') }}" class="fs-5 mx-2 text-success" download><i class="fa fa-download"></i></a>
-                         <a class="btn btn-primary-soft" href="{{route('sms_send')}}">sms</a>
-                        <a class="btn btn-primary-soft ms-auto" href="{{ route('phonebook.create') }}"> <i class="fa-solid fa-plus pe-1"></i> CREATE CONTACT</a>
+                            <div class="row">
+                                <div class="col-md-12 text-md-end">
+                                    <a href="#" id="downloadVCard" class="fs-5 mx-2 text-success"><i class="fa fa-address-card"></i></a>
+                                    <a href="{{ route('phonebook_download') }}" class="fs-5 mx-2 text-success" download><i class="fa fa-download"></i></a>
+                                    {{-- <a class="btn btn-primary-soft" href="{{route('sms_send')}}">sms</a> --}}
+                                    <a class="btn btn-primary-soft ms-auto" href="{{ route('phonebook.create') }}"> <i class="fa-solid fa-plus pe-1"></i> CREATE CONTACT</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
