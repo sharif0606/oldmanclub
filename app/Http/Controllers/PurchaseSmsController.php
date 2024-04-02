@@ -29,8 +29,9 @@ class PurchaseSmsController extends Controller
     public function create()
     {
         $client = Client::find(currentUserId());
-        $sms = SmsPackage::get();
-        return view('user.purchase.create',compact('client','sms'));
+        $sms = SmsPackage::where('status',1)->get();
+        $postCount = Post::where('client_id', currentUserId())->count();
+        return view('user.purchase.create',compact('client','sms','postCount'));
     }
 
     /**
@@ -38,10 +39,21 @@ class PurchaseSmsController extends Controller
      */
     public function store(Request $request)
     {
+        $existingmspackage =PurchaseSms::where('client_id',currentUserId())->where('smspackage_id',$request->smspackage_id)->first(); 
+        if($existingmspackage){
+            $this->notice::error('You have already purchased this SMS package!');
+            return redirect()->route('purchase.create');
+        }
+        $smsPackage = SmsPackage::find($request->smspackage_id);
+
         $purchase = new PurchaseSms;
         $purchase->client_id = currentUserId();
         $purchase->smspackage_id = $request->smspackage_id;
         $purchase->number_of_sms = $request->number_of_sms;
+        // $purchase->validity_count = $request->validity_count;
+        // Calculate validity_count based on created_at and validity_days
+        $purchase->validity_count = now()->diffInDays($purchase->created_at) + $smsPackage->validity_days;
+
         if($purchase->save()){
             $this->notice::success('SMS successfully purchased');
             return redirect()->route('purchase.index');

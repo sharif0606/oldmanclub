@@ -16,7 +16,7 @@
             <div class="card-header border-0 pb-0">
             <div class="row g-2">
                 <div class="col-lg-2">
-                    <h1 class="h4 card-title mb-lg-0">Company</h1>
+                    <h1 class="h4 card-title mb-lg-0">COMPANY</h1>
                 </div>
                 <div class="col-sm-6 col-lg-3 ms-lg-auto">
                     <select class="form-select js-choice choice-select-text-none" data-search-enabled="false">
@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-sm-6 col-lg-3">
                     <a class="btn btn-primary-soft" href="{{ route('company.index') }}"> 
-                    <i class="fas fa-list pe-1"></i>All Company</a>
+                    <i class="fas fa-list pe-1"></i>ALL COMPANY</a>
                 </div>
             </div>
             </div>

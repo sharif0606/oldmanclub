@@ -25,8 +25,8 @@
       <div class="col-md-8 col-lg-6 vstack gap-4">
           <div class="card">
             <div class="card-header d-sm-flex align-items-center text-center justify-content-sm-between border-0 pb-0">
-              <h1 class="h4 card-title">Shipping</h1>
-              <a class="btn btn-primary-soft" href="{{ route('shipping.create') }}" > <i class="fa-solid fa-plus pe-1"></i> Create shipping</a>
+              <h1 class="h4 card-title">SHIPPING</h1>
+              <a class="btn btn-primary-soft" href="{{ route('shipping.create') }}" > <i class="fa-solid fa-plus pe-1"></i> CREATE SHIPPING</a>
             </div>
             <div class="card-body">
               <div class="tab-content mb-0 pb-0">
@@ -49,10 +49,10 @@
                           <p class="mb-0 small"> <i class="bi bi-calendar-check pe-1"></i>{{ $value->created_at->format('d M,Y')}}</p>
                         </div>
                         <div class="d-flex">
-                          <a href="{{route('shipping.edit',encryptor('encrypt',$value->id))}}" class="btn btn-success-soft text-center w-50">Edit
+                          <a href="{{route('shipping.edit',encryptor('encrypt',$value->id))}}" class="btn btn-success-soft text-center w-50"><i class="fa fa-edit"></i>
                           </a>
-                          <a href="javascript:void()" onclick="$('#form{{$value->id}}').submit()" class="btn btn-danger-soft text-center w-50">Delete
-                                        {{-- <i class="fa fa-trash"></i> --}}
+                          <a href="javascript:void()" onclick="$('#form{{$value->id}}').submit()" class="btn btn-danger-soft text-center w-50">
+                                        <i class="fa fa-trash"></i>
                               </a>
                             <form id="form{{$value->id}}" action="{{route('shipping.destroy',encryptor('encrypt',$value->id))}}" method="post">
                                 @csrf
