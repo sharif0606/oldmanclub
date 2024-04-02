@@ -93,8 +93,9 @@
 </main>
 
 <script>
-    document.getElementById('downloadVCard').addEventListener('click', function() {
-        var phonebook = @json($phonebook);
+document.getElementById('downloadVCard').addEventListener('click', function() {
+        var phonebook = {!! json_encode($phonebook) !!}; // Correct way to pass PHP variable to JavaScript in Laravel Blade
+
         function generateVCard(phonebook) {
             var vCard = "BEGIN:VCARD\nVERSION:3.0";
             phonebook.forEach(function(contact) {
@@ -110,11 +111,15 @@
             vCard += "\nEND:VCARD";
             return vCard;
         }
+
         var vCardData = generateVCard(phonebook);
-            var link = document.createElement('a');
-            link.setAttribute('href', 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vCardData));
-            link.setAttribute('download', 'phonebook.vcf');
-            link.click();
+        var link = document.createElement('a');
+        link.setAttribute('href', 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vCardData));
+        link.setAttribute('download', 'phonebook.vcf');
+        link.style.display = 'none'; // Hide the link
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link); // Remove the link after download
     });
 </script>
 
