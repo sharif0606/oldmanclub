@@ -41,7 +41,7 @@
                             <div>
                                 <a href="{{ route('nfc_card.edit', encryptor('encrypt', $nfc_card->id)) }}"><i class="fa fa-edit"></i></a>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                     @if ($nfc_card->card_design?->design_card_id == 1)
                                         @include('user.nfc-template_show.classic-template')
                                     @elseif($nfc_card->card_design?->design_card_id == 2)
