@@ -67,9 +67,9 @@
                     <p class="px-5 mb-5">{{$homepage?->service_section_text}}
                         </p>
                 </div>
-                    <div class="row gx-1 pt-4">
+                    <div class="row gx-0 pt-2">
                         @forelse($services as $value)
-                        <div class="col-md-4 mb-4">
+                        <div class="col-md-4 mb-2">
                             <a href="{{$value->link}}" class="card-link service">
                                 <div class="card fixed-size-card">
                                     <img src="{{asset('public/uploads/ourservices/'.$value->image)}}" class="card-img-top" alt="Product Shipping Service">
