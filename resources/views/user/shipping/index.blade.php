@@ -45,7 +45,7 @@
                         </div>
                         <div class="card-body position-relative pt-0">
                           <h6 class="mt-3"> <a href="#">{{__($value->shippingdetail?->shipping_title)}}</a> </h6>
-                           <p class="small"></i>{{__($value->shippingdetail?->price)}}</p>
+                          <p class="small">{{__($value->shippingdetail?->price)}}</p>
                           <p class="mb-0 small"> <i class="bi bi-calendar-check pe-1"></i>{{ $value->created_at->format('d M,Y')}}</p>
                         </div>
                         <div class="d-flex">

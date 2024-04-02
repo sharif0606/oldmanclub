@@ -95,7 +95,7 @@
 <script>
 document.getElementById('downloadVCard').addEventListener('click', function() {
         var phonebook = {!! json_encode($phonebook) !!}; // Correct way to pass PHP variable to JavaScript in Laravel Blade
-
+console.log(phonebook);
         function generateVCard(phonebook) {
             var vCard = "BEGIN:VCARD\nVERSION:3.0";
             phonebook.forEach(function(contact) {
