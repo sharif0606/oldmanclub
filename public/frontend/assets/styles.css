@@ -210,9 +210,10 @@
         /* Set the image width to 100% of the container */
     }
 
-    /*.fixed-size-card {
-        height: 100%;
-    }*/
+    .fixed-size-card {
+        /*height: 100%;*/
+        padding: 15px;
+    }
 
     .fixed-size-card img {
         /*height: 250px;*/
@@ -229,7 +230,7 @@
     .fixed-size-card .card-body {
         text-align: center;
         /* Center-align the text */
-        padding: 15px;
+        padding: 10px;
         /* Add padding for better aesthetics */
     }
 
