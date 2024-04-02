@@ -5,10 +5,14 @@
         <div class="container">
             <!-- Logo START -->
             <a class="navbar-brand" href="{{route('clientdashboard')}}">
-                <img class="light-mode-item navbar-brand-item"
+                {{-- <img class="light-mode-item navbar-brand-item"
                     src="{{ asset('public/user/assets/images/logo.svg') }}" alt="logo">
                 <img class="dark-mode-item navbar-brand-item"
-                    src="{{ asset('public/user/assets/images/logo.svg') }}" alt="logo">
+                    src="{{ asset('public/user/assets/images/logo.svg') }}" alt="logo"> --}}
+                <img class="light-mode-item navbar-brand-item"
+                    src="{{ asset('public/assets/images/oldman-logo.png') }}" alt="logo">
+                <img class="dark-mode-item navbar-brand-item"
+                    src="{{ asset('public/assets/images/oldman-logo.png') }}" alt="logo">
             </a>
             <!-- Logo END -->
 
