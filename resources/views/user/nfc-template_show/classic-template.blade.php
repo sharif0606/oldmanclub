@@ -57,7 +57,7 @@
             </div>
         </div>
     </div>
-    <section class="middle" style="padding: 0px !important">
+    <section class="middle">
         <div class="container-fluid mt-2">
             <div class="row">
                 <div class="col-sm-12">
@@ -116,7 +116,7 @@
             </div>
         </div>
     </section>
-    <section>
+    <section style="padding: 0px !important">
         <div class="container-fluid px-3">
             <div class="row">
                 @if ($nfc_card->nfc_info?->headline)
