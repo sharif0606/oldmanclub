@@ -38,18 +38,14 @@
                       <div class="card h-100">
                         <div class="position-relative">
                           @if($value->shippingdetail->image)
-                          <img class=" rounded-top w-100" src="{{ asset('public/uploads/shipping/'.$value->shippingdetail->image) }}" alt="">
+                          <img class="img-fluid rounded-top w-100" src="{{ asset('public/uploads/shipping/'.$value->shippingdetail->image) }}" alt="">
                           @else
-                          <img class="rounded-top w-100" src="{{ asset('public/user/assets/images/events/01.jpg') }}" alt="">
+                          <img class="img-fluid rounded-top" src="{{ asset('public/user/assets/images/events/01.jpg') }}" alt="">
                           @endif
                         </div>
                         <div class="card-body position-relative pt-0">
                           <h6 class="mt-3"> <a href="#">{{__($value->shippingdetail?->shipping_title)}}</a> </h6>
-
-                          <p class="small">{{__($value->shippingdetail?->price)}}</p>
-
-                          <p class="">{{__($value->shippingstatus?->delivery_address)}}</p>
-
+                          {!! $value->shippingdetail?->price !!}
                           <p class="mb-0 small"> <i class="bi bi-calendar-check pe-1"></i>{{ $value->created_at->format('d M,Y')}}</p>
                         </div>
                         <div class="d-flex">
