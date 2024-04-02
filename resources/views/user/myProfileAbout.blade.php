@@ -77,14 +77,14 @@
                     <div class="card">
                         <!-- Card header START -->
                         <div class="card-header border-0 pb-0">
-                            <h5 class="card-title"> Profile Info</h5>
+                            <h5 class="card-title">PROFILE INFO</h5>
                         </div>
                         <!-- Card header END -->
                         <!-- Card body START -->
                         <div class="card-body">
                             <div class="rounded border px-3 py-2 mb-3">
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <h6>Overview</h6>
+                                    <h6>OVERVIEW</h6>
                                     <div class="dropdown ms-auto">
                                         <!-- Card share action menu -->
                                         <a class="nav nav-link text-secondary mb-0" href="#" id="aboutAction"
@@ -274,10 +274,10 @@
                     <!-- Card feed item START -->
                     <div class="card">
                         <!-- Card header START -->
-                        <div class="card-header d-sm-flex justify-content-between border-0 pb-0">
+                        {{-- <div class="card-header d-sm-flex justify-content-between border-0 pb-0">
                             <h5 class="card-title">Interests</h5>
-                            {{-- <a class="btn btn-primary-soft btn-sm" href="#!"> See all</a> --}}
-                        </div>
+                            <a class="btn btn-primary-soft btn-sm" href="#!"> See all</a>
+                        </div> --}}
                         <!-- Card header END -->
                         <!-- Card body START -->
                         <div class="card-body">
