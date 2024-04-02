@@ -27,13 +27,13 @@
                 <div class="card-header border-0 pb-0">
                     <div class="row g-2">
                         <div class="col-lg-3">
-                            <h1 class="h4 card-title mb-lg-0">Phone Book</h1>
+                            <h1 class="h4 card-title mb-lg-0">PHONEBOOK LIST</h1>
                         </div>
                         <div class="col-sm-6 col-lg-6 ms-auto">
                         <a href="#" id="downloadVCard" class="fs-5 mx-2 text-success"><i class="fa fa-address-card"></i></a>
                         <a href="{{ route('phonebook_download') }}" class="fs-5 mx-2 text-success" download><i class="fa fa-download"></i></a>
-                         <a class="btn btn-primary-soft" href="{{route('sms_send')}}">send sms</a>
-                        <a class="btn btn-primary-soft ms-auto" href="{{ route('phonebook.create') }}"> <i class="fa-solid fa-plus pe-1"></i> Create contact</a>
+                         <a class="btn btn-primary-soft" href="{{route('sms_send')}}">sms</a>
+                        <a class="btn btn-primary-soft ms-auto" href="{{ route('phonebook.create') }}"> <i class="fa-solid fa-plus pe-1"></i> CREATE CONTACT</a>
                         </div>
                     </div>
                 </div>
@@ -45,8 +45,9 @@
                                 <div class="col-sm-6 col-lg-4">
                                     {{-- <a href="{{route('phonebook.show',encryptor('encrypt',$p->id))}}" class=""> </a> --}}
                                     <div class="card">
-                                        @if($p->phonegroup?->image)
-                                        <div class="h-80px rounded-top" style="background-image: url({{asset('public/uploads/phonegroup/'.$p->phonegroup?->image)}}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+                                        {{-- @if($p->phonegroup?->image) --}}
+                                        @if($p->image)
+                                        <div class="h-80px rounded-top" style="background-image: url({{asset('public/uploads/phonebook/'.$p->image)}}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
                                         @else
                                         <div class="h-80px rounded-top" style="background-image: url({{asset('public/user/assets/images/bg/firstimg.jpg')}}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
                                         @endif
@@ -61,10 +62,10 @@
                                             <small> <i class="bi bi-lock pe-1"></i> {{$p->phonegroup?->group_name}}</small>
                                         </div>
                                         <div class="d-flex">
-                                            <a href="{{route('phonebook.edit',encryptor('encrypt',$p->id))}}" class="btn btn-success-soft text-center w-50">Edit Group</a>
+                                            <a href="{{route('phonebook.edit',encryptor('encrypt',$p->id))}}" class="btn btn-success-soft text-center w-50"><i class="fa fa-edit"></i></a>
 
-                                            <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()" class="btn btn-danger-soft text-center w-50">Delete
-                                            {{-- <i class="fa fa-trash"></i> --}}
+                                            <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()" class="btn btn-danger-soft text-center w-50">
+                                            <i class="fa fa-trash"></i>
                                             </a>
                                             <form id="form{{$p->id}}" action="{{route('phonebook.destroy',encryptor('encrypt',$p->id))}}" method="post" onsubmit="return confirm('Are you sure you want to delete this item?');">
                                                 @csrf

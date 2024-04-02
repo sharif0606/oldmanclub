@@ -21,9 +21,9 @@
       <div class="col-md-8 col-lg-6 vstack gap-4">
           <div class="card">
               <div class="card-header d-sm-flex text-center align-items-center justify-content-between border-0 pb-0">
-                  <h4 class="card-title h4">SMS List</h4>
+                  <h4 class="card-title h4">SMS LIST</h4>
                   <a class="btn btn-primary-soft" href="{{ route('sms_create') }}">
-                    <i class="fa-solid fa-plus pe-1"></i>Send SMS</a>
+                    <i class="fa-solid fa-plus pe-1"></i>SEND SMS</a>
               </div>
               <div class="card-body">
                   <div class="mb-0 pb-0">
@@ -35,6 +35,7 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">{{__('#SL')}}</th>
+                                                {{-- <th scope="col">{{__('Name')}}</th> --}}
                                                 <th scope="col">{{__('Phone Number')}}</th>
                                                 <th scope="col">{{__('Message')}}</th>
                                                 {{-- <th class="white-space-nowrap">{{__('Action') }}</th> --}}
@@ -44,6 +45,7 @@
                                             @forelse($data as $p)
                                             <tr>
                                                 <th scope="row">{{ ++$loop->index }}</th>
+                                                {{-- <td>{{$p->phonebook?->name_en}}</td> --}}
                                                 <td>{{$p->contact_no}}</td>
                                                 <td>{{$p->message_body}}</td>
                                                 {{-- <td class="white-space-nowrap">

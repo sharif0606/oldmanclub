@@ -24,7 +24,7 @@
             <div class="card-header border-0 pb-0">
                 <div class="row g-2">
                     <div class="col-lg-2">
-                        <h1 class="h4 card-title mb-lg-0">Company</h1>
+                        <h1 class="h4 card-title mb-lg-0">COMPANY LIST</h1>
                     </div>
                     <div class="col-sm-6 col-lg-3 ms-lg-auto">
                         <select class="form-select js-choice choice-select-text-none" data-search-enabled="false">
@@ -35,7 +35,7 @@
                         </select>
                     </div>
                     <div class="col-sm-6 col-lg-3">
-                    <a class="btn btn-primary-soft ms-auto w-100" href="{{ route('company.create') }}"> <i class="fa-solid fa-plus pe-1"></i> Create company</a>
+                    <a class="btn btn-primary-soft ms-auto w-100" href="{{ route('company.create') }}"> <i class="fa-solid fa-plus pe-1"></i> CREATE COMPANY</a>
                     </div>
                 </div>
             </div>
@@ -72,8 +72,8 @@
                                
                             </div>
                             <div class="d-flex">
-                                <a href="{{route('company.edit',encryptor('encrypt',$p->id))}}" class="btn btn-primary-soft text-center w-50">Edit Group</a>
-                                <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()" class="btn btn-danger-soft text-center w-50">Delete
+                                <a href="{{route('company.edit',encryptor('encrypt',$p->id))}}" class="btn btn-success-soft text-center w-50"><i class="fa fa-edit"></i></a>
+                                <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()" class="btn btn-danger-soft text-center w-50"><i class="fa fa-trash"></i>
                                 </a>
                                 <form id="form{{$p->id}}" action="{{route('company.destroy',encryptor('encrypt',$p->id))}}" method="post">
                                     @csrf

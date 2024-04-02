@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Models\User\EmailSend;
 use App\Models\User\Client;
+use App\Models\User\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -15,12 +16,14 @@ class EmailSendController extends Controller
     public function index()
     {
         $email = EmailSend::paginate(10);
-        return view('user.email.index',compact('email'));
+        $postCount = Post::where('client_id', currentUserId())->count();
+        return view('user.email.index',compact('email','postCount'));
     }
     public function inbox(){
         $client = Client::find(currentUserId());
         $receive_email = EmailSend::get();
-        return view('user.email.inbox',compact('receive_email','client'));
+        $postCount = Post::where('client_id', currentUserId())->count();
+        return view('user.email.inbox',compact('receive_email','client','postCount'));
     }
     public function sentbox(){
         $send_email = EmailSend::where('sender_id',currentUserId())->get();
@@ -28,7 +31,8 @@ class EmailSendController extends Controller
     }
     public function sent_email(){
         $client = Client::find(currentUserId());
-        return view('user.email.sentemail',compact('client'));
+        $postCount = Post::where('client_id', currentUserId())->count();
+        return view('user.email.sentemail',compact('client','postCount'));
     }
     public function store_email(Request $request){
         try{

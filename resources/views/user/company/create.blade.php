@@ -15,9 +15,9 @@
     <div class="col-md-8 col-lg-6 vstack gap-4">
         <div class="card">
             <div class="card-header d-sm-flex text-center align-items-center justify-content-between border-0 pb-0">
-                <h4 class="card-title h4">Add New Company</h4>
+                <h4 class="card-title h4">ADD NEW COMPANY</h4>
                 <a class="btn btn-primary-soft" href="{{ route('company.index') }}"> <i
-                        class="fas fa-list pe-1"></i>All Company</a>
+                        class="fas fa-list pe-1"></i>ALL COMPANY</a>
             </div>
             <div class="card-body">
                 <div class="mb-0 pb-0">

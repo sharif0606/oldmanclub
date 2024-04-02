@@ -25,9 +25,9 @@
             <div class="col-md-8 col-lg-6 vstack gap-4">
                 <div class="card">
                     <div class="card-header d-sm-flex align-items-center text-center justify-content-sm-between border-0 pb-0">
-                        <h1 class="h4 card-title">Shipping</h1>
+                        <h1 class="h4 card-title">SHIPPING</h1>
                         <a class="btn btn-primary-soft" href="{{ route('shipping.index') }}" ><i
-                        class="fas fa-list pe-1"></i> All shipping</a>
+                        class="fas fa-list pe-1"></i> ALL SHIPPING</a>
                     </div>
                     <div class="card-body">
                         <div class="tab-content mb-0 pb-0">

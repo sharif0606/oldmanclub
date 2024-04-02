@@ -22,6 +22,9 @@ return new class extends Migration
             $table->string('contact_en');
             $table->string('contact_bn')->nullable();
             $table->string('email')->uniqid();
+            $table->string('description')->nullable();
+            $table->string('company_name')->nullable();
+            $table->string('image')->nullable();
             $table->string('given_name')->nullable();
             $table->string('additional_name')->nullable();
             $table->string('family_name')->nullable();

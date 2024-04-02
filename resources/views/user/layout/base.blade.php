@@ -96,6 +96,7 @@
 
     <!-- Theme CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('public/user/assets/css/style.css') }}">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GMKQ4P9YMZ"></script>
@@ -791,19 +792,26 @@
                 <!-- Modal feed header END -->
 
                 <!-- Modal feed body START -->
+                <form action="{{ route('post.store') }}" class="w-100" method="POST">
+                            @csrf
                 <div class="modal-body">
                     <!-- Add Feed -->
                     <div class="d-flex mb-3">
                         <!-- Avatar -->
                         <div class="avatar avatar-xs me-2">
-                            <img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg"
-                                alt="">
+                            @if ($client->image)
+                                        <img class="avatar-img rounded-circle"
+                                            src="{{ asset('public/uploads/client/' . $client->image) }}" alt="">
+                                    @else
+                            <img class="avatar-img rounded-circle"
+                                src="{{ asset('public/user/assets/images/avatar/03.jpg') }}" alt="">
+                            @endif
                         </div>
                         <!-- Feed box  -->
-                        <form class="w-100">
-                            <textarea class="form-control pe-4 fs-3 lh-1 border-0" rows="4" placeholder="Share your thoughts..."
+                        
+                            <textarea class="form-control pe-4 fs-3 lh-1 border-0" name="message" rows="4" placeholder="Share your thoughts..."
                                 autofocus></textarea>
-                        </form>
+                       
                     </div>
                     <!-- Feed rect START -->
                     <div class="hstack gap-2">
@@ -846,10 +854,11 @@
                     <div class="col-lg-8 text-sm-end">
                         <button type="button" class="btn btn-danger-soft me-2"> <i
                                 class="bi bi-camera-video-fill pe-1"></i> Live video</button>
-                        <button type="button" class="btn btn-success-soft">Post</button>
+                        <button type="submit" class="btn btn-success-soft">Post</button>
                     </div>
                 </div>
                 <!-- Modal feed footer -->
+                 </form>
 
             </div>
         </div>
@@ -1182,7 +1191,9 @@ JS libraries, plugins and custom scripts -->
     <script src="{{ asset('public/user/assets/vendor/dropzone/dist/min/dropzone.min.js') }}"></script>
     <script src="{{ asset('public/user/assets/vendor/zuck.js/dist/zuck.min.js') }}"></script>
     <script src="{{ asset('public/user/assets/js/zuck-stories.js') }}"></script>
-
+    <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    {!! Toastr::message() !!}
     <!-- Theme Functions -->
     <script src="{{ asset('public/user/assets/js/functions.js') }}"></script>
 

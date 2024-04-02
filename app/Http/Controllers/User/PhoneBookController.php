@@ -8,6 +8,7 @@ use App\Models\User\Post;
 use App\Models\User\SendSms;
 use App\Models\User\PhoneGroup;
 use App\Http\Controllers\Controller;
+use App\Models\User\PurchaseSms;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Response;
@@ -50,6 +51,13 @@ class PhoneBookController extends Controller
             $phonebook->name_en = $request->name_en;
             $phonebook->contact_en = $request->contact_en;
             $phonebook->email = $request->email;
+            $phonebook->description = $request->description;
+            $phonebook->company_name = $request->company_name;
+            if($request->hasFile('image')){
+                $imageName = rand(111,999).'.'.$request->image->extension();
+                $request->image->move(public_path('uploads/phonebook'),$imageName);
+                $phonebook->image=$imageName;
+            }
             if($phonebook->save()){
                 $this->notice::success('Phone number Successfully Saved');
                 return redirect()->route('phonebook.index');
@@ -94,6 +102,13 @@ class PhoneBookController extends Controller
             $phonebook->name_en = $request->name_en;
             $phonebook->contact_en = $request->contact_en;
             $phonebook->email = $request->email;
+            $phonebook->description = $request->description;
+            $phonebook->company_name = $request->company_name;
+            if($request->hasFile('image')){
+                $imageName = rand(111,999).'.'.$request->image->extension();
+                $request->image->move(public_path('uploads/phonebook'),$imageName);
+                $phonebook->image=$imageName;
+            }
             if($phonebook->save()){
                 $this->notice::success('Phone number Successfully Saved');
                 return redirect()->route('phonebook.index');
@@ -147,20 +162,49 @@ class PhoneBookController extends Controller
         $client = Client::find(currentUserId());
         $postCount = Post::where('client_id', currentUserId())->count();
         $phonebook = PhoneBook::where('client_id',currentUserId())->get();
-        return view('user.phonebook.smscreate',compact('client','postCount','phonebook'));
+        $purchase = PurchaseSms::where('client_id',currentUserId())->get();
+        return view('user.phonebook.smscreate',compact('client','postCount','phonebook','purchase'));
     }
     public function sms_store(Request $request){
-        $sms = new SendSms;
-        $sms->client_id = currentUserId();
+        // $sms = new SendSms;
+        // $sms->client_id = currentUserId();
+        // $contact_nos = explode(',', $request->contact_no);
+        // foreach($contact_nos as $contact_no){
+        //     $sms = new SendSms;
+        //     $sms->client_id = currentUserId();
+        //     $sms->contact_no = $contact_no;
+        //     $sms->message_body = $request->message_body;
+        //     $sms->save();
+        // }
+        // $this->notice::success('sms successfully send');
+        // return redirect()->route('sms_send');
+        // Retrieve the current user's purchase record
+
+        $purchase = PurchaseSms::where('client_id', currentUserId())->where('id',$request->purchase_id)->first();
+        if (!$purchase) {
+            $this->notice::error('You have not purchased any SMS packages');
+            return redirect()->route('sms_send');
+        }
         $contact_nos = explode(',', $request->contact_no);
+        $smsCount = count($contact_nos);
+        if ($purchase->number_of_sms < $smsCount) {
+            $this->notice::error('Insufficient SMS credits');
+            return redirect()->route('sms_send');
+        }
+        $purchase->number_of_sms -= $smsCount;
+        $purchase->uses_sms += $smsCount;
+        $purchase->save();
+
         foreach($contact_nos as $contact_no){
             $sms = new SendSms;
             $sms->client_id = currentUserId();
             $sms->contact_no = $contact_no;
             $sms->message_body = $request->message_body;
+            $sms->purchase_id = $request->purchase_id;
             $sms->save();
         }
-        $this->notice::success('sms successfully send');
+
+        $this->notice::success('SMS successfully sent');
         return redirect()->route('sms_send');
     }
 }
