@@ -1,14 +1,5 @@
 @extends('frontend.layouts.app')
 @section('title','Old Club Man')
-@push('styles')
-    <style>
-        /* Add hover effect */
-        .card.fixed-size-card:hover {
-            box-shadow: 0px 0px 20px rgba(252, 214, 214, 0.1); /* Example shadow effect */
-            transition: box-shadow 0.3s ease; /* Smooth transition effect */
-        }
-    </style>
-@endpush
 @section('content')
 
     <!-- Hero section start -->
