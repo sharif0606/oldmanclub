@@ -1,5 +1,17 @@
 @extends('user.layout.base')
 @section('title', 'Sent Email')
+@push('styles')
+  <style>
+    textarea {
+            width: 100%;
+            min-height: 300px; /* Adjust as needed */
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+  </style>
+@endpush
 @section('content')
 <div class="row g-4">
     <div class="col-lg-3">
@@ -67,7 +79,10 @@
                         <input type="text" name="subject" class="form-control bg-transparent" placeholder=" Subject:">
                     </div>
                     <div class="form-group mb-2">
-                       <textarea name="message" cols="30" rows="8" id="service_details" id="service_details" class="form-control"></textarea>
+
+                       <textarea name="message" class="form-control content"></textarea>
+                        {{-- <textarea id="email-compose-editor" name="message" class="textarea_editor form-control bg-transparent" rows="15"
+                            placeholder="Enter text ..."></textarea> --}}
                     </div>
                     <hr>
                     <h5 class="mb-4"><i class="fa fa-paperclip"></i> Attatchment</h5>
@@ -86,13 +101,23 @@
 </main> --}}
 @endsection
 @push('scripts')
-<script src="{{ asset('public/assets/tinymc.js') }}"></script>
-<script src="https://cdn.tiny.cloud/1/x4jk2jz64zffwc1fuef936e2b3z54jdbl9q6pb9rplm00ea2/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
-<script>
-  tinymce.init({
-    selector: 'textarea',
-    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount linkchecker markdown',
-    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-  });
-</script>
+
+    {{-- CKEditor CDN --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
+
+
+    <script>
+        // Select all textarea elements with the specified class name
+        const textareas = document.querySelectorAll('.content');
+
+        // Loop through each textarea element
+        textareas.forEach(textarea => {
+            // Apply ClassicEditor.create to each textarea
+            ClassicEditor.create(textarea)
+                .catch(error => {
+                    console.error(error);
+                });
+        });
+    </script>
+
 @endpush

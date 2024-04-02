@@ -31,10 +31,10 @@
                                         <input type="text" class="form-control mb-3" id="" name="shipping_title" value="{{old('shipping_title',$shipping->shippingdetail?->shipping_title)}}" placeholder="shipping tittle">
                                     </div>
                                     <div class="col-12">
-                                        <textarea name="shipping_description" class="form-control mb-3" placeholder="Order Details" rows="5">{{ $shipping->shippingdetail?->shipping_description }}</textarea>
+                                        <textarea name="shipping_description" class="form-control mb-3 content" placeholder="Order Details" rows="5">{{ $shipping->shippingdetail?->shipping_description }}</textarea>
                                     </div>
                                     <div class="col-12">
-                                        <textarea name="delivery_address" class="form-control mb-3" placeholder="Delivery Address" rows="5">{{ $shipping->shippingstatus?->delivery_address }}</textarea>
+                                        <textarea name="delivery_address" class="form-control mb-3 content`" placeholder="Delivery Address" rows="5">{{ $shipping->shippingstatus?->delivery_address }}</textarea>
                                     </div>
                                     <div class="col-12">
                                         <input type="text" class="form-control mb-3" id="" name="price"  value="{{old('price',$shipping->shippingdetail?->price)}}" placeholder="Price">
@@ -63,15 +63,23 @@
 </div>
 @endsection
 @push('scripts')
-<script src="{{ asset('public/assets/tinymc.js') }}"></script>
-<script src="https://cdn.tiny.cloud/1/x4jk2jz64zffwc1fuef936e2b3z54jdbl9q6pb9rplm00ea2/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
-<script>
-  tinymce.init({
-    selector: 'textarea',
-    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount linkchecker markdown',
-    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-  });
-</script>
+    {{-- CKEditor CDN --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
 
+
+    <script>
+        // Select all textarea elements with the specified class name
+        const textareas = document.querySelectorAll('.content');
+
+        // Loop through each textarea element
+        textareas.forEach(textarea => {
+            // Apply ClassicEditor.create to each textarea
+            ClassicEditor.create(textarea)
+                .catch(error => {
+                    console.error(error);
+                });
+        });
+    </script>
+@endpush
 
 
