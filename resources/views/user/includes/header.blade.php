@@ -73,9 +73,9 @@
                         <a class="nav-link dropdown-toggle" href="#" id="postMenu" data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">Card </a>
                             <ul class="dropdown-menu" aria-labelledby="postMenu">
-                                <li> <a class="dropdown-item" href="">Business Card</a></li>
+                                {{-- <li> <a class="dropdown-item" href="">Business Card</a></li> --}}
                                 <li> <a class="dropdown-item" href="{{ route('nfc_card.index') }}">Nfc Card</a></li>
-                                <li> <a class="dropdown-item" href="">Credit Card</a></li>
+                                {{-- <li> <a class="dropdown-item" href="">Credit Card</a></li> --}}
                             </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -85,13 +85,13 @@
                                 <li> <a class="dropdown-item" href="{{route('phonegroup.index')}}">Create Phone Group</a></li>
                                 <li> <a class="dropdown-item" href="{{route('phonebook.index')}}">Phone Book Group</a></li>
                                 <li> <a class="dropdown-item" href="{{route('purchase.index')}}">Purchase SMS</a></li>
-                                <li class="dropdown-submenu dropstart">
+                                {{-- <li class="dropdown-submenu dropstart">
                                     <a class="dropdown-item dropdown-toggle" href="#">Social Contact</a>
                                     <ul class="dropdown-menu dropdown-menu-end" data-bs-popper="none">
                                         <li> <a class="dropdown-item" href="">Create Social Contact</a> </li>
                                         <li> <a class="dropdown-item" href="">All Social Contact</a> </li>
                                     </ul>
-                                </li>
+                                </li> --}}
                             </ul>
                     </li>
 
@@ -106,13 +106,13 @@
                                 <li> <a class="dropdown-item" href="{{route('inbox')}}">Inbox</a></li>
                             </ul>
                     </li>
-                    <li class="nav-item dropdown">
+                    {{-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="postMenu" data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">Ecommerce</a>
                             <ul class="dropdown-menu" aria-labelledby="postMenu">
                                 <li> <a class="dropdown-item" href=""></a></li>
                             </ul>
-                    </li>
+                    </li> --}}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="postMenu" data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">Shipping</a>
