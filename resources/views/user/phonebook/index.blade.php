@@ -94,8 +94,7 @@
 
 <script>
     document.getElementById('downloadVCard').addEventListener('click', function() {
-        alert('ok')
-        var $phonebook = @json($phonebook);
+        var phonebook = @json($phonebook);
         function generateVCard(phonebook) {
             var vCard = "BEGIN:VCARD\nVERSION:3.0";
             phonebook.forEach(function(contact) {
