@@ -7,7 +7,7 @@
         width: calc(100% + 0px);
     }
 </style>
-<div>
+<div class="card p-3">
     <div class="col-md-12">
         <div class="classic_header_image_show">
             @if ($nfc_card->client?->image)
@@ -57,7 +57,7 @@
             </div>
         </div>
     </div>
-    <section class="middle">
+    <section class="middle" style="padding: 0px !important">
         <div class="container-fluid mt-2">
             <div class="row">
                 <div class="col-sm-12">
