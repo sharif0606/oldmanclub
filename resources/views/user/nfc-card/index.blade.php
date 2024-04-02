@@ -78,14 +78,11 @@
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="photoActionEdit">
                                            
                                         {{-- asset('public/user/assets/images/albums/01.jpg') --}}
-                                        <span class="fs-4 fw-bold">{{ $nfc_card->client?->fname }}</span>
-                                        <span class="fs-4 fw-bold">{{ $nfc_card->client?->middle_name }}</span>
-                                        <span class="fs-4 fw-bold">{{ $nfc_card->client?->last_name }}</span>
                                             <li><a class="dropdown-item"> 
                                                 @if ($nfc_card->card_type == 1)
-                                                <p>{{ __('Work') }}</p>
+                                                {{ __('Work') }}
                                                 @else
-                                                <p>{{ __('Personal') }}</p>
+                                                {{ __('Personal') }}
                                                 @endif</a>
                                             </li>
                                             <li><a class="dropdown-item"> 
