@@ -53,7 +53,7 @@
                                     @endif
                             </div>
                             <div class="col-md-4">
-                                {!! QrCode::size(300)->generate(url('nfcqrurl/' . encryptor('encrypt', $nfc_card->id))) !!}
+                                {!! QrCode::size(300)->generate(url('nfcqrurl/' . encryptor('encrypt', $nfc_card->id)/$nfc_card->client_id)) !!}
                             </div>
                     </div>
                     <!-- Photos of you tab END -->

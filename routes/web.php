@@ -265,7 +265,7 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     
 
 });
-Route::get('nfcqrurl/{id}', [nfc_card::class, 'showqrurl']);
+Route::get('nfcqrurl/{id}/{client_id}', [nfc_card::class, 'showqrurl']);
 Route::get('save-contact/{id}', [nfc_card::class, 'save_contact'])->name('save_contact');
 Route::post('/send-message', [ChatController::class, 'sendMessage']);
 
