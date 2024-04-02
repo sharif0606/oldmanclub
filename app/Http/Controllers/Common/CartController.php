@@ -52,6 +52,7 @@ class CartController extends Controller
                 "image"=>$product->image,
                 "quantity" => 1,
                 "price" => $product->price,
+                "printing_service_id" => $product->id,
             ];
             session()->put('cart', $cart);
             $this->cart_total();
