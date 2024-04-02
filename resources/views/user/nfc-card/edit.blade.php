@@ -153,7 +153,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-12 my-2">
                                         <button type="submit" class="btn btn-primary">Update NFC Card</button>
                                     </div>
                                 </form>
