@@ -215,10 +215,17 @@
     }
 
     .fixed-size-card img {
-        /*height: 250px;*/
+        height: 250px;
         /* Set your desired fixed height for the image */
     }
+/* Add hover effect with animation */
+.card.fixed-size-card {
+    transition: box-shadow 0.3s ease;
+}
 
+.card.fixed-size-card:hover {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Adjust shadow color and intensity */
+}
     .fixed-size-card hr {
         width: 100%;
         /* Set the width of the line as needed */
