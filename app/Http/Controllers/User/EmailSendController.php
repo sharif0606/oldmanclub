@@ -53,7 +53,7 @@ class EmailSendController extends Controller
                 $sentmail = EmailSend::findOrFail($email->id);
                 Mail::send('user.email.sentmailshow', ['client' => $client,'sentmail' => $sentmail], function($message) use($request){
                     $message->from('noreply@muktomart.com.bd', 'Old Man Club');
-                    $message->to($request->email);
+                    $message->to($request->to_email);
                     $message->subject($request->subject);
                 });
                 return redirect()->route('inbox');
