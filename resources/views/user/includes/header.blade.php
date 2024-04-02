@@ -87,8 +87,9 @@
                             aria-haspopup="true" aria-expanded="false">SMS</a>
                             <ul class="dropdown-menu" aria-labelledby="postMenu">
                                 <li> <a class="dropdown-item" href="{{route('phonegroup.index')}}">Create Phone Group</a></li>
-                                <li> <a class="dropdown-item" href="{{route('phonebook.index')}}">Phone Book Group</a></li>
+                                <li> <a class="dropdown-item" href="{{route('phonebook.index')}}">Phone Book</a></li>
                                 <li> <a class="dropdown-item" href="{{route('purchase.index')}}">Purchase SMS</a></li>
+                                <li> <a class="dropdown-item" href="{{route('sms_send')}}">Send SMS</a></li>
                                 {{-- <li class="dropdown-submenu dropstart">
                                     <a class="dropdown-item dropdown-toggle" href="#">Social Contact</a>
                                     <ul class="dropdown-menu dropdown-menu-end" data-bs-popper="none">

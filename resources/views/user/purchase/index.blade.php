@@ -30,7 +30,7 @@
               <div class="row g-2">
                 <div class="col-lg-3">
                   <!-- Card title -->
-                  <h1 class="h4 card-title mb-lg-0">PURCHASE LIST</h1>
+                  <h1 class="h4 card-title mb-lg-0">MY SMS PACKAGE LIST</h1>
                 </div>
                 {{--  <div class="col-sm-6 col-lg-3 ms-lg-auto">
                   <!-- Select Groups -->
