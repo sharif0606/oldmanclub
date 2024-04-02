@@ -55,13 +55,13 @@
                             <li class="dropdown-submenu dropstart">
                                 <a class="dropdown-item dropdown-toggle" href="#">Company</a>
                                 <ul class="dropdown-menu dropdown-menu-end" data-bs-popper="none">
-                                    <li> <a class="dropdown-item" href="{{route('company.index')}}">Entry Company</a> </li>
+                                    <li> <a class="dropdown-item" href="{{route('company.index')}}">Company List</a> </li>
                                 </ul>
                             </li>
                             <li class="dropdown-submenu dropstart">
                                 <a class="dropdown-item dropdown-toggle" href="#">Bank</a>
                                 <ul class="dropdown-menu dropdown-menu-end" data-bs-popper="none">
-                                    <li> <a class="dropdown-item" href="{{route('bank.index')}}">Entry Bank</a> </li>
+                                    <li> <a class="dropdown-item" href="{{route('bank.index')}}">Bank List</a> </li>
                                 </ul>
                             </li>
                             <!-- dropdown submenu open left -->

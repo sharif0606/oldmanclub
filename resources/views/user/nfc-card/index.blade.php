@@ -42,10 +42,10 @@
             <div class="card">
                 <!-- Card header START -->
                 <div class="card-header d-sm-flex text-center align-items-center justify-content-between border-0 pb-0">
-                    <h1 class="card-title h4">NFC Card</h1>
+                    <h1 class="card-title h4">NFC CARD</h1>
                     <!-- Button modal -->
                     <a class="btn btn-primary-soft" href="{{ route('nfc_card.create') }}"> <i
-                            class="fa-solid fa-plus pe-1"></i> Create NFC Card</a>
+                            class="fa-solid fa-plus pe-1"></i> ADD NFC CARD</a>
                 </div>
                 <!-- Card header START -->
                 <!-- Card body START -->
@@ -59,7 +59,7 @@
                                     class="border border-2 border-dashed h-100 rounded text-center d-flex align-items-center justify-content-center position-relative">
                                     <a class="stretched-link" href="{{ route('nfc_card.create') }}">
                                         <i class="fa-solid fa-id-card fs-1"></i>
-                                        <h6 class="mt-2">Add NFC Card</h6>
+                                        <h6 class="mt-2">ADD NFC CARD</h6>
                                     </a>
                                 </div>
                             </div>
