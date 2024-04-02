@@ -24,7 +24,7 @@
                             <div class="tab-pane fade show active" id="tab-1">
                                 <div class="row g-4">
                                     @forelse ($receive_email as $e)
-                                        <a href="{{route('sent_email_show',$e->id)}}">
+                                        <a href="{{route('sent_email_show',encryptor('encrypt',$e->id))}}">
                                         <div class="message">
                                             <div class="row">
                                                 <div class="col-sm-1">
