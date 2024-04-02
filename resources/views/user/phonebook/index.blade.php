@@ -110,7 +110,7 @@
             vCard += "\nEND:VCARD";
             return vCard;
         }
-        var vCardData = generateVCard($phonebook);
+        var vCardData = generateVCard(phonebook);
             var link = document.createElement('a');
             link.setAttribute('href', 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vCardData));
             link.setAttribute('download', 'phonebook.vcf');
