@@ -47,7 +47,7 @@
                                         <input type="file" class="form-control mb-3" id="" name="image" >
                                     </div>
                                     <div class="col-12">
-                                        <button type="submit" class="btn btn-primary px-3">Save</button>
+                                        <button type="submit" class="btn btn-primary px-3">Update</button>
                                     </div>
                                 </form>
                             </div>

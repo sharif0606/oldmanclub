@@ -51,9 +51,9 @@
                                     <div class="card">
                                         {{-- @if($p->phonegroup?->image) --}}
                                         @if($p->image)
-                                        <div class="h-80px rounded-top" style="background-image: url({{asset('public/uploads/phonebook/'.$p->image)}}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+                                        <div class="h-150px rounded-top" style="background-image: url({{asset('public/uploads/phonebook/'.$p->image)}}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
                                         @else
-                                        <div class="h-80px rounded-top" style="background-image: url({{asset('public/user/assets/images/bg/firstimg.jpg')}}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+                                        <div class="h-150px rounded-top" style="background-image: url({{asset('public/user/assets/images/bg/firstimg.jpg')}}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
                                         @endif
                                         <div class="card-body text-center pt-0">
                                             {{-- <div class="avatar avatar-lg mt-n5 mb-3">

@@ -49,7 +49,7 @@
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="price">Discount<i class="text-danger">*</i></label>
-                                    <input type="text" id="discount" class="form-control" value="{{ old('discount')}}" name="discount" oninput="calculateDiscountPrice()">
+                                    <input type="text" id="discount_percentage" class="form-control" value="{{ old('discount_percentage')}}" name="discount_percentage" oninput="calculateDiscountPrice()">
                                 </div>
                             </div>
                             <div class="col-md-6 col-12">
@@ -123,7 +123,7 @@
 <script>
     function calculateDiscountPrice(){
         var price = parseFloat(document.getElementById('price').value);
-        var discount = parseFloat(document.getElementById('discount').value);
+        var discount = parseFloat(document.getElementById('discount_percentage').value);
         if(!isNaN(price) && !isNaN(discount)){
             var discountAmount = (price * discount)/100;
             var discountPrice = price - discountAmount;
@@ -133,5 +133,4 @@
         }
     }
 </script>
-
 @endsection

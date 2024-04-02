@@ -42,7 +42,7 @@ class SmsPackageController extends Controller
             $sms->number_of_sms = $request->number_of_sms;
             $sms->validity_days = $request->validity_days;
             $sms->price = $request->price;
-            $sms->discount = $request->discount;
+            $sms->discount_percentage = $request->discount_percentage;
             $sms->discount_price = $request->discount_price;
             $sms->per_sms_charge = $request->per_sms_charge;
             $sms->status = 1;
@@ -91,7 +91,7 @@ class SmsPackageController extends Controller
             $sms->number_of_sms = $request->number_of_sms;
             $sms->validity_days = $request->validity_days;
             $sms->price = $request->price;
-            $sms->discount = $request->discount;
+            $sms->discount_percentage = $request->discount_percentage;
             $sms->discount_price = $request->discount_price;
             $sms->per_sms_charge = $request->per_sms_charge;
             $sms->status = $request->status;

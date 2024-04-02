@@ -20,8 +20,8 @@
                             <th scope="col">{{__('Special Image')}}</th>
                             <th scope="col">{{__('Special Link')}}</th>
                             <th scope="col">{{__('Golebal Network Text')}}</th>
-                            <th scope="col">{{__('Golebal Network Image')}}</th>
                             <th scope="col">{{__('Customer Feedback')}}</th>
+                            <th scope="col">{{__('Golebal Network Image')}}</th>
                             <th scope="col">{{__('Action')}}</th>
                         </tr>
                     </thead>
