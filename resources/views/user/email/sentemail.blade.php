@@ -82,7 +82,7 @@
 
                        <textarea name="message" class="form-control content"></textarea>
                         {{-- <textarea id="email-compose-editor" name="message" class="textarea_editor form-control bg-transparent" rows="15"
-                            placeholder="Enter text ..."></textarea> --}}
+                            placeholder="Enter text ..."></textarea> 
                     </div>
                     <hr>
                     <h5 class="mb-4"><i class="fa fa-paperclip"></i> Attatchment</h5>

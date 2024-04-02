@@ -24,7 +24,7 @@
                     <div class="row g-3">
                         <div class="card col-sm-12 shadow-lg">
                             <div class="card-body">
-                                <form action="{{route('shipping.update',encryptor('encrypt',$shipping->id))}}" method="post" class="row">
+                                <form action="{{route('shipping.update',encryptor('encrypt',$shipping->id))}}" method="post" class="row" enctype="multipart/form-data">
                                 @csrf
                                 @method('PATCH')
                                     <div class="col-12">
