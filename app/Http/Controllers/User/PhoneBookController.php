@@ -153,7 +153,7 @@ class PhoneBookController extends Controller
 
     public function sendsms(){
         $client = Client::find(currentUserId());
-        $data = SendSms::where('client_id',currentUserId())->orderBy('id','desc')->paginate('5');
+        $data = SendSms::where('client_id',currentUserId())->orderBy('id','desc')->paginate('20');
         $postCount = Post::where('client_id', currentUserId())->count();
         $phonebook = PhoneBook::where('client_id',currentUserId())->get();
         return view('user.phonebook.smslist',compact('data','client','postCount','phonebook'));

@@ -42,12 +42,12 @@ class CompanyController extends Controller
             $company->company_name = $request->company_name;
             if($request->hasFile('company_image')){
                 $imageName = rand(111,999).time().'.'.$request->company_image->extension();
-                $request->company_image->move(public_path('uploads/Company'), $imageName);
+                $request->company_image->move(public_path('uploads/company'), $imageName);
                 $company->company_image=$imageName;
             }
             if($request->hasFile('company_logo')){
                 $imageName = rand(111,999).time().'.'.$request->company_logo->extension();
-                $request->company_logo->move(public_path('uploads/Company'), $imageName);
+                $request->company_logo->move(public_path('uploads/company'), $imageName);
                 $company->company_logo=$imageName;
             }
             if ($request->hasFile('company_document')) {

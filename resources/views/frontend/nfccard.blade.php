@@ -20,7 +20,7 @@
     <div class="container feature-section">
         <div class="row">
             <div class="col-12">
-                <h2 class="feature-heading">Explore Our Features</h2>
+                <h2 class="feature-heading">EXPLORE OUR FEATURES</h2>
                 <div class="video-container embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item"
                             src="https://www.youtube.com/embed/{{$nfccardhero->video_link}}"
@@ -36,7 +36,7 @@
     <div class="container what-you-get-section">
         <div class="row">
             <div class="col-md-6">
-                <h2 class="section-heading">What You Get</h2>
+                <h2 class="section-heading">WHAT YOU GET</h2>
                 <ul class="feature-list text-start">
                     @foreach($lists as $list)
                     <li>{{$list}}</li>
