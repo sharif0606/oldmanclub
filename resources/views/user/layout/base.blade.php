@@ -1194,8 +1194,8 @@ JS libraries, plugins and custom scripts -->
     <script src="{{ asset('public/user/assets/vendor/flatpickr/dist/flatpickr.min.js') }}"></script>
     <script src="{{ asset('public/user/assets/vendor/plyr/plyr.js') }}"></script>
     <script src="{{ asset('public/user/assets/vendor/dropzone/dist/min/dropzone.min.js') }}"></script>
-    <script src="{{ asset('public/user/assets/vendor/zuck.js/dist/zuck.min.js') }}"></script>
-    <script src="{{ asset('public/user/assets/js/zuck-stories.js') }}"></script>
+    {{-- <script src="{{ asset('public/user/assets/vendor/zuck.js/dist/zuck.min.js') }}"></script>
+    <script src="{{ asset('public/user/assets/js/zuck-stories.js') }}"></script> --}}
     <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     {!! Toastr::message() !!}
