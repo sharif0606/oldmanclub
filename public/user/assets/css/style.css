@@ -15952,7 +15952,8 @@ body {
 }
 
 main {
-  background-color: var(--bs-body-bg);
+  /*background-color: var(--bs-body-bg);*/
+  background-color: #2F0549;
 }
 
 header {
