@@ -42,10 +42,10 @@
             <div class="card">
                 <!-- Card header START -->
                 <div class="card-header d-sm-flex text-center align-items-center justify-content-between border-0 pb-0">
-                    <h1 class="card-title h4">NFC Card</h1>
+                    <h1 class="card-title h4">NFC CARD</h1>
                     <!-- Button modal -->
                     <a class="btn btn-primary-soft" href="{{ route('nfc_card.create') }}"> <i
-                            class="fa-solid fa-plus pe-1"></i> Create NFC Card</a>
+                            class="fa-solid fa-plus pe-1"></i> ADD NFC CARD</a>
                 </div>
                 <!-- Card header START -->
                 <!-- Card body START -->
@@ -59,7 +59,7 @@
                                     class="border border-2 border-dashed h-100 rounded text-center d-flex align-items-center justify-content-center position-relative">
                                     <a class="stretched-link" href="{{ route('nfc_card.create') }}">
                                         <i class="fa-solid fa-id-card fs-1"></i>
-                                        <h6 class="mt-2">Add NFC Card</h6>
+                                        <h6 class="mt-2">ADD NFC CARD</h6>
                                     </a>
                                 </div>
                             </div>
@@ -76,6 +76,20 @@
                                         </a>
                                         <!-- Dropdown menu -->
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="photoActionEdit">
+                                           
+                                        {{-- asset('public/user/assets/images/albums/01.jpg') --}}
+                                            <li><a class="dropdown-item"> 
+                                                @if ($nfc_card->card_type == 1)
+                                                {{ __('Work') }}
+                                                @else
+                                                {{ __('Personal') }}
+                                                @endif</a>
+                                            </li>
+                                            <li><a class="dropdown-item"> 
+                                                <span class="fs-6 fw-bold">{{ $nfc_card->client?->fname }}</span>
+                                                <span class="fs-6 fw-bold">{{ $nfc_card->client?->middle_name }}</span>
+                                                <span class="fs-6 fw-bold">{{ $nfc_card->client?->last_name }}</span>
+                                            </li>
                                             <li><a class="dropdown-item" href="{{ route('nfc_card.edit', encryptor('encrypt', $nfc_card->id)) }}"> <i
                                                         class="bi bi-tag fa-fw pe-1"></i>Edit</a></li>
                                             <li><a class="dropdown-item" href="{{ route('nfc_card.show', encryptor('encrypt', $nfc_card->id)) }}"> <i
@@ -100,8 +114,6 @@
                                 @else
                                 <img class="avatar-img" src="{{asset('public/user/assets/images/avatar/03.jpg')}}" alt="">
                                 @endif
-                               
-                                    {{-- asset('public/user/assets/images/albums/01.jpg') --}}
                             </div>
                             @empty
                             No Card Made Yet

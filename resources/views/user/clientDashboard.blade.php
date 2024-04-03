@@ -5,7 +5,7 @@
 
         <!-- Container START -->
         <div class="container">
-            <div class="row g-4">
+            <div class="row g-2">
 
                 <!-- Main content START -->
                 <div class="col-lg-12 vstack gap-4">
@@ -16,12 +16,12 @@
 
                 <!-- Right sidebar START -->
                 <div class="col-lg-4">
-                    <div class="row g-4">
+                    <div class="row g-2">
                         <!-- Card START -->
                         <div class="col-md-6 col-lg-12">
                             <div class="card">
                                 <div class="card-header border-0 pb-0">
-                                    <h5 class="card-title">Intro</h5>
+                                    <h5 class="card-title">INTRO</h5>
                                     <!-- Button modal -->
                                 </div>
                                 <!-- Card body START -->
@@ -132,7 +132,7 @@
                             <div class="card">
                                 <!-- Card header START -->
                                 <div class="card-header d-sm-flex justify-content-between border-0">
-                                    <h5 class="card-title">Photos</h5>
+                                    <h5 class="card-title">PHOTOS</h5>
                                     <a class="btn btn-primary-soft btn-sm" href="#!"> See all photo</a>
                                 </div>
                                 <!-- Card header END -->
@@ -192,7 +192,7 @@
                             <div class="card">
                                 <!-- Card header START -->
                                 <div class="card-header d-sm-flex justify-content-between align-items-center border-0">
-                                    <h5 class="card-title">Friends <span
+                                    <h5 class="card-title">FRIENDS <span
                                             class="badge bg-danger bg-opacity-10 text-danger">230</span></h5>
                                     <a class="btn btn-primary-soft btn-sm" href="#!"> See all friends</a>
                                 </div>
@@ -344,7 +344,7 @@
                             <!-- Post input -->
                             <form class="w-100">
                                 <input class="form-control pe-4 border-0" placeholder="Share your thoughts..."
-                                    data-bs-toggle="modal" data-bs-target="#modalCreateFeed">
+                                    data-bs-toggle="modal" data-bs-target="#feedActionPhoto">
                             </form>
                         </div>
                         <!-- Share feed toolbar START -->

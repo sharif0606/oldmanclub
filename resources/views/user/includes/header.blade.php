@@ -5,10 +5,14 @@
         <div class="container">
             <!-- Logo START -->
             <a class="navbar-brand" href="{{route('clientdashboard')}}">
-                <img class="light-mode-item navbar-brand-item"
+                {{-- <img class="light-mode-item navbar-brand-item"
                     src="{{ asset('public/user/assets/images/logo.svg') }}" alt="logo">
                 <img class="dark-mode-item navbar-brand-item"
-                    src="{{ asset('public/user/assets/images/logo.svg') }}" alt="logo">
+                    src="{{ asset('public/user/assets/images/logo.svg') }}" alt="logo"> --}}
+                <img class="light-mode-item navbar-brand-item"
+                    src="{{ asset('public/assets/images/oldman-logo.png') }}" alt="logo">
+                <img class="dark-mode-item navbar-brand-item"
+                    src="{{ asset('public/assets/images/oldman-logo.png') }}" alt="logo">
             </a>
             <!-- Logo END -->
 
@@ -51,13 +55,13 @@
                             <li class="dropdown-submenu dropstart">
                                 <a class="dropdown-item dropdown-toggle" href="#">Company</a>
                                 <ul class="dropdown-menu dropdown-menu-end" data-bs-popper="none">
-                                    <li> <a class="dropdown-item" href="{{route('company.index')}}">Entry Company</a> </li>
+                                    <li> <a class="dropdown-item" href="{{route('company.index')}}">Company List</a> </li>
                                 </ul>
                             </li>
                             <li class="dropdown-submenu dropstart">
                                 <a class="dropdown-item dropdown-toggle" href="#">Bank</a>
                                 <ul class="dropdown-menu dropdown-menu-end" data-bs-popper="none">
-                                    <li> <a class="dropdown-item" href="{{route('bank.index')}}">Entry Bank</a> </li>
+                                    <li> <a class="dropdown-item" href="{{route('bank.index')}}">Bank List</a> </li>
                                 </ul>
                             </li>
                             <!-- dropdown submenu open left -->
@@ -83,8 +87,9 @@
                             aria-haspopup="true" aria-expanded="false">SMS</a>
                             <ul class="dropdown-menu" aria-labelledby="postMenu">
                                 <li> <a class="dropdown-item" href="{{route('phonegroup.index')}}">Create Phone Group</a></li>
-                                <li> <a class="dropdown-item" href="{{route('phonebook.index')}}">Phone Book Group</a></li>
+                                <li> <a class="dropdown-item" href="{{route('phonebook.index')}}">Phone Book</a></li>
                                 <li> <a class="dropdown-item" href="{{route('purchase.index')}}">Purchase SMS</a></li>
+                                <li> <a class="dropdown-item" href="{{route('sms_send')}}">Send SMS</a></li>
                                 {{-- <li class="dropdown-submenu dropstart">
                                     <a class="dropdown-item dropdown-toggle" href="#">Social Contact</a>
                                     <ul class="dropdown-menu dropdown-menu-end" data-bs-popper="none">

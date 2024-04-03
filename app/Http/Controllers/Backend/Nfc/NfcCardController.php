@@ -216,9 +216,9 @@ class NfcCardController extends Controller
     {
         //
     }
-    public function showqrurl($id)
+    public function showqrurl($id,$client_id)
     {
-        $client = Client::find(currentUserId());
+        $client = Client::find($client_id);
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
         return view('user.nfc-card.showqrurl', compact('nfc_card','client'));
     }

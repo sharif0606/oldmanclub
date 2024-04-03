@@ -27,13 +27,17 @@
                 <div class="card-header border-0 pb-0">
                     <div class="row g-2">
                         <div class="col-lg-3">
-                            <h1 class="h4 card-title mb-lg-0">PHONEBOOK LIST</h1>
+                            <h1 class="h4 card-title mb-lg-0">CONTACT LIST</h1>
                         </div>
                         <div class="col-sm-6 col-lg-6 ms-auto">
-                        <a href="#" id="downloadVCard" class="fs-5 mx-2 text-success"><i class="fa fa-address-card"></i></a>
-                        <a href="{{ route('phonebook_download') }}" class="fs-5 mx-2 text-success" download><i class="fa fa-download"></i></a>
-                         <a class="btn btn-primary-soft" href="{{route('sms_send')}}">sms</a>
-                        <a class="btn btn-primary-soft ms-auto" href="{{ route('phonebook.create') }}"> <i class="fa-solid fa-plus pe-1"></i> CREATE CONTACT</a>
+                            <div class="row">
+                                <div class="col-md-12 text-md-end">
+                                    <a href="#" id="downloadVCard" class="fs-5 mx-2 text-success"><i class="fa fa-address-card"></i></a>
+                                    <a href="{{ route('phonebook_download') }}" class="fs-5 mx-2 text-success" download><i class="fa fa-download"></i></a>
+                                    {{-- <a class="btn btn-primary-soft" href="{{route('sms_send')}}">sms</a> --}}
+                                    <a class="btn btn-primary-soft ms-auto" href="{{ route('phonebook.create') }}"> <i class="fa-solid fa-plus pe-1"></i> CREATE CONTACT</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -88,88 +92,10 @@
     </div>
 </main>
 
-{{-- <main>
-    <div class="container">
-        <div class="row g-4">
-            <div class="col-lg-3">
-                <div class="d-flex align-items-center d-lg-none">
-                    <button class="border-0 bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSideNavbar" aria-controls="offcanvasSideNavbar">
-                        <span class="btn btn-primary"><i class="fa-solid fa-sliders-h"></i></span>
-                        <span class="h6 mb-0 fw-bold d-lg-none ms-2">My profile</span>
-                    </button>
-                </div>
-                    @include('user.includes.profile-navbar')
-            </div>
-            <div class="col-md-8 col-lg-6 vstack gap-4">
-                <div class="card">
-                    <div class="card-header border-0 pb-0">
-                        <div class="row g-2">
-                            <div class="col-lg-2">
-                            <h1 class="h4 card-title mb-lg-0">Contact List</h1>
-                            </div>
-                            <div class="col-sm-6 col-lg-6 ms-auto">
-                                <a class="btn btn-primary-soft" href="{{route('sms_create')}}">sms</a>
-                                <a href="#" id="downloadVCard" class="fs-5 mx-2 text-success"><i class="fa fa-address-card"></i></a>
-                                    <a href="{{ route('phonebook_download') }}" class="fs-5 mx-2 text-success" download><i class="fa fa-download"></i></a>
-                                <a class="btn btn-primary-soft ms-auto" href="{{route('phonebook.create')}}"> <i class="fa-solid fa-plus pe-1"></i> Create Contact</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover mb-0" id="phone_book">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">{{__('#SL')}}</th>
-                                        <th scope="col">{{__('Name')}}</th>
-                                        <th scope="col">{{__('Group')}}</th>
-                                        <th scope="col">{{__('Contact No')}}</th>
-                                        <th scope="col">{{__('E-mail')}}</th>
-                                        <th class="white-space-nowrap">{{__('Action') }}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse($phonebook as $p)
-                                    <tr>
-                                        <th scope="row">{{ ++$loop->index }}</th>
-                                        <td>{{$p->name_en}}</td>
-                                        <td>{{$p->phonegroup?->group_name}}</td>
-                                        <td>{{$p->contact_en}}</td>
-                                        <td>{{$p->email}}</td>
-                                        <td class="white-space-nowrap">
-                                            <a href="{{route('phonebook.edit',encryptor('encrypt',$p->id))}}" class="text-warning">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-
-                                            <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()" class="text-danger">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                            <form id="form{{$p->id}}" action="{{route('phonebook.destroy',encryptor('encrypt',$p->id))}}" method="post" onsubmit="return confirm('Are you sure you want to delete this item?');">
-                                                @csrf
-                                                @method('delete')
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    @empty
-                                    <tr>
-                                        <th colspan="8" class="text-center">No Pruduct Found</th>
-                                    </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                            <div class="paginate pt-3">
-                                {{ $phonebook->links() }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</main> --}}
 <script>
-    document.getElementById('downloadVCard').addEventListener('click', function() {
-        var $phonebook = @json($phonebook);
+document.getElementById('downloadVCard').addEventListener('click', function() {
+        var phonebook = {!! json_encode($phonebook) !!}; // Correct way to pass PHP variable to JavaScript in Laravel Blade
+console.log(phonebook);
         function generateVCard(phonebook) {
             var vCard = "BEGIN:VCARD\nVERSION:3.0";
             phonebook.forEach(function(contact) {
@@ -185,11 +111,15 @@
             vCard += "\nEND:VCARD";
             return vCard;
         }
-        var vCardData = generateVCard($phonebook);
-            var link = document.createElement('a');
-            link.setAttribute('href', 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vCardData));
-            link.setAttribute('download', 'phonebook.vcf');
-            link.click();
+
+        var vCardData = generateVCard(phonebook);
+        var link = document.createElement('a');
+        link.setAttribute('href', 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vCardData));
+        link.setAttribute('download', 'phonebook.vcf');
+        link.style.display = 'none'; // Hide the link
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link); // Remove the link after download
     });
 </script>
 

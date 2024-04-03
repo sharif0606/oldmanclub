@@ -54,17 +54,18 @@
         <div class="row">
             <div class="col-md-12">                  
                 <div class="our-service-details mt-5 text-center">
-                    <h2>Our Service</h2>
+                    <h2>OUR SERVICE</h2>
                     <p class="px-5 mb-5">{{$homepage?->service_section_text}}
                         </p>
                 </div>
-                    <div class="row pt-4">
+            </div>
+            <div class="col-md-10 offset-md-1">  
+                    <div class="row gx-1 pt-2">
                         @forelse($services as $value)
-                        <div class="col-md-4 mb-4">
+                        <div class="col-md-4 mb-3">
                             <a href="{{$value->link}}" class="card-link service">
                                 <div class="card fixed-size-card">
                                     <img src="{{asset('public/uploads/ourservices/'.$value->image)}}" class="card-img-top" alt="Product Shipping Service">
-                                    <hr class="my-3">
                                     <div class="card-body ">
                                         <p class="card-text text-decoration-none">
                                             {{$value->title}}    
@@ -91,7 +92,7 @@
     <div class="container mt-5 special-offers">
         <div class="row">
         <div class="col-md-12 text-center">
-            <h2 class="py-5">Special Offers</h2>
+            <h2 class="py-5">SPECIAL OFFERS</h2>
             <p class="px-5">{{$homepage?->special_offer_text}}
             </p>
         </div>
@@ -111,7 +112,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <h2 py-5>Huge Global Network</h2>
+                    <h2 py-5>HUGE GLOBAL NETWORK</h2>
                     <p class="p-5">{{$homepage?->global_network_text}}
                     </p>
                     <img src="{{asset('public/uploads/homepage/'.$homepage?->global_network_image)}}" alt="Huge Global Network" class="w-100 img-fluid py-3">
@@ -128,7 +129,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <section class="happy-customer">
-                    <h2>Trusted By Thousands of Happy Customer</h2>
+                    <h2>TRUSTED BY THOUSANDS OF HAPPY CUSTOMER</h2>
                     <p>These are the stories our customers who have joined us with great pleasure when using this crazy feature.</p>
                     <div class="testimonial-slider">
                         <!-- Testimonial 1 -->
@@ -185,7 +186,7 @@
                             <div class="row">
                                 <div class="col-md-8 text-start">
                                     
-                                    <h5 class="card-title">Subscribe Now To Get Special Offers </h5>
+                                    <h5 class="card-title">SUBSCRIBE NOW TO GET SPECIAL OFFERS</h5>
                                     <p class="card-text">Stay with us and find the thrill.</p>
                                 </div>
                                 <div class="col-md-4 text-center">
