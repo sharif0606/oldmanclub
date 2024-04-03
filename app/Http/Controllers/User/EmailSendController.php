@@ -51,7 +51,7 @@ class EmailSendController extends Controller
                 $this->notice::success('Email Successfully send');
                 $client = Client::find(currentUserId());
                 $sentmail = EmailSend::findOrFail($email->id);
-                Mail::send('user.email.sentmailshow', ['client' => $client,'sentmail' => $sentmail], function($message) use($request){
+                Mail::send('user.email.email', ['client' => $client,'sentmail' => $sentmail], function($message) use($request){
                     $message->from('noreply@muktomart.com.bd', 'Old Man Club');
                     $message->to($request->to_email);
                     $message->subject($request->subject);
