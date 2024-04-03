@@ -184,6 +184,12 @@
                             </a>
                         </li>
                         <li>
+                            <a class="has-arrow" href="{{route('contact_list')}}" aria-expanded="false">
+                                <i class="fa-solid fa-table-list"></i>
+                                <span class="nav-text">Contact List</span>
+                            </a>
+                        </li>
+                        <li>
                             <a class="has-arrow" href="{{route('company_list')}}" aria-expanded="false">
                                 <i class="fa-solid fa-table-list"></i>
                                 <span class="nav-text">Company List</span>

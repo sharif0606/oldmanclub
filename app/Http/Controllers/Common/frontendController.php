@@ -105,19 +105,11 @@ class frontendController extends Controller
             $contact->contact_no = $request->contact_no;
             $contact->email = $request->email;
             $contact->message = $request->message;
-            if ($request->hasFile('file')) {
-                $file = $request->file('file');
-                // $validator = Validator::make(['file' => $file], [
-                //     'file' => 'required|mimes:jpeg,jpg,png,pdf,doc,docx|max:3072'
-                // ]);
-                if ($validator->fails()) {
-                    throw new \Exception('Invalid file format or size');
-                }
-                $imageName = rand(111, 999) . time() . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('uploads/contact_file'), $imageName);
-                $contact->file = $imageName;
+            if($request->hasFile('file')){
+                $imageName = rand(111,999).time().'.'.$request->file->extension();
+                $request->file->move(public_path('uploads/contact_file'), $imageName);
+                $contact->file=$imageName;
             }
-
             if($contact->save()){
                 $this->notice::success('Message Successfully Send');
                 return redirect()->route('contact_create');
