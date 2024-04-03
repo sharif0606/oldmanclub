@@ -10,6 +10,8 @@ use App\Models\Backend\Website\OurServices;
 use App\Models\Backend\Website\Homepage;
 use App\Models\Backend\Website\CustomerFeedback;
 use App\Models\Backend\Website\GlobalNetWorkImage;
+use App\Models\Common\ContactUs;
+use Illuminate\Support\Facades\Validator;
 
 // use App\Models\Backend\Website\NfcCard\NfcCardImage;
 // use App\Models\Backend\Website\NfcCard\NfcCardPriceSection;
@@ -83,5 +85,47 @@ class frontendController extends Controller
         $printfeedback = \App\Models\Backend\Website\PrintingService\PrintCustomerFeedback::get();
         $printservices = \App\Models\Backend\PrintingService::latest()->take(4)->get();
         return view('frontend.printservice',compact('setting','printinghero','printvideo','printfeature','printfeedback','printservices'));
+    }
+    public function contact_create(){
+        $setting = \App\Models\Backend\Website\Setting::first();
+        return view('frontend.contact',compact('setting'));
+    }
+    public function contact_store(Request $request){
+        try{
+            $request->validate([
+                'name' => 'required|string',
+                'contact_no' => 'required|string',
+                'email' => 'required|email',
+                'message' => 'required|string',
+                'file' => 'nullable|mimes:jpeg,jpg,png,pdf,doc,docx|max:2048', // Adjust max file size as needed (2048 KB = 2 MB)
+            ]);
+
+            $contact = new ContactUs;
+            $contact->name = $request->name;
+            $contact->contact_no = $request->contact_no;
+            $contact->email = $request->email;
+            $contact->message = $request->message;
+            if ($request->hasFile('file')) {
+                $file = $request->file('file');
+                // $validator = Validator::make(['file' => $file], [
+                //     'file' => 'required|mimes:jpeg,jpg,png,pdf,doc,docx|max:3072'
+                // ]);
+                if ($validator->fails()) {
+                    throw new \Exception('Invalid file format or size');
+                }
+                $imageName = rand(111, 999) . time() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('uploads/contact_file'), $imageName);
+                $contact->file = $imageName;
+            }
+
+            if($contact->save()){
+                $this->notice::success('Message Successfully Send');
+                return redirect()->route('contact_create');
+            }
+        }catch(Exception $e){
+            dd($e);
+            $this->notice::error('Something Wrong! Please try again');
+            return redirect()->route('contact_create');
+        }
     }
 }

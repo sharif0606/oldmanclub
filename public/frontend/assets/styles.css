@@ -1536,9 +1536,65 @@
     .product-image-container:hover .hover-buttons {
         opacity: 1;
     }
-
-
-
-    
-
     /* Printing Service Css End */
+    /* contact page css start */
+    
+    .contact-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 50px;
+        background-color: #0B132A;
+        color: white;
+    }
+
+    .contact-form-col {
+        flex: 1;
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        color: #fff;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-bottom: 1px solid #fff;
+        background-color: transparent;
+        color: #fff;
+    }
+
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-bottom: 1px solid #fff;
+        background-color: transparent;
+        color: #fff;
+        resize: vertical;
+    }
+
+    button {
+        background-color: #1F2A4F;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .contact-images img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    /* contact page css end */

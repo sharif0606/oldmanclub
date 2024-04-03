@@ -12,7 +12,6 @@
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
     <link rel="stylesheet" href="{{asset('public/frontend/assets/styles.css')}}">
     @stack('styles')
 </head>
@@ -45,7 +44,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item"><a href="#" class="nav-link">Testimonials</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link">Contact Us</a></li>
+                            <li class="nav-item"><a href="{{route("contact_create")}}" class="nav-link">Contact Us</a></li>
                         </ul>
                         <div class="navbar-right">
                             <a href="{{route('clientlogin')}}" class="btn btn-link ps-0">Sign In</a>
@@ -71,7 +70,7 @@
     @yield('content')
 
     <!-- Footer section start-->
-    <footer class="footer">
+    <footer class="footer mt-3">
         <div class="container">
             <div class="col-md-3 footer-column">
                 <!-- 1st Column -->

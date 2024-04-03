@@ -59,7 +59,7 @@
                     </div>
                     <div class="col-md-9 sign-up-text">
                     <h2 class="text-capitalize pb-4 pt-2">Sign up for a virtual mail box</h2>
-                    <button class="btn smart-btn-contact-us fw-medium">Contact With Us</button>
+                    <a href="{{ route('contact_create') }}" class="btn smart-btn-contact-us fw-medium text-uppercase">Contact With Us</a>
                     </div> 
                 </div>
             </div>
@@ -74,8 +74,9 @@
                     <h3 class="px-2 text-capitalize">{{$smartsmsservice?->text_large}}</h3>
                    <p class="p-2">{{$smartsmsservice?->text_small}}</p>
                      <div class="d-inline">
-                        <button type="submit" class="btn btn-view-plan mx-2 px-4">View Plan</button>
-                        <button type="submit" class="btn smart-btn-contact-us mx-2 px-4">Contact Us</button>
+                        <button type="submit" class="btn btn-view-plan mx-2 px-4 text-uppercase">View Plan</button>
+                        <a href="{{ route('contact_create') }}" class="btn smart-btn-contact-us mx-2 px-4 text-uppercase">Contact Us</a>
+                        
                     </div>
                 </div>
                 <div class="col-md-6 sms-image text-end">
@@ -96,8 +97,10 @@
                     <h3 class="text-capitalize px-2">{{$smartphonebook?->text_large}}</h3>
                     <p class="p-2">{{$smartphonebook?->text_small}}</p>
                     <div class="d-inline">
-                        <button type="submit" class="btn btn-sign-up mx-2 px-4">Sign Up</button>
-                       <button type="submit" class="btn smart-btn-contact-us mx-2 px-4">Contact Us</button>
+                        {{-- <button type="submit" class="btn btn-sign-up mx-2 px-4">Sign Up</button> --}}
+                        <a href="{{ route('clientlogin') }}" class="btn btn-sign-up mx-2 px-4 text-uppercase">Sign in</a>
+                        <a href="{{ route('contact_create') }}" class="btn smart-btn-contact-us mx-2 px-4 text-uppercase">Contact Us</a>
+                       {{-- <button type="submit" class="btn smart-btn-contact-us mx-2 px-4">Contact Us</button> --}}
                     </div>
                 </div>
             </div>

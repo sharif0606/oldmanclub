@@ -93,11 +93,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('public/user/assets/vendor/flatpickr/dist/flatpickr.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/user/assets/vendor/plyr/plyr.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/user/assets/vendor/zuck.js/dist/zuck.min.css') }}">
-
     <!-- Theme CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('public/user/assets/css/style.css') }}">
-    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GMKQ4P9YMZ"></script>
     <script>
@@ -1191,9 +1188,7 @@ JS libraries, plugins and custom scripts -->
     <script src="{{ asset('public/user/assets/vendor/dropzone/dist/min/dropzone.min.js') }}"></script>
     <script src="{{ asset('public/user/assets/vendor/zuck.js/dist/zuck.min.js') }}"></script>
     <script src="{{ asset('public/user/assets/js/zuck-stories.js') }}"></script>
-    <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-    {!! Toastr::message() !!}
+    
     <!-- Theme Functions -->
     <script src="{{ asset('public/user/assets/js/functions.js') }}"></script>
 

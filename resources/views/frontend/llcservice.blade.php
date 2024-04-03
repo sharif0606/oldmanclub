@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title','Shipping Service')
+@section('title','LLC Service')
 @section('content')
       <!-- hero section start -->
       <section class="llc-hero">
@@ -134,7 +134,7 @@
         <div class="llc-contact-us-content">
             <h2 class="fs-2">{{$llccardsection?->contact_text_large}}</h2>
             <p class="text-secondary ">{{$llccardsection?->contact_text_small}}</p>
-            <button class="btn btn-info">Contact With Us</button>
+            <a href="{{ route('contact_create') }}" class="btn btn-warning text-uppercase">Contact With Us</a>
         </div>
    </section>
    <!-- card section end -->

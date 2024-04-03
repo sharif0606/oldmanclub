@@ -6,7 +6,7 @@
                 <div class="col-md-6">
                     <h1 class="fw-bold py-2">{{$heading?->text_large}}</h1>
                     <p class="fw-normal pt-1 pb-3">{{$heading?->text_small}}</p>
-                    <a href="#" class="btn contact-btn me-3">Contact Us</a>
+                    <a href="{{route('contact_create')}}" class="btn contact-btn me-3">Contact Us</a>
                     <a href="#" class="btn learn-more-btn">Learn More</a>
                 </div>
                 <div class="col-md-6">
@@ -141,7 +141,7 @@
                 <div class="col-md-10 help-text">
                     <h2>Can I Help?</h2>
                 <p>Our Team is waiting to hear from you.</p>
-                <button class="btn btn-info btn-contact fw-medium">Contact With Us</button>
+                <a href="{{ route('contact_create') }}" class="btn btn-info btn-contact fw-medium text-uppercase">Contact With Us</a>
                 </div> 
             </div>
         </div>
