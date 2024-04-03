@@ -95,11 +95,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('public/user/assets/vendor/zuck.js/dist/zuck.min.css') }}">
     <!-- Theme CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('public/user/assets/css/style.css') }}">
-<<<<<<< HEAD
-=======
-   
-
->>>>>>> 66b64afa7ee90268d99fb0f21fa127bf965595c8
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GMKQ4P9YMZ"></script>
     <script>
@@ -1183,11 +1178,9 @@ JS libraries, plugins and custom scripts -->
             });
         }
     });
-
 </script>
     <!-- Bootstrap JS -->
     <script src="{{ asset('public/user/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-
     <!-- Vendors -->
     <script src="{{ asset('public/user/assets/vendor/tiny-slider/dist/tiny-slider.js') }}"></script>
     <script src="{{ asset('public/user/assets/vendor/OverlayScrollbars-master/js/OverlayScrollbars.min.js') }}"></script>
@@ -1198,16 +1191,7 @@ JS libraries, plugins and custom scripts -->
     <script src="{{ asset('public/user/assets/vendor/dropzone/dist/min/dropzone.min.js') }}"></script>
     <script src="{{ asset('public/user/assets/vendor/zuck.js/dist/zuck.min.js') }}"></script>
     <script src="{{ asset('public/user/assets/js/zuck-stories.js') }}"></script>
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> 66b64afa7ee90268d99fb0f21fa127bf965595c8
     <!-- Theme Functions -->
     <script src="{{ asset('public/user/assets/js/functions.js') }}"></script>
-
-    
 </body>
-
-
 </html>

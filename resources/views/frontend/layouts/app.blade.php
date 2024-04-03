@@ -75,7 +75,7 @@
     @yield('content')
 
     <!-- Footer section start-->
-    <footer class="footer mt-3">
+    <footer class="footer">
         <div class="container">
             <div class="col-md-3 footer-column">
                 <!-- 1st Column -->
