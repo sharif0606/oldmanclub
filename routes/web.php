@@ -107,7 +107,7 @@ Route::get('/mail', [test::class, 'index'])->name('mail');
 |
 */
 
-Route::get('/register', [auth::class, 'signUpForm'])->name('register');
+// Route::get('/register', [auth::class, 'signUpForm'])->name('register');
 Route::post('/register', [auth::class, 'signUpStore'])->name('register.store');
 Route::get('/login', [auth::class, 'signInForm'])->name('login');
 Route::post('/login', [auth::class, 'signInCheck'])->name('login.check');
@@ -265,11 +265,11 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     
 
 });
-Route::get('nfcqrurl/{id}', [nfc_card::class, 'showqrurl']);
+Route::get('nfcqrurl/{id}/{client_id}', [nfc_card::class, 'showqrurl']);
 Route::get('save-contact/{id}', [nfc_card::class, 'save_contact'])->name('save_contact');
 Route::post('/send-message', [ChatController::class, 'sendMessage']);
 
-Route::get('', [frontend::class, 'frontend'])->name('frontend');
+Route::get('/', [frontend::class, 'frontend'])->name('frontend');
 Route::get('nfccard', [frontend::class, 'nfccard'])->name('nfccard');
 Route::get('shippingservice', [frontend::class, 'shippingservice'])->name('shippingservice');
 Route::get('llcservice', [frontend::class, 'llcservice'])->name('llcservice');

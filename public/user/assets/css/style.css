@@ -254,7 +254,7 @@ h4, .h4 {
 }
 @media (min-width: 1200px) {
   h4, .h4 {
-    font-size: 1.40625rem;
+    font-size: 1rem;
   }
 }
 
@@ -14210,7 +14210,7 @@ textarea.form-control-lg {
 }
 
 .h-200px {
-  height: 200px !important;
+  height: 250px !important;
 }
 
 .h-300px {
@@ -15952,7 +15952,8 @@ body {
 }
 
 main {
-  background-color: var(--bs-body-bg);
+  /*background-color: var(--bs-body-bg);*/
+  background-color: #2F0549;
 }
 
 header {
@@ -17010,7 +17011,7 @@ a.badge:hover {
   border-radius: 0.4rem;
   min-height: auto;
   padding: 0.5rem 1rem !important;
-  font-size: 0.9375rem;
+  font-size: 0.8rem;
 }
 .choices .choices__list--multiple .choices__item {
   background-color: var(--bs-light);

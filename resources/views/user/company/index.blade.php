@@ -59,11 +59,11 @@
                                     @else
                                     <a href="#"><img class="avatar-img rounded-circle border border-white border-3 bg-white" src="{{ asset('public/user/assets/images/logo/08.svg') }}" alt=""></a>
                                     @endif
-                                    @if($p->qrcode)
+                                    {{-- @if($p->qrcode)
                                         <i class="bi bi-patch-check-fill text-success small"></i>
                                     @else
                                         <i class="bi bi-file-x-fill text-danger small"></i>
-                                    @endif
+                                    @endif --}}
                                 </div>
                                 <h5 class="mb-0"> <a href="#">{{ $p->company_name }}</a> </h5>
                                 <p class="mb-0"><strong>{{ $p->email }}</strong></p>

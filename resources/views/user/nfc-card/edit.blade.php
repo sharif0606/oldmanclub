@@ -24,10 +24,10 @@
         <div class="card">
             <!-- Card header START -->
             <div class="card-header d-sm-flex text-center align-items-center justify-content-between border-0 pb-0">
-                <h4 class="card-title h4">Edit NFC Card</h4>
+                <h4 class="card-title h4">EDIT NFC CARD</h4>
                 <!-- Button modal -->
                 <a class="btn btn-primary-soft" href="{{ route('nfc_card.index') }}"> <i
-                        class="fas fa-list pe-1"></i>All NFC Card</a>
+                        class="fas fa-list pe-1"></i>All NFC CARD</a>
             </div>
             <!-- Card header START -->
             <!-- Card body START -->
@@ -41,7 +41,7 @@
                                     @csrf
                                     @method('PATCH')
                                     <div class="col-12">
-                                        <h6 class="border-bottom">NFC Card</h6>
+                                        <h6 class="border-bottom">Card Name</h6>
                                         <input type="text" class="form-control mb-3" id="" name="card_name" placeholder="Card Name"
                                             required value="{{ $nfc_card->card_name }}">
                                     </div>
@@ -153,7 +153,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-12 my-2">
                                         <button type="submit" class="btn btn-primary">Update NFC Card</button>
                                     </div>
                                 </form>

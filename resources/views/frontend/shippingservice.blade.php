@@ -27,7 +27,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="pb-3">How It's Work</h2>
+                    <h2 class="pb-3">HOW IT'S WORK</h2>
                     <div class="row pt-4">
                     @foreach($service as $value)
                         <div class="col-md-4 service-item">
@@ -46,7 +46,7 @@
         </div>
     </section>
         
-    <section class="shipping shipping-section">
+    {{-- <section class="shipping shipping-section">
         <div class="shipping container">
             <div class="row">
                 <div class="col-md-12">
@@ -106,7 +106,7 @@
             </div>
         </div>
     </section>
-   
+    --}}
     <section class="shipping why-choose-us">
         <div class="shipping container">
             <div class="row">
@@ -120,7 +120,7 @@
                     </div>
                  </div>
                  <div class="col-md-5 col-sm-5 col-xs-5 offset-xs-4 benefits">
-                    <h2>Why Choice Us</h2>
+                    <h2>WHY CHOICE US</h2>
                     <ol class="py-2">
                         @foreach($featureList as $list)
                         <li class="">{{$list}}</li>
@@ -139,7 +139,7 @@
                     <img src="{{asset('public/frontend/shippinservice/shape.png')}}" alt="shape" class="shape" width="150px">
                 </div>
                 <div class="col-md-10 help-text">
-                    <h2>Can I Help?</h2>
+                    <h2>CAN I HELP?</h2>
                 <p>Our Team is waiting to hear from you.</p>
                 <a href="{{ route('contact_create') }}" class="btn btn-info btn-contact fw-medium text-uppercase">Contact With Us</a>
                 </div> 

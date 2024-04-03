@@ -123,7 +123,7 @@
 <script>
     function calculateDiscountPrice(){
         var price = parseFloat(document.getElementById('price').value);
-        var discount = parseFloat(document.getElementById('discount').value);
+        var discount = parseFloat(document.getElementById('discount_percentage').value);
         if(!isNaN(price) && !isNaN(discount)){
             var discountAmount = (price * discount)/100;
             var discountPrice = price - discountAmount;
@@ -133,5 +133,4 @@
         }
     }
 </script>
-
 @endsection

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('smspackage_id')->index();
             $table->foreign('smspackage_id')->references('id')->on('sms_packages')->onDelete('cascade');
             $table->string('number_of_sms')->nullable();
+            $table->string('uses_sms')->nullable();
             $table->integer('validity_count')->nullable();
             $table->timestamps();
             $table->softDeletes();

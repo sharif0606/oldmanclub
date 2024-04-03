@@ -7,6 +7,7 @@ use App\Models\User\Client;
 use App\Models\User\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Mail; 
 
 class EmailSendController extends Controller
 {
@@ -48,6 +49,13 @@ class EmailSendController extends Controller
             }
             if($email->save()){
                 $this->notice::success('Email Successfully send');
+                $client = Client::find(currentUserId());
+                $sentmail = EmailSend::findOrFail($email->id);
+                Mail::send('user.email.email', ['client' => $client,'sentmail' => $sentmail], function($message) use($request){
+                    $message->from('noreply@muktomart.com.bd', 'Old Man Club');
+                    $message->to($request->to_email);
+                    $message->subject($request->subject);
+                });
                 return redirect()->route('inbox');
             }
         }catch(Exception $e){

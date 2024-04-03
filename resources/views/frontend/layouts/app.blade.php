@@ -32,7 +32,7 @@
                         <ul class="navbar-nav mx-auto me-auto mb-2 mb-lg-0">
                             <li class="nav-item"><a href="{{route('frontend')}}" class="nav-link">Home</a></li>
                             
-                            <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
+                            {{-- <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li> --}}
                             <li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Service</a>
                                 <ul class="dropdown-menu" id="service-dropdown">
                                     <li class="m-0 p-0"><a class="dropdown-item" href="{{route('shippingservice')}}">Product Shipping</a></li>
@@ -43,8 +43,13 @@
                                     <li class="m-0 p-0"><a class="dropdown-item" href="{{route('phoneservice')}}">Phone Service</a></li>
                                 </ul>
                             </li>
+
                             <li class="nav-item"><a href="#" class="nav-link">Testimonials</a></li>
                             <li class="nav-item"><a href="{{route("contact_create")}}" class="nav-link">Contact Us</a></li>
+
+                            {{-- <li class="nav-item"><a href="#" class="nav-link">Testimonials</a></li> --}}
+                            <li class="nav-item"><a href="#" class="nav-link">Contact Us</a></li>
+
                         </ul>
                         <div class="navbar-right">
                             <a href="{{route('clientlogin')}}" class="btn btn-link ps-0">Sign In</a>
@@ -86,7 +91,7 @@
 
             <div class="col-md-3 footer-column">
                 <!-- 2nd Column -->
-                <h3 class="footer-heading">Product</h3>
+                <h3 class="footer-heading">PRODUCT</h3>
                 <ul class="footer-links">
                     <li><a href="#">Buy</a></li>
                     <li><a href="#">Pricing</a></li>
@@ -98,7 +103,7 @@
 
             <div class="col-md-3 footer-column">
                 <!-- 3rd Column -->
-                <h3 class="footer-heading">Engage</h3>
+                <h3 class="footer-heading">ENGAGE</h3>
                 <ul class="footer-links">
                     <li><a href="#">Old Club Man</a></li>
                     <li><a href="#">FAQ</a></li>
@@ -111,7 +116,7 @@
 
             <div class="col-md-3 footer-column">
                 <!-- 4th Column -->
-                <h3 class="footer-heading">Earn Money</h3>
+                <h3 class="footer-heading">EARN MONEY</h3>
                 <ul class="footer-links">
                     <li><a href="#">Affiliate</a></li>
                     <li><a href="#">Become a Partner</a></li>

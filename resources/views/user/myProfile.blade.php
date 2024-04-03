@@ -31,7 +31,7 @@
                             <!-- Post input -->
                             <form class="w-100">
                                 <input class="form-control pe-4 border-0" placeholder="Share your thoughts..."
-                                    data-bs-toggle="modal" data-bs-target="#modalCreateFeed">
+                                    data-bs-toggle="modal" data-bs-target="#feedActionPhoto">
                             </form>
                         </div>
                         <!-- Share feed toolbar START -->

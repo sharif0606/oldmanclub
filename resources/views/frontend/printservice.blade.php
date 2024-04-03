@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12 print-hero-section">
                 <div class="col-md-6 print-hero-content">
-                    <h1 class="fw-bold py-2">{{ $printinghero?->text_large }}</h1>
+                    <h1 class="fw-bold py-2 text-uppercase">{{ $printinghero?->text_large }}</h1>
                     <p class="fw-normal pt-1 pb-3">{{ $printinghero?->text_small }}
 
                     </p>
@@ -20,7 +20,7 @@
         </div>
         <div class="row py-4">
             <div class="col-md-12">
-                <h2 class="text-capitalize fw-bold text-center py-3">Trusted By</h2>
+                <h2 class="text-capitalize fw-bold text-center py-3 text-uppercase">Trusted By</h2>
                 <img src="{{ asset('public/frontend/assets/image/Sponsored.png') }}" alt="" />
             </div>
         </div>
@@ -33,7 +33,7 @@
             <div class="row py-3">
                 <div class="col-md-7 col-sm-12 px-2">
                     <!-- Full-width on small devices -->
-                    <h2 class="fw-bold py-2">{{ $printvideo?->text_large }}</h2>
+                    <h2 class="fw-bold py-2 text-uppercase">{{ $printvideo?->text_large }}</h2>
                     <p class="py-2">{{ $printvideo?->text_small }}.
                     </p>
                 </div>
@@ -68,7 +68,7 @@
     <section class="print-product-section py-5">
         <div class="container-fluid">
             <div class="row py-3">
-                <h3 class="product-heading text-capitalize fw-bold">
+                <h3 class="product-heading  fw-bold text-uppercase">
                     Our Best Selling Products
                 </h3>
                 <p class="product-text">Explore our latest and greatest products.</p>
@@ -112,7 +112,7 @@
     <section class="print-product-section py-5">
         <div class="container-fluid">
             <div class="row py-3">
-                <h3 class="product-heading text-capitalize fw-bold">
+                <h3 class="product-heading text-uppercase fw-bold">
                     Our Best Services
                 </h3>
                 <div class="print-product-cards py-1">
@@ -173,7 +173,7 @@
                         <span class="visually-hidden">Next</span>
                       </button>
                     </div> -->
-                    <h2 class="text-center">Customer Reviews</h2>
+                    <h2 class="text-center text-uppercase">Customer Reviews</h2>
                     <p class="text-center">Some introductory text about customer reviews.</p>
                 </div>
             </div>
@@ -221,7 +221,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="print-subscribe-content text-start">
-                    <h3 class="subscribe-heading fw-bold">
+                    <h3 class="subscribe-heading fw-bold text-uppercase">
                         Take action now to stay compliant. Grow your business without
                         tension.
                     </h3>

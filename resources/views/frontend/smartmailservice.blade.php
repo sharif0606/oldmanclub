@@ -7,8 +7,8 @@
             <div class="row">
                 <div class="col-md-6 pb-5">
                     <div class="left-content">
-                        <h2 class="fw-bold text-capitalize pb-2">{{$smartmailhero?->text_large}} </h2>
-                        <p class="text-capitalize fw-medium">{{$smartmailhero?->text_small}}</p>
+                        <h2 class="fw-bold text-uppercase pb-2">{{$smartmailhero?->text_large}} </h2>
+                        <p class="fw-medium">{{$smartmailhero?->text_small}}</p>
                        <div class="row py-3">
                             <div class="col-md-7">
                                 <form action="#">
@@ -32,7 +32,7 @@
 
 
     <section class="mail-works py-5">
-        <h2 class="text-center text-capitalize fw-bold py-5"> How does it work?</h2>
+        <h2 class="text-center text-uppercase fw-bold py-5"> How does it work?</h2>
         <div class="container">
             <div class="row text-center">
                 @foreach($smartworkservice as $smartwork)
@@ -58,8 +58,13 @@
                         <img src="{{asset('public/frontend/smartmailservice/white-shape.png')}}" alt="shape" class="w-100">
                     </div>
                     <div class="col-md-9 sign-up-text">
+<<<<<<< HEAD
                     <h2 class="text-capitalize pb-4 pt-2">Sign up for a virtual mail box</h2>
                     <a href="{{ route('contact_create') }}" class="btn smart-btn-contact-us fw-medium text-uppercase">Contact With Us</a>
+=======
+                    <h2 class=" pb-4 pt-2 text-uppercase">Sign up for a virtual mail box</h2>
+                    <button class="btn smart-btn-contact-us fw-medium text-uppercase">Contact With Us</button>
+>>>>>>> 66b64afa7ee90268d99fb0f21fa127bf965595c8
                     </div> 
                 </div>
             </div>
@@ -69,9 +74,9 @@
      <section class="sms py-5">
         <div class="container">
             <div class="row">
-                <h2 class="text-center text-capitalize fw-bold pt-3 pb-5">We have a SMS service</h2>
+                <h2 class="text-center text-uppercase fw-bold pt-3 pb-5">We have a SMS service</h2>
                 <div class="col-md-6 pt-5">
-                    <h3 class="px-2 text-capitalize">{{$smartsmsservice?->text_large}}</h3>
+                    <h3 class="px-2 text-uppercase">{{$smartsmsservice?->text_large}}</h3>
                    <p class="p-2">{{$smartsmsservice?->text_small}}</p>
                      <div class="d-inline">
                         <button type="submit" class="btn btn-view-plan mx-2 px-4 text-uppercase">View Plan</button>
@@ -89,12 +94,12 @@
      <section class="phonebook py-5 mb-5">
         <div class="container">
             <div class="row">
-                <h2 class="text-capitalize text-center fw-bold pt-3 pb-5">We have a PhoneBook Service</h2>
+                <h2 class="text-uppercase text-center fw-bold pt-3 pb-5">We have a PhoneBook Service</h2>
                 <div class="col-md-6 phonebook-image">
                     <img src="{{asset('public/uploads/smartmailservice/'.$smartphonebook?->image)}}" alt="PhoneBook Service" width="400px" class="h-100">
                 </div>
                 <div class="col-md-6 pt-5">
-                    <h3 class="text-capitalize px-2">{{$smartphonebook?->text_large}}</h3>
+                    <h3 class="text-uppercase px-2">{{$smartphonebook?->text_large}}</h3>
                     <p class="p-2">{{$smartphonebook?->text_small}}</p>
                     <div class="d-inline">
                         {{-- <button type="submit" class="btn btn-sign-up mx-2 px-4">Sign Up</button> --}}
