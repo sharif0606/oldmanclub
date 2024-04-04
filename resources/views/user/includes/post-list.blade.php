@@ -1,5 +1,5 @@
-@foreach ($post as $value )
 <div class="card">
+    @foreach ($post as $value )
     <!-- Card header START -->
     <div class="card-header border-0 pb-0">
         <div class="d-flex align-items-center justify-content-between">
@@ -291,5 +291,5 @@
         </a>
     </div> --}}
     <!-- Card footer END -->
+    @endforeach
 </div>
-@endforeach
