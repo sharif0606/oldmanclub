@@ -10061,6 +10061,10 @@ textarea.form-control-lg {
 .rounded-circle {
   border-radius: 50% !important;
 }
+.rounded-border-10 {
+  border-radius: 10% !important;
+}
+
 
 .rounded-pill {
   border-radius: var(--bs-border-radius-pill) !important;

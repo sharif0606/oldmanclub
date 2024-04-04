@@ -19,7 +19,7 @@
                     <img class="avatar-img rounded-circle border border-white border-3"
                         src="{{asset('public/uploads/client/' . $client->image)}}" alt="">
                     @else
-                    <img class="avatar-img rounded-circle border border-white border-3"
+                    <img class="avatar-img rounded-border-10 border border-white border-3"
                         src="{{asset('public/images/download.jpg')}}" alt="">
                     {{-- <img class="avatar-img rounded-circle border border-white border-3"
                         src="{{asset($client->image?$client->image:default_image())}}" alt=""> --}}
@@ -38,7 +38,7 @@
                 <p class="mb-1"><span>1.2M Followers</span><span class="mx-2" style="border-right: 2px solid #EFF2F6;"></span><span>2.5K Following</span></p>
                 <div class="w-100">
                   <!-- Connections START -->
-                  <ul class="avatar-group mt-1 list-unstyled align-items-sm-center">
+                  {{-- <ul class="avatar-group mt-1 list-unstyled align-items-sm-center">
                     <li class="avatar avatar-xxs">
                       <img class="avatar-img rounded-circle" src="{{ asset('public/user/assets/images/avatar/01.jpg')}}" alt="avatar">
                     </li>
@@ -69,7 +69,7 @@
                     {{-- <li class="small ms-3">
                       Carolyn Ortiz, Frances Guerrero, and 20 other shared connections
                     </li> --}}
-                  </ul>
+                  </ul> --}}
                   <!-- Connections END -->
                 </div>
             </div>
