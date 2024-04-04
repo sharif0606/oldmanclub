@@ -174,7 +174,7 @@ class ClientAuthentication extends Controller
           ]);
 
         Mail::send('email.forgetPassword', ['token' => $token], function($message) use($request){
-            $message->from('noreply@muktomart.com.bd', 'Old Man Club');
+            $message->from('oldclubman@quickpicker.xyz', 'Old Man Club');
             $message->to($request->email);
             $message->subject('Reset Password');
         });
