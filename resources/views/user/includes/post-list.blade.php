@@ -56,7 +56,8 @@
     </div>
     <!-- Card header END -->
     <!-- Card body START -->
-    <div class="card-body post-border">
+    <div class="card-body">
+        <div class="post-border">
         <p>{{$value->message}}.</p>
         <!-- Card img -->
         @if($value->image)
@@ -274,6 +275,7 @@
             <!-- Comment item END -->
         </ul> --}}
         <!-- Comment wrap END -->
+        </div>
     </div>
     <!-- Card body END -->
     <!-- Card footer START -->
