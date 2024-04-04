@@ -19,7 +19,7 @@
                     <img class="avatar-img rounded-circle border border-white border-3"
                         src="{{asset('public/uploads/client/' . $client->image)}}" alt="">
                     @else
-                    <img class="avatar-img rounded-circle border border-white border-3"
+                    <img class="avatar-img rounded-border-10 border border-white border-3"
                         src="{{asset('public/images/download.jpg')}}" alt="">
                     {{-- <img class="avatar-img rounded-circle border border-white border-3"
                         src="{{asset($client->image?$client->image:default_image())}}" alt=""> --}}
@@ -38,7 +38,7 @@
                 <p class="mb-1"><span>1.2M Followers</span><span class="mx-2" style="border-right: 2px solid #EFF2F6;"></span><span>2.5K Following</span></p>
                 <div class="w-100">
                   <!-- Connections START -->
-                  <ul class="avatar-group mt-1 list-unstyled align-items-sm-center">
+                  {{-- <ul class="avatar-group mt-1 list-unstyled align-items-sm-center">
                     <li class="avatar avatar-xxs">
                       <img class="avatar-img rounded-circle" src="{{ asset('public/user/assets/images/avatar/01.jpg')}}" alt="avatar">
                     </li>
@@ -69,16 +69,17 @@
                     {{-- <li class="small ms-3">
                       Carolyn Ortiz, Frances Guerrero, and 20 other shared connections
                     </li> --}}
-                  </ul>
+                  </ul> --}}
                   <!-- Connections END -->
                 </div>
             </div>
             <!-- Button -->
             <div class="d-flex mt-3 justify-content-center ms-sm-auto">
-                <a class="btn btn-primary me-2" href="{{route('accountSetting')}}" style="padding: 8px 12px;font-size:12px"> <i
-                        class="bi bi-pencil-fill pe-1"></i>Edit</a>
+              
                 <a class="btn btn-primary me-2" href="" style="padding: 8px 12px;font-size:12px"> <i
-                            class="bi bi-tools pe-1"></i>View Tools</a>
+                            class="bi bi-tools pe-1"></i>View As</a>
+                <a class="btn btn-primary me-2" href="{{route('accountSetting')}}" style="padding: 8px 12px;font-size:12px"> <i
+                                class="bi bi-pencil-fill pe-1"></i>Edit Profile</a>
                 <a class="btn btn-primary me-2" href="" style="padding: 8px 12px;font-size:12px"> <i
                                 class="bi bi-megaphone pe-1"></i>Promote Profile</a>
                 <div class="dropdown">
