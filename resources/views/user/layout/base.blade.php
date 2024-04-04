@@ -114,11 +114,6 @@
     .btn-primary-soft{
         font-size: 0.8rem;
     }
-    .post-border{
-        border: 2px solid #905cb1;
-        border-radius:10px;
-        margin: 10px 24px;
-    }
 </style>   
  @stack('styles')
 </head>

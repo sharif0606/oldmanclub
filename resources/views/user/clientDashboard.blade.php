@@ -24,6 +24,7 @@
                                 <!-- Card body START -->
                                 <div class="card-body position-relative pt-0">
                                     <p>{{ $client->tagline }}</p>
+                                    <hr>
                                     <!-- Date time -->
                                     <ul class="list-unstyled mt-3 mb-0">
                                         <li class="mb-2"><i class="bi bi-calendar2-plus pe-1"></i>
@@ -337,7 +338,7 @@
                     </div>
                 </div>
                 <!-- Right sidebar END -->
-                <div class="col-lg-8 vstack">
+                <div class="col-lg-8 vstack gap-2">
                     <!-- Share feed START -->
                     <div class="card card-body">
                         <div class="d-flex mb-3">
