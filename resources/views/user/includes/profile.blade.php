@@ -75,13 +75,6 @@
             </div>
             <!-- Button -->
             <div class="d-flex mt-3 justify-content-center ms-sm-auto">
-              
-                <a class="btn btn-primary me-2" href="" style="padding: 8px 12px;font-size:12px"> <i
-                            class="bi bi-tools pe-1"></i>View As</a>
-                <a class="btn btn-primary me-2" href="{{route('accountSetting')}}" style="padding: 8px 12px;font-size:12px"> <i
-                                class="bi bi-pencil-fill pe-1"></i>Edit Profile</a>
-                <a class="btn btn-primary me-2" href="" style="padding: 8px 12px;font-size:12px"> <i
-                                class="bi bi-megaphone pe-1"></i>Promote Profile</a>
                 <div class="dropdown">
                     <!-- Card share action menu -->
                     <button class="icon-md btn btn-light" type="button" id="profileAction2"
@@ -91,18 +84,14 @@
                     <!-- Card share action dropdown menu -->
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileAction2">
                         <li><a class="dropdown-item" href="#"> <i
-                                    class="bi bi-bookmark fa-fw pe-2"></i>Share profile in a message</a>
+                                    class="bi bi-bookmark fa-fw pe-2"></i>View As</a>
                         </li>
-                        <li><a class="dropdown-item" href="#"> <i
-                                    class="bi bi-file-earmark-pdf fa-fw pe-2"></i>Save your profile to
-                                PDF</a></li>
-                        <li><a class="dropdown-item" href="#"> <i
-                                    class="bi bi-lock fa-fw pe-2"></i>Lock profile</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
+                        <li><a class="dropdown-item" href="{{route('accountSetting')}}"> <i
+                            class="bi bi-bookmark fa-fw pe-2"></i>Edit Profile</a>
                         </li>
-                        <li><a class="dropdown-item" href="#"> <i
-                                    class="bi bi-gear fa-fw pe-2"></i>Profile settings</a></li>
+                        <li><a class="dropdown-item" href="{{route('accountSetting')}}"> <i
+                            class="bi bi-bookmark fa-fw pe-2"></i>Promote Profile</a>
+                        </li>
                     </ul>
                 </div>
             </div>
