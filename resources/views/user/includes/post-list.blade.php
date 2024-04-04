@@ -1,5 +1,5 @@
-<div class="card mt-2">
-    @foreach ($post as $value )
+@foreach ($post as $value )
+<div class="card">
     <!-- Card header START -->
     <div class="card-header border-0 pb-0">
         <div class="d-flex align-items-center justify-content-between">
@@ -56,7 +56,7 @@
     </div>
     <!-- Card header END -->
     <!-- Card body START -->
-    <div class="card-body post-border">
+    <div class="card-body">
         <p>{{$value->message}}.</p>
         <!-- Card img -->
         @if($value->image)
@@ -291,5 +291,5 @@
         </a>
     </div> --}}
     <!-- Card footer END -->
-    @endforeach
 </div>
+@endforeach
