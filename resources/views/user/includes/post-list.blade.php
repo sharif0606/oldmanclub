@@ -61,7 +61,9 @@
 
         <p>{{$value->message}}.</p>
         <!-- Card img -->
+        @if($value->image)
         <img class="card-img" src="{{asset('public/uploads/post/' . $value->image)}}" alt="Post">
+        @endif
         {{-- <img class="card-img" src="assets/images/post/3by2/01.jpg" alt="Post"> --}}
         <!-- Feed react START -->
         {{-- <ul class="nav nav-stack py-3 small">
