@@ -97,7 +97,7 @@
             </div>
         </div>
         <!-- List profile -->
-        <ul class="list-inline mb-0 text-center text-sm-start mt-3 mt-sm-0">
+        {{-- <ul class="list-inline mb-0 text-center text-sm-start mt-3 mt-sm-0">
             <li class="my-1"><i class="bi bi-calendar2-plus me-1"></i>
                 Joined on {{ $client->created_at->format('d M,Y')}}
             </li>
@@ -117,7 +117,7 @@
                 Form {{$client->fromcountry?->name}}@if($client->current_city_id), {{$client->fromstate?->name}} @endif
             </li>
             @endif
-        </ul>
+        </ul> --}}
     </div>
     <!-- Card body END -->
     @include('user/includes/navigation')
