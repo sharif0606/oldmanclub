@@ -39,6 +39,7 @@
                                             <i class="bi bi-geo-alt pe-1"></i>
                                             Lives In {{$client->currentcountry?->name}}@if($client->current_city_id), {{$client->currentstate?->name}} @endif
                                         </li>
+                                        @endif
                                         {{-- <li class="mb-2"> <i class="bi bi-calendar-date fa-fw pe-1"></i> Born:
                                             <strong>{{ \Carbon\Carbon::parse($client->dob)->format('M-d-Y') }}</strong>
                                         </li>
