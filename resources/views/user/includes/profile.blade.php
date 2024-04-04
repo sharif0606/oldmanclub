@@ -75,10 +75,11 @@
             </div>
             <!-- Button -->
             <div class="d-flex mt-3 justify-content-center ms-sm-auto">
-                <a class="btn btn-primary me-2" href="{{route('accountSetting')}}" style="padding: 8px 12px;font-size:12px"> <i
-                        class="bi bi-pencil-fill pe-1"></i>Edit</a>
+              
                 <a class="btn btn-primary me-2" href="" style="padding: 8px 12px;font-size:12px"> <i
-                            class="bi bi-tools pe-1"></i>View Tools</a>
+                            class="bi bi-tools pe-1"></i>View As</a>
+                <a class="btn btn-primary me-2" href="{{route('accountSetting')}}" style="padding: 8px 12px;font-size:12px"> <i
+                                class="bi bi-pencil-fill pe-1"></i>Edit Profile</a>
                 <a class="btn btn-primary me-2" href="" style="padding: 8px 12px;font-size:12px"> <i
                                 class="bi bi-megaphone pe-1"></i>Promote Profile</a>
                 <div class="dropdown">
