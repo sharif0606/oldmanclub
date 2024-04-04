@@ -117,7 +117,7 @@
     .post-border{
         border: 2px solid #905cb1;
         border-radius:10px;
-        padding:25px 10px;
+        margin: 10px 24px;
     }
 </style>   
  @stack('styles')
