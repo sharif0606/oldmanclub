@@ -26,7 +26,7 @@
                                 </div>
                                 <!-- Card body START -->
                                 <div class="card-body position-relative pt-0">
-                                    <p>{{$client->tagline}}</p>
+                                    <p>{{ $client->tagline }}</p>
                                     <!-- Date time -->
                                     <ul class="list-unstyled mt-3 mb-0">
                                         <li class="mb-2"> <i class="bi bi-calendar-date fa-fw pe-1"></i> Born:
@@ -208,7 +208,8 @@
                                                 <div class="card-body p-2 pb-0">
                                                     <div class="avatar avatar-story avatar-xl">
                                                         <a href="#!"><img class="avatar-img rounded-circle"
-                                                                src="{{ asset('public/user/assets/images/avatar/02.jpg')}}" alt=""></a>
+                                                                src="{{ asset('public/user/assets/images/avatar/02.jpg') }}"
+                                                                alt=""></a>
                                                     </div>
                                                     <h6 class="card-title mb-1 mt-3"> <a href="#!"> Amanda Reed </a>
                                                     </h6>
@@ -236,7 +237,8 @@
                                                 <div class="card-body p-2 pb-0">
                                                     <div class="avatar avatar-xl">
                                                         <a href="#!"><img class="avatar-img rounded-circle"
-                                                                src="{{ asset('public/user/assets/images/avatar/03.jpg')}}" alt=""></a>
+                                                                src="{{ asset('public/user/assets/images/avatar/03.jpg') }}"
+                                                                alt=""></a>
                                                     </div>
                                                     <h6 class="card-title mb-1 mt-3"> <a href="#!"> Samuel Bishop
                                                         </a></h6>
@@ -264,7 +266,8 @@
                                                 <div class="card-body p-2 pb-0">
                                                     <div class="avatar avatar-xl">
                                                         <a href="#!"><img class="avatar-img rounded-circle"
-                                                                src="{{ asset('public/user/assets/images/avatar/04.jpg')}}" alt=""></a>
+                                                                src="{{ asset('public/user/assets/images/avatar/04.jpg') }}"
+                                                                alt=""></a>
                                                     </div>
                                                     <h6 class="card-title mb-1 mt-3"> <a href="#"> Bryan Knight </a>
                                                     </h6>
@@ -292,7 +295,8 @@
                                                 <div class="card-body p-2 pb-0">
                                                     <div class="avatar avatar-xl">
                                                         <a href="#!"><img class="avatar-img rounded-circle"
-                                                                src="{{ asset('public/user/assets/images/avatar/05.jpg')}}" alt=""></a>
+                                                                src="{{ asset('public/user/assets/images/avatar/05.jpg') }}"
+                                                                alt=""></a>
                                                     </div>
                                                     <h6 class="card-title mb-1 mt-3"> <a href="#!"> Amanda Reed </a>
                                                     </h6>
@@ -323,7 +327,7 @@
 
                 </div>
                 <!-- Right sidebar END -->
-                <div class="col-lg-8 gap-4">
+                <div class="col-lg-8 vstack gap-4">
                     <!-- Share feed START -->
                     <div class="card card-body">
                         <div class="d-flex mb-3">
@@ -348,8 +352,8 @@
                             </form>
                         </div>
                         <!-- Share feed toolbar START -->
-                        <ul class="nav nav-pills nav-stack small fw-normal">
-                            {{--<li class="nav-item">
+                        {{-- <ul class="nav nav-pills nav-stack small fw-normal">
+                            <li class="nav-item">
                                 <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal"
                                     data-bs-target="#feedActionPhoto"> <i
                                         class="bi bi-image-fill text-success pe-2"></i>Photo</a>
@@ -386,18 +390,18 @@
                                             <li><a class="dropdown-item" href="#"> <i
                                                         class="bi bi-pencil-square fa-fw pe-2"></i>Help</a></li>
                                         </ul>
-                                    </li> --}}
-            </ul>
-            <!-- Share feed toolbar END -->
-        </div>
-        <!-- Share feed END -->
+                                    </li> 
+            </ul> --}}
+                        <!-- Share feed toolbar END -->
+                    </div>
+                    <!-- Share feed END -->
 
-        <!-- Card feed item START -->
-        @include('user.includes.post-list')
-        <!-- Card feed item END -->
+                    <!-- Card feed item START -->
+                    @include('user.includes.post-list')
+                    <!-- Card feed item END -->
 
-        <!-- Card feed item START -->
-        {{-- <div class="card">
+                    <!-- Card feed item START -->
+                    {{-- <div class="card">
                 <div class="border-bottom">
                     <p class="small mb-0 px-4 py-2"><i class="bi bi-heart-fill text-danger pe-1"></i>Sam Lanson
                         likes this post</p>

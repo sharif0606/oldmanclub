@@ -1,4 +1,4 @@
-<div class="card mt-3">
+<div class="card mt-2">
     <!-- Card header START -->
      @foreach ($post as $value )
     <div class="card-header border-0 pb-0">
