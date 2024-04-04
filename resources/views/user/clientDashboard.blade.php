@@ -321,10 +321,9 @@
                         </div>
                         <!-- Card END -->
                     </div>
-
                 </div>
                 <!-- Right sidebar END -->
-                <div class="col-lg-8 vstack gap-4">
+                <div class="col-lg-8 vstack gap-2">
                     <!-- Share feed START -->
                     <div class="card card-body">
                         <div class="d-flex mb-3">
@@ -397,9 +396,7 @@
                     @include('user.includes.post-list')
                     <!-- Card feed item END -->
 
-
-                </div>
-                <!-- Main content END -->
+                </div><!-- Main content END -->
             </div> <!-- Row END -->
         </div>
         <!-- Container END -->
