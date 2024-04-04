@@ -57,7 +57,7 @@
     <!-- Card header END -->
     <!-- Card body START -->
     <div class="card-body">
-        <p style="border: 1px solid #2F0549;border-radius:4px">{{$value->message}}.</p>
+        <p style="border: 1px solid #905cb1;border-radius:4px;padding:4px;">{{$value->message}}.</p>
         <!-- Card img -->
         @if($value->image)
         <img class="card-img" src="{{asset('public/uploads/post/' . $value->image)}}" alt="Post">
