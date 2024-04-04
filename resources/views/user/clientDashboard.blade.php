@@ -323,7 +323,7 @@
                     </div>
                 </div>
                 <!-- Right sidebar END -->
-                <div class="col-lg-8 vstack gap-2">
+                <div class="col-lg-8 vstack">
                     <!-- Share feed START -->
                     <div class="card card-body">
                         <div class="d-flex mb-3">
