@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card mt-2">
     @foreach ($post as $value )
     <!-- Card header START -->
     <div class="card-header border-0 pb-0">
@@ -57,7 +57,7 @@
     <!-- Card header END -->
     <!-- Card body START -->
     <div class="card-body">
-        <p>{{$value->message}}.</p>
+        <p style="border: 1px solid #2F0549;border-radius:4px">{{$value->message}}.</p>
         <!-- Card img -->
         @if($value->image)
         <img class="card-img" src="{{asset('public/uploads/post/' . $value->image)}}" alt="Post">
