@@ -23,7 +23,7 @@
                                 </div>
                                 <!-- Card body START -->
                                 <div class="card-body position-relative pt-0">
-                                    <p>{{ $client->tagline }}</p>
+                                    <p class="text-center">{{ $client->tagline }}</p>
                                     <hr>
                                     <!-- Date time -->
                                     <ul class="list-unstyled mt-3 mb-0">
