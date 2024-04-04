@@ -18,7 +18,7 @@
                         <div class="col-md-6 col-lg-12">
                             <div class="card">
                                 <div class="card-header border-0 pb-0">
-                                    <h5 class="card-title">INTRO</h5>
+                                    {{-- <h5 class="card-title">INTRO</h5> --}}
                                     <!-- Button modal -->
                                 </div>
                                 <!-- Card body START -->
@@ -26,7 +26,20 @@
                                     <p>{{ $client->tagline }}</p>
                                     <!-- Date time -->
                                     <ul class="list-unstyled mt-3 mb-0">
-                                        <li class="mb-2"> <i class="bi bi-calendar-date fa-fw pe-1"></i> Born:
+                                        <li class="mb-2"><i class="bi bi-calendar2-plus pe-1"></i>
+                                            Joined on {{ $client->created_at->format('d M,Y')}}
+                                        </li>
+                                        @if ($client->designation)
+                                        <li class="mb-2"><i class="bi bi-briefcase-fill pe-1"></i>
+                                            {{$client->designation}}
+                                        </li>
+                                        @endif
+                                        @if ($client->current_country_id)
+                                        <li class="mb-2">
+                                            <i class="bi bi-geo-alt pe-1"></i>
+                                            Lives In {{$client->currentcountry?->name}}@if($client->current_city_id), {{$client->currentstate?->name}} @endif
+                                        </li>
+                                        {{-- <li class="mb-2"> <i class="bi bi-calendar-date fa-fw pe-1"></i> Born:
                                             <strong>{{ \Carbon\Carbon::parse($client->dob)->format('M-d-Y') }}</strong>
                                         </li>
                                         <li class="mb-2"> <i class="bi bi-heart fa-fw pe-1"></i> Status: <strong> Single
@@ -46,7 +59,7 @@
                                                 {{ $client->address_line_1 }}
                                             </strong>
                                         </li>
-                                        {{-- <li class="mb-2">
+                                        <li class="mb-2">
                                             <i class="bi bi-card-text fa-fw pe-1"></i> ID NO: <strong> {{ $client->id_no }}
                                             </strong>
                                         </li> --}}
