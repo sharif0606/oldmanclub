@@ -16,7 +16,7 @@
                 <!-- Avatar -->
                 <div class="avatar avatar-xxl mt-n5 mb-3">
                     @if($client->image)
-                    <img class="avatar-img rounded-circle border border-white border-3"
+                    <img class="avatar-img rounded-border-10 border border-white border-3"
                         src="{{asset('public/uploads/client/' . $client->image)}}" alt="">
                     @else
                     <img class="avatar-img rounded-border-10 border border-white border-3"
@@ -66,9 +66,9 @@
                     <li class="avatar avatar-xxs">
                       <div class="avatar-img rounded-circle bg-primary"><span class="smaller text-white position-absolute top-50 start-50 translate-middle">+2</span></div>
                     </li>
-                    {{-- <li class="small ms-3">
+                    <li class="small ms-3">
                       Carolyn Ortiz, Frances Guerrero, and 20 other shared connections
-                    </li> --}}
+                    </li>
                   </ul> --}}
                   <!-- Connections END -->
                 </div>
