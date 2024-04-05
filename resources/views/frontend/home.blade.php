@@ -97,7 +97,7 @@
             {{-- <div class="container"> --}}
                 <div class="col-md-12">
                     <a href="">
-                        <img src="{{asset('public/uploads/homepage/'.$homepage?->special_offer_image)}}" alt="" class="w-100 img-fluid">
+                        <img src="{{asset('public/uploads/homepage/'.$homepage?->special_offer_image)}}" alt="" class="" width="100%" height="300px">
                     </a>
                 </div>
             {{-- </div> --}}
@@ -188,7 +188,7 @@
                                     <p class="card-text">Stay with us and find the thrill.</p>
                                 </div>
                                 <div class="col-md-4 text-end">
-                                    <a href="#" class="btn btn-primary w-100">Subscribe Now</a>
+                                    <a href="#" class="btn btn-primary w-100 text-uppercase" style="background-color:#66298b;">Subscribe Now</a>
                                 </div>
                             </div>
                         </div>

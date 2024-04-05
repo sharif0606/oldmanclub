@@ -137,9 +137,9 @@
     <script>
         $(document).ready(function(){
             $('.testimonial-slider').slick({
-                // infinite: true,
+                infinite: true,
                 slidesToShow: 3, // Show three testimonials at a time
-                slidesToScroll: 2, // Scroll one testimonial at a time
+                slidesToScroll: 3, // Scroll one testimonial at a time
                 arrows: true,
                 dots: true,
                 autoplay: true,
