@@ -20,7 +20,7 @@
         </div>
         <div class="row py-4">
             <div class="col-md-12">
-                <h2 class="text-capitalize fw-bold text-center py-3 text-uppercase">Trusted By</h2>
+                <h2 class="fw-bold text-center py-3 text-uppercase">Trusted By</h2>
                 <img src="{{ asset('public/frontend/assets/image/Sponsored.png') }}" alt="" />
             </div>
         </div>

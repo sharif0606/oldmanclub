@@ -191,7 +191,7 @@ class ClientAuthentication extends Controller
               'password' => 'required|string|confirmed'/*min:6|*/,
               'password_confirmation' => 'required'
           ]);
-  
+ 
           $updatePassword = DB::table('password_resets')
                               ->where([
                                 'email' => $request->email, 

@@ -40,7 +40,7 @@
                             <form action="{{ route('sms_store') }}" method="post" class="row">
                                 @csrf
                                 <div class="form-group">
-                                    <select name="purchase_id" id="" class="form-control mb-3">
+                                    <select name="purchase_id" id="" class="form-control mb-3" required>
                                         <option value="">Select Package</option>
                                         @forelse($purchase as $p)
                                             <option value="{{ $p->id }}">{{ $p->package?->title }}<span class="">(remaining sms:{{ $p->number_of_sms }}) </span></option>
