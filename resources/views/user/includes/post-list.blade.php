@@ -42,6 +42,8 @@
                     <li><a class="dropdown-item" href="#"> <i
                                 class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
                     <li><a class="dropdown-item" href="#"> <i
+                                    class="bi bi-pencil-square fa-fw pe-2"></i>Edit post</a></li>
+                    <li><a class="dropdown-item" href="#"> <i
                                 class="bi bi-person-x fa-fw pe-2"></i>Unfollow lori ferguson </a>
                     </li>
                     <li><a class="dropdown-item" href="#"> <i
