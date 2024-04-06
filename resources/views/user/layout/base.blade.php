@@ -1185,6 +1185,15 @@ JS libraries, plugins and custom scripts -->
                 }
             });
         }
+
+        /*=== Edit Post  ===*/
+         // Handle click event for edit post dropdown item
+    $(".edit-post").click(function(event) {
+        // Prevent the default action of the link
+        event.preventDefault();
+        // Open the edit post modal
+        $('#editPostModal').modal('show');
+    });
     });
 </script>
     <!-- Bootstrap JS -->
