@@ -15,12 +15,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
             integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
         <link href="{{asset('public/css/style.css')}}" rel="stylesheet">
         <script src="{{ asset('js/app.js') }}" defer></script>
         @stack('styles')
-
-
     </head>
 
     <body>
@@ -184,6 +181,12 @@
                             <a class="has-arrow" href="{{route('order_list')}}" aria-expanded="false">
                                 <i class="fa-solid fa-table-list"></i>
                                 <span class="nav-text">Order List</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="{{route('contact_list')}}" aria-expanded="false">
+                                <i class="fa-solid fa-table-list"></i>
+                                <span class="nav-text">Contact List</span>
                             </a>
                         </li>
                         <li>
@@ -384,21 +387,16 @@
 
         <!-- Owl Carousel -->
         <script src="{{asset('public/vendor/owl-carousel/js/owl.carousel.min.js')}}"></script>
-
         <!-- Counter Up -->
         <script src="{{asset('public/vendor/jqvmap/js/jquery.vmap.min.js')}}"></script>
         <script src="{{asset('public/vendor/jqvmap/js/jquery.vmap.usa.js')}}"></script>
         <script src="{{asset('public/vendor/jquery.counterup/jquery.counterup.min.js')}}"></script>
-
-
         <script src="{{asset('public/js/dashboard/dashboard-1.js')}}"></script>
         @stack('scripts')
         <!-- Init JavaScript -->
         <script src="{{asset('public/dist/js/init.js')}}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" />
+        
          <script src="{{ asset('js/app.js') }}"></script>
-        {!! Toastr::message() !!}
     </body>
 
 </html>

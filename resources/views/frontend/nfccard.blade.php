@@ -94,7 +94,7 @@
                 </div>
             </div>
             <div class="col-md-6 subscribe-btn text-center">
-                <a href="#" class="btn btn-primary contact-us-btn px-5 py-2">Contact Us</a>
+                <a href="{{ route('contact_create') }}" class="btn btn-primary contact-us-btn px-5 py-2 text-uppercase">Contact Us</a>
             </div>
         </div>
    </div>

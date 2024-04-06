@@ -60,60 +60,57 @@
                 </div>
             </div>
             <div class="col-md-10 offset-md-1">  
-                    <div class="row gx-1 pt-2">
-                        @forelse($services as $value)
-                        <div class="col-md-4 mb-3">
-                            <a href="{{$value->link}}" class="card-link service">
-                                <div class="card fixed-size-card">
-                                    <img src="{{asset('public/uploads/ourservices/'.$value->image)}}" class="card-img-top" alt="Product Shipping Service">
-                                    <div class="card-body ">
-                                        <p class="card-text text-decoration-none">
-                                            {{$value->title}}    
-                                        </p>
-                                    </div>
+                <div class="row gx-1 pt-2">
+                    @forelse($services as $value)
+                    <div class="col-md-4 mb-3">
+                        <a href="{{$value->link}}" class="card-link service">
+                            <div class="card fixed-size-card">
+                                <img src="{{asset('public/uploads/ourservices/'.$value->image)}}" class="card-img-top" alt="Product Shipping Service">
+                                <div class="card-body ">
+                                    <p class="card-text text-decoration-none">
+                                        {{$value->title}}    
+                                    </p>
                                 </div>
-                            </a>                               
-                        </div>
-                       
-                        @empty
-                        <h1>No Service Found</h1>
-                        @endforelse
+                            </div>
+                        </a>                               
                     </div>
-                    <div class="text-center mt-4">
-                        <button type="button" class="btn btn-primary rounded-pill shadow-lg" style="background-color:#66298b;">Browse All Categories <i class="fa-solid fa-arrow-right"></i></button>
-                    </div>
+                    @empty
+                    <h1>No Service Found</h1>
+                    @endforelse
+                </div>
+                <div class="text-center mt-4">
+                    <button type="button" class="btn btn-primary rounded-pill shadow-lg" style="background-color:#66298b;">Browse All Categories <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
-        
+        </div>
     </div>
     <!-- Our Service section end -->
 
     <!-- Special offer start -->
-    <div class="container mt-5 special-offers">
+    <div class="container mt-5">
         <div class="row">
-        <div class="col-md-12 text-center">
-            <h2 class="py-5">SPECIAL OFFERS</h2>
-            <p class="px-5">{{$homepage?->special_offer_text}}
-            </p>
-        </div>
-        <div class="container">
-            <div class="col-md-12 credit-card">
-                <a href="">
-                    <img src="{{asset('public/uploads/homepage/'.$homepage?->special_offer_image)}}" alt="" class="w-100 img-fluid">
-                </a>
+            <div class="col-md-12 text-center">
+                <h2 class="">SPECIAL OFFERS</h2>
+                <p class="px-5">{{$homepage?->special_offer_text}}
+                </p>
             </div>
-        </div>
+            {{-- <div class="container"> --}}
+                <div class="col-md-12">
+                    <a href="">
+                        <img src="{{asset('public/uploads/homepage/'.$homepage?->special_offer_image)}}" alt="" class="" width="100%" height="300px">
+                    </a>
+                </div>
+            {{-- </div> --}}
         </div>
     </div>
     <!-- Special offer end -->
-
     <!-- Global Network start -->
     <section class="global-network">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
                     <h2 py-5>HUGE GLOBAL NETWORK</h2>
-                    <p class="p-5">{{$homepage?->global_network_text}}
+                    <p class="">{{$homepage?->global_network_text}}
                     </p>
                     <img src="{{asset('public/uploads/homepage/'.$homepage?->global_network_image)}}" alt="Huge Global Network" class="w-100 img-fluid py-3">
                 </div>
@@ -126,7 +123,7 @@
     <!-- Global Network end -->
     <!-- Testimonial section starts -->
     <div class="container mb-5 happy">
-        <div class="row">
+        <div class="row gx-2">
             <div class="col-md-12 text-center">
                 <section class="happy-customer">
                     <h2>TRUSTED BY THOUSANDS OF HAPPY CUSTOMER</h2>
@@ -134,35 +131,37 @@
                     <div class="testimonial-slider">
                         <!-- Testimonial 1 -->
                         @foreach($feedback as $value)
-                        <div class="card testimonial-item">
-                            <div class="card-body ">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="customer-info">
-                                            <img src="{{asset('public/uploads/client/'.$value->client?->image)}}" alt="Customer 1" class="rounded-circle customer-image" width="50px">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="customer-details">
-                                            <p class="fw-bold">
-                                                {{$value->client?->fname}}  
-                                                {{$value->client?->middle_name}}  
-                                                {{$value->client?->last_name}}  
-                                            </p>
-                                            <p>
-                                                {{$value->client?->address_line_1}}
-                                            </p>                                 
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="rating">
-                                                <span class="rating-number">{{$value->rate}}</span>
-                                                <span class="star-icon">&#9733;</span>
+                        <div class="col-sm-4">
+                            <div class="card testimonial-item">
+                                <div class="card-body h-100">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="customer-info">
+                                                <img src="{{asset('public/uploads/client/'.$value->client?->image)}}" alt="Customer 1" class="rounded-circle" width="100px">
                                             </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="customer-details">
+                                                <p class="fw-bold">
+                                                    {{$value->client?->fname}}  
+                                                    {{$value->client?->middle_name}}  
+                                                    {{$value->client?->last_name}}  
+                                                </p>
+                                                <p>
+                                                    {{$value->client?->address_line_1}}
+                                                </p>                                 
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="rating">
+                                                <span class="rating-number">{{$value->rate}}</span>
+                                                {{-- <span class="star-icon">&#9733;</span> --}}
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="customer-review">
-                                    <p>"{{$value->message}}"</p>
+                                    <div class="customer-review">
+                                        <p>"{{$value->message}}"</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -185,13 +184,11 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-8 text-start">
-                                    
                                     <h5 class="card-title">SUBSCRIBE NOW TO GET SPECIAL OFFERS</h5>
                                     <p class="card-text">Stay with us and find the thrill.</p>
                                 </div>
-                                <div class="col-md-4 text-center">
-                                    
-                                    <a href="#" class="btn btn-primary">Subscribe Now</a>
+                                <div class="col-md-4 text-end">
+                                    <a href="#" class="btn btn-primary w-100 text-uppercase" style="background-color:#66298b;">Subscribe Now</a>
                                 </div>
                             </div>
                         </div>

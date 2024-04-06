@@ -6,8 +6,8 @@
                 <div class="col-md-6">
                     <h1 class="fw-bold py-2">{{$heading?->text_large}}</h1>
                     <p class="fw-normal pt-1 pb-3">{{$heading?->text_small}}</p>
-                    <a href="#" class="btn contact-btn me-3">Contact Us</a>
-                    <a href="#" class="btn learn-more-btn">Learn More</a>
+                    <a href="{{route('contact_create')}}" class="btn contact-btn me-3 text-uppercase">Contact Us</a>
+                    <a href="#" class="btn learn-more-btn text-uppercase">Learn More</a>
                 </div>
                 <div class="col-md-6">
                      <img width="400px" height="450px" class="ms-3" src="{{asset('public/uploads/shipping/'.$heading?->header_image)}}" alt="Shipping Image">
@@ -141,7 +141,7 @@
                 <div class="col-md-10 help-text">
                     <h2>CAN I HELP?</h2>
                 <p>Our Team is waiting to hear from you.</p>
-                <button class="btn btn-info btn-contact fw-medium">Contact With Us</button>
+                <a href="{{ route('contact_create') }}" class="btn btn-info btn-contact fw-medium text-uppercase">Contact With Us</a>
                 </div> 
             </div>
         </div>

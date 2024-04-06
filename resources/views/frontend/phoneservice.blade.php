@@ -31,10 +31,7 @@
             </div>
         </div>
     </section>
-    <!-- phone hero end -->
-    <!-- phone service start -->
-    
-     <section class="phn-our-service">
+    <section class="phn-our-service">
         <div class="container">
             <div class="row">
                 <div class="col-md-5 phn-our-service-text">
@@ -108,15 +105,11 @@
                         </div>
                         @endforeach
                     </div>
-                </div>
-                       
+                </div>  
             </div>
         </div>
     </section>
     <!-- customre feedback end -->
-       
-
-
      <div class="container phn-subscribe-section mt-3">
         <div class="row">
             <div class="col-md-6">
@@ -126,12 +119,10 @@
                 </div>
             </div>
             <div class="col-md-6 phn-subscribe-btn text-start">
-                <a href="#" class="btn btn-primary phn-contact-us-btn px-5 py-2">Contact Us</a>
+                <a href="{{ route('contact_create') }}" class="btn btn-primary phn-contact-us-btn px-5 py-2 text-uppercase">Contact Us</a>
             </div>
         </div>
      </div>
-
-   
 @endsection
 @push('scripts')
 <script>

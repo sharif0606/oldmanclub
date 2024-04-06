@@ -12,7 +12,6 @@
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
     <link rel="stylesheet" href="{{asset('public/frontend/assets/styles.css')}}">
     @stack('styles')
 </head>
@@ -30,26 +29,31 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav mx-auto me-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a href="{{route('frontend')}}" class="nav-link">Home</a></li>
+                        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                            <li class="nav-item"><a href="{{route('frontend')}}" class="nav-link text-uppercase">Home</a></li>
                             
                             {{-- <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li> --}}
-                            <li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Service</a>
+                            <li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle text-uppercase" role="button" data-bs-toggle="dropdown">Service</a>
                                 <ul class="dropdown-menu" id="service-dropdown">
-                                    <li class="m-0 p-0"><a class="dropdown-item" href="{{route('shippingservice')}}">Product Shipping</a></li>
-                                    <li class="m-0 p-0"><a class="dropdown-item" href="{{route('nfccard')}}">NFC Card</a></li>
-                                    <li class="m-0 p-0"><a class="dropdown-item" href="{{route('printservice')}}">Printing Service</a></li>
-                                    <li class="m-0 p-0"><a class="dropdown-item" href="{{route('smartmailservice')}}">Smart Mail Service</a></li>
-                                    <li class="m-0 p-0"><a class="dropdown-item" href="{{route('llcservice')}}">LLC Service</a></li>
-                                    <li class="m-0 p-0"><a class="dropdown-item" href="{{route('phoneservice')}}">Phone Service</a></li>
+                                    <li class="m-0 p-0"><a class="dropdown-item text-uppercase" href="{{route('shippingservice')}}">Product Shipping</a></li>
+                                    <li class="m-0 p-0"><a class="dropdown-item text-uppercase" href="{{route('nfccard')}}">NFC Card</a></li>
+                                    <li class="m-0 p-0"><a class="dropdown-item text-uppercase" href="{{route('printservice')}}">Printing Service</a></li>
+                                    <li class="m-0 p-0"><a class="dropdown-item text-uppercase" href="{{route('smartmailservice')}}">Smart Mail Service</a></li>
+                                    <li class="m-0 p-0"><a class="dropdown-item text-uppercase" href="{{route('llcservice')}}">LLC Service</a></li>
+                                    <li class="m-0 p-0"><a class="dropdown-item text-uppercase" href="{{route('phoneservice')}}">Phone Service</a></li>
                                 </ul>
                             </li>
+
                             {{-- <li class="nav-item"><a href="#" class="nav-link">Testimonials</a></li> --}}
-                            <li class="nav-item"><a href="#" class="nav-link">Contact Us</a></li>
+                            <li class="nav-item"><a href="{{route("contact_create")}}" class="nav-link text-uppercase">Contact Us</a></li>
+
+                            {{-- <li class="nav-item"><a href="#" class="nav-link">Testimonials</a></li> --}}
+                            {{-- <li class="nav-item"><a href="#" class="nav-link">Contact Us</a></li> --}}
+
                         </ul>
                         <div class="navbar-right">
-                            <a href="{{route('clientlogin')}}" class="btn btn-link ps-0">Sign In</a>
-                            <a href="{{route('clientregister')}}" class="btn btn-outline-warning rounded-pill px-4 py-1 m-0 sign-up-btn">Sign Up</a>
+                            <a href="{{route('clientlogin')}}" class="btn btn-link ps-0 text-uppercase">Sign In</a>
+                            <a href="{{route('clientregister')}}" class="btn btn-outline-warning rounded-pill px-4 py-1 m-0 sign-up-btn text-uppercase">Sign Up</a>
                             <a href="{{route('cart_page')}}" class="cart-nav border-0 bg-transparent mx-3">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -77,11 +81,11 @@
                 <!-- 1st Column -->
                 <img src="{{asset('public/uploads/setting/'.$setting?->footer_logo)}}" alt="Logo" class="logo">
                 <p>{{$setting?->footer_text}}</p>
-                <div class="d-flex pt-3">
-                    <a class="btn btn-square btn-light rounded-circle me-2" href="{{$setting?->twitter_icon}}"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-square btn-light rounded-circle me-2" href="{{$setting?->facebook_icon}}"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-square btn-light rounded-circle me-2" href="{{$setting?->instagram_icon}}"><i  class="fa-brands fa-square-instagram"></i></a>
-                    <a class="btn btn-square btn-light rounded-circle me-2" href="{{$setting?->linkedln_icon}}"><i class="fab fa-linkedin-in"></i></a>
+                <div class="d-flex">
+                    <a class="btn btn-square social_icon rounded-circle p-2" href="{{$setting?->twitter_icon}}"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-square social_icon rounded-circle  p-2" href="{{$setting?->facebook_icon}}"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-square social_icon rounded-circle  p-2" href="{{$setting?->instagram_icon}}"><i class="bi bi-instagram"></i></a>
+                    <a class="btn btn-square social_icon rounded-circle  p-2" href="{{$setting?->linkedln_icon}}"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
 
@@ -133,26 +137,26 @@
     <script>
         $(document).ready(function(){
             $('.testimonial-slider').slick({
-               infinite: true,
-                slidesToShow: 3,
-                slidesToScroll: 2,
+                infinite: true,
+                slidesToShow: 3, // Show three testimonials at a time
+                slidesToScroll: 3, // Scroll one testimonial at a time
                 arrows: true,
                 dots: true,
-            //    autoplay: true,
-              autoplaySpeed: 2000,
-              responsive:[
+                autoplay: true,
+                autoplaySpeed: 2000,
+                responsive:[
                 {
                     breakpoint:600,
                     settings:{
-                        slidesToShow:1,
-                        slidesToScroll:2
+                        slidesToShow:3,
+                        slidesToScroll:1
                     }
                 },
                 {
                     breakpoint:768,
                     settings:{
-                        slidesToShow:1,
-                        slidesToScroll:2
+                        slidesToShow:3,
+                        slidesToScroll:1
                     }
                 }
               ]

@@ -20,6 +20,7 @@ use App\Http\Controllers\Backend\Admin\OrderController;
 use App\Http\Controllers\Backend\Admin\CompanyController;
 use App\Http\Controllers\Backend\Admin\BankController;
 use App\Http\Controllers\Backend\Admin\PostController;
+use App\Http\Controllers\Backend\Admin\ContactUserController as contact;
 
 // use App\Http\Controllers\Backend\PhoneBookController as phonebook;
 use App\Http\Controllers\Backend\Website\SettingController as setting;
@@ -161,6 +162,7 @@ Route::prefix('admin')->group(function () {
     Route::get('bank_edit/{id}',[BankController::class,'bank_edit'])->name('bank_edit');
     Route::post('bank_update/{id}',[BankController::class,'bank_update'])->name('bank_update');
     Route::get('post_list',[PostController::class,'post_list'])->name('post_list');
+    Route::get('contact/list',[contact::class,'contact_list'])->name('contact_list');
 
 
     //website
@@ -276,6 +278,8 @@ Route::get('llcservice', [frontend::class, 'llcservice'])->name('llcservice');
 Route::get('phoneservice', [frontend::class, 'phoneservice'])->name('phoneservice');
 Route::get('smartmailservice', [frontend::class, 'smartmailservice'])->name('smartmailservice');
 Route::get('printservice', [frontend::class, 'printservice'])->name('printservice');
+Route::get('contact/create', [frontend::class, 'contact_create'])->name('contact_create');
+Route::post('contact/create', [frontend::class, 'contact_store'])->name('contact_store');
 
 
 // cart
