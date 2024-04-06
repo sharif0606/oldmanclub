@@ -872,6 +872,7 @@
 
     <!-- Modal create Feed photo START -->
     @include('user.includes.add-post-photo')
+    @include('user.includes.edit-post')
     <div class="modal fade" id="feedActionPhoto" tabindex="-1" aria-labelledby="feedActionPhotoLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -1190,13 +1191,13 @@ JS libraries, plugins and custom scripts -->
         }
 
         /*=== Edit Post  ===*/
-         // Handle click event for edit post dropdown item
-    $(".edit-post").click(function(event) {
-        // Prevent the default action of the link
-        event.preventDefault();
-        // Open the edit post modal
-        $('#editPostModal').modal('show');
-    });
+        // Handle click event for edit post dropdown item
+        $(".edit-post").click(function(event) {
+            // Prevent the default action of the link
+            event.preventDefault();
+            // Open the edit post modal
+            $('#editPostModal').modal('show');
+        });
     });
 
 </script>
