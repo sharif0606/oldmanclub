@@ -26,7 +26,7 @@
                     </div>
                     {{-- <span class="nav-item mb-0 small"><i class="bi bi-briefcase-fill me-1"></i>{{$client->designation}}</span> --}}
                     @if ($client->current_country_id)
-                    <span class="nav-item mb-0 small"><i class="bi bi-geo-alt-fill me-1">{{$client->currentcountry?->name}}@if($client->current_city_id), {{$client->currentstate?->name}} @endif</span>
+                    <span class="nav-item mb-0 small"><i class="bi bi-geo-alt-fill me-1"></i>{{$client->currentcountry?->name}}@if($client->current_city_id), {{$client->currentstate?->name}} @endif</span>
                     @endif
                     <span class="nav-item small" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Public" data-bs-original-title="Public"> <i class="bi bi-globe"></i> </span>
                 </div>
