@@ -24,8 +24,8 @@
                             </a></h6>
                         <span class="nav-item small">{{$value->created_at->diffForHumans()}}</span>
                     </div>
-                    <p class="nav-item mb-0 small"><i class="bi bi-briefcase-fill me-1"></i>{{$client->designation}}</p>
-                        <span class="nav-item small" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Public" data-bs-original-title="Public"> <i class="bi bi-globe"></i> </span>
+                    <span class="nav-item mb-0 small"><i class="bi bi-briefcase-fill me-1"></i>{{$client->designation}}</span>
+                    <span class="nav-item small" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Public" data-bs-original-title="Public"> <i class="bi bi-globe"></i> </span>
                 </div>
             </div>
             <!-- Card feed action dropdown START -->
