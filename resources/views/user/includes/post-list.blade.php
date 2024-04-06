@@ -23,9 +23,9 @@
                         <h6 class="nav-item card-title mb-0"> <a href="#!">{{$client->fname}} {{$client->middle_name}} {{$client->last_name}}
                             </a></h6>
                         <span class="nav-item small">{{$value->created_at->diffForHumans()}}</span>
-                        <p class="nav-item mb-0 small"><i class="bi bi-briefcase-fill me-1"></i>{{$client->designation}}</p>
-                        <span class="nav-item small" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Public" data-bs-original-title="Public"> <i class="bi bi-globe"></i> </span>
                     </div>
+                    <p class="nav-item mb-0 small"><i class="bi bi-briefcase-fill me-1"></i>{{$client->designation}}</p>
+                        <span class="nav-item small" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Public" data-bs-original-title="Public"> <i class="bi bi-globe"></i> </span>
                 </div>
             </div>
             <!-- Card feed action dropdown START -->
