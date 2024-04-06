@@ -25,6 +25,7 @@
                         <span class="nav-item small">{{$value->created_at->diffForHumans()}}</span>
                     </div>
                     <p class="mb-0 small"><i class="bi bi-briefcase-fill me-1"></i>{{$client->designation}}</p>
+                    <span class="nav-item small" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Public" data-bs-original-title="Public"> <i class="bi bi-globe"></i> </span>
                 </div>
             </div>
             <!-- Card feed action dropdown START -->
@@ -64,7 +65,7 @@
         @endif
         {{-- <img class="card-img" src="assets/images/post/3by2/01.jpg" alt="Post"> --}}
         <!-- Feed react START -->
-        {{-- <ul class="nav nav-stack py-3 small">
+        <ul class="nav nav-stack py-3 small">
             <li class="nav-item">
                 <a class="nav-link active" href="#!" data-bs-container="body"
                     data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true"
@@ -102,7 +103,7 @@
                 </ul>
             </li>
             <!-- Card share action END -->
-        </ul> --}}
+        </ul>
         <!-- Feed react END -->
 
         <!-- Add comment -->
