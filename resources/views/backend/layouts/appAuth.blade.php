@@ -111,8 +111,7 @@ JS libraries, plugins and custom scripts -->
 
 <!-- Theme Functions -->
 <script src="{{ asset('public/user/assets/js/functions.js')}}"></script>
-  
->>>>>>> 66b64afa7ee90268d99fb0f21fa127bf965595c8
+
 </body>
 
 <!-- Mirrored from social.webestica.com/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 08 Mar 2024 13:01:13 GMT -->
