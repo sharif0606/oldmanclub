@@ -22,7 +22,7 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-white">
                 <div class="container">
                     <img src="{{asset('public/uploads/setting/'.$setting?->header_logo)}}" alt="Logo" class="logo">
-                    <h4 class="text company">{{$setting?->company_name}}</h4>
+                    <h4 class="text company pt-2">{{$setting?->company_name}}</h4>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                         aria-label="Toggle navigation">
@@ -80,8 +80,8 @@
             <div class="col-md-3 footer-column">
                 <!-- 1st Column -->
                 <img src="{{asset('public/uploads/setting/'.$setting?->footer_logo)}}" alt="Logo" class="logo">
-                <p>{{$setting?->footer_text}}</p>
-                <div class="d-flex">
+                <p class="mb-0">{{$setting?->footer_text}}</p>
+                <div class="d-flex mt-0">
                     <a class="btn btn-square social_icon rounded-circle p-2" href="{{$setting?->twitter_icon}}"><i class="fab fa-twitter"></i></a>
                     <a class="btn btn-square social_icon rounded-circle  p-2" href="{{$setting?->facebook_icon}}"><i class="fab fa-facebook-f"></i></a>
                     <a class="btn btn-square social_icon rounded-circle  p-2" href="{{$setting?->instagram_icon}}"><i class="bi bi-instagram"></i></a>

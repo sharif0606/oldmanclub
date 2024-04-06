@@ -221,7 +221,8 @@
         /* Set your desired fixed height for the image */
     }
     .social_icon:hover{
-        background-color: #fdb838 !important;
+        background-color: #5d1474 !important;
+        color: #f5ab0b;
     }
 /* Add hover effect with animation */
 .card.fixed-size-card {
@@ -297,8 +298,8 @@
     .footer {
         background-color: #F8F8F8;
         color: #4F5665;
-        padding: 20px 20px;
-        height: 345px;
+        /* padding: 20px 20px; */
+        height: 370px;
         z-index: 1;
         margin-top: -45px;
         /* Adjust the negative margin to intersect the footer in half */
