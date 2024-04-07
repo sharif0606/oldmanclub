@@ -14,7 +14,7 @@
                             <p>{{$s->text_small}}</p>
                             <a href="{{$s->link}}" class="btn btn-warning px-5 py-2 mt-4">Get Started</a>
                         </div>
-                        <div class="col-md-7 col-sm-6 slider-image">
+                        <div class="col-md-7 col-sm-6 slider-image d-none d-sm-block">
                                 <img src="{{asset('public/uploads/slider/'.$s->image)}}" alt="Slider Image 1" class="img-fluid">
                         </div>
                     </div>

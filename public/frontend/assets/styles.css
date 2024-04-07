@@ -162,7 +162,7 @@
 
     .slider-image {
         float: right;
-        margin-top: -261px;
+        margin-top: -202px;
         position: relative;
         margin-right: -60px;
         height: auto;
@@ -176,6 +176,13 @@
     /* Our service starts */
     .card-group {
         display: flex;
+        /* justify-content: center;
+        align-items: center; */
+    }
+    @media (max-width: 576px) {
+        .card-group {
+            margin-left: -29px;
+        }
     }
 
     .service .card {
@@ -392,7 +399,12 @@
         list-style: none;
         text-align: left;
     }
-
+    @media (max-width: 576px) {
+        .hero-section .slick-dots {
+            display: none;
+        }
+    }
+    
     .hero-section .slick-dots li {
         position: relative;
         display: inline-block;
