@@ -1192,8 +1192,27 @@ JS libraries, plugins and custom scripts -->
         $(".edit-post").click(function(event) {
             // Prevent the default action of the link
             event.preventDefault();
-            // Open the edit post modal
-            $('#editPostModal').modal('show');
+            // Get the post ID from data attribute
+            var postId = $(this).data('post-id');
+            // AJAX request to fetch edit form data
+            $.ajax({
+                url: '/posts/' + postId + '/edit',
+                type: 'GET',
+                success: function(data) {
+                    // Populate the modal with fetched data
+                    $('#editMessage').val(data.message);
+                    $('#editPrivacy').val(data.privacy);
+                    
+                    // Open the edit post modal
+                    $('#editPostModal').modal('show');
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    console.error(error);
+                    // Display error message to the user
+                    alert("Error: " + error);
+                }
+            });
         });
     });
 </script>
