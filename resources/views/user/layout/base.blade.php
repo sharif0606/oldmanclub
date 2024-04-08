@@ -1196,7 +1196,7 @@ JS libraries, plugins and custom scripts -->
             var postId = $(this).data('post-id');
             // AJAX request to fetch edit form data
             $.ajax({
-                url: '/posts/' + postId + '/edit',
+                url: 'user/post/' + postId + '/edit',
                 type: 'GET',
                 success: function(data) {
                     // Populate the modal with fetched data
