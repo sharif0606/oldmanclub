@@ -70,6 +70,12 @@
 		})
 		
 	</script>
+    @stack('scripts')
+    <script src="{{asset('public/vendor/global/global.min.js')}}"></script>
+    <script src="{{asset('public/js/quixnav-init.js')}}"></script>
+    <script src="{{asset('public/js/custom.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="{{ asset('public/user/assets/images/favicon.ico')}}">
@@ -105,7 +111,7 @@ JS libraries, plugins and custom scripts -->
 
 <!-- Theme Functions -->
 <script src="{{ asset('public/user/assets/js/functions.js')}}"></script>
-  
+
 </body>
 
 <!-- Mirrored from social.webestica.com/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 08 Mar 2024 13:01:13 GMT -->

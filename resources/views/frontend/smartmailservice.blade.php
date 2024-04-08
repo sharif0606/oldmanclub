@@ -58,8 +58,13 @@
                         <img src="{{asset('public/frontend/smartmailservice/white-shape.png')}}" alt="shape" class="w-100">
                     </div>
                     <div class="col-md-9 sign-up-text">
+<<<<<<< HEAD
+                    <h2 class="text-capitalize pb-4 pt-2">Sign up for a virtual mail box</h2>
+                    <a href="{{ route('contact_create') }}" class="btn smart-btn-contact-us fw-medium text-uppercase">Contact With Us</a>
+=======
                     <h2 class=" pb-4 pt-2 text-uppercase">Sign up for a virtual mail box</h2>
                     <button class="btn smart-btn-contact-us fw-medium text-uppercase">Contact With Us</button>
+>>>>>>> 66b64afa7ee90268d99fb0f21fa127bf965595c8
                     </div> 
                 </div>
             </div>
@@ -74,8 +79,9 @@
                     <h3 class="px-2 text-uppercase">{{$smartsmsservice?->text_large}}</h3>
                    <p class="p-2">{{$smartsmsservice?->text_small}}</p>
                      <div class="d-inline">
-                        <button type="submit" class="btn btn-view-plan mx-2 px-4">View Plan</button>
-                        <button type="submit" class="btn smart-btn-contact-us mx-2 px-4">Contact Us</button>
+                        <button type="submit" class="btn btn-view-plan mx-2 px-4 text-uppercase">View Plan</button>
+                        <a href="{{ route('contact_create') }}" class="btn smart-btn-contact-us mx-2 px-4 text-uppercase">Contact Us</a>
+                        
                     </div>
                 </div>
                 <div class="col-md-6 sms-image text-end">
@@ -96,8 +102,10 @@
                     <h3 class="text-uppercase px-2">{{$smartphonebook?->text_large}}</h3>
                     <p class="p-2">{{$smartphonebook?->text_small}}</p>
                     <div class="d-inline">
-                        <button type="submit" class="btn btn-sign-up mx-2 px-4">Sign Up</button>
-                       <button type="submit" class="btn smart-btn-contact-us mx-2 px-4">Contact Us</button>
+                        {{-- <button type="submit" class="btn btn-sign-up mx-2 px-4">Sign Up</button> --}}
+                        <a href="{{ route('clientlogin') }}" class="btn btn-sign-up mx-2 px-4 text-uppercase">Sign in</a>
+                        <a href="{{ route('contact_create') }}" class="btn smart-btn-contact-us mx-2 px-4 text-uppercase">Contact Us</a>
+                       {{-- <button type="submit" class="btn smart-btn-contact-us mx-2 px-4">Contact Us</button> --}}
                     </div>
                 </div>
             </div>

@@ -4,6 +4,7 @@
         overflow-x: hidden;
         box-sizing: border-box;
         font-weight: 500;
+        font-family: 'Poppins';font-size: 22px;
     }
     h1,h2,h3,h4,h5,h6{
         font-weight: bold;
@@ -113,7 +114,8 @@
     }
     
     .dropdown-menu li a:hover {
-        background-color: #f0f0f0; /* Add a subtle background color change on hover */
+        background-color: #f0f0f0; 
+        /* Add a subtle background color change on hover */
     }
     #service-dropdown {
         display: none; /* Initially hide the dropdown */
@@ -124,7 +126,7 @@
         padding: 15px;
         margin: 0;
         list-style: none;
-        box-shadow: 0 2px 5px rgba(0,0,0,.1); /* Add a subtle shadow */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
         opacity: 0; /* Initially hide the dropdown */
         transition: opacity 0.3s ease-in-out; /* Add a transition for smoother appearance */
         columns: 2; /* Display dropdown items in two columns */
@@ -218,13 +220,19 @@
         height: 250px;
         /* Set your desired fixed height for the image */
     }
+    .social_icon:hover{
+        background-color: #fdb838 !important;
+    }
 /* Add hover effect with animation */
 .card.fixed-size-card {
     transition: box-shadow 0.3s ease;
+    transition: transform 0.5s ease; 
+
 }
 
 .card.fixed-size-card:hover {
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Adjust shadow color and intensity */
+    transform: translateY(-10px);
 }
     .fixed-size-card hr {
         width: 100%;
@@ -263,17 +271,18 @@
 
     /* Global-network */
     .global-network {
-        margin-top: 220px;
+        margin-top: 20px;
     }
-
+    
     /* Happy Customer */
     .happy-customer {
         margin-bottom: 0px;
     }
 
     .testimonial-item {
-        margin: 0px 12px;
+        margin: 0px 5px;
         display: flex;
+        height: 300px;
     }
 
 
@@ -1127,7 +1136,7 @@
 
     .phn-testimonial-slider {
         display: flex;
-        flex-wrap: wrap;
+        /* flex-wrap: wrap; */
         justify-content: space-between;
     }
 
@@ -1543,9 +1552,65 @@
     .product-image-container:hover .hover-buttons {
         opacity: 1;
     }
-
-
-
-    
-
     /* Printing Service Css End */
+    /* contact page css start */
+    
+    .contact-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 50px;
+        background-color: #0B132A;
+        color: white;
+    }
+
+    .contact-form-col {
+        flex: 1;
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        color: #fff;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-bottom: 1px solid #fff;
+        background-color: transparent;
+        color: #fff;
+    }
+
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-bottom: 1px solid #fff;
+        background-color: transparent;
+        color: #fff;
+        resize: vertical;
+    }
+
+    button {
+        background-color: #1F2A4F;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .contact-images img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    /* contact page css end */
