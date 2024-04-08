@@ -1207,6 +1207,8 @@ JS libraries, plugins and custom scripts -->
                     $('#editMessage').val(data.message);
                     $('#editPrivacy').val(data.privacy);
                     
+                    // Set the post ID to the input field's data attribute
+                    $('input[data-post-id]').attr('data-post-id', postId);
                     // Open the edit post modal
                     $('#editPostModal').modal('show');
                 },
