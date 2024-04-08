@@ -231,6 +231,12 @@
         background-color: #5d1474 !important;
         color: #f5ab0b;
     }
+    @media(max-width:578px){
+       .social_image{
+            justify-content: center;
+        } 
+    }
+    
 /* Add hover effect with animation */
 .card.fixed-size-card {
     transition: box-shadow 0.3s ease;
@@ -1266,7 +1272,7 @@
 
     /* Subscribe section */
     .phn-subscribe-section {
-        padding: 40px;
+        /* padding: 40px; */
     }
 
     .phn-subscribe-content {

@@ -81,7 +81,7 @@
                 <!-- 1st Column -->
                 <img src="{{asset('public/uploads/setting/'.$setting?->footer_logo)}}" alt="Logo" class="logo">
                 <p class="mb-0">{{$setting?->footer_text}}</p>
-                <div class="d-flex mt-0">
+                <div class="d-flex mt-0 social_image">
                     <a class="btn btn-square social_icon rounded-circle p-2" href="{{$setting?->twitter_icon}}"><i class="fab fa-twitter"></i></a>
                     <a class="btn btn-square social_icon rounded-circle  p-2" href="{{$setting?->facebook_icon}}"><i class="fab fa-facebook-f"></i></a>
                     <a class="btn btn-square social_icon rounded-circle  p-2" href="{{$setting?->instagram_icon}}"><i class="bi bi-instagram"></i></a>

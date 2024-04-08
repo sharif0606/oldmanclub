@@ -116,7 +116,7 @@
         </div>
     </section>
     <!-- customre feedback end -->
-     <div class="container phn-subscribe-section mt-3">
+     <div class="container phn-subscribe-section">
         <div class="row">
             <div class="col-md-6">
                 <div class="phn-subscribe-content text-start">
