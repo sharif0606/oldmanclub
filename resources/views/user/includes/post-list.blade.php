@@ -113,11 +113,16 @@
 
         <!-- Add comment -->
         <div class="d-flex mb-3">
+            @if($client->image)
             <!-- Avatar -->
             <div class="avatar avatar-xs me-2">
                 <a href="#!"> <img class="avatar-img rounded-circle"
-                        src="assets/images/avatar/12.jpg" alt=""> </a>
+                        src="{{asset('public/uploads/client/' . $client->image)}}" alt=""> </a>
             </div>
+            @else
+            <a href="#!"><img class="avatar-img rounded-circle"
+            src="{{asset('public/images/download.jpg')}}" alt=""></a>
+            @endif
             <!-- Comment box  -->
             <form class="nav nav-item w-100 position-relative">
                 <textarea data-autoresize="" class="form-control pe-5 bg-light" rows="1" placeholder="Add a comment..."></textarea>
@@ -129,7 +134,7 @@
             </form>
         </div>
         <!-- Comment wrap START -->
-        {{-- <ul class="comment-wrap list-unstyled">
+        <ul class="comment-wrap list-unstyled">
             <!-- Comment item START -->
             <li class="comment-item">
                 <div class="d-flex position-relative">
@@ -278,7 +283,7 @@
                 </div>
             </li>
             <!-- Comment item END -->
-        </ul> --}}
+        </ul>
         <!-- Comment wrap END -->
     </div>
     <!-- Card body END -->
