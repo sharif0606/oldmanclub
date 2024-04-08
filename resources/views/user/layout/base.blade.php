@@ -1193,7 +1193,6 @@ JS libraries, plugins and custom scripts -->
         /*=== Edit Post  ===*/
         // Handle click event for edit post dropdown item
         $(".edit-post").click(function(event) {
-            console.log("{{ url('/') }}");
             // Prevent the default action of the link
             event.preventDefault();
             // Get the post ID from data attribute
@@ -1215,6 +1214,31 @@ JS libraries, plugins and custom scripts -->
                     console.error(error);
                     // Display error message to the user
                     alert("Error: " + error);
+                }
+            });
+        });
+
+        /*=== Update ePost ===*/
+        $("#editSubmitBtn").on('click', function() {
+        var formData = new FormData($("#editFormSubmit")[0]);
+        var postId = $(this).data('post-id');
+        formData.append('_method', 'PUT'); // Add method spoofing for PUT request
+            $.ajax({
+                type: 'POST',
+                url: "{{ url('/') }}/user/post/" + postId,
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    // Handle success response
+                    console.log(response);
+                    $('#editPostModal').modal('hide');
+                    window.location.href = "{{route('clientdashboard')}}";
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    console.error(xhr.responseText);
+                    alert("Error: " + xhr.responseText);
                 }
             });
         });
