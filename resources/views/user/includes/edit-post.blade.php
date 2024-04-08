@@ -14,6 +14,7 @@
                     <!-- Edit Feed -->
                     <div class="d-flex mb-3">
                         <!-- Avatar -->
+                        <input type="text" data-post-id="">
                         <div class="avatar avatar-xs me-2">
                             @if ($client->image)
                             <img class="avatar-img rounded-circle"
