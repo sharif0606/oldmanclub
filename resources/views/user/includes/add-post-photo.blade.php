@@ -56,7 +56,7 @@
                     <!-- Button -->
                     <button type="button" class="btn btn-danger-soft me-2"
                         data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-success-soft">Post</button>
+                    <button type="button" class="btn btn-success-soft" id="submitBtn">Post</button>
                     <!-- Button -->
                     </div>
 
