@@ -161,6 +161,7 @@ Route::prefix('admin')->group(function () {
     Route::get('bank_edit/{id}',[BankController::class,'bank_edit'])->name('bank_edit');
     Route::post('bank_update/{id}',[BankController::class,'bank_update'])->name('bank_update');
     Route::get('post_list',[PostController::class,'post_list'])->name('post_list');
+    Route::post('post-update',[PostController::class,'post_update'])->name('post_update');
 
 
     //website
