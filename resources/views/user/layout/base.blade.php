@@ -1189,15 +1189,15 @@ JS libraries, plugins and custom scripts -->
 
         /*=== Edit Post  ===*/
         // Handle click event for edit post dropdown item
-        var base_url =
         $(".edit-post").click(function(event) {
+            console.log("{{ url('/') }}");
             // Prevent the default action of the link
             event.preventDefault();
             // Get the post ID from data attribute
             var postId = $(this).data('post-id');
             // AJAX request to fetch edit form data
             $.ajax({
-                url:  "{{ url('/') }}"+'oldclubman/user/post/' + postId + '/edit',
+                url:  "{{ url('/') }}"+'/user/post/' + postId + '/edit',
                 type: 'GET',
                 success: function(data) {
                     // Populate the modal with fetched data
