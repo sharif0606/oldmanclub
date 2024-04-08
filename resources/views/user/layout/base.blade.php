@@ -1197,7 +1197,7 @@ JS libraries, plugins and custom scripts -->
             var postId = $(this).data('post-id');
             // AJAX request to fetch edit form data
             $.ajax({
-                url:  "{{ url('/') }}"+'/post/' + postId + '/edit',
+                url:  "{{ url('/') }}"+'oldclubman/user/post/' + postId + '/edit',
                 type: 'GET',
                 success: function(data) {
                     // Populate the modal with fetched data
