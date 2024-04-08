@@ -175,7 +175,7 @@
                             <!-- Avatar -->
                             <div class="avatar avatar-xs">
                                 <a href="#!"><img class="avatar-img rounded-circle"
-                                        src="assets/images/avatar/06.jpg" alt=""></a>
+                                        src="{{ asset('public/user/assets/images/avatar/06.jpg')}}" alt=""></a>
                             </div>
                             <!-- Comment by -->
                             <div class="ms-2">
@@ -208,7 +208,7 @@
                             <!-- Avatar -->
                             <div class="avatar avatar-story avatar-xs">
                                 <a href="#!"><img class="avatar-img rounded-circle"
-                                        src="assets/images/avatar/07.jpg" alt=""></a>
+                                        src="{{ asset('public/user/assets/images/avatar/07.jpg')}}" alt=""></a>
                             </div>
                             <!-- Comment by -->
                             <div class="ms-2">
@@ -255,7 +255,7 @@
                     <!-- Avatar -->
                     <div class="avatar avatar-xs">
                         <a href="#!"><img class="avatar-img rounded-circle"
-                                src="assets/images/avatar/05.jpg" alt=""></a>
+                                src="{{ asset('public/user/assets/images/avatar/05.jpg')}}" alt=""></a>
                     </div>
                     <!-- Comment by -->
                     <div class="ms-2">
