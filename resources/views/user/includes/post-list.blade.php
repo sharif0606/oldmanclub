@@ -140,8 +140,8 @@
                 <div class="d-flex position-relative">
                     <!-- Avatar -->
                     <div class="avatar avatar-xs">
-                        <a href="#!"><img class="avatar-img rounded-circle"
-                                src="assets/images/avatar/05.jpg" alt=""></a>
+                        <a href="#!"><img class="{{ asset('public/user/assets/avatar-img rounded-circle')}}"
+                                src="{{ asset('public/user/assets/assets/images/avatar/05.jpg')}}" alt=""></a>
                     </div>
                     <div class="ms-2">
                         <!-- Comment by -->
@@ -174,8 +174,8 @@
                         <div class="d-flex">
                             <!-- Avatar -->
                             <div class="avatar avatar-xs">
-                                <a href="#!"><img class="avatar-img rounded-circle"
-                                        src="assets/images/avatar/06.jpg" alt=""></a>
+                                <a href="#!"><img class="{{ asset('public/user/assets/avatar-img rounded-circle')}}"
+                                        src="{{ asset('public/user/assets/assets/images/avatar/06.jpg')}}" alt=""></a>
                             </div>
                             <!-- Comment by -->
                             <div class="ms-2">
@@ -207,8 +207,8 @@
                         <div class="d-flex">
                             <!-- Avatar -->
                             <div class="avatar avatar-story avatar-xs">
-                                <a href="#!"><img class="avatar-img rounded-circle"
-                                        src="assets/images/avatar/07.jpg" alt=""></a>
+                                <a href="#!"><img class="{{ asset('public/user/assets/avatar-img rounded-circle')}}"
+                                        src="{{ asset('public/user/assets/assets/images/avatar/07.jpg')) alt=""></a>
                             </div>
                             <!-- Comment by -->
                             <div class="ms-2">
@@ -254,8 +254,8 @@
                 <div class="d-flex">
                     <!-- Avatar -->
                     <div class="avatar avatar-xs">
-                        <a href="#!"><img class="avatar-img rounded-circle"
-                                src="assets/images/avatar/05.jpg" alt=""></a>
+                        <a href="#!"><img class="{{ asset('public/user/assets/avatar-img rounded-circle')}}"
+                                src="{{ asset('public/user/assets/assets/images/avatar/05.jpg')}}" alt=""></a>
                     </div>
                     <!-- Comment by -->
                     <div class="ms-2">
