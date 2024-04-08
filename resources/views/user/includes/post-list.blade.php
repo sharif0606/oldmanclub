@@ -112,7 +112,7 @@
         <!-- Feed react END -->
 
         <!-- Add comment -->
-        {{-- <div class="d-flex mb-3">
+        <div class="d-flex mb-3">
             <!-- Avatar -->
             <div class="avatar avatar-xs me-2">
                 <a href="#!"> <img class="avatar-img rounded-circle"
@@ -127,7 +127,7 @@
                     <i class="bi bi-send-fill"> </i>
                 </button>
             </form>
-        </div> --}}
+        </div>
         <!-- Comment wrap START -->
         {{-- <ul class="comment-wrap list-unstyled">
             <!-- Comment item START -->
