@@ -199,9 +199,9 @@
                                             </div>
                                             <div class="col-md-9">
                                                 <div class="customer-details">
-                                                    <h4>{{ $feedback->client?->first_name_en }}
-                                                        {{ $feedback->client?->middle_name_en }}
-                                                        {{ $feedback->client?->last_name_en }}
+                                                    <h4>{{ $feedback->client?->f_name }}
+                                                        {{ $feedback->client?->middle_name }}
+                                                        {{ $feedback->client?->last_name }}
                                                     </h4>
                                                 </div>
                                             </div>

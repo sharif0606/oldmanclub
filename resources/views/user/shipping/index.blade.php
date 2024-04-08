@@ -34,7 +34,7 @@
                   <div class="row g-4">
                     @forelse($shipping as $value)
                     <div class="col-sm-6 col-xl-4">
-                      <a href="{{route('shipping.show',encryptor('encrypt',$value->id))}}" class="text-warning">
+                      <a href="{{route('shipping.show',encryptor('encrypt',$value->id))}}" class="text-dark">
                       <div class="card h-100">
                         <div class="position-relative">
                           @if($value->shippingdetail->image)
@@ -44,8 +44,8 @@
                           @endif
                         </div>
                         <div class="card-body position-relative pt-0">
-                          <h6 class="mt-3"> <a href="#">{{__($value->shippingdetail?->shipping_title)}}</a> </h6>
-                          {!! $value->shippingdetail?->shipping_description !!}
+                          <h6 class="mt-3">{{__($value->shippingdetail?->shipping_title)}} </h6>
+                          <p class="">{!! $value->shippingdetail?->shipping_description !!}</p>
                           <p class="small">{{__($value->shippingdetail?->price)}}</p>
                           <p class="mb-0 small"> <i class="bi bi-calendar-check pe-1"></i>{{ $value->created_at->format('d M,Y')}}</p>
                         </div>

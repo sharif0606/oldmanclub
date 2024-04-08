@@ -69,7 +69,7 @@
     <!-- customre feedback start -->
     <section class="phn-our-customer py-5">
         <h2 class="fw-bold text-center py-4 text-uppercase">Trusted by millions of customers worldwide</h2>
-        <div class="container">
+        <div class="container phn">
             <div class="row">
                 <div class="phn-testimonial-slider-container">
                      <div class="phn-testimonial-slider">
@@ -77,13 +77,17 @@
                         <div class="phn-custom-card phn-testimonial-item col-md-4">
                             <div class="phn-card-body">
                                 <div class="customer-review">
-                                    <p>"{{$feedback?->customer_message}}."</p>
+                                    <p>{{$feedback?->customer_message}}.</p>
                                 </div>
                                 <hr>
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="customer-image">
-                                            <img src="{{asset('public/uploads/client/'.$feedback?->client?->image)}}" alt="Customer 1" class="rounded-circle img-fluid">
+                                            @if($feedback->client->image)
+                                                <img src="{{asset('public/uploads/client/'.$feedback?->client?->image)}}"  alt="Customer 1" class="rounded-circle img-fluid">
+                                            @else
+                                                <img class="avatar-img rounded-circle border border-white border-3" src="{{asset('public/images/download.jpg')}}" alt="">
+                                            @endif
                                         </div>
                                     </div>
                                    <div class="col-md-9">
@@ -104,6 +108,8 @@
                             </div>
                         </div>
                         @endforeach
+                        <button type="button" class="slick-prev">Previous</button>
+                        <button type="button" class="slick-next">Next</button>
                     </div>
                 </div>  
             </div>
