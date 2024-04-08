@@ -89,7 +89,7 @@ use App\Http\Controllers\Backend\Nfc\NfcCardController as nfc_card;
 // printing_service admin panelBackend\Printingservice
 
 use App\Http\Controllers\Backend\Printingservice\PrintingServiceController as print_service;
-use App\Http\Controllers\Backend\Printingservice\PrintingServiceImageController as print_service_image;
+//use App\Http\Controllers\Backend\Printingservice\PrintingServiceImageController as print_service_image;
 
 /*== for Mail and other Send Purpose ==*/
 use App\Http\Controllers\TestController as test;
@@ -144,7 +144,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('print_service', print_service::class);
     Route::get('print_image/{id}', [print_service::class,'uploadfile'])->name('uploadimage');
     Route::post('print_image/{id}', [print_service::class,'uploadfile_store'])->name('uploadfile_store');
-    Route::resource('print_service_image', print_service_image::class);
+    //Route::resource('print_service_image', print_service_image::class);
 
     Route::get('comment_list', [CommentController::class, 'comment_list'])->name('comment_list');
     Route::get('comment_edit/{id}', [CommentController::class, 'comment_edit'])->name('comment_edit');
