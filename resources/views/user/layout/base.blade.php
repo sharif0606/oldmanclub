@@ -1221,7 +1221,7 @@ JS libraries, plugins and custom scripts -->
         /*=== Update ePost ===*/
         $("#editSubmitBtn").on('click', function() {
         var formData = new FormData($("#editFormSubmit")[0]);
-        var postId = $(this).data('post-id');
+        var postId = $('#postId').val();
         formData.append('_method', 'PUT'); // Add method spoofing for PUT request
             $.ajax({
                 type: 'POST',

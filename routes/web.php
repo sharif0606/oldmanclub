@@ -165,6 +165,7 @@ Route::prefix('admin')->group(function () {
     Route::get('contact/list',[contact::class,'contact_list'])->name('contact_list');
 
 
+
     //website
     Route::resource('setting', setting::class);
     Route::resource('nfc-field', nfc_field::class);
