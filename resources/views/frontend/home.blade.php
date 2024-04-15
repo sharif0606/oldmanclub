@@ -29,15 +29,15 @@
                             <div class="card-group">
                                 <div class="card">
                                     <img src="{{asset('public/images/icon/user.png')}}" class="mx-3 mt-3" width="50px" height="50px" alt="" srcset="">
-                                    <p class="location"><b >90K+</b> <br>Users</p>
+                                    <p class="location pe-2"><b >90K+</b> <br>Users</p>
                                 </div>
                                 <div class="card">
                                 <img src="{{asset('public/images/icon/location.png')}}" class="mx-3 mt-3" width="50px" height="50px" alt="" srcset="">
-                                    <p class="location"><b >200+</b> <br> Locations</p>
+                                    <p class="location pe-2"><b >200+</b> <br> Locations</p>
                                 </div>
                                 <div class="card">
                                 <img src="{{asset('public/images/icon/Server.png')}}" class="mx-3 mt-3" width="50px" height="50px" alt="" srcset="">
-                                    <p class="location"><b class="fw-bolder">50+</b><br>Banks</p>
+                                    <p class="location pe-2"><b class="fw-bolder">50+</b><br>Banks</p>
                                 </div>
                             </div>
                         </section>

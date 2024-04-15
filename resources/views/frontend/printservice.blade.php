@@ -1,6 +1,11 @@
 @extends('frontend.layouts.app')
 @section('title', 'Printing Service')
 @section('content')
+@push('styles')
+<style>
+
+</style>
+@endpush
     <!-- printing service hero start -->
     <div class="container">
         <div class="row">
@@ -145,75 +150,100 @@
 
     <!-- printing service product end -->
     <!-- printing service feedback start -->
-    <section class="our-customer pt-2 pb-4">
-        <div class="container">
+    <section class="our-customer pt-2">
+         <div class="container mb-5 happy">
+            <div class="row gx-2">
+                    <section class="happy-customer">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="text-center text-uppercase">Customer Reviews</h2>
+                                <p class="text-center">Some introductory text about customer reviews.</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-slider">
+                            <!-- Testimonial 1 -->
+                            @foreach($printfeedback as $value)
+                            <div class="col-md-4 col-sm-6">
+                                <div class="card testimonial-item print-testimonial" style="background-color: #2F0549; color:#fff">
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <img src="{{ asset('public/frontend/assets/image/quat.png') }}" alt="" width="25px" class="text-white">
+                                        </div>
+                                        {{-- <div class="row"> --}}
+                                        <div class="customer-review">
+                                            <p>"{{ $value?->customer_message }}"</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="">
+                                        <div class="d-flex">
+                                            <img src="{{asset('public/uploads/client/'.$value->client?->image)}}" alt="Customer 1" class="rounded-circle" width="70px" height="70px">
+                                            <p class="fw-bold  text-center mx-auto mt-2">
+                                                {{$value->client?->fname}}  
+                                                {{$value->client?->middle_name}}  
+                                                {{$value->client?->last_name}} <br>  
+                                                <span class="rating-number ms-auto">{{$value->client?->designation}}</span>  
+                                            </p>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                            <button type="button" class="slick-prev">Previous</button>
+                            <button type="button" class="slick-next">Next</button>
+                        </div>
+                    </section>
+            </div>
+        </div>
+        {{-- <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <!-- <div class="carousel-controls">
-                      <button
-                        class="carousel-control-prev"
-                        type="button"
-                        data-bs-target="#testimonialCarousel"
-                        data-bs-slide="prev"
-                      ><span
-                          class="carousel-control-prev-icon"
-                          aria-hidden="true"
-                        ></span>
-                        <span class="visually-hidden">Previous</span>
-                      </button>
-                      <button
-                        class="carousel-control-next"
-                        type="button"
-                        data-bs-target="#testimonialCarousel"
-                        data-bs-slide="next"
-                      ><span
-                          class="carousel-control-next-icon"
-                          aria-hidden="true"
-                        ></span>
-                        <span class="visually-hidden">Next</span>
-                      </button>
-                    </div> -->
-                    <h2 class="text-center text-uppercase">Customer Reviews</h2>
-                    <p class="text-center">Some introductory text about customer reviews.</p>
+                <div class="col-md-6">
+                    <h2 class="text-uppercase">Customer Reviews</h2>
+                    <p class="">Some introductory text about customer reviews.</p>
                 </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
 
-            <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+           <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
+                    <div class="container carousel-item active">
                         <div class="row">
                             @foreach ($printfeedback as $feedback)
-                                <div class="print-custom-card testimonial-item col-md-4 me-1">
-                                    <div class="print-card-body">
-                                        <div class="customer-review">
-                                            <p>"{{ $feedback?->customer_message }}"
-                                            </p>
-                                        </div>
-                                        <hr />
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <div class="customer-image">
-                                                    <img src="{{ asset('public/uploads/client/' . $feedback->client?->image) }}"
-                                                        class="img-fluid rounded-circle" alt="">
-                                                </div>
+                            <div class="print-custom-card testimonial-item col-md-4 rounded">
+                                <div class="print-card-body">
+                                    <div class="customer-review">
+                                        <p>"{{ $feedback?->customer_message }}"</p>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="customer-image">
+                                                <img src="{{ asset('public/uploads/client/' . $feedback->client?->image) }}" class="img-fluid rounded-circle" alt="">
                                             </div>
-                                            <div class="col-md-9">
-                                                <div class="customer-details">
-                                                    <h4>{{ $feedback->client?->f_name }}
-                                                        {{ $feedback->client?->middle_name }}
-                                                        {{ $feedback->client?->last_name }}
-                                                    </h4>
-                                                </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="customer-details">
+                                                <h4>{{ $feedback->client?->f_name }} {{ $feedback->client?->middle_name }} {{ $feedback->client?->last_name }}</h4>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             @endforeach
                         </div>
                     </div>
                 </div>
+                
             </div>
-        </div>
+
+        </div> --}}
     </section>
     <!-- printing service feedback end -->
     <!-- printing service subscribe start -->

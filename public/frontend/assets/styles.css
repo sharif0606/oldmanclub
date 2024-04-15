@@ -21,9 +21,15 @@
     }
 
     .navbar {
-        background-color: #2F0549;
+        /* background-color: #2F0549; */
         font-size: 16px;
         font-weight: 500;
+       
+    }
+    @media (max-width: 768px) {
+        .navbar {
+            padding-left: 20px; /* Reset width for smaller screens */
+        }
     }
 
     .navbar-nav .nav-link {
@@ -139,7 +145,8 @@
         opacity: 1; /* Show the dropdown with a fade effect */
     }
     .navbar-nav .nav-item {
-        width: 100px; /* Adjust width as needed */
+        /* width: 100px;  */
+        /* Adjust width as needed */
     }
     .navbar-nav .nav-item {
         white-space: normal;
@@ -182,6 +189,7 @@
     @media (max-width: 576px) {
         .card-group {
             margin-left: -29px;
+            padding-right: 20px;
         }
     }
 
@@ -365,14 +373,16 @@
     @media (max-width: 767px) {
         .footer {
             height: auto;
+            margin-top: 0;
         }
 
         .footer-column {
             width: 100%;
-            /* padding: 10px 0; */
+            padding: 15px 5px;
             text-align: center;
         }
     }
+    
 
     .user-location {
         position: absolute;
@@ -398,14 +408,14 @@
     .hero-section .slick-dots {
         position: absolute;
         bottom: 240px;
-        display: block;
+        /* display: block; */
         width: 100%;
         padding: 0;
         margin-left: 60px;
         list-style: none;
         text-align: left;
     }
-    @media (max-width: 576px) {
+    @media (min-width: 576px) {
         .hero-section .slick-dots {
             display: none;
         }
@@ -413,7 +423,7 @@
     
     .hero-section .slick-dots li {
         position: relative;
-        display: inline-block;
+        /* display: inline-block; */
         width: 8px;
         height: 8px;
         margin: 0 5px;
@@ -450,7 +460,7 @@
     .happy .slick-dots {
         position: absolute;
         bottom: -50px;
-        display: block;
+        /* display: block; */
         width: 100%;
         padding: 0;
         /* margin-left: 60px; */
@@ -460,7 +470,7 @@
 
     .happy .slick-dots li {
         position: relative;
-        display: inline-block;
+        /* display: inline-block; */
         width: 8px;
         height: 8px;
         margin: 0 5px;
@@ -1437,7 +1447,7 @@
 
     img {
         max-width: 100%;
-        height: auto;
+        /* height: auto; */
     }
 
     /* why-choose-us */
@@ -1525,7 +1535,7 @@
     .carousel-inner .carousel-item .print-custom-card {
         flex: 0 0 30%;
         /* Adjusted to make three cards fit in a row with margin between */
-        margin-right: 2%;
+        /* margin-right: 2%; */
     }
 
     .carousel-inner .carousel-item .print-custom-card:last-child {
@@ -1533,8 +1543,10 @@
     }
 
     .print-custom-card {
-        background-color: #f3f3f3;
+        /* background-color: #f3f3f3; */
+        background-color: #2F0549;
         border: none;
+        color: #fff;
         margin-bottom: 20px;
         box-sizing: border-box;
         padding: 15px;
@@ -1557,10 +1569,12 @@
         display: flex;
         align-items: center;
         margin-bottom: 20px;
+        color: black;
     }
 
     .carousel-controls button {
         margin-right: 10px;
+        /* color: #000; */
     }
 
     /* Responsive adjustments */
@@ -1581,7 +1595,7 @@
 
     /* Subscribe section */
     .print-subscribe-section {
-        padding: 40px;
+        /* padding: 40px; */
     }
 
     .print-subscribe-content {

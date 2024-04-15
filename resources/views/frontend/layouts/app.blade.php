@@ -44,12 +44,12 @@
                                 </ul>
                             </li>
 
-                            {{-- <li class="nav-item"><a href="#" class="nav-link">Testimonials</a></li> --}}
+                            
                             <li class="nav-item"><a href="{{route("contact_create")}}" class="nav-link text-uppercase">Contact Us</a></li>
 
-                            {{-- <li class="nav-item"><a href="#" class="nav-link">Testimonials</a></li> --}}
-                            {{-- <li class="nav-item"><a href="#" class="nav-link">Contact Us</a></li> --}}
-
+                            {{-- <li class="nav-item text-uppercase"><a href="#" class="nav-link">Testimonials</a></li>
+                            <li class="nav-item text-uppercase"><a href="#" class="nav-link">Contact Us</a></li> --}}
+                            
                         </ul>
                         <div class="navbar-right">
                             <a href="{{route('clientlogin')}}" class="btn btn-link ps-0 text-uppercase">Sign In</a>
@@ -89,7 +89,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3 footer-column">
+            <div class="col-md-3 footer-column two">
                 <!-- 2nd Column -->
                 <h3 class="footer-heading">PRODUCT</h3>
                 <ul class="footer-links">
@@ -101,7 +101,7 @@
                 </ul>
             </div>
 
-            <div class="col-md-3 footer-column">
+            <div class="col-md-3 footer-column three">
                 <!-- 3rd Column -->
                 <h3 class="footer-heading">ENGAGE</h3>
                 <ul class="footer-links">
@@ -114,7 +114,7 @@
                 </ul>
             </div>
 
-            <div class="col-md-3 footer-column">
+            <div class="col-md-3 footer-column four">
                 <!-- 4th Column -->
                 <h3 class="footer-heading">EARN MONEY</h3>
                 <ul class="footer-links">
@@ -158,6 +158,13 @@
                         slidesToShow:2,
                         slidesToScroll:1
                     }
+                },
+                {
+                    breakpoint:576,
+                    settings:{
+                        slidesToShow:1,
+                        slidesToScroll:1,
+                    }
                 }
               ]
             });
@@ -168,6 +175,17 @@
                 dots: true,
                 // autoplay: true,
                 // autoplaySpeed: 2000,
+                responsive:[
+                    {
+                        breakpoint:576,
+                        settings:{
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            arrows: false,
+                            dots: false,
+                        }
+                    }
+                ]
             });
         });
     </script>
