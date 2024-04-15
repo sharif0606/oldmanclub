@@ -247,18 +247,18 @@
     </section>
     <!-- printing service feedback end -->
     <!-- printing service subscribe start -->
-    <div class="container print-subscribe-section mt-3">
+    <div class="container print-subscribe-section mb-4">
         <div class="row">
-            <div class="col-md-6">
-                <div class="print-subscribe-content text-start">
-                    <h3 class="subscribe-heading fw-bold text-uppercase">
+            <div class="col-md-8">
+                {{-- <div class="print-subscribe-content text-start"> --}}
+                    <h4 class="subscribe-heading  text-uppercase mt-4">
                         Take action now to stay compliant. Grow your business without
                         tension.
-                    </h3>
-                </div>
+                    </h4>
+                {{-- </div> --}}
             </div>
-            <div class="col-md-6 print-subscribe-btn text-center">
-                <a href="{{ route('contact_create') }}" class="print-btn btn-primary print-contact-us-btn px-5 py-2 text-uppercase">Contact Us</a>
+            <div class="col-md-4 print-subscribe-btn text-end">
+                <a href="{{ route('contact_create') }}" class="print-btn btn-primary print-contact-us-btn px-5 text-uppercase">Contact Us</a>
             </div>
         </div>
     </div>

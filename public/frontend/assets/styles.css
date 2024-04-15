@@ -1599,18 +1599,18 @@
     }
 
     .print-subscribe-content {
-        padding: 50px 40px;
+        /* padding: 50px 40px; */
     }
 
     .print-subscribe-btn {
-        padding: 50px;
-        display: flex;
+        padding: 40px;
+        /* display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: center; */
     }
 
     .print-contact-us-btn {
-        background-color: rgb(65, 72, 87) !important;
+        background-color: #2f0549 !important;
         color: white !important;
         border: 1px solid #2f0549 !important;
         /* padding: 10px 0px;  */
