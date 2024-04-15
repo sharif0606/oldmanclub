@@ -15854,7 +15854,7 @@ header {
 }
 header.fixed-top + main {
   padding-top: calc(1.5rem + 56px);
-  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
 .navbar-toggler .navbar-toggler-animation {

@@ -7,9 +7,9 @@
                 <!-- Avatar -->
                 <div class="avatar avatar-story me-2">
                     <a href="#!">
-                        @if($client->image)
+                        @if($value->client->image)
                             <img class="avatar-img rounded-circle"
-                            src="{{asset('public/uploads/client/' . $client->image)}}" alt="">
+                            src="{{asset('public/uploads/client/' . $value->client->image)}}" alt="">
                         @else
                             <img class="avatar-img rounded-circle"
                             src="{{asset('public/images/download.jpg')}}" alt="">
@@ -20,13 +20,13 @@
                 <!-- Info -->
                 <div>
                     <div class="nav nav-divider">
-                        <h6 class="nav-item card-title mb-0"> <a href="#!">{{$client->fname}} {{$client->middle_name}} {{$client->last_name}}
+                        <h6 class="nav-item card-title mb-0"> <a href="#!">{{$value->client->fname}} {{$value->client->middle_name}} {{$value->client->last_name}}
                             </a></h6>
                         <span class="nav-item small">{{$value->created_at->diffForHumans()}}</span>
                     </div>
                     {{-- <span class="nav-item mb-0 small"><i class="bi bi-briefcase-fill me-1"></i>{{$client->designation}}</span> --}}
                     @if ($client->current_country_id)
-                    <span class="nav-item mb-0 small"><i class="bi bi-geo-alt-fill me-1"></i>{{$client->currentcountry?->name}}@if($client->current_city_id), {{$client->currentstate?->name}} @endif</span>
+                    <span class="nav-item mb-0 small"><i class="bi bi-geo-alt-fill me-1"></i>{{$value->client->currentcountry?->name}}@if($value->client->current_city_id), {{$value->client->currentstate?->name}} @endif</span>
                     @endif
                     <span class="nav-item small" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Public" data-bs-original-title="Public"> <i class="bi bi-globe"></i> </span>
                 </div>
@@ -83,207 +83,13 @@
                     (12)</a>
             </li>
             <!-- Card share action START -->
-            <li class="nav-item dropdown ms-sm-auto">
-                <a class="nav-link mb-0" href="#" id="cardShareAction"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-reply-fill flip-horizontal ps-1"></i>Share (3)
-                </a>
-                <!-- Card share action dropdown menu -->
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction">
-                    <li><a class="dropdown-item" href="#"> <i
-                                class="bi bi-envelope fa-fw pe-2"></i>Send via Direct Message</a>
-                    </li>
-                    <li><a class="dropdown-item" href="#"> <i
-                                class="bi bi-bookmark-check fa-fw pe-2"></i>Bookmark </a></li>
-                    <li><a class="dropdown-item" href="#"> <i
-                                class="bi bi-link fa-fw pe-2"></i>Copy link to post</a></li>
-                    <li><a class="dropdown-item" href="#"> <i
-                                class="bi bi-share fa-fw pe-2"></i>Share post via …</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#"> <i
-                                class="bi bi-pencil-square fa-fw pe-2"></i>Share to News Feed</a>
-                    </li>
-                </ul>
-            </li>
+           @include('user.includes.share')
             <!-- Card share action END -->
         </ul>
         <!-- Feed react END -->
 
         <!-- Add comment -->
-        <div class="d-flex mb-3">
-            @if($client->image)
-            <!-- Avatar -->
-            <div class="avatar avatar-xs me-2">
-                <a href="#!"> <img class="avatar-img rounded-circle"
-                        src="{{asset('public/uploads/client/' . $client->image)}}" alt=""> </a>
-            </div>
-            @else
-            <a href="#!"><img class="avatar-img rounded-circle"
-            src="{{asset('public/images/download.jpg')}}" alt=""></a>
-            @endif
-            <!-- Comment box  -->
-            <form class="nav nav-item w-100 position-relative">
-                <textarea data-autoresize="" class="form-control pe-5 bg-light" rows="1" placeholder="Add a comment..."></textarea>
-                <button
-                    class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0"
-                    type="submit">
-                    <i class="bi bi-send-fill"> </i>
-                </button>
-            </form>
-        </div>
-        <!-- Comment wrap START -->
-        <ul class="comment-wrap list-unstyled">
-            <!-- Comment item START -->
-            <li class="comment-item">
-                <div class="d-flex position-relative">
-                    <!-- Avatar -->
-                    <div class="avatar avatar-xs">
-                        <a href="#!"><img class="{{ asset('public/user/assets/avatar-img rounded-circle')}}"
-                                src="{{ asset('public/user/assets/images/avatar/05.jpg')}}" alt=""></a>
-                    </div>
-                    <div class="ms-2">
-                        <!-- Comment by -->
-                        <div class="bg-light rounded-start-top-0 p-3 rounded">
-                            <div class="d-flex justify-content-between">
-                                <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a></h6>
-                                <small class="ms-2">5hr</small>
-                            </div>
-                            <p class="small mb-0">Removed demands expense account in outward
-                                tedious do. Particular way thoroughly unaffected projection.</p>
-                        </div>
-                        <!-- Comment react -->
-                        <ul class="nav nav-divider py-2 small">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#!"> Like (3)</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#!"> Reply</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#!"> View 5 replies</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Comment item nested START -->
-                <ul class="comment-item-nested list-unstyled">
-                    <!-- Comment item START -->
-                    <li class="comment-item">
-                        <div class="d-flex">
-                            <!-- Avatar -->
-                            <div class="avatar avatar-xs">
-                                <a href="#!"><img class="avatar-img rounded-circle"
-                                        src="{{ asset('public/user/assets/images/avatar/06.jpg')}}" alt=""></a>
-                            </div>
-                            <!-- Comment by -->
-                            <div class="ms-2">
-                                <div class="bg-light p-3 rounded">
-                                    <div class="d-flex justify-content-between">
-                                        <h6 class="mb-1"> <a href="#!"> Lori Stevens </a>
-                                        </h6>
-                                        <small class="ms-2">2hr</small>
-                                    </div>
-                                    <p class="small mb-0">See resolved goodness felicity shy
-                                        civility domestic had but Drawings offended yet answered
-                                        Jennings perceive.</p>
-                                </div>
-                                <!-- Comment react -->
-                                <ul class="nav nav-divider py-2 small">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#!"> Like (5)</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#!"> Reply</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- Comment item END -->
-                    <!-- Comment item START -->
-                    <li class="comment-item">
-                        <div class="d-flex">
-                            <!-- Avatar -->
-                            <div class="avatar avatar-story avatar-xs">
-                                <a href="#!"><img class="avatar-img rounded-circle"
-                                        src="{{ asset('public/user/assets/images/avatar/07.jpg')}}" alt=""></a>
-                            </div>
-                            <!-- Comment by -->
-                            <div class="ms-2">
-                                <div class="bg-light p-3 rounded">
-                                    <div class="d-flex justify-content-between">
-                                        <h6 class="mb-1"> <a href="#!"> Billy Vasquez </a>
-                                        </h6>
-                                        <small class="ms-2">15min</small>
-                                    </div>
-                                    <p class="small mb-0">Wishing calling is warrant settled was
-                                        lucky.</p>
-                                </div>
-                                <!-- Comment react -->
-                                <ul class="nav nav-divider py-2 small">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#!"> Like</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#!"> Reply</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- Comment item END -->
-                </ul>
-                <!-- Load more replies -->
-                <a href="#!" role="button"
-                    class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center mb-3 ms-5"
-                    data-bs-toggle="button" aria-pressed="true">
-                    <div class="spinner-dots me-2">
-                        <span class="spinner-dot"></span>
-                        <span class="spinner-dot"></span>
-                        <span class="spinner-dot"></span>
-                    </div>
-                    Load more replies
-                </a>
-                <!-- Comment item nested END -->
-            </li>
-            <!-- Comment item END -->
-            <!-- Comment item START -->
-            <li class="comment-item">
-                <div class="d-flex">
-                    <!-- Avatar -->
-                    <div class="avatar avatar-xs">
-                        <a href="#!"><img class="avatar-img rounded-circle"
-                                src="{{ asset('public/user/assets/images/avatar/05.jpg')}}" alt=""></a>
-                    </div>
-                    <!-- Comment by -->
-                    <div class="ms-2">
-                        <div class="bg-light p-3 rounded">
-                            <div class="d-flex justify-content-between">
-                                <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a> </h6>
-                                <small class="ms-2">4min</small>
-                            </div>
-                            <p class="small mb-0">Removed demands expense account in outward
-                                tedious do. Particular way thoroughly unaffected projection.</p>
-                        </div>
-                        <!-- Comment react -->
-                        <ul class="nav nav-divider pt-2 small">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#!"> Like (1)</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#!"> Reply</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#!"> View 6 replies</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-            <!-- Comment item END -->
-        </ul>
+        @include('user.includes.comment')
         <!-- Comment wrap END -->
     </div>
     <!-- Card body END -->

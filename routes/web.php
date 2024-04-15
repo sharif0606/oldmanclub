@@ -76,6 +76,7 @@ use App\Http\Controllers\User\CompanyController as company;
 use App\Http\Controllers\User\BankController as bank;
 use App\Http\Controllers\User\PostController as post;
 use App\Http\Controllers\PurchaseSmsController as purchase;
+use App\Http\Controllers\FollowController as follow;
 
 // landing page
 use App\Http\Controllers\Common\frontendController as frontend;
@@ -229,6 +230,10 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::get('my-profile', [clientprofile::class, 'myProfile'])->name('myProfile');
     Route::get('my-profile-about', [clientprofile::class, 'myProfileAbout'])->name('myProfileAbout');
     Route::get('account-setting', [clientprofile::class, 'accountSetting'])->name('accountSetting');
+    Route::get('find-people', [clientprofile::class, 'search_by_people'])->name('search_by_people');
+    Route::resource('follow', follow::class);
+    Route::get('gathering', [clientprofile::class, 'gathering'])->name('gathering');
+
     Route::resource('phonebook', phonebook::class);
     Route::resource('phonegroup', phonegroup::class);
     Route::resource('shipping', shipping::class);
@@ -267,6 +272,11 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
 
     
 
+});
+Route::middleware(['checkclient'])->group(function () {
+    Route::get('{username}', [clientprofile::class, 'client_by_search'])->name('client_by_search');
+    Route::get('{username}/profile', [clientprofile::class, 'usernameProfile'])->name('usernameProfile');
+    Route::get('{username}/profile-about', [clientprofile::class, 'usernameProfileAbout'])->name('usernameProfileAbout');
 });
 Route::get('nfcqrurl/{id}/{client_id}', [nfc_card::class, 'showqrurl']);
 Route::get('save-contact/{id}', [nfc_card::class, 'save_contact'])->name('save_contact');

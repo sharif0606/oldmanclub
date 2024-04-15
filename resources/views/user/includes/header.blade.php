@@ -33,9 +33,10 @@
                 <!-- Nav Search START -->
                 <div class="nav mt-3 mt-lg-0 flex-nowrap align-items-center px-4 px-lg-0">
                     <div class="nav-item w-100">
-                        <form class="rounded position-relative">
+                        <form class="rounded position-relative" action="{{route('search_by_people')}}">
+                            @csrf
                             <input class="form-control ps-5 bg-light" type="search" placeholder="Search..."
-                                aria-label="Search">
+                                aria-label="Search" name="search" required>
                             <button
                                 class="btn bg-transparent px-2 py-0 position-absolute top-50 start-0 translate-middle-y"
                                 type="submit"><i class="bi bi-search fs-5"> </i></button>
@@ -245,14 +246,14 @@
                     </div> --}}
                 </li>
                 <!-- Notification dropdown END -->
-
+                @php $cur_client = \App\Models\User\Client::where('id',currentUserId())->first();@endphp
                 <li class="nav-item ms-2 dropdown">
                     <a class="nav-link btn icon-md p-0" href="#" id="profileDropdown" role="button"
                         data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        @if($client->image)
+                        @if($cur_client->image)
                         <img class="avatar-img rounded-circle border border-white border-3"
-                            src="{{asset('public/uploads/client/' . $client->image)}}" alt="">
+                            src="{{asset('public/uploads/client/' . $cur_client->image)}}" alt="">
                         @else
                         <img class="avatar-img rounded-circle border border-white border-3"
                             src="{{asset('public/images/download.jpg')}}" alt="">
@@ -264,23 +265,43 @@
                         <!-- Profile info -->
                         <li class="px-3">
                             <div class="d-flex align-items-center position-relative">
-                                <!-- Avatar -->
-                                <div class="avatar me-3">
-                                    @if($client->image)
-                                    <img class="avatar-img rounded-circle"
-                                        src="{{asset('public/uploads/client/' . $client->image)}}" alt="">
-                                    @else
-                                    <img class="avatar-img rounded-circle "
-                                        src="{{asset('public/images/download.jpg')}}" alt="">
-                                    @endif
-                                    {{--<img class="avatar-img rounded-circle"
-                                        src="{{ asset($client->image?$client->image:default_image()) }}"
-                                        alt="avatar">--}}
-                                </div>
-                                <div>
-                                    <a class="h6 stretched-link" href="#">{{$client->middle_name}} {{$client->last_name}}</a>
-                                    {{-- <p class="small m-0">Web Developer</p> --}}
-                                </div>
+                                @if (search_client())
+                                    <!-- Avatar -->
+                                    <div class="avatar me-3">
+                                        @if($cur_client->image)
+                                        <img class="avatar-img rounded-circle"
+                                            src="{{asset('public/uploads/client/' . $cur_client->image)}}" alt="">
+                                        @else
+                                        <img class="avatar-img rounded-circle "
+                                            src="{{asset('public/images/download.jpg')}}" alt="">
+                                        @endif
+                                        {{--<img class="avatar-img rounded-circle"
+                                            src="{{ asset($client->image?$client->image:default_image()) }}"
+                                            alt="avatar">--}}
+                                    </div>
+                                    <div>
+                                        <a class="h6 stretched-link" href="#">{{$cur_client->fname}} {{$cur_client->middle_name}} {{$cur_client->last_name}}</a>
+                                        {{-- <p class="small m-0">Web Developer</p> --}}
+                                    </div>
+                                @else
+                                    <!-- Avatar -->
+                                    <div class="avatar me-3">
+                                        @if($client->image)
+                                        <img class="avatar-img rounded-circle"
+                                            src="{{asset('public/uploads/client/' . $client->image)}}" alt="">
+                                        @else
+                                        <img class="avatar-img rounded-circle "
+                                            src="{{asset('public/images/download.jpg')}}" alt="">
+                                        @endif
+                                        {{--<img class="avatar-img rounded-circle"
+                                            src="{{ asset($client->image?$client->image:default_image()) }}"
+                                            alt="avatar">--}}
+                                    </div>
+                                    <div>
+                                        <a class="h6 stretched-link" href="#">{{$client->fname}} {{$client->middle_name}} {{$client->last_name}}</a>
+                                        {{-- <p class="small m-0">Web Developer</p> --}}
+                                    </div>
+                                @endif
                             </div>
                             <a class="dropdown-item btn btn-primary-soft btn-sm my-2 text-center"
                                 href="{{route('myProfile')}}">View profile</a>

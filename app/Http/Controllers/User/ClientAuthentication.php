@@ -66,7 +66,13 @@ class ClientAuthentication extends Controller
             $user->status = 1;
             $user->password = Hash::make($request->password);
 
-
+            // Generate username based on middle and last name
+            $username = strtolower(substr($request->middle_name, 0, 1) . $request->last_name);
+            $count = Client::where('username', 'like', $username . '%')->count();
+            if ($count > 0) {
+                $username .= $count + 1;
+            }
+            $user->username = $username;
 
             if ($user->save()) {
 
@@ -149,7 +155,7 @@ class ClientAuthentication extends Controller
     public function singOut()
     {
         //request()->session()->flush();
-        request()->session()->forget(['userId', 'userName']);
+        request()->session()->forget(['userId', 'username']);
         return redirect()->route('clientlogin')->with('danger', 'Succfully Logged Out');
     }
     public function forget_password()
