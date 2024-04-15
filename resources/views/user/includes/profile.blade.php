@@ -28,14 +28,14 @@
             </div>
             <div class="ms-sm-4 mt-sm-3">
                 <!-- Info -->
-                <h1 class="mb-0 h5">{{$client->middle_name}} {{$client->last_name}}
+                <h1 class="mb-0 h5">{{$client->fname}} {{$client->middle_name}} {{$client->last_name}}
                 @if($client->is_address_verified==1)
                     <i class="bi bi-patch-check-fill text-success small"></i>
                 @else
                     {{-- <i class="bi bi-file-x-fill text-danger small"></i> --}}
                 @endif
                 </h1>
-                <p class="mb-1"><span>1.2M Followers</span><span class="mx-2" style="border-right: 2px solid #EFF2F6;"></span><span>2.5K Following</span></p>
+                <p class="mb-1"><span>{{ $client->formatted_followers_count }}</span><span class="mx-2" style="border-right: 2px solid #EFF2F6;"></span><span>{{ $client->formatted_followings_count }}</span></p>
                 <div class="w-100">
                   <!-- Connections START -->
                   {{-- <ul class="avatar-group mt-1 list-unstyled align-items-sm-center">

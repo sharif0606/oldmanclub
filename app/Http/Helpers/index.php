@@ -79,6 +79,10 @@ function limitWordShow($string, $word_limit)
 function currentUserId(){
 	return encryptor('decrypt', request()->session()->get('userId'));
 }
+function search_client(){
+	return request()->session()->get('username');
+}
+
 function fullAccess(){
 	return encryptor('decrypt', request()->session()->get('accessType'));
 }
