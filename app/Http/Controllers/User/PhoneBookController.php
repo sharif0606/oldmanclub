@@ -203,7 +203,6 @@ class PhoneBookController extends Controller
             $sms->purchase_id = $request->purchase_id;
             $sms->save();
         }
-
         $this->notice::success('SMS successfully sent');
         return redirect()->route('sms_send');
     }

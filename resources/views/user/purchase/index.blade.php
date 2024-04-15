@@ -62,7 +62,6 @@
                                             {{-- <div class="avatar avatar-lg mt-n5 mb-3">
                                                 <a href="#"><img class="avatar-img rounded-circle border border-white border-3 bg-white" src="{{ asset('public/user/assets/images/logo/08.svg') }}" alt=""></a>
                                             </div> --}}
-                                            
                                             <h5 class="mb-0"><a href="#">@if($p->package?->package_type == 1){{ 'Regular' }} @else {{ 'Validity' }} @endif</a> </h5>
                                             <span class="fs-6 fw-bold text-dark px-2">Title:</span><span>{{ $p->package?->title }}</span><br>
                                             <span class="fs-6 fw-bold text-dark px-2">Number Of SMS:</span><span>{{ $p->package?->number_of_sms }}</span><br>

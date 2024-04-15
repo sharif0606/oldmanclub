@@ -10,8 +10,8 @@
                     <p class="fw-normal pt-1 pb-3">{{ $printinghero?->text_small }}
 
                     </p>
-                    <a href="#" class="print-btn print-contact-btn me-3">Contact Us</a>
-                    <a href="#" class="print-btn print-learn-more-btn">Learn More</a>
+                    <a href="{{ route('contact_create') }}" class="print-btn print-contact-btn me-3 text-uppercase">Contact Us</a>
+                    <a href="#" class="print-btn print-learn-more-btn text-uppercase">Learn More</a>
                 </div>
                 <div class="col-md-6 print-hero-image">
                     <img src="{{ asset('public/uploads/printservice/' . $printinghero?->hero_image) }}" alt="Hero Image" />
@@ -20,7 +20,7 @@
         </div>
         <div class="row py-4">
             <div class="col-md-12">
-                <h2 class="text-capitalize fw-bold text-center py-3 text-uppercase">Trusted By</h2>
+                <h2 class="fw-bold text-center py-3 text-uppercase">Trusted By</h2>
                 <img src="{{ asset('public/frontend/assets/image/Sponsored.png') }}" alt="" />
             </div>
         </div>
@@ -228,7 +228,7 @@
                 </div>
             </div>
             <div class="col-md-6 print-subscribe-btn text-center">
-                <a href="#" class="print-btn btn-primary print-contact-us-btn px-5 py-2">Contact Us</a>
+                <a href="{{ route('contact_create') }}" class="print-btn btn-primary print-contact-us-btn px-5 py-2 text-uppercase">Contact Us</a>
             </div>
         </div>
     </div>
