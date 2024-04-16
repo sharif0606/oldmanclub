@@ -58,13 +58,10 @@
                         <img src="{{asset('public/frontend/smartmailservice/white-shape.png')}}" alt="shape" class="w-100">
                     </div>
                     <div class="col-md-9 sign-up-text">
-<<<<<<< HEAD
-                    <h2 class="text-capitalize pb-4 pt-2">Sign up for a virtual mail box</h2>
+                    <h2 class="text-uppercase pb-4 pt-2">Sign up for a virtual mail box</h2>
                     <a href="{{ route('contact_create') }}" class="btn smart-btn-contact-us fw-medium text-uppercase">Contact With Us</a>
-=======
-                    <h2 class=" pb-4 pt-2 text-uppercase">Sign up for a virtual mail box</h2>
-                    <button class="btn smart-btn-contact-us fw-medium text-uppercase">Contact With Us</button>
->>>>>>> 66b64afa7ee90268d99fb0f21fa127bf965595c8
+                    {{-- <h2 class=" pb-4 pt-2 text-uppercase">Sign up for a virtual mail box</h2>
+                    <button class="btn smart-btn-contact-us fw-medium text-uppercase">Contact With Us</button> --}}
                     </div> 
                 </div>
             </div>

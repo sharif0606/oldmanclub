@@ -573,16 +573,16 @@
         margin-bottom: 30px;
     }
 
-    .video-container {
+    .nfc-video-container {
         position: relative;
-        width: 100%;
-        max-width: 800px;
+        /* width: 100%;
+        max-width: 800px; */
         margin: 0 auto;
         padding-bottom: 56.25%;
         /* 16:9 aspect ratio */
     }
 
-    .video-container iframe {
+    .nfc-video-container iframe {
         position: absolute;
         top: 0;
         left: 0;
@@ -597,12 +597,17 @@
     }
 
     .section-heading {
-        font-size: 36px;
+        /* font-size: 36px;
         font-weight: bold;
         color: #2F0549;
-        margin-bottom: 20px;
+        margin-bottom: 20px; */
+        padding: 60px;
     }
-
+@media(max-width:576px){
+    .section-heading{
+        padding-top: 0px;
+    }
+}
     .feature-list {
         padding-top: 15px;
         padding-left: 30px;
@@ -660,7 +665,7 @@
     }
 
     .subscribe-section {
-        padding: 40px;
+        padding: 20px;
     }
 
     .subscribe-content {
@@ -675,7 +680,7 @@
     }
 
     .contact-us-btn {
-        background-color: rgb(65, 72, 87) !important;
+        background-color: #2F0549 !important;
         color: white !important;
         border: 1px solid #2F0549 !important;
         /* padding: 10px 0px;  */
@@ -773,7 +778,7 @@
     .video-container {
         position: relative;
         width: 100%;
-        max-width: 800px;
+        /* max-width: 800px; */
         margin: 0 auto;
         padding-bottom: 56.25%;
         /* 16:9 aspect ratio */
@@ -788,15 +793,19 @@
     }
 
     .why-choose-us .benefits {
-        padding: 60px !important;
+        padding: 0px 60px !important;
     }
-
+    @media(max-width:576px){
+        .why-choose-us .benefits{
+            padding: 30px 60px !important;
+        }
+    }
     /* Help */
     .help {
         padding: 50px;
         background-color: #2F0549;
         color: white;
-        margin-bottom: -60px;
+        /* margin-bottom: -60px; */
         z-index: 1;
         position: relative;
     }
@@ -930,7 +939,7 @@
     .llc-video-container {
         position: relative;
         width: 100%;
-        max-width: 800px;
+        /* max-width: 800px; */
         margin: 0 auto;
         padding-bottom: 56.25%;
         /* 16:9 aspect ratio */
@@ -964,6 +973,7 @@
     .llc-pricing-card:hover {
         background-color: #2F0549;
         color: white;
+        cursor: pointer;
     }
 
     .llc-pricing-card .card-body {
@@ -976,6 +986,7 @@
 
     .llc-pricing-card :hover h3 {
         color: white;
+        
     }
 
     .llc-pricing-card hr {
@@ -1006,16 +1017,14 @@
         transition: background-color 0.3s, color 0.3s;
     }
 
-
-
-
     /* Card section */
     .llc-our-card {
-        padding: 0px 25px;
+        /* padding: 0px 25px; */
+        margin-top: -150px;
     }
 
     .llc-our-card-text {
-        padding-top: 170px;
+        padding-top: 175px;
     }
 
     .llc-our-card-image img {
@@ -1411,9 +1420,13 @@
     }
 
     .print-hero-image {
-        padding-left: 70px;
+        padding-left: 60px;
     }
-
+    @media(max-width:576px){
+        .print-hero-image{
+            padding-left: 0px;
+        }
+    }
     h1 {
         font-size: 36px;
         margin-bottom: 20px;
@@ -1442,7 +1455,11 @@
     .print-learn-more-btn {
         background-color: #ffffff !important;
         color: #2f0549 !important;
-        border: 2px solid #2f0549 !important;
+        border: 1px solid #2f0549 !important;
+    }
+    .print-learn-more-btn:hover{
+        background-color: #2f0549 !important;
+        color: #fff !important;
     }
 
     img {

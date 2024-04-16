@@ -10,7 +10,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 print-hero-section">
-                <div class="col-md-6 print-hero-content">
+                <div class="col-md-6  print-hero-content">
                     <h1 class="fw-bold py-2 text-uppercase">{{ $printinghero?->text_large }}</h1>
                     <p class="fw-normal pt-1 pb-3">{{ $printinghero?->text_small }}
 

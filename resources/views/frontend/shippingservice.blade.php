@@ -132,7 +132,7 @@
     </section>
 
     
-    <div class="shipping container help">
+    <div class="shipping container help mb-2">
         <div class="row">
             <div class="col-md-12 help-content text-center">
                 <div class="col-md-2">
