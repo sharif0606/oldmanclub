@@ -6,19 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Post extends Model
+class Reply extends Model
 {
-    use HasFactory , SoftDeletes;
-    protected $fillable = [
-        'message',
-        'client_id',
-        'image',
-    ];
+    use HasFactory,SoftDeletes;
     public function client(){
         return $this->belongsTo(Client::class ,'client_id','id');
     }
-    public function comments()
+    public function comment()
     {
-        return $this->hasMany(Comment::class);
+        return $this->belongsTo(Comment::class);
     }
 }

@@ -24,7 +24,8 @@ class ClientController extends Controller
     {
         session()->forget('username');
         $client = Client::withCount('followers', 'followings')->find(currentUserId());
-        $post = Post::where('client_id',currentUserId())->orderBy('created_at', 'desc')->get();
+        $post = Post::with('comments.replies')->where('client_id',currentUserId())->orderBy('created_at', 'desc')->get();
+        //dd($post);
         $postCount = Post::where('client_id', currentUserId())->count();
         return view('user.clientDashboard', compact('client','post','postCount'));
     }

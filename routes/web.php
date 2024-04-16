@@ -77,6 +77,10 @@ use App\Http\Controllers\User\BankController as bank;
 use App\Http\Controllers\User\PostController as post;
 use App\Http\Controllers\PurchaseSmsController as purchase;
 use App\Http\Controllers\FollowController as follow;
+use App\Http\Controllers\User\PostCommnetController as postcomment;
+use App\Http\Controllers\User\ReplyController as reply;
+use App\Http\Controllers\User\CommentReactionController as commentreaction;
+use App\Http\Controllers\User\ReplyReactionController as replyreaction;
 
 // landing page
 use App\Http\Controllers\Common\frontendController as frontend;
@@ -232,6 +236,10 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::get('account-setting', [clientprofile::class, 'accountSetting'])->name('accountSetting');
     Route::get('find-people', [clientprofile::class, 'search_by_people'])->name('search_by_people');
     Route::resource('follow', follow::class);
+    Route::resource('post-comment', postcomment::class);
+    Route::resource('reply', reply::class);
+    Route::resource('comment-reaction', commentreaction::class);
+    Route::resource('reply-reaction', replyreaction::class);
     Route::get('gathering', [clientprofile::class, 'gathering'])->name('gathering');
 
     Route::resource('phonebook', phonebook::class);
