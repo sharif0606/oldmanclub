@@ -1245,6 +1245,16 @@ JS libraries, plugins and custom scripts -->
                 }
             });
         });
+        /*==== Reply Comment====*/
+
+        // Function to toggle reply form visibility
+        $(".reply-btn").click(function() {
+            var commentId = $(this).data('comment-id');
+            var replyForm = $(this).closest('.comment-item').find('.reply-form');
+            replyForm.find('.comment-id').val(commentId);
+            replyForm.toggle();
+        });
+
     });
 </script>
     <!-- Bootstrap JS -->

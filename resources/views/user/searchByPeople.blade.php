@@ -161,7 +161,11 @@
                                     </div>
                                 </div>
                             @empty
-                                @if(!in_array($search_client_id->id,$followIds))
+                                @if($search_client_id)
+                                    @if(!in_array($search_client_id->id,$followIds))
+                                        @include('user.includes.no-people-found')
+                                    @endif
+                                    @else
                                     @include('user.includes.no-people-found')
                                 @endif
                             @endforelse
