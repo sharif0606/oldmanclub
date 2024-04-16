@@ -281,11 +281,7 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     
 
 });
-Route::middleware(['checkclient'])->group(function () {
-    Route::get('{username}', [clientprofile::class, 'client_by_search'])->name('client_by_search');
-    Route::get('{username}/profile', [clientprofile::class, 'usernameProfile'])->name('usernameProfile');
-    Route::get('{username}/profile-about', [clientprofile::class, 'usernameProfileAbout'])->name('usernameProfileAbout');
-});
+
 Route::get('nfcqrurl/{id}/{client_id}', [nfc_card::class, 'showqrurl']);
 Route::get('save-contact/{id}', [nfc_card::class, 'save_contact'])->name('save_contact');
 Route::post('/send-message', [ChatController::class, 'sendMessage']);
@@ -325,5 +321,11 @@ Route::post('/receive', 'App\Http\Controllers\PusherController@receive');
 /*===City and State ====*/
 Route::get('/states', [StateController::class,'getStatesByCountry'])->name('getStatesByCountry');
 Route::get('/cities', [CityController::class,'getCitiesByStates'])->name('getCitiesByStates');
+
+Route::middleware(['checkclient'])->group(function () {
+    Route::get('{username}', [clientprofile::class, 'client_by_search'])->name('client_by_search');
+    Route::get('{username}/profile', [clientprofile::class, 'usernameProfile'])->name('usernameProfile');
+    Route::get('{username}/profile-about', [clientprofile::class, 'usernameProfileAbout'])->name('usernameProfileAbout');
+});
 
 
