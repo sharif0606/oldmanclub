@@ -8,10 +8,12 @@ use App\Models\User\Country;
 use App\Models\User\City;
 use App\Models\User\State;
 use App\Models\Backend\PhoneBook;
+use App\Models\User\Follow;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use DB;
+use Session;
 class ClientController extends Controller
 {
     /**
@@ -20,27 +22,38 @@ class ClientController extends Controller
 
     public function index()
     {
-        $client = Client::find(currentUserId());
-        $post = Post::where('client_id',currentUserId())->orderBy('created_at', 'desc')->get();
+        session()->forget('username');
+        $client = Client::withCount('followers', 'followings')->find(currentUserId());
+        $post = Post::with('comments.replies')->where('client_id',currentUserId())->orderBy('created_at', 'desc')->get();
+        //dd($post);
         $postCount = Post::where('client_id', currentUserId())->count();
         return view('user.clientDashboard', compact('client','post','postCount'));
     }
     public function myProfile()
     {
+        session()->forget('username');
         $client = Client::find(currentUserId());
         $post = Post::where('client_id',currentUserId())->orderBy('created_at', 'desc')->get();
         return view('user.myProfile', compact('client','post'));
     }
     public function myProfileAbout()
     {
+        session()->forget('username');
         $client = Client::find(currentUserId());
         return view('user.myProfileAbout', compact('client'));
     }
     public function accountSetting()
     {
+        session()->forget('username');
         $client = Client::find(currentUserId());
         $countries = Country::get();
         return view('user.accountSetting', compact('client','countries'));
+    }
+    public function gathering(){
+        session()->forget('username');
+        $client = Client::find(currentUserId());
+        $post = Post::where('client_id','!=',currentUserId())->orderBy('id', 'desc')->get();
+        return view('user.includes.gathering',compact('client','post'));
     }
     // public function phonebook_list()
     // {
@@ -69,7 +82,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        //
+        dd($client);
     }
 
     /**
@@ -178,5 +191,61 @@ class ClientController extends Controller
                 'image' => $client->image ?? 'No Image Found'
             ]
         );
+    }
+    public function search_by_people(Request $request){
+        //dd(currentUserId());
+        $client = Client::with('followers')->find(currentUserId());
+
+        // Retrieve all follow IDs from the followers
+        // Enable query logging
+        DB::connection()->enableQueryLog();
+        $followIds = Follow::where('following_id',currentUserId())->pluck('follower_id')->toArray();
+        // Get the executed queries
+        $queries = DB::getQueryLog();
+
+        // Print the queries
+        /*foreach ($queries as $query) {
+            dump($query);
+        }*/
+        $search_by_people = trim($request->search);
+        
+        $follow_connections = Client::where(function ($query) use ($search_by_people) {
+            $query->where('fname', 'like', '%' . $search_by_people . '%')
+            ->orWhere('middle_name', 'like', '%' . $search_by_people . '%')
+            ->orWhere('last_name', 'like', '%' . $search_by_people . '%');
+        })
+        ->where('id', '!=',currentUserId())
+        ->whereNotIn('id', $followIds)
+        ->paginate(25);
+        $unfollow_connections = Follow::with('client')->where('following_id', '=',currentUserId())->get();
+
+        $search_client_id = Client::where(function ($query) use ($search_by_people) {
+            $query->where('fname', 'like', '%' . $search_by_people . '%')
+            ->orWhere('middle_name', 'like', '%' . $search_by_people . '%')
+            ->orWhere('last_name', 'like', '%' . $search_by_people . '%');
+        })->first();
+        return view('user.searchByPeople',compact('client','follow_connections','unfollow_connections','followIds','search_client_id'));
+    }
+    public function client_by_search($username)
+    {
+        session()->forget('username');
+        // Store the username in the session
+        Session::put('username', $username);
+        //dd($username);
+        $client = Client::where('username', 'like', "%$username%")->first();
+        $post = Post::where('client_id',$client->id)->orderBy('created_at', 'desc')->get();
+        $postCount = Post::where('client_id', currentUserId())->count();
+        return view('connection.connectionDashboard', compact('client','post','postCount'));
+    }
+    public function usernameProfile($username)
+    {
+        $client = Client::where('username', 'like', "%$username%")->first();
+        $post = Post::where('client_id',$client->id)->orderBy('created_at', 'desc')->get();
+        return view('user.myProfile', compact('client','post'));
+    }
+    public function usernameProfileAbout($username)
+    {
+        $client = Client::where('username', 'like', "%$username%")->first();
+        return view('user.myProfileAbout', compact('client'));
     }
 }

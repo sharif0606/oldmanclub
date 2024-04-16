@@ -10062,6 +10062,10 @@ textarea.form-control-lg {
 .rounded-circle {
   border-radius: 50% !important;
 }
+.rounded-border-10 {
+  border-radius: 10% !important;
+}
+
 
 .rounded-pill {
   border-radius: var(--bs-border-radius-pill) !important;
@@ -15851,7 +15855,7 @@ header {
 }
 header.fixed-top + main {
   padding-top: calc(1.5rem + 56px);
-  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
 .navbar-toggler .navbar-toggler-animation {

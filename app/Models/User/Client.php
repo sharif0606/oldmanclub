@@ -66,4 +66,37 @@ class Client extends Model
     public function city(){
         return $this->belongsTo(City::class);
     }
+    public function followers()
+    {
+        return $this->hasMany(Follow::class, 'following_id');
+    }
+    public function followings()
+    {
+        return $this->hasMany(Follow::class, 'follower_id');
+    }
+    public function getFormattedFollowersCountAttribute()
+    {
+        $count = $this->followers()->count();
+
+        if ($count >= 1000000) {
+            return number_format($count / 1000000, 1) . 'M Followers';
+        } elseif ($count >= 1000) {
+            return number_format($count / 1000, 1) . 'K Followers';
+        } else {
+            return $count . ' Followers';
+        }
+    }
+
+    public function getFormattedFollowingsCountAttribute()
+    {
+        $count = $this->followings()->count();
+
+        if ($count >= 1000000) {
+            return number_format($count / 1000000, 1) . 'M Following';
+        } elseif ($count >= 1000) {
+            return number_format($count / 1000, 1) . 'K Following';
+        } else {
+            return $count . ' Following';
+        }
+    }
 }

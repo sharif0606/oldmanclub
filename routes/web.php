@@ -76,6 +76,11 @@ use App\Http\Controllers\User\CompanyController as company;
 use App\Http\Controllers\User\BankController as bank;
 use App\Http\Controllers\User\PostController as post;
 use App\Http\Controllers\PurchaseSmsController as purchase;
+use App\Http\Controllers\FollowController as follow;
+use App\Http\Controllers\User\PostCommnetController as postcomment;
+use App\Http\Controllers\User\ReplyController as reply;
+use App\Http\Controllers\User\CommentReactionController as commentreaction;
+use App\Http\Controllers\User\ReplyReactionController as replyreaction;
 
 // landing page
 use App\Http\Controllers\Common\frontendController as frontend;
@@ -90,7 +95,7 @@ use App\Http\Controllers\Backend\Nfc\NfcCardController as nfc_card;
 // printing_service admin panelBackend\Printingservice
 
 use App\Http\Controllers\Backend\Printingservice\PrintingServiceController as print_service;
-use App\Http\Controllers\Backend\Printingservice\PrintingServiceImageController as print_service_image;
+//use App\Http\Controllers\Backend\Printingservice\PrintingServiceImageController as print_service_image;
 
 /*== for Mail and other Send Purpose ==*/
 use App\Http\Controllers\TestController as test;
@@ -145,7 +150,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('print_service', print_service::class);
     Route::get('print_image/{id}', [print_service::class,'uploadfile'])->name('uploadimage');
     Route::post('print_image/{id}', [print_service::class,'uploadfile_store'])->name('uploadfile_store');
-    Route::resource('print_service_image', print_service_image::class);
+    //Route::resource('print_service_image', print_service_image::class);
 
     Route::get('comment_list', [CommentController::class, 'comment_list'])->name('comment_list');
     Route::get('comment_edit/{id}', [CommentController::class, 'comment_edit'])->name('comment_edit');
@@ -163,6 +168,7 @@ Route::prefix('admin')->group(function () {
     Route::post('bank_update/{id}',[BankController::class,'bank_update'])->name('bank_update');
     Route::get('post_list',[PostController::class,'post_list'])->name('post_list');
     Route::get('contact/list',[contact::class,'contact_list'])->name('contact_list');
+
 
 
     //website
@@ -228,6 +234,14 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::get('my-profile', [clientprofile::class, 'myProfile'])->name('myProfile');
     Route::get('my-profile-about', [clientprofile::class, 'myProfileAbout'])->name('myProfileAbout');
     Route::get('account-setting', [clientprofile::class, 'accountSetting'])->name('accountSetting');
+    Route::get('find-people', [clientprofile::class, 'search_by_people'])->name('search_by_people');
+    Route::resource('follow', follow::class);
+    Route::resource('post-comment', postcomment::class);
+    Route::resource('reply', reply::class);
+    Route::resource('comment-reaction', commentreaction::class);
+    Route::resource('reply-reaction', replyreaction::class);
+    Route::get('gathering', [clientprofile::class, 'gathering'])->name('gathering');
+
     Route::resource('phonebook', phonebook::class);
     Route::resource('phonegroup', phonegroup::class);
     Route::resource('shipping', shipping::class);
@@ -266,6 +280,11 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
 
     
 
+});
+Route::middleware(['checkclient'])->group(function () {
+    Route::get('{username}', [clientprofile::class, 'client_by_search'])->name('client_by_search');
+    Route::get('{username}/profile', [clientprofile::class, 'usernameProfile'])->name('usernameProfile');
+    Route::get('{username}/profile-about', [clientprofile::class, 'usernameProfileAbout'])->name('usernameProfileAbout');
 });
 Route::get('nfcqrurl/{id}/{client_id}', [nfc_card::class, 'showqrurl']);
 Route::get('save-contact/{id}', [nfc_card::class, 'save_contact'])->name('save_contact');

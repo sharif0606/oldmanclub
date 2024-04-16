@@ -16,13 +16,15 @@ class DatabaseSeeder extends Seeder
             [
                 //NfcFieldSeeder::class,
                 //NfcInformationSeeder::class,
-                CountriesSeeder::class,
-                StateSeeder::class,
-                CitiesSeeder::class
+                //CountriesSeeder::class,
+                //StateSeeder::class,
+                //CitiesSeeder::class
+                ClientSeeder::class,
+                PostSeeder::class
             ]
         );
 
-        // \App\Models\User::factory(10)->create();
+       
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
