@@ -83,10 +83,10 @@
                           <div class="card-body text-center pt-0">
                             <!-- Avatar -->
                               <div class="avatar avatar-lg mt-n5 mb-3">
-                                <a href="#"><img class="avatar-img rounded-circle border border-white border-3 bg-white" src="{{ asset('public/user/assets/images/logo/08.svg') }}" alt=""></a>
+                                <img class="avatar-img rounded-circle border border-white border-3 bg-white" src="{{ asset('public/user/assets/images/logo/08.svg') }}" alt="">
                               </div>
                              
-                              <h5 class="mb-0"> <a href="#">{{ $p->group_name }}</a> </h5>
+                              <h5 class="mb-0"> {{ $p->group_name }} </h5>
                               <small> <i class="bi bi-lock pe-1"></i> Private Group</small>
                              
                               <div class="hstack gap-2 gap-xl-3 justify-content-center mt-3">

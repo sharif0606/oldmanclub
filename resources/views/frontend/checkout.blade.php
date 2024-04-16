@@ -61,11 +61,11 @@
                                             <input name="quantity" type="hidden" value="1">
                                             <input type="submit" name="op" value="+"
                                                 style="padding:2px 8px;"
-                                                class="">
+                                                class="text-dark">
                                                 {{ $details['quantity'] }}
                                             <input type="submit" name="op" value="-"
                                                 style="padding:2px 8px;"
-                                                class="">
+                                                class="text-dark">
                                         </form>
 
                                         <form method="POST"

@@ -60,9 +60,9 @@
                                                 <a href="#"><img class="avatar-img rounded-circle border border-white border-3 bg-white" src="{{ asset('public/user/assets/images/logo/08.svg') }}" alt=""></a>
                                             </div> --}}
                                             
-                                            <h5 class="mb-0"> <a href="#">{{ $p->name_en }}</a> </h5>
-                                            <h6 class="mb-0"> <a href="#">{{ $p->contact_en }}</a> </h6>
-                                            <h6 class="mb-0"> <a href="#">{{ $p->email }}</a> </h6>
+                                            <h5 class="mb-0"> {{ $p->name_en }} </h5>
+                                            <h6 class="mb-0"> {{ $p->contact_en }} </h6>
+                                            <h6 class="mb-0"> {{ $p->email }}</h6>
                                             <small> <i class="bi bi-lock pe-1"></i> {{$p->phonegroup?->group_name}}</small>
                                         </div>
                                         <div class="d-flex">

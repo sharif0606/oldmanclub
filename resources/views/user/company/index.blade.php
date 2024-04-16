@@ -45,43 +45,43 @@
                     <div class="row g-4">
                         @foreach($company as $p)
                         <div class="col-sm-6 col-lg-4">
-                        <a href="{{route('company.show',encryptor('encrypt',$p->id))}}" class="">
-                        <div class="card">
-                            @if($p->company_image)
-                            <div class="h-80px rounded-top" style="background-image: url({{asset('public/uploads/company/'.$p->company_image)}}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
-                            @else
-                            <div class="h-80px rounded-top" style="background-image: url({{asset('public/user/assets/images/bg/firstimg.jpg')}}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
-                            @endif
-                            <div class="card-body text-center pt-0">
-                                <div class="avatar avatar-lg mt-n5 mb-3">
-                                    @if($p->company_logo)
-                                    <a href="#"><img class="avatar-img rounded-circle border border-white border-3 bg-white" src="{{ asset('public/uploads/company/'.$p->company_logo) }}" alt=""></a>
+                            <a href="{{route('company.show',encryptor('encrypt',$p->id))}}" class="">
+                                <div class="card">
+                                    @if($p->company_image)
+                                    <div class="h-80px rounded-top" style="background-image: url({{asset('public/uploads/company/'.$p->company_image)}}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
                                     @else
-                                    <a href="#"><img class="avatar-img rounded-circle border border-white border-3 bg-white" src="{{ asset('public/user/assets/images/logo/08.svg') }}" alt=""></a>
+                                    <div class="h-80px rounded-top" style="background-image: url({{asset('public/user/assets/images/bg/firstimg.jpg')}}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
                                     @endif
-                                    {{-- @if($p->qrcode)
-                                        <i class="bi bi-patch-check-fill text-success small"></i>
-                                    @else
-                                        <i class="bi bi-file-x-fill text-danger small"></i>
-                                    @endif --}}
+                                    <div class="card-body text-center pt-0">
+                                        <div class="avatar avatar-lg mt-n5 mb-3">
+                                            @if($p->company_logo)
+                                            <img class="avatar-img rounded-circle border border-white border-3 bg-white" src="{{ asset('public/uploads/company/'.$p->company_logo) }}" alt="">
+                                            @else
+                                            <img class="avatar-img rounded-circle border border-white border-3 bg-white" src="{{ asset('public/user/assets/images/logo/08.svg') }}" alt="">
+                                            @endif
+                                            {{-- @if($p->qrcode)
+                                                <i class="bi bi-patch-check-fill text-success small"></i>
+                                            @else
+                                                <i class="bi bi-file-x-fill text-danger small"></i>
+                                            @endif --}}
+                                        </div>
+                                        <h5 class="mb-0"> {{ $p->company_name }}</h5>
+                                        <p class="mb-0"><strong>{{ $p->email }}</strong></p>
+                                        <p class="mb-0"><strong>{{ $p->contact_no }}</strong></p>
+                                        <p><strong>{{ $p->phone_number }}</strong></p>
+                                    
+                                    </div>
+                                    <div class="d-flex">
+                                        <a href="{{route('company.edit',encryptor('encrypt',$p->id))}}" class="btn btn-success-soft text-center w-50"><i class="fa fa-edit"></i></a>
+                                        <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()" class="btn btn-danger-soft text-center w-50"><i class="fa fa-trash"></i>
+                                        </a>
+                                        <form id="form{{$p->id}}" action="{{route('company.destroy',encryptor('encrypt',$p->id))}}" method="post">
+                                            @csrf
+                                            @method('delete')
+                                        </form>
+                                    </div>
                                 </div>
-                                <h5 class="mb-0"> <a href="#">{{ $p->company_name }}</a> </h5>
-                                <p class="mb-0"><strong>{{ $p->email }}</strong></p>
-                                <p class="mb-0"><strong>{{ $p->contact_no }}</strong></p>
-                                <p><strong>{{ $p->phone_number }}</strong></p>
-                               
-                            </div>
-                            <div class="d-flex">
-                                <a href="{{route('company.edit',encryptor('encrypt',$p->id))}}" class="btn btn-success-soft text-center w-50"><i class="fa fa-edit"></i></a>
-                                <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()" class="btn btn-danger-soft text-center w-50"><i class="fa fa-trash"></i>
-                                </a>
-                                <form id="form{{$p->id}}" action="{{route('company.destroy',encryptor('encrypt',$p->id))}}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                </form>
-                            </div>
-                        </div>
-                        </a>
+                            </a>
                         </div>
                         @endforeach
                     </div>

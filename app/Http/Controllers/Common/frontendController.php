@@ -31,7 +31,7 @@ class frontendController extends Controller
         $slider = Slider::get();
         $services = OurServices::get();
         $homepage = Homepage::first();
-        $feedback = CustomerFeedback::get();
+        $feedback = CustomerFeedback::where('show_hide',1)->get();
         $globalnetwork = GlobalNetWorkImage::get();
         return view('frontend.home',compact('setting','slider','services','homepage','feedback','globalnetwork'));
     }

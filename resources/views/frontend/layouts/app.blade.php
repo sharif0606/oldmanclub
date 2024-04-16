@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{asset('public/frontend/assets/styles.css')}}">
     @stack('styles')
@@ -22,7 +22,7 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-white">
                 <div class="container">
                     <img src="{{asset('public/uploads/setting/'.$setting?->header_logo)}}" alt="Logo" class="logo">
-                    <h4 class="text company">{{$setting?->company_name}}</h4>
+                    <h4 class="text company pt-2">{{$setting?->company_name}}</h4>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                         aria-label="Toggle navigation">
@@ -44,12 +44,12 @@
                                 </ul>
                             </li>
 
-                            {{-- <li class="nav-item"><a href="#" class="nav-link">Testimonials</a></li> --}}
+                            
                             <li class="nav-item"><a href="{{route("contact_create")}}" class="nav-link text-uppercase">Contact Us</a></li>
 
-                            {{-- <li class="nav-item"><a href="#" class="nav-link">Testimonials</a></li> --}}
-                            {{-- <li class="nav-item"><a href="#" class="nav-link">Contact Us</a></li> --}}
-
+                            {{-- <li class="nav-item text-uppercase"><a href="#" class="nav-link">Testimonials</a></li>
+                            <li class="nav-item text-uppercase"><a href="#" class="nav-link">Contact Us</a></li> --}}
+                            
                         </ul>
                         <div class="navbar-right">
                             <a href="{{route('clientlogin')}}" class="btn btn-link ps-0 text-uppercase">Sign In</a>
@@ -80,8 +80,8 @@
             <div class="col-md-3 footer-column">
                 <!-- 1st Column -->
                 <img src="{{asset('public/uploads/setting/'.$setting?->footer_logo)}}" alt="Logo" class="logo">
-                <p>{{$setting?->footer_text}}</p>
-                <div class="d-flex">
+                <p class="mb-0">{{$setting?->footer_text}}</p>
+                <div class="d-flex mt-0 social_image">
                     <a class="btn btn-square social_icon rounded-circle p-2" href="{{$setting?->twitter_icon}}"><i class="fab fa-twitter"></i></a>
                     <a class="btn btn-square social_icon rounded-circle  p-2" href="{{$setting?->facebook_icon}}"><i class="fab fa-facebook-f"></i></a>
                     <a class="btn btn-square social_icon rounded-circle  p-2" href="{{$setting?->instagram_icon}}"><i class="bi bi-instagram"></i></a>
@@ -89,7 +89,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3 footer-column">
+            <div class="col-md-3 footer-column two">
                 <!-- 2nd Column -->
                 <h3 class="footer-heading">PRODUCT</h3>
                 <ul class="footer-links">
@@ -101,7 +101,7 @@
                 </ul>
             </div>
 
-            <div class="col-md-3 footer-column">
+            <div class="col-md-3 footer-column three">
                 <!-- 3rd Column -->
                 <h3 class="footer-heading">ENGAGE</h3>
                 <ul class="footer-links">
@@ -114,7 +114,7 @@
                 </ul>
             </div>
 
-            <div class="col-md-3 footer-column">
+            <div class="col-md-3 footer-column four">
                 <!-- 4th Column -->
                 <h3 class="footer-heading">EARN MONEY</h3>
                 <ul class="footer-links">
@@ -148,15 +148,22 @@
                 {
                     breakpoint:600,
                     settings:{
-                        slidesToShow:3,
+                        slidesToShow:1,
                         slidesToScroll:1
                     }
                 },
                 {
                     breakpoint:768,
                     settings:{
-                        slidesToShow:3,
+                        slidesToShow:2,
                         slidesToScroll:1
+                    }
+                },
+                {
+                    breakpoint:576,
+                    settings:{
+                        slidesToShow:1,
+                        slidesToScroll:1,
                     }
                 }
               ]
@@ -168,6 +175,17 @@
                 dots: true,
                 // autoplay: true,
                 // autoplaySpeed: 2000,
+                responsive:[
+                    {
+                        breakpoint:576,
+                        settings:{
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            arrows: false,
+                            dots: false,
+                        }
+                    }
+                ]
             });
         });
     </script>

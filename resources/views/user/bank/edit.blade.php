@@ -75,7 +75,7 @@
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="email">Email <i class="text-danger">*</i></label>
-                                                <input type="text" id="email" class="form-control" value="{{ old('email',$bank->contact_no)}}" name="email">
+                                                <input type="text" id="email" class="form-control" value="{{ old('email',$bank->email)}}" name="email">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-4">

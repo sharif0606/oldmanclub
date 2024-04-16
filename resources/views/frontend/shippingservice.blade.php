@@ -10,7 +10,7 @@
                     <a href="#" class="btn learn-more-btn text-uppercase">Learn More</a>
                 </div>
                 <div class="col-md-6">
-                     <img width="400px" height="450px" class="ms-3" src="{{asset('public/uploads/shipping/'.$heading?->header_image)}}" alt="Shipping Image">
+                     <img width="400px" height="450px" class="ms-3 shipping-head-img" src="{{asset('public/uploads/shipping/'.$heading?->header_image)}}" alt="Shipping Image">
                 </div>
            
         </div>
@@ -132,7 +132,7 @@
     </section>
 
     
-    <div class="shipping container help">
+    <div class="shipping container help mb-2">
         <div class="row">
             <div class="col-md-12 help-content text-center">
                 <div class="col-md-2">

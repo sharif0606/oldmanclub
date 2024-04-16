@@ -14,7 +14,7 @@
                             <p>{{$s->text_small}}</p>
                             <a href="{{$s->link}}" class="btn btn-warning px-5 py-2 mt-4">Get Started</a>
                         </div>
-                        <div class="col-md-7 col-sm-6 slider-image">
+                        <div class="col-md-7 col-sm-6 slider-image d-none d-sm-block">
                                 <img src="{{asset('public/uploads/slider/'.$s->image)}}" alt="Slider Image 1" class="img-fluid">
                         </div>
                     </div>
@@ -29,15 +29,15 @@
                             <div class="card-group">
                                 <div class="card">
                                     <img src="{{asset('public/images/icon/user.png')}}" class="mx-3 mt-3" width="50px" height="50px" alt="" srcset="">
-                                    <p class="location"><b >90K+</b> <br>Users</p>
+                                    <p class="location pe-2"><b >90K+</b> <br>Users</p>
                                 </div>
                                 <div class="card">
                                 <img src="{{asset('public/images/icon/location.png')}}" class="mx-3 mt-3" width="50px" height="50px" alt="" srcset="">
-                                    <p class="location"><b >200+</b> <br> Locations</p>
+                                    <p class="location pe-2"><b >200+</b> <br> Locations</p>
                                 </div>
                                 <div class="card">
                                 <img src="{{asset('public/images/icon/Server.png')}}" class="mx-3 mt-3" width="50px" height="50px" alt="" srcset="">
-                                    <p class="location"><b class="fw-bolder">50+</b><br>Banks</p>
+                                    <p class="location pe-2"><b class="fw-bolder">50+</b><br>Banks</p>
                                 </div>
                             </div>
                         </section>
@@ -131,16 +131,30 @@
                     <div class="testimonial-slider">
                         <!-- Testimonial 1 -->
                         @foreach($feedback as $value)
-                        <div class="col-sm-4">
+                        <div class="col-md-4 col-sm-6">
                             <div class="card testimonial-item">
-                                <div class="card-body h-100">
-                                    <div class="row">
-                                        <div class="col-md-2">
+                                <div class="card-body">
+                                    {{-- <div class="row"> --}}
+                                        <div class="d-flex">
+                                            <img src="{{asset('public/uploads/client/'.$value->client?->image)}}" alt="Customer 1" class="rounded-circle" width="100px">
+                                            <p class="fw-bold  text-center mx-auto mt-5">
+                                                {{$value->client?->fname}}  
+                                                {{$value->client?->middle_name}}  
+                                                {{$value->client?->last_name}}  
+                                            </p>
+                                            <span class="rating-number ms-auto">{{$value->rate}}</span>  
+                                        </div>
+                                       
+                                        <p class="">
+                                            {{$value->client?->address_line_1}}
+                                        </p>
+                                       
+                                        {{-- <div class="col-sm-2">
                                             <div class="customer-info">
                                                 <img src="{{asset('public/uploads/client/'.$value->client?->image)}}" alt="Customer 1" class="rounded-circle" width="100px">
                                             </div>
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-sm-8">
                                             <div class="customer-details">
                                                 <p class="fw-bold">
                                                     {{$value->client?->fname}}  
@@ -152,14 +166,16 @@
                                                 </p>                                 
                                             </div>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="col-sm-2">
                                             <div class="rating">
                                                 <span class="rating-number">{{$value->rate}}</span>
-                                                {{-- <span class="star-icon">&#9733;</span> --}}
+                                                
                                             </div>
-                                        </div>
-                                    </div>
+                                        </div> --}}
+                                    {{-- </div> --}}
                                     <div class="customer-review">
+                                        {{-- <p>{!! \Illuminate\Support\Str::limit($value->message, 150, '...') !!}</p> --}}
+                                        
                                         <p>"{{$value->message}}"</p>
                                     </div>
                                 </div>

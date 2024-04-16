@@ -8,8 +8,9 @@
         </div>
     </div>
 </div> --}}
-<div class="contact-section">
-        <div class="contact-images col-md-3">
+
+    <div class="contact-section">
+        <div class="contact-images col-md-3 d-none d-sm-block">
             <img src="{{ asset('public/frontend/assets/image/Ellipse 1221.png')}}" alt="Image 1">
         </div>
 
@@ -62,7 +63,7 @@
             </form>
         </div>
 
-        <div class="contact-images col-md-3">
+        <div class="contact-images col-md-3 d-none d-sm-block">
             <img src="{{ asset('public/frontend/assets/image/Ellipse 1222.png')}}" alt="Image 2">
         </div>
     </div>
