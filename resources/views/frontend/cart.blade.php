@@ -14,7 +14,7 @@
             background-color: #2F0549;
         }
     </style>
-    <div class="container  my-5">
+    <div class="container my-5">
         @if (session('cart'))
         <div class="row">
             <h2 class="text-center mt-2 fw-bold">Shopping Cart</h2>
@@ -92,7 +92,7 @@
                     @endif
                     </tbody>
                 </table>
-             </div>
+            </div>
         </div>
        
         <div class="row mt-2">
@@ -131,10 +131,11 @@
             </div>
         </div>
         @else
-        <div class="container text-center mb-3">
-            <div class="card">
-                <h1>Your Cart is Empty</h1>
-                <h5>No Item in Your Cart Yet</h5>
+        <div class="container text-center mb-5">
+            <div class="col-sm-12">
+                <img src="{{ asset('public/frontend/assets/image/shopping_cart.jpeg') }}" alt="" width="400px">
+                <h1>You have no items in your shopping cart.</h1>
+                <a href="{{ route('printservice') }}" class="btn btn-warning fw-bold px-5 mb-5">Continue Shopping</a>
             </div>
         </div>
         @endif
