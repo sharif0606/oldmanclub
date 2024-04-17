@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->unsignedBigInteger('purchase_id')->index();
             $table->foreign('purchase_id')->references('id')->on('purchase_sms')->onDelete('cascade');
+            $table->string('name')->nullable();
             $table->integer('contact_no');
             $table->string('message_body');
             $table->timestamps();

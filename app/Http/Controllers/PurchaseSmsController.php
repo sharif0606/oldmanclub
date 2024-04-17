@@ -39,28 +39,28 @@ class PurchaseSmsController extends Controller
      */
     public function store(Request $request)
     {
-        $existingmspackage =PurchaseSms::where('client_id',currentUserId())->where('smspackage_id',$request->smspackage_id)->first();
-        if($existingmspackage){
-            $this->notice::error('You have already purchased this SMS package!');
-            return redirect()->route('purchase.create');
-        }
-        // if($existingmspackage->smspackage_id && $existingmspackage->number_of_sms==0){
-        //     $smsPackage = SmsPackage::find($request->smspackage_id);
-        //     $purchase = new PurchaseSms;
-        //     $purchase->client_id = currentUserId();
-        //     $purchase->smspackage_id = $request->smspackage_id;
-        //     $purchase->number_of_sms = $request->number_of_sms;
-        //     $purchase->validity_count = now()->diffInDays($purchase->created_at) + $smsPackage->validity_days;
-
-        //     if($purchase->save()){
-        //         $this->notice::success('SMS successfully purchased');
-        //         return redirect()->route('purchase.index');
-        //     }
-        // }
-        // else{
+        $existingsmspackage =PurchaseSms::where('client_id',currentUserId())->where('smspackage_id',$request->smspackage_id)->first();
+        // if($existingmspackage){
         //     $this->notice::error('You have already purchased this SMS package!');
         //     return redirect()->route('purchase.create');
         // }
+        if(!$existingsmspackage || $existingsmspackage->number_of_sms == 0){
+            $smsPackage = SmsPackage::find($request->smspackage_id);
+            $purchase = new PurchaseSms;
+            $purchase->client_id = currentUserId();
+            $purchase->smspackage_id = $request->smspackage_id;
+            $purchase->number_of_sms = $request->number_of_sms;
+            $purchase->validity_count = now()->diffInDays($purchase->created_at) + $smsPackage->validity_days;
+
+            if($purchase->save()){
+                $this->notice::success('SMS successfully purchased');
+                return redirect()->route('purchase.index');
+            }
+        }
+        else{
+            $this->notice::error('You have already purchased this SMS package!');
+            return redirect()->route('purchase.create');
+        }
         $smsPackage = SmsPackage::find($request->smspackage_id);
 
         $purchase = new PurchaseSms;

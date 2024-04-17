@@ -35,7 +35,7 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">{{__('#SL')}}</th>
-                                                {{-- <th scope="col">{{__('Name')}}</th> --}}
+                                                <th scope="col">{{__('Name')}}</th>
                                                 <th scope="col">{{__('Phone Number')}}</th>
                                                 <th scope="col">{{__('Message')}}</th>
                                                 {{-- <th class="white-space-nowrap">{{__('Action') }}</th> --}}
@@ -45,7 +45,7 @@
                                             @forelse($data as $p)
                                             <tr>
                                                 <th scope="row">{{ ++$loop->index }}</th>
-                                                {{-- <td>{{$p->phonebook?->name_en}}</td> --}}
+                                                <td>{{$p->name}}</td>
                                                 <td>{{$p->contact_no}}</td>
                                                 <td>{{$p->message_body}}</td>
                                                 {{-- <td class="white-space-nowrap">
