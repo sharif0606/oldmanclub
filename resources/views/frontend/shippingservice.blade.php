@@ -1,15 +1,48 @@
 @extends('frontend.layouts.app')
 @section('title','Shipping Service')
 @section('content')
+@push('styles')
+<style>
+    .animate-left {
+        animation: slideInLeft 0.7s ease-out;
+    }
+
+    .animate-right {
+        animation: slideInRight 0.7s ease-out;
+    }
+
+    @keyframes slideInLeft {
+        from {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+</style>
+@endpush
     <div class="shipping container mt-5">
         <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 animate-right">
                     <h1 class="fw-bold py-2">{{$heading?->text_large}}</h1>
                     <p class="fw-normal pt-1 pb-3">{{$heading?->text_small}}</p>
                     <a href="{{route('contact_create')}}" class="btn contact-btn me-3 text-uppercase">Contact Us</a>
                     <a href="#" class="btn learn-more-btn text-uppercase">Learn More</a>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 animate-left">
                      <img width="400px" height="450px" class="ms-3 shipping-head-img" src="{{asset('public/uploads/shipping/'.$heading?->header_image)}}" alt="Shipping Image">
                 </div>
            

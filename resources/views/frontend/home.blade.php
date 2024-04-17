@@ -2,6 +2,7 @@
 @section('title','Old Club Man')
 @section('content')
 
+
     <!-- Hero section start -->
     <div class="container-fluid hero-section">
         <div class="container">
@@ -97,7 +98,7 @@
             {{-- <div class="container"> --}}
                 <div class="col-md-12">
                     <a href="">
-                        <img src="{{asset('public/uploads/homepage/'.$homepage?->special_offer_image)}}" alt="" class="" width="100%" height="300px">
+                        <img src="{{asset('public/uploads/homepage/'.$homepage?->special_offer_image)}}" alt="" class="" width="100%" height="400px">
                     </a>
                 </div>
             {{-- </div> --}}

@@ -1,9 +1,42 @@
 @extends('frontend.layouts.app')
 @section('title','NFC Card')
 @section('content')
+@push('styles')
+<style>
+    .animate-left {
+        animation: slideInLeft 0.7s ease-out;
+    }
+
+    .animate-right {
+        animation: slideInRight 0.7s ease-out;
+    }
+
+    @keyframes slideInLeft {
+        from {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+</style>
+@endpush
 <!-- Hero section -->
 <div class="container-fluid heading">
-        <div class="hero-text">
+        <div class="nfc-hero-text animate-right">
             <h1 class="hero-heading">{{$nfccardhero?->header_text_large}}</h1>
             <p class="hero-description">{{$nfccardhero?->header_text_small}}</p>
             <div class="hero-buttons">
@@ -11,7 +44,7 @@
                 <a href="#" class="btn see-guide-btn">See Guide</a>
             </div>
         </div>
-        <div class="hero-image">
+        <div class="hero-image animate-left">
             <img src="{{asset('public/uploads/nfccard/'.$nfccardhero->header_image)}}" alt="NFC Business Card" class="card-image">
         </div>
     </div>
@@ -20,7 +53,7 @@
     <div class="container feature-section">
         <div class="row">
             <div class="col-12">
-                <h2 class="feature-heading text-uppercase">nfc business card features</h2>
+                <h2 class="feature-heading text-uppercase py-5">nfc business card features</h2>
                 <div class="nfc-video-container embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item"
                             src="https://www.youtube.com/embed/{{$nfccardhero->video_link}}"

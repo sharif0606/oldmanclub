@@ -1,26 +1,59 @@
 @extends('frontend.layouts.app')
 @section('title','Phone Service')
 @section('content')
+@push('styles')
+<style>
+    .animate-left {
+        animation: slideInLeft 0.7s ease-out;
+    }
+
+    .animate-right {
+        animation: slideInRight 0.7s ease-out;
+    }
+
+    @keyframes slideInLeft {
+        from {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+</style>
+@endpush
     <!-- phone hero start -->
     
     <section class="phn-hero">
         <img src="{{asset('public/uploads/phoneservice/'.$phonehero?->background_image)}}" alt="" class="phn-hero-image">
         <div class="phn-hero-text">
-            <h2 class="fw-bold fs-1 text-uppercase">{{$phonehero?->text_large}}</h2>
-            <p class="py-3 fw-medium">{{$phonehero?->text_small}}</p>
+            <h2 class="fw-bold fs-1 text-uppercase animate-right">{{$phonehero?->text_large}}</h2>
+            <p class="py-3 fw-medium animate-left">{{$phonehero?->text_small}}</p>
             <div class="phn-hero-content mt-4">
                 <div class="row">
                     <div class="col-md-8">
                         <form action="#">                      
                             <div class="phn-search-box mb-3">
                                     <span class="phn-search-icon">&#128269;</span>
-                                    <input type="text" class="form-control py-3 px-5" placeholder="Enter Country & City">
+                                    <input type="text" class="form-control py-3 px-5 animate-right" placeholder="Enter Country & City">
                                     <span class="phn-arrow-icon">&#10148;</span>
                             </div>   
                         </form>
                     </div>
                     <div class="col-md-4">
-                        <button class="btn phn-search-btn fw-medium mx-3 py-3 px-5">Search</button>
+                        <button class="btn phn-search-btn fw-medium mx-3 py-3 px-5 animate-left">Search</button>
                     </div>
                 </div>
                 <div class="row">

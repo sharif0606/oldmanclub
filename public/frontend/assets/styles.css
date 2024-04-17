@@ -517,7 +517,10 @@
         max-width: 500px;
         padding-left: 90px;
     }
-
+    .nfc-hero-text{
+        max-width: 600px;
+        padding-left: 90px;
+    }
     .hero-heading {
         font-size: 36px;
         font-weight: bold;
@@ -1514,7 +1517,7 @@
     }
 
     .print-product-card {
-        width: 220px !important;
+        width: 290px !important;
         height: 315px !important;
         border: 1px solid #ddd;
         background-color: #fff;
