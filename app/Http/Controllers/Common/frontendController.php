@@ -29,13 +29,18 @@ class frontendController extends Controller
     public function frontend(){
         $setting = Setting::first();
         $slider = Slider::get();
-        $services = OurServices::get();
+        $services = OurServices::take(6)->get();
+        // $services = OurServices::get();
         $homepage = Homepage::first();
         $feedback = CustomerFeedback::where('show_hide',1)->get();
         $globalnetwork = GlobalNetWorkImage::get();
         return view('frontend.home',compact('setting','slider','services','homepage','feedback','globalnetwork'));
     }
-
+    public function allservice(){
+        $setting = Setting::first();
+        $services = OurServices::get();
+        return view('frontend.allservice',compact('setting','services'));
+    }
     public function nfccard(){
         $setting = Setting::first();
         $nfccardhero = \App\Models\Backend\Website\NfcCard\NfcCardImage::first();

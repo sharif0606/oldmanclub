@@ -293,6 +293,7 @@ Route::get('llcservice', [frontend::class, 'llcservice'])->name('llcservice');
 Route::get('phoneservice', [frontend::class, 'phoneservice'])->name('phoneservice');
 Route::get('smartmailservice', [frontend::class, 'smartmailservice'])->name('smartmailservice');
 Route::get('printservice', [frontend::class, 'printservice'])->name('printservice');
+Route::get('allservice', [frontend::class, 'allservice'])->name('allservice');
 Route::get('contact/create', [frontend::class, 'contact_create'])->name('contact_create');
 Route::post('contact/create', [frontend::class, 'contact_store'])->name('contact_store');
 

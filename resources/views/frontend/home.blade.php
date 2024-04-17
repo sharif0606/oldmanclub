@@ -1,8 +1,6 @@
 @extends('frontend.layouts.app')
 @section('title','Old Club Man')
 @section('content')
-
-
     <!-- Hero section start -->
     <div class="container-fluid hero-section">
         <div class="container">
@@ -67,7 +65,8 @@
                         <a href="{{$value->link}}" class="card-link service">
                             <div class="card fixed-size-card">
                                 <img src="{{asset('public/uploads/ourservices/'.$value->image)}}" class="card-img-top" alt="Product Shipping Service">
-                                <div class="card-body ">
+                                {{-- <hr> --}}
+                                <div class="card-body">
                                     <p class="card-text text-decoration-none">
                                         {{$value->title}}    
                                     </p>
@@ -80,7 +79,7 @@
                     @endforelse
                 </div>
                 <div class="text-center mt-4">
-                    <button type="button" class="btn btn-primary rounded-pill shadow-lg" style="background-color:#66298b;">Browse All Categories <i class="fa-solid fa-arrow-right"></i></button>
+                    <a href="{{ route('allservice') }}" class="btn btn-primary rounded-pill shadow-lg" style="background-color:#66298b;">Browse All Categories <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
