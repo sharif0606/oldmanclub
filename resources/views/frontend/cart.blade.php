@@ -134,8 +134,8 @@
         <div class="container text-center mb-5">
             <div class="col-sm-12">
                 <img src="{{ asset('public/frontend/assets/image/shopping_cart.jpeg') }}" alt="" width="400px">
-                <h1>You have no items in your shopping cart.</h1>
-                <a href="{{ route('printservice') }}" class="btn btn-warning fw-bold px-5 mb-5">Continue Shopping</a>
+                <h1 class="">You have no items in your shopping cart.</h1>
+                <a href="{{ route('printservice') }}" class="btn btn-warning text-uppercase fw-bold px-5 mb-5">Continue Shopping</a>
             </div>
         </div>
         @endif
