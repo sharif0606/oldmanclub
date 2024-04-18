@@ -90,10 +90,10 @@
                 <p class="fw-medium mb-4">{{$nfcsection?->text_small}}</p>
             </div>
         </div>
-        <div class="row">
+        <div class="row g-2">
             @foreach($nfccardprice as $card)
             <div class="col-md-4 mt-3 nfccard">
-                <div class="card h-100">
+                <div class="card h-100 shadow">
                     <div class="card-body">
                         <h5 class="card-title text-start">{{$card?->nfc_card_name}}</h5>
                         <h2 class="card-price text-start">${{$card?->card_price}}</h2>

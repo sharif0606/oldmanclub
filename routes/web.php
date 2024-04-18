@@ -294,6 +294,7 @@ Route::get('phoneservice', [frontend::class, 'phoneservice'])->name('phoneservic
 Route::get('smartmailservice', [frontend::class, 'smartmailservice'])->name('smartmailservice');
 Route::get('printservice', [frontend::class, 'printservice'])->name('printservice');
 Route::get('allservice', [frontend::class, 'allservice'])->name('allservice');
+Route::get('shipplearnmore', [frontend::class, 'shipplearnmore'])->name('shipplearnmore');
 Route::get('contact/create', [frontend::class, 'contact_create'])->name('contact_create');
 Route::post('contact/create', [frontend::class, 'contact_store'])->name('contact_store');
 

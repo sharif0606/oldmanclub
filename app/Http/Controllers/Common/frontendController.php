@@ -58,6 +58,10 @@ class frontendController extends Controller
         $featureList = is_array($choice?->feature_list)? $choice->feature_list:explode(',',$choice?->feature_list);
         return view('frontend.shippingservice',compact('setting','heading','service','choice','featureList'));
     }
+    public function shipplearnmore(){
+        $setting = Setting::first();
+        return view('frontend.shipplearnmore',compact('setting'));
+    }
     public function llcservice(){
         $setting = \App\Models\Backend\Website\Setting::first();
         $llcherosection = \App\Models\Backend\Website\LLcservice\LlcHeroSection::first();
