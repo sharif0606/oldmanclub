@@ -29,7 +29,26 @@ class CommentReactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the incoming request data
+        $request->validate([
+            'comment_id' => 'required|exists:comments,id',
+            'reaction_type' => 'required|in:like,dislike',
+        ]);
+        // Check if the user has already reacted to the comment
+        $existingReaction = CommentReaction::where('comment_id', $request->comment_id)
+            ->where('client_id', currentUserId())
+            ->first();
+        $comment_reaction = new CommentReaction();
+        $comment_reaction->comment_id = $request->comment_id;
+        $comment_reaction->client_id = currentUserId();
+        $comment_reaction->type = $request->reaction_type;
+        $comment_reaction->save();
+        // Get updated like count for the comment
+        $likeCount = CommentReaction::where('comment_id', $request->comment_id)
+            ->where('type', 'like')
+            ->count();
+
+        return response()->json(['likeCount' => $likeCount], 200);
     }
 
     /**

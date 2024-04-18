@@ -1245,18 +1245,58 @@ JS libraries, plugins and custom scripts -->
                 }
             });
         });
+
         /*==== Reply Comment====*/
 
         // Function to toggle reply form visibility
-        $(".reply-btn").click(function() {
+        $(".reply-btn").click(function(event) {
+            event.preventDefault(); // Prevent the default behavior of the link
             var commentId = $(this).data('comment-id');
             var replyForm = $(this).closest('.comment-item').find('.reply-form');
             replyForm.find('.comment-id').val(commentId);
             replyForm.toggle();
         });
 
+
+
+        $('.like-btn').click(function(e) {
+        e.preventDefault();
+        //alert('ok');
+        var commentId = $(this).data('comment-id');
+        var likeCountElement = $(this).find('.like-count');
+        var currentReactionType = $(this).data('reaction-type'); // Get the current reaction type
+
+        // To Hide Current Giver React button 
+        var likeBtn = $(this); // Store the reference to the button
+         // Send AJAX request to like the comment
+        $.ajax({
+            url: "{{ route('comment-reaction.store') }}",
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            data: {
+                comment_id: commentId,
+                reaction_type: currentReactionType // Specify the reaction type
+            },
+            success: function(response) {
+                // Update the like count on success
+                $('.like-count').text(response.likeCount);
+                likeCountElement.text(response.likeCount);
+                likeBtn.hide();
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        })
+    })
+    
     });
 </script>
+    @include('user/scripts/add-comment-script')
+    @include('user/scripts/comment-reply-script')
+    <!-- Custome Script JS -->
+    <script src="{{ asset('public/user/assets/js/script.js') }}"></script>
     <!-- Bootstrap JS -->
     <script src="{{ asset('public/user/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     <!-- Vendors -->

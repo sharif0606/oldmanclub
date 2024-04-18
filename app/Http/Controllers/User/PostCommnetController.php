@@ -29,15 +29,25 @@ class PostCommnetController extends Controller
      */
     public function store(Request $request)
     {
-        $post_comment = New Comment();
-        $post_comment->post_id = $request->post_id;
-        $post_comment->content = $request->content;
-        $post_comment->client_id = currentUserId();
-        // Save the comment
-        $post_comment->save();
+        // Validate the request data
+        /*$validatedData = $request->validate([
+            'post_id' => 'required|exists:posts,id',
+            'content' => 'required|string',
+        ]);*/
 
+        $comment = new Comment();
+        $comment->post_id = $request->post_id;
+        $comment->content = $request->content;
+        $comment->client_id = currentUserId();
+        // Save the comment
+        $comment->save();
+
+        // Return the newly created comment as a JSON response
+        return response()->json([
+            'commentHtml' => view('user.partials.comment_item', compact('comment'))->render(),
+        ], 201);
         // Redirect back or to a different page
-        return redirect()->back()->with('success', 'Comment added successfully!');
+        //return redirect()->back()->with('success', 'Comment added successfully!');
     }
 
     /**

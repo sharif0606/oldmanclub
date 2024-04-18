@@ -322,10 +322,10 @@ Route::post('/receive', 'App\Http\Controllers\PusherController@receive');
 Route::get('/states', [StateController::class,'getStatesByCountry'])->name('getStatesByCountry');
 Route::get('/cities', [CityController::class,'getCitiesByStates'])->name('getCitiesByStates');
 
-Route::middleware(['checkclient'])->group(function () {
+//Route::middleware(['checkclient'])->group(function () {
     Route::get('{username}', [clientprofile::class, 'client_by_search'])->name('client_by_search');
     Route::get('{username}/profile', [clientprofile::class, 'usernameProfile'])->name('usernameProfile');
     Route::get('{username}/profile-about', [clientprofile::class, 'usernameProfileAbout'])->name('usernameProfileAbout');
-});
+//});
 
 
