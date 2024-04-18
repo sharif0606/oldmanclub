@@ -49,7 +49,8 @@
                     @endif
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link reply-btn" data-comment-id="{{ $comment->id }}">Reply</a>
+                    <a href="#" class="nav-link reply-btn"
+                        data-comment-id="{{ $comment->id }}">Reply</a>
                 </li>
                 <!-- Add view replies link if necessary -->
                 @if ($comment->replies->count() > 0)
