@@ -1,5 +1,5 @@
 <!-- Comment item START -->
-<li class="comment-item">
+<li class="comment-item" data-comment-id="{{ $comment->id }}">
     <div class="d-flex position-relative">
         <!-- Avatar -->
         <div class="avatar avatar-xs">
@@ -49,9 +49,9 @@
                     @endif
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link reply-btn"
-                        data-comment-id="{{ $comment->id }}">Reply</a>
+                    <a href="#" class="nav-link reply-btn" onclick="reply({{ $comment->id }},event)">Reply</a>
                 </li>
+                
                 <!-- Add view replies link if necessary -->
                 @if ($comment->replies->count() > 0)
                     <li class="nav-item">
@@ -62,18 +62,20 @@
             </ul>
             {{-- action="{{ route('reply.store') }}" method="post" --}}
             <!-- Reply Form (hidden by default) -->
-            <form class="nav nav-item w-100 position-relative reply-form my-2" style="display: none;">
+            <form class="nav nav-item w-100 position-relative reply-form my-2" style="display: none;" data-comment-id="{{ $comment->id }}" onsubmit="submitReplyForm(event, this)">
                 @csrf
                 <textarea data-autoresize="" name="content" class="form-control pe-5 bg-light" rows="1"
                     placeholder="Write your reply here..." name="content" required></textarea>
-                <input type="hidden" name="comment_id" value="{{ $comment->id }}"
-                    data-comment-id="{{ $comment->id }}">
-                <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0"
+                <input type="hidden" name="comment_id" value="{{ $comment->id }}" data-comment-id="{{ $comment->id }}">
+                <button
+                    class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0"
                     type="submit">
                     <i class="bi bi-send-fill"> </i>
                 </button>
             </form>
         </div>
     </div>
+    <ul class="comment-item-nested list-unstyled"></ul>
 </li>
 <!-- Comment item END -->
+
