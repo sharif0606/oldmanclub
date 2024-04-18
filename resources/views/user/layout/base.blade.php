@@ -1246,19 +1246,6 @@ JS libraries, plugins and custom scripts -->
             });
         });
 
-        /*==== Reply Comment====*/
-
-        // Function to toggle reply form visibility
-        $(".reply-btn").click(function(event) {
-            event.preventDefault(); // Prevent the default behavior of the link
-            var commentId = $(this).data('comment-id');
-            var replyForm = $(this).closest('.comment-item').find('.reply-form');
-            replyForm.find('.comment-id').val(commentId);
-            replyForm.toggle();
-        });
-
-
-
         $('.like-btn').click(function(e) {
         e.preventDefault();
         //alert('ok');
@@ -1292,7 +1279,11 @@ JS libraries, plugins and custom scripts -->
     })
     
     });
+    /*$(".reply-btn").click(function(event) {
+            alert('ok')
+            });*/
 </script>
+    @include('user/scripts/reply-form-script')
     @include('user/scripts/add-comment-script')
     @include('user/scripts/comment-reply-script')
     <!-- Custome Script JS -->

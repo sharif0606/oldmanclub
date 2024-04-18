@@ -82,8 +82,7 @@
                                 @endif
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link reply-btn"
-                                    data-comment-id="{{ $comment->id }}">Reply</a>
+                                <a href="#" class="nav-link reply-btn" onclick="reply({{ $comment->id }},event)">Reply</a>
                             </li>
                             <!-- Add view replies link if necessary -->
                             @if ($comment->replies->count() > 0)
@@ -95,7 +94,7 @@
                         </ul>
                         {{-- action="{{ route('reply.store') }}" method="post" --}}
                         <!-- Reply Form (hidden by default) -->
-                        <form class="nav nav-item w-100 position-relative reply-form my-2" style="display: none;">
+                        <form class="nav nav-item w-100 position-relative reply-form my-2" style="display: none;" data-comment-id="{{ $comment->id }}" onsubmit="submitReplyForm(event, this)">
                             @csrf
                             <textarea data-autoresize="" name="content" class="form-control pe-5 bg-light" rows="1"
                                 placeholder="Write your reply here..." name="content" required></textarea>
