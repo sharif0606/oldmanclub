@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class CommentReaction extends Model
 {
     use HasFactory,SoftDeletes;
+    public function comment()
+    {
+        return $this->belongsTo(Comment::class);
+    }
 }

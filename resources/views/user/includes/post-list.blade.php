@@ -79,8 +79,7 @@
                     <i class="bi bi-hand-thumbs-up-fill pe-1"></i>Liked (56)</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#!"> <i class="bi bi-chat-fill pe-1"></i>Comments
-                    (12)</a>
+                <a class="nav-link" href="#!"><i class="bi bi-chat-fill pe-1"></i>Comments ({{$value->comments->count()}})</a>
             </li>
             <!-- Card share action START -->
            @include('user.includes.share')

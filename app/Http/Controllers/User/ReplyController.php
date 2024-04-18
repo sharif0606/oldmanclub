@@ -35,8 +35,11 @@ class ReplyController extends Controller
         $reply->client_id = currentUserId();
         // Save the comment
         $reply->save();
+        return response()->json([
+            'commentHtml' => view('user.partials.reply_item', compact('reply'))->render(),
+        ], 201);
         // Redirect back or to a different page
-        return redirect()->back()->with('success', 'Comment added successfully!');
+        //return redirect()->back()->with('success', 'Comment added successfully!');
     }
 
     /**
