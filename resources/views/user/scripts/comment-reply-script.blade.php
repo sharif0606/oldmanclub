@@ -12,6 +12,9 @@
             // Append CSRF token to form data
             formData.append('_token', '{{ csrf_token() }}');
 
+            // Store the reply form reference
+            var replyForm = $(this);
+
             // Submit the form via AJAX
             $.ajax({
                 type: 'POST',
@@ -26,8 +29,11 @@
                     //$('.comments-container').find('.comment-item[data-comment-id="' + commentId + '"] .comment-item-nested').prepend(response.commentHtml);
 
                     // Clear the form fields
-                    $('#reply-form textarea[name="content"]').val('');
+                    replyForm.find('textarea[name="content"]').val('');
 
+                    // Hide the reply form
+                    replyForm.hide();
+              
                     // Display a success message (optional)
                     // You can handle success feedback as per your requirements
                     //alert('Comment added successfully!');
