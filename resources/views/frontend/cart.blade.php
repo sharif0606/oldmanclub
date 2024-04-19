@@ -61,10 +61,10 @@
                                                     <p class="d-flex">
                                                         @if($image->is_featured)
                                                             <!-- Display the featured image without blur -->
-                                                            <img src="{{ asset('public/uploads/printimages/' . $image->image) }}" alt="" width="300px" class="featured-image" data-item-id="{{ $printingService->id }}">
+                                                            <img src="{{ asset('public/uploads/printimages/' . $image->image) }}" alt="" width="300px" height="250px" class="featured-image" data-item-id="{{ $printingService->id }}">
                                                         @else
                                                             <!-- Display the non-featured images with blur -->
-                                                            <img src="{{ asset('public/uploads/printimages/' . $image->image) }}" alt="" width="50px" class="blurry-image" data-item-id="{{ $printingService->id }}">
+                                                            <img src="{{ asset('public/uploads/printimages/' . $image->image) }}" alt="" width="50px" height="50px" class="blurry-image" data-item-id="{{ $printingService->id }}">
                                                         @endif
                                                     </p>
                                                 </div>
@@ -190,10 +190,12 @@
                 document.querySelectorAll('[data-item-id="' + itemId + '"]').forEach(function(itemImg) {
                     itemImg.classList.add('blurry-image');
                     itemImg.style.width = '50px';
+                    itemImg.style.height = '50px';
                 });
                 // Remove blur effect from the clicked image
                 this.classList.remove('blurry-image');
                 this.style.width = '300px';
+                this.style.height = '250px';
             });
         });
     </script>
