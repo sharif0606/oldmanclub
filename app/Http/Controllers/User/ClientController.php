@@ -255,7 +255,7 @@ class ClientController extends Controller
         $client = Client::where('username', 'like', "%$username%")->first();
         $post = Post::where('client_id',$client->id)->orderBy('created_at', 'desc')->get();
         $postCount = Post::where('client_id', currentUserId())->count();
-        return view('connection.connectionDashboard', compact('client','post','postCount'));
+        //return view('connection.connectionDashboard', compact('client','post','postCount'));
     }
     public function usernameProfile($username)
     {
