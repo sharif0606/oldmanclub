@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('reply_id')->constrained('replies');
             $table->foreignId('client_id')->constrained('clients');
-            $table->enum('type', ['like', 'dislike']);
+            $table->enum('type', ['like', 'love', 'care', 'haha', 'wow', 'sad', 'angry', 'dislike']);
             $table->timestamps();
             $table->softDeletes(); // Add soft delete column
         });

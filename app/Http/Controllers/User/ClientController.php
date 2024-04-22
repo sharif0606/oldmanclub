@@ -24,11 +24,17 @@ class ClientController extends Controller
     {
         session()->forget('username');
         $client = Client::withCount('followers', 'followings')->find(currentUserId());
-        $post = Post::with(['comments' => function ($query) {
-            $query->orderBy('created_at', 'desc')->with(['replies' => function ($query) {
+        $post = Post::with([
+            'reactions' => function ($query) {
+                // Filter reactions where client_id is the current user's ID or any user's ID
                 $query->orderBy('created_at', 'desc');
-            }]);
-        }])
+            },
+            'comments' => function ($query) {
+                $query->orderBy('created_at', 'desc')->with(['replies' => function ($query) {
+                    $query->orderBy('created_at', 'desc');
+                }]);
+            }
+        ])
         ->where('client_id', currentUserId())
         ->orderBy('created_at', 'desc')
         ->get();
@@ -239,6 +245,13 @@ class ClientController extends Controller
         // Store the username in the session
         Session::put('username', $username);
         //dd($username);
+        $client = Client::where(function ($query) use ($username) {
+            $query->where('fname', 'like', "%$username%")
+                  ->orWhere('middle_name', 'like', "%$username%")
+                  ->orWhere('last_name', 'like', "%$username%")
+                  ->orWhere('username', 'like', "%$username%");
+        })->first();
+        
         $client = Client::where('username', 'like', "%$username%")->first();
         $post = Post::where('client_id',$client->id)->orderBy('created_at', 'desc')->get();
         $postCount = Post::where('client_id', currentUserId())->count();

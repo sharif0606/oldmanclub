@@ -28,7 +28,7 @@
                 <!-- Add your comment reaction buttons here -->
                 <li class="nav-item dropdown position-relative" data-bs-toggle="dropdown" aria-expanded="false">
                     <a class="nav-link" href="#!" id="card-comment-reaction"> Like (<span
-                            class="like-count">{{ $comment->reactions()->where('type', 'like')->count() }}</span>)</a>
+                        class="like-count" data-comment-id="{{ $comment->id }}">{{ $comment->reactions()->where('type', 'like')->count() }}</span>)</a>
                     <!-- Replace with like count -->
                     @php
                         $currentUserLiked = $comment
@@ -41,8 +41,8 @@
                     @if (!$currentUserLiked)
                         <ul class="dropdown-menu dropdown-menu-start p-2" aria-labelledby="card-comment-reaction">
                             {{-- $comment->reactions --}}
-                            <a class="like-btn" href="#" data-comment-id="{{ $comment->id }}"
-                                data-reaction-type="like"> <i class="bi bi-hand-thumbs-up fa-fw pe-2"></i></a>
+                            <a href="#" onclick="reaction({{ $comment->id }},event,'like',this)"> <i
+                                class="bi bi-hand-thumbs-up fa-fw pe-2"></i></a>
                             {{-- <a class="like-btn" href="#" data-comment-id="{{ $comment->id }}" data-reaction-type="dislike"> <i
                                 class="bi bi-hand-thumbs-down fa-fw pe-2"></i></a> --}}
                         </ul>

@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comment_reactions', function (Blueprint $table) {
+        Schema::create('post_reactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('comment_id')->constrained('comments');
+            $table->foreignId('post_id')->constrained('posts');
             $table->foreignId('client_id')->constrained('clients');
             $table->enum('type', ['like', 'love', 'care', 'haha', 'wow', 'sad', 'angry', 'dislike']);
             $table->timestamps();
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comment_reactions');
+        Schema::dropIfExists('post_reactions');
     }
 };
