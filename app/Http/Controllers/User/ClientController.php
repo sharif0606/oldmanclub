@@ -245,17 +245,10 @@ class ClientController extends Controller
         // Store the username in the session
         Session::put('username', $username);
         //dd($username);
-        $client = Client::where(function ($query) use ($username) {
-            $query->where('fname', 'like', "%$username%")
-                  ->orWhere('middle_name', 'like', "%$username%")
-                  ->orWhere('last_name', 'like', "%$username%")
-                  ->orWhere('username', 'like', "%$username%");
-        })->first();
-        
         $client = Client::where('username', 'like', "%$username%")->first();
         $post = Post::where('client_id',$client->id)->orderBy('created_at', 'desc')->get();
         $postCount = Post::where('client_id', currentUserId())->count();
-        //return view('connection.connectionDashboard', compact('client','post','postCount'));
+        return view('connection.connectionDashboard', compact('client','post','postCount'));
     }
     public function usernameProfile($username)
     {

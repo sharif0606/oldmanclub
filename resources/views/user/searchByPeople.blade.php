@@ -38,7 +38,7 @@
                                     <!-- Info -->
                                     <div class="w-100">
                                         <div class="d-sm-flex align-items-start">
-                                            <h6 class="mb-0"><a href="#!">{{ $connection->client->fname }}
+                                            <h6 class="mb-0"><a href="{{route('client_by_search',$connection->client->username)}}">{{ $connection->client->fname }}
                                                     {{ $connection->client->middle_name }} {{ $connection->client->last_name }}</a></h6>
                                             <p class="small ms-sm-2 mb-0"> {{ $connection->client->designation }}</p>
                                         </div>
