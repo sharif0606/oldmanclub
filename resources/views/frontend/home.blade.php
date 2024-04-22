@@ -11,7 +11,7 @@
                         <div class="col-md-5 col-sm-6 slider-text">
                             <h2>{{$s->text_large}}</h2>
                             <p>{{$s->text_small}}</p>
-                            <a href="{{$s->link}}" class="btn btn-warning px-5 py-2 mt-4">Get Started</a>
+                            <a href="{{$s->link}}" class="btn btn-warning px-5 py-2 mt-4 getstarted" id="getstarted">Get Started</a>
                         </div>
                         <div class="col-md-7 col-sm-6 slider-image d-none d-sm-block">
                                 <img src="{{asset('public/uploads/slider/'.$s->image)}}" alt="Slider Image 1" class="img-fluid">
@@ -215,3 +215,48 @@
     </section>
     <!-- Subscribe section ends -->
 @endsection
+@push('scripts')
+<script>
+    // Get references to the elements
+    var getstartedElement = document.querySelector('.getstarted');
+    var slickDotsElement = document.querySelector('.hero-section .slick-dots');
+
+    // Function to position the slick-dots element below the getstarted element
+    function positionSlickDots() {
+        var getstartedRect = getstartedElement.getBoundingClientRect();
+        var slickDotsRect = slickDotsElement.getBoundingClientRect();
+
+        var topPosition = getstartedRect.bottom + window.scrollY;
+        var leftPosition = (getstartedRect.left + getstartedRect.right) / 2 - slickDotsRect.width / 2;
+
+        slickDotsElement.style.top = topPosition + 'px';
+        slickDotsElement.style.left = leftPosition + 'px';
+    }
+
+    // Call the function initially
+    positionSlickDots();
+
+    // Recalculate position on window resize
+    window.addEventListener('resize', positionSlickDots);
+</script>
+<script>
+//    // Get the element by its ID
+//     var element = document.getElementById('getstarted');
+
+//     // Get the dimensions of the viewport
+//     var viewportWidth = window.innerWidth;
+//     var viewportHeight = window.innerHeight;
+
+//     // Get the dimensions of the element
+//     var rect = element.getBoundingClientRect();
+//     var elementWidth = rect.width;
+//     var elementHeight = rect.height;
+
+//     // Log the dimensions of the element and the viewport
+//     console.log("Element width: " + elementWidth);
+//     console.log("Element height: " + elementHeight);
+//     console.log("Viewport width: " + viewportWidth);
+//     console.log("Viewport height: " + viewportHeight);
+
+</script>
+@endpush

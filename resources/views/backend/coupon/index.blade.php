@@ -7,7 +7,7 @@
         <div class="card">
             <!-- table bordered -->
             <div class="table-responsive">
-                <a class="pull-right fs-1" href="{{route('coupon.create')}}"><i class="fa fa-plus"></i></a>
+                <a class="pull-right fs-1" href="{{route('coupon.create')}}"><i class="fa fa-plus">Add New</i></a>
                 <table class="table table-bordered mb-0">
                     <thead>
                          <tr>
@@ -17,8 +17,8 @@
                             <th scope="col">{{__('Value')}}</th>
                             <th scope="col">{{__('Start Date')}}</th>
                             <th scope="col">{{__('End Date')}}</th>
-                            <th scope="col">{{__('Max Uses')}}</th>
-                            <th scope="col">{{__('Uses')}}</th>
+                            {{-- <th scope="col">{{__('Max Uses')}}</th>
+                            <th scope="col">{{__('Uses')}}</th> --}}
                             <th scope="col">{{__('Status')}}</th>
                             <th class="white-space-nowrap">{{__('Action') }}</th>
                         </tr>
@@ -27,28 +27,28 @@
                         @forelse($coupons as $value)
                         <tr>
                             <th scope="row">{{ ++$loop->index }}</th>
-                            <td>{{ $coupon->code }}</td>
-                            <td>{{ $coupon->type }}</td>
-                            <td>{{ $coupon->value }}</td>
-                            <td>{{ $coupon->start_date }}</td>
-                            <td>{{ $coupon->end_date }}</td>
-                            <td style="color: @if($value->status==1) #FFC107 @else red @endif; font-weight:bold;">
+                            <td>{{ $value->code }}</td>
+                            <td>{{ $value->type }}</td>
+                            <td>{{ $value->value }}</td>
+                            <td>{{ $value->start_date }}</td>
+                            <td>{{ $value->end_date }}</td>
+                            <td style="color: @if($value->status==1) green @else red @endif; font-weight:bold;">
                                 {{ $value->status == 1 ? __('Show') : __('Hide')}}
                             </td>
                             <td class="white-space-nowrap">
                                 <a href="{{route('coupon.edit',encryptor('encrypt',$value->id))}}">
                                     <i class="fa fa-edit"></i>
                                 </a>
-                                <a href="{{route('coupon.delete',encryptor('encrypt',$value->id))}}" class="">
+                                {{-- <a href="{{route('coupon.destroy',encryptor('encrypt',$value->id))}}" class="">
                                     <i class="fa fa-eye"></i>
-                                </a>
-                                <!-- <a href="javascript:void()" onclick="$('#form{{$value->id}}').submit()">
+                                </a> --}}
+                                <a href="javascript:void()" onclick="$('#form{{$value->id}}').submit()" class="text-danger">
                                     <i class="fa fa-trash"></i>
                                 </a>
-                                <form id="form{{$value->id}}" action="{{route('company.destroy',encryptor('encrypt',$value->id))}}" method="post">
+                                <form id="form{{$value->id}}" action="{{route('coupon.destroy',encryptor('encrypt',$value->id))}}" method="post">
                                     @csrf
                                     @method('delete')
-                                </form> -->
+                                </form>
                             </td>
                         </tr>
                         @empty

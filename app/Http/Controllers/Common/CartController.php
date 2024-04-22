@@ -7,13 +7,20 @@ use Illuminate\Http\Request;
 use App\Models\Common\CartItem;
 use App\Models\Backend\PrintingService;
 use App\Models\Backend\PrintingServiceImage;
+use App\Models\Backend\Admin\Coupon;
+use Carbon\Carbon;
 
 class CartController extends Controller
 {
     public function cart()
     {
         $setting = \App\Models\Backend\Website\Setting::first();
-        return view('frontend.cart', compact('setting'));
+        $currentDate = Carbon::now();
+        $coupon = Coupon::where('status', 1)
+            ->where('start_date', '<=', $currentDate)
+            ->where('end_date', '>=', $currentDate)
+            ->get();
+        return view('frontend.cart', compact('setting','coupon'));
     }
     public function addToCart(Request $r, $id)
     {

@@ -174,7 +174,16 @@
         margin-right: -60px;
         height: auto;
     }
-
+    @media(min-width: 1768px){
+        .slider-image{
+            top:-60px
+        }
+    }
+    /* @media(min-width: 1326px){
+        .slider-image{
+            margin-top: -202px;
+        }
+    } */
     .card-info {
         margin-top: -280px;
         /* Adjust the negative margin to overlap */
@@ -407,13 +416,20 @@
     /* slider dots */
     .hero-section .slick-dots {
         position: absolute;
-        bottom: 240px;
+        /* top: 92vh; */
+        top: 334px;
+        /* bottom: 240px; */
         /* display: block; */
         width: 100%;
         padding: 0;
         margin-left: 60px;
         list-style: none;
         text-align: left;
+    }
+    @media (max-width: 1200px) {
+        .hero-section .slick-dots {
+            top: 334px;
+        }
     }
     @media (min-width: 576px) {
         .hero-section .slick-dots {

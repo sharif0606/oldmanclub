@@ -133,7 +133,19 @@
             <div class="col-sm-6">
                 <h5>Promo Code</h5>
                 <div class="d-flex">
-                    <input type="text" name="" id="" placeholder="Coupon Code" class="form-control m-0">
+                    <select name="" id="" class="form-control">
+                        <option value="">Select Offer</option>
+                        @foreach($coupon as $value)
+                            <option value="{{ $value->id }}">{{ $value->code }}-
+                                @if ($value->type === 'percentage')
+                                    {{ number_format($value->value, 0) }}%
+                                @elseif ($value->type === 'fixed_amount')
+                                    ${{ $value->value }}
+                                @endif
+                            </option>
+                        @endforeach
+                    </select>
+                    {{-- <input type="text" name="" id="" placeholder="Coupon Code" class="form-control m-0"> --}}
                     <button class="btn checkout mx-1 py-0 rounded-pill w-25 text-white">Apply</button>
                 </div>
             </div>

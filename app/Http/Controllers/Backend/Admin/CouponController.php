@@ -36,6 +36,8 @@ class CouponController extends Controller
             'value' => 'required',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
+            'status' => 'required',
+            'max_uses' => 'required'
         ]);
 
         // Create a new coupon
@@ -48,7 +50,7 @@ class CouponController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Coupon $coupon)
+    public function show($id)
     {
         $coupon = Coupon::findOrFail($id);
         return view('backend.coupon.edit', compact('coupon'));
@@ -59,7 +61,7 @@ class CouponController extends Controller
      */
     public function edit($id)
     {
-        $coupon = Coupon::findOrFail($id);
+        $coupon = Coupon::findOrFail(encryptor('decrypt',$id));
         return view('backend.coupon.edit', compact('coupon'));
     }
 
@@ -68,20 +70,17 @@ class CouponController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'code' => 'required|unique:coupons,code,'.$id,
-            'type' => 'required',
-            'value' => 'required',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after:start_date',
-        ]);
-
-        // Find the coupon by id and update its data
-        $coupon = Coupon::findOrFail($id);
-        $coupon->update($request->all());
-
-        // Redirect to the index page with success message
-        return redirect()->route('coupon.index')->with('success', 'Coupon updated successfully.');
+        $coupon = Coupon::findOrFail(encryptor('decrypt',$id));
+        $coupon->code = $request->code;
+        $coupon->type = $request->type;
+        $coupon->value = $request->value;
+        $coupon->start_date = $request->start_date;
+        $coupon->end_date = $request->end_date;
+        $coupon->status = $request->status;
+        $coupon->max_uses = $request->max_uses;
+        if($coupon->save()){
+            return redirect()->route('coupon.index')->with('success', 'Coupon updated successfully.');
+        }
     }
 
     /**
@@ -89,7 +88,7 @@ class CouponController extends Controller
      */
     public function destroy($id)
     {
-        $coupon = Coupon::findOrFail($id);
+        $coupon = Coupon::findOrFail(encryptor('decrypt',$id));
         $coupon->delete();
 
         // Redirect to the index page with success message
