@@ -1246,46 +1246,16 @@ JS libraries, plugins and custom scripts -->
             });
         });
 
-        $('.like-btn').click(function(e) {
-        e.preventDefault();
-        //alert('ok');
-        var commentId = $(this).data('comment-id');
-        var likeCountElement = $(this).find('.like-count');
-        var currentReactionType = $(this).data('reaction-type'); // Get the current reaction type
 
-        // To Hide Current Giver React button 
-        var likeBtn = $(this); // Store the reference to the button
-         // Send AJAX request to like the comment
-        $.ajax({
-            url: "{{ route('comment-reaction.store') }}",
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            data: {
-                comment_id: commentId,
-                reaction_type: currentReactionType // Specify the reaction type
-            },
-            success: function(response) {
-                // Update the like count on success
-                $('.like-count').text(response.likeCount);
-                likeCountElement.text(response.likeCount);
-                likeBtn.hide();
-            },
-            error: function(xhr, status, error) {
-                console.error(xhr.responseText);
-            }
-        })
-    })
     
     });
-    /*$(".reply-btn").click(function(event) {
-            alert('ok')
-            });*/
+
 </script>
     @include('user/scripts/reply-form-script')
     @include('user/scripts/add-comment-script')
     @include('user/scripts/comment-reply-script')
+    @include('user/scripts/comment-like-script')
+    {{-- @include('user/scripts/post-reaction-script') --}}
     <!-- Custome Script JS -->
     <script src="{{ asset('public/user/assets/js/script.js') }}"></script>
     <!-- Bootstrap JS -->

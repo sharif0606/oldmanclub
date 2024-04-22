@@ -81,6 +81,7 @@ use App\Http\Controllers\User\PostCommnetController as postcomment;
 use App\Http\Controllers\User\ReplyController as reply;
 use App\Http\Controllers\User\CommentReactionController as commentreaction;
 use App\Http\Controllers\User\ReplyReactionController as replyreaction;
+use App\Http\Controllers\User\PostReactionController as postreaction;
 
 // landing page
 use App\Http\Controllers\Common\frontendController as frontend;
@@ -240,6 +241,8 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::resource('reply', reply::class);
     Route::resource('comment-reaction', commentreaction::class);
     Route::resource('reply-reaction', replyreaction::class);
+    Route::resource('post-reaction', postreaction::class);
+    Route::get('post-reaction-update', [postreaction::class,'post_reaction_update'])->name('post-reaction-update');
     Route::get('gathering', [clientprofile::class, 'gathering'])->name('gathering');
 
     Route::resource('phonebook', phonebook::class);
