@@ -144,6 +144,7 @@
                                 <li><a href="{{route('client.index')}}">User</a></li>
                                 <li><a href="{{route('sms.index')}}">SMS Package Service</a></li>
                                 <li><a href="{{route('mailbox.index')}}">Mail Package Service</a></li>
+                                <li><a href="{{route('coupon.index')}}">Coupon</a></li>
                             </ul>
                         </li>
                         <li>

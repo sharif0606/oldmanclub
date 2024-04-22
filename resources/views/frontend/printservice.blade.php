@@ -92,11 +92,11 @@
 }
 /* Our Best Services end  */
 .card {
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.5s ease-in-out;
 }
 
 .card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-15px);
 }
 </style>
 @endpush
@@ -165,78 +165,85 @@
     <!-- printing service feature end -->
     <!-- printing service product start -->
     <section class="print-product-section py-4">
-        <div class="container-fluid">
-            <div class="row py-3">
+        <div class="container">
+            <div class="row py-3 g-2">
                 <h3 class="product-heading  fw-bold text-uppercase">
                     Our Best Selling Products
                 </h3>
                 <p class="product-text">Explore our latest and greatest products.</p>
 
-                <div class="print-product-cards py-3">
-                    <div class="card print-product-card mx-1 mb-3 col-lg-3 col-md-6 col-sm-12 shadow animate-left">
-                        <img src="{{ asset('public/frontend/assets/image/product-1.jpg') }}" alt="Product 1"
-                            class="print-product-image" />
-                        <h3 class="print-product-name">Product 1</h3>
-                        <p class="print-product-price">$29.99</p>
-                        <div class="print-product-review">⭐⭐⭐⭐⭐</div>
+                {{-- <div class="print-product-cards py-3"> --}}
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="card print-product-card mb-3  shadow animate-left">
+                            <img src="{{ asset('public/frontend/assets/image/product-1.jpg') }}" alt="Product 1"
+                                class="print-product-image" />
+                            <h3 class="print-product-name">Product 1</h3>
+                            <p class="print-product-price">$29.99</p>
+                            <div class="print-product-review">⭐⭐⭐⭐⭐</div>
+                        </div>
                     </div>
-
-                    <div class="card print-product-card mx-1 mb-3 col-lg-3 col-md-6 col-sm-12 shadow animate-right">
-                        <img src="{{ asset('public/frontend/assets/image/product-2.jpg') }}" alt="Product 2"
-                            class="print-product-image" />
-                        <h3 class="print-product-name">Product 2</h3>
-                        <p class="print-product-price">$39.99</p>
-                        <div class="print-product-review">⭐⭐⭐⭐⭐</div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="card print-product-card mb-3 shadow animate-right">
+                            <img src="{{ asset('public/frontend/assets/image/product-2.jpg') }}" alt="Product 2"
+                                class="print-product-image" />
+                            <h3 class="print-product-name">Product 2</h3>
+                            <p class="print-product-price">$39.99</p>
+                            <div class="print-product-review">⭐⭐⭐⭐⭐</div>
+                        </div>
                     </div>
-
-                    <div class="card print-product-card mx-1 mb-3 col-lg-3 col-md-6 col-sm-12 shadow animate-left">
-                        <img src="{{ asset('public/frontend/assets/image/product-3.jpg') }}" alt="Product 3"
-                            class="print-product-image" />
-                        <h3 class="print-product-name">Product 3</h3>
-                        <p class="print-product-price">$49.99</p>
-                        <div class="print-product-review">⭐⭐⭐⭐⭐</div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="card print-product-card mb-3 shadow animate-left">
+                            <img src="{{ asset('public/frontend/assets/image/product-3.jpg') }}" alt="Product 3"
+                                class="print-product-image" />
+                            <h3 class="print-product-name">Product 3</h3>
+                            <p class="print-product-price">$49.99</p>
+                            <div class="print-product-review">⭐⭐⭐⭐⭐</div>
+                        </div>
                     </div>
-
-                    <div class="card print-product-card mx-1 mb-3 col-lg-3 col-md-6 col-sm-12 shadow animate-right">
-                        <img src="{{ asset('public/frontend/assets/image/product-4.jpg') }}" alt="Product 4"
-                            class="print-product-image" />
-                        <h3 class="print-product-name">Product 4</h3>
-                        <p class="print-product-price">$59.99</p>
-                        <div class="print-product-review">⭐⭐⭐⭐⭐</div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="card print-product-card mb-3 shadow animate-right">
+                            <img src="{{ asset('public/frontend/assets/image/product-4.jpg') }}" alt="Product 4"
+                                class="print-product-image" />
+                            <h3 class="print-product-name">Product 4</h3>
+                            <p class="print-product-price">$59.99</p>
+                            <div class="print-product-review">⭐⭐⭐⭐⭐</div>
+                        </div>
                     </div>
-                </div>
+                {{-- </div> --}}
             </div>
         </div>
     </section>
     <section class="print-product-section py-2">
-        <div class="container-fluid">
-            <div class="row py-3">
+        <div class="container">
+            <div class="row py-3 g-2">
                 <h3 class="product-heading text-uppercase fw-bold">
                     Our Best Services
                 </h3>
-                <div class="print-product-cards py-4">
+                {{-- <div class="print-product-cards py-4"> --}}
                     @foreach ($printservices as $value)
-                        <div class="card product-image-container print-product-card mx-1 mb-3 col-lg-3 col-md-6 col-sm-12 shadow animate-slide">
-                            @foreach ($value->printing_service_image as $v)
-                                @if ($v->is_featured)
-                                    <img src="{{ asset('public/uploads/printimages/' . $v->image) }}" alt=""
-                                        class="img-fluid w-100 h-75">
-                                    <div class="hover-buttons d-flex">
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="card product-image-container print-product-card mb-3 shadow animate-slide">
+                                @foreach ($value->printing_service_image as $v)
+                                    @if ($v->is_featured)
+                                        <img src="{{ asset('public/uploads/printimages/' . $v->image) }}" alt=""
+                                            class="img-fluid w-100 h-75">
+                                        <div class="hover-buttons d-flex">
 
-                                        <a href="{{ route('addto_cart', $value->id) }}"
-                                            class=" btn btn-lg btn-info me-1"><i class="fas fa-cart-plus"></i></a>
-                                        <!-- <button class="cart-button"><i class="fa-solid fa-cart-plus"></i></button> -->
-                                        {{-- <button class="btn btn-lg btn-warning wish-button"><i
-                                                class="fa-regular fa-heart"></i></button> --}}
-                                    </div>
-                                @endif
-                            @endforeach
-                            <h3 class="print-product-name">{{ $value->service_name }}</h3>
-                            <p class="print-product-price">${{ $value->price }}</p>
-                            <!-- <div class="print-product-review">⭐⭐⭐⭐⭐</div> -->
+                                            <a href="{{ route('addto_cart', $value->id) }}"
+                                                class=" btn btn-lg btn-info me-1"><i class="fas fa-cart-plus"></i></a>
+                                            <!-- <button class="cart-button"><i class="fa-solid fa-cart-plus"></i></button> -->
+                                            {{-- <button class="btn btn-lg btn-warning wish-button"><i
+                                                    class="fa-regular fa-heart"></i></button> --}}
+                                        </div>
+                                    @endif
+                                @endforeach
+                                <h3 class="print-product-name">{{ $value->service_name }}</h3>
+                                <p class="print-product-price">${{ $value->price }}</p>
+                                <!-- <div class="print-product-review">⭐⭐⭐⭐⭐</div> -->
+                            </div>
                         </div>
                     @endforeach
-                </div>
+                {{-- </div> --}}
 
             </div>
         </div>

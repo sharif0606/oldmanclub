@@ -245,17 +245,17 @@
         } 
     }
     
-/* Add hover effect with animation */
-.card.fixed-size-card {
-    transition: box-shadow 0.3s ease;
-    transition: transform 0.5s ease; 
+    /* Add hover effect with animation */
+    .card.fixed-size-card {
+        transition: box-shadow 0.5s ease;
+        transition: transform 0.5s ease; 
 
-}
+    }
 
-.card.fixed-size-card:hover {
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Adjust shadow color and intensity */
-    transform: translateY(-10px);
-}
+    .card.fixed-size-card:hover {
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Adjust shadow color and intensity */
+        transform: translateY(-10px);
+    }
     .fixed-size-card hr {
         width: 100%;
         /* Set the width of the line as needed */
@@ -1517,7 +1517,7 @@
     }
 
     .print-product-card {
-        width: 290px !important;
+        width: 100% !important;
         height: 315px !important;
         border: 1px solid #ddd;
         background-color: #fff;
