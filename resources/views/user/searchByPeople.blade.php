@@ -44,30 +44,11 @@
                                         </div>
                                         <!-- Connections START -->
                                         <ul class="avatar-group mt-1 list-unstyled align-items-sm-center">
+                                            {{$connection->
                                             <li class="avatar avatar-xxs">
                                                 <img class="avatar-img rounded-circle"
                                                     src="{{ asset('public/user/assets/images/avatar/01.jpg') }}"
                                                     alt="avatar">
-                                            </li>
-                                            <li class="avatar avatar-xxs">
-                                                <img class="avatar-img rounded-circle"
-                                                    src="{{ asset('public/user/assets/images/avatar/02.jpg') }}"
-                                                    alt="avatar">
-                                            </li>
-                                            <li class="avatar avatar-xxs">
-                                                <img class="avatar-img rounded-circle"
-                                                    src="{{ asset('public/user/assets/images/avatar/03.jpg') }}"
-                                                    alt="avatar">
-                                            </li>
-                                            <li class="avatar avatar-xxs">
-                                                <img class="avatar-img rounded-circle"
-                                                    src="{{ asset('public/user/assets/images/avatar/04.jpg') }}"
-                                                    alt="avatar">
-                                            </li>
-                                            <li class="avatar avatar-xxs">
-                                                <div class="avatar-img rounded-circle bg-primary"><span
-                                                        class="smaller text-white position-absolute top-50 start-50 translate-middle">+2</span>
-                                                </div>
                                             </li>
                                             <li class="small ms-3">
                                                 Carolyn Ortiz, Frances Guerrero, and 20 other shared connections
