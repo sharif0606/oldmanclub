@@ -44,7 +44,6 @@
                                         </div>
                                         <!-- Connections START -->
                                         <ul class="avatar-group mt-1 list-unstyled align-items-sm-center">
-                                            {{$connection->
                                             <li class="avatar avatar-xxs">
                                                 <img class="avatar-img rounded-circle"
                                                     src="{{ asset('public/user/assets/images/avatar/01.jpg') }}"
