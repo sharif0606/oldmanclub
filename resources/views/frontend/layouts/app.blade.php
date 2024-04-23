@@ -129,7 +129,7 @@
    
 
         
-   <!-- Add jQuery before Slick Carousel -->
+    <!-- Add jQuery before Slick Carousel -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     
     <!-- Slick Carousel script -->

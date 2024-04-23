@@ -63,7 +63,7 @@
                     @forelse($services as $value)
                     <div class="col-md-4 mb-3">
                         <a href="{{$value->link}}" class="card-link service">
-                            <div class="card fixed-size-card">
+                            <div class="card fixed-size-card h-100">
                                 <img src="{{asset('public/uploads/ourservices/'.$value->image)}}" class="card-img-top" alt="Product Shipping Service">
                                 {{-- <hr> --}}
                                 <div class="card-body">
@@ -217,27 +217,39 @@
 @endsection
 @push('scripts')
 <script>
-    // Get references to the elements
+// Function to position the slick-dots element below the getstarted element
+function positionSlickDots() {
     var getstartedElement = document.querySelector('.getstarted');
     var slickDotsElement = document.querySelector('.hero-section .slick-dots');
 
-    // Function to position the slick-dots element below the getstarted element
-    function positionSlickDots() {
-        var getstartedRect = getstartedElement.getBoundingClientRect();
-        var slickDotsRect = slickDotsElement.getBoundingClientRect();
+    var getstartedRect = getstartedElement.getBoundingClientRect();
+    var slickDotsRect = slickDotsElement.getBoundingClientRect();
 
-        var topPosition = getstartedRect.bottom + window.scrollY;
-        var leftPosition = (getstartedRect.left + getstartedRect.right) / 2 - slickDotsRect.width / 2;
+    var topPosition = getstartedRect.bottom + 10; // Add a margin of 10px
 
-        slickDotsElement.style.top = topPosition + 'px';
-        slickDotsElement.style.left = leftPosition + 'px';
+    // Get the viewport height
+    var viewportHeight = window.innerHeight;
+
+    // Check if slick dots would exceed viewport height
+    if (topPosition + slickDotsRect.height > viewportHeight) {
+        // If it would, position the slick dots just above the "Get Started" button
+        topPosition = getstartedRect.top - slickDotsRect.height - 10; // Add a margin of 10px
     }
 
-    // Call the function initially
-    positionSlickDots();
+    var leftPosition = (getstartedRect.left + getstartedRect.right) / 2 - slickDotsRect.width / 2;
 
-    // Recalculate position on window resize
-    window.addEventListener('resize', positionSlickDots);
+    slickDotsElement.style.top = topPosition + 'px';
+    slickDotsElement.style.left = leftPosition + 'px';
+}
+
+// Call the function initially
+positionSlickDots();
+
+// Recalculate position on window resize
+window.addEventListener('resize', positionSlickDots);
+
+
+
 </script>
 <script>
 //    // Get the element by its ID
