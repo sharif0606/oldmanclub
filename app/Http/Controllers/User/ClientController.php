@@ -223,11 +223,16 @@ class ClientController extends Controller
         $search_by_people = trim($request->search);
         
         $follow_connections = Client::where(function ($query) use ($search_by_people) {
-            $query->where('fname', 'like', '%' . $search_by_people . '%')
-            ->orWhere('middle_name', 'like', '%' . $search_by_people . '%')
-            ->orWhere('last_name', 'like', '%' . $search_by_people . '%');
+            $names = explode(' ', $search_by_people);
+            foreach ($names as $name) {
+                $query->where(function ($query) use ($name) {
+                    $query->where('fname', 'like', "%$name%")
+                          ->orWhere('middle_name', 'like', "%$name%")
+                          ->orWhere('last_name', 'like', "%$name%");
+                });
+            }
         })
-        ->where('id', '!=',currentUserId())
+        ->where('id', '!=', currentUserId())
         ->whereNotIn('id', $followIds)
         ->paginate(25);
         $unfollow_connections = Follow::with('client')->where('following_id', '=',currentUserId())->get();
