@@ -197,7 +197,7 @@
                                 <!-- Card body END -->
                             </div>
                         </div> --}}
-                        <!-- Card END -->
+                        <!-- Card END --> 
 
                         <!-- Card START -->
                         <div class="col-md-6 col-lg-12">
