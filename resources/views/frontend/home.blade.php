@@ -1,7 +1,6 @@
 @extends('frontend.layouts.app')
 @section('title','Old Club Man')
 @section('content')
-
     <!-- Hero section start -->
     <div class="container-fluid hero-section">
         <div class="container">
@@ -12,7 +11,7 @@
                         <div class="col-md-5 col-sm-6 slider-text">
                             <h2>{{$s->text_large}}</h2>
                             <p>{{$s->text_small}}</p>
-                            <a href="{{$s->link}}" class="btn btn-warning px-5 py-2 mt-4">Get Started</a>
+                            <a href="{{$s->link}}" class="btn btn-warning px-5 py-2 mt-4 getstarted" id="getstarted">Get Started</a>
                         </div>
                         <div class="col-md-7 col-sm-6 slider-image d-none d-sm-block">
                                 <img src="{{asset('public/uploads/slider/'.$s->image)}}" alt="Slider Image 1" class="img-fluid">
@@ -64,9 +63,10 @@
                     @forelse($services as $value)
                     <div class="col-md-4 mb-3">
                         <a href="{{$value->link}}" class="card-link service">
-                            <div class="card fixed-size-card">
+                            <div class="card fixed-size-card h-100">
                                 <img src="{{asset('public/uploads/ourservices/'.$value->image)}}" class="card-img-top" alt="Product Shipping Service">
-                                <div class="card-body ">
+                                {{-- <hr> --}}
+                                <div class="card-body">
                                     <p class="card-text text-decoration-none">
                                         {{$value->title}}    
                                     </p>
@@ -79,7 +79,7 @@
                     @endforelse
                 </div>
                 <div class="text-center mt-4">
-                    <button type="button" class="btn btn-primary rounded-pill shadow-lg" style="background-color:#66298b;">Browse All Categories <i class="fa-solid fa-arrow-right"></i></button>
+                    <a href="{{ route('allservice') }}" class="btn btn-primary rounded-pill shadow-lg" style="background-color:#66298b;">Browse All Categories <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
@@ -97,7 +97,7 @@
             {{-- <div class="container"> --}}
                 <div class="col-md-12">
                     <a href="">
-                        <img src="{{asset('public/uploads/homepage/'.$homepage?->special_offer_image)}}" alt="" class="" width="100%" height="300px">
+                        <img src="{{asset('public/uploads/homepage/'.$homepage?->special_offer_image)}}" alt="" class="" width="100%" height="400px">
                     </a>
                 </div>
             {{-- </div> --}}
@@ -215,3 +215,60 @@
     </section>
     <!-- Subscribe section ends -->
 @endsection
+@push('scripts')
+<script>
+// Function to position the slick-dots element below the getstarted element
+function positionSlickDots() {
+    var getstartedElement = document.querySelector('.getstarted');
+    var slickDotsElement = document.querySelector('.hero-section .slick-dots');
+
+    var getstartedRect = getstartedElement.getBoundingClientRect();
+    var slickDotsRect = slickDotsElement.getBoundingClientRect();
+
+    var topPosition = getstartedRect.bottom + 10; // Add a margin of 10px
+
+    // Get the viewport height
+    var viewportHeight = window.innerHeight;
+
+    // Check if slick dots would exceed viewport height
+    if (topPosition + slickDotsRect.height > viewportHeight) {
+        // If it would, position the slick dots just above the "Get Started" button
+        topPosition = getstartedRect.top - slickDotsRect.height - 10; // Add a margin of 10px
+    }
+
+    var leftPosition = (getstartedRect.left + getstartedRect.right) / 2 - slickDotsRect.width / 2;
+
+    slickDotsElement.style.top = topPosition + 'px';
+    slickDotsElement.style.left = leftPosition + 'px';
+}
+
+// Call the function initially
+positionSlickDots();
+
+// Recalculate position on window resize
+window.addEventListener('resize', positionSlickDots);
+
+
+
+</script>
+<script>
+//    // Get the element by its ID
+//     var element = document.getElementById('getstarted');
+
+//     // Get the dimensions of the viewport
+//     var viewportWidth = window.innerWidth;
+//     var viewportHeight = window.innerHeight;
+
+//     // Get the dimensions of the element
+//     var rect = element.getBoundingClientRect();
+//     var elementWidth = rect.width;
+//     var elementHeight = rect.height;
+
+//     // Log the dimensions of the element and the viewport
+//     console.log("Element width: " + elementWidth);
+//     console.log("Element height: " + elementHeight);
+//     console.log("Viewport width: " + viewportWidth);
+//     console.log("Viewport height: " + viewportHeight);
+
+</script>
+@endpush

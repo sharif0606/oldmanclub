@@ -174,7 +174,16 @@
         margin-right: -60px;
         height: auto;
     }
-
+    @media(min-width: 1768px){
+        .slider-image{
+            top:-60px
+        }
+    }
+    /* @media(min-width: 1326px){
+        .slider-image{
+            margin-top: -202px;
+        }
+    } */
     .card-info {
         margin-top: -280px;
         /* Adjust the negative margin to overlap */
@@ -228,7 +237,7 @@
 
     .fixed-size-card {
         /*height: 100%;*/
-        padding: 15px;
+        /* padding: 15px; */
     }
 
     .fixed-size-card img {
@@ -245,17 +254,17 @@
         } 
     }
     
-/* Add hover effect with animation */
-.card.fixed-size-card {
-    transition: box-shadow 0.3s ease;
-    transition: transform 0.5s ease; 
+    /* Add hover effect with animation */
+    .card.fixed-size-card {
+        transition: box-shadow 0.5s ease;
+        transition: transform 0.5s ease; 
 
-}
+    }
 
-.card.fixed-size-card:hover {
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Adjust shadow color and intensity */
-    transform: translateY(-10px);
-}
+    .card.fixed-size-card:hover {
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Adjust shadow color and intensity */
+        transform: translateY(-10px);
+    }
     .fixed-size-card hr {
         width: 100%;
         /* Set the width of the line as needed */
@@ -407,13 +416,20 @@
     /* slider dots */
     .hero-section .slick-dots {
         position: absolute;
-        bottom: 240px;
+        /* top: 92vh; */
+        top: 334px;
+        /* bottom: 240px; */
         /* display: block; */
         width: 100%;
         padding: 0;
         margin-left: 60px;
         list-style: none;
         text-align: left;
+    }
+    @media (max-width: 1200px) {
+        .hero-section .slick-dots {
+            top: 334px;
+        }
     }
     @media (min-width: 576px) {
         .hero-section .slick-dots {
@@ -517,7 +533,10 @@
         max-width: 500px;
         padding-left: 90px;
     }
-
+    .nfc-hero-text{
+        max-width: 600px;
+        padding-left: 90px;
+    }
     .hero-heading {
         font-size: 36px;
         font-weight: bold;
@@ -559,6 +578,15 @@
         padding: 10px 10px;
         justify-content: center;
     }
+    @media (max-width:877px){
+        .user-location .card {
+        
+        padding: 10px 40px;
+       
+    }
+    }
+        
+
 
     /* Custom feature section styles */
     .feature-section {
@@ -1020,11 +1048,11 @@
     /* Card section */
     .llc-our-card {
         /* padding: 0px 25px; */
-        margin-top: -150px;
+        margin-top: -100px;
     }
 
     .llc-our-card-text {
-        padding-top: 175px;
+        padding-top: 100px;
     }
 
     .llc-our-card-image img {
@@ -1514,7 +1542,7 @@
     }
 
     .print-product-card {
-        width: 220px !important;
+        width: 100% !important;
         height: 315px !important;
         border: 1px solid #ddd;
         background-color: #fff;

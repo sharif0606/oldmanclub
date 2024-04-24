@@ -388,7 +388,7 @@
                                         <!-- Current password -->
                                         <div class="col-12">
                                             <label class="form-label">Current password</label>
-                                            <input type="text" class="form-control" placeholder=""
+                                            <input type="password" class="form-control" placeholder=""
                                                 name="current_password">
                                             @if ($errors->has('current_password'))
                                                 <small class="d-block text-danger">

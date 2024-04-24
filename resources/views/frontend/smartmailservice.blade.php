@@ -1,11 +1,43 @@
 @extends('frontend.layouts.app')
 @section('title','Smart Mail Service')
 @section('content')
+@push('styles')
+<style>
+    .animate-left {
+        animation: slideInLeft 0.7s ease-out;
+    }
 
+    .animate-right {
+        animation: slideInRight 0.7s ease-out;
+    }
+
+    @keyframes slideInLeft {
+        from {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+</style>
+@endpush
     <section class="smart-mail-hero">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 pb-5">
+                <div class="col-md-6 pb-5 animate-left">
                     <div class="left-content">
                         <h2 class="fw-bold text-uppercase pb-2">{{$smartmailhero?->text_large}} </h2>
                         <p class="fw-medium">{{$smartmailhero?->text_small}}</p>
@@ -23,7 +55,7 @@
                        </div>
                     </div>
                 </div>
-                <div class="col-md-6 smart-mail-hero-image">
+                <div class="col-md-6 smart-mail-hero-image animate-right">
                     <img src="{{asset('public/uploads/smartmailservice/'.$smartmailhero?->image)}}" alt="Postman" class="w-100">
                 </div>
             </div>
