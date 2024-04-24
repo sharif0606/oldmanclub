@@ -238,10 +238,21 @@ class ClientController extends Controller
         ->paginate(25);
         $unfollow_connections = Follow::with('client')->where('following_id', '=',currentUserId())->get();
 
-        $search_client_id = Client::where(function ($query) use ($search_by_people) {
+        /*$search_client_id = Client::where(function ($query) use ($search_by_people) {
             $query->where('fname', 'like', '%' . $search_by_people . '%')
             ->orWhere('middle_name', 'like', '%' . $search_by_people . '%')
             ->orWhere('last_name', 'like', '%' . $search_by_people . '%');
+        })->first();*/
+
+        $search_client_id = Client::where(function ($query) use ($search_by_people) {
+            $names = explode(' ', $search_by_people);
+            foreach ($names as $name) {
+                $query->where(function ($query) use ($name) {
+                    $query->where('fname', 'like', "%$name%")
+                          ->orWhere('middle_name', 'like', "%$name%")
+                          ->orWhere('last_name', 'like', "%$name%");
+                });
+            }
         })->first();
         return view('user.searchByPeople',compact('client','follow_connections','unfollow_connections','followIds','search_client_id'));
     }

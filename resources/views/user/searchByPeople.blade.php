@@ -143,10 +143,10 @@
                             @empty
                                 @if($search_client_id)
                                     @if(!in_array($search_client_id->id,$followIds))
-                                        @include('user.includes.no-people-found')
-                                    @endif
+                                        {{-- @include('user.includes.no-people-found') --}}
+                                    @endif 
                                     @else
-                                    @include('user.includes.no-people-found')
+                                    {{-- @include('user.includes.no-people-found') --}}
                                 @endif
                             @endforelse
 
