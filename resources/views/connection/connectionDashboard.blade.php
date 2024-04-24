@@ -277,7 +277,7 @@
                 <div class="col-lg-8 vstack gap-2">
                     <!-- Share feed START -->
                     <div class="card card-body">
-                        <div class="d-flex mb-3">
+                        {{--<div class="d-flex mb-3">
                             <!-- Avatar -->
                             <div class="avatar avatar-xs me-2">
                                 <a href="#">
@@ -288,16 +288,16 @@
                                         <img class="avatar-img rounded-circle"
                                             src="{{ asset('public/images/download.jpg') }}" alt="">
                                     @endif
-                                    {{-- <img class="avatar-img rounded-circle" src="{{asset($client->image?$client->image:default_image())}}"
-                                                            alt="">  --}}
+                                    <img class="avatar-img rounded-circle" src="{{asset($client->image?$client->image:default_image())}}"
+                                                            alt="">
                                 </a>
                             </div>
                             <!-- Post input -->
-                            {{-- <form class="w-100">
+                            <form class="w-100">
                                 <input class="form-control pe-4 border-0" placeholder="Share your thoughts..."
                                     data-bs-toggle="modal" data-bs-target="#feedActionPhoto">
-                            </form> --}}
-                        </div>
+                            </form> 
+                        </div>--}}
                         <!-- Share feed toolbar START -->
                         {{-- <ul class="nav nav-pills nav-stack small fw-normal">
                             <li class="nav-item">
