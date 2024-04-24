@@ -6,7 +6,7 @@
                 <div class="d-flex align-items-center">
                     <!-- Avatar -->
                     <div class="avatar avatar-story me-2">
-                        <a href="#!">
+                        <a href="{{route('client_by_search',$value->client->username)}}">
                             @if ($value->client->image)
                                 <img class="avatar-img rounded-circle"
                                     src="{{ asset('public/uploads/client/' . $value->client->image) }}" alt="">
@@ -20,7 +20,7 @@
                     <!-- Info -->
                     <div>
                         <div class="nav nav-divider">
-                            <h6 class="nav-item card-title mb-0"> <a href="#!">{{ $value->client->fname }}
+                            <h6 class="nav-item card-title mb-0"> <a href="{{route('client_by_search',$value->client->username)}}">{{ $value->client->fname }}
                                     {{ $value->client->middle_name }} {{ $value->client->last_name }}
                                 </a></h6>
                             <span class="nav-item small">{{ $value->created_at->diffForHumans() }}</span>
