@@ -38,9 +38,10 @@ class ClientController extends Controller
         ->where('client_id', currentUserId())
         ->orderBy('created_at', 'desc')
         ->get();
+        $followers = Follow::where('following_id',currentUserId())->orderBy('id', 'desc')->take(4)->get();
         //dd($post);
         $postCount = Post::where('client_id', currentUserId())->count();
-        return view('user.clientDashboard', compact('client','post','postCount'));
+        return view('user.clientDashboard', compact('client','post','postCount','followers'));
     }
     public function myProfile()
     {
@@ -253,7 +254,8 @@ class ClientController extends Controller
         $client = Client::where('username', 'like', "%$username%")->first();
         $post = Post::where('client_id',$client->id)->orderBy('created_at', 'desc')->get();
         $postCount = Post::where('client_id', currentUserId())->count();
-        return view('connection.connectionDashboard', compact('client','post','postCount'));
+        $followers = Follow::where('following_id',$client->id)->orderBy('id', 'desc')->take(4)->get();
+        return view('connection.connectionDashboard', compact('client','post','postCount','followers'));
     }
     public function usernameProfile($username)
     {
