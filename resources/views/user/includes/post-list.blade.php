@@ -33,6 +33,8 @@
                                     , {{ $value->client->currentstate?->name }}
                                 @endif
                             </span>
+                            @else
+                            <span class="nav-item mb-0 small">This Account Location Not Set Yet.</span>
                         @endif
                         <span class="nav-item small" data-bs-toggle="tooltip" data-bs-placement="top"
                             aria-label="Public" data-bs-original-title="Public"> <i class="bi bi-globe"></i> </span>
