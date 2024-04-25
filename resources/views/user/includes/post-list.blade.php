@@ -27,6 +27,7 @@
                             <span class="nav-item small">{{ $value->created_at->diffForHumans() }}</span>
                         </div>
                         {{-- <span class="nav-item mb-0 small"><i class="bi bi-briefcase-fill me-1"></i>{{$client->designation}}</span> --}}
+                        {{$client->id}}
                         @if ($client->current_country_id)
                             <span class="nav-item mb-0 small"><i
                                     class="bi bi-geo-alt-fill me-1"></i>{{ $value->client->currentcountry?->name }}
