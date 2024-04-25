@@ -67,7 +67,8 @@ class ClientController extends Controller
         session()->forget('username');
         $client = Client::find(currentUserId());
         $post = Post::where('client_id','!=',currentUserId())->orderBy('id', 'desc')->get();
-        return view('user.includes.gathering',compact('client','post'));
+        $followers = Follow::where('following_id',currentUserId())->orderBy('id', 'desc')->take(4)->get();
+        return view('user.includes.gathering',compact('client','post','followers'));
     }
     // public function phonebook_list()
     // {
@@ -266,13 +267,16 @@ class ClientController extends Controller
         $post = Post::where('client_id',$client->id)->orderBy('created_at', 'desc')->get();
         $postCount = Post::where('client_id', currentUserId())->count();
         $followers = Follow::where('following_id',$client->id)->orderBy('id', 'desc')->take(4)->get();
-        return view('connection.connectionDashboard', compact('client','post','postCount','followers'));
+        $connection = Client::where('username', 'like', "%$username%")->first();
+        $followIds = Follow::where('following_id',currentUserId())->pluck('follower_id')->toArray();
+        return view('connection.connectionDashboard', compact('client','post','postCount','followers','followIds','connection'));
     }
     public function usernameProfile($username)
     {
         $client = Client::where('username', 'like', "%$username%")->first();
         $post = Post::where('client_id',$client->id)->orderBy('created_at', 'desc')->get();
         return view('user.myProfile', compact('client','post'));
+       
     }
     public function usernameProfileAbout($username)
     {

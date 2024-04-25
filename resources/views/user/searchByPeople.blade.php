@@ -50,7 +50,8 @@
                                                     alt="avatar">
                                             </li>
                                             <li class="small ms-3">
-                                                Carolyn Ortiz, Frances Guerrero, and 20 other shared connections
+                                                {{-- {{$connection->client->followings}} --}}
+                                                {{-- Carolyn Ortiz, Frances Guerrero, and 20 other shared connections --}}
                                             </li>
                                         </ul>
                                         <!-- Connections END -->
