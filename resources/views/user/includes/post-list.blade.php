@@ -38,6 +38,7 @@
                         @endif
                         <span class="nav-item small" data-bs-toggle="tooltip" data-bs-placement="top"
                             aria-label="Public" data-bs-original-title="Public"> <i class="bi bi-globe"></i> </span>
+                            
                     </div>
                 </div>
                 <!-- Card feed action dropdown START -->
