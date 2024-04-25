@@ -77,20 +77,22 @@
             </div>
             <!-- Button -->
             <div class="d-flex mt-3 justify-content-center ms-sm-auto">
-                @if (!in_array($connection->id, $followIds))
-                    <form action="{{ route('follow.store') }}" method="post">
-                        @csrf
-                        <input type="hidden" name="username" value="{{ Session::get('username') }}">
-                        <button type="submit" class="btn btn-primary-soft me-2"> Follow
-                        </button>
-                    </form>
-                @else
-                @php $follow = \App\Models\User\Follow::where('follower_id',$connection->id)->where('following_id',currentUserId())->first(); @endphp
-                    <form action="{{ route('follow.destroy', $follow) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger-soft btn-sm mb-0 me-2"> Unfollow </button>
-                    </form>
+                @if($connection->id != currentUserId())
+                  @if (!in_array($connection->id, $followIds))
+                      <form action="{{ route('follow.store') }}" method="post">
+                          @csrf
+                          <input type="hidden" name="username" value="{{ Session::get('username') }}">
+                          <button type="submit" class="btn btn-primary-soft me-2"> Follow
+                          </button>
+                      </form>
+                  @else
+                  @php $follow = \App\Models\User\Follow::where('follower_id',$connection->id)->where('following_id',currentUserId())->first(); @endphp
+                      <form action="{{ route('follow.destroy', $follow) }}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          <button class="btn btn-danger-soft btn-sm mb-0 me-2"> Unfollow </button>
+                      </form>
+                  @endif
                 @endif
             </div>
         </div>
