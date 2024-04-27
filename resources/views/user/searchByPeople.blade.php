@@ -106,8 +106,8 @@
                                             <li class="small ms-3">
                                                 {{$connection->client->followings}}
                                                 Carolyn Ortiz, Frances Guerrero, and 20 other shared connections
-                                            </li>
-                                        </ul> --}}
+                                            </li>--}}
+                                        </ul> 
                                             <!-- Connections END -->
                                     </div>
                                     <!-- Button -->
