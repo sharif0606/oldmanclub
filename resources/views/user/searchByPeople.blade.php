@@ -51,7 +51,7 @@
                                         <ul class="avatar-group mt-1 list-unstyled align-items-sm-center">
                                             @foreach ($connection->client->followings->take(4) as $following)
                                                 <li class="avatar avatar-xxs">
-                                                    @if ($connection->image)
+                                                    @if ($connection->follow_client->image)
                                                         <img class="avatar-img rounded-circle"
                                                             src="{{ asset('public/uploads/client/' . $following->follow_client->image) }}"
                                                             alt="">
