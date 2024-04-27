@@ -45,9 +45,9 @@
                                             <p class="small ms-sm-2 mb-0"> {{ $connection->client->designation }}</p>
                                         </div>
                                         <!-- Connections START -->
-                                        <pre>
-                                            {{-- $connection->client->followings->pluck('following_id') --}}
-                                        </pre>
+                                        {{-- <pre>
+                                            {{ $connection->client->followings->pluck('following_id') }}
+                                        </pre> --}}
                                         <ul class="avatar-group mt-1 list-unstyled align-items-sm-center">
                                             @foreach ($connection->client->followings->take(4) as $following)
                                                 <li class="avatar avatar-xxs">
@@ -57,7 +57,7 @@
                                                             alt="">
                                                     @else
                                                         <img class="avatar-img rounded-circle"
-                                                            src="{{ asset('public/uploads/client/' . $following->follow_client->image) }}"
+                                                            src="{{ asset('public/user/assets/images/avatar/placeholder.jpg') }}"
                                                             alt="">
                                                     @endif
                                                 </li>
