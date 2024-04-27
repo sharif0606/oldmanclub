@@ -13,4 +13,9 @@ class Follow extends Model
     {
         return $this->belongsTo(Client::class, 'follower_id');
     }
+    /* To Get Following Id Realtion With Client */
+    public function follow_client()
+    {
+        return $this->belongsTo(Client::class, 'following_id');
+    }
 }
