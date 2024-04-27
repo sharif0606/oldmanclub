@@ -82,9 +82,9 @@
                                                     @endforeach
                                                     {{-- Displaying the remaining connections count --}}
                                                     @if ($otherConnectionsCount == 1)
-                                                        and 1 other shared connection
+                                                        and 1 other connection
                                                     @else
-                                                        and {{ $otherConnectionsCount }} other shared connections
+                                                        and {{ $otherConnectionsCount }} other connections
                                                     @endif
                                                 @else
                                                     {{-- Displaying all names if there are less than 4 --}}
