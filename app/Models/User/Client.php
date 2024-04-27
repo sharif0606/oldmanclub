@@ -70,10 +70,16 @@ class Client extends Model
     {
         return $this->hasMany(Follow::class, 'following_id');
     }
+   
     public function followings()
     {
         return $this->hasMany(Follow::class, 'follower_id');
     }
+     /*
+     Here Function is Followings
+         Will result Who are follower here example as follower_id = 4  and follwing are 
+         SELECT * FROM `follows` WHERE `follower_id`=4;
+    */
     public function getFormattedFollowersCountAttribute()
     {
         $count = $this->followers()->count();

@@ -236,7 +236,7 @@ class ClientController extends Controller
         })
         ->where('id', '!=', currentUserId())
         ->whereNotIn('id', $followIds)
-        ->paginate(25);
+        ->get();
         $unfollow_connections = Follow::with('client')->where('following_id', '=',currentUserId())->get();
 
         /*$search_client_id = Client::where(function ($query) use ($search_by_people) {
