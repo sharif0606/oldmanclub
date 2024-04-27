@@ -23,7 +23,7 @@
                                 <div class="d-md-flex align-items-center mb-4">
                                     <!-- Avatar -->
                                     <div class="avatar me-3 mb-3 mb-md-0">
-                                        <a href="{{route('client_by_search',$connection->client->username)}}">
+                                        <a href="{{ route('client_by_search', $connection->client->username) }}">
                                             @if ($connection->image)
                                                 <img class="avatar-img rounded-circle"
                                                     src="{{ asset('public/uploads/client/' . $connection->image) }}"
@@ -38,44 +38,97 @@
                                     <!-- Info -->
                                     <div class="w-100">
                                         <div class="d-sm-flex align-items-start">
-                                            <h6 class="mb-0"><a href="{{route('client_by_search',$connection->client->username)}}">{{ $connection->client->fname }}
-                                                    {{ $connection->client->middle_name }} {{ $connection->client->last_name }}</a></h6>
+                                            <h6 class="mb-0"><a
+                                                    href="{{ route('client_by_search', $connection->client->username) }}">{{ $connection->client->fname }}
+                                                    {{ $connection->client->middle_name }}
+                                                    {{ $connection->client->last_name }}</a></h6>
                                             <p class="small ms-sm-2 mb-0"> {{ $connection->client->designation }}</p>
                                         </div>
                                         <!-- Connections START -->
+                                        <pre>
+                                            {{-- $connection->client->followings->pluck('following_id') --}}
+                                        </pre>
                                         <ul class="avatar-group mt-1 list-unstyled align-items-sm-center">
-                                            <li class="avatar avatar-xxs">
+                                            @foreach ($connection->client->followings->take(4) as $following)
+                                                <li class="avatar avatar-xxs">
+                                                    @if ($connection->image)
+                                                        <img class="avatar-img rounded-circle"
+                                                            src="{{ asset('public/uploads/client/' . $following->follow_client->image) }}"
+                                                            alt="">
+                                                    @else
+                                                        <img class="avatar-img rounded-circle"
+                                                            src="{{ asset('public/uploads/client/' . $following->follow_client->image) }}"
+                                                            alt="">
+                                                    @endif
+                                                </li>
+                                            @endforeach
+                                            <li class="small ms-3">
+                                                @php
+                                                    $otherConnectionsCount = max(
+                                                        $connection->client->followings->count() - 4,
+                                                        0,
+                                                    );
+                                                    //echo $otherConnectionsCount;
+                                                @endphp
+                                                @if ($otherConnectionsCount > 0)
+                                                    {{-- Displaying the first two names --}}
+                                                    @foreach ($connection->client->followings->take(2) as $key => $following)
+                                                        {{ $following->follow_client->fname }}
+                                                        {{ $following->follow_client->middle_name }}
+                                                        {{ $following->follow_client->last_name }}
+                                                        @if (!$loop->last)
+                                                            {{ ',' }}
+                                                        @endif
+                                                    @endforeach
+                                                    {{-- Displaying the remaining connections count --}}
+                                                    @if ($otherConnectionsCount == 1)
+                                                        and 1 other shared connection
+                                                    @else
+                                                        and {{ $otherConnectionsCount }} other shared connections
+                                                    @endif
+                                                @else
+                                                    {{-- Displaying all names if there are less than 4 --}}
+                                                    @foreach ($connection->client->followings as $key => $following)
+                                                        {{ $following->follow_client->fname }}
+                                                        {{ $following->follow_client->middle_name }}
+                                                        {{ $following->follow_client->last_name }}
+                                                        @if (!$loop->last)
+                                                            {{ ',' }}
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            </li>
+                                            {{-- <li class="avatar avatar-xxs">
                                                 <img class="avatar-img rounded-circle"
                                                     src="{{ asset('public/user/assets/images/avatar/01.jpg') }}"
                                                     alt="avatar">
                                             </li>
                                             <li class="small ms-3">
-                                                {{-- {{$connection->client->followings}} --}}
-                                                {{-- Carolyn Ortiz, Frances Guerrero, and 20 other shared connections --}}
+                                                {{$connection->client->followings}}
+                                                Carolyn Ortiz, Frances Guerrero, and 20 other shared connections
                                             </li>
-                                        </ul>
-                                        <!-- Connections END -->
+                                        </ul> --}}
+                                            <!-- Connections END -->
                                     </div>
                                     <!-- Button -->
                                     <div class="ms-md-auto d-flex">
-                                        <form action="{{route('follow.destroy',$connection)}}" method="POST">
+                                        <form action="{{ route('follow.destroy', $connection) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-danger-soft btn-sm mb-0 me-2"> Unfollow </button>
                                         </form>
-                                        
+
 
                                     </div>
                                 </div>
                             @empty
-                                
                             @endforelse
                             @forelse ($follow_connections as $connection)
                                 <!-- Connections Item -->
                                 <div class="d-md-flex align-items-center mb-4">
                                     <!-- Avatar -->
                                     <div class="avatar me-3 mb-3 mb-md-0">
-                                        <a href="{{route('client_by_search',$connection->username)}}">
+                                        <a href="{{ route('client_by_search', $connection->username) }}">
                                             @if ($connection->image)
                                                 <img class="avatar-img rounded-circle"
                                                     src="{{ asset('public/uploads/client/' . $connection->image) }}"
@@ -90,7 +143,8 @@
                                     <!-- Info -->
                                     <div class="w-100">
                                         <div class="d-sm-flex align-items-start">
-                                            <h6 class="mb-0"><a href="{{route('client_by_search',$connection->username)}}">{{ $connection->fname }}
+                                            <h6 class="mb-0"><a
+                                                    href="{{ route('client_by_search', $connection->username) }}">{{ $connection->fname }}
                                                     {{ $connection->middle_name }} {{ $connection->last_name }}</a></h6>
                                             <p class="small ms-sm-2 mb-0"> {{ $connection->designation }}</p>
                                         </div>
@@ -129,24 +183,24 @@
                                     </div>
                                     <!-- Button -->
                                     <div class="ms-md-auto d-flex">
-                                        
-                                       
-                                            <form action="{{ route('follow.store') }}" method="post">
-                                                @csrf
-                                                <input type="hidden" name="follower_id" value="{{ $connection->id }}">
-                                                <button type="submit" class="btn btn-primary-soft btn-sm mb-0"> Follow
-                                                </button>
-                                            </form>
-                                      
+
+
+                                        <form action="{{ route('follow.store') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="follower_id" value="{{ $connection->id }}">
+                                            <button type="submit" class="btn btn-primary-soft btn-sm mb-0"> Follow
+                                            </button>
+                                        </form>
+
 
                                     </div>
                                 </div>
                             @empty
-                                @if($search_client_id)
-                                    @if(!in_array($search_client_id->id,$followIds))
+                                @if ($search_client_id)
+                                    @if (!in_array($search_client_id->id, $followIds))
                                         {{-- @include('user.includes.no-people-found') --}}
-                                    @endif 
-                                    @else
+                                    @endif
+                                @else
                                     {{-- @include('user.includes.no-people-found') --}}
                                 @endif
                             @endforelse
