@@ -168,35 +168,73 @@
                                         </div>
                                         <!-- Connections START -->
                                         <ul class="avatar-group mt-1 list-unstyled align-items-sm-center">
+                                            @foreach ($connection->followings->take(4) as $following)
+                                                <li class="avatar avatar-xxs">
+                                                    @if ($following->follow_client->image)
+                                                        <img class="avatar-img rounded-circle"
+                                                            src="{{ asset('public/uploads/client/' . $following->follow_client->image) }}"
+                                                            alt="">
+                                                    @else
+                                                        <img class="avatar-img rounded-circle"
+                                                            src="{{ asset('public/user/assets/images/avatar/placeholder.jpg') }}"
+                                                            alt="">
+                                                    @endif
+                                                </li>
+                                            @endforeach
+                                            @php
+                                            $otherConnectionsCount = max(
+                                                $connection->followings->count() - 4,
+                                                0,
+                                            );
+                                            //echo $otherConnectionsCount;
+                                            @endphp
+                                            @if ($otherConnectionsCount > 0)
                                             <li class="avatar avatar-xxs">
+                                                <div class="avatar-img rounded-circle bg-primary"><span
+                                                        class="smaller text-white position-absolute top-50 start-50 translate-middle">{{$otherConnectionsCount}}+</span>
+                                                </div>
+                                            </li>
+                                            @endif
+                                            <li class="small ms-3">
+                                                @if ($otherConnectionsCount > 0)
+                                                    {{-- Displaying the first two names --}}
+                                                    @foreach ($connection->followings->take(2) as $key => $following)
+                                                        {{ $following->follow_client->fname }}
+                                                        {{ $following->follow_client->middle_name }}
+                                                        {{ $following->follow_client->last_name }}
+                                                        @if (!$loop->last)
+                                                            {{ ',' }}
+                                                        @endif
+                                                    @endforeach
+                                                    {{-- Displaying the remaining connections count --}}
+                                                    @if ($otherConnectionsCount == 1)
+                                                        and 1 other Follwing
+                                                    @else
+                                                        and {{ $otherConnectionsCount }} other are Following
+                                                    @endif
+                                                @else
+                                                    {{-- Displaying all names if there are less than 4 --}}
+                                                    @foreach ($connection->followings as $key => $following)
+                                                        {{ $following->follow_client->fname }}
+                                                        {{ $following->follow_client->middle_name }}
+                                                        {{ $following->follow_client->last_name }}
+                                                        @if (!$loop->last)
+                                                            {{ ',' }}
+                                                        @endif
+                                                    @endforeach
+                                                    Following
+                                                @endif
+                                            </li>
+                                            {{-- <li class="avatar avatar-xxs">
                                                 <img class="avatar-img rounded-circle"
                                                     src="{{ asset('public/user/assets/images/avatar/01.jpg') }}"
                                                     alt="avatar">
                                             </li>
-                                            <li class="avatar avatar-xxs">
-                                                <img class="avatar-img rounded-circle"
-                                                    src="{{ asset('public/user/assets/images/avatar/02.jpg') }}"
-                                                    alt="avatar">
-                                            </li>
-                                            <li class="avatar avatar-xxs">
-                                                <img class="avatar-img rounded-circle"
-                                                    src="{{ asset('public/user/assets/images/avatar/03.jpg') }}"
-                                                    alt="avatar">
-                                            </li>
-                                            <li class="avatar avatar-xxs">
-                                                <img class="avatar-img rounded-circle"
-                                                    src="{{ asset('public/user/assets/images/avatar/04.jpg') }}"
-                                                    alt="avatar">
-                                            </li>
-                                            <li class="avatar avatar-xxs">
-                                                <div class="avatar-img rounded-circle bg-primary"><span
-                                                        class="smaller text-white position-absolute top-50 start-50 translate-middle">+2</span>
-                                                </div>
-                                            </li>
                                             <li class="small ms-3">
+                                                {{$connection->client->followings}}
                                                 Carolyn Ortiz, Frances Guerrero, and 20 other shared connections
-                                            </li>
-                                        </ul>
+                                            </li>--}}
+                                        </ul> 
                                         <!-- Connections END -->
                                     </div>
                                     <!-- Button -->
