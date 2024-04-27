@@ -36,6 +36,11 @@
                                         </a>
                                     </div>
                                     <!-- Info -->
+                                    {{-- <table class="table table-bordered">
+                                        <tr>
+                                            <td>CurrentUser ID {{currentUserId()}} is (following_id)- where {{$connection->client->id}} is follower_id</td>
+                                        </tr>
+                                    </table> --}}
                                     <div class="w-100">
                                         <div class="d-sm-flex align-items-start">
                                             <h6 class="mb-0"><a
@@ -62,14 +67,19 @@
                                                     @endif
                                                 </li>
                                             @endforeach
+                                            @php
+                                            $otherConnectionsCount = max(
+                                                $connection->client->followings->count() - 4,
+                                                0,
+                                            );
+                                            //echo $otherConnectionsCount;
+                                            @endphp
+                                            <li class="avatar avatar-xxs">
+                                                <div class="avatar-img rounded-circle bg-primary"><span
+                                                        class="smaller text-white position-absolute top-50 start-50 translate-middle">{{$otherConnectionsCount}}+</span>
+                                                </div>
+                                            </li>
                                             <li class="small ms-3">
-                                                @php
-                                                    $otherConnectionsCount = max(
-                                                        $connection->client->followings->count() - 4,
-                                                        0,
-                                                    );
-                                                    //echo $otherConnectionsCount;
-                                                @endphp
                                                 @if ($otherConnectionsCount > 0)
                                                     {{-- Displaying the first two names --}}
                                                     @foreach ($connection->client->followings->take(2) as $key => $following)
@@ -82,9 +92,9 @@
                                                     @endforeach
                                                     {{-- Displaying the remaining connections count --}}
                                                     @if ($otherConnectionsCount == 1)
-                                                        and 1 other connection
+                                                        and 1 other Follwing
                                                     @else
-                                                        and {{ $otherConnectionsCount }} other connections
+                                                        and {{ $otherConnectionsCount }} other are Following
                                                     @endif
                                                 @else
                                                     {{-- Displaying all names if there are less than 4 --}}
@@ -141,6 +151,11 @@
                                         </a>
                                     </div>
                                     <!-- Info -->
+                                    {{-- <table class="table table-bordered">
+                                        <tr>
+                                            <td>Here {{currentUserId()}} is (following_id) and {{$connection->id}} will be (follower_id)</td>
+                                        </tr>
+                                    </table> --}}
                                     <div class="w-100">
                                         <div class="d-sm-flex align-items-start">
                                             <h6 class="mb-0"><a
