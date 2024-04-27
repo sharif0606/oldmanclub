@@ -263,11 +263,11 @@ class ClientController extends Controller
         // Store the username in the session
         Session::put('username', $username);
         //dd($username);
-        $client = Client::where('username', 'like', "%$username%")->first();
+        $client = Client::where('username', $username)->first();
         $post = Post::where('client_id',$client->id)->orderBy('created_at', 'desc')->get();
         $postCount = Post::where('client_id', currentUserId())->count();
         $followers = Follow::where('following_id',$client->id)->orderBy('id', 'desc')->take(4)->get();
-        $connection = Client::where('username', 'like', "%$username%")->first();
+        $connection = Client::where('username', $username)->first();
         $followIds = Follow::where('following_id',currentUserId())->pluck('follower_id')->toArray();
         return view('connection.connectionDashboard', compact('client','post','postCount','followers','followIds','connection'));
     }
