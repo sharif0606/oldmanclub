@@ -74,11 +74,13 @@
                                             );
                                             //echo $otherConnectionsCount;
                                             @endphp
+                                            @if ($otherConnectionsCount > 0)
                                             <li class="avatar avatar-xxs">
                                                 <div class="avatar-img rounded-circle bg-primary"><span
                                                         class="smaller text-white position-absolute top-50 start-50 translate-middle">{{$otherConnectionsCount}}+</span>
                                                 </div>
                                             </li>
+                                            @endif
                                             <li class="small ms-3">
                                                 @if ($otherConnectionsCount > 0)
                                                     {{-- Displaying the first two names --}}
@@ -106,6 +108,7 @@
                                                             {{ ',' }}
                                                         @endif
                                                     @endforeach
+                                                    is Following
                                                 @endif
                                             </li>
                                             {{-- <li class="avatar avatar-xxs">
