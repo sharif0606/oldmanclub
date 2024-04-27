@@ -24,9 +24,9 @@
                                     <!-- Avatar -->
                                     <div class="avatar me-3 mb-3 mb-md-0">
                                         <a href="{{ route('client_by_search', $connection->client->username) }}">
-                                            @if ($connection->image)
+                                            @if ($connection->client->image)
                                                 <img class="avatar-img rounded-circle"
-                                                    src="{{ asset('public/uploads/client/' . $connection->image) }}"
+                                                    src="{{ asset('public/uploads/client/' . $connection->client->image) }}"
                                                     alt="">
                                             @else
                                                 <img class="avatar-img rounded-circle"
