@@ -108,7 +108,7 @@
                                                             {{ ',' }}
                                                         @endif
                                                     @endforeach
-                                                    is Following
+                                                    Following
                                                 @endif
                                             </li>
                                             {{-- <li class="avatar avatar-xxs">
