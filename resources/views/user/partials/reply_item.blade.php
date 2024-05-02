@@ -4,17 +4,17 @@
         <!-- Avatar -->
         <div class="avatar avatar-xs">
             @if ($reply->client->image)
-                <a href="#!"> <img class="avatar-img rounded-circle"
+                <a href="{{ route('client_by_search', $reply->client->username) }}"> <img class="avatar-img rounded-circle"
                         src="{{ asset('public/uploads/client/' . $reply->client->image) }}"
                         alt=""></a>
             @else
-                <a href="#!"><img class="avatar-img rounded-circle"
+                <a href="{{ route('client_by_search', $reply->client->username) }}"><img class="avatar-img rounded-circle"
                         src="{{ asset('public/images/download.jpg') }}" alt=""></a>
             @endif
         </div>
         <!-- Comment by -->
         <div class="ms-2">
-            <div class="bg-light p-3 rounded">
+            <div class="bg-light p-2 rounded">
                 <div class="d-flex justify-content-between">
                     <h6 class="mb-1"> <a href="#!">{{ $reply->client->fname }}
                             {{ $reply->client->middle_name }}

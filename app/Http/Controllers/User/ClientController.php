@@ -56,6 +56,13 @@ class ClientController extends Controller
         $client = Client::find(currentUserId());
         return view('user.myProfileAbout', compact('client'));
     }
+    public function all_followers()
+    {
+        session()->forget('username');
+        $client = Client::find(currentUserId());
+        $followers = Follow::with('client')->where('following_id', '=',currentUserId())->get();
+        return view('user.all-followers', compact('client','followers'));
+    }
     public function accountSetting()
     {
         session()->forget('username');
