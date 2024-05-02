@@ -1,3 +1,4 @@
+@if($value->comments()->count() == 0)
 <div class="d-flex mb-3">
     <div class="avatar avatar-xs me-2">
         @if ($client->image)
@@ -22,6 +23,7 @@
         </button>
     </form>
 </div>
+@endif
 <!-- Comment wrap START -->
 <div class="comments-container">
     <ul class="comment-wrap list-unstyled" data-post-id="{{$value->id}}">
@@ -44,7 +46,7 @@
                     <div class="ms-2">
                         @php 
                             $followIds = \App\Models\User\Follow::where('following_id',$comment->client->id)->pluck('follower_id')->toArray(); 
-                            print_r($followIds);
+                            //print_r($followIds);
                         @endphp
                         <!-- Comment by -->
                         <div class="bg-light rounded-start-top-1 p-2 rounded">
@@ -198,7 +200,32 @@
         @endforelse
     </ul>
 </div>
-
+@if($value->comments()->count() > 0)
+<div class="d-flex mb-3">
+    <div class="avatar avatar-xs me-2">
+        @if ($client->image)
+            <!-- Avatar -->
+            <a href="{{ route('client_by_search', $client->username) }}"> <img class="avatar-img rounded-circle"
+                    src="{{ asset('public/uploads/client/' . $client->image) }}" alt=""> </a>
+        @else
+            <a href="{{ route('client_by_search', $client->username) }}"><img class="avatar-img rounded-circle" src="{{ asset('public/images/download.jpg') }}"
+                    alt=""></a>
+        @endif
+    </div>
+    <!-- Comment box  -->
+    {{-- action="{{ route('post-comment.store') }}" method="post" --}}
+    <form class="nav nav-item w-100 position-relative comment-form">
+        @csrf
+        <textarea data-autoresize="" class="form-control pe-5 bg-light" rows="1" placeholder="Add a comment..."
+            name="content" required style="border-radius:20px;"></textarea>
+        <input type="hidden" name="post_id" value="{{ $value->id }}" data-post-id="{{$value->id}}">
+        <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0"
+            type="submit">
+            <i class="bi bi-send-fill"> </i>
+        </button>
+    </form>
+</div>
+@endif
 
 {{-- 
         <!-- Comment wrap START -->
