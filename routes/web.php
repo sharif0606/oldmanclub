@@ -234,6 +234,7 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::get('dashboard', [clientprofile::class, 'index'])->name('clientdashboard');
     Route::get('my-profile', [clientprofile::class, 'myProfile'])->name('myProfile');
     Route::get('my-profile-about', [clientprofile::class, 'myProfileAbout'])->name('myProfileAbout');
+    Route::get('followers', [clientprofile::class, 'all_followers'])->name('all.followers');
     Route::get('account-setting', [clientprofile::class, 'accountSetting'])->name('accountSetting');
     Route::get('find-people', [clientprofile::class, 'search_by_people'])->name('search_by_people');
     Route::resource('follow', follow::class);

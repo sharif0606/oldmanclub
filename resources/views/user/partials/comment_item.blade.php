@@ -4,18 +4,18 @@
         <!-- Avatar -->
         <div class="avatar avatar-xs">
             @if ($comment->client->image)
-                <a href="#!"> <img class="avatar-img rounded-circle"
+                <a href="{{ route('client_by_search', $comment->client->username) }}"> <img class="avatar-img rounded-circle"
                         src="{{ asset('public/uploads/client/' . $comment->client->image) }}" alt=""></a>
             @else
-                <a href="#!"><img class="avatar-img rounded-circle" src="{{ asset('public/images/download.jpg') }}"
+                <a href="{{ route('client_by_search', $comment->client->username) }}"><img class="avatar-img rounded-circle" src="{{ asset('public/images/download.jpg') }}"
                         alt=""></a>
             @endif
         </div>
         <div class="ms-2">
             <!-- Comment by -->
-            <div class="bg-light rounded-start-top-0 p-3 rounded">
+            <div class="bg-light rounded-start-top-1 p-2 rounded">
                 <div class="d-flex justify-content-between">
-                    <h6 class="mb-1"> <a href="#!">{{ $comment->client->fname }}
+                    <h6 class="mb-1"> <a href="{{ route('client_by_search', $comment->client->username) }}">{{ $comment->client->fname }}
                             {{ $comment->client->middle_name }} {{ $comment->client->last_name }}</a></h6>
                     <!-- Replace with user name -->
                     <small class="ms-2">{{ $comment->created_at->diffForHumans() }}</small>

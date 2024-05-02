@@ -211,7 +211,7 @@
                         <div class="d-flex mb-3">
                             <!-- Avatar -->
                             <div class="avatar avatar-xs me-2">
-                                <a href="#">
+                                <a href="{{ route('client_by_search', $client->username) }}">
                                     @if ($client->image)
                                         <img class="avatar-img rounded-circle"
                                             src="{{ asset('public/uploads/client/' . $client->image) }}" alt="">

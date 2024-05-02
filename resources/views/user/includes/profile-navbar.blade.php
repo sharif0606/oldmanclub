@@ -19,7 +19,7 @@
                     <div class="text-center">
                         <!-- Avatar -->
                         <div class="avatar avatar-lg mt-n5 mb-3">
-                            <a href="#!">
+                            <a href="{{ route('client_by_search', $client->username) }}">
                                 @if($client->image)
                                     <img class="avatar-img rounded-circle border border-white border-3" src="{{asset('public/uploads/client/' . $client->image)}}" alt="">
                                 @else

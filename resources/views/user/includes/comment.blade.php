@@ -2,10 +2,10 @@
     <div class="avatar avatar-xs me-2">
         @if ($client->image)
             <!-- Avatar -->
-            <a href="#!"> <img class="avatar-img rounded-circle"
+            <a href="{{ route('client_by_search', $client->username) }}"> <img class="avatar-img rounded-circle"
                     src="{{ asset('public/uploads/client/' . $client->image) }}" alt=""> </a>
         @else
-            <a href="#!"><img class="avatar-img rounded-circle" src="{{ asset('public/images/download.jpg') }}"
+            <a href="{{ route('client_by_search', $client->username) }}"><img class="avatar-img rounded-circle" src="{{ asset('public/images/download.jpg') }}"
                     alt=""></a>
         @endif
     </div>
@@ -14,7 +14,7 @@
     <form class="nav nav-item w-100 position-relative comment-form">
         @csrf
         <textarea data-autoresize="" class="form-control pe-5 bg-light" rows="1" placeholder="Add a comment..."
-            name="content" required></textarea>
+            name="content" required style="border-radius:20px;"></textarea>
         <input type="hidden" name="post_id" value="{{ $value->id }}" data-post-id="{{$value->id}}">
         <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0"
             type="submit">
@@ -33,20 +33,44 @@
                     <!-- Avatar -->
                     <div class="avatar avatar-xs">
                         @if ($comment->client->image)
-                            <a href="#!"> <img class="avatar-img rounded-circle"
+                            <a href="{{ route('client_by_search', $comment->client->username) }}"> <img class="avatar-img rounded-circle"
                                     src="{{ asset('public/uploads/client/' . $comment->client->image) }}"
                                     alt=""></a>
                         @else
-                            <a href="#!"><img class="avatar-img rounded-circle"
+                            <a href="{{ route('client_by_search', $comment->client->username) }}"><img class="avatar-img rounded-circle"
                                     src="{{ asset('public/images/download.jpg') }}" alt=""></a>
                         @endif
                     </div>
                     <div class="ms-2">
+                        @php 
+                            $followIds = \App\Models\User\Follow::where('following_id',$comment->client->id)->pluck('follower_id')->toArray(); 
+                            print_r($followIds);
+                        @endphp
                         <!-- Comment by -->
-                        <div class="bg-light rounded-start-top-0 p-3 rounded">
+                        <div class="bg-light rounded-start-top-1 p-2 rounded">
                             <div class="d-flex justify-content-between">
-                                <h6 class="mb-1"> <a href="#!">{{ $comment->client->fname }}
-                                        {{ $comment->client->middle_name }} {{ $comment->client->last_name }}</a></h6>
+                                <h6 class="mb-1">
+                                    <a href="{{ route('client_by_search', $comment->client->username) }}">{{ $comment->client->fname }}
+                                        {{ $comment->client->middle_name }} {{ $comment->client->last_name }}
+                                        @if($comment->client->id != currentUserId())
+                                            @if (!in_array($comment->client->id, $followIds))
+                                                <form action="{{ route('follow.store') }}" class="d-inline" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="username" value="{{ Session::get('username') }}">
+                                                    <button type="submit" class="badge text-primary me-2" style="border:none;font-weight:bold;font-size:13px;"> Follow
+                                                    </button>
+                                                </form>
+                                            @else
+                                            @php $follow = \App\Models\User\Follow::where('follower_id',$connection->id)->where('following_id',$comment->client->id)->first(); @endphp
+                                                <form action="{{ route('follow.destroy', $follow) }}" class="d-inline" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="badge text-primary me-2" style="border:none;font-weight:bold;font-size:13px;"> Unfollow </button>
+                                                </form>
+                                            @endif
+                                        @endif
+                                    </a>
+                                    </h6>
                                 <!-- Replace with user name -->
                                 <small class="ms-2">{{ $comment->created_at->diffForHumans() }}</small>
                                 <!-- Replace with comment creation time -->
@@ -134,7 +158,7 @@
                                     </div>
                                     <!-- Comment by -->
                                     <div class="ms-2">
-                                        <div class="bg-light p-3 rounded">
+                                        <div class="bg-light p-2 rounded">
                                             <div class="d-flex justify-content-between">
                                                 <h6 class="mb-1"> <a href="#!">{{ $reply->client->fname }}
                                                         {{ $reply->client->middle_name }}
