@@ -100,6 +100,7 @@
             <div class="card-body">
                 <p><b>Mailing Address : </b>{{$client->address_line_1}}</p>
                 {{-- <p><b>Address Two : </b>{{$client->address_line_2}}</p> --}}
+                <p><b>Verification Code : </b>{{$client->code}}</p>
                 <p><b>Country : </b>{{$client->country}}</p>
                 <p><b>City : </b>{{$client->city}}</p>
                 <p><b>State : </b>{{$client->state}}</p>
