@@ -138,7 +138,7 @@ class ClientController extends Controller
     {
         try {
             $user=Client::find(currentUserId());
-            $count = Client::where('username', 'like', $request->username)->count();
+            $count = Client::where('username', $request->username)->count();
             if ($count > 0  && $request->username !== $user->username) {
                 return redirect()->back()->withInput()->withErrors(['username' => 'The requested ('.$request->username.') username is not available. Please choose a different one.']);
             }
