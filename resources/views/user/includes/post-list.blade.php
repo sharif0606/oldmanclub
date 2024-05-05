@@ -21,8 +21,12 @@
                     <div>
                         <div class="nav nav-divider">
                             <h6 class="nav-item card-title mb-0"> <a
-                                    href="{{ route('client_by_search', $value->client->username) }}">{{ $value->client->fname }}
-                                    {{ $value->client->middle_name }} {{ $value->client->last_name }}
+                                    href="{{ route('client_by_search', $value->client->username) }}">
+                                    @if($client->display_name)
+                                    {{$client->display_name}}
+                                    @else
+                                    {{$client->fname}} {{$client->middle_name}} {{$client->last_name}}
+                                    @endif
                                 </a></h6>
                             <span class="nav-item small">{{ $value->created_at->diffForHumans() }}</span>
                         </div>

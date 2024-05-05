@@ -15,7 +15,7 @@
             <!-- Comment by -->
             <div class="bg-light rounded-start-top-1 p-2 rounded">
                 <div class="d-flex justify-content-between">
-                    <h6 class="mb-1"> <a href="{{ route('client_by_search', $comment->client->username) }}">{{ $comment->client->fname }}
+                    <h6 class="my-0" style="font-size: 0.8375rem;"> <a href="{{ route('client_by_search', $comment->client->username) }}">{{ $comment->client->fname }}
                             {{ $comment->client->middle_name }} {{ $comment->client->last_name }}</a></h6>
                     <!-- Replace with user name -->
                     <small class="ms-2">{{ $comment->created_at->diffForHumans() }}</small>

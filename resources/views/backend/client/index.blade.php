@@ -43,7 +43,7 @@
                             <td style="color: @if($p->status==1) Green @else red @endif; font-weight:bold;">@if($p->status == 1) {{__('Active') }} @else {{__('Inactive') }} @endif</td>
                             <!-- or <td>{{ $p->status == 1?"Active":"Inactive" }}</td>-->
                             <td class="white-space-nowrap">
-                                @if($p->is_address_verified!=1)
+                                @if($p->is_address_verified==0)
                                 <a href="{{route('client.edit',encryptor('encrypt',$p->id))}}">
                                     <i class="fa fa-edit"></i>
                                 </a>

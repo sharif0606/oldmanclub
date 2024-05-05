@@ -28,7 +28,12 @@
             </div>
             <div class="ms-sm-4 mt-sm-3">
                 <!-- Info -->
-                <h1 class="mb-0 h5">{{$client->fname}} {{$client->middle_name}} {{$client->last_name}}
+                <h1 class="mb-0 h5">
+                    @if($client->display_name)
+                    {{$client->display_name}}
+                    @else
+                    {{$client->fname}} {{$client->middle_name}} {{$client->last_name}}
+                    @endif
                 @if($client->is_address_verified==1)
                     <i class="bi bi-patch-check-fill text-success small"></i>
                 @else

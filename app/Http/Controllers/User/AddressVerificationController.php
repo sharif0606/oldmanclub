@@ -35,7 +35,7 @@ class AddressVerificationController extends Controller
     {
         try{
             // DB::beginTransaction();
-            $address_verify = new AddressVerification;
+            /*$address_verify = new AddressVerification;
             $address_verify->client_id = currentUserId();
             if ($request->hasFile('id_image')) {
                 $imageName = rand(111, 999) . time() . '.' . $request->id_image->extension();
@@ -59,15 +59,16 @@ class AddressVerificationController extends Controller
                     $documentNames[] = $imageName;
                 }
                 $address_verify->document = implode(',', $documentNames);
-            }
+            }*/
             // Update the address_line_1 directly in the clients table
             $client = Client::where('id', currentUserId())->firstOrFail();
             $client->address_line_1 = $request->address_line_1;
+            $client->verification_request_status = 1;
             $client->save();
 
-            if ($address_verify->save()) {
+            //if ($address_verify->save()) {
                 return redirect()->back()->with('success', 'Data Saved'); 
-            }
+           // }
            
         }catch(Exception $e){
             DB::rollback();

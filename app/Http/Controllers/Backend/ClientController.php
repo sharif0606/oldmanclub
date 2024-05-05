@@ -7,6 +7,8 @@ use App\Models\User\AddressVerification;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 class ClientController extends Controller
 {
@@ -99,17 +101,55 @@ class ClientController extends Controller
         }
     }
 
+    public function generateUniqueOTP() {
+        do {
+            // Generate a random 6-digit code
+            $otp = Str::random(6);
+    
+            // Check if the code already exists in the clients table
+            $existingClient = Client::where('code', $otp)->exists();
+    
+        } while ($existingClient);
+    
+        return $otp;
+    }
     public function verification($id){
         $client = Client::findOrFail(encryptor('decrypt',$id));
-        $client_address = AddressVerification::where('client_id',$client->id)->get();
-        return view('backend.client.verify', compact('client','client_address'));
+       // $client_address = AddressVerification::where('client_id',$client->id)->get();
+        $client->code = $this->generateUniqueOTP();
+        $client->verification_request_status = 2;
+        if($client->save()){
+            $this->notice::success('Code Generated Successfully');
+            return redirect()->back();
+        }
+        //return view('backend.client.verify', compact('client','client_address'));
     }
     public function verification_update(Request $request, $id){
         $client = Client::findOrFail(encryptor('decrypt',$id));
-        $client->is_address_verified = $request->is_address_verified;
+        // Validate the request data
+        $validator = Validator::make($request->all(), [
+            'code' => [
+                'required',
+                function ($attribute, $value, $fail) use ($client) {
+                    // Check if the provided code matches the code field of the client
+                    if ($value !== $client->code) {
+                        $fail('The provided code does not match the given code.');
+                    }
+                },
+            ],
+        ]);
+
+        // Check if the validation fails
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        
+   
+        $client->is_address_verified = 1;
         if($client->save()){
             $this->notice::success('Address successfully Verified');
-            return redirect()->route('client.index');
+            //return redirect()->route('client.index');
+            return redirect()->back();
         }
     }
     /**
