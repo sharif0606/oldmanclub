@@ -165,9 +165,13 @@
                                     <div class="ms-2">
                                         <div class="bg-light p-2 rounded">
                                             <div class="d-flex justify-content-between">
-                                                <h6 class="my-0" style="font-size: 0.8375rem;"> <a href="#!">{{ $reply->client->fname }}
-                                                        {{ $reply->client->middle_name }}
-                                                        {{ $reply->client->last_name }}</a></h6>
+                                                <h6 class="my-0" style="font-size: 0.8375rem;"> <a href="#!">
+                                                        @if($reply->client->display_name)
+                                                            {{$reply->client->display_name}}
+                                                        @else
+                                                        {{$reply->client->fname}} {{$reply->client->middle_name}} {{$reply->client->last_name}}
+                                                        @endif
+                                                    </a></h6>
                                                 <!-- Replace with user name -->
                                                 <small class="ms-2">{{ $reply->created_at->diffForHumans() }}</small>
                                                 <!-- Replace with reply creation time -->

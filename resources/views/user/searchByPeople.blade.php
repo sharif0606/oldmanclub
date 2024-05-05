@@ -44,9 +44,12 @@
                                     <div class="w-100">
                                         <div class="d-sm-flex align-items-start">
                                             <h6 class="mb-0"><a
-                                                    href="{{ route('client_by_search', $connection->client->username) }}">{{ $connection->client->fname }}
-                                                    {{ $connection->client->middle_name }}
-                                                    {{ $connection->client->last_name }}</a></h6>
+                                                    href="{{ route('client_by_search', $connection->client->username) }}">
+                                                    @if($connection->client->display_name)
+                                                    {{$connection->client->display_name}}
+                                                    @else
+                                                    {{$connection->client->fname}} {{$connection->client->middle_name}} {{$connection->client->last_name}}
+                                                    @endif</a></h6>
                                             <p class="small ms-sm-2 mb-0"> {{ $connection->client->designation }}</p>
                                         </div>
                                         <!-- Connections START -->
@@ -162,8 +165,13 @@
                                     <div class="w-100">
                                         <div class="d-sm-flex align-items-start">
                                             <h6 class="mb-0"><a
-                                                    href="{{ route('client_by_search', $connection->username) }}">{{ $connection->fname }}
-                                                    {{ $connection->middle_name }} {{ $connection->last_name }}</a></h6>
+                                                    href="{{ route('client_by_search', $connection->username) }}">
+                                                    @if($connection->display_name)
+                                                    {{$connection->display_name}}
+                                                    @else
+                                                    {{ $connection->fname }}{{ $connection->middle_name }} {{ $connection->last_name }}
+                                                    @endif
+                                                </a></h6>
                                             <p class="small ms-sm-2 mb-0"> {{ $connection->designation }}</p>
                                         </div>
                                         <!-- Connections START -->
