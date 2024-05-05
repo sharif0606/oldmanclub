@@ -30,8 +30,14 @@
                     </div>
                     @endif
 
-                        <h6 class="card-title mb-1 mt-3"> <a href="{{route('client_by_search',$follow->client->username)}}"> {{ $follow->client->fname }}
-                            {{ $follow->client->middle_name }} {{ $follow->client->last_name }} </a>
+                        <h6 class="card-title mb-1 mt-3"> 
+                            <a href="{{route('client_by_search',$follow->client->username)}}"> 
+                                @if($follow->client->display_name)
+                                    {{$follow->client->display_name}}
+                                @else
+                                    {{ $follow->client->fname }}{{ $follow->client->middle_name }} {{ $follow->client->last_name }}
+                                @endif
+                            </a>
                         </h6>
                         {{-- <p class="mb-0 small lh-sm">16 mutual connections</p> --}}
                     </div>

@@ -22,10 +22,10 @@
                         <div class="nav nav-divider">
                             <h6 class="nav-item card-title mb-0"> <a
                                     href="{{ route('client_by_search', $value->client->username) }}">
-                                    @if($client->display_name)
-                                    {{$client->display_name}}
+                                    @if($value->client->display_name)
+                                    {{$value->client->display_name}}
                                     @else
-                                    {{$client->fname}} {{$client->middle_name}} {{$client->last_name}}
+                                    {{$value->client->fname}} {{$value->client->middle_name}} {{$value->client->last_name}}
                                     @endif
                                 </a></h6>
                             <span class="nav-item small">{{ $value->created_at->diffForHumans() }}</span>
@@ -149,9 +149,10 @@
                 </ul>
                 <!-- Feed react END -->
                 <!-- Feed react START -->
+
                 <ul class="nav nav-pills nav-pills-light nav-fill nav-stack small border-top border-bottom py-1 mb-3">
 
-                    <li class="nav-item dropdown dropup">
+                    <li class="nav-item @if($value->client_id == currentUserId()) @else dropdown dropup @endif" >
                         <a class="nav-link mb-0 active" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-hand-thumbs-up pe-1"></i>Like</a>
                         <ul class="dropdown-menu rounded-left rounded-right p-2" aria-labelledby="postReaction">
