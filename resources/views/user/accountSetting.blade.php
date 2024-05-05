@@ -423,7 +423,7 @@
                                 <!-- Card body START -->
                                 <div class="card-body">
                                     <form method="post" enctype="multipart/form-data"
-                                        action="{{ route('user_save_profile') }}" class="row g-2">
+                                        action="{{ route('save_cover_profile_photo') }}" class="row g-2">
                                         @csrf
                                         <div class="col-12">
                                             <label class="form-label">Profile Photo </label>
@@ -446,8 +446,9 @@
                                                 style="display: none; max-width: 100px;">
                                         </div>
                                         <button type="submit" class="btn btn-sm btn-primary mb-0">Upload</button>
-                                    </form>
+                                    
                                 </div>
+                            </form>
                                 {{-- <form action="{{ route('address_verify.store') }}" method="post"
                                         enctype="multipart/form-data">
                                         @csrf
