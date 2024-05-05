@@ -430,26 +430,22 @@
                                             <div class="input-group">
                                                 <input type="file" placeholder="" class="form-control" name="image"
                                                     id="image">
-                                                <button type="submit" class="btn btn-sm btn-primary mb-0">Upload</button>
                                             </div>
                                             <img id="preview" src="#" alt="Preview"
                                                 style="display: none; max-width: 100px;">
                                         </div>
 
-                                    </form>
-                                    <form method="post" enctype="multipart/form-data"
-                                        action="{{ route('user_save_profile') }}" class="row g-2">
-                                        @csrf
                                         <div class="col-12">
                                             <label class="form-label">Cover Photo</label>
                                             <div class="input-group">
                                                 <input type="file" placeholder="" class="form-control"
                                                     name="cover_photo" id="cover_photo">
-                                                <button type="submit" class="btn btn-sm btn-primary mb-0">Upload</button>
+                                               
                                             </div>
                                             <img id="preview_cover" src="#" alt="preview_cover"
                                                 style="display: none; max-width: 100px;">
                                         </div>
+                                        <button type="submit" class="btn btn-sm btn-primary mb-0">Upload</button>
                                     </form>
                                 </div>
                                 {{-- <form action="{{ route('address_verify.store') }}" method="post"
@@ -537,6 +533,11 @@
                                         <h5 class="h5 card-title text-success">Your Address Verification is complete.</h5>
                                     @else
                                         <h5 class="h5 card-title">We Are Reviewing Your Address Verification.</h5>
+                                        <div class="form-group">
+                                            <label for="">Your Mailling Address <strong
+                                                    class="text-danger">(Unverified)</strong></label>
+                                            <textarea class="form-control" rows="6" readonly>{{$client->address_line_1}}</textarea>
+                                        </div>
                                     @endif
 
 

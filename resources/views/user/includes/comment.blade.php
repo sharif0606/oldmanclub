@@ -61,7 +61,7 @@
                                             @if (!in_array($comment->client->id, $followIds))
                                                 <form action="{{ route('follow.store') }}" class="d-inline" method="post">
                                                     @csrf
-                                                    <input type="hidden" name="username" value="{{ Session::get('username') }}">
+                                                    <input type="hidden" name="username" value="{{$comment->client->username}}">
                                                     <button type="submit" class="badge text-primary me-2" style="border:none;font-weight:bold;font-size:13px;"> Follow
                                                     </button>
                                                 </form>

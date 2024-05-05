@@ -151,8 +151,8 @@
                 <!-- Feed react START -->
 
                 <ul class="nav nav-pills nav-pills-light nav-fill nav-stack small border-top border-bottom py-1 mb-3">
-
-                    <li class="nav-item @if($value->client_id == currentUserId()) @else dropdown dropup @endif" >
+                    @if($value->client_id == currentUserId())
+                    <li class="nav-item dropdown dropup">
                         <a class="nav-link mb-0 active" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-hand-thumbs-up pe-1"></i>Like</a>
                         <ul class="dropdown-menu rounded-left rounded-right p-2" aria-labelledby="postReaction">
@@ -189,6 +189,13 @@
 
                         </ul>
                     </li>
+                    @else  
+                    <li class="nav-item">
+                        <a class="nav-link mb-0 active" href="#!">
+                            <i class="bi bi-hand-thumbs-up pe-1"></i>Like
+                        </a>
+                    </li>
+                    @endif
                     <!-- Card share action menu END -->
                     <li class="nav-item">
                         <a class="nav-link mb-0" href="#!"> <i class="bi bi-chat-fill pe-1"></i>Comment</a>
