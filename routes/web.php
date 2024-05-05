@@ -61,6 +61,7 @@ use App\Http\Controllers\Backend\Website\PrintingService\PrintCardSectionControl
 use App\Http\Controllers\Backend\Website\PrintingService\PrintCustomerFeedbackController as printcus_feedback;
 //Country City and State
 use App\Http\Controllers\Backend\Location\CityController;
+use App\Http\Controllers\Backend\Location\CountryController;
 use App\Http\Controllers\Backend\Location\StateController;
 //User
 use App\Http\Controllers\User\ClientAuthentication as clientauth;
@@ -324,6 +325,7 @@ Route::post('/receive', 'App\Http\Controllers\PusherController@receive');
 
 /*===City and State ====*/
 Route::get('/states', [StateController::class,'getStatesByCountry'])->name('getStatesByCountry');
+Route::get('/code', [CountryController::class,'getCodesByCountry'])->name('getCodesByCountry');//Phone Code
 Route::get('/cities', [CityController::class,'getCitiesByStates'])->name('getCitiesByStates');
 
 //Route::middleware(['checkclient'])->group(function () {

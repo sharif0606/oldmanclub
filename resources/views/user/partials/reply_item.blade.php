@@ -16,7 +16,7 @@
         <div class="ms-2">
             <div class="bg-light p-2 rounded">
                 <div class="d-flex justify-content-between">
-                    <h6 class="mb-1"> <a href="#!">{{ $reply->client->fname }}
+                    <h6 class="my-0" style="font-size: 0.8375rem;"> <a href="#!">{{ $reply->client->fname }}
                             {{ $reply->client->middle_name }}
                             {{ $reply->client->last_name }}</a></h6>
                     <!-- Replace with user name -->

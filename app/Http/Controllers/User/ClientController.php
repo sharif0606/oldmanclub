@@ -138,10 +138,17 @@ class ClientController extends Controller
     {
         try {
             $user=Client::find(currentUserId());
+            $count = Client::where('username', 'like', '%'.$request->username . '%')->count();
+            if ($count > 0  && $request->username !== $user->username) {
+                return redirect()->back()->withInput()->withErrors(['username' => 'The requested ('.$request->username.') username is not available. Please choose a different one.']);
+            }
+            $user->username = $request->username;
             $user->fname = $request->fname;
             $user->middle_name = $request->middle_name;
             $user->last_name = $request->last_name;
+            $user->display_name = $request->display_name;
             $user->dob = $request->dob;
+            $user->phone_code = $request->phone_code;
             $user->contact_no = $request->contact_no;
             $user->email = $request->email;
             $user->address_line_1 = $request->address_line_1;

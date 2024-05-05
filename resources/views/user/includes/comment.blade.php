@@ -45,15 +45,18 @@
                     </div>
                     <div class="ms-2">
                         @php 
-                            $followIds = \App\Models\User\Follow::where('following_id',$comment->client->id)->pluck('follower_id')->toArray(); 
+                            $followIds = \App\Models\User\Follow::where('following_id',currentUserId())->pluck('follower_id')->toArray(); 
                             //print_r($followIds);
                         @endphp
                         <!-- Comment by -->
                         <div class="bg-light rounded-start-top-1 p-2 rounded">
                             <div class="d-flex justify-content-between">
-                                <h6 class="mb-1">
-                                    <a href="{{ route('client_by_search', $comment->client->username) }}">{{ $comment->client->fname }}
-                                        {{ $comment->client->middle_name }} {{ $comment->client->last_name }}
+                                <h6 class="my-0" style="font-size: 0.8375rem;">
+                                    <a href="{{ route('client_by_search', $comment->client->username) }}"> @if($comment->client->display_name)
+                                        {{$comment->client->display_name}}
+                                        @else
+                                        {{$comment->client->fname}} {{$comment->client->middle_name}} {{$comment->client->last_name}}
+                                        @endif
                                         @if($comment->client->id != currentUserId())
                                             @if (!in_array($comment->client->id, $followIds))
                                                 <form action="{{ route('follow.store') }}" class="d-inline" method="post">
@@ -63,12 +66,12 @@
                                                     </button>
                                                 </form>
                                             @else
-                                            @php $follow = \App\Models\User\Follow::where('follower_id',$connection->id)->where('following_id',$comment->client->id)->first(); @endphp
-                                                <form action="{{ route('follow.destroy', $follow) }}" class="d-inline" method="POST">
+                                            @php $follow = \App\Models\User\Follow::where('follower_id',$comment->client->id)->where('following_id',currentUserId())->first(); @endphp
+                                                {{-- <form action="{{ route('follow.destroy', $follow) }}" class="d-inline" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button class="badge text-primary me-2" style="border:none;font-weight:bold;font-size:13px;"> Unfollow </button>
-                                                </form>
+                                                    <button class="badge text-danger me-2" style="border:none;font-weight:bold;font-size:13px;"> Unfollow </button>
+                                                </form> --}}
                                             @endif
                                         @endif
                                     </a>
@@ -162,7 +165,7 @@
                                     <div class="ms-2">
                                         <div class="bg-light p-2 rounded">
                                             <div class="d-flex justify-content-between">
-                                                <h6 class="mb-1"> <a href="#!">{{ $reply->client->fname }}
+                                                <h6 class="my-0" style="font-size: 0.8375rem;"> <a href="#!">{{ $reply->client->fname }}
                                                         {{ $reply->client->middle_name }}
                                                         {{ $reply->client->last_name }}</a></h6>
                                                 <!-- Replace with user name -->

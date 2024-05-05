@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class CountryController extends Controller
 {
-    use ResponseTrait;
+    //use ResponseTrait;
     /**
      * Display a listing of the resource.
      *
@@ -107,5 +107,10 @@ class CountryController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function getCodesByCountry(Request $request)
+    {
+        $codes = Country::where('id',$request->countryId)->first();
+        return response()->json($codes);
     }
 }
