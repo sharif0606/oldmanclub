@@ -167,7 +167,7 @@
                                             <h6 class="mb-0"><a
                                                     href="{{ route('client_by_search', $connection->username) }}">
                                                     @if($connection->display_name)
-                                                    {{$client->display_name}}
+                                                    {{$connection->display_name}}
                                                     @else
                                                     {{ $connection->fname }}{{ $connection->middle_name }} {{ $connection->last_name }}
                                                     @endif
