@@ -416,7 +416,7 @@
                                         action="{{ route('save_cover_profile_photo') }}" class="row g-2">
                                         @csrf
                                         <div class="col-12">
-                                            <label class="form-label">Profile Photo </label>
+                                            <label class="form-label">Profile Photo <small><strong>Recomended Size (128x128)</strong></small></label>
                                             <div class="input-group">
                                                 <input type="file" placeholder="" class="form-control" name="image"
                                                     id="image">
@@ -426,7 +426,7 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <label class="form-label">Cover Photo</label>
+                                            <label class="form-label">Cover Photo <small><strong>Recomended Size (1090x250)</strong></small></label>
                                             <div class="input-group">
                                                 <input type="file" placeholder="" class="form-control"
                                                     name="cover_photo" id="cover_photo">
