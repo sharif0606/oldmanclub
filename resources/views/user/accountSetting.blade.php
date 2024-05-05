@@ -381,16 +381,6 @@
                                                 <option value="">Select City</option>
                                             </select>
                                         </div>
-                                        <div class="col-12">
-                                            <label class="form-label">Profile Overview</label>
-                                            <textarea class="form-control" rows="4" placeholder="Profile Overview (Required)" name="profile_overview">{{ $client->profile_overview }}</textarea>
-                                            <small>Character limit: 300</small>
-                                        </div>
-                                        <div class="col-12">
-                                            <label class="form-label">Tagline</label>
-                                            <textarea class="form-control" rows="2" placeholder="Tagline (Required)" name="tagline">{{ $client->tagline }}</textarea>
-                                            <small>Character limit: 14</small>
-                                        </div>
                                         {{-- <div class="col-sm-6 col-lg-3">
                                             <label class="form-label">Zip Code</label>
                                             <input type="text" placeholder="" value="{{ $client->from_zip_code }}"
@@ -445,7 +435,17 @@
                                             <img id="preview_cover" src="#" alt="preview_cover"
                                                 style="display: none; max-width: 100px;">
                                         </div>
-                                        <button type="submit" class="btn btn-sm btn-primary mb-0">Upload</button>
+                                        <div class="col-12">
+                                            <label class="form-label">Profile Overview</label>
+                                            <textarea class="form-control" rows="4" placeholder="Profile Overview (Required)" name="profile_overview">{{ $client->profile_overview }}</textarea>
+                                            <small>Character limit: 300</small>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Tagline</label>
+                                            <textarea class="form-control" rows="2" placeholder="Tagline (Required)" name="tagline">{{ $client->tagline }}</textarea>
+                                            <small>Character limit: 14</small>
+                                        </div>
+                                        <button type="submit" class="btn btn-sm btn-primary mb-0">Save Changes</button>
                                     
                                 </div>
                             </form>
@@ -508,6 +508,11 @@
                                             <button type="submit" class="btn btn-success mt-2">Verify Now</button>
                                         </form>
                                     @elseif($client->verification_request_status == 2 && $client->is_address_verified == 0)
+                                        <div class="form-group">
+                                            <label for="">Your Mailling Address <strong
+                                                    class="text-danger">(Unverified)</strong></label>
+                                            <textarea class="form-control" rows="6" readonly>{{$client->address_line_1}}</textarea>
+                                        </div>
                                         <form class="form" method="post" enctype="multipart/form-data"
                                             action="{{ route('address_verify_saved', encryptor('encrypt', $client->id)) }}">
                                             @csrf
