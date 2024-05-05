@@ -265,6 +265,7 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::get('sent_email_show/{id}', [EmailSendController::class, 'sent_email_show'])->name('sent_email_show');
 
     Route::post('/profile/save', [clientprofile::class, 'save_profile'])->name('user_save_profile');
+    Route::post('/profile/photo/save', [clientprofile::class, 'save_cover_profile_photo'])->name('save_cover_profile_photo');
     Route::post('/profile/savepass', [clientprofile::class, 'change_password'])->name('change_password');
     // Route::get('/phonebook/list', [clientprofile::class, 'phonebook_list'])->name('phonebook_list');
 

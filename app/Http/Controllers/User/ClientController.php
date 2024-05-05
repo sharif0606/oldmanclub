@@ -169,6 +169,29 @@ class ClientController extends Controller
             $user->designation = $request->designation;
             $user->profile_overview = $request->profile_overview;
             $user->tagline = $request->tagline;
+            /*if ($request->hasFile('cover_photo')) {
+                $imageName = rand(111, 999) . time() . '.' . $request->cover_photo->extension();
+                $request->cover_photo->move(public_path('uploads/client'), $imageName);
+                $user->cover_photo = $imageName;
+            }
+            if ($request->hasFile('image')) {
+                $imageName = rand(111, 999) . time() . '.' . $request->image->extension();
+                $request->image->move(public_path('uploads/client'), $imageName);
+                $user->image = $imageName;
+            }*/
+            if ($user->save()){
+                $this->setSession($user);
+                return redirect()->back()->with('success', 'Data Saved');
+            }
+        } catch (Exception $e) {
+            // dd($e);
+            return redirect()->back()->withInput()->with('error', 'Please try again');
+        }
+    }
+    public function save_cover_profile_photo(Request $request)
+    {
+        try {
+            $user=Client::find(currentUserId());
             if ($request->hasFile('cover_photo')) {
                 $imageName = rand(111, 999) . time() . '.' . $request->cover_photo->extension();
                 $request->cover_photo->move(public_path('uploads/client'), $imageName);
