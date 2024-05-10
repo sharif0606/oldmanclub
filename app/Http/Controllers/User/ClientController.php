@@ -151,8 +151,8 @@ class ClientController extends Controller
             $user->phone_code = $request->phone_code;
             $user->contact_no = $request->contact_no;
             $user->email = $request->email;
-           /*$user->address_line_1 = $request->address_line_1;
-            $user->address_line_2 = $request->address_line_2;*/
+            $user->address_line_1 = $request->address_line_1;
+            $user->address_line_2 = $request->address_line_2;
             $user->current_country_id = $request->current_country_id;
             $user->current_city_id = $request->current_city_id;
             $user->current_state_id = $request->current_state_id;

@@ -89,6 +89,10 @@
                 <p><b>Contact No : </b>{{$client->contact_no}}</p>
                 {{-- <p><b>Nationality : </b>{{$client->nationality}}</p>
                 <p><b>ID No : </b>{{$client->id_no}}</p> --}}
+                <h3 class="">PHOTO ID</h3>
+                <a href="{{ asset('public/uploads/verify_image/' . $client->photo_id) }}" target="_blank"> <!-- Open image in new tab when clicked -->
+                    <embed width="100px" src="{{ asset('public/uploads/verify_image/' . $client->photo_id) }}"  alt="Document" class="m-1">
+                </a>
             </div>
         </div>
     </div>
