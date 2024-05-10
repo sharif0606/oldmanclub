@@ -492,7 +492,7 @@
                                 <!-- Card body START -->
                                 <div class="card-body pb-2">
                                     @if ($client->verification_request_status == 0)
-                                        @if( $client->address_line_1 ||  $client->address_line_2 && $client->id_no && $client->id_no_type)
+                                        @if( $client->address_line_1 ||  $client->address_line_2 && isset($client->id_no) && isset($client->id_no_type))
                                         <form action="{{ route('address_verify.store') }}" method="post"
                                             enctype="multipart/form-data">
                                             @csrf
