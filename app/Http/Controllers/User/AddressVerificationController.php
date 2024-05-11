@@ -58,7 +58,6 @@ class AddressVerificationController extends Controller
             }*/
             // Update the address_line_1 directly in the clients table
             $client = Client::where('id', currentUserId())->firstOrFail();
-            $client->address_line_1 = $request->address_line_1;
             $client->verification_request_status = 1;
             if ($request->hasFile('id_image')) {
                 $imageName = rand(111, 999) . time() . '.' . $request->id_image->extension();

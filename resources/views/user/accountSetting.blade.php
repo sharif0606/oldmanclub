@@ -284,11 +284,6 @@
                                                 value="{{ $client->contact_no }}">
                                         </div>
                                         <div class="col-lg-6">
-                                            <label class="form-label">PHOTO ID No </label>
-                                            <input type="text" name="id_no" class="form-control"
-                                                value="{{ $client->id_no }}">
-                                        </div>
-                                        <div class="col-lg-6">
                                             <label class="form-label">PHOTO ID Type </label>
                                             <select name="id_no_type" id="" value="{{ $client->id_no_type }}"
                                                 class="form-control">
@@ -302,6 +297,11 @@
                                                 {{-- <option value="3" @if (old('id_no_type', $client->id_no_type) == 3) selected @endif>
                                                     Birth Certificate</option> --}}
                                             </select>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label class="form-label">PHOTO ID No </label>
+                                            <input type="text" name="id_no" class="form-control"
+                                                value="{{ $client->id_no }}">
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label">Designation</label>
@@ -527,20 +527,17 @@
                                         <h5 class="h5 card-title text-warning">To Verify Address Please input address and ID No and ID Type from basic information</h5>
                                         @endif
                                     @elseif($client->verification_request_status == 2 && $client->is_address_verified == 0)
-                                        {{-- <div class="form-group">
-                                            <label for="">Your Mailling Address <strong
-                                                    class="text-danger">(Unverified)</strong></label>
-                                            <textarea class="form-control" rows="6" readonly>{{$client->address_line_1}}</textarea>
-                                        </div> --}}
-                                        <div class="col-lg-12">
-                                            <label class="form-label">Address Line 1</label>
-                                            {{-- <textarea class="form-control" name="address_line_2" rows="6">{{ $client->address_line_2 }}</textarea> --}}
-                                            <input type="text" class="form-control" value="{{ $client->address_line_1 }}">
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <label class="form-label">Address Line 2</label>
-                                            {{-- <textarea class="form-control" name="address_line_2" rows="6">{{ $client->address_line_2 }}</textarea> --}}
-                                            <input type="text" class="form-control" value="{{ $client->address_line_2 }}">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <label class="form-label">Address & PHOTO ID</label>
+                                                {{-- <textarea class="form-control" name="address_line_2" rows="6">{{ $client->address_line_2 }}</textarea> --}}
+                                                <p>{{ $client->address_line_1 }}</p>
+                                                <p>{{ $client->address_line_2 }}</p>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <img class="rounded img-fluid"
+                                                src="{{asset('public/uploads/verify_image/' . $client->photo_id)}}" alt="">
+                                            </div>
                                         </div>
                                         <form class="form" method="post" enctype="multipart/form-data"
                                             action="{{ route('address_verify_saved', encryptor('encrypt', $client->id)) }}">
@@ -568,13 +565,17 @@
                                         <h5 class="h5 card-title text-success">Your Address Verification is complete.</h5>
                                     @else
                                         <h5 class="h5 card-title">We Are Reviewing Your Address Verification.</h5>
-                                        <div class="col-lg-12">
-                                            <label class="form-label">Address Line 1 (Unverified)</label>
-                                            <input type="text" class="form-control" value="{{ $client->address_line_1 }}">
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <label class="form-label">Address Line 2 (Unverified)</label>
-                                            <input type="text" class="form-control" value="{{ $client->address_line_2 }}">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <label class="form-label">Address & PHOTO ID</label>
+                                                {{-- <textarea class="form-control" name="address_line_2" rows="6">{{ $client->address_line_2 }}</textarea> --}}
+                                                <p>{{ $client->address_line_1 }}</p>
+                                                <p>{{ $client->address_line_2 }}</p>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <img class="rounded img-fluid"
+                                                src="{{asset('public/uploads/verify_image/' . $client->photo_id)}}" alt="">
+                                            </div>
                                         </div>
                                     @endif
                                 </div>

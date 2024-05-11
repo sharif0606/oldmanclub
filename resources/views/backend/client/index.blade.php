@@ -53,6 +53,14 @@
                                 <a href="javascript:void()" onclick="$('#form{{$p->id}}').submit()">
                                     <i class="fa fa-trash"></i>
                                 </a>
+                                <form class="form" method="post" enctype="multipart/form-data"
+                                action="{{ route('address_verify_saved', encryptor('encrypt', $p->id)) }}">
+                                @csrf
+                                @method('Post')
+                                <input type="hidden" name="uptoken"
+                                    value="{{ encryptor('encrypt', $p->id) }}">
+                                    <button type="submit" class="btn btn-success mt-2">Verify</button>
+                                </form>
                                 <form id="form{{$p->id}}" action="{{route('client.destroy',encryptor('encrypt',$p->id))}}" method="post">
                                     @csrf
                                     @method('delete')

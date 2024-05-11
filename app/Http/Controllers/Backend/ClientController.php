@@ -126,30 +126,39 @@ class ClientController extends Controller
     }
     public function verification_update(Request $request, $id){
         $client = Client::findOrFail(encryptor('decrypt',$id));
-        // Validate the request data
-        $validator = Validator::make($request->all(), [
-            'code' => [
-                'required',
-                function ($attribute, $value, $fail) use ($client) {
-                    // Check if the provided code matches the code field of the client
-                    if ($value !== $client->code) {
-                        $fail('The provided code does not match the given code.');
-                    }
-                },
-            ],
-        ]);
+        if(currentUser() == 'superadmin'){
 
-        // Check if the validation fails
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+        }else{
+            // Validate the request data
+            $validator = Validator::make($request->all(), [
+                'code' => [
+                    'required',
+                    function ($attribute, $value, $fail) use ($client) {
+                        // Check if the provided code matches the code field of the client
+                        if ($value !== $client->code) {
+                            $fail('The provided code does not match the given code.');
+                        }
+                    },
+                ],
+            ]);
+
+            // Check if the validation fails
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
         }
+        
         
    
         $client->is_address_verified = 1;
         if($client->save()){
-            $this->notice::success('Address successfully Verified');
-            //return redirect()->route('client.index');
-            return redirect()->back();
+            if(currentUser() == 'superadmin'){
+                $this->notice::success('ID Verification Complete');
+                return redirect()->route('client.index');
+            }else{
+                $this->notice::success('Address successfully Verified');
+                return redirect()->back();
+            }
         }
     }
     /**
