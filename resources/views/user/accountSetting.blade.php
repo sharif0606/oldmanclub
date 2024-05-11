@@ -498,14 +498,10 @@
                                             @csrf
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                                    <label class="form-label">Address Line 1</label>
-                                                    <input type="text" class="form-control" value="{{ $client->address_line_1 }}">
-                                                    {{-- <textarea class="form-control" name="address_line_1" rows="6">{{ $client->address_line_1 }}</textarea> --}}
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <label class="form-label">Address Line 2</label>
+                                                    <label class="form-label">Address</label>
                                                     {{-- <textarea class="form-control" name="address_line_2" rows="6">{{ $client->address_line_2 }}</textarea> --}}
-                                                    <input type="text" class="form-control" value="{{ $client->address_line_2 }}">
+                                                    <p>{{ $client->address_line_1 }}</p>
+                                                    <p>{{ $client->address_line_2 }}</p>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="id_image" class="mb-2">Upload Your PHOTO ID (Mentioned In Basic Information):</label>
