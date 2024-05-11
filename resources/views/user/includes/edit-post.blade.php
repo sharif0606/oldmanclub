@@ -51,12 +51,12 @@
                             <option value="only_me">Only Me</option>
                         </select>
                     </div>
-                    <div class="col-lg-8 text-sm-end">
+                    {{-- <div class="col-lg-8 text-sm-end">
                         <!-- Button -->
                         <button type="button" class="btn btn-danger-soft me-2" data-bs-dismiss="modal">Cancel</button>
                         <button type="button" class="btn btn-success-soft" id="editSubmitBtn">Update</button>
                         <!-- Button -->
-                    </div>
+                    </div> --}}
                 </div>
                 <!-- Modal feed footer -->
             </form>

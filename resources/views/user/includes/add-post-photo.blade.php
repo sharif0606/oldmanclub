@@ -46,12 +46,12 @@
 
                 <!-- Modal feed footer -->
                 <div class="modal-footer row justify-content-between">
-                    <div class="col-lg-3">
+                    {{-- <div class="col-lg-3">
                         <select class="form-select" aria-label="Default select example">
                             <option selected>Public</option>
                             <option value="1">Only Me</option>
                           </select>
-                    </div>
+                    </div> --}}
                     <div class="col-lg-8 text-sm-end">
                     <!-- Button -->
                     <button type="button" class="btn btn-danger-soft me-2"
