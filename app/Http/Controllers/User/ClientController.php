@@ -179,7 +179,8 @@ class ClientController extends Controller
             }*/
             if ($user->save()){
                 $this->setSession($user);
-                return redirect()->back()->with('success', 'Data Saved');
+                $this->notice::success('Save Changes Successfully');
+                return redirect()->back();
             }
         } catch (Exception $e) {
             // dd($e);

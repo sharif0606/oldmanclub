@@ -79,7 +79,9 @@
         <!-- Card header END -->
         <!-- Card body START -->
         <div class="card-body">
-            <p>{{ $value->message }}.</p>
+            <p>
+                {!! nl2br($value->message) !!}
+            </p>
             <!-- Card img -->
             @if ($value->image)
                 <img class="card-img" src="{{ asset('public/uploads/post/' . $value->image) }}" alt="Post">

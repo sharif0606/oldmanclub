@@ -125,7 +125,7 @@
         </div>--}}
         <div>
             @if($client->address_line_1)
-                @if($client->verification_request_status==1)
+                @if($client->verification_request_status==1 && $client->is_address_verified == 0)
                 <a href="{{route('address_verify',encryptor('encrypt',$client->id))}}" class="btn btn-sm bg-danger text-white">
                 Generate Address Verification Code
                 </a>
