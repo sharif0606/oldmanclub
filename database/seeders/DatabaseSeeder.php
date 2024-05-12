@@ -19,8 +19,9 @@ class DatabaseSeeder extends Seeder
                 //CountriesSeeder::class,
                 //StateSeeder::class,
                 //CitiesSeeder::class
-                ClientSeeder::class,
-                PostSeeder::class
+                //ClientSeeder::class,
+                //PostSeeder::class
+                FollowSeeder::class
             ]
         );
 

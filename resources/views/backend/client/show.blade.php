@@ -87,8 +87,12 @@
                 <p><b>Email : </b>{{$client->email}}</p>
                 <p><b>Birth Date : </b>{{$client->dob}}</p>
                 <p><b>Contact No : </b>{{$client->contact_no}}</p>
-                <p><b>Nationality : </b>{{$client->nationality}}</p>
-                <p><b>ID No : </b>{{$client->id_no}}</p>
+                {{-- <p><b>Nationality : </b>{{$client->nationality}}</p>
+                <p><b>ID No : </b>{{$client->id_no}}</p> --}}
+                <h3 class="">PHOTO ID</h3>
+                <a href="{{ asset('public/uploads/verify_image/' . $client->photo_id) }}" target="_blank"> <!-- Open image in new tab when clicked -->
+                    <embed width="100px" src="{{ asset('public/uploads/verify_image/' . $client->photo_id) }}"  alt="Document" class="m-1">
+                </a>
             </div>
         </div>
     </div>
@@ -98,8 +102,9 @@
                 <h3 class="">Address Information</h3>
             </div>
             <div class="card-body">
-                <p><b>Address One : </b>{{$client->address_line_1}}</p>
-                <p><b>Address Two : </b>{{$client->address_line_2}}</p>
+                <p><b>Mailing Address : </b>{{$client->address_line_1}}</p>
+                {{-- <p><b>Address Two : </b>{{$client->address_line_2}}</p> --}}
+                <p><b>Verification Code : </b>{{$client->code}}</p>
                 <p><b>Country : </b>{{$client->country}}</p>
                 <p><b>City : </b>{{$client->city}}</p>
                 <p><b>State : </b>{{$client->state}}</p>
@@ -108,7 +113,7 @@
         </div>
     </div>
     <div class="col-sm-6">
-        <div class="card">
+        {{--<div class="card">
             <div class="card-header">
                 <h3 class="mx-auto">National ID</h3>
             </div>
@@ -117,22 +122,29 @@
                     <img src="{{asset('public/uploads/verify_image/'.$client->addres_verify?->id_image)}}" alt="" width="100px">
                 </a>
             </div>
-        </div>
+        </div>--}}
         <div>
-            @if($client_address->isNotEmpty())
-                @if($client->is_address_verified!=1)
+            @if($client->address_line_1)
+                @if($client->verification_request_status==1 && $client->is_address_verified == 0)
                 <a href="{{route('address_verify',encryptor('encrypt',$client->id))}}" class="btn btn-sm bg-danger text-white">
-                Verify Your Address
+                Generate Address Verification Code
                 </a>
+                @elseif ($client->verification_request_status==2)
+                    <a href="{{route('address_verify',encryptor('encrypt',$client->id))}}" class="btn btn-sm bg-danger text-white">
+                        Print Mailing Address
+                    </a>
+                @elseif ($client->verification_request_status==3){
+                    <p>This User Address is Verified</p>
+                }
                 @else
-                    <p>This User is Verified</p>
+                    -
                 @endif
             @else
-                <p class="text-danger fw-bold">This User Document is Empty</p>
+                <p class="text-danger fw-bold">Address Verification Not Yet Requested.</p>
             @endif
         </div>
     </div>
-    <div class="col-sm-6">
+    {{--<div class="col-sm-6">
         <div class="card">
             <div class="card-header">
                 <h3 class="mx-auto">Gallery</h3>
@@ -154,6 +166,6 @@
                 @endif
             </div>
         </div>
-    </div>
+    </div>--}} 
 </div>
 @endsection

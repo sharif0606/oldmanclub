@@ -1,0 +1,124 @@
+<div class="card">
+    <!-- Cover image -->
+    @if ($client->cover_photo)
+        <div class="h-200px rounded-top"
+            style="background-image:url({{ asset('public/uploads/client/' . $client->cover_photo) }}); background-position: center; background-size: cover; background-repeat: no-repeat;">
+        </div>
+    @else
+        <div class="h-200px rounded-top"
+            style="background-image:url({{ asset(default_bg_image()) }}); background-position: center; background-size: cover; background-repeat: no-repeat;">
+        </div>
+    @endif
+    <!-- Card body START -->
+    <div class="card-body py-0">
+        <div class="d-sm-flex align-items-start text-center text-sm-start">
+            <div>
+                <!-- Avatar -->
+                <div class="avatar avatar-xxl mt-n5 mb-3">
+                    @if ($client->image)
+                        <img class="avatar-img rounded-border-10 border border-white border-3"
+                            src="{{ asset('public/uploads/client/' . $client->image) }}" alt="">
+                    @else
+                        <img class="avatar-img rounded-border-10 border border-white border-3"
+                            src="{{ asset('public/images/download.jpg') }}" alt="">
+                        {{-- <img class="avatar-img rounded-circle border border-white border-3"
+                        src="{{asset($client->image?$client->image:default_image())}}" alt=""> --}}
+                    @endif
+                </div>
+            </div>
+            <div class="ms-sm-4 mt-sm-3">
+                <!-- Info -->
+                <h1 class="mb-0 h5">{{ $client->fname }} {{ $client->middle_name }} {{ $client->last_name }}
+                    @if ($client->is_address_verified == 1)
+                        <i class="bi bi-patch-check-fill text-success small"></i>
+                    @else
+                        {{-- <i class="bi bi-file-x-fill text-danger small"></i> --}}
+                    @endif
+                </h1>
+                <p class="mb-1"><span>{{ $client->formatted_followers_count }}</span><span class="mx-2"
+                        style="border-right: 2px solid #EFF2F6;"></span><span>{{ $client->formatted_followings_count }}</span>
+                </p>
+                <div class="w-100">
+                    <!-- Connections START -->
+                    {{-- <ul class="avatar-group mt-1 list-unstyled align-items-sm-center">
+                    <li class="avatar avatar-xxs">
+                      <img class="avatar-img rounded-circle" src="{{ asset('public/user/assets/images/avatar/01.jpg')}}" alt="avatar">
+                    </li>
+                    <li class="avatar avatar-xxs">
+                      <img class="avatar-img rounded-circle" src="{{ asset('public/user/assets/images/avatar/02.jpg')}}" alt="avatar">
+                    </li>
+                    <li class="avatar avatar-xxs">
+                      <img class="avatar-img rounded-circle" src="{{ asset('public/user/assets/images/avatar/03.jpg')}}" alt="avatar">
+                    </li>
+                    <li class="avatar avatar-xxs">
+                      <img class="avatar-img rounded-circle" src="{{ asset('public/user/assets/images/avatar/04.jpg')}}" alt="avatar">
+                    </li>
+                    <li class="avatar avatar-xxs">
+                        <img class="avatar-img rounded-circle" src="{{ asset('public/user/assets/images/avatar/01.jpg')}}" alt="avatar">
+                      </li>
+                      <li class="avatar avatar-xxs">
+                        <img class="avatar-img rounded-circle" src="{{ asset('public/user/assets/images/avatar/02.jpg')}}" alt="avatar">
+                      </li>
+                      <li class="avatar avatar-xxs">
+                        <img class="avatar-img rounded-circle" src="{{ asset('public/user/assets/images/avatar/03.jpg')}}" alt="avatar">
+                      </li>
+                      <li class="avatar avatar-xxs">
+                        <img class="avatar-img rounded-circle" src="{{ asset('public/user/assets/images/avatar/04.jpg')}}" alt="avatar">
+                      </li>
+                    <li class="avatar avatar-xxs">
+                      <div class="avatar-img rounded-circle bg-primary"><span class="smaller text-white position-absolute top-50 start-50 translate-middle">+2</span></div>
+                    </li>
+                    <li class="small ms-3">
+                      Carolyn Ortiz, Frances Guerrero, and 20 other shared connections
+                    </li>
+                  </ul> --}}
+                    <!-- Connections END -->
+                </div>
+            </div>
+            <!-- Button -->
+            <div class="d-flex mt-3 justify-content-center ms-sm-auto">
+                @if($connection->id != currentUserId())
+                  @if (!in_array($connection->id, $followIds))
+                      <form action="{{ route('follow.store') }}" method="post">
+                          @csrf
+                          <input type="hidden" name="username" value="{{ Session::get('username') }}">
+                          <button type="submit" class="btn btn-primary-soft me-2"> Follow
+                          </button>
+                      </form>
+                  @else
+                  @php $follow = \App\Models\User\Follow::where('follower_id',$connection->id)->where('following_id',currentUserId())->first(); @endphp
+                      <form action="{{ route('follow.destroy', $follow) }}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          <button class="btn btn-danger-soft btn-sm mb-0 me-2"> Unfollow </button>
+                      </form>
+                  @endif
+                @endif
+            </div>
+        </div>
+        <!-- List profile -->
+        {{-- <ul class="list-inline mb-0 text-center text-sm-start mt-3 mt-sm-0">
+            <li class="my-1"><i class="bi bi-calendar2-plus me-1"></i>
+                Joined on {{ $client->created_at->format('d M,Y')}}
+            </li>
+            @if ($client->designation)
+            <li><i class="bi bi-briefcase-fill me-1"></i>
+                {{$client->designation}}
+            </li>
+            @endif
+            @if ($client->current_country_id)
+            <li>
+                <i class="bi bi-geo-alt me-1"></i>
+                Lives In {{$client->currentcountry?->name}}@if ($client->current_city_id), {{$client->currentstate?->name}} @endif
+            </li>
+            @endif
+            @if ($client->from_country_id)
+            <li class="ps-4">
+                Form {{$client->fromcountry?->name}}@if ($client->current_city_id), {{$client->fromstate?->name}} @endif
+            </li>
+            @endif
+        </ul> --}}
+    </div>
+    <!-- Card body END -->
+    @include('user/includes/navigation')
+</div>

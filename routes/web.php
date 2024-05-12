@@ -62,6 +62,7 @@ use App\Http\Controllers\Backend\Website\PrintingService\PrintCardSectionControl
 use App\Http\Controllers\Backend\Website\PrintingService\PrintCustomerFeedbackController as printcus_feedback;
 //Country City and State
 use App\Http\Controllers\Backend\Location\CityController;
+use App\Http\Controllers\Backend\Location\CountryController;
 use App\Http\Controllers\Backend\Location\StateController;
 //User
 use App\Http\Controllers\User\ClientAuthentication as clientauth;
@@ -82,6 +83,7 @@ use App\Http\Controllers\User\PostCommnetController as postcomment;
 use App\Http\Controllers\User\ReplyController as reply;
 use App\Http\Controllers\User\CommentReactionController as commentreaction;
 use App\Http\Controllers\User\ReplyReactionController as replyreaction;
+use App\Http\Controllers\User\PostReactionController as postreaction;
 
 // landing page
 use App\Http\Controllers\Common\frontendController as frontend;
@@ -235,6 +237,7 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::get('dashboard', [clientprofile::class, 'index'])->name('clientdashboard');
     Route::get('my-profile', [clientprofile::class, 'myProfile'])->name('myProfile');
     Route::get('my-profile-about', [clientprofile::class, 'myProfileAbout'])->name('myProfileAbout');
+    Route::get('followers', [clientprofile::class, 'all_followers'])->name('all.followers');
     Route::get('account-setting', [clientprofile::class, 'accountSetting'])->name('accountSetting');
     Route::get('find-people', [clientprofile::class, 'search_by_people'])->name('search_by_people');
     Route::resource('follow', follow::class);
@@ -242,6 +245,8 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::resource('reply', reply::class);
     Route::resource('comment-reaction', commentreaction::class);
     Route::resource('reply-reaction', replyreaction::class);
+    Route::resource('post-reaction', postreaction::class);
+    Route::get('post-reaction-update', [postreaction::class,'post_reaction_update'])->name('post-reaction-update');
     Route::get('gathering', [clientprofile::class, 'gathering'])->name('gathering');
 
     Route::resource('phonebook', phonebook::class);
@@ -260,6 +265,7 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::get('sent_email_show/{id}', [EmailSendController::class, 'sent_email_show'])->name('sent_email_show');
 
     Route::post('/profile/save', [clientprofile::class, 'save_profile'])->name('user_save_profile');
+    Route::post('/profile/photo/save', [clientprofile::class, 'save_cover_profile_photo'])->name('save_cover_profile_photo');
     Route::post('/profile/savepass', [clientprofile::class, 'change_password'])->name('change_password');
     // Route::get('/phonebook/list', [clientprofile::class, 'phonebook_list'])->name('phonebook_list');
 
@@ -324,12 +330,13 @@ Route::post('/receive', 'App\Http\Controllers\PusherController@receive');
 
 /*===City and State ====*/
 Route::get('/states', [StateController::class,'getStatesByCountry'])->name('getStatesByCountry');
+Route::get('/code', [CountryController::class,'getCodesByCountry'])->name('getCodesByCountry');//Phone Code
 Route::get('/cities', [CityController::class,'getCitiesByStates'])->name('getCitiesByStates');
 
-Route::middleware(['checkclient'])->group(function () {
+//Route::middleware(['checkclient'])->group(function () {
     Route::get('{username}', [clientprofile::class, 'client_by_search'])->name('client_by_search');
     Route::get('{username}/profile', [clientprofile::class, 'usernameProfile'])->name('usernameProfile');
     Route::get('{username}/profile-about', [clientprofile::class, 'usernameProfileAbout'])->name('usernameProfileAbout');
-});
+//});
 
 

@@ -1109,6 +1109,9 @@
     <!-- =======================
 JS libraries, plugins and custom scripts -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+<script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+{!! Toastr::message() !!}
 @stack('scripts')
 <script>
     $(document).ready(function() {
@@ -1245,18 +1248,19 @@ JS libraries, plugins and custom scripts -->
                 }
             });
         });
-        /*==== Reply Comment====*/
 
-        // Function to toggle reply form visibility
-        $(".reply-btn").click(function() {
-            var commentId = $(this).data('comment-id');
-            var replyForm = $(this).closest('.comment-item').find('.reply-form');
-            replyForm.find('.comment-id').val(commentId);
-            replyForm.toggle();
-        });
 
+    
     });
+
 </script>
+    @include('user/scripts/reply-form-script')
+    @include('user/scripts/add-comment-script')
+    @include('user/scripts/comment-reply-script')
+    @include('user/scripts/comment-like-script')
+    @include('user/scripts/post-reaction-script')
+    <!-- Custome Script JS -->
+    <script src="{{ asset('public/user/assets/js/script.js') }}"></script>
     <!-- Bootstrap JS -->
     <script src="{{ asset('public/user/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     <!-- Vendors -->

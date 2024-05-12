@@ -35,14 +35,10 @@ class AddressVerificationController extends Controller
     {
         try{
             // DB::beginTransaction();
-            $address_verify = new AddressVerification;
-            $address_verify->client_id = currentUserId();
-            if ($request->hasFile('id_image')) {
-                $imageName = rand(111, 999) . time() . '.' . $request->id_image->extension();
-                $request->id_image->move(public_path('uploads/verify_image'), $imageName);
-                $address_verify->id_image = $imageName;
-            }
-            if ($request->hasFile('document')) {
+            /*$address_verify = new AddressVerification;
+            $address_verify->client_id = currentUserId();*/
+            
+            /*if ($request->hasFile('document')) {
                 $documentNames = []; // Array to store document file names
                 
                 foreach ($request->file('document') as $file) {
@@ -59,15 +55,20 @@ class AddressVerificationController extends Controller
                     $documentNames[] = $imageName;
                 }
                 $address_verify->document = implode(',', $documentNames);
-            }
+            }*/
             // Update the address_line_1 directly in the clients table
             $client = Client::where('id', currentUserId())->firstOrFail();
-            $client->address_line_1 = $request->address_line_1;
+            $client->verification_request_status = 1;
+            if ($request->hasFile('id_image')) {
+                $imageName = rand(111, 999) . time() . '.' . $request->id_image->extension();
+                $request->id_image->move(public_path('uploads/verify_image'), $imageName);
+                $client->photo_id = $imageName;
+            }
             $client->save();
 
-            if ($address_verify->save()) {
+            //if ($address_verify->save()) {
                 return redirect()->back()->with('success', 'Data Saved'); 
-            }
+           // }
            
         }catch(Exception $e){
             DB::rollback();

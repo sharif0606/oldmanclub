@@ -38,9 +38,11 @@ class PostController extends Controller
         }else{
             $imageName = '';
         }
+        // Normalize line breaks before storing the content
+        $content = preg_replace('/\R{2,}/', "\n", $request->input('message'));
          // create db entry
          $post = Post::create([
-            'message' => $request->message,
+            'message' => $content,
             'image'=>$imageName,
             'client_id' => currentUserId()
         ]);
@@ -74,8 +76,9 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $content = preg_replace('/\R{2,}/', "\n", $request->input('message'));
         $post = Post::findOrFail($id);
-        $post->message = $request->message;
+        $post->message = $content;
         $post->save();
 
         return response()->json(['success' => true, 'message' => 'Post updated successfully']);
