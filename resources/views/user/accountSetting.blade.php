@@ -534,24 +534,8 @@
                                         <h5 class="h5 card-title text-warning">To Verify Address Please input address and ID No and ID Type from basic information</h5>
                                         @endif
                                     @elseif($client->verification_request_status == 2 && $client->is_address_verified == 0)
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <label class="form-label">Address & PHOTO ID</label>
-                                                <span class="pe-1">{{ $client->address_line_1 }}</span>
-                                                <span>{{ $client->address_line_2 }}</span>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <img class="rounded img-fluid"
-                                                src="{{asset('public/uploads/verify_image/' . $client->photo_id)}}" alt="">
-                                            </div>
-                                            <div class="col-md-12">
-                                                <label class="form-label"><strong>Address Verification Document</strong></label>
-                                                <img class="rounded img-fluid"
-                                                src="{{asset('public/uploads/verify_image/' . $client->address_proof_photo)}}" alt="">
-                                            </div>
-                                        </div>
                                         <form class="form" method="post" enctype="multipart/form-data"
-                                            action="{{ route('address_verify_saved', encryptor('encrypt', $client->id)) }}">
+                                        action="{{ route('address_verify_saved', encryptor('encrypt', $client->id)) }}">
                                             @csrf
                                             @method('Post')
                                             <input type="hidden" name="uptoken"
@@ -572,6 +556,23 @@
                                             </div>
                                             <button type="submit" class="btn btn-success mt-2">Verify With Code</button>
                                         </form>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label class="form-label">Address & PHOTO ID</label>
+                                                <span class="pe-1">{{ $client->address_line_1 }}</span>
+                                                <span>{{ $client->address_line_2 }}</span>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <img class="rounded img-fluid"
+                                                src="{{asset('public/uploads/verify_image/' . $client->photo_id)}}" alt="">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="form-label"><strong>Address Verification Document</strong></label>
+                                                <img class="rounded img-fluid"
+                                                src="{{asset('public/uploads/verify_image/' . $client->address_proof_photo)}}" alt="">
+                                            </div>
+                                        </div>
+
                                     @elseif($client->verification_request_status == 2 && $client->is_address_verified == 1)
                                         <h5 class="h5 card-title text-success">Your Address Verification is complete.</h5>
                                     @else
