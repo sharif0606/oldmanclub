@@ -38,7 +38,6 @@ function submitReplyForm(event, form) {
 }
  // Event listener for keydown on the textarea within reply forms
  $('.reply-form textarea[name="content"]').on('keydown', function(e) {
-    alert('ok')
     if ((e.keyCode === 13 || e.keyCode === 108) && !e.shiftKey) {  // Check if Enter key is pressed
             e.preventDefault(); // Prevent line break
             var form = $(this).closest('form')[0]; // Get the form element
