@@ -369,6 +369,8 @@
                                                 <option value="">Select State</option>
                                             </select>
                                         </div>
+                                        <div class="col-sm-6 col-lg-6">
+                                        </div>
                                         {{--<div class="col-sm-6 col-lg-3">
                                             <label class="form-label">From City</label>
                                             <select name="from_city_id" id="from-city-dropdown" class="form-control">
