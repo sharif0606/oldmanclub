@@ -559,8 +559,10 @@
                                         <div class="row">
                                             <div class="col-lg-4">
                                                 <label class="form-label">Address & PHOTO ID</label>
-                                                <span class="pe-1">{{ $client->address_line_1 }}</span>
-                                                <span>{{ $client->address_line_2 }}</span>
+                                                <p>
+                                                    <span class="pe-1">{{ $client->address_line_1 }}</span>
+                                                    <span>{{ $client->address_line_2 }}</span>
+                                                </p>
                                             </div>
                                             <div class="col-lg-4">
                                                 <img class="rounded img-fluid"
