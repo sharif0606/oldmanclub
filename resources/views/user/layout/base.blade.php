@@ -1221,37 +1221,90 @@ JS libraries, plugins and custom scripts -->
             });
         });
 
-        /*=== Update ePost ===*/
-        $("#editSubmitBtn").on('click', function() {
-        var formData = new FormData($("#editFormSubmit")[0]);
-        var postId = $('#postId').val();
-        formData.append('_method', 'PUT'); // Add method spoofing for PUT request
-            $.ajax({
-                type: 'POST',
-                url: "{{ url('/') }}/user/post/" + postId,
-                data: formData,
-                processData: false,
-                contentType: false,
+
+
+            // Initialize Dropzone for post update
+            var editDropzone = new Dropzone("#editPostDropzone", {
+                url: "{{ route('postUpdate') }}",
+                paramName: 'image',
+                maxFilesize: 5,
+                maxFiles: 1,
+                acceptedFiles: 'image/*',
+                addRemoveLinks: true,
+                autoProcessQueue: false,
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
-                success: function(response) {
-                    // Handle success response
-                    console.log(response);
-                    $('#editPostModal').modal('hide');
-                    window.location.href = "{{route('clientdashboard')}}";
-                },
-                error: function(xhr, status, error) {
-                    // Handle error response
-                    console.error(xhr.responseText);
-                    alert("Error: " + xhr.responseText);
+                init: function() {
+                    this.on("sending", function(file, xhr, formData) {
+                        // Append additional form data to Dropzone request
+                        formData.append('postId', $('#postId').val());
+                        formData.append('message', $('#editMessage').val());
+                    });
                 }
             });
-        });
+
+
+            // Handle form submission for post update
+            $("#editSubmitBtn").on('click', function() {
+                // Check if Dropzone has files
+                if (editDropzone.getQueuedFiles().length > 0) {
+                    // Process Dropzone queue
+                    editDropzone.processQueue();
+                } else {
+                    // If no files in Dropzone queue, submit the form
+                    submitEditForm();
+                }
+            });
+
+            // Handle Dropzone success event for post update
+            editDropzone.on('success', function(file, response) {
+                // Handle success response
+                console.log(response);
+                // Optionally, close the modal
+                $('#editPostModal').modal('hide');
+                // Redirect or update UI as needed
+                window.location.href = "{{route('clientdashboard')}}";
+            });
+
+        // Function to submit edit form without files
+        function submitEditForm() {
+            // Implement your form submission logic here
+
+            var formData = new FormData($("#editFormSubmit")[0]);
+            formData.append('postId', $('#postId').val());
+                    formData.append('message', $('#editMessage').val());
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ route('postUpdate') }}",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            // Handle success response
+                            $('#editPostModal').modal('hide');
+                            window.location.href = "{{route('clientdashboard')}}";
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle error response
+                            console.error(xhr.responseText);
+                            alert("Error: " + xhr.responseText);
+                        }
+                    });
+        }
+        
 
 
     
     });
+    function confirmShare(button) {
+        if (confirm("Are you sure you want to share this post?")) {
+            button.closest('.share-form').submit();
+        }
+    }
 
 </script>
     @include('user/scripts/reply-form-script')

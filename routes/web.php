@@ -77,6 +77,7 @@ use App\Http\Controllers\User\AddressVerificationController as address_verify;
 use App\Http\Controllers\User\CompanyController as company;
 use App\Http\Controllers\User\BankController as bank;
 use App\Http\Controllers\User\PostController as post;
+use App\Http\Controllers\User\ShareController as share;
 use App\Http\Controllers\PurchaseSmsController as purchase;
 use App\Http\Controllers\FollowController as follow;
 use App\Http\Controllers\User\PostCommnetController as postcomment;
@@ -248,6 +249,8 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::resource('post-reaction', postreaction::class);
     Route::get('post-reaction-update', [postreaction::class,'post_reaction_update'])->name('post-reaction-update');
     Route::get('gathering', [clientprofile::class, 'gathering'])->name('gathering');
+   
+    
 
     Route::resource('phonebook', phonebook::class);
     Route::resource('phonegroup', phonegroup::class);
@@ -283,7 +286,8 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::resource('company', company::class);
     Route::resource('bank', bank::class);
     Route::resource('post', post::class);
-
+    Route::resource('share', share::class);
+    Route::post('post-update', [post::class, 'post_update'])->name('postUpdate');
     Route::resource('purchase', purchase::class);
 
     

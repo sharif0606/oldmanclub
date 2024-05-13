@@ -25,7 +25,7 @@
                         </div>
                         <!-- Feed box  -->
 
-                        <textarea class="form-control pe-4 fs-3 lh-1 border-0" id="message" name="message" rows="2" placeholder="Share your thoughts..."></textarea>
+                        <textarea class="form-control pe-4 lh-1 border-0" id="message" name="message" rows="2" placeholder="Share your thoughts..."></textarea>
 
                     </div>
 
