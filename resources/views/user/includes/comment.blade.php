@@ -128,10 +128,9 @@
                         </ul>
                         {{-- action="{{ route('reply.store') }}" method="post" --}}
                         <!-- Reply Form (hidden by default) -->
-                        <form class="nav nav-item w-100 position-relative reply-form my-2" style="display: none;" data-comment-id="{{ $comment->id }}" onsubmit="submitReplyForm(event, this)">
-                            @csrf
+                        <form class="nav nav-item w-100 position-relative reply-form my-2" style="display: none;" data-comment-id="{{ $comment->id }}">
                             <textarea data-autoresize="" name="content" class="form-control pe-5 bg-light" rows="1"
-                                placeholder="Write your reply here..." name="content" required></textarea>
+                                placeholder="Write your reply here..." required></textarea>
                             <input type="hidden" name="comment_id" value="{{ $comment->id }}" data-comment-id="{{ $comment->id }}">
                             <button
                                 class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0"

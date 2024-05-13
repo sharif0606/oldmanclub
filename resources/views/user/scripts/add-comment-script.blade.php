@@ -93,7 +93,7 @@
 
     // Event listener for Enter key press in the comment textarea
     $('.comment-form textarea[name="content"]').on('keydown', function(e) {
-        if (e.keyCode === 13 && !e.shiftKey) { // Check if Enter key is pressed
+        if ((e.keyCode === 13 || e.keyCode === 108) && !e.shiftKey) {  // Check if Enter key is pressed
             e.preventDefault(); // Prevent line break
             var formData = new FormData($(this).closest('form')[0]); // Get form data
             var postId = formData.get('post_id'); // Get post ID

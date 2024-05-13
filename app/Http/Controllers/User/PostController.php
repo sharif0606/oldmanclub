@@ -6,7 +6,7 @@ use App\Models\User\Post;
 use App\Models\User\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 class PostController extends Controller
 {
     /**
@@ -83,7 +83,25 @@ class PostController extends Controller
 
         return response()->json(['success' => true, 'message' => 'Post updated successfully']);
     }
-
+    public function post_update(Request $request){
+        $postId = $request->postId;
+        $post = Post::findOrFail($postId);
+    
+        // Handle image upload if present
+        if ($request->hasFile('image')) {
+            $imageName = rand(111, 999) . time() . '.' . $request->image->extension();
+            $request->image->move(public_path('uploads/post'), $imageName);
+            $post->image = $imageName;
+        }
+    
+        // Normalize line breaks before updating the content
+        $content = preg_replace('/\R{2,}/', "\n", $request->input('message'));
+        $post->message = $content;
+        $post->updated_at = Carbon::now();
+        $post->save();
+    
+        return response()->json($post);
+    }
     /**
      * Remove the specified resource from storage.
      */

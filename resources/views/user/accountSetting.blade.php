@@ -125,7 +125,7 @@
 
                                         <!-- Side Nav START -->
                                         <ul class="nav nav-tabs nav-pills nav-pills-soft flex-column fw-bold gap-2 border-0"
-                                            role="tablist">
+                                            role="tablist" id="myTab">
                                             <li class="nav-item" data-bs-dismiss="offcanvas" role="presentation">
                                                 <a class="nav-link d-flex mb-0 active" href="#nav-setting-tab-1"
                                                     data-bs-toggle="tab" aria-selected="true" role="tab"> <img
@@ -339,9 +339,10 @@
                                         </div>
                                         <div class="col-sm-6 col-lg-3">
                                             <label class="form-label">City</label>
-                                            <select name="current_city_id" id="city-dropdown" class="form-control">
+                                            <input type="text" class="form-control" name="current_city_id" value="{{$client->current_city_id}}">
+                                            {{-- <select name="current_city_id" id="city-dropdown" class="form-control">
                                                 <option value="">Select City</option>
-                                            </select>
+                                            </select> --}}
                                         </div>
 
                                         <div class="col-sm-6 col-lg-3">
@@ -498,16 +499,24 @@
                                             @csrf
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                                    <label class="form-label">Address</label>
+                                                    <label class="form-label"><strong>Address</strong></label>
                                                     {{-- <textarea class="form-control" name="address_line_2" rows="6">{{ $client->address_line_2 }}</textarea> --}}
-                                                    <p>{{ $client->address_line_1 }}</p>
-                                                    <p>{{ $client->address_line_2 }}</p>
+                                                    <span class="pe-1">{{ $client->address_line_1 }}</span>
+                                                    <span>{{ $client->address_line_2 }}</span>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="id_image" class="mb-2">Upload Your PHOTO ID (Mentioned In Basic Information):</label>
+                                                    <label for="id_image" class="mb-2"><strong>Upload Your PHOTO ID</strong> (Mentioned In Basic Information):</label>
                                                     <input type="file" id="id_image" class="form-control" name="id_image"
                                                         required>
                                                     <img id="preview_photo_id" src="#" alt="preview_photo_id"
+                                                        style="display: none; max-width: 100px;">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="id_image" class="mb-2"><strong>Upload Address Proof for Address verification
+                                                    </strong></label>
+                                                    <input type="file" id="address_proof_photo" class="form-control" name="address_proof_photo"
+                                                        required>
+                                                    <img id="address_proof_photo" src="#" alt="address_proof_photo"
                                                         style="display: none; max-width: 100px;">
                                                 </div>
                                             </div>
@@ -526,9 +535,8 @@
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <label class="form-label">Address & PHOTO ID</label>
-                                                {{-- <textarea class="form-control" name="address_line_2" rows="6">{{ $client->address_line_2 }}</textarea> --}}
-                                                <p>{{ $client->address_line_1 }}</p>
-                                                <p>{{ $client->address_line_2 }}</p>
+                                                <span class="pe-1">{{ $client->address_line_1 }}</span>
+                                                <span>{{ $client->address_line_2 }}</span>
                                             </div>
                                             <div class="col-lg-6">
                                                 <img class="rounded img-fluid"
@@ -563,14 +571,21 @@
                                         <h5 class="h5 card-title">We Are Reviewing Your Address Verification.</h5>
                                         <div class="row">
                                             <div class="col-lg-6">
-                                                <label class="form-label">Address & PHOTO ID</label>
-                                                {{-- <textarea class="form-control" name="address_line_2" rows="6">{{ $client->address_line_2 }}</textarea> --}}
-                                                <p>{{ $client->address_line_1 }}</p>
-                                                <p>{{ $client->address_line_2 }}</p>
+                                                <label class="form-label"><strong>Address & PHOTO ID</strong></label>
+                                                <p>
+                                                    <span>{{ $client->address_line_1 }}</span>
+                                                    <span>{{ $client->address_line_2 }}</span>
+                                                </p>
+                                               
                                             </div>
                                             <div class="col-lg-6">
                                                 <img class="rounded img-fluid"
                                                 src="{{asset('public/uploads/verify_image/' . $client->photo_id)}}" alt="">
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class="form-label"><strong>Address Verification Document</strong></label>
+                                                <img class="rounded img-fluid"
+                                                src="{{asset('public/uploads/verify_image/' . $client->address_proof_photo)}}" alt="">
                                             </div>
                                         </div>
                                     @endif
@@ -1082,4 +1097,18 @@
             });
         }
     </script>
+    @if(old('tab'))
+    <script>
+        $(function() {
+            $('#myTab .nav-link').removeClass('active');
+            $('.tab-content .tab-pane').removeClass('in active show');
+            var selectedTab = '{{ old("tab") }}';
+            // Show the selected tab
+            if (selectedTab) {
+                $('#myTab a[href="#' + selectedTab + '"]').addClass('active').tab('show');
+                $('#' + selectedTab).addClass('in active show');
+            }
+        });
+    </script>
+    @endif
 @endpush

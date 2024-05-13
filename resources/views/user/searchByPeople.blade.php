@@ -12,7 +12,7 @@
                     <div class="card">
                         <!-- Card header START -->
                         <div class="card-header border-0 pb-0">
-                            <h5 class="card-title"> Connections</h5>
+                            <h5 class="card-title">Connections</h5>
                         </div>
                         <!-- Card header END -->
 

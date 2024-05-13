@@ -54,12 +54,12 @@
                     </a>
                     <!-- Card feed action dropdown menu -->
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
-                        <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save
-                                post</a></li>
+                        {{--<li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save
+                                post</a></li>--}}
                         <li><a class="dropdown-item edit-post" data-post-id="{{ $value->id }}" href="#"
                                 data-toggle="modal" data-target="#editPostModal"> <i
                                     class="bi bi-pencil-square fa-fw pe-2"></i>Edit post</a></li>
-                        <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow
+                        {{--<li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow
                                 lori ferguson </a>
                         </li>
                         <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide
@@ -70,7 +70,7 @@
                             <hr class="dropdown-divider">
                         </li>
                         <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report
-                                post</a></li>
+                                post</a></li> --}}
                     </ul>
                 </div>
                 <!-- Card feed action dropdown END -->
@@ -83,9 +83,21 @@
                 {!! nl2br($value->message) !!}
             </p>
             <!-- Card img -->
-            @if ($value->image)
+            @if($value->is_cover_photo)
+                @if ($value->image)
+                <img class="card-img" src="{{ asset('public/uploads/client/' . $value->image) }}" alt="Post">
+                @endif
+            @elseif($value->is_profile_photo)
+                @if ($value->image)
+                <img class="card-img" src="{{ asset('public/uploads/client/' . $value->image) }}" alt="Post">
+                @endif
+            @else
+                @if ($value->image)
                 <img class="card-img" src="{{ asset('public/uploads/post/' . $value->image) }}" alt="Post">
+                @endif
             @endif
+
+           
             {{-- <img class="card-img" src="assets/images/post/3by2/01.jpg" alt="Post"> --}}
             <div class="post-reaction" data-post-id="{{ $value->id }}">
                 <!-- Feed react START -->
@@ -153,7 +165,7 @@
                 <!-- Feed react START -->
 
                 <ul class="nav nav-pills nav-pills-light nav-fill nav-stack small border-top border-bottom py-1 mb-3">
-                    @if($value->client_id == currentUserId())
+                    @if($value->client_id != currentUserId())
                     <li class="nav-item dropdown dropup">
                         <a class="nav-link mb-0 active" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-hand-thumbs-up pe-1"></i>Like</a>
@@ -199,15 +211,20 @@
                     </li>
                     @endif
                     <!-- Card share action menu END -->
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link mb-0" href="#!"> <i class="bi bi-chat-fill pe-1"></i>Comment</a>
-                    </li>
+                    </li> --}}
                     <!-- Card share action menu START -->
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link mb-0" id="cardShareAction4" data-bs-toggle="dropdown"
+                        <form method="post" action="{{route('share.store')}}" class="share-form">
+                            @csrf
+                            <input type="hidden" name="post_id" value="{{$value->id}}">
+                            <button type="button" class="nav-link mb-0" onclick="confirmShare(this)"> <i class="bi bi-reply-fill flip-horizontal ps-1"></i>Share ({{$value->shares->count()}})</button>
+                        </form>
+                        {{-- <a href="#" class="nav-link mb-0" id="cardShareAction4" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             <i class="bi bi-reply-fill flip-horizontal ps-1"></i>Share (3)
-                        </a>
+                        </a> --}}
                         <!-- Card share action dropdown menu -->
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction4">
                             <li><a class="dropdown-item" href="#"> <i
