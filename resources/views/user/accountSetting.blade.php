@@ -558,13 +558,14 @@
                                         </form>
                                         <div class="row">
                                             <div class="col-lg-4">
-                                                <label class="form-label">Address & PHOTO ID</label>
+                                                <label class="form-label">Address</label>
                                                 <p>
                                                     <span class="pe-1">{{ $client->address_line_1 }}</span>
                                                     <span>{{ $client->address_line_2 }}</span>
                                                 </p>
                                             </div>
                                             <div class="col-lg-4">
+                                                <label class="form-label">PHOTO ID</label>
                                                 <img class="rounded img-fluid"
                                                 src="{{asset('public/uploads/verify_image/' . $client->photo_id)}}" alt="">
                                             </div>
