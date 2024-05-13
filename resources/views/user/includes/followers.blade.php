@@ -86,7 +86,7 @@
         <div class="card">
             <!-- Card header START -->
             <div class="card-header d-sm-flex justify-content-between align-items-center border-0">
-                <h5 class="card-title mb-0">Who to follow</h5>
+                <h5 class="card-title mb-0">You May Follow</h5>
                 <a class="btn btn-primary-soft btn-sm" href="{{route('search_by_people')}}"> See all Connections</a>
             </div>
             <!-- Card header END -->

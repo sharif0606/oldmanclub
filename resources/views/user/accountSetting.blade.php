@@ -380,12 +380,12 @@
                                             <input type="text" placeholder="" value="{{ $client->from_zip_code }}"
                                                 class="form-control"name="from_zip_code">
                                         </div> --}}
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-6">
                                             <label class="form-label">Address Line 1</label>
                                             <input type="text" class="form-control" name="address_line_1" value="{{ $client->address_line_1 }}">
                                             {{-- <textarea class="form-control" name="address_line_1" rows="6">{{ $client->address_line_1 }}</textarea> --}}
                                         </div>
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-6">
                                             <label class="form-label">Address Line 2</label>
                                             <input type="text" class="form-control" name="address_line_2" value="{{ $client->address_line_2 }}">
                                             {{-- <textarea class="form-control" name="address_line_2" rows="6">{{ $client->address_line_2 }}</textarea> --}}
