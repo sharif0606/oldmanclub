@@ -252,7 +252,7 @@
                                         </div>
                                         <!-- Birthday -->
                                         <div class="col-lg-6">
-                                            <label class="form-label">Birthday </label>
+                                            <label class="form-label">Date of Birth</label>
                                             <input type="date" name="dob" class="form-control"
                                                 value="{{ $client->dob }}">
                                         </div>
