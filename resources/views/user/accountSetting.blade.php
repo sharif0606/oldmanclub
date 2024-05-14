@@ -235,7 +235,7 @@
                                         </div>
                                         <!-- User name -->
                                         <div class="col-sm-12">
-                                            <label class="form-label">User name</label>
+                                            <label class="form-label">User name </label>
                                             <input type="text" name="username" value="{{ $client->username }}"
                                                 class="form-control" placeholder="">
                                             @if ($errors->has('username'))
