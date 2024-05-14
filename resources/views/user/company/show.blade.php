@@ -37,7 +37,7 @@
                     <div class="tab-pane fade show active" id="tab-1">
                         <div class="row g-4">
                             <div class="col-sm-6">
-                                <div class="card shadow-lg">
+                                <div class="card shadow-lg h-100">
                                     <div class="card-header">
                                         <h4 class="mx-auto">Company Information</h4>
                                     </div>
@@ -91,7 +91,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <div class="card shadow-lg">
+                                <div class="card shadow-lg h-100">
                                     <div class="card-header">
                                         <h4 class="mx-auto">Address Information</h4>
                                     </div>

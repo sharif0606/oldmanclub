@@ -1,25 +1,58 @@
 @extends('frontend.layouts.app')
 @section('title','LLC Service')
 @section('content')
+@push('styles')
+<style>
+    .animate-left {
+        animation: slideInLeft 0.7s ease-out;
+    }
+
+    .animate-right {
+        animation: slideInRight 0.7s ease-out;
+    }
+
+    @keyframes slideInLeft {
+        from {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+</style>
+@endpush
       <!-- hero section start -->
       <section class="llc-hero">
             <img src="{{asset('public/uploads/llcservice/'.$llcherosection?->background_image)}}" alt="" class="llc-hero-image">
         <div class="llc-hero-text">
-            <h2 class="text-uppercase fw-bold fs-1">{{$llcherosection?->text_large}}</h2>
-            <p class="py-3 fw-medium">{{$llcherosection?->text_small}}</p>
+            <h2 class="text-uppercase fw-bold fs-1 animate-right">{{$llcherosection?->text_large}}</h2>
+            <p class="py-3 fw-medium animate-left">{{$llcherosection?->text_small}}</p>
             <div class="llc-hero-content mt-4">
                 <div class="row">
                     <div class="col-md-8">
                         <form action="#">                      
                             <div class="llc-search-box mb-3">
                                     <span class="llc-search-icon">&#128269;</span>
-                                    <input type="text" class="form-control py-3 px-5" placeholder="Company Name Search">
+                                    <input type="text" class="form-control py-3 px-5 animate-right" placeholder="Company Name Search">
                                     <span class="llc-arrow-icon">&#10148;</span>
                                 </div>    
                         </form>
                     </div>
                     <div class="col-md-4">
-                        <a href="" class="btn llc-register-btn fw-medium mx-3 px-5 py-1">Register Now</a>
+                        <a href="" class="btn llc-register-btn fw-medium mx-3 px-5 py-1 animate-left">Register Now</a>
                     </div>
                 </div>
             </div>
@@ -32,7 +65,7 @@
         <div class="container">
             
             <div class="row">
-                <div class="col-md-4 llc-service-text">
+                <div class="col-md-4 llc-service-text animate-right">
                     <h2 class="py-2 text-uppercase">{{$llcserve?->title}}</h2>
                     <ul>
                     
@@ -54,7 +87,7 @@
                     </ul>
                     <button class="btn llc-get-started-btn fw-medium mb-5 ms-3 px-5 py-2">Get Started</button>
                 </div>
-                <div class="col-md-8 llc-service-image">
+                <div class="col-md-8 llc-service-image animate-left">
                     <img src="{{asset('public/uploads/llcservice/'.$llcserve->image)}}" alt="" width="100%">
                 </div>
                 
@@ -104,7 +137,7 @@
                                 <li class="fw-medium"><i class="fa-regular fa-circle-check me-2"></i>{{$llcprice?->llcpricingfeature_list}}</li>
                             @endif
                         </ul>
-                        <button class="btn px-5 py-2">Buy Now</button>
+                        <button class="btn px-5 py-2 llc-btn">Buy Now</button>
                     </div>
                 </div>
             </div>
@@ -118,13 +151,13 @@
     <section class="llc-our-card">
         <div class="container">
             <div class="row">
-                <div class="col-md-5 llc-our-card-text">
+                <div class="col-md-6 llc-our-card-text">
                     <h2 class="text-uppercase">{{$llccardsection?->text_large}}</h2>
                     <p class="text-start py-2 fw-medium">{{$llccardsection?->text_small}} </p>
                     <button class="btn llc-get-started-btn fw-medium mb-3 px-5 py-2">Get Started</button>
                 </div>
-                <div class="col-md-7 llc-our-card-image">
-                    <img src="{{asset('public/uploads/llcservice/'.$llccardsection?->image)}}" alt="card-image" class="h-100">
+                <div class="col-md-6 llc-our-card-image">
+                    <img src="{{asset('public/uploads/llcservice/'.$llccardsection?->image)}}" alt="card-image">
                 </div>
             </div>
         </div>

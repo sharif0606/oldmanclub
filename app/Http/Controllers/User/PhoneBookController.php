@@ -162,8 +162,11 @@ class PhoneBookController extends Controller
         $client = Client::find(currentUserId());
         $postCount = Post::where('client_id', currentUserId())->count();
         $phonebook = PhoneBook::where('client_id',currentUserId())->get();
-        $purchase = PurchaseSms::where('client_id',currentUserId())->get();
-        return view('user.phonebook.smscreate',compact('client','postCount','phonebook','purchase'));
+        $purchase = PurchaseSms::where('client_id', currentUserId())
+                           ->whereNotNull('number_of_sms')
+                           ->get();
+        $group = PhoneGroup::where('client_id',currentUserId())->get();
+        return view('user.phonebook.smscreate',compact('client','postCount','phonebook','purchase','group'));
     }
     public function sms_store(Request $request){
         // $sms = new SendSms;
@@ -186,6 +189,7 @@ class PhoneBookController extends Controller
             return redirect()->route('sms_send');
         }
         $contact_nos = explode(',', $request->contact_no);
+        $names = explode(',', $request->name);
         $smsCount = count($contact_nos);
         if ($purchase->number_of_sms < $smsCount) {
             $this->notice::error('Insufficient SMS credits');
@@ -195,10 +199,11 @@ class PhoneBookController extends Controller
         $purchase->uses_sms += $smsCount;
         $purchase->save();
 
-        foreach($contact_nos as $contact_no){
+        foreach($contact_nos as $index=>$contact_no){
             $sms = new SendSms;
             $sms->client_id = currentUserId();
             $sms->contact_no = $contact_no;
+            $sms->name = $names[$index]; 
             $sms->message_body = $request->message_body;
             $sms->purchase_id = $request->purchase_id;
             $sms->save();

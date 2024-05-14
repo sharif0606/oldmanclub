@@ -55,13 +55,13 @@
                             <div class="card-body text-center pt-0">
                                 <div class="avatar avatar-lg mt-n5 mb-3">
                                     @if($p->bank_logo)
-                                    <a href="#"><img class="avatar-img rounded-circle border border-white border-3 bg-white" src="{{ asset('public/uploads/bank/'.$p->bank_logo) }}" alt=""></a>
+                                    <img class="avatar-img rounded-circle border border-white border-3 bg-white" src="{{ asset('public/uploads/bank/'.$p->bank_logo) }}" alt="">
                                     @else
-                                    <a href="#"><img class="avatar-img rounded-circle border border-white border-3 bg-white" src="{{ asset('public/user/assets/images/logo/08.svg') }}" alt=""></a>
+                                    <img class="avatar-img rounded-circle border border-white border-3 bg-white" src="{{ asset('public/user/assets/images/logo/08.svg') }}" alt="">
                                     @endif
                                 </div>
-                                <h5 class="mb-0"> <a href="#">{{ $p->bank_name }}</a> </h5>
-                                <h6 class="mb-0"> <a href="#">{{ $p->branch_name }}</a> </h6>
+                                <h5 class="mb-0"> {{ $p->bank_name }} </h5>
+                                <h6 class="mb-0"> {{ $p->branch_name }} </h6>
                                 <p class="mb-0"><strong>{{ $p->email }}</strong></p>
                                 <p class="mb-0"><strong>{{ $p->contact_no }}</strong></p>
                             </div>

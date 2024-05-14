@@ -15,9 +15,21 @@
     <div class="col-md-8 col-lg-6 vstack gap-4">
         <div class="card">
             <div class="card-header d-sm-flex text-center align-items-center justify-content-between border-0 pb-0">
-                <h4 class="card-title h4">SEND SMS</h4>
-                <a class="btn btn-primary-soft" href="{{ route('sms_send') }}"> <i
-                        class="fas fa-list pe-1"></i>All SMS</a>
+                <div class="d-flex">
+                    <h4 class="card-title h4 me-4">SEND SMS</h4>
+                    <select name="group_select" id="group_select" class="">
+                        <option value="">Select Group</option>
+                        @foreach ($group as $value)
+                        @php
+                            $numbers = $value->phonebook->pluck('contact_en')->toArray();
+                            $names = $value->phonebook->pluck('name_en')->toArray();
+                        @endphp
+                            <option value="{{ $value->id }}" data-numbers="{{ json_encode($numbers) }}" data-names="{{ json_encode($names) }}">{{ $value->group_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <a class="btn btn-primary-soft" href="{{ route('sms_send') }}">
+                    <i class="fas fa-list pe-1"></i>All SMS</a>
             </div>
             <div class="card-body">
                 <div class="mb-0 pb-0">
@@ -29,7 +41,10 @@
                             <input type="checkbox" name="selected_contact[]" class="contact-checkbox" data-contact="{{ $p->contact_en }}" data-name="{{ $p->name_en }}">
                             </span>
                             <span><strong>{{ $p->name_en }}</strong></span>
-                            <p class="ps-4"><strong>{{ $p->contact_en }}</strong></p>
+                            <p class="ps-4">
+                                <strong>{{ $p->contact_en }}</strong><br>
+                                <strong>{{ $p->phonegroup->group_name }}</strong>
+                            </p>
                         </div>
                         @empty
                             <p>PHONEBOOK NOT FOUND</p>
@@ -50,10 +65,10 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control mb-3" id="selected_contact_input" name="contact_no" placeholder="Contact No" style="display: none">
+                                    <input type="hidden" class="form-control mb-3" id="selected_contact_input" name="contact_no" placeholder="Contact No" >
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control mb-3" id="selected_name_input" value="" placeholder="Contact No">
+                                    <input type="text" class="form-control mb-3" id="selected_name_input" name="name" value="" placeholder="Contact No">
                                 </div>
                                 <div class="form-group">
                                     <textarea id="" name="message_body" placeholder="Write your message" class="form-control mb-3" ></textarea>
@@ -73,6 +88,12 @@
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script>
     $(document).ready(function() {
+        $('#group_select').change(function() {
+            var selectedGroup = $(this).children("option:selected").val();
+            var numbers = $(this).children("option:selected").data('numbers');
+            $('#selected_contact_input').val(numbers.join(','));
+        });
+
         const $checkboxes = $('.contact-checkbox');
         const $selectedContactInput = $('#selected_contact_input');
         $checkboxes.on('change', function() {
@@ -86,8 +107,17 @@
             console.log("Selected Contacts:", selectedContacts);
             $selectedContactInput.val(selectedContacts);
         });
+        // var selectedGroup = $('#group_select').children("option:selected");
+        // var numbers = selectedGroup.data('numbers');
+        // $('#selected_contact_input').val(numbers.join(','));
     });
-    $(document).ready(function() {
+      $(document).ready(function() {
+        $('#group_select').change(function() {
+            var selectedGroup = $(this).children("option:selected").val();
+            var names = $(this).children("option:selected").data('names');
+            $('#selected_name_input').val(names.join(','));
+        });
+        
         const $checkboxes = $('.contact-checkbox');
         const $selectedNameInput = $('#selected_name_input');
         $checkboxes.on('change', function() {

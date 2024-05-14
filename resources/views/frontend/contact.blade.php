@@ -1,15 +1,41 @@
 @extends('frontend.layouts.app')
 @section('title', 'Contact Form')
 @section('content')
-{{-- <div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <img src="{{ asset('public/frontend/assets/image/map-image.png') }}" alt="Image Map" class="">
-        </div>
-    </div>
-</div> --}}
-<div class="contact-section">
-        <div class="contact-images col-md-3">
+@push('styles')
+<style>
+    .animate-left {
+        animation: slideInLeft 0.7s ease-out;
+    }
+
+    .animate-right {
+        animation: slideInRight 0.7s ease-out;
+    }
+
+    @keyframes slideInLeft {
+        from {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+</style>
+@endpush
+    <div class="contact-section">
+        <div class="contact-images col-md-3 d-none d-sm-block">
             <img src="{{ asset('public/frontend/assets/image/Ellipse 1221.png')}}" alt="Image 1">
         </div>
 
@@ -24,7 +50,7 @@
                             @csrf
                 <div class="form-group">
                     {{-- <label for="name">Name</label> --}}
-                    <input type="text" id="name" name="name" placeholder="Your Name">
+                    <input type="text" id="name" name="name" class="animate-right" placeholder="Your Name">
                 </div>
                 @error('name')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -32,37 +58,37 @@
 
                 <div class="form-group">
                     {{-- <label for="phone">Contact Number</label> --}}
-                    <input type="tel" id="phone" name="contact_no" placeholder="Your Phone Number" >
+                    <input type="tel" id="phone" name="contact_no" class="animate-left" placeholder="Your Phone Number" >
                 </div>
                 @error('contact_no')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <div class="form-group">
                     {{-- <label for="email">Email</label> --}}
-                    <input type="email" id="email" name="email" placeholder="Your Email" >
+                    <input type="email" id="email" name="email" class="animate-right" placeholder="Your Email" >
                 </div>
                 @error('email')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <div class="form-group">
                     {{-- <label for="message">Message</label> --}}
-                    <textarea id="message" name="message" rows="4" placeholder="Your Message" ></textarea>
+                    <textarea id="message" name="message" rows="4" class="animate-left" placeholder="Your Message" ></textarea>
                 </div>
                 @error('message')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                  <div class="form-group">
                     {{-- <label for="file">Attach File</label> --}}
-                    <input type="file" id="file" name="file">
+                    <input type="file" id="file" name="file" class="animate-right">
                 </div>
                 @error('file')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
-                <button type="submit">Submit</button>
+                <button type="submit" class="animate-left" >Submit</button>
             </form>
         </div>
 
-        <div class="contact-images col-md-3">
+        <div class="contact-images col-md-3 d-none d-sm-block">
             <img src="{{ asset('public/frontend/assets/image/Ellipse 1222.png')}}" alt="Image 2">
         </div>
     </div>

@@ -13,13 +13,16 @@
         .bg{
             background-color: #2F0549;
         }
+        .blurry-image {
+            filter: blur(5px);
+        }
     </style>
-    <div class="container  my-5">
+    <div class="container my-5">
         @if (session('cart'))
         <div class="row">
-            <h2 class="text-center mt-2 fw-bold">Shopping Cart</h2>
+            <h2 class="text-center fw-bold">Shopping Cart</h2>
             <p class="text-end fw-bold">({{ count(session('cart', [])) }})Items</p>
-             <div class="table-responsive ">
+             <div class="table-responsive mt-0">
                 @php
                     $total = 0;
                     //echo '<pre>';
@@ -34,8 +37,8 @@
                 <table class="table table-bordered">
                     <thead class="table-dark">
                         <tr>
-                        <th scope="col">SL</th>
-                        <th scope="col">Product</th>
+                        <th scope="col" class="text-center">SL</th>
+                        <th scope="col" width="600px">Product</th>
                         <th scope="col">Unit Price</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Subtotal</th>
@@ -45,16 +48,47 @@
                     @if(session('cart'))
                         @foreach(session('cart') as $id=>$details)
                         <tr>
-                            <th scope="row">{{$loop->iteration}}</th>
+                            <th scope="row" class="text-center">{{$loop->iteration}}</th>
                             <td>
-                                @if(isset($details['printing_service_image']['image']))
-                                    <img src="{{ asset('public/uploads/printimages/' . $details['printing_service_image']['image']) }}" alt="">
+                                @if(isset($details['printing_service_id']))
+                                    @php
+                                        $printingService = \App\Models\Backend\PrintingService::find($details['printing_service_id']);
+                                    @endphp
+                                    @if($printingService)
+                                        <div class="d-flex">
+                                            @foreach($printingService->images as $image)
+                                                <div class="mr-2">
+                                                    <p class="d-flex">
+                                                        @if($image->is_featured)
+                                                            <!-- Display the featured image without blur -->
+                                                            <img src="{{ asset('public/uploads/printimages/' . $image->image) }}" alt="" width="300px" height="250px" class="featured-image" data-item-id="{{ $printingService->id }}">
+                                                        @else
+                                                            <!-- Display the non-featured images with blur -->
+                                                            <img src="{{ asset('public/uploads/printimages/' . $image->image) }}" alt="" width="50px" height="50px" class="blurry-image" data-item-id="{{ $printingService->id }}">
+                                                        @endif
+                                                    </p>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @endif
                                 @endif
-                                    {{-- <img src="{{ asset('public/uploads/printimages/' . $details->printing_service_image['image']) }}" alt=""> --}}
-                                {{ $details['service_name'] }}
-                                {!! \Illuminate\Support\Str::limit($details['service_details'], 50, '...') !!}
+                                    {{-- @if(isset($details['printing_service_id']))
+                                        @php
+                                            $printingService = \App\Models\Backend\PrintingService::find($details['printing_service_id']);
+                                        @endphp
+                                        @if($printingService)
+                                            @foreach($printingService->images as $image)
+                                                <img src="{{ asset('public/uploads/printimages/' . $image->image) }}" alt="" width="300px">
+                                            @endforeach
+                                        @endif
+                                    @endif --}}
+                              
+                                <p class="m-0 fw-bold">
+                                    {{ $details['service_name'] }}
+                                </p>
+                                <p class="m-0">{!! $details['service_details'] !!}</p>
+                                {{-- {!! \Illuminate\Support\Str::limit($details['service_details'], 50, '...') !!} --}}
                                 {{-- @if(isset($details['service_details']))
-
                                     {!! implode(' ', array_slice(explode(' ', $details['service_details']), 0, 5)) !!}
                                 @endif --}}
                             </td>
@@ -68,11 +102,11 @@
                                         <input name="quantity" type="hidden" value="1">
                                         <input type="submit" name="op" value="+"
                                             style="padding:2px 8px;"
-                                            class="">
+                                            class="text-dark">
                                             {{ $details['quantity'] }}
                                         <input type="submit" name="op" value="-"
                                             style="padding:2px 8px;"
-                                            class="">
+                                            class="text-dark">
                                     </form>
 
                                     <form method="POST"
@@ -92,14 +126,26 @@
                     @endif
                     </tbody>
                 </table>
-             </div>
+            </div>
         </div>
        
         <div class="row mt-2">
             <div class="col-sm-6">
                 <h5>Promo Code</h5>
                 <div class="d-flex">
-                    <input type="text" name="" id="" placeholder="Coupon Code" class="form-control m-0">
+                    <select name="" id="" class="form-control">
+                        <option value="">Select Offer</option>
+                        @foreach($coupon as $value)
+                            <option value="{{ $value->id }}">{{ $value->code }}-
+                                @if ($value->type === 'percentage')
+                                    {{ number_format($value->value, 0) }}%
+                                @elseif ($value->type === 'fixed_amount')
+                                    ${{ $value->value }}
+                                @endif
+                            </option>
+                        @endforeach
+                    </select>
+                    {{-- <input type="text" name="" id="" placeholder="Coupon Code" class="form-control m-0"> --}}
                     <button class="btn checkout mx-1 py-0 rounded-pill w-25 text-white">Apply</button>
                 </div>
             </div>
@@ -131,10 +177,11 @@
             </div>
         </div>
         @else
-        <div class="container text-center mb-3">
-            <div class="card">
-                <h1>Your Cart is Empty</h1>
-                <h5>No Item in Your Cart Yet</h5>
+        <div class="container text-center mb-5">
+            <div class="col-sm-12">
+                <img src="{{ asset('public/frontend/assets/image/shopping_cart.jpeg') }}" alt="" width="400px">
+                <h1 class="">You have no items in your shopping cart.</h1>
+                <a href="{{ route('printservice') }}" class="btn btn-warning text-uppercase fw-bold px-5 mb-5">Continue Shopping</a>
             </div>
         </div>
         @endif
@@ -145,6 +192,25 @@
 @endsection
 
 @push('scripts')
+    <script>
+        // Add click event listener to all images with class 'blurry-image' and 'featured-image'
+        document.querySelectorAll('.blurry-image, .featured-image').forEach(function(img) {
+            img.addEventListener('click', function() {
+                // Get the item ID associated with this image
+                const itemId = this.getAttribute('data-item-id');
+                // Remove blur effect from all images associated with this item
+                document.querySelectorAll('[data-item-id="' + itemId + '"]').forEach(function(itemImg) {
+                    itemImg.classList.add('blurry-image');
+                    itemImg.style.width = '50px';
+                    itemImg.style.height = '50px';
+                });
+                // Remove blur effect from the clicked image
+                this.classList.remove('blurry-image');
+                this.style.width = '300px';
+                this.style.height = '250px';
+            });
+        });
+    </script>
     <script>
         function qty_increment(inc) {
             var qty_inc = $('.qty_' + inc).val();

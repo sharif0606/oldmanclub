@@ -15,8 +15,9 @@
             <!-- Comment by -->
             <div class="bg-light rounded-start-top-1 p-2 rounded">
                 <div class="d-flex justify-content-between">
-                    <h6 class="my-0" style="font-size: 0.8375rem;"> <a href="{{ route('client_by_search', $comment->client->username) }}">{{ $comment->client->fname }}
-                            {{ $comment->client->middle_name }} {{ $comment->client->last_name }}</a></h6>
+                    <h6 class="my-0" style="font-size: 0.8375rem;">
+                        <a href="{{ route('client_by_search', $comment->client->username) }}">{{ $comment->client->fname }} {{ $comment->client->middle_name }} {{ $comment->client->last_name }}</a>
+                    </h6>
                     <!-- Replace with user name -->
                     <small class="ms-2">{{ $comment->created_at->diffForHumans() }}</small>
                     <!-- Replace with comment creation time -->
@@ -62,9 +63,9 @@
             </ul>
             {{-- action="{{ route('reply.store') }}" method="post" --}}
             <!-- Reply Form (hidden by default) -->
-            <form class="nav nav-item w-100 position-relative reply-form my-2" style="display: none;" data-comment-id="{{ $comment->id }}" onsubmit="submitReplyForm(event, this)">
+            <form class="nav nav-item w-100 position-relative reply-form my-2" style="display: none;" data-comment-id="{{ $comment->id }}">
                 @csrf
-                <textarea data-autoresize="" name="content" class="form-control pe-5 bg-light" rows="1"
+                <textarea data-autoresize="" onkeydown="checkKey(event,this)" name="content" class="form-control pe-5 bg-light" rows="1"
                     placeholder="Write your reply here..." required></textarea>
                 <input type="hidden" name="comment_id" value="{{ $comment->id }}" data-comment-id="{{ $comment->id }}">
                 <button

@@ -29,13 +29,18 @@ class frontendController extends Controller
     public function frontend(){
         $setting = Setting::first();
         $slider = Slider::get();
-        $services = OurServices::get();
+        $services = OurServices::take(6)->get();
+        // $services = OurServices::get();
         $homepage = Homepage::first();
-        $feedback = CustomerFeedback::get();
+        $feedback = CustomerFeedback::where('show_hide',1)->get();
         $globalnetwork = GlobalNetWorkImage::get();
         return view('frontend.home',compact('setting','slider','services','homepage','feedback','globalnetwork'));
     }
-
+    public function allservice(){
+        $setting = Setting::first();
+        $services = OurServices::get();
+        return view('frontend.allservice',compact('setting','services'));
+    }
     public function nfccard(){
         $setting = Setting::first();
         $nfccardhero = \App\Models\Backend\Website\NfcCard\NfcCardImage::first();
@@ -52,6 +57,10 @@ class frontendController extends Controller
         $choice = \App\Models\Backend\Website\ShippingService\ChoiceSection::first();
         $featureList = is_array($choice?->feature_list)? $choice->feature_list:explode(',',$choice?->feature_list);
         return view('frontend.shippingservice',compact('setting','heading','service','choice','featureList'));
+    }
+    public function shipplearnmore(){
+        $setting = Setting::first();
+        return view('frontend.shipplearnmore',compact('setting'));
     }
     public function llcservice(){
         $setting = \App\Models\Backend\Website\Setting::first();

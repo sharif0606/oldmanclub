@@ -21,6 +21,7 @@ use App\Http\Controllers\Backend\Admin\CompanyController;
 use App\Http\Controllers\Backend\Admin\BankController;
 use App\Http\Controllers\Backend\Admin\PostController;
 use App\Http\Controllers\Backend\Admin\ContactUserController as contact;
+use App\Http\Controllers\Backend\Admin\CouponController as coupon;
 
 // use App\Http\Controllers\Backend\PhoneBookController as phonebook;
 use App\Http\Controllers\Backend\Website\SettingController as setting;
@@ -149,6 +150,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('nfc_field', nfc_field::class);
     Route::resource('design_card', design_card::class);
     Route::resource('nfc_card', nfc_card::class);
+    Route::resource('coupon', coupon::class);
     // print_service admin panel
     Route::resource('print_service', print_service::class);
     Route::get('print_image/{id}', [print_service::class,'uploadfile'])->name('uploadimage');
@@ -303,6 +305,8 @@ Route::get('llcservice', [frontend::class, 'llcservice'])->name('llcservice');
 Route::get('phoneservice', [frontend::class, 'phoneservice'])->name('phoneservice');
 Route::get('smartmailservice', [frontend::class, 'smartmailservice'])->name('smartmailservice');
 Route::get('printservice', [frontend::class, 'printservice'])->name('printservice');
+Route::get('allservice', [frontend::class, 'allservice'])->name('allservice');
+Route::get('shipping-more', [frontend::class, 'shipplearnmore'])->name('shipplearnmore');
 Route::get('contact/create', [frontend::class, 'contact_create'])->name('contact_create');
 Route::post('contact/create', [frontend::class, 'contact_store'])->name('contact_store');
 

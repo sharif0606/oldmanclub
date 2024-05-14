@@ -24,12 +24,21 @@
                     <div class="tab-pane fade show active" id="tab-1">
                         <div class="row g-4">
                             <div class="col-sm-6">
-                                <div class="card shadow-lg">
+                                <div class="card shadow-lg h-100">
                                     <div class="card-header">
                                         <h3 class="mx-auto">Bank Information</h3>
                                     </div>
                                     <hr>
                                     <div class="card-body">
+                                        <div class="d-flex">
+                                            <div class="col-sm-6">
+                                                <h4 class="mx-3">Image</h4>
+                                            </div>
+                                            <b>:</b>
+                                            <span class="mx-2"><img src="{{asset('public/uploads/bank/'.$bank->bank_image)}}" alt="" width="50px">
+                                            </span>
+                                            {{-- <span class="mx-2">{{$bank->bank_name}}</span> --}}
+                                        </div>
                                         <div class="d-flex">
                                             <div class="col-sm-6">
                                                 <h4 class="mx-3">Bank Name</h4>
@@ -59,18 +68,12 @@
                                             <b>:</b>
                                             <span class="mx-2">{{$bank->email}}</span>
                                         </div>
-                                        <div class="d-flex">
-                                            <div class="col-sm-6">
-                                                <h4 class="mx-3">Phone Number</h4>
-                                            </div>
-                                            <b>:</b>
-                                            <span class="mx-2">{{$bank->phone_number}}</span>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <div class="card shadow-lg">
+                                <div class="card shadow-lg h-100">
                                     <div class="card-header">
                                         <h3 class="mx-auto">Address Information</h3>
                                     </div>

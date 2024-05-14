@@ -15,6 +15,6 @@ class PhoneGroup extends Model
     }
     public function phonebook()
     {
-        return $this->hasMany(PhoneBook::class);
+        return $this->hasMany(PhoneBook::class,'group_id','id');
     }
 }

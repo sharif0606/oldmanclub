@@ -21,9 +21,15 @@
     }
 
     .navbar {
-        background-color: #2F0549;
+        /* background-color: #2F0549; */
         font-size: 16px;
         font-weight: 500;
+       
+    }
+    @media (max-width: 768px) {
+        .navbar {
+            padding-left: 20px; /* Reset width for smaller screens */
+        }
     }
 
     .navbar-nav .nav-link {
@@ -139,7 +145,8 @@
         opacity: 1; /* Show the dropdown with a fade effect */
     }
     .navbar-nav .nav-item {
-        width: 100px; /* Adjust width as needed */
+        /* width: 100px;  */
+        /* Adjust width as needed */
     }
     .navbar-nav .nav-item {
         white-space: normal;
@@ -162,12 +169,21 @@
 
     .slider-image {
         float: right;
-        margin-top: -261px;
+        margin-top: -202px;
         position: relative;
         margin-right: -60px;
         height: auto;
     }
-
+    @media(min-width: 1768px){
+        .slider-image{
+            top:-60px
+        }
+    }
+    /* @media(min-width: 1326px){
+        .slider-image{
+            margin-top: -202px;
+        }
+    } */
     .card-info {
         margin-top: -280px;
         /* Adjust the negative margin to overlap */
@@ -176,6 +192,14 @@
     /* Our service starts */
     .card-group {
         display: flex;
+        /* justify-content: center;
+        align-items: center; */
+    }
+    @media (max-width: 576px) {
+        .card-group {
+            margin-left: -29px;
+            padding-right: 20px;
+        }
     }
 
     .service .card {
@@ -213,7 +237,7 @@
 
     .fixed-size-card {
         /*height: 100%;*/
-        padding: 15px;
+        /* padding: 15px; */
     }
 
     .fixed-size-card img {
@@ -221,19 +245,26 @@
         /* Set your desired fixed height for the image */
     }
     .social_icon:hover{
-        background-color: #fdb838 !important;
+        background-color: #5d1474 !important;
+        color: #f5ab0b;
     }
-/* Add hover effect with animation */
-.card.fixed-size-card {
-    transition: box-shadow 0.3s ease;
-    transition: transform 0.5s ease; 
+    @media(max-width:578px){
+       .social_image{
+            justify-content: center;
+        } 
+    }
+    
+    /* Add hover effect with animation */
+    .card.fixed-size-card {
+        transition: box-shadow 0.5s ease;
+        transition: transform 0.5s ease; 
 
-}
+    }
 
-.card.fixed-size-card:hover {
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Adjust shadow color and intensity */
-    transform: translateY(-10px);
-}
+    .card.fixed-size-card:hover {
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Adjust shadow color and intensity */
+        transform: translateY(-10px);
+    }
     .fixed-size-card hr {
         width: 100%;
         /* Set the width of the line as needed */
@@ -281,8 +312,8 @@
 
     .testimonial-item {
         margin: 0px 5px;
-        display: flex;
-        height: 300px;
+        /* display: flex; */
+        height: 350px;
     }
 
 
@@ -297,8 +328,8 @@
     .footer {
         background-color: #F8F8F8;
         color: #4F5665;
-        padding: 20px 20px;
-        height: 345px;
+        /* padding: 20px 20px; */
+        height: 370px;
         z-index: 1;
         margin-top: -45px;
         /* Adjust the negative margin to intersect the footer in half */
@@ -351,14 +382,16 @@
     @media (max-width: 767px) {
         .footer {
             height: auto;
+            margin-top: 0;
         }
 
         .footer-column {
             width: 100%;
-            /* padding: 10px 0; */
+            padding: 15px 5px;
             text-align: center;
         }
     }
+    
 
     .user-location {
         position: absolute;
@@ -383,18 +416,30 @@
     /* slider dots */
     .hero-section .slick-dots {
         position: absolute;
-        bottom: 240px;
-        display: block;
+        /* top: 92vh; */
+        top: 334px;
+        /* bottom: 240px; */
+        /* display: block; */
         width: 100%;
         padding: 0;
         margin-left: 60px;
         list-style: none;
         text-align: left;
     }
-
+    @media (max-width: 1200px) {
+        .hero-section .slick-dots {
+            top: 334px;
+        }
+    }
+    @media (min-width: 576px) {
+        .hero-section .slick-dots {
+            display: none;
+        }
+    }
+    
     .hero-section .slick-dots li {
         position: relative;
-        display: inline-block;
+        /* display: inline-block; */
         width: 8px;
         height: 8px;
         margin: 0 5px;
@@ -431,7 +476,7 @@
     .happy .slick-dots {
         position: absolute;
         bottom: -50px;
-        display: block;
+        /* display: block; */
         width: 100%;
         padding: 0;
         /* margin-left: 60px; */
@@ -441,7 +486,7 @@
 
     .happy .slick-dots li {
         position: relative;
-        display: inline-block;
+        /* display: inline-block; */
         width: 8px;
         height: 8px;
         margin: 0 5px;
@@ -488,7 +533,10 @@
         max-width: 500px;
         padding-left: 90px;
     }
-
+    .nfc-hero-text{
+        max-width: 600px;
+        padding-left: 90px;
+    }
     .hero-heading {
         font-size: 36px;
         font-weight: bold;
@@ -530,6 +578,15 @@
         padding: 10px 10px;
         justify-content: center;
     }
+    @media (max-width:877px){
+        .user-location .card {
+        
+        padding: 10px 40px;
+       
+    }
+    }
+        
+
 
     /* Custom feature section styles */
     .feature-section {
@@ -544,16 +601,16 @@
         margin-bottom: 30px;
     }
 
-    .video-container {
+    .nfc-video-container {
         position: relative;
-        width: 100%;
-        max-width: 800px;
+        /* width: 100%;
+        max-width: 800px; */
         margin: 0 auto;
         padding-bottom: 56.25%;
         /* 16:9 aspect ratio */
     }
 
-    .video-container iframe {
+    .nfc-video-container iframe {
         position: absolute;
         top: 0;
         left: 0;
@@ -568,12 +625,17 @@
     }
 
     .section-heading {
-        font-size: 36px;
+        /* font-size: 36px;
         font-weight: bold;
         color: #2F0549;
-        margin-bottom: 20px;
+        margin-bottom: 20px; */
+        padding: 60px;
     }
-
+@media(max-width:576px){
+    .section-heading{
+        padding-top: 0px;
+    }
+}
     .feature-list {
         padding-top: 15px;
         padding-left: 30px;
@@ -631,7 +693,7 @@
     }
 
     .subscribe-section {
-        padding: 40px;
+        padding: 20px;
     }
 
     .subscribe-content {
@@ -646,7 +708,7 @@
     }
 
     .contact-us-btn {
-        background-color: rgb(65, 72, 87) !important;
+        background-color: #2F0549 !important;
         color: white !important;
         border: 1px solid #2F0549 !important;
         /* padding: 10px 0px;  */
@@ -744,7 +806,7 @@
     .video-container {
         position: relative;
         width: 100%;
-        max-width: 800px;
+        /* max-width: 800px; */
         margin: 0 auto;
         padding-bottom: 56.25%;
         /* 16:9 aspect ratio */
@@ -759,15 +821,19 @@
     }
 
     .why-choose-us .benefits {
-        padding: 60px !important;
+        padding: 0px 60px !important;
     }
-
+    @media(max-width:576px){
+        .why-choose-us .benefits{
+            padding: 30px 60px !important;
+        }
+    }
     /* Help */
     .help {
         padding: 50px;
         background-color: #2F0549;
         color: white;
-        margin-bottom: -60px;
+        /* margin-bottom: -60px; */
         z-index: 1;
         position: relative;
     }
@@ -901,7 +967,7 @@
     .llc-video-container {
         position: relative;
         width: 100%;
-        max-width: 800px;
+        /* max-width: 800px; */
         margin: 0 auto;
         padding-bottom: 56.25%;
         /* 16:9 aspect ratio */
@@ -935,6 +1001,7 @@
     .llc-pricing-card:hover {
         background-color: #2F0549;
         color: white;
+        cursor: pointer;
     }
 
     .llc-pricing-card .card-body {
@@ -947,6 +1014,7 @@
 
     .llc-pricing-card :hover h3 {
         color: white;
+        
     }
 
     .llc-pricing-card hr {
@@ -977,16 +1045,14 @@
         transition: background-color 0.3s, color 0.3s;
     }
 
-
-
-
     /* Card section */
     .llc-our-card {
-        padding: 0px 25px;
+        /* padding: 0px 25px; */
+        margin-top: -100px;
     }
 
     .llc-our-card-text {
-        padding-top: 170px;
+        padding-top: 100px;
     }
 
     .llc-our-card-image img {
@@ -1110,6 +1176,52 @@
             max-width: 80%;
         }
     }
+    .phn .slick-dots {
+        position: absolute;
+        bottom: -50px;
+        display: block;
+        width: 100%;
+        padding: 0;
+        /* margin-left: 60px; */
+        list-style: none;
+        text-align: left;
+    }
+
+    .phn .slick-dots li {
+        position: relative;
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        margin: 0 5px;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    .phn .slick-dots li button:before {
+        font-family: 'slick';
+        font-size: 20px;
+        line-height: 10px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 10px;
+        height: 10px;
+        /*content: '•';*/
+        text-align: center;
+        opacity: 1;
+        color: #2f0549;
+        content: '';
+        background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='100' ry='100' stroke='gray' stroke-width='25' stroke-dasharray='100%25%2c 13%25' stroke-dashoffset='100' stroke-linecap='round'/%3e%3c/svg%3e");
+        border-radius: 100px;
+    }
+
+    .phn .slick-dots li.slick-active button:before {
+        opacity: .75;
+        color: #2f0549;
+        width: 20px;
+        background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='100' ry='100' stroke='indigo' stroke-width='25' stroke-dasharray='100%25%2c 13%25' stroke-dashoffset='100' stroke-linecap='round'/%3e%3c/svg%3e");
+        left: -5px;
+    }
 
     /* Service section */
     .phn-our-service {
@@ -1141,7 +1253,7 @@
     }
 
     .phn-testimonial-slider-container {
-        max-width: 900px;
+        max-width: 100%;
         /* Adjust the width as needed */
         margin: 0 auto;
         /* Center the container */
@@ -1149,6 +1261,7 @@
 
     .phn-testimonial-item {
         margin-right: 15px;
+        height: 350px;
         /* Add space between cards */
     }
 
@@ -1206,7 +1319,7 @@
 
     /* Subscribe section */
     .phn-subscribe-section {
-        padding: 40px;
+        /* padding: 40px; */
     }
 
     .phn-subscribe-content {
@@ -1335,9 +1448,13 @@
     }
 
     .print-hero-image {
-        padding-left: 70px;
+        padding-left: 60px;
     }
-
+    @media(max-width:576px){
+        .print-hero-image{
+            padding-left: 0px;
+        }
+    }
     h1 {
         font-size: 36px;
         margin-bottom: 20px;
@@ -1366,12 +1483,16 @@
     .print-learn-more-btn {
         background-color: #ffffff !important;
         color: #2f0549 !important;
-        border: 2px solid #2f0549 !important;
+        border: 1px solid #2f0549 !important;
+    }
+    .print-learn-more-btn:hover{
+        background-color: #2f0549 !important;
+        color: #fff !important;
     }
 
     img {
         max-width: 100%;
-        height: auto;
+        /* height: auto; */
     }
 
     /* why-choose-us */
@@ -1421,7 +1542,7 @@
     }
 
     .print-product-card {
-        width: 220px !important;
+        width: 100% !important;
         height: 315px !important;
         border: 1px solid #ddd;
         background-color: #fff;
@@ -1459,7 +1580,7 @@
     .carousel-inner .carousel-item .print-custom-card {
         flex: 0 0 30%;
         /* Adjusted to make three cards fit in a row with margin between */
-        margin-right: 2%;
+        /* margin-right: 2%; */
     }
 
     .carousel-inner .carousel-item .print-custom-card:last-child {
@@ -1467,8 +1588,10 @@
     }
 
     .print-custom-card {
-        background-color: #f3f3f3;
+        /* background-color: #f3f3f3; */
+        background-color: #2F0549;
         border: none;
+        color: #fff;
         margin-bottom: 20px;
         box-sizing: border-box;
         padding: 15px;
@@ -1491,10 +1614,12 @@
         display: flex;
         align-items: center;
         margin-bottom: 20px;
+        color: black;
     }
 
     .carousel-controls button {
         margin-right: 10px;
+        /* color: #000; */
     }
 
     /* Responsive adjustments */
@@ -1515,22 +1640,22 @@
 
     /* Subscribe section */
     .print-subscribe-section {
-        padding: 40px;
+        /* padding: 40px; */
     }
 
     .print-subscribe-content {
-        padding: 50px 40px;
+        /* padding: 50px 40px; */
     }
 
     .print-subscribe-btn {
-        padding: 50px;
-        display: flex;
+        padding: 40px;
+        /* display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: center; */
     }
 
     .print-contact-us-btn {
-        background-color: rgb(65, 72, 87) !important;
+        background-color: #2f0549 !important;
         color: white !important;
         border: 1px solid #2f0549 !important;
         /* padding: 10px 0px;  */

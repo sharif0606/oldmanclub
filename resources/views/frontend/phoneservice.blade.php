@@ -1,26 +1,59 @@
 @extends('frontend.layouts.app')
 @section('title','Phone Service')
 @section('content')
+@push('styles')
+<style>
+    .animate-left {
+        animation: slideInLeft 0.7s ease-out;
+    }
+
+    .animate-right {
+        animation: slideInRight 0.7s ease-out;
+    }
+
+    @keyframes slideInLeft {
+        from {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+</style>
+@endpush
     <!-- phone hero start -->
     
     <section class="phn-hero">
         <img src="{{asset('public/uploads/phoneservice/'.$phonehero?->background_image)}}" alt="" class="phn-hero-image">
         <div class="phn-hero-text">
-            <h2 class="fw-bold fs-1 text-uppercase">{{$phonehero?->text_large}}</h2>
-            <p class="py-3 fw-medium">{{$phonehero?->text_small}}</p>
+            <h2 class="fw-bold fs-1 text-uppercase animate-right">{{$phonehero?->text_large}}</h2>
+            <p class="py-3 fw-medium animate-left">{{$phonehero?->text_small}}</p>
             <div class="phn-hero-content mt-4">
                 <div class="row">
                     <div class="col-md-8">
                         <form action="#">                      
                             <div class="phn-search-box mb-3">
                                     <span class="phn-search-icon">&#128269;</span>
-                                    <input type="text" class="form-control py-3 px-5" placeholder="Enter Country & City">
+                                    <input type="text" class="form-control py-3 px-5 animate-right" placeholder="Enter Country & City">
                                     <span class="phn-arrow-icon">&#10148;</span>
                             </div>   
                         </form>
                     </div>
                     <div class="col-md-4">
-                        <button class="btn phn-search-btn fw-medium mx-3 py-3 px-5">Search</button>
+                        <button class="btn phn-search-btn fw-medium mx-3 py-3 px-5 animate-left">Search</button>
                     </div>
                 </div>
                 <div class="row">
@@ -69,7 +102,7 @@
     <!-- customre feedback start -->
     <section class="phn-our-customer py-5">
         <h2 class="fw-bold text-center py-4 text-uppercase">Trusted by millions of customers worldwide</h2>
-        <div class="container">
+        <div class="container phn">
             <div class="row">
                 <div class="phn-testimonial-slider-container">
                      <div class="phn-testimonial-slider">
@@ -77,13 +110,17 @@
                         <div class="phn-custom-card phn-testimonial-item col-md-4">
                             <div class="phn-card-body">
                                 <div class="customer-review">
-                                    <p>"{{$feedback?->customer_message}}."</p>
+                                    <p>{{$feedback?->customer_message}}.</p>
                                 </div>
                                 <hr>
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="customer-image">
-                                            <img src="{{asset('public/uploads/client/'.$feedback?->client?->image)}}" alt="Customer 1" class="rounded-circle img-fluid">
+                                            @if($feedback->client->image)
+                                                <img src="{{asset('public/uploads/client/'.$feedback?->client?->image)}}"  alt="Customer 1" class="rounded-circle img-fluid">
+                                            @else
+                                                <img class="avatar-img rounded-circle border border-white border-3" src="{{asset('public/images/download.jpg')}}" alt="">
+                                            @endif
                                         </div>
                                     </div>
                                    <div class="col-md-9">
@@ -104,13 +141,15 @@
                             </div>
                         </div>
                         @endforeach
+                        <button type="button" class="slick-prev">Previous</button>
+                        <button type="button" class="slick-next">Next</button>
                     </div>
                 </div>  
             </div>
         </div>
     </section>
     <!-- customre feedback end -->
-     <div class="container phn-subscribe-section mt-3">
+     <div class="container phn-subscribe-section">
         <div class="row">
             <div class="col-md-6">
                 <div class="phn-subscribe-content text-start">

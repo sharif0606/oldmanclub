@@ -37,19 +37,30 @@
                         <tbody>
                         @if(session('cart'))
                        {{-- Dump cart session data --}}
-@dump(session('cart'))
+{{-- @dump(session('cart')) --}}
 
                             @foreach(session('cart') as $id=>$details)
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
                                 <td>
-                                    @if(isset($details['image']) && !empty($details['image']))
-                                        <img src="{{ asset('public/uploads/printimages/' . $details['image']) }}" alt="">
+                                    @if(isset($details['printing_service_id']))
+                                        @php
+                                            $printingService = \App\Models\Backend\PrintingService::find($details['printing_service_id']);
+                                        @endphp
+                                        @if($printingService)
+                                            @foreach($printingService->printimages as $image)
+                                                <img src="{{ asset('public/uploads/printimages/' . $image->image) }}" alt="" width="150px">
+                                            @endforeach
+                                        @endif
                                     @endif
-                                    {{ $details['service_name'] }}
+                                    <p class="m-0 fw-bold">
+                                        {{ $details['service_name'] }}
+                                    </p>
+                                    {!! \Illuminate\Support\Str::limit($details['service_details'], 50, '...') !!}
+                                    {{-- {{ $details['service_name'] }}
                                     @if(isset($details['service_details']))
                                         {!! implode(' ', array_slice(explode(' ', $details['service_details']), 0, 5)) !!}
-                                    @endif
+                                    @endif --}}
                                 </td>
                                 <td>
                                     ${{$details['price']}}
@@ -61,11 +72,11 @@
                                             <input name="quantity" type="hidden" value="1">
                                             <input type="submit" name="op" value="+"
                                                 style="padding:2px 8px;"
-                                                class="">
+                                                class="text-dark">
                                                 {{ $details['quantity'] }}
                                             <input type="submit" name="op" value="-"
                                                 style="padding:2px 8px;"
-                                                class="">
+                                                class="text-dark">
                                         </form>
 
                                         <form method="POST"
