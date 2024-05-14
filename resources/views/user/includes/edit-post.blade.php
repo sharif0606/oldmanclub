@@ -46,8 +46,8 @@
                 <!-- Modal feed footer -->
                 <div class="modal-footer row justify-content-between">
                     {{-- <div class="col-lg-3">
-                        <select class="form-select" id="editPrivacy" aria-label="Default select example">
-                            <option value="public">Public</option>
+                        <select class="form-select" aria-label="Default select example" name="privacy_mode">
+                            <option value="public" selected>Public</option>
                             <option value="only_me">Only Me</option>
                         </select>
                     </div> --}}

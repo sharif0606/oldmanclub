@@ -157,7 +157,7 @@ class ClientController extends Controller
                 return redirect()->route('client.index');
             }else{
                 $this->notice::success('Address successfully Verified');
-                return redirect()->back();
+                redirect()->back()->withInput(['tab' => 'nav-setting-tab-3']);
             }
         }
     }

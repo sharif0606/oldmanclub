@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\User\Share;
+use App\Models\User\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB; // Import the DB facade
 
 class ShareController extends Controller
 {
@@ -29,14 +31,36 @@ class ShareController extends Controller
      */
     public function store(Request $request)
     {
-        $share = New Share;
-        $share->post_id = $request->post_id;
-        $share->client_id = currentUserId();
-        $share->save();
-        if ($share->save()){
-            $this->notice::success('Post Shared Successfully');
+        // Start a database transaction
+        DB::beginTransaction();
+        try {
+            $share = New Share;
+            $share->post_id = $request->post_id;
+            $share->client_id = currentUserId();
+            $share->save();
+            if ($share){
+                // Retrieve the post you want to share
+                $sharedPost = Post::find($request->post_id);
+                $newPost = new Post;
+                $newPost->message = $sharedPost->message;
+                $newPost->image = $sharedPost->image;
+                $newPost->client_id = currentUserId();
+                $newPost->shared_from = $sharedPost->client_id;
+                $newPost->post_type = 'shared_post';
+                $newPost->save();
+                // Commit the transaction if everything succeeds
+                DB::commit();
+                $this->notice::success('Post Shared Successfully');
+                return redirect()->back();
+            }
+        } catch (\Exception $e) {
+            // Something went wrong, rollback the transaction
+            DB::rollBack();
+            //dd($e->getMessage()); // Example: Display the error message
+            $this->notice::error('Something went wrong!');
             return redirect()->back();
         }
+
     }
 
     /**
