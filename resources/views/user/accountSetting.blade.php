@@ -284,7 +284,7 @@
                                                 value="{{ $client->contact_no }}">
                                         </div>
                                         <div class="col-lg-6">
-                                            <label class="form-label">PHOTO ID Type </label>
+                                            <label class="form-label">Photo ID Type</label>
                                             <select name="id_no_type" id="" value="{{ $client->id_no_type }}"
                                                 class="form-control">
                                                 <option value="">Select</option>
@@ -299,7 +299,7 @@
                                             </select>
                                         </div>
                                         <div class="col-lg-6">
-                                            <label class="form-label">PHOTO ID No </label>
+                                            <label class="form-label">Photo ID No</label>
                                             <input type="text" name="id_no" class="form-control"
                                                 value="{{ $client->id_no }}">
                                         </div>
@@ -507,7 +507,7 @@
                                                     <span>{{ $client->address_line_2 }}</span>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="id_image" class="mb-2"><strong>Upload Your PHOTO ID</strong> (Mentioned In Basic Information):</label>
+                                                    <label for="id_image" class="mb-2"><strong>Upload Your Photo ID</strong> (Mentioned In Basic Information):</label>
                                                     <input type="file" id="id_image" class="form-control" name="id_image"
                                                         required>
                                                     <img id="preview_photo_id" src="#" alt="preview_photo_id"
@@ -565,7 +565,7 @@
                                                 </p>
                                             </div>
                                             <div class="col-lg-4">
-                                                <label class="form-label">PHOTO ID</label>
+                                                <label class="form-label">Photo ID</label>
                                                 <img class="rounded img-fluid"
                                                 src="{{asset('public/uploads/verify_image/' . $client->photo_id)}}" alt="">
                                             </div>
@@ -582,7 +582,7 @@
                                         <h5 class="h5 card-title">We Are Reviewing Your Address Verification.</h5>
                                         <div class="row">
                                             <div class="col-lg-6">
-                                                <label class="form-label"><strong>Address & PHOTO ID</strong></label>
+                                                <label class="form-label"><strong>Address & Photo ID</strong></label>
                                                 <p>
                                                     <span>{{ $client->address_line_1 }}</span>
                                                     <span>{{ $client->address_line_2 }}</span>

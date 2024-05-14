@@ -135,7 +135,7 @@
             <div class="post-reaction" data-post-id="{{ $value->id }}">
                 <!-- Feed react START -->
                 @php $clients = []; @endphp
-                <ul class="nav nav-stack pb-2 small mt-2">
+                <ul class="nav nav-stack pb-2 small mt-2 border-top">
                     @forelse ($value->reactions as $reaction)
                         @php
                             if ($reaction->client_id == currentUserId()) {
