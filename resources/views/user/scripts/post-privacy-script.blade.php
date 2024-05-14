@@ -33,13 +33,12 @@
                     privacy_mode: privacyMode
                 },
                 success: function(response) {
+                    console.log(response);
                     // Update UI based on the selected privacy mode
-                    if (privacyMode === 'only_me') {
-                        tooltipElement.attr('data-bs-original-title', 'Only Me').find('i').removeClass('bi-globe').addClass('bi-eye-slash'); // Set the tooltip title to 'Only Me'
-                        //$('[data-toggle-id="' + postId + '"]').hide(); // Hide the post
+                    if (response.privacyMode === 'only_me') {
+                        $('[data-toggle-id="' + postId + '"]').hide(); // Hide the post
                     } else {
-                        //$('[data-toggle-id="' + postId + '"]').show(); // Show the post
-                        tooltipElement.attr('data-bs-original-title', 'Public').find('i').removeClass('bi-eye-slash').addClass('bi-globe'); // Set the tooltip title to 'Public'
+                        $('[data-toggle-id="' + postId + '"]').show(); // Show the post
                     }
                 },
                 error: function(xhr, status, error) {

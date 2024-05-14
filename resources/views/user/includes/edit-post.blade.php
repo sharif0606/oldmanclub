@@ -45,12 +45,12 @@
 
                 <!-- Modal feed footer -->
                 <div class="modal-footer row justify-content-between">
-                    {{-- <div class="col-lg-3">
-                        <select class="form-select" aria-label="Default select example" name="privacy_mode">
+                    <div class="col-lg-3">
+                        {{-- <select class="form-select" aria-label="Default select example" name="privacy_mode">
                             <option value="public" selected>Public</option>
                             <option value="only_me">Only Me</option>
-                        </select>
-                    </div> --}}
+                        </select> --}}
+                    </div>
                     <div class="col-lg-8 text-sm-end">
                         <!-- Button -->
                         <button type="button" class="btn btn-danger-soft me-2" data-bs-dismiss="modal">Cancel</button>

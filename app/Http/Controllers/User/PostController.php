@@ -89,7 +89,7 @@ class PostController extends Controller
         // Return a JSON response with the updated post ID and privacy mode
         return response()->json([
             'postId' => $post->id,
-            'privacyMode' => $request->privacy_mode,
+            'privacyMode' => $post->privacy_mode,
             'message' => 'Privacy mode updated successfully'
         ]);
     }
@@ -112,6 +112,14 @@ class PostController extends Controller
         $post->save();
     
         return response()->json($post);
+    }
+    public function privacy(Request $request){
+        $post = Post::findOrFail($request->postId);
+        $post->privacy_mode = $request->privacy_mode;
+        $post->save();
+        return response()->json([
+            'commentHtml' => view('user.partials.privacy', compact('post'))->render(),
+        ], 201);
     }
     /**
      * Remove the specified resource from storage.

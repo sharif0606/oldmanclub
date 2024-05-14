@@ -132,10 +132,10 @@
 
            
             {{-- <img class="card-img" src="assets/images/post/3by2/01.jpg" alt="Post"> --}}
-            <div class="post-reaction" data-post-id="{{ $value->id }}">
+            <div class="post-reaction border-top" data-post-id="{{ $value->id }}">
                 <!-- Feed react START -->
                 @php $clients = []; @endphp
-                <ul class="nav nav-stack pb-2 small mt-2 border-top">
+                <ul class="nav nav-stack pb-2 small mt-2">
                     @forelse ($value->reactions as $reaction)
                         @php
                             if ($reaction->client_id == currentUserId()) {
