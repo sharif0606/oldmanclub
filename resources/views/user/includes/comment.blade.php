@@ -113,6 +113,10 @@
                                         {{-- <a class="like-btn" href="#" data-comment-id="{{ $comment->id }}" data-reaction-type="dislike"> <i
                                             class="bi bi-hand-thumbs-down fa-fw pe-2"></i></a> --}}
                                     </ul>
+                                @else
+                                @foreach (['like', 'love', 'care', 'haha', 'wow', 'sad', 'angry'] as $reactionType){
+                                    
+                                }    
                                 @endif
                             </li>
                             <li class="nav-item">
