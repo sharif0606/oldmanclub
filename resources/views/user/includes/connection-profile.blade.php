@@ -82,8 +82,7 @@
                       <form action="{{ route('follow.store') }}" method="post">
                           @csrf
                           <input type="hidden" name="username" value="{{ Session::get('username') }}">
-                          <button type="submit" class="btn btn-primary-soft me-2"> Follow
-                          </button>
+                          <button type="submit" class="btn btn-primary-soft me-2">Follow</button>
                       </form>
                   @else
                   @php $follow = \App\Models\User\Follow::where('follower_id',$connection->id)->where('following_id',currentUserId())->first(); @endphp

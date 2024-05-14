@@ -44,7 +44,8 @@ class PostController extends Controller
          $post = Post::create([
             'message' => $content,
             'image'=>$imageName,
-            'client_id' => currentUserId()
+            'client_id' => currentUserId(),
+            'privacy_mode' => $request->privacy_mode
         ]);
         
         return response()->json($post);
@@ -76,12 +77,21 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $content = preg_replace('/\R{2,}/', "\n", $request->input('message'));
         $post = Post::findOrFail($id);
-        $post->message = $content;
+        if($request->input('message')){
+            $content = preg_replace('/\R{2,}/', "\n", $request->input('message'));
+            $post->message = $content;
+        }
+        $post->privacy_mode = $request->privacy_mode;
         $post->save();
 
-        return response()->json(['success' => true, 'message' => 'Post updated successfully']);
+        //return response()->json(['success' => true, 'message' => 'Post updated successfully']);
+        // Return a JSON response with the updated post ID and privacy mode
+        return response()->json([
+            'postId' => $post->id,
+            'privacyMode' => $request->privacy_mode,
+            'message' => 'Privacy mode updated successfully'
+        ]);
     }
     public function post_update(Request $request){
         $postId = $request->postId;
@@ -98,6 +108,7 @@ class PostController extends Controller
         $content = preg_replace('/\R{2,}/', "\n", $request->input('message'));
         $post->message = $content;
         $post->updated_at = Carbon::now();
+        $post->privacy_mode = $request->privacy_mode;
         $post->save();
     
         return response()->json($post);

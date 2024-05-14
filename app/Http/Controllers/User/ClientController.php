@@ -24,7 +24,7 @@ class ClientController extends Controller
     {
         session()->forget('username');
         $client = Client::withCount('followers', 'followings')->find(currentUserId());
-        $userPosts = Post::with([
+        $post = Post::with([
             'reactions' => function ($query) {
                 // Filter reactions where client_id is the current user's ID or any user's ID
                 $query->orderBy('created_at', 'desc');
@@ -37,47 +37,11 @@ class ClientController extends Controller
             'shares' => function ($query) {
                 // Include any additional constraints or orderings if needed
             }
-            
         ])
         ->where('client_id', currentUserId())
         ->orderBy('created_at', 'desc')
         ->get();
 
-        $client_id = currentUserId();
-        $sharedPosts = Post::with([
-            'shares' => function ($query) {
-                // Include any additional constraints or orderings if needed
-            },
-            'reactions' => function ($query) {
-                $query->orderBy('created_at', 'desc');
-            },
-            'comments' => function ($query) {
-                $query->orderBy('created_at', 'desc')->with(['replies' => function ($query) {
-                    $query->orderBy('created_at', 'desc');
-                }]);
-            }
-        ])
-        ->whereHas('shares', function ($query) use ($client_id) {
-            $query->where('client_id', $client_id);
-        })
-        ->orderBy('created_at', 'desc')
-        ->get();
-
-        // Add a new attribute 'type' to each post object to indicate its type
-        $userPosts->each(function ($post) {
-            $post->type = 'user'; // Mark as user post
-        });
-
-        $sharedPosts->each(function ($post) {
-            $post->type = 'shared'; // Mark as shared post
-        });
-
-        // Merge user posts and shared posts
-        $allPosts = $sharedPosts->concat($userPosts);
-
-        // Sort posts by creation time in descending order
-        $post = $allPosts->sortByDesc('created_at');
-        
         $followers = Follow::where('following_id',currentUserId())->orderBy('id', 'desc')->take(4)->get();
         //dd($post);
         $postCount = Post::where('client_id', currentUserId())->count();
@@ -113,7 +77,7 @@ class ClientController extends Controller
     public function gathering(){
         session()->forget('username');
         $client = Client::find(currentUserId());
-        $post = Post::where('client_id','!=',currentUserId())->orderBy('id', 'desc')->get();
+        $post = Post::where('privacy_mode','public')->orderBy('id', 'desc')->get();
         $followers = Follow::where('following_id',currentUserId())->orderBy('id', 'desc')->take(4)->get();
         return view('user.includes.gathering',compact('client','post','followers'));
     }
@@ -240,7 +204,7 @@ class ClientController extends Controller
                     'message' => "Changed Cover Photo",
                     'image'=>$imageName,
                     'client_id' => currentUserId(),
-                    'is_cover_photo' => 1
+                    'post_type' => 'profile_photo'
                 ]);
             }
             if ($request->hasFile('image')) {
@@ -251,7 +215,7 @@ class ClientController extends Controller
                     'message' => "Changed Profile Photo",
                     'image'=>$imageName,
                     'client_id' => currentUserId(),
-                    'is_profile_photo' => 1
+                    'post_type' => 'cover_photo'
                 ]);
             }
             $user->profile_overview = $request->profile_overview;

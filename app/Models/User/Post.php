@@ -13,9 +13,11 @@ class Post extends Model
     protected $fillable = [
         'message',
         'client_id',
-        'is_cover_photo',
-        'is_profile_photo',
         'image',
+        'post_type',
+        'privacy_mode',
+        'shared_from'
+       
     ];
     public function client(){
         return $this->belongsTo(Client::class ,'client_id','id');

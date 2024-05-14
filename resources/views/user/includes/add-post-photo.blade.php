@@ -47,10 +47,10 @@
                 <!-- Modal feed footer -->
                 <div class="modal-footer row justify-content-between">
                     <div class="col-lg-3">
-                        <select class="form-select" aria-label="Default select example">
+                        {{-- <select class="form-select" aria-label="Default select example">
                             <option selected>Public</option>
                             <option value="1">Only Me</option>
-                          </select>
+                        </select> --}}
                     </div>
                     <div class="col-lg-8 text-sm-end">
                     <!-- Button -->
