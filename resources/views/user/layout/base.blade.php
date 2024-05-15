@@ -1312,6 +1312,7 @@ JS libraries, plugins and custom scripts -->
     @include('user/scripts/comment-reply-script')
     @include('user/scripts/comment-like-script')
     @include('user/scripts/post-reaction-script')
+    @include('user/scripts/comment-reaction-script')
     @include('user/scripts/post-privacy-script')
     <!-- Custome Script JS -->
     <script src="{{ asset('public/user/assets/js/script.js') }}"></script>
