@@ -23,7 +23,7 @@
             <div class="row gx-1">
               <div class="col-md-6">
                 <div class="mb-3 input-group-md">
-                  <input type="text" name="fname" class="form-control" placeholder="Your First Name">
+                  <input type="text" name="fname" class="form-control" placeholder="Your First Name"  value="{{old('fname')}}">
                     @if ($errors->has('fname'))
                         <small class="d-block text-danger fw-bold">
                             {{ $errors->first('fname') }}
@@ -32,25 +32,43 @@
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="mb-3 input-group-md">
+                {{-- <div class="mb-3 input-group-md">
                   <input type="text" name="middle_name" class="form-control" placeholder="Your Middle Name">
                     @if ($errors->has('middle_name'))
                         <small class="d-block text-danger fw-bold">
                             {{ $errors->first('middle_name') }}
                         </small>
                     @endif
-                </div>
+                </div> --}}
+                <input type="text" name="last_name" class="form-control" placeholder="Your Last Name" value="{{old('last_name')}}">
+                @if ($errors->has('last_name'))
+                    <small class="d-block text-danger fw-bold">
+                        {{ $errors->first('last_name') }}
+                    </small>
+                @endif
               </div>
             </div>
-            <!-- Email -->
             <div class="mb-3 input-group-md">
+              <input type="text" name="contact_or_email" class="form-control" placeholder="Enter email Or Contact" value="{{old('contact_or_email')}}">
+                @if ($errors->has('contact_or_email'))
+                    <small class="d-block text-danger fw-bold">
+                        {{ $errors->first('contact_or_email') }}
+                    </small>
+                @endif
+                
+            </div>
+            <div class="mb-3 input-group-md">
+              <input type="date" name="dob" class="form-control" value="{{old('dob')}}">
+            </div>
+            <!-- Email -->
+            {{-- <div class="mb-3 input-group-md">
               <input type="text" name="last_name" class="form-control" placeholder="Your Last Name">
                 @if ($errors->has('last_name'))
                     <small class="d-block text-danger fw-bold">
                         {{ $errors->first('last_name') }}
                     </small>
                 @endif
-            </div>
+            </div> 
             <div class="mb-3 input-group-md">
               <input type="email" name="email" class="form-control" placeholder="Enter email">
                 @if ($errors->has('email'))
@@ -68,7 +86,7 @@
                     </small>
                 @endif
               <small>We'll never share your email with anyone else.</small>
-            </div>
+            </div>--}}
             <!-- New password -->
             <div class="mb-3 position-relative">
               <!-- Input group -->

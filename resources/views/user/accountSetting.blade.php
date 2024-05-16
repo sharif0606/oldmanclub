@@ -274,14 +274,14 @@
                                             </select>
                                         </div>
                                         <div class="col-sm-2">
-                                            <label class="form-label">Ext.</label>
+                                            <label class="form-label">Country Code</label>
                                             <input type="text" readonly id="code-dropdown" name="phone_code"
                                                 class="form-control" value="{{ $client->phone_code }}">
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label">Contact </label>
                                             <input type="text" name="contact_no" class="form-control "
-                                                value="{{ $client->contact_no }}">
+                                                value="{{ $client->contact_no }}" onkeyup="handleContactInput(this)">
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label">Photo ID Type</label>
@@ -350,6 +350,16 @@
                                             <input type="text" placeholder="" value="{{ $client->zip_code }}"
                                                 class="form-control"name="zip_code">
                                         </div>
+                                        <div class="col-lg-6">
+                                            <label class="form-label">Address Line 1</label>
+                                            <input type="text" class="form-control" name="address_line_1" value="{{ $client->address_line_1 }}">
+                                            {{-- <textarea class="form-control" name="address_line_1" rows="6">{{ $client->address_line_1 }}</textarea> --}}
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label class="form-label">Address Line 2</label>
+                                            <input type="text" class="form-control" name="address_line_2" value="{{ $client->address_line_2 }}">
+                                            {{-- <textarea class="form-control" name="address_line_2" rows="6">{{ $client->address_line_2 }}</textarea> --}}
+                                        </div>
                                         <div class="col-sm-6 col-lg-3">
                                             <label class="form-label">From Country</label>
                                             <select name="from_country_id" class="form-control"
@@ -382,16 +392,6 @@
                                             <input type="text" placeholder="" value="{{ $client->from_zip_code }}"
                                                 class="form-control"name="from_zip_code">
                                         </div> --}}
-                                        <div class="col-lg-6">
-                                            <label class="form-label">Address Line 1</label>
-                                            <input type="text" class="form-control" name="address_line_1" value="{{ $client->address_line_1 }}">
-                                            {{-- <textarea class="form-control" name="address_line_1" rows="6">{{ $client->address_line_1 }}</textarea> --}}
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label class="form-label">Address Line 2</label>
-                                            <input type="text" class="form-control" name="address_line_2" value="{{ $client->address_line_2 }}">
-                                            {{-- <textarea class="form-control" name="address_line_2" rows="6">{{ $client->address_line_2 }}</textarea> --}}
-                                        </div>
                                         <!-- Button  -->
                                         <div class="col-12 text-end">
                                             <button type="submit" class="btn btn-sm btn-primary mb-0">Save
@@ -949,7 +949,7 @@
                     // Update UI with states data
                     // Example: Display states in a dropdown
                     $('#code-dropdown').empty();
-                    $('#code-dropdown').val(response.phonecode);
+                    $('#code-dropdown').val("+"+response.phonecode);
                 },
                 error: function(xhr, status, error) {
                     console.error(error);
@@ -1106,6 +1106,13 @@
                     console.error(error);
                 }
             });
+        }
+        function handleContactInput(input) {
+            var inputValue = input.value;
+            // If the first character is zero and the length is greater than 1, remove the zero
+            if (inputValue.charAt(0) === '0' && inputValue.length > 1) {
+                input.value = inputValue.substring(1); // Remove the first character
+            }
         }
     </script>
     @if(old('tab'))
