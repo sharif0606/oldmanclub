@@ -19,6 +19,7 @@ use Validator;
 use DB;
 use Mail; 
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class ClientAuthentication extends Controller
 {
@@ -32,20 +33,55 @@ class ClientAuthentication extends Controller
     public function signUpStore(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            // 'fname' => 'required',
-            // 'middle_name' => 'required',
-            // 'last_name' => 'required',
-            //'dob' => 'required',
-            'contact_no' => 'required|unique:clients,contact_no',
-            'email' => 'required|email|unique:clients,email',
+            'contact_or_email' => 'required', // Add validation for the input field
             'password' => 'required|confirmed',
+            'fname' => 'required',
+            'last_name' => 'required',
+            'dob' => 'required|date',
         ], [
+            'contact_or_email.required' => 'The email or contact field is required.',
             'password.required' => 'The password field is required.',
             'password.min' => 'The password must be at least 8 characters.',
-            'password.confirmed' => 'The password confirmation does not match.'
+            'password.confirmed' => 'The password confirmation does not match.',
+            'dob.required' => 'The date of birth field is required.',
+            'dob.date' => 'The date of birth must be a valid date.',
+            'unique_contact_or_email' => 'The email or contact already exists.',
         ]);
+    
+        // Custom validation rule to check if either email or contact number already exists
+        $validator->addExtension('unique_contact_or_email', function ($attribute, $value, $parameters, $validator) {
+            $existsByEmail = Client::where('email', $value)->exists();
+            $existsByContact = Client::where('contact_no', $value)->exists();
+            return !$existsByEmail && !$existsByContact;
+        });
+    
+        $validator->sometimes('contact_or_email', 'unique_contact_or_email', function ($input) {
+            return true;
+        });
+    
+        // Custom validation rule to check if fname, last_name, and dob are the same
+        $validator->addExtension('same_client', function ($attribute, $value, $parameters, $validator) use ($request) {
+            return Client::where([
+                ['fname', '=', $request->fname],
+                ['last_name', '=', $request->last_name],
+                ['dob', '=', $request->dob],
+            ])->doesntExist();
+        });
+    
+        $validator->sometimes(['fname', 'last_name', 'dob'], 'same_client', function ($input) {
+            return !empty($input->fname) && !empty($input->last_name) && !empty($input->dob);
+        });
+    
         if ($validator->fails()) {
-            //return response()->json(['success' => false, 'errors' => $validator->errors()]);//for json
+
+            
+            // Check if the validation error is due to the same_client rule
+            if ($validator->errors()->has('fname') && $validator->errors()->has('last_name') && $validator->errors()->has('dob')) {
+                // Redirect with a custom message
+                return redirect()->route('contact_create')->with('msg', '');
+            }
+            
+            // If other validation errors occur, return back with the errors
             return redirect()->back()->withErrors($validator)->withInput();
         }
         DB::beginTransaction();
@@ -54,9 +90,15 @@ class ClientAuthentication extends Controller
             $user->fname = $request->fname;
             $user->middle_name = $request->middle_name;
             $user->last_name = $request->last_name;
-            $user->contact_no = $request->contact_no;
-            // $user->dob = $request->dob;
-            $user->email = $request->email;
+            // Check if contact_or_email contains an email address
+            if (filter_var($request->contact_or_email, FILTER_VALIDATE_EMAIL)) {
+                // If it's an email, assign it to the email attribute
+                $user->email = $request->contact_or_email;
+            } else {
+                // If it's not an email (assuming it's a contact number), assign it to the contact_no attribute
+                $user->contact_no = $request->contact_or_email;
+            }
+            $user->dob = $request->dob;
             // $user->address_line_1 = $request->address_line_1;
             // $user->address_line_2 = $request->address_line_2;
             // $user->country_id = $request->country_id;
@@ -118,7 +160,11 @@ class ClientAuthentication extends Controller
     public function signInCheck(SigninRequest $request)
     {
         try {
-            $user = Client::where('email', $request->username)->first();
+            //Client::where('email', $request->username)->first();
+            $user = Client::where(function ($query) use ($request) {
+                $query->where('email', $request->username)
+                      ->orWhere('contact_no', $request->username);
+            })->first();
             if ($user) {
                 if ($user->status == 1) {
                     if (Hash::check($request->password, $user->password)) {
