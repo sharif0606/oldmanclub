@@ -37,14 +37,22 @@ class ClientAuthentication extends Controller
             'password' => 'required|confirmed',
             'fname' => 'required',
             'last_name' => 'required',
-            'dob' => 'required|date',
+            //'dob' => 'required|date',
+            'birthDay' => 'required|integer|between:1,31',
+            'birthMonth' => 'required|integer|between:1,12',
+            'birthYear' => 'required|integer|between:1900,' . date('Y'),
         ], [
             'contact_or_email.required' => 'The email or contact field is required.',
             'password.required' => 'The password field is required.',
-            'password.min' => 'The password must be at least 8 characters.',
-            'password.confirmed' => 'The password confirmation does not match.',
-            'dob.required' => 'The date of birth field is required.',
-            'dob.date' => 'The date of birth must be a valid date.',
+            'birthDay.required' => 'The birth day field is required.',
+            'birthDay.integer' => 'The birth day must be an integer.',
+            'birthDay.between' => 'The birth day must be between 1 and 31.',
+            'birthMonth.required' => 'The birth month field is required.',
+            'birthMonth.integer' => 'The birth month must be an integer.',
+            'birthMonth.between' => 'The birth month must be between 1 and 12.',
+            'birthYear.required' => 'The birth year field is required.',
+            'birthYear.integer' => 'The birth year must be an integer.',
+            'birthYear.between' => 'The birth year must be between 1900 and ' . date('Y') . '.',
             'unique_contact_or_email' => 'The email or contact already exists.',
         ]);
     
@@ -61,25 +69,37 @@ class ClientAuthentication extends Controller
     
         // Custom validation rule to check if fname, last_name, and dob are the same
         $validator->addExtension('same_client', function ($attribute, $value, $parameters, $validator) use ($request) {
+            $dob = $request->birthYear . '-' . str_pad($request->birthMonth, 2, '0', STR_PAD_LEFT) . '-' . str_pad($request->birthDay, 2, '0', STR_PAD_LEFT);
             return Client::where([
                 ['fname', '=', $request->fname],
                 ['last_name', '=', $request->last_name],
-                ['dob', '=', $request->dob],
+                ['dob', '=', $dob],
             ])->doesntExist();
         });
     
-        $validator->sometimes(['fname', 'last_name', 'dob'], 'same_client', function ($input) {
-            return !empty($input->fname) && !empty($input->last_name) && !empty($input->dob);
+        $validator->sometimes(['fname', 'last_name', 'birthDay', 'birthMonth', 'birthYear'], 'same_client', function ($input) {
+            return !empty($input->fname) && !empty($input->last_name) && !empty($input->birthDay) && !empty($input->birthMonth) && !empty($input->birthYear);
         });
+        
     
         if ($validator->fails()) {
 
-            
-            // Check if the validation error is due to the same_client rule
-            if ($validator->errors()->has('fname') && $validator->errors()->has('last_name') && $validator->errors()->has('dob')) {
-                // Redirect with a custom message
-                return redirect()->route('contact_create')->with('msg', '');
-            }
+            // Construct dob from the birthDay, birthMonth, and birthYear
+    $dob = $request->birthYear . '-' . str_pad($request->birthMonth, 2, '0', STR_PAD_LEFT) . '-' . str_pad($request->birthDay, 2, '0', STR_PAD_LEFT);
+    
+    // Check if the validation error is due to the same_client rule
+    if ($validator->errors()->has('fname') && 
+        $validator->errors()->has('last_name') && 
+        $validator->errors()->has('birthDay') &&
+        Client::where([
+            ['fname', '=', $request->fname],
+            ['last_name', '=', $request->last_name],
+            ['dob', '=', $dob],
+        ])->exists()) {
+        // Redirect with a custom message
+        return redirect()->route('contact_create')->with('msg', 'Client with the same first name, last name, and date of birth already exists.');
+    }
+
             
             // If other validation errors occur, return back with the errors
             return redirect()->back()->withErrors($validator)->withInput();
@@ -98,7 +118,7 @@ class ClientAuthentication extends Controller
                 // If it's not an email (assuming it's a contact number), assign it to the contact_no attribute
                 $user->contact_no = $request->contact_or_email;
             }
-            $user->dob = $request->dob;
+            $user->dob = $request->birthYear . '-' . $request->birthMonth . '-' . $request->birthDay;
             // $user->address_line_1 = $request->address_line_1;
             // $user->address_line_2 = $request->address_line_2;
             // $user->country_id = $request->country_id;
