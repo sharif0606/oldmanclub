@@ -64,7 +64,7 @@
 
                             </div>
                             <div class="form-group mb-3">
-                                <small>BirthDay</small>
+                                <small>Birthday</small>
                                 <div class="d-flex">
                                     <select id="birthDay" name="birthDay" class="form-control">
                                         <option value="">Day</option>
