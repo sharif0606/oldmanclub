@@ -168,6 +168,7 @@ class ClientController extends Controller
             //$user->from_zip_code = $request->from_zip_code;
             $user->zip_code = $request->zip_code;
             $user->nationality = $request->nationality;
+            $user->phone_code = $request->phone_code;
             $user->id_no = $request->id_no;
             $user->id_no_type = $request->id_no_type;
             $user->marital_status = $request->marital_status;
