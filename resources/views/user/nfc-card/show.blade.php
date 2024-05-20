@@ -5,24 +5,14 @@
 @endpush
 @section('content')
 <div class="row g-4">
-    <!-- Sidenav START -->
-    <div class="col-lg-3">
-        <!-- Advanced filter responsive toggler START -->
-        <div class="d-flex align-items-center d-lg-none">
-            <button class="border-0 bg-transparent" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasSideNavbar" aria-controls="offcanvasSideNavbar">
-                <span class="btn btn-primary"><i class="fa-solid fa-sliders-h"></i></span>
-                <span class="h6 mb-0 fw-bold d-lg-none ms-2">My profile</span>
-            </button>
-        </div>
-        <!-- Advanced filter responsive toggler END -->
-        <!-- Navbar START-->
-        @include('user.includes.profile-navbar')
-        <!-- Navbar END-->
+    <div class="col-lg-12 vstack gap-4">
+        <!-- My profile START -->
+        @include('user.includes.profile')
+        <!-- My profile END -->
     </div>
     <!-- Sidenav END -->
     <!-- Main content START -->
-    <div class="col-md-8 col-lg-6 vstack gap-4">
+    <div class="col-md-12">
         <!-- Card START -->
         <div class="card">
             <!-- Card header START -->
@@ -41,7 +31,7 @@
                             <div>
                                 <a href="{{ route('nfc_card.edit', encryptor('encrypt', $nfc_card->id)) }}"><i class="fa fa-edit"></i></a>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                     @if ($nfc_card->card_design?->design_card_id == 1)
                                         @include('user.nfc-template_show.classic-template')
                                     @elseif($nfc_card->card_design?->design_card_id == 2)
