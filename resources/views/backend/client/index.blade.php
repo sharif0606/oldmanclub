@@ -70,6 +70,7 @@
                                     <i class="fa fa-eye"></i>
                                 </a>
                                 @endif
+                                <a href="{{route('secretLogin',$p->id)}}" class="btn btn-sm btn-success">Login As {{$p->fname}} {{$p->middle_name}} {{$p->last_name}}</a>
                             </td>
                         </tr>
                         @empty

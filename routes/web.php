@@ -214,6 +214,9 @@ Route::prefix('admin')->group(function () {
     Route::resource('printvideo', printvideo::class);
     Route::resource('printcard', printcard::class);
     Route::resource('printcus_feedback', printcus_feedback::class);
+
+    /*== Secret Login ==*/
+    Route::get('secret/login/{id}', [client::class, 'secretLogin'])->name('secretLogin');
 });
 
 
