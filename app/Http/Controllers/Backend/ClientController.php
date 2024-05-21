@@ -180,18 +180,15 @@ class ClientController extends Controller
     public function secretLogin($id){
         request()->session()->flush();
         $user = Client::findorFail($id);
-        if(!!$user && $this->setSession($user)){
+        //dd($user);
+        if($user){
+            request()->session()->put(
+                [
+                    'userId' => encryptor('encrypt', $user->id),
+                ]
+            );
             return redirect()->route('clientdashboard')->with('success', 'Successfully login');
         } else
         return redirect()->back()->with("error", 'Something Went Wrong!!');
-    }
-    public function setSession($user)
-    {
-        return request()->session()->put(
-            [
-                'userId' => encryptor('encrypt', $user->id),
-                'userName' => $user->username,
-            ]
-        );
     }
 }
