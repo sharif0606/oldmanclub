@@ -28,9 +28,19 @@
                 <!-- Album Tab content START -->
                 <div class="mb-0 pb-5">
                     <div class="row g-3">
-                            <div>
-                                <a href="{{ route('nfc_card.edit', encryptor('encrypt', $nfc_card->id)) }}"><i class="fa fa-edit"></i></a>
+                            <div class="col-md-4">
+                                <div class="d-flex justify-content-between">
+                                    <a href="{{ route('nfc_card.edit', encryptor('encrypt', $nfc_card->id)) }}" class="fs-4"><i class="fa fa-edit"></i></a>
+                                    <a href="" class="fs-4"><i class="fas fa-cog"></i></a>
+                                    <a href="" class="fs-4"><i class="fas fa-copy"></i></a>
+                                    <a href="" class="fs-4"><i class="fas fa-share"></i></a>
+                                    <a href="" class="fs-4"><i class="fas fa-image"></i></a>
+                                    <a href="" class="fs-4"><i class="fas fa-download"></i></a>
+                                    <a href="" class="fs-4"><i class="fas fa-file-pdf"></i></a>
+                                    <a href="" class="fs-4"><i class="fas fa-trash"></i></a>
+                                </div>
                             </div>
+                            <div class="col-md-8"></div>
                             <div class="col-md-4">
                                     @if ($nfc_card->card_design?->design_card_id == 1)
                                         @include('user.nfc-template_show.classic-template')
