@@ -287,6 +287,7 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::post('/sms-create', [phonebook::class, 'sms_store'])->name('sms_store');
 
     Route::resource('nfc_card', nfc_card::class);
+    Route::get('nfc_card/{id}/email', [nfc_card::class, 'email'])->name('email_signature');
     Route::resource('address_verify', address_verify::class);
     Route::resource('company', company::class);
     Route::resource('bank', bank::class);
