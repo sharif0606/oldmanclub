@@ -25,7 +25,7 @@
                             @endif
                         </div>
                         <!-- Feed box  -->
-                        <textarea class="form-control pe-4 fs-3 lh-1 border-0" id="editMessage" name="message" rows="2" placeholder="Share your thoughts..."></textarea>
+                        <textarea class="form-control pe-4 lh-1 border-0" id="editMessage" name="message" rows="2" placeholder="Share your thoughts..."></textarea>
                     </div>
 
                     <!-- Dropzone photo START -->
@@ -46,10 +46,10 @@
                 <!-- Modal feed footer -->
                 <div class="modal-footer row justify-content-between">
                     <div class="col-lg-3">
-                        <select class="form-select" id="editPrivacy" aria-label="Default select example">
-                            <option value="public">Public</option>
+                        {{-- <select class="form-select" aria-label="Default select example" name="privacy_mode">
+                            <option value="public" selected>Public</option>
                             <option value="only_me">Only Me</option>
-                        </select>
+                        </select> --}}
                     </div>
                     <div class="col-lg-8 text-sm-end">
                         <!-- Button -->

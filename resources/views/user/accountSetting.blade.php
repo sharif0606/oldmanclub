@@ -125,7 +125,7 @@
 
                                         <!-- Side Nav START -->
                                         <ul class="nav nav-tabs nav-pills nav-pills-soft flex-column fw-bold gap-2 border-0"
-                                            role="tablist">
+                                            role="tablist" id="myTab">
                                             <li class="nav-item" data-bs-dismiss="offcanvas" role="presentation">
                                                 <a class="nav-link d-flex mb-0 active" href="#nav-setting-tab-1"
                                                     data-bs-toggle="tab" aria-selected="true" role="tab"> <img
@@ -235,7 +235,7 @@
                                         </div>
                                         <!-- User name -->
                                         <div class="col-sm-12">
-                                            <label class="form-label">User name</label>
+                                            <label class="form-label">User name </label>
                                             <input type="text" name="username" value="{{ $client->username }}"
                                                 class="form-control" placeholder="">
                                             @if ($errors->has('username'))
@@ -252,7 +252,7 @@
                                         </div>
                                         <!-- Birthday -->
                                         <div class="col-lg-6">
-                                            <label class="form-label">Birthday </label>
+                                            <label class="form-label">Date of Birth</label>
                                             <input type="date" name="dob" class="form-control"
                                                 value="{{ $client->dob }}">
                                         </div>
@@ -274,17 +274,17 @@
                                             </select>
                                         </div>
                                         <div class="col-sm-2">
-                                            <label class="form-label">Ext.</label>
+                                            <label class="form-label">Country Code</label>
                                             <input type="text" readonly id="code-dropdown" name="phone_code"
                                                 class="form-control" value="{{ $client->phone_code }}">
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label">Contact </label>
                                             <input type="text" name="contact_no" class="form-control "
-                                                value="{{ $client->contact_no }}">
+                                                value="{{ $client->contact_no }}" onkeyup="handleContactInput(this)">
                                         </div>
                                         <div class="col-lg-6">
-                                            <label class="form-label">PHOTO ID Type </label>
+                                            <label class="form-label">Photo ID Type</label>
                                             <select name="id_no_type" id="" value="{{ $client->id_no_type }}"
                                                 class="form-control">
                                                 <option value="">Select</option>
@@ -299,7 +299,7 @@
                                             </select>
                                         </div>
                                         <div class="col-lg-6">
-                                            <label class="form-label">PHOTO ID No </label>
+                                            <label class="form-label">Photo ID No</label>
                                             <input type="text" name="id_no" class="form-control"
                                                 value="{{ $client->id_no }}">
                                         </div>
@@ -339,15 +339,26 @@
                                         </div>
                                         <div class="col-sm-6 col-lg-3">
                                             <label class="form-label">City</label>
-                                            <select name="current_city_id" id="city-dropdown" class="form-control">
+                                            <input type="text" class="form-control" name="current_city_id" value="{{$client->current_city_id}}">
+                                            {{-- <select name="current_city_id" id="city-dropdown" class="form-control">
                                                 <option value="">Select City</option>
-                                            </select>
+                                            </select> --}}
                                         </div>
 
                                         <div class="col-sm-6 col-lg-3">
                                             <label class="form-label">Zip Code</label>
                                             <input type="text" placeholder="" value="{{ $client->zip_code }}"
                                                 class="form-control"name="zip_code">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label class="form-label">Address Line 1</label>
+                                            <input type="text" class="form-control" name="address_line_1" value="{{ $client->address_line_1 }}">
+                                            {{-- <textarea class="form-control" name="address_line_1" rows="6">{{ $client->address_line_1 }}</textarea> --}}
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label class="form-label">Address Line 2</label>
+                                            <input type="text" class="form-control" name="address_line_2" value="{{ $client->address_line_2 }}">
+                                            {{-- <textarea class="form-control" name="address_line_2" rows="6">{{ $client->address_line_2 }}</textarea> --}}
                                         </div>
                                         <div class="col-sm-6 col-lg-3">
                                             <label class="form-label">From Country</label>
@@ -368,6 +379,8 @@
                                                 <option value="">Select State</option>
                                             </select>
                                         </div>
+                                        <div class="col-sm-6 col-lg-6">
+                                        </div>
                                         {{--<div class="col-sm-6 col-lg-3">
                                             <label class="form-label">From City</label>
                                             <select name="from_city_id" id="from-city-dropdown" class="form-control">
@@ -379,16 +392,6 @@
                                             <input type="text" placeholder="" value="{{ $client->from_zip_code }}"
                                                 class="form-control"name="from_zip_code">
                                         </div> --}}
-                                        <div class="col-lg-12">
-                                            <label class="form-label">Address Line 1</label>
-                                            <input type="text" class="form-control" name="address_line_1" value="{{ $client->address_line_1 }}">
-                                            {{-- <textarea class="form-control" name="address_line_1" rows="6">{{ $client->address_line_1 }}</textarea> --}}
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <label class="form-label">Address Line 2</label>
-                                            <input type="text" class="form-control" name="address_line_2" value="{{ $client->address_line_2 }}">
-                                            {{-- <textarea class="form-control" name="address_line_2" rows="6">{{ $client->address_line_2 }}</textarea> --}}
-                                        </div>
                                         <!-- Button  -->
                                         <div class="col-12 text-end">
                                             <button type="submit" class="btn btn-sm btn-primary mb-0">Save
@@ -498,16 +501,24 @@
                                             @csrf
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                                    <label class="form-label">Address</label>
+                                                    <label class="form-label"><strong>Address</strong></label>
                                                     {{-- <textarea class="form-control" name="address_line_2" rows="6">{{ $client->address_line_2 }}</textarea> --}}
-                                                    <p>{{ $client->address_line_1 }}</p>
-                                                    <p>{{ $client->address_line_2 }}</p>
+                                                    <span class="pe-1">{{ $client->address_line_1 }}</span>
+                                                    <span>{{ $client->address_line_2 }}</span>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="id_image" class="mb-2">Upload Your PHOTO ID (Mentioned In Basic Information):</label>
+                                                    <label for="id_image" class="mb-2"><strong>Upload Your Photo ID</strong> (Mentioned In Basic Information):</label>
                                                     <input type="file" id="id_image" class="form-control" name="id_image"
                                                         required>
                                                     <img id="preview_photo_id" src="#" alt="preview_photo_id"
+                                                        style="display: none; max-width: 100px;">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="id_image" class="mb-2"><strong>Upload Address Proof for Address verification
+                                                    </strong></label>
+                                                    <input type="file" id="address_proof_photo" class="form-control" name="address_proof_photo"
+                                                        required>
+                                                    <img id="address_proof_photo" src="#" alt="address_proof_photo"
                                                         style="display: none; max-width: 100px;">
                                                 </div>
                                             </div>
@@ -523,20 +534,8 @@
                                         <h5 class="h5 card-title text-warning">To Verify Address Please input address and ID No and ID Type from basic information</h5>
                                         @endif
                                     @elseif($client->verification_request_status == 2 && $client->is_address_verified == 0)
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <label class="form-label">Address & PHOTO ID</label>
-                                                {{-- <textarea class="form-control" name="address_line_2" rows="6">{{ $client->address_line_2 }}</textarea> --}}
-                                                <p>{{ $client->address_line_1 }}</p>
-                                                <p>{{ $client->address_line_2 }}</p>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <img class="rounded img-fluid"
-                                                src="{{asset('public/uploads/verify_image/' . $client->photo_id)}}" alt="">
-                                            </div>
-                                        </div>
                                         <form class="form" method="post" enctype="multipart/form-data"
-                                            action="{{ route('address_verify_saved', encryptor('encrypt', $client->id)) }}">
+                                        action="{{ route('address_verify_saved', encryptor('encrypt', $client->id)) }}">
                                             @csrf
                                             @method('Post')
                                             <input type="hidden" name="uptoken"
@@ -557,20 +556,47 @@
                                             </div>
                                             <button type="submit" class="btn btn-success mt-2">Verify With Code</button>
                                         </form>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label class="form-label">Address</label>
+                                                <p>
+                                                    <span class="pe-1">{{ $client->address_line_1 }}</span>
+                                                    <span>{{ $client->address_line_2 }}</span>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <label class="form-label">Photo ID</label>
+                                                <img class="rounded img-fluid"
+                                                src="{{asset('public/uploads/verify_image/' . $client->photo_id)}}" alt="">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="form-label"><strong>Address Verification Document</strong></label>
+                                                <img class="rounded img-fluid"
+                                                src="{{asset('public/uploads/verify_image/' . $client->address_proof_photo)}}" alt="">
+                                            </div>
+                                        </div>
+
                                     @elseif($client->verification_request_status == 2 && $client->is_address_verified == 1)
                                         <h5 class="h5 card-title text-success">Your Address Verification is complete.</h5>
                                     @else
                                         <h5 class="h5 card-title">We Are Reviewing Your Address Verification.</h5>
                                         <div class="row">
                                             <div class="col-lg-6">
-                                                <label class="form-label">Address & PHOTO ID</label>
-                                                {{-- <textarea class="form-control" name="address_line_2" rows="6">{{ $client->address_line_2 }}</textarea> --}}
-                                                <p>{{ $client->address_line_1 }}</p>
-                                                <p>{{ $client->address_line_2 }}</p>
+                                                <label class="form-label"><strong>Address & Photo ID</strong></label>
+                                                <p>
+                                                    <span>{{ $client->address_line_1 }}</span>
+                                                    <span>{{ $client->address_line_2 }}</span>
+                                                </p>
+                                               
                                             </div>
                                             <div class="col-lg-6">
                                                 <img class="rounded img-fluid"
                                                 src="{{asset('public/uploads/verify_image/' . $client->photo_id)}}" alt="">
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class="form-label"><strong>Address Verification Document</strong></label>
+                                                <img class="rounded img-fluid"
+                                                src="{{asset('public/uploads/verify_image/' . $client->address_proof_photo)}}" alt="">
                                             </div>
                                         </div>
                                     @endif
@@ -923,7 +949,7 @@
                     // Update UI with states data
                     // Example: Display states in a dropdown
                     $('#code-dropdown').empty();
-                    $('#code-dropdown').val(response.phonecode);
+                    $('#code-dropdown').val("+"+response.phonecode);
                 },
                 error: function(xhr, status, error) {
                     console.error(error);
@@ -1081,5 +1107,26 @@
                 }
             });
         }
+        function handleContactInput(input) {
+            var inputValue = input.value;
+            // If the first character is zero and the length is greater than 1, remove the zero
+            if (inputValue.charAt(0) === '0' && inputValue.length > 1) {
+                input.value = inputValue.substring(1); // Remove the first character
+            }
+        }
     </script>
+    @if(old('tab'))
+    <script>
+        $(function() {
+            $('#myTab .nav-link').removeClass('active');
+            $('.tab-content .tab-pane').removeClass('in active show');
+            var selectedTab = '{{ old("tab") }}';
+            // Show the selected tab
+            if (selectedTab) {
+                $('#myTab a[href="#' + selectedTab + '"]').addClass('active').tab('show');
+                $('#' + selectedTab).addClass('in active show');
+            }
+        });
+    </script>
+    @endif
 @endpush

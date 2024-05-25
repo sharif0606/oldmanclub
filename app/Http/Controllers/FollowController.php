@@ -30,7 +30,7 @@ class FollowController extends Controller
     public function store(Request $request)
     {
         if($request->username){
-            $client = Client::where('username', 'like', "$request->username")->first();
+            $client = Client::where('username', 'like', $request->username)->first();
             if(Follow::where('follower_id',$client->id)->where('following_id',currentUserId())->exists()){
                 return redirect()->back();
             }else{

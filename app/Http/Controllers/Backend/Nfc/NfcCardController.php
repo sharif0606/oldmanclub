@@ -269,4 +269,14 @@ class NfcCardController extends Controller
             echo $vCard;
         }, $file_name, $headers);
     }
+
+    public function email($id)
+    {
+        $client = Client::find(currentUserId());
+        $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id',currentUserId())->paginate(10);
+        $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
+        $postCount = Post::where('client_id', currentUserId())->count();
+        return view('user.nfc-card.email_signature', compact('nfc_card','client','postCount','nfc_cards'));
+    }
+
 }

@@ -33,11 +33,15 @@ class ClientController extends Controller
                 $query->orderBy('created_at', 'desc')->with(['replies' => function ($query) {
                     $query->orderBy('created_at', 'desc');
                 }]);
+            },
+            'shares' => function ($query) {
+                // Include any additional constraints or orderings if needed
             }
         ])
         ->where('client_id', currentUserId())
         ->orderBy('created_at', 'desc')
         ->get();
+
         $followers = Follow::where('following_id',currentUserId())->orderBy('id', 'desc')->take(4)->get();
         //dd($post);
         $postCount = Post::where('client_id', currentUserId())->count();
@@ -73,7 +77,7 @@ class ClientController extends Controller
     public function gathering(){
         session()->forget('username');
         $client = Client::find(currentUserId());
-        $post = Post::where('client_id','!=',currentUserId())->orderBy('id', 'desc')->get();
+        $post = Post::where('privacy_mode','public')->orderBy('id', 'desc')->get();
         $followers = Follow::where('following_id',currentUserId())->orderBy('id', 'desc')->take(4)->get();
         return view('user.includes.gathering',compact('client','post','followers'));
     }
@@ -136,6 +140,7 @@ class ClientController extends Controller
 
     public function save_profile(Request $request)
     {
+        //dd($request);
         try {
             $user=Client::find(currentUserId());
             $count = Client::where('username', $request->username)->count();
@@ -154,8 +159,8 @@ class ClientController extends Controller
             $user->address_line_1 = $request->address_line_1;
             $user->address_line_2 = $request->address_line_2;
             $user->current_country_id = $request->current_country_id;
-            $user->current_city_id = $request->current_city_id;
             $user->current_state_id = $request->current_state_id;
+            $user->current_city_id = $request->current_city_id;
             //$user->current_zip_code = $request->current_zip_code;
             $user->from_country_id = $request->from_country_id;
             $user->from_city_id = $request->from_city_id;
@@ -163,6 +168,7 @@ class ClientController extends Controller
             //$user->from_zip_code = $request->from_zip_code;
             $user->zip_code = $request->zip_code;
             $user->nationality = $request->nationality;
+            $user->phone_code = $request->phone_code;
             $user->id_no = $request->id_no;
             $user->id_no_type = $request->id_no_type;
             $user->marital_status = $request->marital_status;
@@ -180,7 +186,7 @@ class ClientController extends Controller
             if ($user->save()){
                 $this->setSession($user);
                 $this->notice::success('Save Changes Successfully');
-                return redirect()->back();
+                return redirect()->back()->withInput(['tab' => 'nav-setting-tab-1']);
             }
         } catch (Exception $e) {
             // dd($e);
@@ -195,17 +201,30 @@ class ClientController extends Controller
                 $imageName = rand(111, 999) . time() . '.' . $request->cover_photo->extension();
                 $request->cover_photo->move(public_path('uploads/client'), $imageName);
                 $user->cover_photo = $imageName;
+                $post = Post::create([
+                    'message' => "Changed Cover Photo",
+                    'image'=>$imageName,
+                    'client_id' => currentUserId(),
+                    'post_type' => 'profile_photo'
+                ]);
             }
             if ($request->hasFile('image')) {
                 $imageName = rand(111, 999) . time() . '.' . $request->image->extension();
                 $request->image->move(public_path('uploads/client'), $imageName);
                 $user->image = $imageName;
+                $post = Post::create([
+                    'message' => "Changed Profile Photo",
+                    'image'=>$imageName,
+                    'client_id' => currentUserId(),
+                    'post_type' => 'cover_photo'
+                ]);
             }
             $user->profile_overview = $request->profile_overview;
             $user->tagline = $request->tagline;
             if ($user->save()){
                 $this->setSession($user);
-                return redirect()->back()->with('success', 'Data Saved');
+                $this->notice::success('Data Saved');
+                return redirect()->back()->withInput(['tab' => 'nav-setting-tab-2']);
             }
         } catch (Exception $e) {
             // dd($e);
@@ -225,7 +244,7 @@ class ClientController extends Controller
             if ($data->save()) {
                 $this->setSession($data);
                 $this->notice::success('Data Saved');
-                return redirect()->back()->with('success', 'Data Saved');
+                return redirect()->back()->withInput(['tab' => 'nav-setting-tab-4']);;
             }
         } catch (Exception $e) {
             dd($e);
@@ -261,20 +280,26 @@ class ClientController extends Controller
             dump($query);
         }*/
         $search_by_people = trim($request->search);
-        
-        $follow_connections = Client::where(function ($query) use ($search_by_people) {
-            $names = explode(' ', $search_by_people);
-            foreach ($names as $name) {
-                $query->where(function ($query) use ($name) {
-                    $query->where('fname', 'like', "%$name%")
-                          ->orWhere('middle_name', 'like', "%$name%")
-                          ->orWhere('last_name', 'like', "%$name%");
-                });
-            }
-        })
-        ->where('id', '!=', currentUserId())
-        ->whereNotIn('id', $followIds)
-        ->get();
+        if($request->search){
+            $follow_connections = Client::where(function ($query) use ($search_by_people) {
+                $names = explode(' ', $search_by_people);
+                foreach ($names as $name) {
+                    $query->where(function ($query) use ($name) {
+                        $query->where('fname', 'like', "%$name%")
+                              ->orWhere('middle_name', 'like', "%$name%")
+                              ->orWhere('last_name', 'like', "%$name%");
+                    });
+                }
+            })
+            ->where('id', '!=', currentUserId())
+            ->whereNotIn('id', $followIds)
+            ->get();
+        }else{
+            $follow_connections = Client::where('id', '!=', currentUserId())
+                                ->whereNotIn('id', $followIds)
+                                ->orderBy('id','desc')->get();
+        }
+
         $unfollow_connections = Follow::with('client')->where('following_id', '=',currentUserId())->get();
 
         /*$search_client_id = Client::where(function ($query) use ($search_by_people) {

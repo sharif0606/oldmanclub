@@ -16,4 +16,8 @@ class Reply extends Model
     {
         return $this->belongsTo(Comment::class);
     }
+    public function reactions()
+    {
+        return $this->hasMany(ReplyReaction::class);
+    }
 }

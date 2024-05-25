@@ -64,10 +64,16 @@ class AddressVerificationController extends Controller
                 $request->id_image->move(public_path('uploads/verify_image'), $imageName);
                 $client->photo_id = $imageName;
             }
+            if ($request->hasFile('address_proof_photo')) {
+                $imageName = rand(111, 999) . time() . '.' . $request->address_proof_photo->extension();
+                $request->address_proof_photo->move(public_path('uploads/verify_image'), $imageName);
+                $client->address_proof_photo = $imageName;
+            }
             $client->save();
 
             //if ($address_verify->save()) {
-                return redirect()->back()->with('success', 'Data Saved'); 
+                $this->notice::success('Data Saved');
+                return redirect()->back()->withInput(['tab' => 'nav-setting-tab-3']);
            // }
            
         }catch(Exception $e){

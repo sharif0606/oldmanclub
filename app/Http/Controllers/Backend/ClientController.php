@@ -157,7 +157,7 @@ class ClientController extends Controller
                 return redirect()->route('client.index');
             }else{
                 $this->notice::success('Address successfully Verified');
-                return redirect()->back();
+                redirect()->back()->withInput(['tab' => 'nav-setting-tab-3']);
             }
         }
     }
@@ -176,5 +176,19 @@ class ClientController extends Controller
             $this->notice::warning('Deleted Permanently!');
             return redirect()->back();
         }
+    }
+    public function secretLogin($id){
+        request()->session()->flush();
+        $user = Client::findorFail($id);
+        //dd($user);
+        if($user){
+            request()->session()->put(
+                [
+                    'userId' => encryptor('encrypt', $user->id),
+                ]
+            );
+            return redirect()->route('clientdashboard')->with('success', 'Successfully login');
+        } else
+        return redirect()->back()->with("error", 'Something Went Wrong!!');
     }
 }

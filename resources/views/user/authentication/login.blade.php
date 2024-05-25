@@ -19,7 +19,7 @@
 				@csrf
             <!-- Email -->
             <div class="mb-3 input-group-lg">
-              <input type="email" class="form-control" name="username" placeholder="Enter email">
+              <input type="text" class="form-control" name="username" placeholder="Enter email or Contact">
 			  	@if($errors->has('username'))
 					<small class="d-block text-danger fw-bold">
 						{{$errors->first('username')}}

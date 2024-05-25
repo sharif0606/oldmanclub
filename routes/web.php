@@ -77,6 +77,7 @@ use App\Http\Controllers\User\AddressVerificationController as address_verify;
 use App\Http\Controllers\User\CompanyController as company;
 use App\Http\Controllers\User\BankController as bank;
 use App\Http\Controllers\User\PostController as post;
+use App\Http\Controllers\User\ShareController as share;
 use App\Http\Controllers\PurchaseSmsController as purchase;
 use App\Http\Controllers\FollowController as follow;
 use App\Http\Controllers\User\PostCommnetController as postcomment;
@@ -213,6 +214,9 @@ Route::prefix('admin')->group(function () {
     Route::resource('printvideo', printvideo::class);
     Route::resource('printcard', printcard::class);
     Route::resource('printcus_feedback', printcus_feedback::class);
+
+    /*== Secret Login ==*/
+    Route::get('secret/login/{id}', [client::class, 'secretLogin'])->name('secretLogin');
 });
 
 
@@ -247,7 +251,11 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::resource('reply-reaction', replyreaction::class);
     Route::resource('post-reaction', postreaction::class);
     Route::get('post-reaction-update', [postreaction::class,'post_reaction_update'])->name('post-reaction-update');
+    Route::get('comment-reaction-update', [commentreaction::class,'comment_reaction_update'])->name('comment-reaction-update');
+    Route::get('reply-reaction-update', [replyreaction::class,'reply_reaction_update'])->name('reply-reaction-update');
     Route::get('gathering', [clientprofile::class, 'gathering'])->name('gathering');
+   
+    
 
     Route::resource('phonebook', phonebook::class);
     Route::resource('phonegroup', phonegroup::class);
@@ -279,11 +287,13 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::post('/sms-create', [phonebook::class, 'sms_store'])->name('sms_store');
 
     Route::resource('nfc_card', nfc_card::class);
+    Route::get('nfc_card/{id}/email', [nfc_card::class, 'email'])->name('email_signature');
     Route::resource('address_verify', address_verify::class);
     Route::resource('company', company::class);
     Route::resource('bank', bank::class);
     Route::resource('post', post::class);
-
+    Route::resource('share', share::class);
+    Route::post('post-update', [post::class, 'post_update'])->name('postUpdate');
     Route::resource('purchase', purchase::class);
 
     

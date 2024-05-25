@@ -1,5 +1,5 @@
 @foreach ($post as $value)
-    <div class="card">
+    <div class="card" data-toggle-id="{{$value->id}}">
         <!-- Card header START -->
         <div class="card-header border-0 pb-0">
             <div class="d-flex align-items-center justify-content-between">
@@ -41,12 +41,20 @@
                         @else
                             <span class="nav-item mb-0 small">This Account Location Not Set Yet.</span>
                         @endif
-                        <span class="nav-item small" data-bs-toggle="tooltip" data-bs-placement="top"
-                            aria-label="Public" data-bs-original-title="Public"> <i class="bi bi-globe"></i></span>
+                        @if ($value->privacy_mode == 'public')
+                        <span class="nav-item small public" data-bs-toggle="tooltip" data-bs-placement="top"
+                        aria-label="Public" data-bs-original-title="Public"> <i class="bi bi-globe"></i></span>
+                        @else
+                        <span class="nav-item small only" data-bs-toggle="tooltip" data-bs-placement="top"
+                        aria-label="Public" data-bs-original-title="Only Me"> <i class="bi bi-lock"></i></span>
+                        @endif
+                       
 
                     </div>
                 </div>
                 <!-- Card feed action dropdown START -->
+                @if ($value->post_type == 'profile_photo' || $value->post_type == 'cover_photo')
+                @elseif ($value->client_id == currentuserId())
                 <div class="dropdown">
                     <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction"
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -54,25 +62,50 @@
                     </a>
                     <!-- Card feed action dropdown menu -->
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
-                        <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save
-                                post</a></li>
+                        {{--<li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save
+                                post</a></li>--}}     
+                       
                         <li><a class="dropdown-item edit-post" data-post-id="{{ $value->id }}" href="#"
-                                data-toggle="modal" data-target="#editPostModal"> <i
-                                    class="bi bi-pencil-square fa-fw pe-2"></i>Edit post</a></li>
-                        <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow
+                        data-toggle="modal" data-target="#editPostModal"> <i
+                            class="bi bi-pencil-square fa-fw pe-2"></i>Edit post</a></li>
+                                
+                        
+                        {{--<li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow
                                 lori ferguson </a>
-                        </li>
-                        <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide
-                                post</a></li>
-                        <li><a class="dropdown-item" href="#"> <i
+                        </li>--}}
+                       
+                        
+                        @if ($value->privacy_mode == 'public')
+                            <li>
+                                <a class="dropdown-item" href="#" data-privacy-mode="only_me" data-privacy-post-id="{{$value->id}}"> 
+                                    <i class="bi bi-x-circle fa-fw pe-2"></i> Only Me
+                                </a>
+                            </li>
+                        @else
+                            <li>
+                                <a class="dropdown-item" href="#" data-privacy-mode="public" data-privacy-post-id="{{$value->id}}"> 
+                                    <i class="bi bi-globe fa-fw pe-2"></i>Public
+                                </a>
+                            </li>
+                        @endif
+
+                       
+                       
+                        {{--<li><a class="dropdown-item" href="#"> <i
                                     class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
-                        <li>
+                        <li>--}}
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report
-                                post</a></li>
+                        <li>
+                            <a class="dropdown-item" href="#" data-privacy-mode="is_report" data-privacy-post-id="{{$value->id}}"> 
+                                <i class="bi bi-flag fa-fw pe-2"></i>Report
+                                post
+                            </a>
+                        </li>
                     </ul>
                 </div>
+                @else
+                @endif
                 <!-- Card feed action dropdown END -->
             </div>
         </div>
@@ -83,11 +116,23 @@
                 {!! nl2br($value->message) !!}
             </p>
             <!-- Card img -->
-            @if ($value->image)
+            @if($value->post_type == 'profile_photo')
+                @if ($value->image)
+                <img class="card-img" src="{{ asset('public/uploads/client/' . $value->image) }}" alt="Post">
+                @endif
+            @elseif($value->post_type == 'cover_photo')
+                @if ($value->image)
+                <img class="card-img" src="{{ asset('public/uploads/client/' . $value->image) }}" alt="Post">
+                @endif
+            @else
+                @if ($value->image)
                 <img class="card-img" src="{{ asset('public/uploads/post/' . $value->image) }}" alt="Post">
+                @endif
             @endif
+
+           
             {{-- <img class="card-img" src="assets/images/post/3by2/01.jpg" alt="Post"> --}}
-            <div class="post-reaction" data-post-id="{{ $value->id }}">
+            <div class="post-reaction border-top" data-post-id="{{ $value->id }}">
                 <!-- Feed react START -->
                 @php $clients = []; @endphp
                 <ul class="nav nav-stack pb-2 small mt-2">
@@ -153,7 +198,7 @@
                 <!-- Feed react START -->
 
                 <ul class="nav nav-pills nav-pills-light nav-fill nav-stack small border-top border-bottom py-1 mb-3">
-                    @if($value->client_id == currentUserId())
+                    @if($value->client_id != currentUserId())
                     <li class="nav-item dropdown dropup">
                         <a class="nav-link mb-0 active" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-hand-thumbs-up pe-1"></i>Like</a>
@@ -184,11 +229,6 @@
                                     @endif
                                 @endif
                             @endforeach
-
-
-
-
-
                         </ul>
                     </li>
                     @else  
@@ -199,15 +239,25 @@
                     </li>
                     @endif
                     <!-- Card share action menu END -->
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link mb-0" href="#!"> <i class="bi bi-chat-fill pe-1"></i>Comment</a>
-                    </li>
+                    </li> --}}
+                    {{-- <p>{{$value->client_id}}</p>
+                    <p>{{currentUserId()}}</p>
+                    <p>{{is_null($value->shared_from)}}</p>
+                    <p>{{$value->post_type}}</p> --}}
                     <!-- Card share action menu START -->
+                    @if($value->client_id != currentUserId() && $value->shared_from!=currentUserId() && is_null($value->post_type))
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link mb-0" id="cardShareAction4" data-bs-toggle="dropdown"
+                        <form method="post" action="{{route('share.store')}}" class="share-form">
+                            @csrf
+                            <input type="hidden" name="post_id" value="{{$value->id}}">
+                            <button type="button" class="nav-link mb-0" onclick="confirmShare(this)"> <i class="bi bi-reply-fill flip-horizontal ps-1"></i>Share ({{$value->shares->count()}})</button>
+                        </form>
+                        {{-- <a href="#" class="nav-link mb-0" id="cardShareAction4" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             <i class="bi bi-reply-fill flip-horizontal ps-1"></i>Share (3)
-                        </a>
+                        </a> --}}
                         <!-- Card share action dropdown menu -->
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction4">
                             <li><a class="dropdown-item" href="#"> <i
@@ -228,6 +278,7 @@
                                         class="bi bi-pencil-square fa-fw pe-2"></i>Share to News Feed</a></li>
                         </ul>
                     </li>
+                    @endif
                 </ul>
                 <!-- Feed react END -->
             </div>

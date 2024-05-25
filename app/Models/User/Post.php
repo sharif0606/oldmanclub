@@ -5,6 +5,7 @@ namespace App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Post extends Model
 {
@@ -13,6 +14,10 @@ class Post extends Model
         'message',
         'client_id',
         'image',
+        'post_type',
+        'privacy_mode',
+        'shared_from'
+       
     ];
     public function client(){
         return $this->belongsTo(Client::class ,'client_id','id');
@@ -28,5 +33,9 @@ class Post extends Model
     public function lastReaction()
     {
         return $this->hasOne(PostReaction::class)->latest();
+    }
+    public function shares(): HasMany
+    {
+        return $this->hasMany(Share::class);
     }
 }
