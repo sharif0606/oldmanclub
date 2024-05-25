@@ -102,6 +102,12 @@
         font-weight: bold;
         color: white;
     } 
+    .save_button{
+        background-color: #6C31CD;
+        padding: 3px;
+        color: #fff;
+        border-radius: 10px 0px 10px 0px;
+    }
     </style>
 @endpush
 
@@ -223,10 +229,10 @@
                                     <!-- Content for QR CODE tab -->
                                     <div class="row">
                                         <div class="col-md-6 mx-auto">
-                                            <div class="card">
+                                            <div class="card" style="border-radius: 10px">
                                                 <div class="d-flex mb-1">
-                                                    <img src="{{ asset('public/uploads/client/2091707728463.jpg') }}" alt="Profile Image" class="profile-image">
-                                                    <div class="">
+                                                    <img src="{{ asset('public/uploads/client/2091707728463.jpg') }}" alt="Profile Image" class="" style="border-radius: 10px 0px 10px 0px;">
+                                                    <div class="px-2">
                                                         <h2 class="">asdfdsaf</h2>
                                                         <p class="position">dsfasdfsda</p>
                                                         <p class="company">sadfsadfsad</p>
@@ -247,12 +253,9 @@
                                                             <img src="{{ asset('public/uploads/client/2091707728463.jpg') }}" alt="Profile Image" class="">
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-md-6 ms-auto">
-                                                            <button class="btn btn-primary">Save Contact</button>
-                                                        </div>
+                                                    <div class="" style="text-align: right">
+                                                            <span class="save_button px-4">Save Contact</span>
                                                     </div>
-                                              
                                             </div>
                                         </div>
                                     </div>
