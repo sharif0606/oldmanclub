@@ -257,7 +257,7 @@ class NfcCardController extends Controller
 
         $vCard .= "PHOTO;TYPE=" . $imageExtension . ";ENCODING=BASE64:" . $imageData . "\r\n";
         $vCard .= "END:VCARD\r\n";
-
+  
 
         // Set headers for vCard file
         $headers = [
