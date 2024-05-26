@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-            
+
             <!-- table bordered -->
             <div class="table-responsive">
                 <div>
@@ -28,7 +28,17 @@
                         <tr>
                             <th scope="row">{{ ++$loop->index }}</th>
                             <td>{{$p->name}}</td>
-                            <td>{{$p->icon}}</td>
+                            <td>
+                            @if ($p->type==1)
+                                <i class="{{$p->icon}}" ></i>
+                            @elseif ($p->type==2)
+                            <span style="height: 50px !important;width: 50px !important;">
+                                {!! $p->icon !!}
+                            </span>
+                            @else
+                                <img src="{{asset($p->icon)}}" alt="icon" style="width: 50px;height: 50px;">
+                            @endif
+                            </td>
                             <td>@if($p->status==1) {{__('Show')}} @else {{__('Hide')}}
                             @endif</td>
                             <td class="white-space-nowrap">
@@ -51,6 +61,7 @@
                         @endforelse
                     </tbody>
                 </table>
+                {{ $data->links() }}
             </div>
         </div>
     </div>

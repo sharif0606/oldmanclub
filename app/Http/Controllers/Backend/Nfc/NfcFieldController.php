@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Backend\NfcField;
 use Exception;
 use Illuminate\Http\Request;
+use Nette\Utils\Validators;
 
 class NfcFieldController extends Controller
 {
@@ -23,17 +24,50 @@ class NfcFieldController extends Controller
      */
     public function create()
     {
-        return view('backend.nfc-field.create');
+        // '1 => Most Popular, 2 => Social, 3 => Communication, 4 => Payment, 5 => Video, 6=> Music, 7=> Design, 8=> Gaming, 9=> Other'
+        // '1 => text, 2=> file 3=> textarea 4=>date'
+        $type = [
+            '1' => 'Text',
+            '2' => 'Svg',
+            '3' => 'File'
+        ];
+        $categories = [
+            '1' => 'Most Popular',
+            '2' => 'Social',
+            '3' => 'Communication',
+            '4' => 'Payment',
+            '5' => 'Video',
+            '6' => 'Music',
+            '7' => 'Design',
+            '8' => 'Gaming',
+            '9' => 'Other',
+        ];
+        return view('backend.nfc-field.create', compact('type', 'categories'));;
     }
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|unique:nfc_fields,name'
+        ]);
+        $icon = $request->icon;
+        if ($request->type == 3) {
+            if ($request->hasFile('iconPic')) {
+                $imageName = rand(111, 999) . time() . '.' . $request->image->extension();
+                $request->image->move(public_path('uploads/icons'), $imageName);
+                $icon = 'uploads/icons/' . $imageName;
+            }
+        } elseif ($request->type == 2) {
+            $icon = $request->svg_icon;
+        }
         try{
             $nfcField = new NfcField;
             $nfcField->name = $request->name;
-            $nfcField->icon = $request->icon;
+            $nfcField->icon = $icon;
+            $nfcField->type = $request->type;
+            $nfcField->category = $request->category;
             $nfcField->status = $request->status;
             $nfcField->created_by = currentUserId();
             if($nfcField->save()){
@@ -41,7 +75,7 @@ class NfcFieldController extends Controller
                 return redirect()->route('nfc_field.index');
             }
         }catch(Exception $e){
-            //dd($e);
+            dd($e);
             $this->notice::error('Please try again');
             return redirect()->back()->withInput();
         }
@@ -61,7 +95,23 @@ class NfcFieldController extends Controller
     public function edit($id)
     {
         $nfcField = NfcField::findOrFail(encryptor('decrypt',$id));
-        return view('backend.nfc-field.edit',compact('nfcField'));
+        $type = [
+            '1' => 'text',
+            '2' => 'svg',
+            '3' => 'file'
+        ];
+        $categories = [
+            '1' => 'Most Popular',
+            '2' => 'Social',
+            '3' => 'Communication',
+            '4' => 'Payment',
+            '5' => 'Video',
+            '6' => 'Music',
+            '7' => 'Design',
+            '8' => 'Gaming',
+            '9' => 'Other',
+        ];
+        return view('backend.nfc-field.edit', compact('nfcField', 'type', 'categories'));
     }
 
     /**
@@ -70,9 +120,24 @@ class NfcFieldController extends Controller
     public function update(Request $request, $id)
     {
         try{
+            $request->validate([
+                'name' => 'required|unique:nfc_fields,name,' . $id
+            ]);
+            $icon = $request->icon;
+            if ($request->type == 3) {
+                if ($request->hasFile('iconPic')) {
+                    $imageName = rand(111, 999) . time() . '.' . $request->image->extension();
+                    $request->image->move(public_path('uploads/icons'), $imageName);
+                    $icon = 'uploads/icons/' . $imageName;
+                }
+            } elseif ($request->type == 2) {
+                $icon = $request->svg_icon;
+            }
             $nfcField = NfcField::findOrFail(encryptor('decrypt',$id));
             $nfcField->name = $request->name;
-            $nfcField->icon = $request->icon;
+            $nfcField->icon = $icon;
+            $nfcField->type = $request->type;
+            $nfcField->category = $request->category;
             $nfcField->status = $request->status;
             $nfcField->updated_by = currentUserId();
             if($nfcField->save()){
