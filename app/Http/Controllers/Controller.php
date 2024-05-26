@@ -10,7 +10,7 @@ use Toastr;
 class Controller extends BaseController
 {
     public $notice;
-    
+
     public function __construct()
     {
         $this->notice = new Toastr();

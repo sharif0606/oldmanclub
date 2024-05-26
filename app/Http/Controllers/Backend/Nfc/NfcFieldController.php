@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Nfc;
 
 use App\Http\Controllers\Controller;
 use App\Models\Backend\NfcField;
+use Exception;
 use Illuminate\Http\Request;
 
 class NfcFieldController extends Controller
