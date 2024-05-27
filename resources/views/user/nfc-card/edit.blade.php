@@ -144,31 +144,48 @@
                                                 @method('PATCH')
                                                 <div class="col-12 border-bottom">
                                                     <h6>Profile Photo</h6>
+                                                    <div class="row">
+                                                        <div class="col-2">
+                                                                <img class="rounded-border-10 border border-white border-3"
+                                                                    src="{{ asset('public/user/assets/images/avatar/placeholder.jpg') }}"
+                                                                    alt="profile" id="profile-picture">
+                                                        </div>
 
+                                                        <div class="col-4 py-2 offset-3">
+                                                            <div class="upload-container">
+                                                                <input type="file" id="profile" name="profile"
+                                                                    accept="image/*" onchange="previewfile(event,'profile-picture')">
+                                                                <label for="profile"
+                                                                    class="d-flex justify-content-center"><i
+                                                                        class="fas fa-images"></i>Replace Photo</label>
+                                                            </div>
+                                                            {{-- <small><strong>Recomended Size (128x128)</strong></small> --}}
+                                                        </div>
+                                                    </div>
 
                                                 </div>
                                                 <div class="col-12 py-2 border-bottom">
-                                                    <h6>Logo</h6>
+                                                    <h6>Design</h6>
                                                     <div class="row">
                                                         <div class="col-2">
                                                             @if ($client->image)
                                                                 <img class="rounded-border-10 border border-white border-3"
                                                                     src="{{ asset('public/uploads/client/' . $client->image) }}"
-                                                                    alt="" id="logo-placeholder">
+                                                                    alt="" id="design-placeholder">
                                                             @else
                                                                 <img class="avatar-img rounded-border-10 border border-white border-3"
                                                                     src="{{ asset('public/user/assets/images/avatar/placeholder.jpg') }}"
-                                                                    alt="" id="logo-placeholder">
+                                                                    alt="" id="design-placeholder">
                                                             @endif
                                                         </div>
 
                                                         <div class="col-4 py-2 offset-3">
                                                             <div class="upload-container">
-                                                                <input type="file" id="logo" name="logo"
-                                                                    accept="image/*">
-                                                                <label for="logo"
+                                                                <input type="file" id="design" name="logo"
+                                                                    accept="image/*" onchange="previewfile(event,'design-placeholder')">
+                                                                <label for="design"
                                                                     class="d-flex justify-content-center"><i
-                                                                        class="fas fa-images"></i>Add Logo</label>
+                                                                        class="fas fa-images"></i>Add Design</label>
                                                             </div>
                                                             <small><strong>Recomended Size (128x128)</strong></small>
                                                         </div>
@@ -180,31 +197,31 @@
                                                     <h6>Color</h6>
                                                     <div class="d-flex justify-content-between col-md-6 py-2">
                                                         <div class="color-box"
-                                                            style="background-color: red;width:25px;height:25px;border-radius:50%;">
+                                                            style="background-color: rgb(41, 203, 32);width:25px;height:25px;border-radius:50%;">
                                                         </div>
                                                         <div class="color-box"
                                                             style="background-color: red;width:25px;height:25px;border-radius:50%;">
                                                         </div>
                                                         <div class="color-box"
-                                                            style="background-color: red;width:25px;height:25px;border-radius:50%;">
+                                                            style="background-color: rgb(0, 247, 255);width:25px;height:25px;border-radius:50%;">
                                                         </div>
                                                         <div class="color-box"
-                                                            style="background-color: red;width:25px;height:25px;border-radius:50%;">
+                                                            style="background-color: rgb(195, 0, 255);width:25px;height:25px;border-radius:50%;">
                                                         </div>
                                                         <div class="color-box"
-                                                            style="background-color: red;width:25px;height:25px;border-radius:50%;">
+                                                            style="background-color: rgb(255, 0, 183);width:25px;height:25px;border-radius:50%;">
                                                         </div>
                                                         <div class="color-box"
-                                                            style="background-color: red;width:25px;height:25px;border-radius:50%;">
+                                                            style="background-color: rgb(242, 255, 0);width:25px;height:25px;border-radius:50%;">
                                                         </div>
                                                         <div class="color-box"
-                                                            style="background-color: red;width:25px;height:25px;border-radius:50%;">
+                                                            style="background-color: rgb(0, 255, 115);width:25px;height:25px;border-radius:50%;">
                                                         </div>
                                                         <div class="color-box"
-                                                            style="background-color: red;width:25px;height:25px;border-radius:50%;">
+                                                            style="background-color: rgb(25, 0, 255);width:25px;height:25px;border-radius:50%;">
                                                         </div>
                                                         <div class="color-box"
-                                                            style="background-color: red;width:25px;height:25px;border-radius:50%;">
+                                                            style="background-color: rgb(221, 0, 255);width:25px;height:25px;border-radius:50%;">
                                                         </div>
                                                         <div class="color-box"
                                                             style="background-color: red;width:25px;height:25px;border-radius:50%;">
@@ -229,7 +246,7 @@
                                                         <div class="col-4 py-2 offset-3">
                                                             <div class="upload-container">
                                                                 <input type="file" id="logo" name="logo"
-                                                                    accept="image/*">
+                                                                    accept="image/*" onchange="previewfile(event,'logo-placeholder')">
                                                                 <label for="logo"
                                                                     class="d-flex justify-content-center"><i
                                                                         class="fas fa-images"></i>Add Logo</label>
@@ -245,18 +262,18 @@
                                                             @if ($nfc_card->card_design->badges)
                                                                 <img class="rounded-border-10 border border-white border-3"
                                                                     src="{{ asset('public/uploads/client/' . $client->image) }}"
-                                                                    alt="" id="logo-placeholder">
+                                                                    alt="" id="badge-placeholder">
                                                             @else
                                                                 <img class="avatar-img rounded-border-10 border border-white border-3"
                                                                     src="{{ asset('public/user/assets/images/avatar/placeholder.jpg') }}"
-                                                                    alt="" id="logo-placeholder">
+                                                                    alt="" id="badge-placeholder">
                                                             @endif
                                                         </div>
                                                         <div class="col-4 py-2 offset-3">
                                                             <div class="upload-container">
-                                                                <input type="file" id="logo" name="logo"
-                                                                    accept="image/*">
-                                                                <label for="logo"
+                                                                <input type="file" id="badge" name="logo"
+                                                                    accept="image/*"onchange="previewfile(event,'badge-placeholder')" >
+                                                                <label for="badge"
                                                                     class="d-flex justify-content-center"><i
                                                                         class="fas fa-images"></i>Add Badge</label>
                                                             </div>
@@ -455,6 +472,9 @@
         </div>
     </div><!-- Row END -->
     <script>
+
+
+
         const colorBox = document.getElementById('colorBox');
 
         colorBox.addEventListener('click', function() {
@@ -462,3 +482,12 @@
         });
     </script>
 @endsection
+@push('scripts')
+<script>
+
+ function previewfile(event, previewimg = 'previewimg') {
+			var output = document.getElementById(previewimg);
+			output.src = URL.createObjectURL(event.target.files[0]);
+		}
+</script>
+@endpush

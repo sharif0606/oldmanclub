@@ -132,13 +132,7 @@ class NfcCardController extends Controller
         $client = Client::find(currentUserId());
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
         $nfc_info = NfcInformation::find($id);
-        $nfc_fields = NfcField::where('status', 1)->orderBy('category')->get();
         $postCount = Post::where('client_id', currentUserId())->count();
-        $type = [
-            '1' => 'Text',
-            '2' => 'Svg',
-            '3' => 'File'
-        ];
         $categories = [
             '1' => 'Most Popular',
             '2' => 'Social',
@@ -150,7 +144,7 @@ class NfcCardController extends Controller
             '8' => 'Gaming',
             '9' => 'Other',
         ];
-        return view('user.nfc-card.edit', compact('categories','nfc_fields', 'nfc_card', 'nfc_info','client','postCount'));
+        return view('user.nfc-card.edit', compact('categories', 'nfc_card', 'nfc_info', 'client', 'postCount'));
     }
 
     /**
