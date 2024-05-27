@@ -154,7 +154,7 @@
                                                         <div class="col-4 py-2 offset-3">
                                                             <div class="upload-container">
                                                                 <input type="file" id="profile" name="profile"
-                                                                    accept="image/*" onchange="previewfile(event,'profile-picture')">
+                                                                    accept="image/*" onchange="previewfile(event,'profile-picture');previewfile(event,'diplay-profile-pic')">
                                                                 <label for="profile"
                                                                     class="d-flex justify-content-center"><i
                                                                         class="fas fa-images"></i>Replace Photo</label>
@@ -272,7 +272,7 @@
                                                         <div class="col-4 py-2 offset-3">
                                                             <div class="upload-container">
                                                                 <input type="file" id="badge" name="logo"
-                                                                    accept="image/*"onchange="previewfile(event,'badge-placeholder')" >
+                                                                    accept="image/*" onchange="previewfile(event,'badge-placeholder')" >
                                                                 <label for="badge"
                                                                     class="d-flex justify-content-center"><i
                                                                         class="fas fa-images"></i>Add Badge</label>

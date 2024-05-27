@@ -15,8 +15,8 @@
                     height="350px" id="diplay-profile-pic">
                 <!-- <div class="main-img" style="background-image: url({{ asset('public/uploads/client/' . $nfc_card->client?->image) }})"></div> -->
             @else
-                <img src="{{ asset('public/assets/nfc/images/123.png') }}" alt="" width="100%">
-                <!-- <div class="main-img" style="background-image: url({{ asset('public/assets/nfc/images/123.png') }})">
+                <img src="{{ asset('public/assets/nfc/images/123.png') }}" alt="" width="100%" id="diplay-profile-pic">
+                <!-- <div class="main-img" style="background-image: url({{ asset('public/assets/nfc/images/123.png') }})" id="diplay-profile-pic">
                 </div> -->
             @endif
 
