@@ -12,11 +12,11 @@
         <div class="classic_header_image_show">
             @if ($nfc_card->client?->image)
                 <img src="{{ asset('public/uploads/client/' . $nfc_card->client?->image) }}" alt="" width="350px"
-                    height="350px">
+                    height="350px" id="diplay-profile-pic">
                 <!-- <div class="main-img" style="background-image: url({{ asset('public/uploads/client/' . $nfc_card->client?->image) }})"></div> -->
             @else
-                <img src="{{ asset('public/assets/nfc/images/123.png') }}" alt="" width="100%">
-                <!-- <div class="main-img" style="background-image: url({{ asset('public/assets/nfc/images/123.png') }})">
+                <img src="{{ asset('public/assets/nfc/images/123.png') }}" alt="" width="100%" id="diplay-profile-pic">
+                <!-- <div class="main-img" style="background-image: url({{ asset('public/assets/nfc/images/123.png') }})" id="diplay-profile-pic">
                 </div> -->
             @endif
 
@@ -61,57 +61,26 @@
         <div class="container-fluid mt-2">
             <div class="row">
                 <div class="col-sm-12">
-                    @if ($nfc_card->nfc_info?->prefix)
-                        <span class="fs-4 fw-bold">{{ $nfc_card->nfc_info?->prefix }}</span>
-                    @else
-                        {{-- <span class="fs-4 fw-bold">Dr.</span> --}}
-                    @endif
-                    <span class="fs-4 fw-bold">{{ $nfc_card->client?->fname }}</span>
-                    <span class="fs-4 fw-bold">{{ $nfc_card->client?->middle_name }}</span>
-                    <span class="fs-4 fw-bold">{{ $nfc_card->client?->last_name }}</span>
+                    <span class="fs-4 fw-bold" id="prefix-name">{{ $nfc_card->nfc_info?->prefix ?? '' }}</span>
+                    <span class="fs-4 fw-bold" id="f-name">{{ $nfc_card->client?->fname ?? '' }}</span>
+                    <span class="fs-4 fw-bold" id="m-name">{{ $nfc_card->client?->middle_name ?? '' }}</span>
+                    <span class="fs-4 fw-bold" id="l-name">{{ $nfc_card->client?->last_name ?? '' }}</span>
 
                     <div>
-                        @if ($nfc_card->nfc_info?->suffix)
-                            <span class="fs-4 fw-bold">{{ $nfc_card->nfc_info?->suffix }}</span>
-                        @else
-                            {{-- <span class="fs-4 fw-bold">FCP</span> --}}
-                        @endif
-                        <span class="fs-4 fw-bold">
-                            @if ($nfc_card->nfc_info?->maiden_name)
-                                ({{ $nfc_card->nfc_info?->maiden_name }})
-                            @else
-                                {{-- (Shuvo) --}}
-                            @endif
-                        </span>
-                        @if ($nfc_card->nfc_info?->accreditations)
-                            <span>&nbsp;{{ $nfc_card->nfc_info?->accreditations }}</span>
-                        @else
-                            {{-- <span>&nbsp;FCPS</span> --}}
-                        @endif
+                        <span class="fs-4 fw-bold" id="suffix-name">{{ $nfc_card->nfc_info?->suffix ?? ''}}</span>
+                        <span class="fs-4 fw-bold" id="maiden_name">{{ $nfc_card->nfc_info?->maiden_name ?? '' }}</span>
+                            <span id="accreditations">&nbsp;{{ $nfc_card->nfc_info?->accreditations ?? '' }}</span>
                     </div>
                 </div>
             </div>
             <div class="row">
-                @if ($nfc_card->nfc_info?->title)
-                    <p class="text-justify">{{ $nfc_card->nfc_info?->title }}</p>
-                @else
-                    <p class="text-justify">
-                        { Insert Desrption }
-                    </p>
-                @endif
+                    <p class="text-justify" id="field-title">{{ $nfc_card->nfc_info?->title ?? '' }}</p>
             </div>
             <div class="row">
                 <div>
-                    @if ($nfc_card->nfc_info?->department)
-                        <span class="fs-5 fw-bold">{{ $nfc_card->nfc_info?->department }}</span>
-                    @else
-                        {{-- <span class="fs-5 fw-bold">Software Development</span> --}}
-                    @endif
-                    @if ($nfc_card->nfc_info?->company)
-                        <p class="fs-6 fw-bold">{{ $nfc_card->nfc_info?->company }}</p>
-                    @else
-                        {{-- <p class="fs-6 fst-italic">Muktodhara Technology Limited</p> --}}
-                    @endif
+                    <span class="fs-5 fw-bold" id="deprtment">{{ $nfc_card->nfc_info?->department ?? ''}}</span>
+                        <p class="fs-6 fw-bold" id="company">{{ $nfc_card->nfc_info?->company ?? '' }}</p>
+                        <span class="fs-5 fw-bold" >{{ $nfc_card->nfc_info?->department ?? ''}}</span>
                 </div>
             </div>
         </div>
@@ -119,11 +88,7 @@
     <section style="padding: 0px !important">
         <div class="container-fluid px-3">
             <div class="row">
-                @if ($nfc_card->nfc_info?->headline)
-                    <p class="my-1">{{ $nfc_card->nfc_info?->headline }}</p>
-                @else
-                    {{-- <p class="my-1 fs-6 text-secondary">Our Concern</p> --}}
-                @endif
+                    <p class="my-1" id="headline">{{ $nfc_card->nfc_info?->headline ?? '' }}</p>
 
                 <div class="d-flex my-1">
                     <svg class="text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -133,11 +98,7 @@
                             clip-rule="evenodd" />
                     </svg>
                     <span class="card_owner">
-                        @if ($nfc_card->nfc_info?->preferred_name)
-                            Goes by {{ $nfc_card->nfc_info?->preferred_name }}
-                        @else
-                            {{-- Kaisar (sam) --}}
-                        @endif
+                            Goes by <span class="text-dark" id="preferred_name">{{ $nfc_card->nfc_info?->preferred_name ?? ''}}</span>
                     </span>
                 </div>
             </div>

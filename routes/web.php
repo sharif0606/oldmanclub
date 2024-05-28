@@ -233,7 +233,7 @@ Route::get('client/login', [clientauth::class, 'signInForm'])->name('clientlogin
 Route::post('client/login', [clientauth::class, 'signInCheck'])->name('clientlogin.check');
 Route::get('client/logout', [clientauth::class, 'singOut'])->name('clientlogOut');
 Route::get('client/forget-password', [clientauth::class, 'forget_password'])->name('client_forget_password');
-Route::post('forget-password', [clientauth::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
+Route::post('forget-password', [clientauth::class, 'submitForgetPasswordForm'])->name('forget.password.post');
 Route::get('reset-password/{token}', [clientauth::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password', [clientauth::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
@@ -254,8 +254,8 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::get('comment-reaction-update', [commentreaction::class,'comment_reaction_update'])->name('comment-reaction-update');
     Route::get('reply-reaction-update', [replyreaction::class,'reply_reaction_update'])->name('reply-reaction-update');
     Route::get('gathering', [clientprofile::class, 'gathering'])->name('gathering');
-   
-    
+
+
 
     Route::resource('phonebook', phonebook::class);
     Route::resource('phonegroup', phonegroup::class);
@@ -296,7 +296,7 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::post('post-update', [post::class, 'post_update'])->name('postUpdate');
     Route::resource('purchase', purchase::class);
 
-    
+
 
 });
 
