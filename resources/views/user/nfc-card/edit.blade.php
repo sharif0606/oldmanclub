@@ -3,6 +3,11 @@
 @push('styles')
     <link rel="stylesheet" href="{{ asset('public/assets/nfc/styles.css') }}" />
     <style>
+        .edit-nav-profile{
+            position: sticky;
+            top: 0;
+            background: white;
+        }
         .social-field-title {
             color: #718096;
             font-size: 0.85rem;
@@ -118,7 +123,7 @@
                                 @endif
                             </div>
                             <div class="col-md-8 nfc-data-previewer">
-                                <ul class="nav nav-tabs nav-bottom-line justify-content-center justify-content-md-start"
+                                <ul class="edit-nav-profile nav nav-tabs nav-bottom-line justify-content-center justify-content-md-start"
                                     role="tablist">
                                     <li class="nav-item" role="presentation"> <a class="nav-link active"
                                             data-bs-toggle="tab" href="#tab-1" aria-selected="true"
@@ -293,81 +298,81 @@
                                                 <div class="col-8 form-group">
                                                     <label for="">Prefix</label>
                                                     <input type="text" name="prefix"
-                                                        value="{{ $nfc_card->nfc_info->prefix }}"
-                                                        class="form-control form-control-sm">
+                                                        value="{{ $nfc_card->nfc_info?->prefix ?? '' }}"
+                                                        class="form-control form-control-sm mb-2 mt-1 mb-2" onkeyup="$('#prefix-name').text($(this).val());">
                                                 </div>
                                                 <div class="col-8 form-group">
                                                     <label for="">First Name</label>
                                                     <input type="text" name="prefix"
-                                                        value="{{ $nfc_card->nfc_info->prefix }}"
-                                                        class="form-control form-control-sm">
+                                                        value="{{ $nfc_card->client?->fname ?? '' }}"
+                                                        class="form-control form-control-sm mb-2 mt-1" onkeyup="$('#f-name').text($(this).val());">
                                                 </div>
                                                 <div class="col-8 form-group">
                                                     <label for="">Middle Name</label>
                                                     <input type="text" name="prefix"
-                                                        value="{{ $nfc_card->nfc_info->prefix }}"
-                                                        class="form-control form-control-sm">
+                                                        value="{{ $nfc_card->client?->middle_name ?? '' }}"
+                                                        class="form-control form-control-sm mb-2 mt-1" onkeyup="$('#m-name').text($(this).val());">
                                                 </div>
                                                 <div class="col-8 form-group">
                                                     <label for="">Last Name</label>
                                                     <input type="text" name="prefix"
-                                                        value="{{ $nfc_card->nfc_info->prefix }}"
-                                                        class="form-control form-control-sm">
+                                                        value="{{ $nfc_card->client?->last_name ?? '' }}"
+                                                        class="form-control form-control-sm mb-2 mt-1" onkeyup="$('#l-name').text($(this).val());">
                                                 </div>
                                                 <div class="col-8 form-group">
                                                     <label for="">Suffix</label>
                                                     <input type="text" name="suffix"
-                                                        value="{{ $nfc_card->nfc_info->suffix }}" id=""
-                                                        class="form-control form-control-sm">
+                                                        value="{{ $nfc_card->nfc_info?->suffix ?? ''}}" id=""
+                                                        class="form-control form-control-sm mb-2 mt-1" onkeyup="$('#suffix-name').text($(this).val());">
                                                 </div>
                                                 <div class="col-8 form-group">
                                                     <label for="">Accreditations</label>
                                                     <input type="text" name="accreditations"
-                                                        value="{{ $nfc_card->nfc_info->accreditations }}" id=""
-                                                        class="form-control form-control-sm">
+                                                        value="{{ $nfc_card->nfc_info->accreditations ?? '' }}" id=""
+                                                        class="form-control form-control-sm mb-2 mt-1" onkeyup="$('#accreditations').text($(this).val());">
                                                 </div>
                                                 <div class="col-8 form-group">
                                                     <label for="">Preferred Name</label>
                                                     <input type="text" name="preferred_name"
                                                         value="{{ $nfc_card->nfc_info->preferred_name }}" id=""
-                                                        class="form-control">
+                                                        class="form-control" onkeyup="$('#preferred_name').text($(this).val());">
                                                 </div>
                                                 <div class="col-8 form-group">
                                                     <label for="">Maiden Name</label>
                                                     <input type="text" name="maiden_name"
                                                         value="{{ $nfc_card->nfc_info->maiden_name }}" id=""
-                                                        class="form-control form-control-sm">
+                                                        class="form-control form-control-sm mb-2 mt-1" onkeyup="$('#accreditations').text($(this).val());">
                                                 </div>
                                                 <div class="col-8 form-group">
                                                     <label for="">Pronoun</label>
                                                     <input type="text" name="pronoun"
                                                         value="{{ $nfc_card->nfc_info->pronoun }}" id=""
-                                                        class="form-control form-control-sm">
+                                                        class="form-control form-control-sm mb-2 mt-1" onkeyup="$('#accreditations').text($(this).val());">
                                                 </div>
                                             </div>
-                                            <h6 class="border-bottom">Affiliation</h6>
+                                            <h6 class="border-bottom py-4">Affiliation</h6>
                                             <div class="row">
                                                 <div class="col-8 form-group">
                                                     <label for="">Title</label>
-                                                    <textarea name="title" id="" class="form-control form-control-sm" name="pronoun">{{ $nfc_card->nfc_info->title }}</textarea>
+                                                    <textarea name="title" onkeyup="$('#field-title').text($(this).val());" class="form-control form-control-sm mb-2 mt-1" name="pronoun">{{ $nfc_card->nfc_info->title ?? ''}}</textarea>
                                                 </div>
                                                 <div class="col-8 form-group">
                                                     <label for="">Department</label>
                                                     <input type="text" name="department"
                                                         value="{{ $nfc_card->nfc_info->department }}" id=""
-                                                        class="form-control form-control-sm">
+                                                        class="form-control form-control-sm mb-2 mt-1"  onkeyup="$('#deprtment').text($(this).val());" >
                                                 </div>
                                                 <div class="col-8 form-group">
                                                     <label for="">Company</label>
                                                     <input type="text" name="company"
-                                                        value="{{ $nfc_card->nfc_info->company }}" id=""
-                                                        class="form-control form-control-sm">
+                                                        value="{{ $nfc_card->nfc_info->company ?? ''}}"
+                                                        class="form-control form-control-sm mb-2 mt-1"onkeyup="$('#company').text($(this).val());" >
                                                 </div>
                                                 <div class="col-8 form-group">
                                                     <label for="">Headline</label>
                                                     <input type="text" name="headline"
-                                                        value="{{ $nfc_card->nfc_info->headline }}" id=""
-                                                        class="form-control form-control-sm">
+                                                        value="{{ $nfc_card->nfc_info->headline }}"
+                                                        class="form-control form-control-sm mb-2 mt-1" onkeyup="$('#headline').text($(this).val());">
                                                 </div>
                                             </div>
                                         </div>
@@ -459,10 +464,30 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="tab-pane fade" id="tab-4" role="tabpanel">
+                                        <div class="px-2">
+                                            <div class="col-12">
+                                                <div class="col-8 form-group">
+                                                <div style="background: #E2E8F0;color:#718096 border:transparent;" class="alert" role="alert">
+                                                    <svg style="width: 20px;height:20px" viewBox="0 0 14 15" focusable="false" class="chakra-icon chakra-icon css-l30hbq"><g fill="currentColor" stroke="currentColor" stroke-linecap="square" stroke-width="2"><circle cx="12" cy="12" fill="none" r="11" stroke="currentColor"></circle><line fill="none" x1="11.959" x2="11.959" y1="11" y2="17"></line><circle cx="11.959" cy="7" r="1" stroke="none"></circle></g></svg>
+                                                    This field does not appear on the card.
+                                                </div>
+                                                    <label for="">Name</label>
+                                                    <input type="text" name="card_name"
+                                                        value="{{ $nfc_card->card_name ?? 'Work' }}" id="card-name"
+                                                        class="form-control form-control-sm" onkeyup="$('#card-name').text($(this).val());">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Photos of you tab END -->
+                    </div>
+                    <div class="" style="position: sticky;bottom:0;float:right;">
+                        <button type="button" class="btn btn-light" >Cancel</button>
+                        <button type="button" class="btn btn-info">Save</button>
                     </div>
                     <!-- Album Tab content END -->
                 </div>
@@ -486,8 +511,8 @@
 <script>
 
  function previewfile(event, previewimg = 'previewimg') {
-			var output = document.getElementById(previewimg);
-			output.src = URL.createObjectURL(event.target.files[0]);
-		}
+    var output = document.getElementById(previewimg);
+    output.src = URL.createObjectURL(event.target.files[0]);
+}
 </script>
 @endpush
