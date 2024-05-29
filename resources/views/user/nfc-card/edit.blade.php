@@ -627,13 +627,10 @@
     <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
     <script>
         // $(document).ready(function() {
-            $("#dragger").click(function() {
-            // $("#draggerContent").draggable();
-            $("#draggable").sortable({
-                handle: ".draggable-item",
-                cursor: "move"
-            });
-            });
+            // $("#dragger").click(function() {
+            // // $("#draggerContent").draggable();
+            // $("#draggable").sortable();
+            // });
 
            function addDraggableContent(icon, text) {
         var draggableContent = `
@@ -675,11 +672,8 @@
                 </div>
             </div>`;
                 $("#draggable").append(draggableContent);
-                $("#draggable").sortable({
-                    handle: ".draggable-item",
-                    cursor: "move"
-                });
-                $("#draggerContent:last-child").draggable();
+                $("#draggable:last-child").sortable();
+                // $("#draggerContent:last-child").sortable();
             }
 
             function removeDraggableContent(btn) {
