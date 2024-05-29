@@ -24,6 +24,31 @@
             width: 100%;
             margin-top: .5rem;
         }
+
+        .btn-nfc{
+                background: transparent;
+                color:#2D3748 !important;
+                border: 1px solid;
+                    border-top-color: currentcolor;
+                    border-right-color: currentcolor;
+                    border-bottom-color: currentcolor;
+                    border-left-color: currentcolor;
+                border-color: #8F60DE;
+                border-radius: .5rem;
+                cursor: pointer;
+                gap: .5rem;
+                opacity: 1;
+
+        }
+        /* .btn-nfc span{
+
+                color:#718096;
+        } */
+        .btn-nfc:hover{
+            background-color: #8F60DE26 !important;
+            color:#2D3748 !important;
+            border-color: #8F60DE !important;
+        }
         .card-dragger-header {}
 
         .remove-button {
@@ -446,7 +471,7 @@
                                                 <div class="col-12">
                                                     {{-- <h6 class="border-bottom">NFC Field</h6> --}}
                                                     <div class="row">
-                                                        <div class="col-md-7">
+                                                        <div class="col-md-8">
                                                             <div id="draggable" class="card p-3 text-white"
                                                                 style="max-height:auto;z-index:1;overflow-y:scroll;background-color:#E2E8F0;border: 2px white dashed;">
                                                                 <div id="draggerContent" class="card px-4 py-2">
@@ -507,7 +532,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-5 pb-2" id="field-gallery"
+                                                        <div class="col-md-4 pb-2" id="field-gallery"
                                                             style="max-height:auto;/*overflow-y:scroll*/;background-color:#8F60DE26;">
                                                             @foreach ($categories as $key => $category)
                                                                 @php
@@ -529,7 +554,7 @@
                                                                             data-field="{{ $value->name }}"
                                                                             data-id="{{ $value->id }}"
                                                                             style="margin:2px 1px"
-                                                                            class="field-item btn btn-primary btn-sm text-white rounded-pill"><span
+                                                                            class="field-item btn btn-nfc btn-sm rounded-md"><span
                                                                                 class="mx-1"><i
                                                                                     class="{{ $value->icon }}"></i></span>{{ $value->name }}</button>
                                                                     @elseif ($value->type == 2)
@@ -545,7 +570,7 @@
                                                                             data-field="{{ $value->name }}"
                                                                             data-id="{{ $value->id }}"
                                                                             style="margin:2px 1px"
-                                                                            class="field-item btn btn-primary btn-sm text-white rounded-pill">
+                                                                            class="field-item btn btn-nfc btn-sm rounded-md">
                                                                             <span
                                                                                 class="mx-1">
                                                                                 {!! $icon !!}</span>{{ $value->name }}</button>
@@ -555,7 +580,7 @@
                                                                             data-field="{{ $value->name }}"
                                                                             data-id="{{ $value->id }}"
                                                                             style="margin:2px 1px"
-                                                                            class="field-item btn btn-primary btn-sm text-white rounded-pill"><span
+                                                                            class="field-item btn btn-nfc btn-sm rounded-md"><span
                                                                                 class="mx-1">
                                                                                 <img src="{{ $value->icon }}" alt="icon"
                                                                                     height="50" weight="50">
