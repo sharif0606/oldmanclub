@@ -144,7 +144,7 @@ class NfcCardController extends Controller
             '8' => 'Gaming',
             '9' => 'Other',
         ];
-        return view('user.nfc-card.edit', compact('categories', 'nfc_card', 'nfc_info', 'client', 'postCount'));
+        return view('user.nfc-card.edit', compact('id','categories', 'nfc_card', 'nfc_info', 'client', 'postCount'));
     }
 
     /**

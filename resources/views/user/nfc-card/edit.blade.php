@@ -3,11 +3,50 @@
 @push('styles')
     <link rel="stylesheet" href="{{ asset('public/assets/nfc/styles.css') }}" />
     <style>
-        .edit-nav-profile{
+        .image-container {
+            display: inline-block;
+            position: relative;
+            margin: 5px;
+        }
+
+        .image-container img {
+            width: 100px;
+            height: 100px;
+        }
+
+        .input-group-prepend{
+            display: flex;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 0 .5rem;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-top: .5rem;
+        }
+        .card-dragger-header {}
+
+        .remove-button {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: rgb(100, 98, 98);
+            color: rgb(232, 227, 227);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            width: 15px;
+            height: 15px;
+            text-align: center;
+            line-height: 18px;
+        }
+
+        .edit-nav-profile {
             position: sticky;
             top: 0;
             background: white;
         }
+
         .social-field-title {
             color: #718096;
             font-size: 0.85rem;
@@ -81,6 +120,15 @@
             font-weight: bold;
         }
 
+        .color-box {
+            outline: transparent;
+            border: transparent;
+            background-color: rgb(41, 203, 32);
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+        }
+
         label i.fas {
             padding: 3px;
         }
@@ -108,387 +156,458 @@
                 <!-- Card header START -->
                 <!-- Card body START -->
                 <div class="card-body">
+                     <form  action="{{ route('nfc_card.update', encryptor('encrypt', $nfc_card->id)) }}"
+                            method="post" class="row">
+                            @csrf
+                            @method('PATCH')
                     <!-- Album Tab content START -->
-                    <div class="mb-0 pb-5">
-                        <div class="row g-3">
-                            <div class="col-md-4 nfc-previewer">
-                                @if ($nfc_card->card_design?->design_card_id == 1)
-                                    @include('user.nfc-template_show.classic-template')
-                                @elseif($nfc_card->card_design?->design_card_id == 2)
-                                    @include('user.nfc-template_show.flat-template')
-                                @elseif($nfc_card->card_design?->design_card_id == 3)
-                                    @include('user.nfc-template_show.modern-template')
-                                @elseif($nfc_card->card_design?->design_card_id == 4)
-                                    @include('user.nfc-template_show.sleek-template')
-                                @endif
-                            </div>
-                            <div class="col-md-8 nfc-data-previewer">
-                                <ul class="edit-nav-profile nav nav-tabs nav-bottom-line justify-content-center justify-content-md-start"
-                                    role="tablist">
-                                    <li class="nav-item" role="presentation"> <a class="nav-link active"
-                                            data-bs-toggle="tab" href="#tab-1" aria-selected="true"
-                                            role="tab">Display</a> </li>
-                                    <li class="nav-item" role="presentation"> <a class="nav-link" data-bs-toggle="tab"
-                                            href="#tab-2" aria-selected="false" tabindex="-1"
-                                            role="tab">Information</a></li>
-                                    <li class="nav-item" role="presentation"> <a class="nav-link" data-bs-toggle="tab"
-                                            href="#tab-3" aria-selected="false" tabindex="-1" role="tab">Fields</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation"> <a class="nav-link" data-bs-toggle="tab"
-                                            href="#tab-4" aria-selected="false" tabindex="-1" role="tab">Card</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content mb-0 pb-0">
+                        <div class="mb-0 pb-5">
+                            <div class="row g-3">
+                                <div class="col-md-4 nfc-previewer">
+                                    @if ($nfc_card->card_design?->design_card_id == 1)
+                                        @include('user.nfc-template_show.classic-template')
+                                    @elseif($nfc_card->card_design?->design_card_id == 2)
+                                        @include('user.nfc-template_show.flat-template')
+                                    @elseif($nfc_card->card_design?->design_card_id == 3)
+                                        @include('user.nfc-template_show.modern-template')
+                                    @elseif($nfc_card->card_design?->design_card_id == 4)
+                                        @include('user.nfc-template_show.sleek-template')
+                                    @endif
+                                </div>
+                                <div class="col-md-8 nfc-data-previewer">
+                                    <ul style="z-index: 4;" class="edit-nav-profile nav nav-tabs nav-bottom-line justify-content-center justify-content-md-start"
+                                        role="tablist">
+                                        <li class="nav-item" role="presentation"> <a class="nav-link active"
+                                                data-bs-toggle="tab" href="#tab-1" aria-selected="true"
+                                                role="tab">Display</a> </li>
+                                        <li class="nav-item" role="presentation"> <a class="nav-link" data-bs-toggle="tab"
+                                                href="#tab-2" aria-selected="false" tabindex="-1"
+                                                role="tab">Information</a></li>
+                                        <li class="nav-item" role="presentation"> <a class="nav-link" data-bs-toggle="tab"
+                                                href="#tab-3" aria-selected="false" tabindex="-1" role="tab">Fields</a>
+                                        </li>
+                                        <li class="nav-item" role="presentation"> <a class="nav-link" data-bs-toggle="tab"
+                                                href="#tab-4" aria-selected="false" tabindex="-1" role="tab">Card</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content mb-0 pb-0">
 
-                                    <div class="tab-pane fade show active" id="tab-1" role="tabpanel">
-                                        <div class="px-2">
-                                            <form
-                                                action="{{ route('nfc_card.update', encryptor('encrypt', $nfc_card->id)) }}"
-                                                method="post" class="row">
-                                                @csrf
-                                                @method('PATCH')
-                                                <div class="col-12 border-bottom">
-                                                    <h6>Profile Photo</h6>
-                                                    <div class="row">
-                                                        <div class="col-2">
+                                        <div class="tab-pane fade show active" id="tab-1" role="tabpanel">
+                                            <div class="px-2">
+
+                                                    <div class="col-12 border-bottom">
+                                                        <h6>Profile Photo</h6>
+                                                        <div class="row">
+                                                            <div class="col-2">
                                                                 <img class="rounded-border-10 border border-white border-3"
                                                                     src="{{ asset('public/user/assets/images/avatar/placeholder.jpg') }}"
                                                                     alt="profile" id="profile-picture">
-                                                        </div>
-
-                                                        <div class="col-4 py-2 offset-3">
-                                                            <div class="upload-container">
-                                                                <input type="file" id="profile" name="profile"
-                                                                    accept="image/*" onchange="previewfile(event,'profile-picture');previewfile(event,'diplay-profile-pic')">
-                                                                <label for="profile"
-                                                                    class="d-flex justify-content-center"><i
-                                                                        class="fas fa-images"></i>Replace Photo</label>
                                                             </div>
-                                                            {{-- <small><strong>Recomended Size (128x128)</strong></small> --}}
-                                                        </div>
-                                                    </div>
 
-                                                </div>
-                                                <div class="col-12 py-2 border-bottom">
-                                                    <h6>Design</h6>
-                                                    <div class="row">
-                                                        <div class="col-2">
-                                                            @if ($client->image)
-                                                                <img class="rounded-border-10 border border-white border-3"
-                                                                    src="{{ asset('public/uploads/client/' . $client->image) }}"
-                                                                    alt="" id="design-placeholder">
-                                                            @else
-                                                                <img class="avatar-img rounded-border-10 border border-white border-3"
-                                                                    src="{{ asset('public/user/assets/images/avatar/placeholder.jpg') }}"
-                                                                    alt="" id="design-placeholder">
-                                                            @endif
-                                                        </div>
-
-                                                        <div class="col-4 py-2 offset-3">
-                                                            <div class="upload-container">
-                                                                <input type="file" id="design" name="logo"
-                                                                    accept="image/*" onchange="previewfile(event,'design-placeholder')">
-                                                                <label for="design"
-                                                                    class="d-flex justify-content-center"><i
-                                                                        class="fas fa-images"></i>Add Design</label>
-                                                            </div>
-                                                            <small><strong>Recomended Size (128x128)</strong></small>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="col-12 py-2 border-bottom">
-                                                    <h6>Color</h6>
-                                                    <div class="d-flex justify-content-between col-md-6 py-2">
-                                                        <div class="color-box"
-                                                            style="background-color: rgb(41, 203, 32);width:25px;height:25px;border-radius:50%;">
-                                                        </div>
-                                                        <div class="color-box"
-                                                            style="background-color: red;width:25px;height:25px;border-radius:50%;">
-                                                        </div>
-                                                        <div class="color-box"
-                                                            style="background-color: rgb(0, 247, 255);width:25px;height:25px;border-radius:50%;">
-                                                        </div>
-                                                        <div class="color-box"
-                                                            style="background-color: rgb(195, 0, 255);width:25px;height:25px;border-radius:50%;">
-                                                        </div>
-                                                        <div class="color-box"
-                                                            style="background-color: rgb(255, 0, 183);width:25px;height:25px;border-radius:50%;">
-                                                        </div>
-                                                        <div class="color-box"
-                                                            style="background-color: rgb(242, 255, 0);width:25px;height:25px;border-radius:50%;">
-                                                        </div>
-                                                        <div class="color-box"
-                                                            style="background-color: rgb(0, 255, 115);width:25px;height:25px;border-radius:50%;">
-                                                        </div>
-                                                        <div class="color-box"
-                                                            style="background-color: rgb(25, 0, 255);width:25px;height:25px;border-radius:50%;">
-                                                        </div>
-                                                        <div class="color-box"
-                                                            style="background-color: rgb(221, 0, 255);width:25px;height:25px;border-radius:50%;">
-                                                        </div>
-                                                        <div class="color-box"
-                                                            style="background-color: red;width:25px;height:25px;border-radius:50%;">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12 py-2 border-bottom">
-                                                    <h6>Logo</h6>
-                                                    <div class="row">
-                                                        <div class="col-2">
-                                                            @if ($nfc_card->card_design->logo)
-                                                                <img class="rounded-border-10 border border-white border-3"
-                                                                    src="{{ asset('public/uploads/client/' . $client->image) }}"
-                                                                    alt="" id="logo-placeholder">
-                                                            @else
-                                                                <img class="avatar-img rounded-border-10 border border-white border-3"
-                                                                    src="{{ asset('public/user/assets/images/avatar/placeholder.jpg') }}"
-                                                                    alt="" id="logo-placeholder">
-                                                            @endif
-                                                        </div>
-                                                        <div class="col-4 py-2 offset-3">
-                                                            <div class="upload-container">
-                                                                <input type="file" id="logo" name="logo"
-                                                                    accept="image/*" onchange="previewfile(event,'logo-placeholder')">
-                                                                <label for="logo"
-                                                                    class="d-flex justify-content-center"><i
-                                                                        class="fas fa-images"></i>Add Logo</label>
+                                                            <div class="col-4 py-2 offset-3">
+                                                                <div class="upload-container">
+                                                                    <input type="file" id="profile" name="profile"
+                                                                        accept="image/*"
+                                                                        onchange="previewfile(event,'profile-picture');previewfile(event,'diplay-profile-pic')">
+                                                                    <label for="profile"
+                                                                        class="d-flex justify-content-center"><i
+                                                                            class="fas fa-images"></i>Replace Photo</label>
+                                                                </div>
+                                                                {{-- <small><strong>Recomended Size (128x128)</strong></small> --}}
                                                             </div>
                                                         </div>
+
                                                     </div>
-
-                                                </div>
-                                                <div class="col-12 py-2 border-bottom">
-                                                    <h6>Badge</h6>
-                                                    <div class="row">
-                                                        <div class="col-2">
-                                                            @if ($nfc_card->card_design->badges)
-                                                                <img class="rounded-border-10 border border-white border-3"
-                                                                    src="{{ asset('public/uploads/client/' . $client->image) }}"
-                                                                    alt="" id="badge-placeholder">
-                                                            @else
-                                                                <img class="avatar-img rounded-border-10 border border-white border-3"
-                                                                    src="{{ asset('public/user/assets/images/avatar/placeholder.jpg') }}"
-                                                                    alt="" id="badge-placeholder">
-                                                            @endif
-                                                        </div>
-                                                        <div class="col-4 py-2 offset-3">
-                                                            <div class="upload-container">
-                                                                <input type="file" id="badge" name="logo"
-                                                                    accept="image/*" onchange="previewfile(event,'badge-placeholder')" >
-                                                                <label for="badge"
-                                                                    class="d-flex justify-content-center"><i
-                                                                        class="fas fa-images"></i>Add Badge</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                            </form>
-                                        </div>
-                                    </div>
-
-                                    <div class="tab-pane fade" id="tab-2" role="tabpanel">
-                                        <div class="px-2">
-                                            <h6 class="border-bottom">Personal</h6>
-                                            <div class="row">
-                                                <div class="col-8 form-group">
-                                                    <label for="">Prefix</label>
-                                                    <input type="text" name="prefix"
-                                                        value="{{ $nfc_card->nfc_info?->prefix ?? '' }}"
-                                                        class="form-control form-control-sm mb-2 mt-1 mb-2" onkeyup="$('#prefix-name').text($(this).val());">
-                                                </div>
-                                                <div class="col-8 form-group">
-                                                    <label for="">First Name</label>
-                                                    <input type="text" name="prefix"
-                                                        value="{{ $nfc_card->client?->fname ?? '' }}"
-                                                        class="form-control form-control-sm mb-2 mt-1" onkeyup="$('#f-name').text($(this).val());">
-                                                </div>
-                                                <div class="col-8 form-group">
-                                                    <label for="">Middle Name</label>
-                                                    <input type="text" name="prefix"
-                                                        value="{{ $nfc_card->client?->middle_name ?? '' }}"
-                                                        class="form-control form-control-sm mb-2 mt-1" onkeyup="$('#m-name').text($(this).val());">
-                                                </div>
-                                                <div class="col-8 form-group">
-                                                    <label for="">Last Name</label>
-                                                    <input type="text" name="prefix"
-                                                        value="{{ $nfc_card->client?->last_name ?? '' }}"
-                                                        class="form-control form-control-sm mb-2 mt-1" onkeyup="$('#l-name').text($(this).val());">
-                                                </div>
-                                                <div class="col-8 form-group">
-                                                    <label for="">Suffix</label>
-                                                    <input type="text" name="suffix"
-                                                        value="{{ $nfc_card->nfc_info?->suffix ?? ''}}" id=""
-                                                        class="form-control form-control-sm mb-2 mt-1" onkeyup="$('#suffix-name').text($(this).val());">
-                                                </div>
-                                                <div class="col-8 form-group">
-                                                    <label for="">Accreditations</label>
-                                                    <input type="text" name="accreditations"
-                                                        value="{{ $nfc_card->nfc_info->accreditations ?? '' }}" id=""
-                                                        class="form-control form-control-sm mb-2 mt-1" onkeyup="$('#accreditations').text($(this).val());">
-                                                </div>
-                                                <div class="col-8 form-group">
-                                                    <label for="">Preferred Name</label>
-                                                    <input type="text" name="preferred_name"
-                                                        value="{{ $nfc_card->nfc_info->preferred_name }}" id=""
-                                                        class="form-control" onkeyup="$('#preferred_name').text($(this).val());">
-                                                </div>
-                                                <div class="col-8 form-group">
-                                                    <label for="">Maiden Name</label>
-                                                    <input type="text" name="maiden_name"
-                                                        value="{{ $nfc_card->nfc_info->maiden_name }}" id=""
-                                                        class="form-control form-control-sm mb-2 mt-1" onkeyup="$('#accreditations').text($(this).val());">
-                                                </div>
-                                                <div class="col-8 form-group">
-                                                    <label for="">Pronoun</label>
-                                                    <input type="text" name="pronoun"
-                                                        value="{{ $nfc_card->nfc_info->pronoun }}" id=""
-                                                        class="form-control form-control-sm mb-2 mt-1" onkeyup="$('#accreditations').text($(this).val());">
-                                                </div>
-                                            </div>
-                                            <h6 class="border-bottom py-4">Affiliation</h6>
-                                            <div class="row">
-                                                <div class="col-8 form-group">
-                                                    <label for="">Title</label>
-                                                    <textarea name="title" onkeyup="$('#field-title').text($(this).val());" class="form-control form-control-sm mb-2 mt-1" name="pronoun">{{ $nfc_card->nfc_info->title ?? ''}}</textarea>
-                                                </div>
-                                                <div class="col-8 form-group">
-                                                    <label for="">Department</label>
-                                                    <input type="text" name="department"
-                                                        value="{{ $nfc_card->nfc_info->department }}" id=""
-                                                        class="form-control form-control-sm mb-2 mt-1"  onkeyup="$('#deprtment').text($(this).val());" >
-                                                </div>
-                                                <div class="col-8 form-group">
-                                                    <label for="">Company</label>
-                                                    <input type="text" name="company"
-                                                        value="{{ $nfc_card->nfc_info->company ?? ''}}"
-                                                        class="form-control form-control-sm mb-2 mt-1"onkeyup="$('#company').text($(this).val());" >
-                                                </div>
-                                                <div class="col-8 form-group">
-                                                    <label for="">Headline</label>
-                                                    <input type="text" name="headline"
-                                                        value="{{ $nfc_card->nfc_info->headline }}"
-                                                        class="form-control form-control-sm mb-2 mt-1" onkeyup="$('#headline').text($(this).val());">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="tab-pane fade" id="tab-3" role="tabpanel">
-                                        <div class="px-2">
-                                            <div class="col-12">
-                                                <h6 class="border-bottom">NFC Field</h6>
-                                                <div class="row">
-                                                    <div class="col-md-7">
-                                                        <div class="card bg-primary text-white"
-                                                            style="max-height:400px;overflow-y:scroll">
-                                                            <div class="card-body" id="selected-fields">
-                                                                @forelse ($nfc_card->nfcFields as $value)
-                                                                    {{-- $value --}}
-                                                                    <div class="selected-field-item px-3 my-1">
-                                                                        <label for="{{ $value->name }}"
-                                                                            class="form-label d-flex justify-content-between">{{ $value->name }}<span
-                                                                                class="delete-btn"><i
-                                                                                    class="fa fa-close"></i></span></label>
-                                                                        <input type="text" class="form-control"
-                                                                            id=""
-                                                                            name="field_value[{{ $value->pivot->nfc_field_id }}]"
-                                                                            placeholder="{{ $value->name }}"
-                                                                            value="{{ $value->pivot->field_value }}">
-                                                                        <input type="hidden" class="form-control"
-                                                                            value="{{ $value->pivot->nfc_field_id }}"
-                                                                            name="nfc_field_id[]">
-                                                                    </div>
-                                                                @empty
-                                                                @endforelse
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-5 pb-2" id="field-gallery"
-                                                        style="max-height:400px;overflow-y:scroll;background-color:#8F60DE26;">
-                                                        @foreach ($categories as $key => $category)
-                                                            @php
-                                                                $title = $category;
-                                                                $nfcFields = DB::table('nfc_fields')
-                                                                    ->where('category', $key)
-                                                                    ->get();
-                                                            @endphp
-                                                            @if ($nfcFields->isEmpty())
-                                                                @continue
-                                                            @endif
-                                                            <h4 class="social-field-title mt-4 mb-2">
-                                                                <strong>{{ $title }}</strong> </h4>
-                                                            @foreach ($nfcFields as $value)
-                                                                @if ($value->type == 1)
-                                                                    <button type="button"
-                                                                        data-field="{{ $value->name }}"
-                                                                        data-id="{{ $value->id }}"
-                                                                        style="margin:2px 1px"
-                                                                        class="field-item btn btn-primary btn-sm text-white rounded-pill"><span
-                                                                            class="mx-1"><i
-                                                                                class="{{ $value->icon }}"></i></span>{{ $value->name }}</button>
-                                                                @elseif ($value->type == 2)
-                                                                    @php
-                                                                        $icon = str_replace(
-                                                                            '<svg',
-                                                                            '<svg style="width:24px; height:20px;"',
-                                                                            $value->icon,
-                                                                        );
-                                                                    @endphp
-                                                                    <button type="button"
-                                                                        data-field="{{ $value->name }}"
-                                                                        data-id="{{ $value->id }}"
-                                                                        style="margin:2px 1px"
-                                                                        class="field-item btn btn-primary btn-sm text-white rounded-pill"><span
-                                                                            class="mx-1">
-                                                                            {!! $icon !!}</span>{{ $value->name }}</button>
-                                                                @elseif ($value->type == 3)
-                                                                    <button type="button"
-                                                                        data-field="{{ $value->name }}"
-                                                                        data-id="{{ $value->id }}"
-                                                                        style="margin:2px 1px"
-                                                                        class="field-item btn btn-primary btn-sm text-white rounded-pill"><span
-                                                                            class="mx-1">
-                                                                            <img src="{{ $value->icon }}" alt="icon"
-                                                                                height="50" weight="50">
-                                                                        </span>{{ $value->name }}</button>
+                                                    <div class="col-12 py-2 border-bottom">
+                                                        <h6>Design</h6>
+                                                        <div class="row">
+                                                            <div class="col-2">
+                                                                @if ($client->image)
+                                                                    <img class="rounded-border-10 border border-white border-3"
+                                                                        src="{{ asset('public/uploads/client/' . $client->image) }}"
+                                                                        alt="" id="design-placeholder">
+                                                                @else
+                                                                    <img class="avatar-img rounded-border-10 border border-white border-3"
+                                                                        src="{{ asset('public/user/assets/images/avatar/placeholder.jpg') }}"
+                                                                        alt="" id="design-placeholder">
                                                                 @endif
-                                                            @endforeach
-                                                        @endforeach
+                                                            </div>
+
+                                                            <div class="col-4 py-2 offset-3">
+                                                                <div class="upload-container">
+                                                                    <input type="file" id="design" name="logo"
+                                                                        accept="image/*"
+                                                                        onchange="previewfile(event,'design-placeholder')">
+                                                                    <label for="design"
+                                                                        class="d-flex justify-content-center"><i
+                                                                            class="fas fa-images"></i>Add Design</label>
+                                                                </div>
+                                                                <small><strong>Recomended Size (128x128)</strong></small>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-12 py-2 border-bottom">
+                                                        <h6>Color</h6>
+                                                        <div class="d-flex justify-content-between col-md-6 py-2">
+                                                            <button type="button" onclick="setWaveColor('rgb(255, 0, 0)')"
+                                                                class="color-box"
+                                                                style="background-color: red;width:25px;height:25px;border-radius:50%;">
+                                                            </button>
+                                                            <button type="button" onclick="setWaveColor('rgb(0, 247, 255)')"
+                                                                class="color-box" style="background-color: rgb(0, 247, 255);">
+                                                            </button>
+                                                            <button type="button" onclick="setWaveColor('rgb(195, 0, 255)')"
+                                                                class="color-box" style="background-color: rgb(195, 0, 255);">
+                                                            </button>
+                                                            <button type="button" onclick="setWaveColor('rgb(255, 0, 183)')"
+                                                                class="color-box" style="background-color: rgb(255, 0, 183);">
+                                                            </button>
+                                                            <button type="button" onclick="setWaveColor('rgb(242, 255, 0)')"
+                                                                class="color-box" style="background-color: rgb(242, 255, 0);">
+                                                            </button>
+                                                            <button type="button" onclick="setWaveColor('rgb(0, 255, 115)')"
+                                                                class="color-box" style="background-color: rgb(0, 255, 115);">
+                                                            </button>
+                                                            <button type="button" onclick="setWaveColor('rgb(25, 0, 255)')"
+                                                                class="color-box" style="background-color: rgb(25, 0, 255);">
+                                                            </button>
+                                                            <button type="button" onclick="setWaveColor('rgb(221, 0, 255)');"
+                                                                class="color-box" style="background-color: rgb(221, 0, 255);">
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 py-2 border-bottom">
+                                                        <h6>Logo</h6>
+                                                        <div class="row">
+                                                            <div class="col-2">
+                                                                @if ($nfc_card->card_design->logo)
+                                                                    <img class="rounded-border-10 border border-white border-3"
+                                                                        src="{{ asset('public/uploads/client/' . $client->image) }}"
+                                                                        alt="" id="logo-placeholder">
+                                                                @else
+                                                                    <img class="avatar-img rounded-border-10 border border-white border-3"
+                                                                        src="{{ asset('public/user/assets/images/avatar/placeholder.jpg') }}"
+                                                                        alt="" id="logo-placeholder">
+                                                                @endif
+                                                            </div>
+                                                            <div class="col-4 py-2 offset-3">
+                                                                <div class="upload-container">
+                                                                    <input type="file" id="logo" name="logo"
+                                                                        accept="image/*"
+                                                                        onchange="previewfile(event,'logo-placeholder'); previewfile(event,'logo-image-preview');">
+                                                                    <label for="logo"
+                                                                        class="d-flex justify-content-center"><i
+                                                                            class="fas fa-images"></i>Add Logo</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-12 py-2 border-bottom">
+                                                        <h6>Badge</h6>
+                                                        <div class="row">
+                                                            <div class="col-8">
+                                                                <span id="badge-image-group" class="d-flex ">
+                                                                    @if ($nfc_card->card_design->badges)
+                                                                        <img class="rounded-border-10 border border-white border-3 col-2"
+                                                                            src="{{ asset('public/uploads/client/' . $client->image) }}"
+                                                                            alt="" id="badge-placeholder">
+                                                                    @else
+                                                                        <div class="image-container">
+                                                                            <img class="avatar-img rounded-border-10 border border-white border-3"
+                                                                                src="{{ asset('public/user/assets/images/avatar/placeholder.jpg') }}"
+                                                                                alt="" id="badge-placeholder">
+                                                                        </div>
+                                                                    @endif
+                                                                </span>
+                                                            </div>
+                                                            <div class="col-4 py-2 fload-end">
+                                                                <div class="upload-container">
+                                                                    <input type="file" id="badge" name="logo"
+                                                                        accept="image/*"
+                                                                        onchange="previewMultipleBadgeFile(event);">
+                                                                    <label for="badge"
+                                                                        class="d-flex justify-content-center"><i
+                                                                            class="fas fa-images"></i>Add Badge</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane fade" id="tab-2" role="tabpanel">
+                                            <div class="px-2">
+                                                <h6 class="border-bottom">Personal</h6>
+                                                <div class="row">
+                                                    <div class="col-8 form-group">
+                                                        <label for="">Prefix</label>
+                                                        <input type="text" name="prefix"
+                                                            value="{{ $nfc_card->nfc_info?->prefix ?? '' }}"
+                                                            class="form-control form-control-sm mb-2 mb-2"
+                                                            onkeyup="$('#prefix-name').text($(this).val());">
+                                                    </div>
+                                                    <div class="col-8 form-group">
+                                                        <label for="">First Name</label>
+                                                        <input type="text" name="prefix"
+                                                            value="{{ $nfc_card->client?->fname ?? '' }}"
+                                                            class="form-control form-control-sm mb-2"
+                                                            onkeyup="$('#f-name').text($(this).val());">
+                                                    </div>
+                                                    <div class="col-8 form-group">
+                                                        <label for="">Middle Name</label>
+                                                        <input type="text" name="prefix"
+                                                            value="{{ $nfc_card->client?->middle_name ?? '' }}"
+                                                            class="form-control form-control-sm mb-2"
+                                                            onkeyup="$('#m-name').text($(this).val());">
+                                                    </div>
+                                                    <div class="col-8 form-group">
+                                                        <label for="">Last Name</label>
+                                                        <input type="text" name="prefix"
+                                                            value="{{ $nfc_card->client?->last_name ?? '' }}"
+                                                            class="form-control form-control-sm mb-2"
+                                                            onkeyup="$('#l-name').text($(this).val());">
+                                                    </div>
+                                                    <div class="col-8 form-group">
+                                                        <label for="">Suffix</label>
+                                                        <input type="text" name="suffix"
+                                                            value="{{ $nfc_card->nfc_info?->suffix ?? '' }}" id=""
+                                                            class="form-control form-control-sm mb-2"
+                                                            onkeyup="$('#suffix-name').text($(this).val());">
+                                                    </div>
+                                                    <div class="col-8 form-group">
+                                                        <label for="">Accreditations</label>
+                                                        <input type="text" name="accreditations"
+                                                            value="{{ $nfc_card->nfc_info->accreditations ?? '' }}"
+                                                            id="" class="form-control form-control-sm mb-2"
+                                                            onkeyup="$('#accreditations').text($(this).val());">
+                                                    </div>
+                                                    <div class="col-8 form-group">
+                                                        <label for="">Preferred Name</label>
+                                                        <input type="text" name="preferred_name"
+                                                            value="{{ $nfc_card->nfc_info->preferred_name }}" id=""
+                                                            class="form-control"
+                                                            onkeyup="$('#preferred_name').text($(this).val());">
+                                                    </div>
+                                                    <div class="col-8 form-group">
+                                                        <label for="">Maiden Name</label>
+                                                        <input type="text" name="maiden_name"
+                                                            value="{{ $nfc_card->nfc_info->maiden_name }}" id=""
+                                                            class="form-control form-control-sm mb-2"
+                                                            onkeyup="$('#accreditations').text($(this).val());">
+                                                    </div>
+                                                    <div class="col-8 form-group">
+                                                        <label for="">Pronoun</label>
+                                                        <input type="text" name="pronoun"
+                                                            value="{{ $nfc_card->nfc_info->pronoun }}" id=""
+                                                            class="form-control form-control-sm mb-2"
+                                                            onkeyup="$('#accreditations').text($(this).val());">
+                                                    </div>
+                                                </div>
+                                                <h6 class="border-bottom py-4">Affiliation</h6>
+                                                <div class="row">
+                                                    <div class="col-8 form-group">
+                                                        <label for="">Title</label>
+                                                        <textarea name="title" onkeyup="$('#field-title').text($(this).val());" class="form-control form-control-sm mb-2"
+                                                            name="pronoun">{{ $nfc_card->nfc_info->title ?? '' }}</textarea>
+                                                    </div>
+                                                    <div class="col-8 form-group">
+                                                        <label for="">Department</label>
+                                                        <input type="text" name="department"
+                                                            value="{{ $nfc_card->nfc_info->department ?? '' }}"
+                                                            id="" class="form-control form-control-sm mb-2"
+                                                            onkeyup="$('#deprtment').text($(this).val());">
+                                                    </div>
+                                                    <div class="col-8 form-group">
+                                                        <label for="">Company</label>
+                                                        <input type="text" name="company"
+                                                            value="{{ $nfc_card->nfc_info->company ?? '' }}"
+                                                            class="form-control form-control-sm mb-2" onkeyup="$('#company').text($(this).val());">
+                                                    </div>
+                                                    <div class="col-8 form-group">
+                                                        <label for="">Headline</label>
+                                                        <input type="text" name="headline"
+                                                            value="{{ $nfc_card->nfc_info->headline }}"
+                                                            class="form-control form-control-sm mb-2"
+                                                            onkeyup="$('#headline').text($(this).val());">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="tab-4" role="tabpanel">
-                                        <div class="px-2">
-                                            <div class="col-12">
-                                                <div class="col-8 form-group">
-                                                <div style="background: #E2E8F0;color:#718096 border:transparent;" class="alert" role="alert">
-                                                    <svg style="width: 20px;height:20px" viewBox="0 0 14 15" focusable="false" class="chakra-icon chakra-icon css-l30hbq"><g fill="currentColor" stroke="currentColor" stroke-linecap="square" stroke-width="2"><circle cx="12" cy="12" fill="none" r="11" stroke="currentColor"></circle><line fill="none" x1="11.959" x2="11.959" y1="11" y2="17"></line><circle cx="11.959" cy="7" r="1" stroke="none"></circle></g></svg>
-                                                    This field does not appear on the card.
-                                                </div>
-                                                    <label for="">Name</label>
-                                                    <input type="text" name="card_name"
-                                                        value="{{ $nfc_card->card_name ?? 'Work' }}" id="card-name"
-                                                        class="form-control form-control-sm" onkeyup="$('#card-name').text($(this).val());">
+
+                                        <div class="tab-pane fade" id="tab-3" role="tabpanel">
+                                            <div class="px-2">
+                                                <div class="col-12">
+                                                    {{-- <h6 class="border-bottom">NFC Field</h6> --}}
+                                                    <div class="row">
+                                                        <div class="col-md-7">
+                                                            <div id="draggable" class="card p-3 text-white"
+                                                                style="max-height:auto;z-index:1;overflow-y:scroll;background-color:#E2E8F0;border: 2px white dashed;">
+                                                                <div id="draggerContent" class="card px-4 py-2">
+                                                                    <div class="card-dragger-header d-flex items-center"
+                                                                        style="gap: 0 0.5rem;justify-content: space-between;">
+                                                                        <span id="dragger" class="d-flex items-center"
+                                                                            style="gap: 0 0.5rem;align-items: center;">
+                                                                            <span class="" style="cursor: pointer">
+                                                                                <svg style="height: 24px" viewBox="0 0 24 24"
+                                                                                    focusable="false"
+                                                                                    class="chakra-icon chakra-icon css-1wuln1z">
+                                                                                    <path
+                                                                                        d="M2 19.2838H22V17.0031H2V19.2838ZM2 13.5821H22V11.3014H2V13.5821ZM2 5.59961V7.88031H22V5.59961H2Z"
+                                                                                        fill="currentColor"></path>
+                                                                                </svg>
+
+                                                                            </span>
+                                                                            <h4 class="mt-1">Phone</h4>
+                                                                        </span>
+                                                                        <button type="button" onclick="removeDraggableContent()"
+                                                                            class="remove-btn btn btn-sm fload-end fs-5 items-center">x</button>
+                                                                    </div>
+                                                                    <div class="">
+                                                                        <div class="form-group">
+                                                                            <div class="col-auto">
+                                                                                <label class="sr-only"
+                                                                                    for="inlineFormInputGroup">Username</label>
+                                                                                <div class="input-group mb-2  bg-white">
+                                                                                    <div class="input-group-prepend">
+                                                                                        <div class="">
+                                                                                            <svg style="height: 24px"
+                                                                                                viewBox="0 0 20 20"
+                                                                                                focusable="false"
+                                                                                                class="chakra-icon chakra-icon css-1dtt6v7">
+                                                                                                <path
+                                                                                                    d="M16.0708 4H3.56342C2.70354 4 2.00782 4.70354 2.00782 5.56342L2 14.944C2 15.8038 2.70354 16.5074 3.56342 16.5074H16.0708C16.9307 16.5074 17.6342 15.8038 17.6342 14.944V5.56342C17.6342 4.70354 16.9307 4 16.0708 4ZM15.7581 7.32227L10.2314 10.7774C9.98127 10.9338 9.65295 10.9338 9.4028 10.7774L3.87611 7.32227C3.68068 7.1972 3.56342 6.98614 3.56342 6.75944C3.56342 6.23569 4.13407 5.92301 4.57965 6.19661L9.81711 9.47198L15.0546 6.19661C15.5001 5.92301 16.0708 6.23569 16.0708 6.75944C16.0708 6.98614 15.9535 7.1972 15.7581 7.32227Z"
+                                                                                                    fill="currentColor"></path>
+                                                                                            </svg>
+                                                                                        </div>
+                                                                                        <input style="border:transparent"
+                                                                                            type="email"
+                                                                                            class="form-control "
+                                                                                            id="inlineFormInputGroup"
+                                                                                            placeholder="Username">
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <select
+                                                                                class="form-select form-control-sm mb-2 bg-white"
+                                                                                name="details.fields.0.label">
+                                                                                <option value="">No Label</option>
+                                                                                <option value="personal">personal</option>
+                                                                                <option value="work">work</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-5 pb-2" id="field-gallery"
+                                                            style="max-height:auto;/*overflow-y:scroll*/;background-color:#8F60DE26;">
+                                                            @foreach ($categories as $key => $category)
+                                                                @php
+                                                                    $title = $category;
+                                                                    $nfcFields = DB::table('nfc_fields')
+                                                                        ->where('category', $key)
+                                                                        ->get();
+                                                                @endphp
+                                                                @if ($nfcFields->isEmpty())
+                                                                    @continue
+                                                                @endif
+                                                                <h4 class="social-field-title mt-4 mb-2">
+                                                                    <strong>{{ $title }}</strong>
+                                                                </h4>
+                                                                @foreach ($nfcFields as $value)
+                                                                    @if ($value->type == 1)
+                                                                        <button type="button"
+                                                                        onclick="addDraggableContent(`<span class='{{ $value->icon}}'></i></span>`,'{{ $value->name }}')"
+                                                                            data-field="{{ $value->name }}"
+                                                                            data-id="{{ $value->id }}"
+                                                                            style="margin:2px 1px"
+                                                                            class="field-item btn btn-primary btn-sm text-white rounded-pill"><span
+                                                                                class="mx-1"><i
+                                                                                    class="{{ $value->icon }}"></i></span>{{ $value->name }}</button>
+                                                                    @elseif ($value->type == 2)
+                                                                        @php
+                                                                            $icon = str_replace(
+                                                                                '<svg',
+                                                                                '<svg style="width:24px; height:20px;"',
+                                                                                $value->icon,
+                                                                            );
+                                                                        @endphp
+                                                                        <button type="button"
+                                                                        onclick="addDraggableContent('{{ $icon }}','{{ $value->name }}')"
+                                                                            data-field="{{ $value->name }}"
+                                                                            data-id="{{ $value->id }}"
+                                                                            style="margin:2px 1px"
+                                                                            class="field-item btn btn-primary btn-sm text-white rounded-pill">
+                                                                            <span
+                                                                                class="mx-1">
+                                                                                {!! $icon !!}</span>{{ $value->name }}</button>
+                                                                    @elseif ($value->type == 3)
+                                                                        <button type="button"
+                                                                        onclick="addDraggableContent()"
+                                                                            data-field="{{ $value->name }}"
+                                                                            data-id="{{ $value->id }}"
+                                                                            style="margin:2px 1px"
+                                                                            class="field-item btn btn-primary btn-sm text-white rounded-pill"><span
+                                                                                class="mx-1">
+                                                                                <img src="{{ $value->icon }}" alt="icon"
+                                                                                    height="50" weight="50">
+                                                                            </span>{{ $value->name }}</button>
+                                                                    @endif
+                                                                @endforeach
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="tab-pane fade" id="tab-4" role="tabpanel">
+                                            <div class="px-2">
+                                                <div class="col-12">
+                                                    <div class="col-8 form-group">
+                                                        <div style="background: #E2E8F0;color:#718096 border:transparent;"
+                                                            class="alert" role="alert">
+                                                            <svg style="width: 20px;height:20px" viewBox="0 0 14 15"
+                                                                focusable="false" class="chakra-icon chakra-icon css-l30hbq">
+                                                                <g fill="currentColor" stroke="currentColor"
+                                                                    stroke-linecap="square" stroke-width="2">
+                                                                    <circle cx="12" cy="12" fill="none"
+                                                                        r="11" stroke="currentColor"></circle>
+                                                                    <line fill="none" x1="11.959" x2="11.959"
+                                                                        y1="11" y2="17"></line>
+                                                                    <circle cx="11.959" cy="7" r="1"
+                                                                        stroke="none"></circle>
+                                                                </g>
+                                                            </svg>
+                                                            This field does not appear on the card.
+                                                        </div>
+                                                        <label for="">Name</label>
+                                                        <input type="text" name="card_name"
+                                                            value="{{ $nfc_card->card_name ?? 'Work' }}" id="card-name"
+                                                            class="form-control form-control-sm"
+                                                            onkeyup="$('#card-name').text($(this).val());">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
+                            <!-- Photos of you tab END -->
                         </div>
-                        <!-- Photos of you tab END -->
-                    </div>
-                    <div class="" style="position: sticky;bottom:0;float:right;">
-                        <button type="button" class="btn btn-light" >Cancel</button>
-                        <button type="button" class="btn btn-info">Save</button>
-                    </div>
+                        <div class="" style="position: sticky;bottom: 0;float: right;display: flex;justify-content: end;gap: 1rem;">
+                            <a href="{{ route('nfc_card.show',  $id)}}" class="btn btn-light">Cancel</a>
+                            <button type="submit" class="btn btn-info">Save</button>
+                        </div>
+                     </form>
                     <!-- Album Tab content END -->
                 </div>
                 <!-- Card body END -->
@@ -497,9 +616,6 @@
         </div>
     </div><!-- Row END -->
     <script>
-
-
-
         const colorBox = document.getElementById('colorBox');
 
         colorBox.addEventListener('click', function() {
@@ -508,11 +624,187 @@
     </script>
 @endsection
 @push('scripts')
-<script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+    <script>
+        // $(document).ready(function() {
+            $("#dragger").click(function() {
+            // $("#draggerContent").draggable();
+            $("#draggable").sortable({
+                handle: ".draggable-item",
+                cursor: "move"
+            });
+            });
 
- function previewfile(event, previewimg = 'previewimg') {
-    var output = document.getElementById(previewimg);
-    output.src = URL.createObjectURL(event.target.files[0]);
-}
-</script>
+           function addDraggableContent(icon, text) {
+        var draggableContent = `
+            <div id="draggerContent" class="draggable-item card px-4 py-2">
+                <div class="card-dragger-header d-flex items-center" style="gap: 0 0.5rem;justify-content: space-between;">
+                    <span id="dragger" class="d-flex items-center" style="gap: 0 0.5rem;align-items: center;">
+                        <span class="" style="cursor: pointer">
+                            <svg style="height: 24px" viewBox="0 0 24 24"
+                                focusable="false"
+                                class="chakra-icon chakra-icon css-1wuln1z">
+                                <path
+                                    d="M2 19.2838H22V17.0031H2V19.2838ZM2 13.5821H22V11.3014H2V13.5821ZM2 5.59961V7.88031H22V5.59961H2Z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </span>
+                        <h4 class="mt-1">${text.toUpperCase()}</h4>
+                    </span>
+                    <button type="button" onclick="removeDraggableContent(this)" class="remove-btn btn btn-sm fload-end fs-5 items-center">x</button>
+                </div>
+                <div class="">
+                    <div class="form-group">
+                        <div class="col-auto">
+                            <label class="sr-only" for="inlineFormInputGroup">Username</label>
+                            <div class="input-group mb-2  bg-white">
+                                <div class="input-group-prepend">
+                                    <div class="">
+                                        ${icon}
+                                    </div>
+                                    <input style="border:transparent" type="email" class="form-control " id="inlineFormInputGroup" placeholder="Username">
+                                </div>
+                            </div>
+                        </div>
+                        <select class="form-select form-control-sm mb-2 bg-white" name="details.fields.0.label">
+                            <option value="">No Label</option>
+                            <option value="personal">personal</option>
+                            <option value="work">work</option>
+                        </select>
+                    </div>
+                </div>
+            </div>`;
+                $("#draggable").append(draggableContent);
+                $("#draggable").sortable({
+                    handle: ".draggable-item",
+                    cursor: "move"
+                });
+                $("#draggerContent:last-child").draggable();
+            }
+
+            function removeDraggableContent(btn) {
+                $(btn).closest(".draggable-item").remove();
+            }
+
+
+        // });
+    </script>
+    <script>
+        function previewfile(event, previewimg = 'previewimg') {
+            var output = document.getElementById(previewimg);
+            output.src = URL.createObjectURL(event.target.files[0]);
+
+            // var button = document.createElement("button");
+            // button.classList.add("remove-button");
+            // button.innerHTML = "X";
+            // output.insertAdjacentElement('afterend', button);
+        }
+
+
+
+        //  function previewMultipleFile(event, previewimg = 'badge-preview') {
+        //     var output = document.getElementById(previewimg);
+
+        //     var file = event.target.files[0];
+        //     if (file) {
+        //         var div = document.createElement("div");
+        //         div.classList.add("image-container");
+
+        //         var img = document.createElement("img");
+        //         img.src = URL.createObjectURL(file);
+
+        //         var button = document.createElement("button");
+        //         button.classList.add("remove-button");
+        //         button.innerHTML = "X";
+        //         button.onclick = function() {
+        //             output.removeChild(div);
+        //         };
+
+        //         div.appendChild(img);
+        //         div.appendChild(button);
+        //         output.appendChild(div);
+        //     }
+        // }
+
+
+        // function removeBtn(div, output) {
+        //     var button = document.createElement("button");
+        //     button.classList.add("remove-button");
+        //     button.innerHTML = "X";
+        //     button.onclick = function() {
+        //         output.removeChild(div);
+        //     };
+        //     div.appendChild(button);
+        // }
+        function setWaveColor(color) {
+            var wave = document.getElementById('wave');
+            var background = document.getElementById('background');
+            var forground = document.getElementById('forground');
+            wave.setAttribute('fill', color);
+            // background.setAttribute('fill', color);
+            // forground.setAttribute('fill', color);
+        }
+        const badgeImages = [];
+
+        function isPlaceholderImage(imgSrc) {
+            return imgSrc.endsWith('/public/user/assets/images/avatar/placeholder.jpg');
+        }
+
+        function removeDefaultBadgeImage() {
+            var controlOutput = document.getElementById('badge-image-group');
+            var existingPlaceholders = controlOutput.querySelectorAll("img");
+            existingPlaceholders.forEach(function(img) {
+                if (isPlaceholderImage(img.src)) {
+                    var container = img.closest(".image-container");
+                    if (container && controlOutput.contains(container)) {
+                        controlOutput.removeChild(container);
+                    }
+                }
+            });
+        }
+
+        function previewMultipleBadgeFile(event) {
+            var previewOutput = document.getElementById('badge-preview');
+            var controlOutput = document.getElementById('badge-image-group');
+
+            removeDefaultBadgeImage();
+            var file = event.target.files[0];
+            if (file) {
+                var imgSrc = URL.createObjectURL(file);
+
+                var previewDiv = document.createElement("div");
+                previewDiv.classList.add("image-container");
+                var previewImg = document.createElement("img");
+                previewImg.src = imgSrc;
+                previewImg.classList.add("rounded-border-10", "border", "border-white", "border-3");
+                previewDiv.appendChild(previewImg);
+                previewOutput.appendChild(previewDiv);
+
+                var controlDiv = document.createElement("div");
+                controlDiv.classList.add("image-container");
+                var controlImg = document.createElement("img");
+                controlImg.src = imgSrc;
+                controlImg.classList.add("rounded-border-10", "border", "border-white", "border-3");
+                controlDiv.appendChild(controlImg);
+                controlOutput.append(controlDiv);
+                addRemoveBtn(controlDiv, previewDiv, controlOutput, previewOutput, imgSrc);
+                badgeImages.push(imgSrc);
+            }
+        }
+
+        function addRemoveBtn(controlDiv, previewDiv, controlOutput, previewOutput, imgSrc) {
+            var button = document.createElement("button");
+            button.classList.add("remove-button");
+            button.innerHTML = "X";
+            button.onclick = function() {
+                controlOutput.removeChild(controlDiv);
+                previewOutput.removeChild(previewDiv);
+                const index = badgeImages.indexOf(imgSrc);
+                if (index > -1) {
+                    badgeImages.splice(index, 1);
+                }
+            };
+            controlDiv.appendChild(button);
+        }
+    </script>
 @endpush
