@@ -11,6 +11,7 @@ use App\Models\Backend\NfcInformation;
 use App\Models\Backend\User;
 
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -132,9 +133,19 @@ class NfcCardController extends Controller
         $client = Client::find(currentUserId());
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
         $nfc_info = NfcInformation::find($id);
-        $nfc_fields = NfcField::all();
         $postCount = Post::where('client_id', currentUserId())->count();
-        return view('user.nfc-card.edit', compact('nfc_fields', 'nfc_card', 'nfc_info','client','postCount'));
+        $categories = [
+            '1' => 'Most Popular',
+            '2' => 'Social',
+            '3' => 'Communication',
+            '4' => 'Payment',
+            '5' => 'Video',
+            '6' => 'Music',
+            '7' => 'Design',
+            '8' => 'Gaming',
+            '9' => 'Other',
+        ];
+        return view('user.nfc-card.edit', compact('categories', 'nfc_card', 'nfc_info', 'client', 'postCount'));
     }
 
     /**
@@ -274,4 +285,14 @@ class NfcCardController extends Controller
             echo $vCard;
         }, $file_name, $headers);
     }
+
+    public function email($id)
+    {
+        $client = Client::find(currentUserId());
+        $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id',currentUserId())->paginate(10);
+        $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
+        $postCount = Post::where('client_id', currentUserId())->count();
+        return view('user.nfc-card.email_signature', compact('nfc_card','client','postCount','nfc_cards'));
+    }
+
 }

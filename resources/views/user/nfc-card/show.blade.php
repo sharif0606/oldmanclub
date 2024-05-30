@@ -2,6 +2,39 @@
 @section('title', 'NFC Card Preview')
 @push('styles')
 <link rel="stylesheet" href="{{ asset('public/assets/nfc/styles.css') }}" />
+<style>
+    /* Custom CSS to make the modal slide from right */
+.modal.right .modal-dialog {
+    position: fixed;
+    right: 0;
+    margin: auto;
+    width: 30%;
+    height: 100%;
+    -webkit-transform: translate3d(0%, 0, 0);
+    -ms-transform: translate3d(0%, 0, 0);
+    -o-transform: translate3d(0%, 0, 0);
+    transform: translate3d(0%, 0, 0);
+}
+
+.modal.right .modal-content {
+    height: 75%;
+    overflow-y: auto;
+}
+
+.modal.right .modal-body {
+    padding: 15px 15px 80px;
+}
+
+/* Rotate icon */
+.btn-rotate {
+    transition: transform 0.3s ease;
+}
+
+.btn-rotate.open {
+    transform: rotate(90deg);
+}
+
+</style>
 @endpush
 @section('content')
 <div class="row g-4">
@@ -31,12 +64,17 @@
                             <div class="col-md-4">
                                 <div class="d-flex justify-content-between">
                                     <a href="{{ route('nfc_card.edit', encryptor('encrypt', $nfc_card->id)) }}" class="fs-4"><i class="fa fa-edit"></i></a>
-                                    <a href="" class="fs-4"><i class="fas fa-cog"></i></a>
+                                    <a href="#" class="fs-4" data-bs-toggle="modal" data-bs-target="#cogModal"><i class="fas fa-cog"></i></a>
                                     <a href="" class="fs-4"><i class="fas fa-copy"></i></a>
                                     <a href="" class="fs-4"><i class="fas fa-share"></i></a>
                                     <a href="" class="fs-4"><i class="fas fa-envelope"></i></a>
                                     <a href="" class="fs-4"><i class="fas fa-image"></i></a>
+<<<<<<< HEAD
                                     <a href="{{url('nfcqrurl-download/' . encryptor('encrypt', $nfc_card->id).'/'.$nfc_card->client_id)}}" class="fs-4"><i class="fas fa-download"></i></a>
+
+                                    <a href="" class="fs-4"><i class="fas fa-download"></i></a>
+                                    <a href="{{ route('email_signature', encryptor('encrypt', $nfc_card->id)) }}" class="fs-4"><i class="fas fa-envelope"></i></a>
+>>>>>>> f82ef104228a1123f28d4b67abaeb7e3b7215015
                                     <a href="" class="fs-4"><i class="fas fa-file-pdf"></i></a>
                                     <a href="" class="fs-4"><i class="fas fa-trash"></i></a>
                                 </div>
@@ -66,4 +104,44 @@
         <!-- Card END -->
     </div>
 </div><!-- Row END -->
+<!-- Modal START -->
+<div class="modal right fade" id="cogModal" tabindex="-1" aria-labelledby="cogModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-slideout">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cogModalLabel">Card settings</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Pause card
+                        <i class="fas fa-chevron-right"></i>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-lock me-2"></i>Personalized link</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-lock me-2"></i>QR code logo</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Renew link
+                        <i class="fas fa-chevron-right"></i>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-lock me-2"></i>Add tracking code</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal END -->
 @endsection
+
+@push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+@endpush
