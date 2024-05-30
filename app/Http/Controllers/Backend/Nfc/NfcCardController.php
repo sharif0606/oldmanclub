@@ -13,6 +13,7 @@ use App\Models\Backend\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Response;
 
 class NfcCardController extends Controller
@@ -221,6 +222,10 @@ class NfcCardController extends Controller
         $client = Client::find($client_id);
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
         return view('user.nfc-card.showqrurl', compact('nfc_card','client'));
+    }
+    public function dowloadqrl($id,$client_id)
+    {
+        
     }
     public function save_contact($id)
     {

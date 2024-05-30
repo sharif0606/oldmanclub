@@ -34,8 +34,9 @@
                                     <a href="" class="fs-4"><i class="fas fa-cog"></i></a>
                                     <a href="" class="fs-4"><i class="fas fa-copy"></i></a>
                                     <a href="" class="fs-4"><i class="fas fa-share"></i></a>
+                                    <a href="" class="fs-4"><i class="fas fa-envelope"></i></a>
                                     <a href="" class="fs-4"><i class="fas fa-image"></i></a>
-                                    <a href="" class="fs-4"><i class="fas fa-download"></i></a>
+                                    <a href="{{url('nfcqrurl-download/' . encryptor('encrypt', $nfc_card->id).'/'.$nfc_card->client_id)}}" class="fs-4"><i class="fas fa-download"></i></a>
                                     <a href="" class="fs-4"><i class="fas fa-file-pdf"></i></a>
                                     <a href="" class="fs-4"><i class="fas fa-trash"></i></a>
                                 </div>
