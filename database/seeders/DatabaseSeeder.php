@@ -14,18 +14,18 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(
             [
-                //NfcFieldSeeder::class,
-                //NfcInformationSeeder::class,
-                //CountriesSeeder::class,
-                //StateSeeder::class,
-                //CitiesSeeder::class
-                //ClientSeeder::class,
-                //PostSeeder::class
+                // NfcFieldSeeder::class,
+                // NfcInformationSeeder::class,
+                // CountriesSeeder::class,
+                // StateSeeder::class,
+                // CitiesSeeder::class
+                // ClientSeeder::class,
+                // PostSeeder::class
                 FollowSeeder::class
             ]
         );
 
-       
+
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
