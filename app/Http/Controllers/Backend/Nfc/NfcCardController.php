@@ -11,6 +11,7 @@ use App\Models\Backend\NfcInformation;
 use App\Models\Backend\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\NfcCardBadges;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -153,20 +154,58 @@ class NfcCardController extends Controller
     public function update(Request $request, $id)
     {
         // Start the database transaction
+        // dd($request->hasFile('badge_images'));
         DB::beginTransaction();
         try {
 
             // Find the NFC card by decrypting the ID
             $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
             $nfc_card->card_name = $request->card_name;
-            $nfc_card->card_type = $request->card_type;
+            // $nfc_card->card_type = $request->card_type;
             //$nfc_card->updated_by = currentUserId();
 
             /* Update Data From Nfc Design */
             $nfc_design = NfcDesign::where('nfc_card_id', encryptor('decrypt', $id))->first();
             $nfc_design->design_card_id = $request->design_card_id;
+            $nfc_design->color = $request->display_nfc_color;
+            if ($request->hasFile('logo')) {
+                $imageName = rand(111, 999) . time() . '.' . $request->logo->extension();
+                $request->logo->move(
+                    public_path('uploads/cards/'),
+                    $imageName
+                );
+                $nfc_design->logo = $imageName;
+            }
             $nfc_design->updated_by = currentUserId();
             $nfc_design->save();
+
+            /* badges image update */
+            if ($request->hasFile('badge_images')) {
+                $badges = $request->file('badge_images');
+                DB::table("nfc_card_badges")->where('nfc_card_id', encryptor('decrypt', $id))->delete();
+                foreach ($badges as $key => $badge) {
+                    $badgeImageName = rand(111, 999) . time() . '.' . $badge->extension();
+                    $badge->move(public_path('uploads/cards/badges'), $badgeImageName);
+                    DB::table("nfc_card_badges")->insert([
+                        'nfc_card_id' => encryptor('decrypt', $id),
+                        'badge_image' => $badgeImageName,
+                    ]);
+                }
+            }
+
+            /* Client Infomations Update */
+            $client = Client::find(currentUserId());
+            $client->fname = $request->f_name;
+            $client->middle_name = $request->middle_name;
+            $client->last_name = $request->l_name;
+            if ($request->hasFile('profile')) {
+                $profileImageName = rand(111, 999) . time() . '.' . $request->profile->extension();
+                $request->profile->move(public_path('uploads/client/'), $profileImageName);
+                $client->image = $profileImageName;
+            }
+            $client->updated_by = currentUserId();
+            $client->save();
+
 
             /* Update Data From Nfc Information */
             $nfc_info = NfcInformation::where('nfc_card_id', encryptor('decrypt', $id))->first();

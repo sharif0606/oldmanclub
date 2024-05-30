@@ -2,6 +2,7 @@
 
 namespace App\Models\Backend;
 
+use App\Models\NfcCardBadges;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User\Client;
@@ -24,5 +25,10 @@ class NfcCard extends Model
     public function nfcFields()
     {
         return $this->belongsToMany(NfcField::class)->withPivot('field_value');
+    }
+
+    public function badges()
+    {
+        return $this->hasMany(NfcCardBadges::class);
     }
 }

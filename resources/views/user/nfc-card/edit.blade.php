@@ -182,9 +182,10 @@
                 <!-- Card body START -->
                 <div class="card-body">
                      <form  action="{{ route('nfc_card.update', encryptor('encrypt', $nfc_card->id)) }}"
-                            method="post" class="row">
+                            method="post" class="row" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
+                            <input type="hidden" name="design_card_id" id="" value="{{ $nfc_card->card_design?->design_card_id ?? ''}}">
                     <!-- Album Tab content START -->
                         <div class="mb-0 pb-5">
                             <div class="row g-3">
@@ -225,7 +226,7 @@
                                                         <div class="row">
                                                             <div class="col-2">
                                                                 <img class="rounded-border-10 border border-white border-3"
-                                                                    src="{{ asset('public/user/assets/images/avatar/placeholder.jpg') }}"
+                                                                    src="{{ asset('public/uploads/client/'. $client->image ?? 'public/user/assets/images/avatar/placeholder.jpg') }}"
                                                                     alt="profile" id="profile-picture">
                                                             </div>
 
@@ -247,20 +248,14 @@
                                                         <h6>Design</h6>
                                                         <div class="row">
                                                             <div class="col-2">
-                                                                @if ($client->image)
-                                                                    <img class="rounded-border-10 border border-white border-3"
-                                                                        src="{{ asset('public/uploads/client/' . $client->image) }}"
-                                                                        alt="" id="design-placeholder">
-                                                                @else
                                                                     <img class="avatar-img rounded-border-10 border border-white border-3"
                                                                         src="{{ asset('public/user/assets/images/avatar/placeholder.jpg') }}"
                                                                         alt="" id="design-placeholder">
-                                                                @endif
                                                             </div>
 
                                                             <div class="col-4 py-2 offset-3">
                                                                 <div class="upload-container">
-                                                                    <input type="file" id="design" name="logo"
+                                                                    <input type="file" id="design" name="design"
                                                                         accept="image/*"
                                                                         onchange="previewfile(event,'design-placeholder')">
                                                                     <label for="design"
@@ -276,6 +271,7 @@
                                                     <div class="col-12 py-2 border-bottom">
                                                         <h6>Color</h6>
                                                         <div class="d-flex justify-content-between col-md-6 py-2">
+                                                            <input type="hidden" name="display_nfc_color" value="{{ $nfc_card->card_design->color ?? '' }}" id="displayNfcColor" >
                                                             <button type="button" onclick="setWaveColor('rgb(255, 0, 0)')"
                                                                 class="color-box"
                                                                 style="background-color: red;width:25px;height:25px;border-radius:50%;">
@@ -310,7 +306,7 @@
                                                             <div class="col-2">
                                                                 @if ($nfc_card->card_design->logo)
                                                                     <img class="rounded-border-10 border border-white border-3"
-                                                                        src="{{ asset('public/uploads/client/' . $client->image) }}"
+                                                                        src="{{ asset('public/uploads/cards/'. $nfc_card->card_design?->logo ?? '') }}"
                                                                         alt="" id="logo-placeholder">
                                                                 @else
                                                                     <img class="avatar-img rounded-border-10 border border-white border-3"
@@ -336,22 +332,27 @@
                                                         <div class="row">
                                                             <div class="col-8">
                                                                 <span id="badge-image-group" class="d-flex ">
-                                                                    @if ($nfc_card->card_design->badges)
-                                                                        <img class="rounded-border-10 border border-white border-3 col-2"
-                                                                            src="{{ asset('public/uploads/client/' . $client->image) }}"
-                                                                            alt="" id="badge-placeholder">
-                                                                    @else
-                                                                        <div class="image-container">
+                                                                    @forelse ( $nfc_card->badges as $bagde)
+                                                                    <div class="image-container " id="image-container-{{$bagde->id}}">
+                                                                            <img class="avatar-img rounded-border-10 border border-white border-3"
+                                                                                src="{{ asset('public/uploads/cards/badges/'. $bagde->badge_image ?? '') }}"
+                                                                                alt="" id="badge-placeholder">
+                                                                        <input type="file" style="visibility: hidden; width: 1px;" name="badge_images[]" value="{{ $bagde->badge_image ?? '' }}">
+                                                                                <button type="button" class="remove-button" onclick="removeBadgeImage('{{ $bagde->id }}',`asset('public/uploads/cards/badges/'. $bagde->badge_image ?? '')`)">X</button>
+                                                                        </div>
+                                                                    @empty
+                                                                    <div class="image-container">
                                                                             <img class="avatar-img rounded-border-10 border border-white border-3"
                                                                                 src="{{ asset('public/user/assets/images/avatar/placeholder.jpg') }}"
                                                                                 alt="" id="badge-placeholder">
                                                                         </div>
-                                                                    @endif
+
+                                                                    @endforelse
                                                                 </span>
                                                             </div>
                                                             <div class="col-4 py-2 fload-end">
                                                                 <div class="upload-container">
-                                                                    <input type="file" id="badge" name="logo"
+                                                                    <input type="file" id="badge" name="badge"
                                                                         accept="image/*"
                                                                         onchange="previewMultipleBadgeFile(event);">
                                                                     <label for="badge"
@@ -360,10 +361,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
-
-
                                             </div>
                                         </div>
 
@@ -380,21 +378,21 @@
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">First Name</label>
-                                                        <input type="text" name="prefix"
+                                                        <input type="text" name="f_name"
                                                             value="{{ $nfc_card->client?->fname ?? '' }}"
                                                             class="form-control form-control-sm mb-2"
                                                             onkeyup="$('#f-name').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Middle Name</label>
-                                                        <input type="text" name="prefix"
+                                                        <input type="text" name="middle_name"
                                                             value="{{ $nfc_card->client?->middle_name ?? '' }}"
                                                             class="form-control form-control-sm mb-2"
                                                             onkeyup="$('#m-name').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Last Name</label>
-                                                        <input type="text" name="prefix"
+                                                        <input type="text" name="l_name"
                                                             value="{{ $nfc_card->client?->last_name ?? '' }}"
                                                             class="form-control form-control-sm mb-2"
                                                             onkeyup="$('#l-name').text($(this).val());">
@@ -491,14 +489,14 @@
                                                                             </span>
                                                                             <h4 class="mt-1">Phone</h4>
                                                                         </span>
-                                                                        <button type="button" onclick="removeDraggableContent()"
+                                                                        <button type="button" onclick="Confirm('remove');removeDraggableContent()"
                                                                             class="remove-btn btn btn-sm fload-end fs-5 items-center">x</button>
                                                                     </div>
                                                                     <div class="">
                                                                         <div class="form-group">
                                                                             <div class="col-auto">
                                                                                 <label class="sr-only"
-                                                                                    for="inlineFormInputGroup">Username</label>
+                                                                                    for="inlineFormInputGroup">Phone</label>
                                                                                 <div class="input-group mb-2  bg-white">
                                                                                     <div class="input-group-prepend">
                                                                                         <div class="">
@@ -512,7 +510,7 @@
                                                                                             </svg>
                                                                                         </div>
                                                                                         <input style="border:transparent"
-                                                                                            type="email"
+                                                                                            type="text"
                                                                                             class="form-control "
                                                                                             id="inlineFormInputGroup"
                                                                                             placeholder="Username">
@@ -522,7 +520,7 @@
                                                                             </div>
                                                                             <select
                                                                                 class="form-select form-control-sm mb-2 bg-white"
-                                                                                name="details.fields.0.label">
+                                                                                name="">
                                                                                 <option value="">No Label</option>
                                                                                 <option value="personal">personal</option>
                                                                                 <option value="work">work</option>
@@ -550,7 +548,7 @@
                                                                 @foreach ($nfcFields as $value)
                                                                     @if ($value->type == 1)
                                                                         <button type="button"
-                                                                        onclick="addDraggableContent(`<span class='{{ $value->icon}}'></i></span>`,'{{ $value->name }}')"
+                                                                        onclick="addDraggableContent(`<span class='{{ $value->icon}}'></i></span>`,'{{ $value->name }}','{{ $value->id }}')"
                                                                             data-field="{{ $value->name }}"
                                                                             data-id="{{ $value->id }}"
                                                                             style="margin:2px 1px"
@@ -566,7 +564,7 @@
                                                                             );
                                                                         @endphp
                                                                         <button type="button"
-                                                                        onclick="addDraggableContent('{{ $icon }}','{{ $value->name }}')"
+                                                                        onclick="addDraggableContent('{{ $icon }}','{{ $value->name }}','{{ $value->id }}')"
                                                                             data-field="{{ $value->name }}"
                                                                             data-id="{{ $value->id }}"
                                                                             style="margin:2px 1px"
@@ -575,8 +573,12 @@
                                                                                 class="mx-1">
                                                                                 {!! $icon !!}</span>{{ $value->name }}</button>
                                                                     @elseif ($value->type == 3)
+                                                                    @php
+                                                                        $icon = "<img src='". asset('public/uploads/client/' . $value->icon). " style='width:24px; height:20px;'/>";
+                                                                    @endphp
+
                                                                         <button type="button"
-                                                                        onclick="addDraggableContent()"
+                                                                        onclick="addDraggableContent('{{ $icon }}','{{ $value->name }}','{{ $value->id }}')"
                                                                             data-field="{{ $value->name }}"
                                                                             data-id="{{ $value->id }}"
                                                                             style="margin:2px 1px"
@@ -657,7 +659,15 @@
             // $("#draggable").sortable();
             // });
 
-           function addDraggableContent(icon, text) {
+    function Confirm(text)
+    {
+        if (confirm(`Are you sure you want to ${text}?`)){
+            return true;
+        } else{
+            return false;
+        }
+    }
+        function addDraggableContent(icon, text,id) {
         var draggableContent = `
             <div id="draggerContent" class="draggable-item card px-4 py-2">
                 <div class="card-dragger-header d-flex items-center" style="gap: 0 0.5rem;justify-content: space-between;">
@@ -673,7 +683,7 @@
                         </span>
                         <h4 class="mt-1">${text.toUpperCase()}</h4>
                     </span>
-                    <button type="button" onclick="removeDraggableContent(this)" class="remove-btn btn btn-sm fload-end fs-5 items-center">x</button>
+                    <button type="button" onclick="Confirm('remove');removeDraggableContent(this);" class="remove-btn btn btn-sm fload-end fs-5 items-center">x</button>
                 </div>
                 <div class="">
                     <div class="form-group">
@@ -684,11 +694,12 @@
                                     <div class="">
                                         ${icon}
                                     </div>
-                                    <input style="border:transparent" type="email" class="form-control " id="inlineFormInputGroup" placeholder="Username">
+                                    <input type="hidden" name="nfc_id[]" value="${id}">
+                                    <input style="border:transparent" name="nfc_user_name[]" type="text" class="form-control " id="inlineFormInputGroup" placeholder="Username">
                                 </div>
                             </div>
                         </div>
-                        <select class="form-select form-control-sm mb-2 bg-white" name="details.fields.0.label">
+                        <select class="form-select form-control-sm mb-2 bg-white" name="nfc_label[]">
                             <option value="">No Label</option>
                             <option value="personal">personal</option>
                             <option value="work">work</option>
@@ -755,6 +766,7 @@
         //     };
         //     div.appendChild(button);
         // }
+
         function setWaveColor(color) {
             var wave = document.getElementById('wave');
             var background = document.getElementById('background');
@@ -762,6 +774,8 @@
             wave.setAttribute('fill', color);
             // background.setAttribute('fill', color);
             // forground.setAttribute('fill', color);
+
+            document.getElementById("displayNfcColor").value = color;
         }
         const badgeImages = [];
 
@@ -788,6 +802,7 @@
 
             removeDefaultBadgeImage();
             var file = event.target.files[0];
+            console.log(file);
             if (file) {
                 var imgSrc = URL.createObjectURL(file);
 
@@ -797,6 +812,13 @@
                 previewImg.src = imgSrc;
                 previewImg.classList.add("rounded-border-10", "border", "border-white", "border-3");
                 previewDiv.appendChild(previewImg);
+                var badgeImgInput = document.createElement("input");
+                badgeImgInput.type = "file";
+                badgeImgInput.style.visibility = "hidden";
+                badgeImgInput.style.width = "1px";
+                badgeImgInput.name = "badge_images[]";
+                badgeImgInput.files = event.target.files;
+
                 previewOutput.appendChild(previewDiv);
 
                 var controlDiv = document.createElement("div");
@@ -805,6 +827,7 @@
                 controlImg.src = imgSrc;
                 controlImg.classList.add("rounded-border-10", "border", "border-white", "border-3");
                 controlDiv.appendChild(controlImg);
+                controlDiv.appendChild(badgeImgInput);
                 controlOutput.append(controlDiv);
                 addRemoveBtn(controlDiv, previewDiv, controlOutput, previewOutput, imgSrc);
                 badgeImages.push(imgSrc);
@@ -824,6 +847,19 @@
                 }
             };
             controlDiv.appendChild(button);
+        }
+
+        function removeBadgeImage(id,imgSrc) {
+            const previewOutput = document.getElementById(`badge-preview-${id}`).remove();
+            const controlOutput = document.getElementById(`image-container-${id}`).remove();
+
+            // previewOutput.removeChild(previewDiv);
+            // controlOutput.removeChild(controlDiv);
+
+            const index = badgeImages.indexOf(imgSrc);
+            if (index > -1) {
+                badgeImages.splice(index, 1);
+            }
         }
     </script>
 @endpush
