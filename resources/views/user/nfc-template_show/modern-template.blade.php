@@ -2,11 +2,11 @@
                 <header class="modern_header">
                     <div class="">
                         @if ($nfc_card->card_design?->logo)
-                            <img src="{{ asset($nfc_card->card_design?->logo) }}" alt="abc" width="60px"
+                            <img  src="{{ asset($nfc_card->card_design?->logo) }}" alt="abc" width="60px" id="diplay-profile-pic"
                             />
                         @else
                             <img src="{{ asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="60px"
-                                srcset="" />
+                                />
                         @endif
                         <!-- <img src="assets/images/header_image.png" alt="abc" width="100px" srcset="" /> -->
                     </div>
@@ -16,7 +16,7 @@
                         @else
                             <span class="fs-4 fw-bold">Dr.</span>
                         @endif
-                        <span class="fs-3 fw-bold"> 
+                        <span class="fs-3 fw-bold">
                             {{ $nfc_card->client?->fname }}
                             {{ $nfc_card->client?->middle_name }}
                             {{ $nfc_card->client?->last_name }}
@@ -43,12 +43,12 @@
                     @if ($nfc_card->client?->image)
                         <div class="CardAvatar">
                             <img src="{{ asset('public/uploads/client/' . $nfc_card->client?->image)}}"
-                        class="modern_card_image img-fluid" alt="" />
+                        class="modern_card_image img-fluid display-profile-pic" alt="" />
                     </div>
                     @else
                     <div class="CardAvatar">
                         <img src="{{ asset('public/assets/nfc/images/123.png')}}"
-                            class="modern_card_image img-fluid" alt="" />
+                            class="modern_card_image img-fluid display-profile-pic" alt="" />
                     </div>
                     @endif
                 <div>
@@ -119,7 +119,7 @@
                                 <a href="#">Google</a>
                                 </li> -->
                             </ul>
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </section>

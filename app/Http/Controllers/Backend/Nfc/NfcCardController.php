@@ -154,14 +154,14 @@ class NfcCardController extends Controller
     public function update(Request $request, $id)
     {
         // Start the database transaction
-        // dd($request->hasFile('badge_images'));
+        // dd($request->all());
         DB::beginTransaction();
         try {
 
             // Find the NFC card by decrypting the ID
             $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
             $nfc_card->card_name = $request->card_name;
-            // $nfc_card->card_type = $request->card_type;
+            $nfc_card->card_type = $request->card_type;
             //$nfc_card->updated_by = currentUserId();
 
             /* Update Data From Nfc Design */
@@ -223,23 +223,26 @@ class NfcCardController extends Controller
             $nfc_info->save();
 
             // Retrieve the existing pivot data associated with the NFC card
-            $existingPivotData = $nfc_card->nfcFields()->pluck('nfc_field_id', 'nfc_field_id')->toArray();
-
+            $existingPivotData = $nfc_card->nfcFields()->pluck('field_value', 'nfc_field_id')->toArray();
 
             // Retrieve the new data from the request
-            $nfcFieldIds = $request->input('nfc_field_id');
-            if ($nfcFieldIds) {
-                $nfcFieldValues = $request->input('field_value');
+            $nfcFieldIds = $request->input('nfc_id');
+            $nfcFieldUsernames = $request->input('nfc_user_name');
+            $nfcFieldLabels = $request->input('nfc_label');
 
+            if ($nfcFieldIds) {
                 // Prepare the data for sync
                 $nfcFieldData = [];
                 foreach ($nfcFieldIds as $index => $nfcFieldId) {
-                    $value = $nfcFieldValues[$nfcFieldId];
-                    $nfcFieldData[$nfcFieldId] = ['field_value' => $value];
+                    // Assuming each nfc_id corresponds to an nfc_field_id
+                    $nfcFieldData[$nfcFieldId] = [
+                        'field_value' => $nfcFieldUsernames[$index],
+                        'display_text' => $nfcFieldLabels[$index]
+                    ];
                 }
 
                 // Synchronize the relationship, deleting any records not included in the new data
-                $nfc_card->nfcFields()->sync($nfcFieldData, true);
+                $nfc_card->nfcFields()->sync($nfcFieldData);
             }
 
             // Save the NFC card
