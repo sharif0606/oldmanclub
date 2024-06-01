@@ -27,6 +27,8 @@ class NfcCard extends Model
         return $this->belongsToMany(NfcField::class)->withPivot('field_value');
     }
 
+
+
     public function badges()
     {
         return $this->hasMany(NfcCardBadges::class);

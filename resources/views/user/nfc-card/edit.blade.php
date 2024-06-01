@@ -3,8 +3,7 @@
 @push('styles')
     <link rel="stylesheet" href="{{ asset('public/assets/nfc/styles.css') }}" />
     <style>
-
-        .design-group{
+        .design-group {
             display: grid;
             /* grid-template-columns: repeat(auto-fit, minmax(25%, 1fr)); */
             grid-template-columns: 6rem 6rem 6rem 6rem;
@@ -12,14 +11,16 @@
             gap: .5rem;
             align-items: center;
         }
+
         .design-card {
             cursor: pointer;
             color: #171923;
 
             border-radius: 20px;
         }
-        .design-card-active{
-            border: 1px solid {{$nfc_card->card_design->color}};
+
+        .design-card-active {
+            border: 1px solid {{ $nfc_card->card_design->color }};
         }
 
         .design-card svg {
@@ -28,6 +29,7 @@
             height: auto;
             margin: .5rem;
         }
+
         .image-container {
             display: inline-block;
             position: relative;
@@ -68,8 +70,8 @@
 
         /* .btn-nfc span{
 
-                    color:#718096;
-            } */
+                        color:#718096;
+                } */
         .btn-nfc:hover {
             background-color: #8F60DE26 !important;
             color: #2D3748 !important;
@@ -227,17 +229,21 @@
                                     @elseif($nfc_card->card_design?->design_card_id == 4)
                                         @include('user.nfc-template_show.sleek-template')
                                     @endif --}}
-                                    <div class="{{ $nfc_card->card_type == 1 ? 'd-block' : 'd-none' }}" id="design-card-id-1">
+                                    <div class="{{ $nfc_card->card_type == 1 ? 'd-block' : 'd-none' }}"
+                                        id="design-card-id-1">
                                         @include('user.nfc-template_show.classic-template')
                                     </div>
-                                    <div class="{{ $nfc_card->card_type == 2 ? 'd-block' : 'd-none' }}" id="design-card-id-2">
-                                      @include('user.nfc-template_show.modern-template')
+                                    <div class="{{ $nfc_card->card_type == 2 ? 'd-block' : 'd-none' }}"
+                                        id="design-card-id-2">
+                                        @include('user.nfc-template_show.modern-template')
                                     </div>
-                                    <div class="{{ $nfc_card->card_type == 3 ? 'd-block' : 'd-none' }}" id="design-card-id-3">
-                                      @include('user.nfc-template_show.sleek-template')
+                                    <div class="{{ $nfc_card->card_type == 3 ? 'd-block' : 'd-none' }}"
+                                        id="design-card-id-3">
+                                        @include('user.nfc-template_show.sleek-template')
                                     </div>
-                                    <div class="{{ $nfc_card->card_type == 4 ? 'd-block' : 'd-none' }}" id="design-card-id-4">
-                                       @include('user.nfc-template_show.flat-template')
+                                    <div class="{{ $nfc_card->card_type == 4 ? 'd-block' : 'd-none' }}"
+                                        id="design-card-id-4">
+                                        @include('user.nfc-template_show.flat-template')
                                     </div>
                                 </div>
                                 <div class="col-md-8 nfc-data-previewer">
@@ -289,60 +295,127 @@
                                                 <div class="col-12 py-2 border-bottom">
                                                     <h6>Design</h6>
                                                     <input type="hidden" name="card_type"
-                                                            value="{{ $nfc_card->card_type ?? '' }}"
-                                                            id="nfcDesign">
+                                                        value="{{ $nfc_card->card_type ?? '' }}" id="nfcDesign">
                                                     <div class="design-group">
-                                                        <div class="design-card {{ $nfc_card->card_type==1 ? 'design-card-active' : ''}}" onclick="changeDesign(event,'1')">
+                                                        <div class="design-card {{ $nfc_card->card_type == 1 ? 'design-card-active' : '' }}"
+                                                            onclick="changeDesign(event,'1')">
                                                             <span>
-                                                                <svg viewBox="0 0 72 72" focusable="false" class="chakra-icon chakra-icon css-5nx6ny">
+                                                                <svg viewBox="0 0 72 72" focusable="false"
+                                                                    class="chakra-icon chakra-icon css-5nx6ny">
                                                                     <g clip-path="url(#clip0_1931_53838)">
-                                                                        <path class="svg-color" fill="{{ $nfc_card->card_design->color ?? ''}}" d="M0 -24H72V54H0V-24Z" fill="currentColor"></path>
-                                                                        <path d="M72 72.5V39.18C44.16 29.9533 29.568 63.3176 0 41.7337V72.5H72Z" fill="whitesmoke"></path>
+                                                                        <path class="svg-color"
+                                                                            fill="{{ $nfc_card->card_design->color ?? '' }}"
+                                                                            d="M0 -24H72V54H0V-24Z" fill="currentColor">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M72 72.5V39.18C44.16 29.9533 29.568 63.3176 0 41.7337V72.5H72Z"
+                                                                            fill="whitesmoke"></path>
                                                                     </g>
                                                                     <defs>
                                                                         <clipPath id="clip0_1931_53838">
-                                                                            <rect fill="white" height="72" rx="16" width="72"></rect>
+                                                                            <rect fill="white" height="72"
+                                                                                rx="16" width="72"></rect>
                                                                         </clipPath>
                                                                     </defs>
                                                                 </svg>
                                                             </span>
                                                             <p class="mt-2">Classic</p>
                                                         </div>
-                                                        <div class="design-card {{ $nfc_card->card_type==2 ? 'design-card-active' : ''}}" onclick="changeDesign(event,'2')">
+                                                        <div class="design-card {{ $nfc_card->card_type == 2 ? 'design-card-active' : '' }}"
+                                                            onclick="changeDesign(event,'2')">
                                                             <span>
-                                                                <svg viewBox="0 0 72 72" focusable="false" class="chakra-icon chakra-icon css-5nx6ny">
+                                                                <svg viewBox="0 0 72 72" focusable="false"
+                                                                    class="chakra-icon chakra-icon css-5nx6ny">
                                                                     <g clip-path="url(#clip0_805_62524)">
-                                                                        <rect fill="white" height="72" rx="16" width="72"></rect>
+                                                                        <rect fill="white" height="72"
+                                                                            rx="16" width="72"></rect>
                                                                         <g clip-path="url(#clip1_805_62524)">
-                                                                            <path  class="svg-color" fill="{{ $nfc_card->card_design->color ?? ''}}" d="M0 -16.875H72V30.3333L0 55.637V-16.875Z" fill="url(#paint0_linear_805_62524)"></path>
-                                                                            <circle cx="53" cy="27.125" fill="#ddd" r="14"></circle>
+                                                                            <path class="svg-color"
+                                                                                fill="{{ $nfc_card->card_design->color ?? '' }}"
+                                                                                d="M0 -16.875H72V30.3333L0 55.637V-16.875Z"
+                                                                                fill="url(#paint0_linear_805_62524)">
+                                                                            </path>
+                                                                            <circle cx="53" cy="27.125"
+                                                                                fill="#ddd" r="14"></circle>
                                                                         </g>
                                                                     </g>
                                                                     <defs>
-                                                                        <linearGradient gradientUnits="userSpaceOnUse" id="paint0_linear_805_62524" x1="36" x2="36" y1="-16.875" y2="55.637">
-                                                                            <stop offset="0" stop-color="currentColor"></stop>
-                                                                            <stop offset="0.75" stop-color="currentColor" stop-opacity="0.75"></stop>
+                                                                        <linearGradient gradientUnits="userSpaceOnUse"
+                                                                            id="paint0_linear_805_62524" x1="36"
+                                                                            x2="36" y1="-16.875" y2="55.637">
+                                                                            <stop offset="0"
+                                                                                stop-color="currentColor"></stop>
+                                                                            <stop offset="0.75" stop-color="currentColor"
+                                                                                stop-opacity="0.75"></stop>
                                                                         </linearGradient>
-                                                                        <clipPath id="clip0_805_62524"><rect fill="white" height="72" rx="16" width="72"></rect></clipPath>
-                                                                            <clipPath id="clip1_805_62524"><rect fill="white" height="72.576" transform="translate(0 -16.875)" width="72"></rect></clipPath></defs>
-                                                                            </svg>
+                                                                        <clipPath id="clip0_805_62524">
+                                                                            <rect fill="white" height="72"
+                                                                                rx="16" width="72"></rect>
+                                                                        </clipPath>
+                                                                        <clipPath id="clip1_805_62524">
+                                                                            <rect fill="white" height="72.576"
+                                                                                transform="translate(0 -16.875)"
+                                                                                width="72"></rect>
+                                                                        </clipPath>
+                                                                    </defs>
+                                                                </svg>
                                                             </span>
                                                             <p class="mt-2">Modern</p>
                                                         </div>
-                                                        <div class="design-card {{ $nfc_card->card_type==3 ? 'design-card-active' : ''}}" onclick="changeDesign(event,'3')">
+                                                        <div class="design-card {{ $nfc_card->card_type == 3 ? 'design-card-active' : '' }}"
+                                                            onclick="changeDesign(event,'3')">
                                                             <span>
-                                                                <svg viewBox="0 0 72 72" focusable="false" class="chakra-icon chakra-icon css-5nx6ny">
-                                                                    <g clip-path="url(#a)"><rect  fill="#F5F5F5" height="72" rx="16" width="72"></rect>
-                                                                    <circle cx="36" cy="-6.75" class="svg-color" fill="{{ $nfc_card->card_design->color ?? ''}}" r="59.625"></circle>
-                                                                    <path fill="white" d="M15.75 42.75h41.625v13.5H15.75z"></path></g><defs><clipPath id="a"><rect fill="#fff" height="72" rx="16" width="72"></rect></clipPath></defs></svg>
+                                                                <svg viewBox="0 0 72 72" focusable="false"
+                                                                    class="chakra-icon chakra-icon css-5nx6ny">
+                                                                    <g clip-path="url(#a)">
+                                                                        <rect fill="#F5F5F5" height="72"
+                                                                            rx="16" width="72"></rect>
+                                                                        <circle cx="36" cy="-6.75"
+                                                                            class="svg-color"
+                                                                            fill="{{ $nfc_card->card_design->color ?? '' }}"
+                                                                            r="59.625"></circle>
+                                                                        <path fill="white"
+                                                                            d="M15.75 42.75h41.625v13.5H15.75z"></path>
+                                                                    </g>
+                                                                    <defs>
+                                                                        <clipPath id="a">
+                                                                            <rect fill="#fff" height="72"
+                                                                                rx="16" width="72"></rect>
+                                                                        </clipPath>
+                                                                    </defs>
+                                                                </svg>
                                                             </span>
                                                             <p class="mt-2">Sleek</p>
                                                         </div>
-                                                        <div class="design-card {{ $nfc_card->card_type==4 ? 'design-card-active' : ''}}" onclick="changeDesign(event,'4')">
+                                                        <div class="design-card {{ $nfc_card->card_type == 4 ? 'design-card-active' : '' }}"
+                                                            onclick="changeDesign(event,'4')">
                                                             <span>
-                                                               <svg viewBox="0 0 72 72" focusable="false" class="chakra-icon chakra-icon css-5nx6ny"><g clip-path="url(#a)"><rect fill="white" height="72" rx="16" width="72"></rect><g clip-path="url(#b)" fill="currentColor">
-                                                                <path  class="svg-color" fill="{{ $nfc_card->card_design->color ?? ''}}" d="M0-29.25h72v72.512H0z"></path>
-                                                                <path  class="svg-color" fill="{{ $nfc_card->card_design->color ?? ''}}" d="M0 32.184v4.88c13.344 7.171 24 7.605 40.224-.83 16.224-8.436 24-7.34 31.776-5.4V29.57c-17.856-5.99-32.352 5.845-43.584 8.798C17.184 41.319 9.888 39.21 0 32.184Z"></path></g></g><defs><clipPath id="a"><rect fill="#fff" height="72" rx="16" width="72"></rect></clipPath><clipPath id="b"><path d="M0-29.25h72v72.576H0z" fill="#fff"></path></clipPath></defs></svg>
+                                                                <svg viewBox="0 0 72 72" focusable="false"
+                                                                    class="chakra-icon chakra-icon css-5nx6ny">
+                                                                    <g clip-path="url(#a)">
+                                                                        <rect fill="white" height="72"
+                                                                            rx="16" width="72"></rect>
+                                                                        <g clip-path="url(#b)" fill="currentColor">
+                                                                            <path class="svg-color"
+                                                                                fill="{{ $nfc_card->card_design->color ?? '' }}"
+                                                                                d="M0-29.25h72v72.512H0z"></path>
+                                                                            <path class="svg-color"
+                                                                                fill="{{ $nfc_card->card_design->color ?? '' }}"
+                                                                                d="M0 32.184v4.88c13.344 7.171 24 7.605 40.224-.83 16.224-8.436 24-7.34 31.776-5.4V29.57c-17.856-5.99-32.352 5.845-43.584 8.798C17.184 41.319 9.888 39.21 0 32.184Z">
+                                                                            </path>
+                                                                        </g>
+                                                                    </g>
+                                                                    <defs>
+                                                                        <clipPath id="a">
+                                                                            <rect fill="#fff" height="72"
+                                                                                rx="16" width="72"></rect>
+                                                                        </clipPath>
+                                                                        <clipPath id="b">
+                                                                            <path d="M0-29.25h72v72.576H0z" fill="#fff">
+                                                                            </path>
+                                                                        </clipPath>
+                                                                    </defs>
+                                                                </svg>
                                                             </span>
                                                             <p class="mt-2">Flat</p>
                                                         </div>
@@ -561,64 +634,102 @@
                                                         <div class="col-md-8">
                                                             <div id="draggable" class="card p-3 text-white"
                                                                 style="max-height:auto;z-index:1;overflow-y:scroll;background-color:#E2E8F0;border: 2px white dashed;">
-                                                                <div id="draggerContent" class="card px-4 py-2">
-                                                                    <div class="card-dragger-header d-flex items-center"
-                                                                        style="gap: 0 0.5rem;justify-content: space-between;">
-                                                                        <span id="dragger" class="d-flex items-center"
-                                                                            style="gap: 0 0.5rem;align-items: center;">
-                                                                            <span class="" style="cursor: pointer">
-                                                                                <svg style="height: 24px"
-                                                                                    viewBox="0 0 24 24" focusable="false"
-                                                                                    class="chakra-icon chakra-icon css-1wuln1z">
-                                                                                    <path
-                                                                                        d="M2 19.2838H22V17.0031H2V19.2838ZM2 13.5821H22V11.3014H2V13.5821ZM2 5.59961V7.88031H22V5.59961H2Z"
-                                                                                        fill="currentColor"></path>
-                                                                                </svg>
+                                                                @php
+                                                                    $ncfCardNfcFields = DB::table('nfc_card_nfc_field')
+                                                                        ->join(
+                                                                            'nfc_fields',
+                                                                            'nfc_fields.id',
+                                                                            'nfc_card_nfc_field.nfc_field_id',
+                                                                        )
+                                                                        ->where(
+                                                                            'nfc_card_nfc_field.nfc_card_id',
+                                                                            $nfc_card->id,
+                                                                        )
+                                                                        ->get();
+                                                                @endphp
+                                                                @forelse ($ncfCardNfcFields as $item)
+                                                                    <div id="draggerContent" class="card px-4 py-2">
+                                                                        <div class="card-dragger-header d-flex items-center"
+                                                                            style="gap: 0 0.5rem;justify-content: space-between;">
+                                                                            <span id="dragger"
+                                                                                class="d-flex items-center"
+                                                                                style="gap: 0 0.5rem;align-items: center;">
+                                                                                <span class=""
+                                                                                    style="cursor: pointer">
+                                                                                    <svg style="height: 24px"
+                                                                                        viewBox="0 0 24 24"
+                                                                                        focusable="false"
+                                                                                        class="chakra-icon chakra-icon css-1wuln1z">
+                                                                                        <path
+                                                                                            d="M2 19.2838H22V17.0031H2V19.2838ZM2 13.5821H22V11.3014H2V13.5821ZM2 5.59961V7.88031H22V5.59961H2Z"
+                                                                                            fill="currentColor"></path>
+                                                                                    </svg>
 
+                                                                                </span>
+                                                                                <h4 class="mt-1">{{ $item->name }}
+                                                                                </h4>
                                                                             </span>
-                                                                            <h4 class="mt-1">Phone</h4>
-                                                                        </span>
-                                                                        <button type="button"
-                                                                            onclick="Confirm('remove');removeDraggableContent()"
-                                                                            class="remove-btn btn btn-sm fload-end fs-5 items-center">x</button>
-                                                                    </div>
-                                                                    <div class="">
-                                                                        <div class="form-group">
-                                                                            <div class="col-auto">
-                                                                                <label class="sr-only"
-                                                                                    for="inlineFormInputGroup">Phone</label>
-                                                                                <div class="input-group mb-2  bg-white">
-                                                                                    <div class="input-group-prepend">
-                                                                                        <div class="">
-                                                                                            <svg style="height: 24px"
-                                                                                                viewBox="0 0 20 20"
-                                                                                                focusable="false"
-                                                                                                class="chakra-icon chakra-icon css-1dtt6v7">
-                                                                                                <path
-                                                                                                    d="M16.0708 4H3.56342C2.70354 4 2.00782 4.70354 2.00782 5.56342L2 14.944C2 15.8038 2.70354 16.5074 3.56342 16.5074H16.0708C16.9307 16.5074 17.6342 15.8038 17.6342 14.944V5.56342C17.6342 4.70354 16.9307 4 16.0708 4ZM15.7581 7.32227L10.2314 10.7774C9.98127 10.9338 9.65295 10.9338 9.4028 10.7774L3.87611 7.32227C3.68068 7.1972 3.56342 6.98614 3.56342 6.75944C3.56342 6.23569 4.13407 5.92301 4.57965 6.19661L9.81711 9.47198L15.0546 6.19661C15.5001 5.92301 16.0708 6.23569 16.0708 6.75944C16.0708 6.98614 15.9535 7.1972 15.7581 7.32227Z"
-                                                                                                    fill="currentColor">
-                                                                                                </path>
-                                                                                            </svg>
+                                                                            <button type="button"
+                                                                                onclick="removeDraggableContent(this)"
+                                                                                class="remove-btn btn btn-sm fload-end fs-5 items-center">x</button>
+                                                                        </div>
+                                                                        <div class="">
+                                                                            <div class="form-group">
+                                                                                <div class="col-auto">
+                                                                                    <label class="sr-only"
+                                                                                        for="inlineFormInputGroup">Phone</label>
+                                                                                    <div
+                                                                                        class="input-group mb-2  bg-white">
+                                                                                        <div class="input-group-prepend">
+                                                                                            <div class="">
+                                                                                                @if ($item->type == '1')
+                                                                                                    <span class="mx-1"><i
+                                                                                                            class="{{ $item->icon }}"></i></span>
+                                                                                                    @elseif($item->type == '2')
+                                                                                                    @php
+                                                                                                        $icon = str_replace(
+                                                                                                            '<svg',
+                                                                                                            '<svg style="width:24px; height:20px;"',
+                                                                                                            $item->icon,
+                                                                                                        );
+                                                                                                    @endphp
+                                                                                                    {{ $icon }}
+                                                                                                    @elseif($item->type == '3')
+                                                                                                    <img src="{{ asset('public/uploads/client/' . $item->icon) }}"
+                                                                                                        style="width:24px; height:20px;" />
+                                                                                                    @endif
+                                                                                            </div>
+                                                                                            <input type="hidden"
+                                                                                                name="nfc_id[]"
+                                                                                                value="{{ $item->id }} " />
+                                                                                            <input
+                                                                                                style="border:transparent"
+                                                                                                name="nfc_user_name[]"
+                                                                                                value="{{ $item->field_value }}"
+                                                                                                type="text"
+                                                                                                class="form-control "
+                                                                                                placeholder="Username">
                                                                                         </div>
-                                                                                        <input style="border:transparent"
-                                                                                            type="text"
-                                                                                            class="form-control "
-                                                                                            id="inlineFormInputGroup"
-                                                                                            placeholder="Username">
-
                                                                                     </div>
                                                                                 </div>
+                                                                                <select
+                                                                                    class="form-select form-control-sm mb-2 bg-white"
+                                                                                    name="nfc_label[]">
+                                                                                    <option value="">No Label
+                                                                                    </option>
+                                                                                    <option
+                                                                                        {{ $item->display_text == 'personal' ? 'selected' : '' }}
+                                                                                        value="personal">personal</option>
+                                                                                    <option
+                                                                                        {{ $item->display_text == 'work' ? 'selected' : '' }}
+                                                                                        value="work">work</option>
+                                                                                </select>
                                                                             </div>
-                                                                            <select
-                                                                                class="form-select form-control-sm mb-2 bg-white"
-                                                                                name="">
-                                                                                <option value="">No Label</option>
-                                                                                <option value="personal">personal</option>
-                                                                                <option value="work">work</option>
-                                                                            </select>
                                                                         </div>
                                                                     </div>
-                                                                </div>
+                                                                @empty
+                                                                @endforelse
+
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4 pb-2" id="field-gallery"
@@ -768,7 +879,7 @@
             }
 
             // Change template
-             var nfcPreviewer = document.querySelector('.nfc-previewer');
+            var nfcPreviewer = document.querySelector('.nfc-previewer');
             var previewTemplates = nfcPreviewer.children;
             Array.from(previewTemplates).forEach(function(template) {
                 template.classList.add('d-none');
@@ -782,13 +893,12 @@
             }
 
         }
-
-
     </script>
 @endsection
 @push('scripts')
     <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
     <script>
+         $("#draggable").sortable();
         function changeProfilePicture(event) {
             var outputs = document.querySelectorAll('.display-profile-pic');
             outputs.forEach((output) => {
@@ -810,8 +920,6 @@
         }
     </script>
     <script>
-
-
         function Confirm(text) {
             if (confirm(`Are you sure you want to ${text}?`)) {
                 return true;
@@ -866,14 +974,17 @@
         }
 
         function removeDraggableContent(btn) {
-            $(btn).closest(".draggable-item").remove();
+             if (confirm(`Do you want to remove this content?`)) {
+                $(btn).closest("#draggerContent").remove();
+            } else {
+                return false;
+            }
         }
 
 
         // });
     </script>
     <script>
-
         function setWaveColor(color) {
             var wave = document.getElementById('wave');
             var background = document.getElementById('background');
@@ -977,7 +1088,5 @@
                 badgeImages.splice(index, 1);
             }
         }
-
-
     </script>
 @endpush
