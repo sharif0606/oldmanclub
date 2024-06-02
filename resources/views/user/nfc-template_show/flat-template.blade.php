@@ -2,10 +2,10 @@
         <div class="header_section">
             <div>
                 @if ($nfc_card->client?->image)
-                    <img src="{{ asset('public/uploads/client/' . $nfc_card->client?->image)}}" alt="" width="350px" height="300px">
+                    <img class="display-profile-pic"  src="{{ asset('public/uploads/client/' . $nfc_card->client?->image)}}" alt="" width="350px" height="300px">
                     <!-- <div class="main-img" style="background-image: url({{ asset('public/uploads/client/' . $nfc_card->client?->image)}});"></div> -->
                 @else
-                    <div class="main-img" style="background-image: url({{ asset('public/assets/nfc/images/123.png') }}) width:350px;" >
+                    <div class="main-img display-profile-pic" style="background-image: url({{ asset('public/assets/nfc/images/123.png') }}) width:350px;" >
                     </div>
                 @endif
             </div>
