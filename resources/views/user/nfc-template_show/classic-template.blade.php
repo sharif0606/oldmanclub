@@ -109,9 +109,9 @@
                 </div>
             </div>
             <div class="row">
-                <ul class="list-group">
+                <ul class="list-group" id="social-user">
                     @foreach ($nfc_card->nfcFields as $nfcField)
-                        <li class="list-group-item">
+                        <li class="list-group-item" id="social-list-item-{{ $nfcField->id }}">
                             <i class="{{ $nfcField->icon }}"></i>
                             <a href="#" class="mx-1">
                                 <img src="assets/images/email.png" alt="" srcset="" width="25px">

@@ -670,7 +670,7 @@
                                                                                 </h4>
                                                                             </span>
                                                                             <button type="button"
-                                                                                onclick="removeDraggableContent(this)"
+                                                                                onclick="removeDraggableContent(this,'{{ $item->id }}')"
                                                                                 class="remove-btn btn btn-sm fload-end fs-5 items-center">x</button>
                                                                         </div>
                                                                         <div class="">
@@ -701,13 +701,14 @@
                                                                                             </div>
                                                                                             <input type="hidden"
                                                                                                 name="nfc_id[]"
-                                                                                                value="{{ $item->id }} " />
+                                                                                                value="{{ $item->id }}" />
                                                                                             <input
                                                                                                 style="border:transparent"
                                                                                                 name="nfc_user_name[]"
                                                                                                 value="{{ $item->field_value }}"
                                                                                                 type="text"
                                                                                                 class="form-control "
+                                                                                                onblur="$('#social-item-link-{{ $item->id }}').text('{{ $item->display_text ?? ''}}').attr('href', this.value);"
                                                                                                 placeholder="Username">
                                                                                         </div>
                                                                                     </div>
@@ -944,7 +945,7 @@
                         </span>
                         <h4 class="mt-1">${text.toUpperCase()}</h4>
                     </span>
-                    <button type="button" onclick="Confirm('remove');removeDraggableContent(this);" class="remove-btn btn btn-sm fload-end fs-5 items-center">x</button>
+                    <button type="button" onclick="removeDraggableContent(this,${id});" class="remove-btn btn btn-sm fload-end fs-5 items-center">x</button>
                 </div>
                 <div class="">
                     <div class="form-group">
@@ -956,7 +957,7 @@
                                         ${icon}
                                     </div>
                                     <input type="hidden" name="nfc_id[]" value="${id}">
-                                    <input style="border:transparent" name="nfc_user_name[]" type="text" class="form-control " id="inlineFormInputGroup" placeholder="Username">
+                                    <input style="border:transparent" name="nfc_user_name[]" type="text" class="form-control " placeholder="Username" onblur="$('#social-item-link-${id}').text('${text}').attr('href', this.value);">
                                 </div>
                             </div>
                         </div>
@@ -968,17 +969,35 @@
                     </div>
                 </div>
             </div>`;
+            AddLeftsideSocialUser(icon, text, id);
             $("#draggable").append(draggableContent);
             $("#draggable:last-child").sortable();
             // $("#draggerContent:last-child").sortable();
         }
 
-        function removeDraggableContent(btn) {
+        function AddLeftsideSocialUser(icon, text, id){
+            var socialContent = document.getElementById("social-user") // ul
+            var socialItem = document.getElementById(`social-list-item-${id}`); //li
+
+            var content = `<li class="list-group-item" id="social-list-item-${id}">
+                            ${icon}
+                            <a style="margin-left:1rem" id="social-item-link-${id}" href="#">${text}</a>
+                        </li>`;
+                socialContent.insertAdjacentHTML('beforeend', content);
+        }
+
+        function removeDraggableContent(btn,id) {
              if (confirm(`Do you want to remove this content?`)) {
                 $(btn).closest("#draggerContent").remove();
+                document.getElementById(`social-list-item-${id}`).remove();
             } else {
                 return false;
             }
+        }
+
+        function removeSocailIcon()
+        {
+
         }
 
 
