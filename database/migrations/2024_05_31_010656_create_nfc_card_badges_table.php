@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('nfc_fields', function (Blueprint $table) {
-            $table->string('icon')->nullable()->change();
+        Schema::create('nfc_card_badges', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('nfc_card_id')->constrained('nfc_cards');
+            $table->string('badge_image');
         });
     }
 
@@ -21,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('nfc_fields', function (Blueprint $table) {
-            $table->string('icon', 100)->nullable()->change();
-        });
+        Schema::dropIfExists('nfc_card_badges');
     }
 };

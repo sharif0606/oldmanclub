@@ -3,9 +3,9 @@
             <div class="sleek_header_image">
                 <div class="css-79elbk">
                     @if ($nfc_card->client?->image)
-                    <img src="{{ asset('public/uploads/client/' . $nfc_card->client?->image)}}" alt="" srcset="" class="" width="100%">
+                    <img class="display-profile-pic"  src="{{ asset('public/uploads/client/' . $nfc_card->client?->image)}}" alt="" srcset="" class="" width="100%">
                     @else
-                    <img src="{{ asset('public/assets/nfc/images/123.png')}}" alt="" srcset="" class="" width="100%">
+                    <img class="display-profile-pic"  src="{{ asset('public/assets/nfc/images/123.png')}}" alt="" srcset="" class="" width="100%">
                     @endif
                 </div>
             </div>
