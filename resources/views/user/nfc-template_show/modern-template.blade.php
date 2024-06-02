@@ -1,5 +1,5 @@
     <div class="header_body">
-                <header class="modern_header">
+                <header class="modern_header" id="modern_header">
                     <div class="">
                         @if ($nfc_card->card_design?->logo)
                             <img  src="{{ asset($nfc_card->card_design?->logo) }}" alt="abc" width="60px" id="diplay-profile-pic"
@@ -90,15 +90,15 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="modern_card">
-                            <ul class="list-group">
-                                 @foreach ($nfc_card->nfcFields as $nfcField)
-                                <li class="list-group-item" id="social-list-item-{{ $nfcField->id }}">
-                                    <i class="{{$nfcField->icon}}"></i>
-                                    <a href="#" class="mx-1">
-                                        <img src="assets/images/email.png" alt="" srcset="" width="25px">
-                                    </a>
-                                    <a href="#">{{ $nfcField->pivot->field_value}}</a>
-                                </li>
+                           <ul class="list-group social-user-ul">
+                                @foreach ($nfc_card->nfcFields as $nfcField)
+                                    <li class="list-group-item social-list-item-{{ $nfcField->id }}">
+                                        <i class="{{ $nfcField->icon }}"></i>
+                                        <a href="#" class="mx-1">
+                                            <img src="assets/images/email.png" alt="" srcset="" width="25px">
+                                        </a>
+                                        <a href="#" class="social-item-link-{{$nfcField->id}}">{{ $nfcField->pivot->field_value }}</a>
+                                    </li>
                                 @endforeach
                                 <!-- <li class="list-group-item">
                                 <a href="#" class="mx-1">

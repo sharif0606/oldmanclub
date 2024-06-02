@@ -22,6 +22,9 @@
         .design-card-active {
             border: 1px solid {{ $nfc_card->card_design->color }};
         }
+        #sleek_header_image,#header_text,#modern_header{
+            background: {{ $nfc_card->card_design->color }};
+        }
 
         .design-card svg {
             box-shadow: 2px 5px 22px #cacaca;
@@ -708,7 +711,7 @@
                                                                                                 value="{{ $item->field_value }}"
                                                                                                 type="text"
                                                                                                 class="form-control "
-                                                                                                onblur="$('#social-item-link-{{ $item->id }}').text('{{ $item->display_text ?? ''}}').attr('href', this.value);"
+                                                                                                onchange="updateSocialItemLink({{ $item->id }}, this.value, '{{ $item->display_text}}');"
                                                                                                 placeholder="Username">
                                                                                         </div>
                                                                                     </div>
@@ -957,7 +960,7 @@
                                         ${icon}
                                     </div>
                                     <input type="hidden" name="nfc_id[]" value="${id}">
-                                    <input style="border:transparent" name="nfc_user_name[]" type="text" class="form-control " placeholder="Username" onblur="$('#social-item-link-${id}').text('${text}').attr('href', this.value);">
+                                    <input style="border:transparent" name="nfc_user_name[]" type="text" class="form-control " placeholder="Username" onchange="updateSocialItemLink( ${id}, this.value, '${text}')">
                                 </div>
                             </div>
                         </div>
@@ -976,29 +979,43 @@
         }
 
         function AddLeftsideSocialUser(icon, text, id){
-            var socialContent = document.getElementById("social-user") // ul
-            var socialItem = document.getElementById(`social-list-item-${id}`); //li
+            var socialContent = document.querySelectorAll(".social-user-ul") // ul
+            // var socialItem = document.getElementById(`social-list-item-${id}`); //li
 
-            var content = `<li class="list-group-item" id="social-list-item-${id}">
+            var content = `<li class="list-group-item social-list-item-${id}">
                             ${icon}
-                            <a style="margin-left:1rem" id="social-item-link-${id}" href="#">${text}</a>
+                            <a class="social-item-link-${id}" style="margin-left:1rem" id="social-item-link-${id}" href="#">${text}</a>
                         </li>`;
+            socialContent.forEach((socialContent) => {
                 socialContent.insertAdjacentHTML('beforeend', content);
+            });
         }
 
         function removeDraggableContent(btn,id) {
              if (confirm(`Do you want to remove this content?`)) {
                 $(btn).closest("#draggerContent").remove();
-                document.getElementById(`social-list-item-${id}`).remove();
+                var socialItem = document.querySelectorAll(`.social-list-item-${id}`); //li
+                socialItem.forEach((socialItem) => {
+                    socialItem.remove();
+                });
             } else {
                 return false;
             }
         }
 
-        function removeSocailIcon()
-        {
-
+        function updateSocialItemLink(id, value, displayText) {
+            if(!displayText || displayText.length == 0){
+               displayText = value;
+            }
+            console.log("Updating social item link:", id, value, displayText);
+            if (id && value !== undefined && displayText) {
+                $('.social-item-link-' + id).text(value).attr('href', value);
+            } else {
+                console.error("Invalid parameters passed to updateSocialItemLink:", id, value, displayText);
+            }
         }
+
+
 
 
         // });
@@ -1022,6 +1039,11 @@
             activeDesignCards.forEach(function(card) {
                 card.style.fill = color;
             });
+
+            document.getElementById("modern_header").style.background = color;
+            document.getElementById("header_text").style.background = color;
+            document.getElementById("sleek_header_image").style.background = color;
+            // document.getElementById("header_sleek").style.background = color;
         }
         const badgeImages = [];
 
