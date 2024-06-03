@@ -9,12 +9,16 @@ use App\Models\Backend\NfcField;
 use App\Models\Backend\NfcDesign;
 use App\Models\Backend\NfcInformation;
 use App\Models\Backend\User;
+use App\Models\User\Country;
+use App\Models\Backend\NfcVirtualBackgroundCategory;
+use App\Models\Backend\NfcVirtualBackground;
 
 use App\Http\Controllers\Controller;
 use App\Models\NfcCardBadges;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Response;
 
 class NfcCardController extends Controller
@@ -122,7 +126,8 @@ class NfcCardController extends Controller
         $client = Client::find(currentUserId());
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
         $postCount = Post::where('client_id', currentUserId())->count();
-        return view('user.nfc-card.show', compact('nfc_card','client','postCount'));
+        $countries = Country::get();
+        return view('user.nfc-card.show', compact('nfc_card','client','postCount','countries'));
     }
 
     /**
@@ -275,6 +280,23 @@ class NfcCardController extends Controller
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
         return view('user.nfc-card.showqrurl', compact('nfc_card','client'));
     }
+    public function dowloadqrl($id,$client_id)
+    {
+        // Generate URL
+        $url = url('nfcqrurl/' . encryptor('encrypt', $id) . '/' . $client_id);
+
+        // Generate QR Code
+        $qrCode = QrCode::format('png')->size(300)->generate($url);
+
+        // Set the headers for file download
+        $headers = [
+            'Content-Type' => 'image/png',
+            'Content-Disposition' => 'attachment; filename="qr-code.png"',
+        ];
+
+        // Return the QR code as a downloadable response
+        return Response::make($qrCode, 200, $headers);
+    }
     public function save_contact($id)
     {
 
@@ -328,8 +350,15 @@ class NfcCardController extends Controller
         $client = Client::find(currentUserId());
         $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id',currentUserId())->paginate(10);
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
-        $postCount = Post::where('client_id', currentUserId())->count();
-        return view('user.nfc-card.email_signature', compact('nfc_card','client','postCount','nfc_cards'));
+        return view('user.nfc-card.email_signature', compact('nfc_card','client','nfc_cards'));
+    }
+    public function virtual_background($id)
+    {
+        $client = Client::find(currentUserId());
+        $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id',currentUserId())->paginate(10);
+        $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
+        $nfc_virtual_categories = NfcVirtualBackgroundCategory::with('backgrounds')->get();
+        return view('user.nfc-card.virtual_background', compact('nfc_card','client','nfc_cards','nfc_virtual_categories'));
     }
 
 }
