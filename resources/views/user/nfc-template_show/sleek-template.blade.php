@@ -1,6 +1,6 @@
     <div class="">
         <div class="header_sleek">
-            <div class="sleek_header_image">
+            <div class="sleek_header_image" id="sleek_header_image">
                 <div class="css-79elbk">
                     @if ($nfc_card->client?->image)
                     <img class="display-profile-pic"  src="{{ asset('public/uploads/client/' . $nfc_card->client?->image)}}" alt="" srcset="" class="" width="100%">
@@ -89,14 +89,14 @@
     <div class="">
         <div class="">
             <div class="container">
-                <ul class="list-group">
-                     @foreach ($nfc_card->nfcFields as $nfcField)
-                        <li class="list-group-item">
-                            <i class="{{$nfcField->icon}}"></i>
+                <ul class="list-group social-user-ul">
+                    @foreach ($nfc_card->nfcFields as $nfcField)
+                        <li class="list-group-item social-list-item-{{ $nfcField->id }}">
+                            <i class="{{ $nfcField->icon }}"></i>
                             <a href="#" class="mx-1">
                                 <img src="assets/images/email.png" alt="" srcset="" width="25px">
                             </a>
-                            <a href="#">{{ $nfcField->pivot->field_value}}</a>
+                            <a href="#" class="social-item-link-{{$nfcField->id}}">{{ $nfcField->pivot->field_value }}</a>
                         </li>
                     @endforeach
                     <!-- <li class="list-group-item">

@@ -9,7 +9,7 @@
                     </div>
                 @endif
             </div>
-            <div class="header_text"></div>
+            <div class="header_text" id="header_text"></div>
         </div>
         <div class="d-none d-sm-block">
             @if ($nfc_card->card_design?->logo)
@@ -109,15 +109,15 @@
                 </div>
             </div>
             <div class="row">
-                <ul class="list-group">
+                <ul class="list-group social-user-ul">
                     @foreach ($nfc_card->nfcFields as $nfcField)
-                    <li class="list-group-item">
-                        <i class="{{$nfcField->icon}}"></i>
-                        <a href="#" class="mx-1">
-                            <img src="assets/images/email.png" alt="" srcset="" width="25px">
-                        </a>
-                        <a href="#">{{ $nfcField->pivot->field_value}}</a>
-                    </li>
+                        <li class="list-group-item social-list-item-{{ $nfcField->id }}">
+                            <i class="{{ $nfcField->icon }}"></i>
+                            <a href="#" class="mx-1">
+                                <img src="assets/images/email.png" alt="" srcset="" width="25px">
+                            </a>
+                            <a href="#" class="social-item-link-{{$nfcField->id}}">{{ $nfcField->pivot->field_value }}</a>
+                        </li>
                     @endforeach
                     <!-- <li class="list-group-item">
                         <a href="#" class="mx-1">

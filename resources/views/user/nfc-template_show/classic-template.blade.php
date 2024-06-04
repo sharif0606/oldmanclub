@@ -109,14 +109,14 @@
                 </div>
             </div>
             <div class="row">
-                <ul class="list-group">
+                 <ul class="list-group social-user-ul">
                     @foreach ($nfc_card->nfcFields as $nfcField)
-                        <li class="list-group-item">
+                        <li class="list-group-item social-list-item-{{ $nfcField->id }}">
                             <i class="{{ $nfcField->icon }}"></i>
                             <a href="#" class="mx-1">
                                 <img src="assets/images/email.png" alt="" srcset="" width="25px">
                             </a>
-                            <a href="#">{{ $nfcField->pivot->field_value }}</a>
+                            <a href="#" class="social-item-link-{{$nfcField->id}}">{{ $nfcField->pivot->field_value }}</a>
                         </li>
                     @endforeach
                     <!-- <li class="list-group-item">
