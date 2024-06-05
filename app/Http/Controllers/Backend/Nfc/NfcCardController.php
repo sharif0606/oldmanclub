@@ -91,30 +91,59 @@ class NfcCardController extends Controller
                 /* Insert Data To Nfc Design */
                 $nfc_design = new NfcDesign;
                 $nfc_design->nfc_card_id = $nfc->id;
-                $nfc_design->design_card_id = $request->design_card_id;
+                $nfc_design->design_card_id = $request->card_type;
+                $nfc_design->color = $request->display_nfc_color;
+                if ($request->hasFile('logo')) {
+                    $imageName = rand(111, 999) . time() . '.' . $request->logo->extension();
+                    $request->logo->move(
+                        public_path('uploads/cards/'),
+                        $imageName
+                    );
+                    $nfc_design->logo = $imageName;
+                }
                 $nfc_design->created_by = currentUserId();
                 $nfc_design->save();
+
+                /* badges image update */
+                if ($request->hasFile('badge_images')) {
+                    $badges = $request->file('badge_images');
+                    foreach ($badges as $key => $badge) {
+                        $badgeImageName = rand(111, 999) . time() . '.' . $badge->extension();
+                        $badge->move(public_path('uploads/cards/badges'), $badgeImageName);
+                        DB::table("nfc_card_badges")->insert([
+                            'nfc_card_id' => $nfc->id,
+                            'badge_image' => $badgeImageName,
+                        ]);
+                    }
+                }
 
                 /* Insert Data To Nfc Information */
 
                 /*Nfc Field Data Insert */
-                $nfcFieldIds = $request->input('nfc_field_id');
+                // $nfcFieldIds = $request->input('nfc_field_id');
+                $nfcFieldIds = $request->input('nfc_id');
+                $nfcFieldUsernames = $request->input('nfc_user_name');
+                $nfcFieldLabels = $request->input('nfc_label');
+                $nfcFieldValues = $request->input('field_value');
                 if ($nfcFieldIds) {
-                    $nfcFieldValues = $request->input('field_value');
                     // Find the NFC card
                     $nfcCard = NfcCard::findOrFail($nfc->id);
-                    // Find the NFC fields
-                    $nfcFields = NfcField::whereIn('id', $nfcFieldIds)->get();
 
                     // Attach NFC fields with values
-                    foreach ($nfcFields as $nfcField) {
+                    foreach ($nfcFieldIds as $index => $nfcFieldId) {
                         // Get the value corresponding to the current NFC field ID
-                        $value = $nfcFieldValues[$nfcField->id];
+                        $value = $nfcFieldUsernames[$index];
 
-                        // Associate the NFC field with the NFC card along with the value
-                        $nfcCard->nfcFields()->attach($nfcField, ['field_value' => $value]);
+                        // Create an array for the additional data
+                        $additionalData = [
+                                'field_value' => $value,
+                                'display_text' => $nfcFieldLabels[$index]
+                            ];
+                        // Associate the NFC field with the NFC card along with the value and additional data
+                        $nfcCard->nfcFields()->attach($nfcFieldId, $additionalData);
                     }
                 }
+
                 // Commit the transaction if all operations are successful
                 DB::commit();
 
