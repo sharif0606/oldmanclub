@@ -1,9 +1,5 @@
 @extends('user.layout.base')
 @section('title', 'NFC Card Preview')
-<?php
-    // ? Controls the form type.
-    $formType = !empty($nfc_card) ? 'edit' : 'create';
-?>
 @push('styles')
     <link rel="stylesheet" href="{{ asset('public/assets/nfc/styles.css') }}" />
     <style>
@@ -24,10 +20,10 @@
         }
 
         .design-card-active {
-            border: 1px solid {{ $formType=='edit' ? $nfc_card->card_design->color : 'rgb(0, 247, 255)' }};
+            border: 1px solid {{ $nfc_card->card_design->color }};
         }
         #sleek_header_image,#header_text,#modern_header{
-            background: {{ $formType=='edit' ? $nfc_card->card_design->color : 'rgb(0, 247, 255)' }};
+            background: {{ $nfc_card->card_design->color }};
         }
 
         .design-card svg {
@@ -217,20 +213,12 @@
                 <!-- Card header START -->
                 <!-- Card body START -->
                 <div class="card-body">
-                    @if ($formType=='edit')
-                        <form action="{{ route('nfc_card.update', encryptor('encrypt', $nfc_card->id)) }}" method="post"
-                            class="row" enctype="multipart/form-data">
-                            @csrf
-                            @method('PATCH')
-                    @else
-                        <form action="{{ route('nfc_card.store') }}" method="post"
-                            class="row" enctype="multipart/form-data">
-                            @csrf
-                            @method('POST')
-
-                    @endif
+                    <form action="{{ route('nfc_card.update', encryptor('encrypt', $nfc_card->id)) }}" method="post"
+                        class="row" enctype="multipart/form-data">
+                        @csrf
+                        @method('PATCH')
                         <input type="hidden" name="design_card_id" id=""
-                            value="{{ $formType=='edit' ? $nfc_card->card_design?->design_card_id :'' }}">
+                            value="{{ $nfc_card->card_design?->design_card_id ?? '' }}">
                         <!-- Album Tab content START -->
                         <div class="mb-0 pb-5">
                             <div class="row g-3">
@@ -244,19 +232,19 @@
                                     @elseif($nfc_card->card_design?->design_card_id == 4)
                                         @include('user.nfc-template_show.sleek-template')
                                     @endif --}}
-                                    <div class="{{  $formType=='create' || ($formType=='edit' && $nfc_card->card_type == 1) ? 'd-block' : 'd-none' }}"
+                                    <div class="{{ $nfc_card->card_type == 1 ? 'd-block' : 'd-none' }}"
                                         id="design-card-id-1">
                                         @include('user.nfc-template_show.classic-template')
                                     </div>
-                                    <div class="{{ $formType=='edit'  && $nfc_card->card_type == 2 ? 'd-block' : 'd-none' }}"
+                                    <div class="{{ $nfc_card->card_type == 2 ? 'd-block' : 'd-none' }}"
                                         id="design-card-id-2">
                                         @include('user.nfc-template_show.modern-template')
                                     </div>
-                                    <div class="{{ $formType=='edit'  && $nfc_card->card_type == 3 ? 'd-block' : 'd-none' }}"
+                                    <div class="{{ $nfc_card->card_type == 3 ? 'd-block' : 'd-none' }}"
                                         id="design-card-id-3">
                                         @include('user.nfc-template_show.sleek-template')
                                     </div>
-                                    <div class="{{ $formType=='edit'  && $nfc_card->card_type == 4 ? 'd-block' : 'd-none' }}"
+                                    <div class="{{ $nfc_card->card_type == 4 ? 'd-block' : 'd-none' }}"
                                         id="design-card-id-4">
                                         @include('user.nfc-template_show.flat-template')
                                     </div>
@@ -289,7 +277,7 @@
                                                     <div class="row">
                                                         <div class="col-2">
                                                             <img class="rounded-border-10 border border-white border-3"
-                                                                src="{{ $formType=='edit' ? asset('public/uploads/client/' . $client->image) : asset('public/user/assets/images/avatar/placeholder.jpg') }}"
+                                                                src="{{ asset('public/uploads/client/' . $client->image ?? 'public/user/assets/images/avatar/placeholder.jpg') }}"
                                                                 alt="profile" id="profile-picture">
                                                         </div>
 
@@ -310,16 +298,16 @@
                                                 <div class="col-12 py-2 border-bottom">
                                                     <h6>Design</h6>
                                                     <input type="hidden" name="card_type"
-                                                        value="{{ $formType=='edit' ? $nfc_card->card_type : '' }}" id="nfcDesign">
+                                                        value="{{ $nfc_card->card_type ?? '' }}" id="nfcDesign">
                                                     <div class="design-group">
-                                                        <div class="design-card {{ $formType=='edit' && $nfc_card->card_type == 1 ? 'design-card-active' : '' }}"
+                                                        <div class="design-card {{ $nfc_card->card_type == 1 ? 'design-card-active' : '' }}"
                                                             onclick="changeDesign(event,'1')">
                                                             <span>
                                                                 <svg viewBox="0 0 72 72" focusable="false"
                                                                     class="chakra-icon chakra-icon css-5nx6ny">
                                                                     <g clip-path="url(#clip0_1931_53838)">
                                                                         <path class="svg-color"
-                                                                            fill="{{ $formType=='edit' ? $nfc_card->card_design->color : '#000000' }}"
+                                                                            fill="{{ $nfc_card->card_design->color ?? '' }}"
                                                                             d="M0 -24H72V54H0V-24Z" fill="currentColor">
                                                                         </path>
                                                                         <path
@@ -336,7 +324,7 @@
                                                             </span>
                                                             <p class="mt-2">Classic</p>
                                                         </div>
-                                                        <div class="design-card {{ $formType=='edit' &&  $nfc_card->card_type == 2 ? 'design-card-active' : '' }}"
+                                                        <div class="design-card {{ $nfc_card->card_type == 2 ? 'design-card-active' : '' }}"
                                                             onclick="changeDesign(event,'2')">
                                                             <span>
                                                                 <svg viewBox="0 0 72 72" focusable="false"
@@ -346,7 +334,7 @@
                                                                             rx="16" width="72"></rect>
                                                                         <g clip-path="url(#clip1_805_62524)">
                                                                             <path class="svg-color"
-                                                                                fill="{{ $formType=='edit' ? $nfc_card->card_design->color : '#000000' }}"
+                                                                                fill="{{ $nfc_card->card_design->color ?? '' }}"
                                                                                 d="M0 -16.875H72V30.3333L0 55.637V-16.875Z"
                                                                                 fill="url(#paint0_linear_805_62524)">
                                                                             </path>
@@ -377,7 +365,7 @@
                                                             </span>
                                                             <p class="mt-2">Modern</p>
                                                         </div>
-                                                        <div class="design-card {{ $formType=='edit' && $nfc_card->card_type == 3 ? 'design-card-active' : '' }}"
+                                                        <div class="design-card {{ $nfc_card->card_type == 3 ? 'design-card-active' : '' }}"
                                                             onclick="changeDesign(event,'3')">
                                                             <span>
                                                                 <svg viewBox="0 0 72 72" focusable="false"
@@ -387,7 +375,7 @@
                                                                             rx="16" width="72"></rect>
                                                                         <circle cx="36" cy="-6.75"
                                                                             class="svg-color"
-                                                                            fill="{{ $formType=='edit' ? $nfc_card->card_design->color : '#000000' }}"
+                                                                            fill="{{ $nfc_card->card_design->color ?? '' }}"
                                                                             r="59.625"></circle>
                                                                         <path fill="white"
                                                                             d="M15.75 42.75h41.625v13.5H15.75z"></path>
@@ -402,7 +390,7 @@
                                                             </span>
                                                             <p class="mt-2">Sleek</p>
                                                         </div>
-                                                        <div class="design-card {{ $formType=='edit' && $nfc_card->card_type == 4 ? 'design-card-active' : '' }}"
+                                                        <div class="design-card {{ $nfc_card->card_type == 4 ? 'design-card-active' : '' }}"
                                                             onclick="changeDesign(event,'4')">
                                                             <span>
                                                                 <svg viewBox="0 0 72 72" focusable="false"
@@ -412,10 +400,10 @@
                                                                             rx="16" width="72"></rect>
                                                                         <g clip-path="url(#b)" fill="currentColor">
                                                                             <path class="svg-color"
-                                                                                fill="{{ $formType=='edit' ? $nfc_card->card_design->color : '#000000' }}"
+                                                                                fill="{{ $nfc_card->card_design->color ?? '' }}"
                                                                                 d="M0-29.25h72v72.512H0z"></path>
                                                                             <path class="svg-color"
-                                                                                fill="{{ $formType=='edit' ? $nfc_card->card_design->color : '#000000' }}"
+                                                                                fill="{{ $nfc_card->card_design->color ?? '' }}"
                                                                                 d="M0 32.184v4.88c13.344 7.171 24 7.605 40.224-.83 16.224-8.436 24-7.34 31.776-5.4V29.57c-17.856-5.99-32.352 5.845-43.584 8.798C17.184 41.319 9.888 39.21 0 32.184Z">
                                                                             </path>
                                                                         </g>
@@ -442,7 +430,7 @@
                                                     <h6>Color</h6>
                                                     <div class="d-flex justify-content-between col-md-6 py-2">
                                                         <input type="hidden" name="display_nfc_color"
-                                                            value="{{ $formType=='edit' ? $nfc_card->card_design->color : '#000000' }}"
+                                                            value="{{ $nfc_card->card_design->color ?? '' }}"
                                                             id="displayNfcColor">
                                                         <button type="button" onclick="setWaveColor('rgb(255, 0, 0)')"
                                                             class="color-box"
@@ -476,9 +464,15 @@
                                                     <h6>Logo</h6>
                                                     <div class="row">
                                                         <div class="col-2">
+                                                            @if ($nfc_card->card_design->logo)
                                                                 <img class="rounded-border-10 border border-white border-3"
-                                                                    src="{{ $formType=='edit' ? asset('public/uploads/cards/' . $nfc_card->card_design?->logo ?? '') : asset('public/user/assets/images/avatar/placeholder.jpg') }}"
+                                                                    src="{{ asset('public/uploads/cards/' . $nfc_card->card_design?->logo ?? '') }}"
                                                                     alt="" id="logo-placeholder">
+                                                            @else
+                                                                <img class="avatar-img rounded-border-10 border border-white border-3"
+                                                                    src="{{ asset('public/user/assets/images/avatar/placeholder.jpg') }}"
+                                                                    alt="" id="logo-placeholder">
+                                                            @endif
                                                         </div>
                                                         <div class="col-4 py-2 offset-3">
                                                             <div class="upload-container">
@@ -498,28 +492,26 @@
                                                     <div class="row">
                                                         <div class="col-8">
                                                             <span id="badge-image-group" class="d-flex ">
-                                                                @if ($formType=='edit')
-                                                                    @foreach ($nfc_card->badges as $bagde)
-                                                                        <div class="image-container "
-                                                                            id="image-container-{{ $bagde->id }}">
-                                                                            <img class="avatar-img rounded-border-10 border border-white border-3"
-                                                                                src="{{ asset('public/uploads/cards/badges/' . $bagde->badge_image ?? '') }}"
-                                                                                alt="" id="badge-placeholder">
-                                                                            <input type="file"
-                                                                                style="visibility: hidden; width: 1px;"
-                                                                                name="badge_images[]"
-                                                                                value="{{ $bagde->badge_image ?? '' }}">
-                                                                            <button type="button" class="remove-button"
-                                                                                onclick="removeBadgeImage('{{ $bagde->id }}',`asset('public/uploads/cards/badges/'. $bagde->badge_image ?? '')`)">X</button>
-                                                                        </div>
-                                                                    @endforeach
-                                                                @else
+                                                                @forelse ($nfc_card->badges as $bagde)
+                                                                    <div class="image-container "
+                                                                        id="image-container-{{ $bagde->id }}">
+                                                                        <img class="avatar-img rounded-border-10 border border-white border-3"
+                                                                            src="{{ asset('public/uploads/cards/badges/' . $bagde->badge_image ?? '') }}"
+                                                                            alt="" id="badge-placeholder">
+                                                                        <input type="file"
+                                                                            style="visibility: hidden; width: 1px;"
+                                                                            name="badge_images[]"
+                                                                            value="{{ $bagde->badge_image ?? '' }}">
+                                                                        <button type="button" class="remove-button"
+                                                                            onclick="removeBadgeImage('{{ $bagde->id }}',`asset('public/uploads/cards/badges/'. $bagde->badge_image ?? '')`)">X</button>
+                                                                    </div>
+                                                                @empty
                                                                     <div class="image-container">
                                                                         <img class="avatar-img rounded-border-10 border border-white border-3"
                                                                             src="{{ asset('public/user/assets/images/avatar/placeholder.jpg') }}"
                                                                             alt="" id="badge-placeholder">
                                                                     </div>
-                                                                @endif
+                                                                @endforelse
                                                             </span>
                                                         </div>
                                                         <div class="col-4 py-2 fload-end">
@@ -544,63 +536,63 @@
                                                     <div class="col-8 form-group">
                                                         <label for="">Prefix</label>
                                                         <input type="text" name="prefix"
-                                                            value="{{ $formType=='edit' ? $nfc_card->nfc_info?->prefix ?? '' : '' }}"
+                                                            value="{{ $nfc_card->nfc_info?->prefix ?? '' }}"
                                                             class="form-control form-control-sm mb-2 mb-2"
                                                             onkeyup="$('#prefix-name').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">First Name</label>
                                                         <input type="text" name="f_name"
-                                                            value="{{ $formType=='edit'  ? $nfc_card->client?->fname ?? '' : ''}}"
+                                                            value="{{ $nfc_card->client?->fname ?? '' }}"
                                                             class="form-control form-control-sm mb-2"
                                                             onkeyup="$('#f-name').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Middle Name</label>
                                                         <input type="text" name="middle_name"
-                                                            value="{{ $formType=='edit' ? $nfc_card->client?->middle_name ?? '' :''}}"
+                                                            value="{{ $nfc_card->client?->middle_name ?? '' }}"
                                                             class="form-control form-control-sm mb-2"
                                                             onkeyup="$('#m-name').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Last Name</label>
                                                         <input type="text" name="l_name"
-                                                            value="{{ $formType=='edit' ? $nfc_card->client?->last_name ?? '' :'' }}"
+                                                            value="{{ $nfc_card->client?->last_name ?? '' }}"
                                                             class="form-control form-control-sm mb-2"
                                                             onkeyup="$('#l-name').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Suffix</label>
                                                         <input type="text" name="suffix"
-                                                            value="{{ $formType=='edit' ? $nfc_card->nfc_info?->suffix ?? '' :''}}"
+                                                            value="{{ $nfc_card->nfc_info?->suffix ?? '' }}"
                                                             id="" class="form-control form-control-sm mb-2"
                                                             onkeyup="$('#suffix-name').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Accreditations</label>
                                                         <input type="text" name="accreditations"
-                                                            value="{{ $formType=='edit'  ? $nfc_card->nfc_info->accreditations ?? '' :'' }}"
+                                                            value="{{ $nfc_card->nfc_info->accreditations ?? '' }}"
                                                             id="" class="form-control form-control-sm mb-2"
                                                             onkeyup="$('#accreditations').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Preferred Name</label>
                                                         <input type="text" name="preferred_name"
-                                                            value="{{ $formType=='edit' ? $nfc_card->nfc_info->preferred_name ?? '' :'' }}"
+                                                            value="{{ $nfc_card->nfc_info->preferred_name }}"
                                                             id="" class="form-control"
                                                             onkeyup="$('#preferred_name').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Maiden Name</label>
                                                         <input type="text" name="maiden_name"
-                                                            value="{{ $formType=='edit' ? $nfc_card->nfc_info->maiden_name ?? '' : ''}}" id=""
+                                                            value="{{ $nfc_card->nfc_info->maiden_name }}" id=""
                                                             class="form-control form-control-sm mb-2"
                                                             onkeyup="$('#accreditations').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Pronoun</label>
                                                         <input type="text" name="pronoun"
-                                                            value="{{ $formType=='edit' ? $nfc_card->nfc_info->pronoun ?? '' : '' }}" id=""
+                                                            value="{{ $nfc_card->nfc_info->pronoun }}" id=""
                                                             class="form-control form-control-sm mb-2"
                                                             onkeyup="$('#accreditations').text($(this).val());">
                                                     </div>
@@ -610,26 +602,26 @@
                                                     <div class="col-8 form-group">
                                                         <label for="">Title</label>
                                                         <textarea name="title" onkeyup="$('#field-title').text($(this).val());" class="form-control form-control-sm mb-2"
-                                                            name="pronoun">{{ $formType=='edit' ? $nfc_card->nfc_info->title ?? '' : '' }}</textarea>
+                                                            name="pronoun">{{ $nfc_card->nfc_info->title ?? '' }}</textarea>
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Department</label>
                                                         <input type="text" name="department"
-                                                            value="{{ $formType=='edit' ? $nfc_card->nfc_info->department ?? '' : '' }}"
+                                                            value="{{ $nfc_card->nfc_info->department ?? '' }}"
                                                             id="" class="form-control form-control-sm mb-2"
                                                             onkeyup="$('#deprtment').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Company</label>
                                                         <input type="text" name="company"
-                                                            value="{{ $formType=='edit' ? $nfc_card->nfc_info->company ?? '' : ''}}"
+                                                            value="{{ $nfc_card->nfc_info->company ?? '' }}"
                                                             class="form-control form-control-sm mb-2"
                                                             onkeyup="$('#company').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Headline</label>
                                                         <input type="text" name="headline"
-                                                            value="{{ $formType=='edit' ? $nfc_card->nfc_info->headline ?? '' : '' }}"
+                                                            value="{{ $nfc_card->nfc_info->headline }}"
                                                             class="form-control form-control-sm mb-2"
                                                             onkeyup="$('#headline').text($(this).val());">
                                                     </div>
@@ -645,7 +637,6 @@
                                                         <div class="col-md-8">
                                                             <div id="draggable" class="card p-3 text-white"
                                                                 style="max-height:auto;z-index:1;overflow-y:scroll;background-color:#E2E8F0;border: 2px white dashed;">
-                                                                @if ($formType=='edit' )
                                                                 @php
                                                                     $ncfCardNfcFields = DB::table('nfc_card_nfc_field')
                                                                         ->join(
@@ -659,89 +650,89 @@
                                                                         )
                                                                         ->get();
                                                                 @endphp
-                                                                    @foreach ($ncfCardNfcFields as $item)
-                                                                        <div id="draggerContent" class="card px-4 py-2">
-                                                                            <div class="card-dragger-header d-flex items-center"
-                                                                                style="gap: 0 0.5rem;justify-content: space-between;">
-                                                                                <span id="dragger"
-                                                                                    class="d-flex items-center"
-                                                                                    style="gap: 0 0.5rem;align-items: center;">
-                                                                                    <span class=""
-                                                                                        style="cursor: pointer">
-                                                                                        <svg style="height: 24px"
-                                                                                            viewBox="0 0 24 24"
-                                                                                            focusable="false"
-                                                                                            class="chakra-icon chakra-icon css-1wuln1z">
-                                                                                            <path
-                                                                                                d="M2 19.2838H22V17.0031H2V19.2838ZM2 13.5821H22V11.3014H2V13.5821ZM2 5.59961V7.88031H22V5.59961H2Z"
-                                                                                                fill="currentColor"></path>
-                                                                                        </svg>
+                                                                @forelse ($ncfCardNfcFields as $item)
+                                                                    <div id="draggerContent" class="card px-4 py-2">
+                                                                        <div class="card-dragger-header d-flex items-center"
+                                                                            style="gap: 0 0.5rem;justify-content: space-between;">
+                                                                            <span id="dragger"
+                                                                                class="d-flex items-center"
+                                                                                style="gap: 0 0.5rem;align-items: center;">
+                                                                                <span class=""
+                                                                                    style="cursor: pointer">
+                                                                                    <svg style="height: 24px"
+                                                                                        viewBox="0 0 24 24"
+                                                                                        focusable="false"
+                                                                                        class="chakra-icon chakra-icon css-1wuln1z">
+                                                                                        <path
+                                                                                            d="M2 19.2838H22V17.0031H2V19.2838ZM2 13.5821H22V11.3014H2V13.5821ZM2 5.59961V7.88031H22V5.59961H2Z"
+                                                                                            fill="currentColor"></path>
+                                                                                    </svg>
 
-                                                                                    </span>
-                                                                                    <h4 class="mt-1">{{ $item->name }}
-                                                                                    </h4>
                                                                                 </span>
-                                                                                <button type="button"
-                                                                                    onclick="removeDraggableContent(this,'{{ $item->id }}')"
-                                                                                    class="remove-btn btn btn-sm fload-end fs-5 items-center">x</button>
-                                                                            </div>
-                                                                            <div class="">
-                                                                                <div class="form-group">
-                                                                                    <div class="col-auto">
-                                                                                        <label class="sr-only"
-                                                                                            for="inlineFormInputGroup">Phone</label>
-                                                                                        <div
-                                                                                            class="input-group mb-2  bg-white">
-                                                                                            <div class="input-group-prepend">
-                                                                                                <div class="">
-                                                                                                    @if ($item->type == '1')
-                                                                                                        <span class="mx-1"><i
-                                                                                                                class="{{ $item->icon }}"></i></span>
-                                                                                                        @elseif($item->type == '2')
-                                                                                                        @php
-                                                                                                            $icon = str_replace(
-                                                                                                                '<svg',
-                                                                                                                '<svg style="width:24px; height:20px;"',
-                                                                                                                $item->icon,
-                                                                                                            );
-                                                                                                        @endphp
-                                                                                                        {{ $icon }}
-                                                                                                        @elseif($item->type == '3')
-                                                                                                        <img src="{{ asset('public/uploads/client/' . $item->icon) }}"
-                                                                                                            style="width:24px; height:20px;" />
-                                                                                                        @endif
-                                                                                                </div>
-                                                                                                <input type="hidden"
-                                                                                                    name="nfc_id[]"
-                                                                                                    value="{{ $item->id }}" />
-                                                                                                <input
-                                                                                                    style="border:transparent"
-                                                                                                    name="nfc_user_name[]"
-                                                                                                    value="{{ $item->field_value }}"
-                                                                                                    type="text"
-                                                                                                    class="form-control "
-                                                                                                    onchange="updateSocialItemLink({{ $item->id }}, this.value, '{{ $item->display_text}}');"
-                                                                                                    placeholder="Username">
+                                                                                <h4 class="mt-1">{{ $item->name }}
+                                                                                </h4>
+                                                                            </span>
+                                                                            <button type="button"
+                                                                                onclick="removeDraggableContent(this,'{{ $item->id }}')"
+                                                                                class="remove-btn btn btn-sm fload-end fs-5 items-center">x</button>
+                                                                        </div>
+                                                                        <div class="">
+                                                                            <div class="form-group">
+                                                                                <div class="col-auto">
+                                                                                    <label class="sr-only"
+                                                                                        for="inlineFormInputGroup">Phone</label>
+                                                                                    <div
+                                                                                        class="input-group mb-2  bg-white">
+                                                                                        <div class="input-group-prepend">
+                                                                                            <div class="">
+                                                                                                @if ($item->type == '1')
+                                                                                                    <span class="mx-1"><i
+                                                                                                            class="{{ $item->icon }}"></i></span>
+                                                                                                    @elseif($item->type == '2')
+                                                                                                    @php
+                                                                                                        $icon = str_replace(
+                                                                                                            '<svg',
+                                                                                                            '<svg style="width:24px; height:20px;"',
+                                                                                                            $item->icon,
+                                                                                                        );
+                                                                                                    @endphp
+                                                                                                    {{ $icon }}
+                                                                                                    @elseif($item->type == '3')
+                                                                                                    <img src="{{ asset('public/uploads/client/' . $item->icon) }}"
+                                                                                                        style="width:24px; height:20px;" />
+                                                                                                    @endif
                                                                                             </div>
+                                                                                            <input type="hidden"
+                                                                                                name="nfc_id[]"
+                                                                                                value="{{ $item->id }}" />
+                                                                                            <input
+                                                                                                style="border:transparent"
+                                                                                                name="nfc_user_name[]"
+                                                                                                value="{{ $item->field_value }}"
+                                                                                                type="text"
+                                                                                                class="form-control "
+                                                                                                onchange="updateSocialItemLink({{ $item->id }}, this.value, '{{ $item->display_text}}');"
+                                                                                                placeholder="Username">
                                                                                         </div>
                                                                                     </div>
-                                                                                    <select
-                                                                                        class="form-select form-control-sm mb-2 bg-white"
-                                                                                        name="nfc_label[]">
-                                                                                        <option value="">No Label
-                                                                                        </option>
-                                                                                        <option
-                                                                                            {{ $item->display_text == 'personal' ? 'selected' : '' }}
-                                                                                            value="personal">personal</option>
-                                                                                        <option
-                                                                                            {{ $item->display_text == 'work' ? 'selected' : '' }}
-                                                                                            value="work">work</option>
-                                                                                    </select>
                                                                                 </div>
+                                                                                <select
+                                                                                    class="form-select form-control-sm mb-2 bg-white"
+                                                                                    name="nfc_label[]">
+                                                                                    <option value="">No Label
+                                                                                    </option>
+                                                                                    <option
+                                                                                        {{ $item->display_text == 'personal' ? 'selected' : '' }}
+                                                                                        value="personal">personal</option>
+                                                                                    <option
+                                                                                        {{ $item->display_text == 'work' ? 'selected' : '' }}
+                                                                                        value="work">work</option>
+                                                                                </select>
                                                                             </div>
                                                                         </div>
-                                                                    @endforeach
-                                                                @endif
+                                                                    </div>
+                                                                @empty
+                                                                @endforelse
 
                                                             </div>
                                                         </div>
@@ -839,8 +830,7 @@
                                                         </div>
                                                         <label for="">Name</label>
                                                         <input type="text" name="card_name"
-                                                        required
-                                                            value="{{ $formType=='edit' ? $nfc_card->card_name ?? '' :'' }}" id="card-name"
+                                                            value="{{ $nfc_card->card_name ?? 'Work' }}" id="card-name"
                                                             class="form-control form-control-sm"
                                                             onkeyup="$('#card-name').text($(this).val());">
                                                     </div>
@@ -855,11 +845,7 @@
                         </div>
                         <div class=""
                             style="position: sticky;bottom: 0;float: right;display: flex;justify-content: end;gap: 1rem;">
-                            @if ($formType=='edit')
                             <a href="{{ route('nfc_card.show', $id) }}" class="btn btn-light">Cancel</a>
-                            @else
-                            <button type="reset" class="btn btn-warning">Reset</button>
-                            @endif
                             <button type="submit" class="btn btn-info">Save</button>
                         </div>
                     </form>

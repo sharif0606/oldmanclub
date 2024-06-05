@@ -42,7 +42,19 @@ class NfcCardController extends Controller
         $nfc_fields = NfcField::all();
         $client = Client::find(currentUserId());
         $postCount = Post::where('client_id', currentUserId())->count();
-        return view('user.nfc-card.create', compact('nfc_fields','client','postCount'));
+        $categories = [
+            '1' => 'Most Popular',
+            '2' => 'Social',
+            '3' => 'Communication',
+            '4' => 'Payment',
+            '5' => 'Video',
+            '6' => 'Music',
+            '7' => 'Design',
+            '8' => 'Gaming',
+            '9' => 'Other',
+        ];
+        // return view('user.nfc-card.create', compact('nfc_fields','client','postCount'));
+        return view('user.nfc-card.edit', compact('categories', 'nfc_fields', 'client', 'postCount'));
     }
 
     /**
