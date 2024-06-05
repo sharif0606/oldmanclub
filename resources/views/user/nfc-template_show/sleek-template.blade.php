@@ -1,29 +1,23 @@
+     @php
+        $formType = isset($nfc_card)? 'edit' : 'create';
+    @endphp
     <div class="">
         <div class="header_sleek">
             <div class="sleek_header_image" id="sleek_header_image">
                 <div class="css-79elbk">
-                    @if ($nfc_card->client?->image)
-                    <img class="display-profile-pic"  src="{{ asset('public/uploads/client/' . $nfc_card->client?->image)}}" alt="" srcset="" class="" width="100%">
-                    @else
-                    <img class="display-profile-pic"  src="{{ asset('public/assets/nfc/images/123.png')}}" alt="" srcset="" class="" width="100%">
-                    @endif
+                    <img class="display-profile-pic"  src="{{ $formType=='edit' ?  asset('public/uploads/client/' . $nfc_card->client?->image) : asset('public/assets/nfc/images/123.png')}}"}}" alt="" srcset="" class="" width="100%">
                 </div>
             </div>
             <div class="css-1fbwa35">
                 <div class="card sleek_card mx-auto mb-3">
                     <div class="card_img">
-                    @if ($nfc_card->card_design?->logo)
-                    <img src="{{ asset($nfc_card->card_design?->logo) }}" alt="abc" width="50px"
+                    <img src="{{ $formType=='edit' ? asset($nfc_card->card_design?->logo) :  asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="50px"
                         />
-                    @else
-                        <img src="{{ asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="50px"
-                            srcset="" />
-                    @endif
                         <!-- <img src="assets/images/header_image.png" width="50px" alt="" srcset=""> -->
                     </div>
                     <div class="CardBox mx-auto">
                         <p class="text-center fs-4 fw-bold">
-                           {{ $nfc_card->client?->fname }}
+                           {{ $formType=='edit' ? $nfc_card->client?->fname ?? '' : '' }}
                         </p>
                         <!-- <span class="css- fs-6 fw-bold">Dr. Md Kaisar Uddin FCP <br>
                         <span class="css-1oyqnxm">(shuvo)</span>
@@ -36,33 +30,17 @@
     <div class="container" style="margin-top: 100px;">
         <div class="row">
                 <div class="col-sm-12">
-                    @if ($nfc_card->nfc_info?->prefix)
-                        <span class="fs-4    fw-bold">{{ $nfc_card->nfc_info?->prefix }}</span>
-                    @else
-                        <span class="fs-4 fw-bold">Dr.</span>
-                    @endif
-                    <span class="fs-4 fw-bold">{{ $nfc_card->client?->fname }}</span>
-                    <span class="fs-4 fw-bold">{{ $nfc_card->client?->middle_name }}</span>
-                    <span class="fs-4 fw-bold">{{ $nfc_card->client?->last_name }}</span>
+                        <span class="fs-4    fw-bold">{{ $formType=='edit' ? $nfc_card->nfc_info?->prefix ?? '' : '' }}</span>
+                    <span class="fs-4 fw-bold">{{ $formType=='edit' ? $nfc_card->client?->fname ?? '' : '' }}</span>
+                    <span class="fs-4 fw-bold">{{ $formType=='edit' ? $nfc_card->client?->middle_name ?? '' : '' }}</span>
+                    <span class="fs-4 fw-bold">{{ $formType=='edit' ? $nfc_card->client?->last_name ?? '' : '' }}</span>
 
                     <div>
-                        @if ($nfc_card->nfc_info?->suffix)
-                            <span class="fs-4 fw-bold">{{ $nfc_card->nfc_info?->suffix }}</span>
-                        @else
-                            <span class="fs-4 fw-bold">FCP</span>
-                        @endif
+                            <span class="fs-4 fw-bold">{{ $formType=='edit' ? $nfc_card->nfc_info?->suffix ?? '' : ''}}</span>
                         <span class="fs-4 fw-bold">
-                            @if ($nfc_card->nfc_info?->maiden_name)
-                                ({{ $nfc_card->nfc_info?->maiden_name }})
-                            @else
-                                (Shuvo)
-                            @endif
+                                ({{ $formType=='edit' ? $nfc_card->nfc_info?->maiden_name ?? '' : '' }})
                         </span>
-                        @if ($nfc_card->nfc_info?->accreditations)
-                            <span>&nbsp;{{ $nfc_card->nfc_info?->accreditations }}</span>
-                        @else
-                            <span>&nbsp;FCPS</span>
-                        @endif
+                            <span>&nbsp;{{ $formType=='edit' ? $nfc_card->nfc_info?->accreditations  ?? '' : ''}}</span>
                     </div>
                 </div>
             </div>
@@ -90,15 +68,17 @@
         <div class="">
             <div class="container">
                 <ul class="list-group social-user-ul">
-                    @foreach ($nfc_card->nfcFields as $nfcField)
-                        <li class="list-group-item social-list-item-{{ $nfcField->id }}">
-                            <i class="{{ $nfcField->icon }}"></i>
-                            <a href="#" class="mx-1">
-                                <img src="assets/images/email.png" alt="" srcset="" width="25px">
-                            </a>
-                            <a href="#" class="social-item-link-{{$nfcField->id}}">{{ $nfcField->pivot->field_value }}</a>
-                        </li>
-                    @endforeach
+                    @if ($formType=='edit')
+                        @foreach ($nfc_card->nfcFields as $nfcField)
+                            <li class="list-group-item social-list-item-{{ $nfcField->id }}">
+                                <i class="{{ $nfcField->icon }}"></i>
+                                <a href="#" class="mx-1">
+                                    <img src="assets/images/email.png" alt="" srcset="" width="25px">
+                                </a>
+                                <a href="#" class="social-item-link-{{$nfcField->id}}">{{ $nfcField->pivot->field_value }}</a>
+                            </li>
+                        @endforeach
+                    @endif
                     <!-- <li class="list-group-item">
                         <a href="#" class="mx-1">
                             <img src="assets/images/email.png" alt="" srcset="" width="25px">

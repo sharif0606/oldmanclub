@@ -552,7 +552,7 @@
                                                 
                                             </div>
                                             <div class="ms-5 mb-3">
-                                                <button id="copyButton" class="generate-btn generate-gmail" onclick="generate()">Generate Signature and Copy</button>
+                                                <button class="generate-btn generate-gmail" onclick="generate()">Generate Signature and Copy</button>
                                             </div>
                                             <div class="step">
                                                 <div class="step-number">02</div>
@@ -625,7 +625,7 @@
 @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
-        /*function generate(){
+        function generate(){
             const profileElement = document.querySelector('#square');
             if (profileElement) {
                 const desiredWidth = 400;  // Set the desired width
@@ -644,16 +644,6 @@
             } else {
                 console.error('No element found with class .profile');
             }
-        }*/
-        $('#copyButton').click(function () {
-                var signatureHTML = $('#square').html();
-                navigator.clipboard.writeText(signatureHTML)
-                    .then(function () {
-                        alert('Signature copied to clipboard!');
-                    })
-                    .catch(function (error) {
-                        console.error('Could not copy signature to clipboard:', error);
-                    });
-            });
+        }
     </script>
 @endpush

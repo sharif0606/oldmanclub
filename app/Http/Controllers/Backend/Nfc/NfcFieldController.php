@@ -42,7 +42,9 @@ class NfcFieldController extends Controller
             '8' => 'Gaming',
             '9' => 'Other',
         ];
-        return view('backend.nfc-field.create', compact('type', 'categories'));;
+        return view('backend.nfc-field.edit',
+            compact('type', 'categories')
+        );;
     }
     /**
      * Store a newly created resource in storage.
