@@ -552,7 +552,7 @@
                                                 
                                             </div>
                                             <div class="ms-5 mb-3">
-                                                <button class="generate-btn">Generate Signature and Copy</button>
+                                                <button class="generate-btn generate-gmail" onclick="generate()">Generate Signature and Copy</button>
                                             </div>
                                             <div class="step">
                                                 <div class="step-number">02</div>
@@ -622,3 +622,28 @@
     </div>
     </div><!-- Row END -->
 @endsection
+@push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        function generate(){
+            const profileElement = document.querySelector('#square');
+            if (profileElement) {
+                const desiredWidth = 400;  // Set the desired width
+        const desiredHeight = 180; // Set the desired height
+                html2canvas(profileElement).then(canvas => {
+                    canvas.toBlob(blob => {
+                        const item = new ClipboardItem({ 'image/png': blob });
+                        navigator.clipboard.write([item]).then(() => {
+                            //alert('Profile copied to clipboard');
+                            document.querySelector('.generate-btn.generate-gmail').innerHTML = 'Copy!';;
+                        }).catch(err => {
+                            console.error('Could not copy image to clipboard', err);
+                        });
+                    });
+                });
+            } else {
+                console.error('No element found with class .profile');
+            }
+        }
+    </script>
+@endpush
