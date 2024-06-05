@@ -1,4 +1,10 @@
 <style>
+    @font-face {
+        font-family: 'FontAwesome';
+        src: url('{{ public_path('user/assets/vendor/font-awesome/webfonts/fa-brands-400.ttf') }}') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
     .classic_svg_show {
         bottom: 0px;
         /* left: 0px; */
@@ -7,6 +13,7 @@
         width: calc(100% + 0px);
     }
 </style>
+
 <div class="card p-3">
     <div class="col-md-12">
         <div class="classic_header_image_show">
