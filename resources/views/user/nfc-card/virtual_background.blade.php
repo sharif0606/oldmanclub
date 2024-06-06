@@ -121,7 +121,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 d-flex flex-column justify-content-center">
-                                    <button type="button" class="btn btn-primary mx-auto">Download</button>
+                                    <button type="button" class="btn btn-primary mx-auto" onclick="download()">Download</button>
                                     <p class="text-center text-black">Your custom background will save as a 1920x1080 image.
                                     </p>
                                     <a href="" class="text-center">How do I use my HiHello background in Zoom™?</a>
@@ -182,6 +182,7 @@
 @endsection
 @push('scripts')
     <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         function changeProfilePicture(event) {
             var output = document.getElementById('profile-picture');
@@ -190,6 +191,16 @@
                 var imageUrl = URL.createObjectURL(file);
                 output.style.backgroundImage = 'url(' + imageUrl + ')';
             }
+        }
+        function download(){
+            html2canvas(document.querySelector('.profile')).then(canvas => {
+                var link = document.createElement('a');
+                link.href = canvas.toDataURL('image/jpeg');
+                link.download = 'virtual_bg.jpg';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
         }
     </script>
 @endpush
