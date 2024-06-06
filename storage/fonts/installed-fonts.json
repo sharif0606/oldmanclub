@@ -1,0 +1,19 @@
+{
+    "font awesome 6 brands": {
+        "normal": "font_awesome_6_brands_normal_3944511d56c483d28cd2e924613d6021"
+    },
+    "font awesome 6 free": {
+        "normal": "H:\\xampp\\htdocs\\oldmanclub\\storage\\fonts\/font_awesome_6_free_normal_b4262483b640d26f6adc9b61bab04e52",
+        "900": "font_awesome_6_free_900_340749b26f1ac9884e6d5a79ba51aee4"
+    },
+    "font awesome 5 brands": {
+        "normal": "font_awesome_5_brands_normal_3944511d56c483d28cd2e924613d6021"
+    },
+    "font awesome 5 free": {
+        "900": "H:\\xampp\\htdocs\\oldmanclub\\storage\\fonts\/font_awesome_5_free_900_340749b26f1ac9884e6d5a79ba51aee4",
+        "normal": "font_awesome_5_free_normal_b4262483b640d26f6adc9b61bab04e52"
+    },
+    "fontawesome": {
+        "normal": "fontawesome_normal_f91c2a17aa3ee5ae309338a17f9050c8"
+    }
+}
