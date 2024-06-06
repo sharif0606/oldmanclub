@@ -298,6 +298,7 @@ class NfcCardController extends Controller
         // Generate URL
         $client = Client::find($client_id);
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
+        //return view('user.nfc-card.showqrurl', compact('nfc_card', 'client'));
         $pdf = PDF::loadView('user.nfc-card.showqrurl', compact('nfc_card', 'client'));
         return $pdf->download('document.pdf');
     }
