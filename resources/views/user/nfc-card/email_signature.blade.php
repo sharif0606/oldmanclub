@@ -2,6 +2,8 @@
 @section('title', 'NFC Email Signature')
 @push('styles')
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
         .card-custom {
             position: relative;
             overflow: hidden;
@@ -12,7 +14,69 @@
             width: 100%;
             height: auto;
         }
+        .signature-card{
+            background-color: rgb(255, 255, 255);
+            border: 0.0625rem solid rgba(0, 0, 0, 0.38);
+            border-radius: 0.75rem;
+            box-sizing: border-box;
+            max-width: 30rem;
+            min-width: 20rem;
+            object-position: center top;
+            overflow: hidden;
+            position: relative;
+            font-family: "Inter", sans-serif;
+            color: #1A202c;
+        }
+        .signature-card svg{
+            height: 80px;
+        }
+        .signature-card-btn{
+            border-radius:10px 0px 10px 0px;
+            lign-self: flex-end;
+            background-color: rgb(108, 49, 205);
+            border: medium;
+            /* border-top-left-radius: 0.75rem; */
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            font-family: Inter, sans-serif;
+            font-size: 0.625rem;
+            font-weight: 300;
+            max-height: 2rem;
+            padding: 0.5rem;
+            text-transform: uppercase;
+            width: 8rem;
+        }
 
+        .company{
+            font-weight: 300;
+            font-size: .876rem;
+            color: #1A202c;
+            line-height: 1rem;
+        }
+        .card-name{
+            font-family: "Inter", sans-serif;
+            color: #1A202c;
+            font-weight: 600;
+            padding: 0px;
+            margin: 5px 0px 0 0;
+                margin-top: 5px;
+            line-height: 12px;
+        }
+        .card-info i{
+            background: rgb(108, 49, 205);
+            margin: 0.3rem;
+            border-radius: 30px;
+            color: white;
+            padding: .3rem;
+            font-size: .678rem;
+        }
+        .position{
+
+        }
+
+        .signature-card-img{
+            border-radius:10px 0px 10px 0px;
+        }
         .card-custom .card-body {
             position: absolute;
             bottom: 0;
@@ -143,7 +207,7 @@
             background-color: #4e4ec8;
             color: white;
             font-weight: bold;
-            border-radius: 5px;
+            border-radius: 5px 0 5px 0;
             padding: 10px 20px;
             display: inline-block;
             text-align: center;
@@ -282,19 +346,19 @@
                                 <div class="tab-pane fade" id="qr-code" role="tabpanel" aria-labelledby="qr-code-tab">
                                     <!-- Content for QR CODE tab -->
                                     <div class="row">
-                                        <div class="col-md-6 mx-auto">
-                                            <div class="card">
+                                        <div class="col-md-5 mx-auto">
+                                            <div class="signature-card">
                                                 <div class="d-flex mb-1">
                                                     <img src="{{ asset('public/uploads/client/' . $nfc_card->client?->image) }}"
-                                                        alt="Profile Image" class="avatar-img rounded-border-10 border border-white border-3 w-25">
-                                                    <div class="ms-2">
-                                                        <h4 class="mt-2">{{ $nfc_card->client?->fname ?? '' }}  {{ $nfc_card->client?->middle_name ?? '' }}   {{ $nfc_card->client?->last_name ?? '' }}</h4>
-                                                        <p class="position">{{ $nfc_card->client?->designation ?? '' }}</p>
+                                                        alt="Profile Image" class="avatar-img w-25 signature-card-img">
+                                                    <article class="ms-2">
+                                                        <h6 class="mt-2 card-name">{{ $nfc_card->client?->fname ?? '' }}  {{ $nfc_card->client?->middle_name ?? '' }}   {{ $nfc_card->client?->last_name ?? '' }}</h6>
+                                                        <span class="position">{{ $nfc_card->client?->designation ?? 'CEO' }}</span>
                                                         <p class="company">{{ $nfc_card->nfc_info?->company ?? '' }}</p>
-                                                    </div>
+                                                    </article>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-8">
+                                                    <div class="col-md-8 card-info">
                                                             <p class="ms-1 m-0"><i class="fas fa-envelope"></i>
                                                                 <span>{{ $nfc_card->client?->email ?? '' }}</span>
                                                             </p>
@@ -302,7 +366,7 @@
                                                                 <span>{{ $nfc_card->client?->phone ?? '' }}</span>
                                                             </p>
                                                     </div>
-                                                    <div class="col-md-4 d-flex justify-content-end">
+                                                    <div class="col-md-4 d-flex justify-content-end p-2">
                                                         {!! QrCode::size(100)->generate(
                                                             url('nfcqrurl/' . encryptor('encrypt', $nfc_card->id) . '/' . $nfc_card->client_id),
                                                         ) !!}
@@ -310,7 +374,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 d-flex justify-content-end">
-                                                        <button class="btn btn-primary border-0 mt-1">Save Contact</button>
+                                                        <button class="btn signature-card-btn border-0 mt-1">Save Contact</button>
                                                     </div>
                                                 </div>
 
@@ -322,20 +386,20 @@
                                     aria-labelledby="image-logo-tab">
                                     <!-- Content for IMAGE + LOGO tab -->
                                     <div class="row">
-                                        <div class="col-md-6 mx-auto">
-                                            <div class="card">
+                                        <div class="col-md-5 mx-auto">
+                                            <div class="signature-card">
                                                 <div class="d-flex mb-1">
                                                     <img src="{{ asset('public/uploads/client/' . $nfc_card->client?->image) }}"
-                                                        alt="Profile Image" class="avatar-img rounded-border-10 border border-white border-3 w-25">
+                                                        alt="Profile Image" class="avatar-img w-25 signature-card-img">
                                                     <div class="ms-2">
-                                                        <h4 class="mt-2">{{ $nfc_card->client?->fname ?? '' }}  {{ $nfc_card->client?->middle_name ?? '' }}   {{ $nfc_card->client?->last_name ?? '' }}</h4>
-                                                        <p class="position">{{ $nfc_card->client?->designation ?? '' }}</p>
+                                                        <h6 class="mt-2 card-name">{{ $nfc_card->client?->fname ?? '' }}  {{ $nfc_card->client?->middle_name ?? '' }}   {{ $nfc_card->client?->last_name ?? '' }}</h6>
+                                                        <span class="position">{{ $nfc_card->client?->designation ?? '' }}</span>
                                                         <p class="company">{{ $nfc_card->nfc_info?->company ?? '' }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-8">
-                                                        <div class="d-flex justify-content-between">
+                                                        <div class="d-flex justify-content-between card-info">
                                                             <p class="ms-1 m-0"><i class="fas fa-envelope"></i>
                                                                 <span>{{ $nfc_card->client?->email ?? '' }}</span>
                                                             </p>
@@ -347,7 +411,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 d-flex justify-content-end">
-                                                        <button class="btn btn-primary border-0 mt-1">Save Contact</button>
+                                                        <button class="btn signature-card-btn border-0 mt-1">Save Contact</button>
                                                     </div>
                                                 </div>
 
@@ -358,20 +422,20 @@
                                 <div class="tab-pane fade" id="logo" role="tabpanel" aria-labelledby="logo-tab">
                                     <!-- Content for LOGO tab -->
                                     <div class="row">
-                                        <div class="col-md-6 mx-auto">
-                                            <div class="card">
+                                        <div class="col-md-5 mx-auto">
+                                            <div class="signature-card">
                                                 <div class="d-flex mb-1">
                                                     <img src="{{ asset('public/uploads/client/' . $nfc_card->client?->image) }}"
-                                                        alt="Profile Image" class="avatar-img rounded-border-10 border border-white border-3 w-25">
+                                                        alt="Profile Image" class="avatar-img w-25 signature-card-img">
                                                     <div class="ms-2">
-                                                        <h4 class="mt-2">{{ $nfc_card->client?->fname ?? '' }}  {{ $nfc_card->client?->middle_name ?? '' }}   {{ $nfc_card->client?->last_name ?? '' }}</h4>
-                                                        <p class="position">{{ $nfc_card->client?->designation ?? '' }}</p>
+                                                        <h6 class="mt-2 card-name">{{ $nfc_card->client?->fname ?? '' }}  {{ $nfc_card->client?->middle_name ?? '' }}   {{ $nfc_card->client?->last_name ?? '' }}</h6>
+                                                        <span class="position">{{ $nfc_card->client?->designation ?? '' }}</span>
                                                         <p class="company">{{ $nfc_card->nfc_info?->company ?? '' }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-8">
-                                                        <div class="d-flex justify-content-between">
+                                                        <div class="d-flex justify-content-between card-info">
                                                             <p class="ms-1 m-0"><i class="fas fa-envelope"></i>
                                                                 <span>{{ $nfc_card->client?->email ?? '' }}</span>
                                                             </p>
@@ -383,7 +447,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 d-flex justify-content-end">
-                                                        <button class="btn btn-primary border-0 mt-1">Save Contact</button>
+                                                        <button class="btn signature-card-btn border-0 mt-1">Save Contact</button>
                                                     </div>
                                                 </div>
 
@@ -394,20 +458,20 @@
                                 <div class="tab-pane fade" id="text" role="tabpanel" aria-labelledby="text-tab">
                                     <!-- Content for TEXT tab -->
                                     <div class="row">
-                                        <div class="col-md-6 mx-auto">
-                                            <div class="card">
+                                        <div class="col-md-5 mx-auto">
+                                            <div class="signature-card">
                                                 <div class="d-flex mb-1">
                                                     <img src="{{ asset('public/uploads/client/' . $nfc_card->client?->image) }}"
-                                                        alt="Profile Image" class="avatar-img rounded-border-10 border border-white border-3 w-25">
+                                                        alt="Profile Image" class="avatar-img w-25 signature-card-img">
                                                     <div class="ms-2">
-                                                        <h4 class="mt-2">{{ $nfc_card->client?->fname ?? '' }}  {{ $nfc_card->client?->middle_name ?? '' }}   {{ $nfc_card->client?->last_name ?? '' }}</h4>
-                                                        <p class="position">{{ $nfc_card->client?->designation ?? '' }}</p>
+                                                        <h6 class="card-name mt-2">{{ $nfc_card->client?->fname ?? '' }}  {{ $nfc_card->client?->middle_name ?? '' }}   {{ $nfc_card->client?->last_name ?? '' }}</h6>
+                                                        <span class="position">{{ $nfc_card->client?->designation ?? '' }}</span>
                                                         <p class="company">{{ $nfc_card->nfc_info?->company ?? '' }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-8">
-                                                        <div class="d-flex justify-content-between">
+                                                        <div class="d-flex justify-content-between card-info">
                                                             <p class="ms-1 m-0"><i class="fas fa-envelope"></i>
                                                                 <span>{{ $nfc_card->client?->email ?? '' }}</span>
                                                             </p>
@@ -419,7 +483,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12 d-flex justify-content-end">
-                                                        <button class="btn btn-primary border-0 mt-1">Save Contact</button>
+                                                        <button class="btn signature-card-btn border-0 mt-1">Save Contact</button>
                                                     </div>
                                                 </div>
 
@@ -460,8 +524,8 @@
                                                 </div>
                                             </button>
                                         </li>
-    
-    
+
+
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link mx-auto btn-white rounded-pill d-flex align-items-center"
                                                 id="outlook-web-tab" data-bs-toggle="pill" data-bs-target="#outlook-web"
@@ -528,14 +592,14 @@
                                                 id="other-tab" data-bs-toggle="pill" data-bs-target="#other" type="button"
                                                 role="tab" aria-controls="other" aria-selected="false">
                                                 <span class="fs-4"><i class="fas fa-envelope"></i></span>
-    
-    
+
+
                                                 <div class="ms-2">
                                                     <div>Other</div>
                                                 </div>
-    
-    
-    
+
+
+
                                             </button>
                                         </li>
                                     </ul>
@@ -544,12 +608,12 @@
                                     <div class="tab-content" id="pills-tabContent">
                                         <div class="tab-pane fade show active" id="gmail" role="tabpanel"
                                             aria-labelledby="gmail-tab">
-    
-                                           
+
+
                                             <div class="step">
                                                 <div class="step-number">01</div>
                                                 <div>Generate and copy your signature's HTML</div>
-                                                
+
                                             </div>
                                             <div class="ms-5 mb-3">
                                                 <button class="generate-btn generate-gmail" onclick="generate()">Generate Signature and Copy</button>
@@ -579,11 +643,11 @@
                                                 <div>Click "Save Changes"</div>
                                             </div>
                                         </div>
-                            
-    
-    
-    
-                           
+
+
+
+
+
                                 <div class="tab-pane fade" id="outlook-web" role="tabpanel"
                                     aria-labelledby="outlook-web-tab">
                                     Outlook Web Content
@@ -609,7 +673,7 @@
                                 </div>
                             </div>
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
