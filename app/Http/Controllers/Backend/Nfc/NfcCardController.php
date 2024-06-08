@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Response;
+use PDF; // Import the PDF facade
 
 class NfcCardController extends Controller
 {
@@ -28,10 +29,10 @@ class NfcCardController extends Controller
      */
     public function index()
     {
-        $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id',currentUserId())->paginate(10);
+        $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id', currentUserId())->paginate(10);
         $client = Client::find(currentUserId());
         $postCount = Post::where('client_id', currentUserId())->count();
-        return view('user.nfc-card.index', compact('nfc_cards','client','postCount'));
+        return view('user.nfc-card.index', compact('nfc_cards', 'client', 'postCount'));
     }
 
     /**
@@ -168,7 +169,7 @@ class NfcCardController extends Controller
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
         $postCount = Post::where('client_id', currentUserId())->count();
         $countries = Country::get();
-        return view('user.nfc-card.show', compact('nfc_card','client','postCount','countries'));
+        return view('user.nfc-card.show', compact('nfc_card', 'client', 'postCount', 'countries'));
     }
 
     /**
@@ -191,7 +192,7 @@ class NfcCardController extends Controller
             '8' => 'Gaming',
             '9' => 'Other',
         ];
-        return view('user.nfc-card.edit', compact('id','categories', 'nfc_card', 'nfc_info', 'client', 'postCount'));
+        return view('user.nfc-card.edit', compact('id', 'categories', 'nfc_card', 'nfc_info', 'client', 'postCount'));
     }
 
     /**
@@ -315,28 +316,20 @@ class NfcCardController extends Controller
     {
         //
     }
-    public function showqrurl($id,$client_id)
+    public function showqrurl($id, $client_id)
     {
         $client = Client::find($client_id);
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
-        return view('user.nfc-card.showqrurl', compact('nfc_card','client'));
+        return view('user.nfc-card.showqrurl', compact('nfc_card', 'client'));
     }
-    public function dowloadqrl($id,$client_id)
+    public function downloadPdf($id, $client_id)
     {
         // Generate URL
-        $url = url('nfcqrurl/' . encryptor('encrypt', $id) . '/' . $client_id);
-
-        // Generate QR Code
-        $qrCode = QrCode::format('png')->size(300)->generate($url);
-
-        // Set the headers for file download
-        $headers = [
-            'Content-Type' => 'image/png',
-            'Content-Disposition' => 'attachment; filename="qr-code.png"',
-        ];
-
-        // Return the QR code as a downloadable response
-        return Response::make($qrCode, 200, $headers);
+        $client = Client::find($client_id);
+        $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
+        //return view('user.nfc-card.showqrurl', compact('nfc_card', 'client'));
+        $pdf = PDF::loadView('user.nfc-card.showqrurl', compact('nfc_card', 'client'));
+        return $pdf->download('document.pdf');
     }
     public function save_contact($id)
     {
@@ -389,17 +382,71 @@ class NfcCardController extends Controller
     public function email($id)
     {
         $client = Client::find(currentUserId());
-        $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id',currentUserId())->paginate(10);
+        $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id', currentUserId())->paginate(10);
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
-        return view('user.nfc-card.email_signature', compact('nfc_card','client','nfc_cards'));
+        return view('user.nfc-card.email_signature', compact('nfc_card', 'client', 'nfc_cards'));
     }
     public function virtual_background($id)
     {
         $client = Client::find(currentUserId());
-        $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id',currentUserId())->paginate(10);
+        $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id', currentUserId())->paginate(10);
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
         $nfc_virtual_categories = NfcVirtualBackgroundCategory::with('backgrounds')->get();
-        return view('user.nfc-card.virtual_background', compact('nfc_card','client','nfc_cards','nfc_virtual_categories'));
+        return view('user.nfc-card.virtual_background', compact('nfc_card', 'client', 'nfc_cards', 'nfc_virtual_categories'));
     }
+    public function duplicate($id)
+    {
+        // Start the transaction
+        DB::beginTransaction();
 
+        try {
+            $originalNfcCard  = NfcCard::with(['nfc_info', 'nfcFields', 'card_design','badges'])->find(encryptor('decrypt', $id));
+            $newNfcCard = $originalNfcCard->replicate();
+            $newNfcCard->card_name = $originalNfcCard->card_name . " " . "copy"; // Update the cardname
+            $newNfcCard->save();
+
+            // Duplicate and update related NfcField records through the pivot table
+            foreach ($originalNfcCard->nfcFields as $nfcField) {
+                $newNfcCard->nfcFields()->attach($nfcField->id, [
+                    'nfc_field_id' => $nfcField->pivot->nfc_field_id,
+                    'field_value' => $nfcField->pivot->field_value,
+                    'nfc_card_id' => $newNfcCard->id, // Ensure the new nfccard_id is set in the pivot table
+                ]);
+            }
+
+            // Duplicate and update related NfcInformation records
+
+                $newNfcInformation = $originalNfcCard->nfc_info->replicate();
+                $newNfcInformation->nfc_card_id = $newNfcCard->id; // Update the foreign key
+                $newNfcInformation->save();
+           
+
+            // Duplicate and update related NfcField records through the pivot table
+            foreach ($originalNfcCard->nfcFields as $nfcField) {
+                $newNfcCard->nfcFields()->attach($nfcField->id, [
+                    'nfc_field_id' => $nfcField->pivot->nfc_field_id,
+                    'field_value' => $nfcField->pivot->field_value,
+                    'nfc_card_id' => $newNfcCard->id, // Ensure the new nfccard_id is set in the pivot table
+                ]);
+            }
+
+            // Duplicate and update related Nfc Card Design records
+            $nfcCardDesign = $originalNfcCard->card_design->replicate();
+            $nfcCardDesign->nfc_card_id = $newNfcCard->id; // Update the foreign key
+            $nfcCardDesign->save();
+            
+
+            // Commit the transaction
+            DB::commit();
+
+            $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id', currentUserId())->paginate(10);
+            $client = Client::find(currentUserId());
+            return view('user.nfc-card.index', compact('nfc_cards', 'client'));
+        } catch (\Exception $e) {
+            // Rollback the transaction if an error occurs
+            DB::rollBack();
+
+            return response()->json(['message' => 'Error duplicating record: ' . $e->getMessage()], 500);
+        }
+    }
 }

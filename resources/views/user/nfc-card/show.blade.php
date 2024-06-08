@@ -64,21 +64,24 @@
                                 <div class="d-flex justify-content-between">
                                     <a href="{{ route('nfc_card.edit', encryptor('encrypt', $nfc_card->id)) }}"
                                         class="fs-4"><i class="fa fa-edit"></i></a>
-                                    <a href="#" class="fs-4" data-bs-toggle="modal" data-bs-target="#cogModal"><i
+                                    <a href="#" class="fs-4" title="Card Settings" data-bs-toggle="modal" data-bs-target="#cogModal"><i
                                             class="fas fa-cog"></i></a>
-                                    <a href="" class="fs-4"><i class="fas fa-copy"></i></a>
-                                    <a href="#" class="fs-4" data-bs-toggle="modal" data-bs-target="#shareModal"
-                                        title="Transfer"><i class="fas fa-share"></i></a>
-                                    <a href="{{ route('virtual_background', encryptor('encrypt', $nfc_card->id)) }}" class="fs-4"><i class="fas fa-image"></i></a>
-                                    <a href="{{ url('nfcqrurl-download/' . encryptor('encrypt', $nfc_card->id) . '/' . $nfc_card->client_id) }}"
-                                        class="fs-4"><i class="fas fa-download"></i></a>
-                                    <a href="{{ route('email_signature', encryptor('encrypt', $nfc_card->id)) }}"
+                                    <a href="{{ route('duplicate', encryptor('encrypt', $nfc_card->id)) }}" class="fs-4" title="Duplicate"><i class="fas fa-copy"></i></a>
+                                    {{-- <a href="#" class="fs-4" data-bs-toggle="modal" data-bs-target="#shareModal"
+                                        title="Transfer"><i class="fas fa-share"></i></a> --}}
+                                    <a href="{{ route('virtual_background', encryptor('encrypt', $nfc_card->id)) }}" title="Virtual Background" class="fs-4"><i class="fas fa-image"></i></a>
+                                    <a href="#" class="fs-4" onclick="downloadSVG()" title="Download Qr Code"><i class="fas fa-download"></i></a>
+                                    <a href="{{ route('email_signature', encryptor('encrypt', $nfc_card->id)) }}" title="Email Signature"
                                         class="fs-4"><i class="fas fa-envelope"></i></a>
-                                    <a href="" class="fs-4"><i class="fas fa-file-pdf"></i></a>
-                                    <a href="" class="fs-4"><i class="fas fa-trash"></i></a>
+                                    <a href="{{ route('downloadPdf', [encryptor('encrypt', $nfc_card->id),$nfc_card->client_id]) }}" title="Download PDF" class="fs-4"><i class="fas fa-file-pdf"></i></a>
+                                    {{-- <a href="#" onclick="generatePDF()" title="Download PDF" class="fs-4"><i class="fas fa-file-pdf"></i></a> --}}
+                                    <a href="" class="fs-4" title="Delete"><i class="fas fa-trash"></i></a>
                                 </div>
                             </div>
                             <div class="col-md-6"></div>
+                            <div  class="row" id="my_img_to_pdf">
+
+                            
                             <div class="col-md-4">
                                 @if ($nfc_card->card_design?->design_card_id == 1)
                                     @include('user.nfc-template_show.classic-template')
@@ -91,10 +94,14 @@
                                 @endif
                             </div>
                             <div class="col-md-4">
-                                {!! QrCode::size(300)->generate(
-                                    url('nfcqrurl/' . encryptor('encrypt', $nfc_card->id) . '/' . $nfc_card->client_id),
-                                ) !!}
+                                <div id="svg">
+                                    {!! QrCode::size(300)->generate(
+                                        url('nfcqrurl/' . encryptor('encrypt', $nfc_card->id) . '/' . $nfc_card->client_id),
+                                    ) !!}
+                                </div>
+                              
                             </div>
+                        </div>
                         </div>
                         <!-- Photos of you tab END -->
                     </div>
@@ -210,5 +217,61 @@
 @endsection
 
 @push('scripts')
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function downloadSVG() {
+            const svgElement = document.getElementById('svg').querySelector('svg');
+            const svgString = new XMLSerializer().serializeToString(svgElement);
+
+            // Create a canvas element
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+
+            // Set the canvas size to the SVG size
+            const svgSize = svgElement.getBoundingClientRect();
+            canvas.width = svgSize.width;
+            canvas.height = svgSize.height;
+
+            // Create an image element
+            const img = new Image();
+
+            // Create a blob from the SVG string
+            const blob = new Blob([svgString], {type: "image/svg+xml;charset=utf-8"});
+            const url = URL.createObjectURL(blob);
+
+            img.onload = function() {
+                // Draw the SVG onto the canvas
+                ctx.drawImage(img, 0, 0);
+
+                // Create a PNG data URL from the canvas
+                const pngDataUrl = canvas.toDataURL("image/png");
+
+                // Create a download link and click it
+                const element = document.createElement("a");
+                element.download = "qr_code.png";
+                element.href = pngDataUrl;
+                element.click();
+
+                // Clean up
+                URL.revokeObjectURL(url);
+                element.remove();
+            };
+
+            // Set the source of the image to the blob URL
+            img.src = url;
+        }
+
+        function generatePDF() {
+            var element = document.getElementById('my_img_to_pdf');
+
+    html2canvas(element).then(canvas => {
+        var imgData = canvas.toDataURL('image/jpeg');
+        var pdf = new jsPDF();
+        pdf.addImage(imgData, 'JPEG', 0, 0);
+        pdf.save('content_to_pdf.pdf');
+    });
+        }
+    </script>
 @endpush
