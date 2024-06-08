@@ -73,15 +73,15 @@
                                     <a href="#" class="fs-4" onclick="downloadSVG()" title="Download Qr Code"><i class="fas fa-download"></i></a>
                                     <a href="{{ route('email_signature', encryptor('encrypt', $nfc_card->id)) }}" title="Email Signature"
                                         class="fs-4"><i class="fas fa-envelope"></i></a>
-                                    <a href="{{ route('downloadPdf', [encryptor('encrypt', $nfc_card->id),$nfc_card->client_id]) }}" title="Download PDF" class="fs-4"><i class="fas fa-file-pdf"></i></a>
-                                    {{-- <a href="#" onclick="generatePDF()" title="Download PDF" class="fs-4"><i class="fas fa-file-pdf"></i></a> --}}
+                                    {{-- <a href="{{ route('downloadPdf', [encryptor('encrypt', $nfc_card->id),$nfc_card->client_id]) }}" title="Download PDF" class="fs-4"><i class="fas fa-file-pdf"></i></a> --}}
+                                    <a href="#" onclick="generatePDF()" title="Download PDF" class="fs-4"><i class="fas fa-file-pdf"></i></a>
                                     <a href="" class="fs-4" title="Delete"><i class="fas fa-trash"></i></a>
                                 </div>
                             </div>
                             <div class="col-md-6"></div>
                             <div  class="row" id="my_img_to_pdf">
 
-                            
+
                             <div class="col-md-4">
                                 @if ($nfc_card->card_design?->design_card_id == 1)
                                     @include('user.nfc-template_show.classic-template')
@@ -99,7 +99,7 @@
                                         url('nfcqrurl/' . encryptor('encrypt', $nfc_card->id) . '/' . $nfc_card->client_id),
                                     ) !!}
                                 </div>
-                              
+
                             </div>
                         </div>
                         </div>
@@ -198,9 +198,9 @@
                                     <input name="email" type="text" class="form-control">
                                     </div>
                                 </div>
-                               
+
                             </div>
-                       
+
                     </div>
 
 

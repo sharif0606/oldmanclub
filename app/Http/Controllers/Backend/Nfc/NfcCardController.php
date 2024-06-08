@@ -325,11 +325,19 @@ class NfcCardController extends Controller
     public function downloadPdf($id, $client_id)
     {
         // Generate URL
-        $client = Client::find($client_id);
-        $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
-        //return view('user.nfc-card.showqrurl', compact('nfc_card', 'client'));
-        $pdf = PDF::loadView('user.nfc-card.showqrurl', compact('nfc_card', 'client'));
-        return $pdf->download('document.pdf');
+        $url = url('nfcqrurl/' . encryptor('encrypt', $id) . '/' . $client_id);
+
+        // Generate QR Code
+        $qrCode = QrCode::format('png')->size(300)->generate($url);
+
+        // Set the headers for file download
+        $headers = [
+            'Content-Type' => 'image/png',
+            'Content-Disposition' => 'attachment; filename="qr-code.png"',
+        ];
+
+        // Return the QR code as a downloadable response
+        return Response::make($qrCode, 200, $headers);
     }
     public function save_contact($id)
     {
@@ -419,7 +427,7 @@ class NfcCardController extends Controller
                 $newNfcInformation = $originalNfcCard->nfc_info->replicate();
                 $newNfcInformation->nfc_card_id = $newNfcCard->id; // Update the foreign key
                 $newNfcInformation->save();
-           
+
 
             // Duplicate and update related NfcField records through the pivot table
             foreach ($originalNfcCard->nfcFields as $nfcField) {
@@ -434,7 +442,7 @@ class NfcCardController extends Controller
             $nfcCardDesign = $originalNfcCard->card_design->replicate();
             $nfcCardDesign->nfc_card_id = $newNfcCard->id; // Update the foreign key
             $nfcCardDesign->save();
-            
+
 
             // Commit the transaction
             DB::commit();
