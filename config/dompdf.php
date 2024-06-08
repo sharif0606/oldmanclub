@@ -278,7 +278,7 @@ return array(
          * @var bool
          */
         "enable_html5_parser" => true,
-        "enable_svg" => true,
+        'isRemoteEnabled' => true,
 
     ),
 
