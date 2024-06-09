@@ -250,15 +250,15 @@
                                                         <span class="fs-5 me-1" style="background-color: #3B5998"><i
                                                                 class="fa-brands fa-facebook-f"></i></span>
                                                     </a>
-                                                    <a href="https://x.com/intent/tweet?url={{ url('x-share', [encryptor('encrypt', $nfc_card->id), $nfc_card->client_id]) }}&text=Check%20out%20this%20property!">
+                                                    <a href="https://x.com/intent/tweet?url={{ url('x-share', [encryptor('encrypt', $nfc_card->id), $nfc_card->client_id]) }}&text={{$nfc_card->client->fname}}">
                                                         <span class="fs-5 me-1" style="background-color: #000"><i
                                                                 class="fa-brands fa-xing"></i></span>
                                                     </a>
-                                                    <a href="">
+                                                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ url('l-share', [encryptor('encrypt', $nfc_card->id), $nfc_card->client_id]) }}&text={{$nfc_card->client->fname}}&title=&summary=&source=oldclubman">
                                                     <span class="fs-5 me-1" style="background-color: #007FB1"><i
                                                             class="fa-brands fa-linkedin"></i></span>
                                                     </a>
-                                                    <a href="">
+                                                    <a href="https://wa.me/?text=test%{{ url('w-share', [encryptor('encrypt', $nfc_card->id), $nfc_card->client_id]) }}">
                                                     <span class="fs-5 me-1" style="background-color: #25D366"><i
                                                             class="fa-brands fa-whatsapp"></i></span>
                                                     </a>

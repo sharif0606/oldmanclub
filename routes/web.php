@@ -309,6 +309,8 @@ Route::get('downloadPdf/{id}/{client_id}', [nfc_card::class, 'downloadPdf'])->na
 //Share
 Route::get('fb-share/{id}/{client_id}', [nfc_card::class, 'fbshare'])->name('fbshare');
 Route::get('x-share/{id}/{client_id}', [nfc_card::class, 'xshare'])->name('xshare');
+Route::get('l-share/{id}/{client_id}', [nfc_card::class, 'lshare'])->name('lshare');
+Route::get('w-share/{id}/{client_id}', [nfc_card::class, 'wshare'])->name('wshare');
 
 Route::get('duplicate/{id}/', [nfc_card::class, 'duplicate'])->name('duplicate');
 Route::get('save-contact/{id}', [nfc_card::class, 'save_contact'])->name('save_contact');

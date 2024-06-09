@@ -435,4 +435,18 @@ class NfcCardController extends Controller
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
         return view('user.nfc-card.pdf', compact('nfc_card', 'client'));
     }
+    public function lshare($id, $client_id)
+    {
+        // Generate URL
+        $client = Client::find($client_id);
+        $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
+        return view('user.nfc-card.pdf', compact('nfc_card', 'client'));
+    }
+    public function wshare($id, $client_id)
+    {
+        // Generate URL
+        $client = Client::find($client_id);
+        $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
+        return view('user.nfc-card.pdf', compact('nfc_card', 'client'));
+    }
 }
