@@ -69,7 +69,7 @@ class NfcCardController extends Controller
             $nfc = new NfcCard;
             $nfc->client_id = currentUserId();
             $nfc->card_name = $request->card_name;
-            $nfc->card_type = $request->card_type;
+            $nfc->card_type = $request->card_type?$request->card_type:1;
             $nfc->created_by = currentUserId();
             if ($nfc->save()) {
 
@@ -92,7 +92,7 @@ class NfcCardController extends Controller
                 /* Insert Data To Nfc Design */
                 $nfc_design = new NfcDesign;
                 $nfc_design->nfc_card_id = $nfc->id;
-                $nfc_design->design_card_id = $request->design_card_id;
+                $nfc_design->design_card_id = $request->design_card_id?$request->design_card_id:1;
                 $nfc_design->created_by = currentUserId();
                 $nfc_design->save();
 
@@ -298,7 +298,7 @@ class NfcCardController extends Controller
         // Generate URL
         $client = Client::find($client_id);
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
-        return view('user.nfc-card.pdf', compact('nfc_card', 'client'));
+        //return view('user.nfc-card.pdf', compact('nfc_card', 'client'));
         $pdf = PDF::loadView('user.nfc-card.pdf', compact('nfc_card', 'client'));
         return $pdf->download('nfc.pdf');
     }

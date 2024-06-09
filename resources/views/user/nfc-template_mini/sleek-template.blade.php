@@ -49,11 +49,12 @@
                         </div>
                     </div>
                     <p class="text-center" style="font-size:18px;color:#676A79">
-                        @if ($nfc_card->card_type == 1)
+                        {{$nfc_card->card_name}}
+                        {{-- @if ($nfc_card->card_type == 1)
                                 Work
                             @else
                                 Personal
-                        @endif
+                        @endif --}}
                     </p>
                 </div>
             </div>

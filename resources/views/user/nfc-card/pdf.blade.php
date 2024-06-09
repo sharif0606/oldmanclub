@@ -18,17 +18,27 @@
             margin: 15px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .classic_header_image{
-            position: relative;
+
+        .classic_header_image {
+            height: 350px;
         }
+
         .classic_header_image img {
             width: 100%;
             height: auto;
             border-radius: 10px 10px 0 0;
         }
 
-        .classic_svg svg {
+        .classic_svg {
+            position: absolute;
+            bottom: 45px;
             width: 100%;
+        }
+        .classic_image{
+            position: absolute;
+            right: 0;
+            width: 50px;
+            bottom: 50px
         }
 
         .text-center {
@@ -44,7 +54,7 @@
         }
 
         .container {
-            width: 30%;
+            width: 350px;
             padding: 0;
             margin: 0px auto;
         }
@@ -67,10 +77,15 @@
             margin: 5px 0;
             display: flex;
             align-items: center;
+            width: 15px;
         }
 
         .list-group-item img {
             margin-right: 10px;
+        }
+        ul{
+            margin: 0;
+            padding: 0;
         }
     </style>
 </head>
