@@ -10,7 +10,7 @@
                 <!-- <div class="main-img" style="background-image: url({{ asset('public/assets/nfc/images/123.png') }})">
                 </div> -->
             @endif
-            <div class="classic_svg" style="bottom: 0px !important;">
+            <div class="classic_svg">
                 <svg preserveAspectRatio="xMinYMax meet" viewBox="0 0 246 57" xmlns="http://www.w3.org/2000/svg"
                     class="css-fxun4i">
                     @if ($nfc_card->card_type == 1)
@@ -35,24 +35,24 @@
                             fill="#6785F5" fill-rule="evenodd"></path>
                     @endif
                 </svg>
-                <div class="classic_image d-none d-sm-block">
-                    @if ($nfc_card->card_design?->logo)
-                        <img src="{{ asset($nfc_card->card_design?->logo) }}" alt="abc" width="60px"
-                            srcset="" />
-                    @else
-                        <img src="{{ asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="60px"
-                            srcset="" />
-                    @endif
-                </div>
+            </div>
+            <div class="classic_image d-none d-sm-block">
+                @if ($nfc_card->card_design?->logo)
+                    <img src="{{ asset($nfc_card->card_design?->logo) }}" alt="abc" width="60px"
+                        srcset="" />
+                @else
+                    <img src="{{ asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="60px"
+                        srcset="" />
+                @endif
             </div>
         </div>
-        <p class="text-center fs-4 fw-bold pt-2">
+        {{-- <p class="text-center fs-4 fw-bold pt-2">
             @if ($nfc_card->card_type == 1)
                 {{ __('Work') }}
             @else
                 {{ __('Personal') }}
             @endif
-        </p>
+        </p> --}}
     </header>
     <section class="middle" style="padding: 0px !important">
         <div class="container-fluid mt-2">
@@ -144,7 +144,7 @@
                         <li class="list-group-item">
                             <i class="{{ $nfcField->icon }}"></i>
                             <a href="#" class="mx-1">
-                                <img src="assets/images/email.png" alt="" srcset="" width="25px">
+                                {{-- <img src="assets/images/email.png" alt="" srcset="" width="25px"> --}}
                             </a>
                             <a href="#">{{ $nfcField->pivot->field_value }}</a>
                         </li>
