@@ -239,7 +239,7 @@
                                                 <div class="social-links mt-2"
                                                     style="width:220px; margin:0px auto;display: flex;
                                             justify-content: center;">
-                                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('downloadPdf', [encryptor('encrypt', $nfc_card->id), $nfc_card->client_id]) }}&display=popup">  
+                                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('fb-share', [encryptor('encrypt', $nfc_card->id), $nfc_card->client_id]) }}&display=popup">  
                                                     <span class="fs-5 me-1" style="background-color: #3B5998"><i
                                                             class="fa-brands fa-facebook-f"></i></span></a>
                                                     <span class="fs-5 me-1" style="background-color: #000"><i

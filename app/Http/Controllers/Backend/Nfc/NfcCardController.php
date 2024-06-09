@@ -298,7 +298,7 @@ class NfcCardController extends Controller
         // Generate URL
         $client = Client::find($client_id);
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
-        return view('user.nfc-card.pdf', compact('nfc_card', 'client'));
+        //return view('user.nfc-card.pdf', compact('nfc_card', 'client'));
         $pdf = PDF::loadView('user.nfc-card.pdf', compact('nfc_card', 'client'));
         return $pdf->download('nfc.pdf');
     }
@@ -419,5 +419,13 @@ class NfcCardController extends Controller
 
             return response()->json(['message' => 'Error duplicating record: ' . $e->getMessage()], 500);
         }
+    }
+
+    public function fbshare($id, $client_id)
+    {
+        // Generate URL
+        $client = Client::find($client_id);
+        $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
+        return view('user.nfc-card.pdf', compact('nfc_card', 'client'));
     }
 }
