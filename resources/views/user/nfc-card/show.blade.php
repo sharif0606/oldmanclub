@@ -110,27 +110,30 @@
         }
 
         /* #pills-tab {
-            border: 2px solid #6C31CD;
-            border-radius: 8px;
-        }
+                    border: 2px solid #6C31CD;
+                    border-radius: 8px;
+                }
 
-        #pills-tab .nav-item {
-            border-right: 2px solid #6C31CD;
-        } */
-        #pills-tab .nav-item:nth-child(1){
+                #pills-tab .nav-item {
+                    border-right: 2px solid #6C31CD;
+                } */
+        #pills-tab .nav-item:nth-child(1) {
             border: 2px solid #6C31CD;
             border-radius: 8px 0px 0px 8px;
         }
-        #pills-tab .nav-item:nth-child(2){
+
+        #pills-tab .nav-item:nth-child(2) {
             border-top: 2px solid #6C31CD;
             border-bottom: 2px solid #6C31CD;
             border-right: 2px solid #6C31CD;
         }
-        #pills-tab .nav-item:nth-child(3){
+
+        #pills-tab .nav-item:nth-child(3) {
             border-top: 2px solid #6C31CD;
             border-bottom: 2px solid #6C31CD;
         }
-        #pills-tab .nav-item:nth-child(4){
+
+        #pills-tab .nav-item:nth-child(4) {
             border: 2px solid #6C31CD;
             border-radius: 0px 8px 8px 0px;
         }
@@ -138,23 +141,26 @@
         #pills-tab .nav-item .nav-link.active {
             background: #6C31CD;
         }
+
         #pills-tab .nav-item .nav-link.active i {
             color: #fff;
             font-weight: bold;
         }
+
         #pills-tab .nav-item .nav-link i {
             color: #6C31CD;
             font-weight: bold;
         }
-        #pills-tab .nav-item .nav-link.active p{
+
+        #pills-tab .nav-item .nav-link.active p {
             color: #fff;
         }
+
         #pills-tab .nav-item .nav-link p {
             color: #6C31CD;
             font-weight: bold;
             font-size: 12px;
         }
-        
     </style>
 @endpush
 @section('content')
@@ -239,18 +245,27 @@
                                                 <div class="social-links mt-2"
                                                     style="width:220px; margin:0px auto;display: flex;
                                             justify-content: center;">
-                                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('fb-share', [encryptor('encrypt', $nfc_card->id), $nfc_card->client_id]) }}&display=popup">  
-                                                    <span class="fs-5 me-1" style="background-color: #3B5998"><i
-                                                            class="fa-brands fa-facebook-f"></i></span></a>
-                                                    <span class="fs-5 me-1" style="background-color: #000"><i
-                                                            class="fa-brands fa-xing"></i></span>
+                                                    <a
+                                                        href="https://www.facebook.com/sharer/sharer.php?u={{ url('fb-share', [encryptor('encrypt', $nfc_card->id), $nfc_card->client_id]) }}&display=popup">
+                                                        <span class="fs-5 me-1" style="background-color: #3B5998"><i
+                                                                class="fa-brands fa-facebook-f"></i></span>
+                                                    </a>
+                                                    <a href="https://x.com/intent/tweet?url={{ url('x-share', [encryptor('encrypt', $nfc_card->id), $nfc_card->client_id]) }}&text=Check%20out%20this%20property!">
+                                                        <span class="fs-5 me-1" style="background-color: #000"><i
+                                                                class="fa-brands fa-xing"></i></span>
+                                                    </a>
+                                                    <a href="">
                                                     <span class="fs-5 me-1" style="background-color: #007FB1"><i
                                                             class="fa-brands fa-linkedin"></i></span>
+                                                    </a>
+                                                    <a href="">
                                                     <span class="fs-5 me-1" style="background-color: #25D366"><i
                                                             class="fa-brands fa-whatsapp"></i></span>
+                                                    </a>
+                                                    <a href="">
                                                     <span class="fs-5" style="background-color: #7F7F7F"><i
                                                             class="fas fa-envelope"></i></span>
-
+                                                    </a>
                                                 </div>
                                                 <div style="width:220px; margin:0px auto;text-align:center;">
                                                     <button class="btn btn-sm my-2 btn-outline-primary w-75"><i
@@ -300,37 +315,37 @@
                                                 </form>
                                             </div>
                                             <div class="tab-pane fade" id="apple" role="tabpanel"
-                                            aria-labelledby="apple-tab">
-                                            <a class="box"
-                                            href="{{ url('nfcqrurl/' . encryptor('encrypt', $nfc_card->id) . '/' . $nfc_card->client_id) }}"
-                                            style="display:block;width:200px;padding: 20px;margin:0px auto;">
-                                            <div id="svg">
-                                                {!! QrCode::size(160)->generate(
-                                                    url('nfcqrurl/' . encryptor('encrypt', $nfc_card->id) . '/' . $nfc_card->client_id),
-                                                ) !!}
+                                                aria-labelledby="apple-tab">
+                                                <a class="box"
+                                                    href="{{ url('nfcqrurl/' . encryptor('encrypt', $nfc_card->id) . '/' . $nfc_card->client_id) }}"
+                                                    style="display:block;width:200px;padding: 20px;margin:0px auto;">
+                                                    <div id="svg">
+                                                        {!! QrCode::size(160)->generate(
+                                                            url('nfcqrurl/' . encryptor('encrypt', $nfc_card->id) . '/' . $nfc_card->client_id),
+                                                        ) !!}
 
-                                            </div>
-                                        </a>
-                                        <small class="mt-1 text-center d-block">Scan Or Click to Preview</small>
-                                        <div class="social-links mt-2"
-                                            style="width:220px; margin:0px auto;display: flex;
+                                                    </div>
+                                                </a>
+                                                <small class="mt-1 text-center d-block">Scan Or Click to Preview</small>
+                                                <div class="social-links mt-2"
+                                                    style="width:220px; margin:0px auto;display: flex;
                                     justify-content: center;">
-                                            <span class="fs-5 me-1" style="background-color: #3B5998"><i
-                                                    class="fa-brands fa-facebook-f"></i></span>
-                                            <span class="fs-5 me-1" style="background-color: #000"><i
-                                                    class="fa-brands fa-xing"></i></span>
-                                            <span class="fs-5 me-1" style="background-color: #007FB1"><i
-                                                    class="fa-brands fa-linkedin"></i></span>
-                                            <span class="fs-5 me-1" style="background-color: #25D366"><i
-                                                    class="fa-brands fa-whatsapp"></i></span>
-                                            <span class="fs-5" style="background-color: #7F7F7F"><i
-                                                    class="fas fa-envelope"></i></span>
+                                                    <span class="fs-5 me-1" style="background-color: #3B5998"><i
+                                                            class="fa-brands fa-facebook-f"></i></span>
+                                                    <span class="fs-5 me-1" style="background-color: #000"><i
+                                                            class="fa-brands fa-xing"></i></span>
+                                                    <span class="fs-5 me-1" style="background-color: #007FB1"><i
+                                                            class="fa-brands fa-linkedin"></i></span>
+                                                    <span class="fs-5 me-1" style="background-color: #25D366"><i
+                                                            class="fa-brands fa-whatsapp"></i></span>
+                                                    <span class="fs-5" style="background-color: #7F7F7F"><i
+                                                            class="fas fa-envelope"></i></span>
 
-                                        </div>
-                                        <div style="width:220px; margin:0px auto;text-align:center;">
-                                            <button class="btn btn-sm my-2 btn-outline-primary w-75"><i
-                                                    class="me-2 fas fa-copy"></i>Copy Link</button>
-                                        </div>
+                                                </div>
+                                                <div style="width:220px; margin:0px auto;text-align:center;">
+                                                    <button class="btn btn-sm my-2 btn-outline-primary w-75"><i
+                                                            class="me-2 fas fa-copy"></i>Copy Link</button>
+                                                </div>
                                             </div>
                                         </div>
 
