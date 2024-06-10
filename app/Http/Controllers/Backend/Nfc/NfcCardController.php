@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 use PDF; // Import the PDF facade
 
 class NfcCardController extends Controller
@@ -456,5 +457,17 @@ class NfcCardController extends Controller
 
             return response()->json(['message' => 'Error duplicating record: ' . $e->getMessage()], 500);
         }
+    }
+
+    public function upload(Request $request)
+    {
+        if($request->hasFile('image')) {
+            $path = $request->file('image')->store('public/images');
+            $url = Storage::url($path);
+
+            return response()->json(['url' => $url]);
+        }
+
+        return response()->json(['error' => 'No image uploaded'], 400);
     }
 }

@@ -643,11 +643,6 @@
                                                 <div>Click "Save Changes"</div>
                                             </div>
                                         </div>
-
-
-
-
-
                                 <div class="tab-pane fade" id="outlook-web" role="tabpanel"
                                     aria-labelledby="outlook-web-tab">
                                     Outlook Web Content
@@ -689,25 +684,42 @@
 @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
-        function generate(){
-            const profileElement = document.querySelector('#square');
-            if (profileElement) {
-                const desiredWidth = 400;  // Set the desired width
-        const desiredHeight = 180; // Set the desired height
-                html2canvas(profileElement).then(canvas => {
-                    canvas.toBlob(blob => {
-                        const item = new ClipboardItem({ 'image/png': blob });
-                        navigator.clipboard.write([item]).then(() => {
-                            //alert('Profile copied to clipboard');
-                            document.querySelector('.generate-btn.generate-gmail').innerHTML = 'Copy!';;
-                        }).catch(err => {
-                            console.error('Could not copy image to clipboard', err);
-                        });
-                    });
-                });
-            } else {
-                console.error('No element found with class .profile');
-            }
+
+       function generate() {
+
+        const imageUrl = "{{ asset('public/uploads/client/' . $nfc_card->client?->image) }}";
+        const profileLink = "{{  route('client.show', encryptor('encrypt', $nfc_card->client_id)) }}";
+        const altText = "{{ $nfc_card->client?->name }}";
+
+        if (imageUrl) {
+
+            const htmlString = `
+                <a href="${profileLink}" rel="noopener" target="_blank" style="display: flex;gap:.5rem;width:600px; text-decoration: none;">
+                    <img alt="${altText}" src="${imageUrl}" width="200" height="100"/>
+                    <div class="col-md-4 d-flex justify-content-end p-2">
+                        {!! QrCode::size(100)->generate(
+                            url('nfcqrurl/' . encryptor('encrypt', $nfc_card->id) . '/' . $nfc_card->client_id),
+                        ) !!}
+                    </div>
+                </a>
+            `;
+
+            copyToClipboard(htmlString);
+        } else {
+            console.error('Image URL not found');
         }
+    }
+
+    function copyToClipboard(htmlString) {
+        const blob = new Blob([htmlString], { type: 'text/html' });
+        const item = new ClipboardItem({ 'text/html': blob });
+        navigator.clipboard.write([item]).then(() => {
+            document.querySelector('.generate-btn.generate-gmail').innerHTML = 'Copy!';
+        }).catch(err => {
+            console.error('Could not copy HTML to clipboard', err);
+        });
+    }
+
+
     </script>
 @endpush
