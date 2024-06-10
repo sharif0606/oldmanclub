@@ -59,26 +59,26 @@
         <div class="container-fluid mt-2">
             <div class="row">
                 <div class="col-sm-12">
-                    <span class="fs-4 fw-bold" id="prefix-name">{{ $formType=='edit' ? $nfc_card->nfc_info?->prefix ?? '' : '' }}</span>
-                    <span class="fs-4 fw-bold" id="f-name">{{ $formType=='edit' ? $nfc_card->client?->fname ?? '' : '' }}</span>
-                    <span class="fs-4 fw-bold" id="m-name">{{ $formType=='edit' ? $nfc_card->client?->middle_name ?? '' : '' }}</span>
-                    <span class="fs-4 fw-bold" id="l-name">{{ $formType=='edit'  ? $nfc_card->client?->last_name ?? '' : '' }}</span>
+                    <span class="fs-4 fw-bold prefix-name" id="prefix-name">{{ $formType=='edit' ? $nfc_card->nfc_info?->prefix ?? '' : '' }}</span>
+                    <span class="fs-4 fw-bold f-name" id="f-name">{{ $formType=='edit' ? $nfc_card->client?->fname ?? '' : '' }}</span>
+                    <span class="fs-4 fw-bold m-name" id="m-name">{{ $formType=='edit' ? $nfc_card->client?->middle_name ?? '' : '' }}</span>
+                    <span class="fs-4 fw-bold l-name" id="l-name">{{ $formType=='edit'  ? $nfc_card->client?->last_name ?? '' : '' }}</span>
 
                     <div>
-                        <span class="fs-4 fw-bold" id="suffix-name">{{ $formType=='edit' ? $nfc_card->nfc_info?->suffix ?? '' : ''}}</span>
-                        <span class="fs-4 fw-bold" id="maiden_name">{{ $formType=='edit' ? $nfc_card->nfc_info?->maiden_name ?? '' : '' }}</span>
-                            <span id="accreditations">&nbsp;{{ $formType=='edit' ? $nfc_card->nfc_info?->accreditations ?? '' : ''}}</span>
+                        <span class="fs-4 fw-bold suffix-name" id="suffix-name">{{ $formType=='edit' ? $nfc_card->nfc_info?->suffix ?? '' : ''}}</span>
+                        <span class="fs-4 fw-bold maiden_name" id="maiden_name">{{ $formType=='edit' ? $nfc_card->nfc_info?->maiden_name ?? '' : '' }}</span>
+                            <span class="accreditations" id="accreditations">&nbsp;{{ $formType=='edit' ? $nfc_card->nfc_info?->accreditations ?? '' : ''}}</span>
                     </div>
                 </div>
             </div>
             <div class="row">
-                    <p class="text-justify" id="field-title">{{ $formType=='edit' ? $nfc_card->nfc_info?->title ?? '' : '' }}</p>
+                    <p class="text-justify field-title" id="field-title">{{ $formType=='edit' ? $nfc_card->nfc_info?->title ?? '' : '' }}</p>
             </div>
             <div class="row">
                 <div>
-                    <span class="fs-5 fw-bold" id="deprtment">{{ $formType=='edit' ? $nfc_card->nfc_info?->department ?? '' : ''}}</span>
-                        <p class="fs-6 fw-bold" id="company">{{ $formType=='edit' ? $nfc_card->nfc_info?->company ?? '' : '' }}</p>
-                        <span class="fs-5 fw-bold" >{{ $formType=='edit' ? $nfc_card->nfc_info?->department ?? '' : ''}}</span>
+                    <span class="fs-5 fw-bold deprtment" id="deprtment">{{ $formType=='edit' ? $nfc_card->nfc_info?->department ?? '' : ''}}</span>
+                        <p class="fs-6 fw-bold company" id="company">{{ $formType=='edit' ? $nfc_card->nfc_info?->company ?? '' : '' }}</p>
+                        <span class="fs-5 fw-bold deprtment" >{{ $formType=='edit' ? $nfc_card->nfc_info?->department ?? '' : ''}}</span>
                 </div>
             </div>
         </div>
@@ -86,7 +86,7 @@
     <section style="padding: 0px !important">
         <div class="container-fluid px-3">
             <div class="row">
-                    <p class="my-1" id="headline">{{ $formType=='edit' ? $nfc_card->nfc_info?->headline ?? '' : ''}}</p>
+                    <p class="my-1 headline" id="headline">{{ $formType=='edit' ? $nfc_card->nfc_info?->headline ?? '' : ''}}</p>
 
                 <div class="d-flex my-1">
                     <svg class="text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +96,7 @@
                             clip-rule="evenodd" />
                     </svg>
                     <span class="card_owner">
-                            Goes by <span class="text-dark" id="preferred_name">{{ $formType=='edit' ? $nfc_card->nfc_info?->preferred_name ?? '' : ''}}</span>
+                            Goes by <span class="text-dark preferred_name" id="preferred_name">{{ $formType=='edit' ? $nfc_card->nfc_info?->preferred_name ?? '' : ''}}</span>
                     </span>
                 </div>
             </div>
