@@ -291,6 +291,8 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::resource('nfc_card', nfc_card::class);
     Route::get('nfc_card/{id}/email', [nfc_card::class, 'email'])->name('email_signature');
     Route::get('nfc_card/{id}/virtual-background', [nfc_card::class, 'virtual_background'])->name('virtual_background');
+    Route::post('upload-own-image', [nfc_card::class, 'upload_own_image'])->name('upload_own_image');
+
     Route::resource('address_verify', address_verify::class);
     Route::resource('company', company::class);
     Route::resource('bank', bank::class);

@@ -366,7 +366,8 @@ class NfcCardController extends Controller
         $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id', currentUserId())->paginate(10);
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
         $nfc_virtual_categories = NfcVirtualBackgroundCategory::with('backgrounds')->get();
-        return view('user.nfc-card.virtual_background', compact('nfc_card', 'client', 'nfc_cards', 'nfc_virtual_categories'));
+        $nfc_virtual_background = NfcVirtualBackground::first();
+        return view('user.nfc-card.virtual_background', compact('nfc_card', 'client', 'nfc_cards', 'nfc_virtual_categories','nfc_virtual_background'));
     }
     public function duplicate($id)
     {
@@ -462,5 +463,12 @@ class NfcCardController extends Controller
         });
         $this->notice::success('Nfc Card Send Successfully');
         return redirect()->back();
+    }
+    public function upload_own_image(Request $request){
+        if($request->hasFile('profile')){
+            $imageName = rand(111,999).'.'.$request->image->extension();
+            $request->image->move(public_path('uploads/virtual_background'),$imageName);
+            
+        }
     }
 }
