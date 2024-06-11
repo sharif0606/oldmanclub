@@ -21,7 +21,8 @@ use Illuminate\Support\Facades\DB;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Response;
 use PDF; // Import the PDF facade
-use Barryvdh\Snappy\Facades\SnappyPdf;
+use Mail; 
+
 class NfcCardController extends Controller
 {
     /**
@@ -450,5 +451,16 @@ class NfcCardController extends Controller
         $client = Client::find($client_id);
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
         return view('user.nfc-card.pdf', compact('nfc_card', 'client'));
+    }
+    public function card_send_via_email(Request $request){
+        $client = Client::find($request->client_id);
+        $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $request->id));
+        Mail::send('user.nfc-card.pdf', ['nfc_card' => $nfc_card,'client' => $client], function($message) use($request){
+            $message->from('oldclubman@quickpicker.xyz', 'Old Man Club');
+            $message->to($request->email);
+            $message->subject('NFC Card');
+        });
+        $this->notice::success('Nfc Card Send Successfully');
+        return redirect()->back();
     }
 }
