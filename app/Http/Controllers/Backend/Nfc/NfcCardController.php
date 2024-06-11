@@ -47,12 +47,13 @@ class NfcCardController extends Controller
             '1' => 'Most Popular',
             '2' => 'Social',
             '3' => 'Communication',
-            '4' => 'Payment',
-            '5' => 'Video',
-            '6' => 'Music',
-            '7' => 'Design',
-            '8' => 'Gaming',
-            '9' => 'Other',
+            '4' => 'Conferencing',
+            '5' => 'Payment',
+            '6' => 'Video',
+            '7' => 'Music',
+            '8' => 'Design',
+            '9' => 'Gaming',
+            '10' => 'Other',
         ];
         // return view('user.nfc-card.create', compact('nfc_fields','client','postCount'));
         return view('user.nfc-card.edit', compact('categories', 'nfc_fields', 'client', 'postCount'));
@@ -156,12 +157,13 @@ class NfcCardController extends Controller
             '1' => 'Most Popular',
             '2' => 'Social',
             '3' => 'Communication',
-            '4' => 'Payment',
-            '5' => 'Video',
-            '6' => 'Music',
-            '7' => 'Design',
-            '8' => 'Gaming',
-            '9' => 'Other',
+            '4' => 'Conferencing',
+            '5' => 'Payment',
+            '6' => 'Video',
+            '7' => 'Music',
+            '8' => 'Design',
+            '9' => 'Gaming',
+            '10' => 'Other',
         ];
         return view('user.nfc-card.edit', compact('id', 'categories', 'nfc_card', 'nfc_info', 'client', 'postCount'));
     }
