@@ -774,7 +774,7 @@
                                                                         @php
                                                                             $icon = str_replace(
                                                                                 '<svg',
-                                                                                '<svg style="width:24px; height:20px;"',
+                                                                                '<svg style="width:14px; height:14px;"',
                                                                                 $value->icon,
                                                                             );
                                                                         @endphp
