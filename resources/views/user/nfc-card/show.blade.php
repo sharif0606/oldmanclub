@@ -258,7 +258,7 @@
                                                     <span class="fs-5 me-1" style="background-color: #007FB1"><i
                                                             class="fa-brands fa-linkedin"></i></span>
                                                     </a>
-                                                    <a href="https://wa.me/?text=test%{{ url('w-share', [encryptor('encrypt', $nfc_card->id), $nfc_card->client_id]) }}">
+                                                    <a href="https://wa.me/?text=%{{ url('w-share', [encryptor('encrypt', $nfc_card->id), $nfc_card->client_id]) }}">
                                                     <span class="fs-5 me-1" style="background-color: #25D366"><i
                                                             class="fa-brands fa-whatsapp"></i></span>
                                                     </a>
