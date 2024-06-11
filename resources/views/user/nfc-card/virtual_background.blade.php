@@ -94,7 +94,7 @@
                             <div class="row d-flex align-items-center">
                                 <div class="col-md-6">
                                     <div class="card d-flex w-100 profile"
-                                        style="background-image: url({{ asset('public/uploads/client/' . $nfc_card->client?->image) }});height:250px;background-position: center center;
+                                        style="background-image: url({{asset('public/'.$nfc_virtual_background->image)}});height:250px;background-position: center center;
                                             background-size: cover;" id="profile-picture">
                                         <div class="row mt-5">
                                             <div class="col-md-9">
@@ -129,13 +129,16 @@
 
                                 <h4 class="mt-3 fs-5">Use Your Own</h4>
                                 <div class="col-md-3">
-
+                                    {{-- <form id="uploadForm" enctype="multipart/form-data">
+                                    @csrf --}}
                                     <div class="upload-container">
                                         <input type="file" id="profile" name="profile" accept="image/*"
                                             onchange="changeProfilePicture(event);">
                                         <label for="profile" class="d-flex justify-content-center"><i
                                                 class="fas fa-images me-2"></i>Upload Image</label>
                                     </div>
+                                    {{-- </form> --}}
+                        
 
                                 </div>
                                 <div class="col-md-9"></div>
@@ -144,7 +147,7 @@
                                 <h4 class="mt-3">{{$cat->category_name}}</h4> 
                                 @forelse ($cat->backgrounds as $virtual)
                                 <div class="col-md-3">
-                                    <img src="{{asset('public/'.$virtual->image)}}" class="img-fluid">
+                                    <img src="{{asset('public/'.$virtual->image)}}" class="change-background img-fluid">
                                 </div>
                                 
                                 @empty
@@ -202,5 +205,37 @@
                 document.body.removeChild(link);
             });
         }
+
+
+        /*$(document).ready(function() {
+        $('#profile').on('change', function(event) {
+            event.preventDefault();
+            var formData = new FormData($('#uploadForm')[0]);
+
+            $.ajax({
+                url: '', // Update with your route//
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    alert('Image uploaded successfully');
+                    // Handle success (e.g., display the uploaded image)
+                },
+                error: function(xhr, status, error) {
+                    alert('Image upload failed');
+                    // Handle error
+                }
+            });
+        });
+    });*/
+
+    
+    $(document).ready(function() {
+        $('.change-background').on('click', function() {
+            var newImageUrl = $(this).attr('src');
+            $('#profile-picture').css('background-image', 'url(' + newImageUrl + ')');
+        });
+    });
     </script>
 @endpush
