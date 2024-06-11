@@ -312,6 +312,9 @@ Route::get('x-share/{id}/{client_id}', [nfc_card::class, 'xshare'])->name('xshar
 Route::get('l-share/{id}/{client_id}', [nfc_card::class, 'lshare'])->name('lshare');
 Route::get('w-share/{id}/{client_id}', [nfc_card::class, 'wshare'])->name('wshare');
 
+//Card Send via Email
+Route::post('card-send-via-email', [nfc_card::class, 'card_send_via_email'])->name('card_send_via_email');
+
 Route::get('duplicate/{id}/', [nfc_card::class, 'duplicate'])->name('duplicate');
 Route::get('save-contact/{id}', [nfc_card::class, 'save_contact'])->name('save_contact');
 Route::post('/send-message', [ChatController::class, 'sendMessage']);

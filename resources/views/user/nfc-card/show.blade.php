@@ -268,21 +268,27 @@
                                                     </a>
                                                 </div>
                                                 <div style="width:220px; margin:0px auto;text-align:center;">
-                                                    <button class="btn btn-sm my-2 btn-outline-primary w-75"><i
+                                                    <p id="textToCopy" class="d-none">{{url('fb-share', [encryptor('encrypt', $nfc_card->id), $nfc_card->client_id]) }}</p>
+                                                    <button class="btn btn-sm my-2 btn-outline-primary w-75" id="copyButton"><i
                                                             class="me-2 fas fa-copy"></i>Copy Link</button>
                                                 </div>
-
+                                                <p class="message" id="copyMessage">Link copied!</p>
                                             </div>
 
                                             <div class="tab-pane fade" id="email" role="tabpanel"
                                                 aria-labelledby="email-tab">
                                                 <p>Email your Work card to:</p>
-                                                <form method="post">
+                                                <form method="post" action="{{route('card_send_via_email')}}">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{encryptor('encrypt', $nfc_card->id)}}">
+                                                    <input type="hidden" name="client_id" value="{{$nfc_card->client_id}}">
+                             
                                                     <input type="text" name="name" class="form-control mb-2"
                                                         placeholder="Name">
                                                     <input type="text" name="email" class="form-control mb-2"
-                                                        placeholder="Email">
+                                                        placeholder="Email" required>
                                                     <textarea name="message" class="form-control mb-2" placeholder="Message" rows="8"></textarea>
+                                                    <button type="submit" class="btn btn-primary btn-sm">Send Email</button>
                                                 </form>
                                             </div>
                                             <div class="tab-pane fade" id="text" role="tabpanel"
@@ -564,5 +570,33 @@
                 pdf.save('content_to_pdf.pdf');
             });
         }
+
+
+        /*Copy Link*/
+        $(document).ready(function() {
+            $('#copyMessage').hide();
+        $('#copyButton').on('click', function() {
+            // Get the text from the paragraph
+            var textToCopy = $('#textToCopy').text();
+            
+            // Create a temporary textarea element to copy the text
+            var $tempTextarea = $('<textarea>');
+            $tempTextarea.val(textToCopy).appendTo('body').select();
+            
+            // Copy the text to the clipboard
+            document.execCommand('copy');
+            
+            // Remove the temporary textarea
+            $tempTextarea.remove();
+            
+            // Show the message
+            $('#copyMessage').show();
+            
+            // Hide the message after a few seconds
+            setTimeout(function() {
+                $('#copyMessage').hide();
+            }, 2000);
+        });
+    });
     </script>
 @endpush
