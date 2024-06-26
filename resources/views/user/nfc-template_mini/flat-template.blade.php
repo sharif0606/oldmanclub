@@ -34,11 +34,12 @@
                                 <rect width="246" height="100" fill="white"></rect>
                             @endif
                             <text x="123" y="50" font-family="Arial" font-size="28" fill="#676A79" text-anchor="middle">
-                                @if ($nfc_card->card_type == 1)
+                                {{$nfc_card->card_name}}
+                                {{-- @if ($nfc_card->card_type == 1)
                                     Work
                                 @else
                                     Personal
-                                @endif
+                                @endif --}}
                             </text>
                         </svg>
                         
