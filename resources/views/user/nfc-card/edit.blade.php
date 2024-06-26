@@ -837,7 +837,7 @@
                                                             </svg>
                                                             This field does not appear on the card.
                                                         </div>
-                                                        <label for="">Name</label>
+                                                        <label for="">Card Name</label>
                                                         <input type="text" name="card_name"
                                                         required
                                                             value="{{ $formType=='edit' ? $nfc_card->card_name ?? '' :'' }}" id="card-name"
