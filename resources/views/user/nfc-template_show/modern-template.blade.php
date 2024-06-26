@@ -9,35 +9,35 @@
                         <!-- <img src="assets/images/header_image.png" alt="abc" width="100px" srcset="" /> -->
                     </div>
                     <div class="col-sm-12 p-0">
-                            <span class="fs-4    fw-bold">{{ $formType=='edit' ? $nfc_card->nfc_info?->prefix ?? '' : ''}}</span>
-                        <span class="fs-3 fw-bold">
-                            {{ $formType=='edit' ? $nfc_card->client?->fname ?? '' : '' }}
-                            {{ $formType=='edit' ? $nfc_card->client?->middle_name ?? '' : '' }}
-                            {{ $formType=='edit' ? $nfc_card->client?->last_name ?? '' : ''}}
-                        </span><br />
-                            <span class="fs-4 fw-bold">{{ $formType=='edit' ? $nfc_card->nfc_info?->suffix ?? '' : '' }}</span>
-                        <span class="fs-2 fw-bold">
+                            <span class="fs-4 fw-bold prefix-name">{{ $formType=='edit' ? $nfc_card->nfc_info?->prefix ?? '' : ''}}</span>
+                        <span class="fs-4 fw-bold f-name">{{ $formType=='edit' ? $nfc_card->client?->fname ?? '' : '' }}</span>
+                    <span class="fs-4 fw-bold m-name">{{ $formType=='edit' ? $nfc_card->client?->middle_name ?? '' : '' }}</span>
+                    <span class="fs-4 fw-bold l-name">{{ $formType=='edit' ? $nfc_card->client?->last_name ?? '' : '' }}</span>
+                    <span class="fs-4 fw-bold suffix-name">{{ $formType=='edit' ? $nfc_card->nfc_info?->suffix ?? '' : '' }}</span>
+                    <span class="fs-2 fw-bold maiden_name">
                             ({{ $formType=='edit' ? $nfc_card->nfc_info?->maiden_name ?? '' : '' }})
-                        </span><br>
-                            <span>&nbsp;{{ $formType=='edit' ? $nfc_card->nfc_info?->accreditations ?? '' : ''}}</span>
+                    </span>
+                    <span class="accreditations">&nbsp;{{ $formType=='edit' ? $nfc_card->nfc_info?->accreditations : '' }}</span>
                     </div>
                     <div class="">
                         <div class="CardAvatar">
                             <img src="{{ $formType=='edit' ? asset('public/uploads/client/' . $nfc_card->client?->image) : asset('public/assets/nfc/images/123.png') }}"
                         class="modern_card_image img-fluid display-profile-pic" alt="" />
                     </div>
+                 <div class="row">
+                    <p class="text-justify field-title">{{ $formType=='edit' ? $nfc_card->nfc_info?->title : '' }}</p>
+            </div>
+            <div class="row">
                 <div>
-                        <p class="text-justify">{{ $formType=='edit' ? $nfc_card->nfc_info?->title ?? '' : '' }}</p>
-                        <p class="text-justify">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda animi alias
-                            vitae! Magnam, esse consequatur culpa mollitia officiis at saepe cum iure. Reprehenderit
-                            voluptates
-                        </p>
+                    <span class="fs-5 fw-bold deprtment" id="deprtment">{{ $formType=='edit' ? $nfc_card->nfc_info?->department ?? '' : ''}}</span>
+                        <p class="fs-6 fw-bold company" id="company">{{ $formType=='edit' ? $nfc_card->nfc_info?->company ?? '' : '' }}</p>
+                        <span class="fs-5 fw-bold deprtment" >{{ $formType=='edit' ? $nfc_card->nfc_info?->department ?? '' : ''}}</span>
                 </div>
+            </div>
                 </header>
                 <div class="CardBox css-19niztd">
                     <div class="css-qcxc6v px-4 pb-3">
-                            <p class="my-1">{{ $formType=='edit' ? $nfc_card->nfc_info?->headline ?? '' : '' }}</p>
+                            <p class="my-1 headline">{{ $formType=='edit' ? $nfc_card->nfc_info?->headline ?? '' : '' }}</p>
                     </div>
                 </div>
                 <div>
@@ -50,7 +50,7 @@
                         <span>Goes by
                         <span class="card_owner mx-1">{{ $formType=='edit' ? $nfc_card->client?->fname ?? '' : '' }}</span>
                         </span>
-                        <span>({{ $formType=='edit' ? $nfc_card->nfc_info?->pronoun ?? '' : '' }})</span>
+                        <span class="pronoun">({{ $formType=='edit' ? $nfc_card->nfc_info?->pronoun ?? '' : '' }})</span>
                     </div>
                 </div>
             </div>

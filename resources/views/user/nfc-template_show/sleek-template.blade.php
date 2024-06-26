@@ -30,17 +30,17 @@
     <div class="container" style="margin-top: 100px;">
         <div class="row">
                 <div class="col-sm-12">
-                        <span class="fs-4    fw-bold">{{ $formType=='edit' ? $nfc_card->nfc_info?->prefix ?? '' : '' }}</span>
-                    <span class="fs-4 fw-bold">{{ $formType=='edit' ? $nfc_card->client?->fname ?? '' : '' }}</span>
-                    <span class="fs-4 fw-bold">{{ $formType=='edit' ? $nfc_card->client?->middle_name ?? '' : '' }}</span>
-                    <span class="fs-4 fw-bold">{{ $formType=='edit' ? $nfc_card->client?->last_name ?? '' : '' }}</span>
+                        <span class="fs-4 fw-bold prefix-name">{{ $formType=='edit' ? $nfc_card->nfc_info?->prefix ?? '' : '' }}</span>
+                    <span class="fs-4 fw-bold f-name">{{ $formType=='edit' ? $nfc_card->client?->fname ?? '' : '' }}</span>
+                    <span class="fs-4 fw-bold l-name">{{ $formType=='edit' ? $nfc_card->client?->middle_name ?? '' : '' }}</span>
+                    <span class="fs-4 fw-bold suffix-name">{{ $formType=='edit' ? $nfc_card->client?->last_name ?? '' : '' }}</span>
 
                     <div>
-                            <span class="fs-4 fw-bold">{{ $formType=='edit' ? $nfc_card->nfc_info?->suffix ?? '' : ''}}</span>
-                        <span class="fs-4 fw-bold">
+                            <span class="fs-4 fw-bold suffix-name">{{ $formType=='edit' ? $nfc_card->nfc_info?->suffix ?? '' : ''}}</span>
+                        <span class="fs-4 fw-bold maiden_name">
                                 ({{ $formType=='edit' ? $nfc_card->nfc_info?->maiden_name ?? '' : '' }})
                         </span>
-                            <span>&nbsp;{{ $formType=='edit' ? $nfc_card->nfc_info?->accreditations  ?? '' : ''}}</span>
+                            <span class="accreditations">&nbsp;{{ $formType=='edit' ? $nfc_card->nfc_info?->accreditations  ?? '' : ''}}</span>
                     </div>
                 </div>
             </div>
@@ -49,18 +49,19 @@
   position: relative;
   background-color: lightgray;">
         <div class="row">
-            <p class="ps-4">Our Concern</p>
-            <div class="d-flex ps-4">
-                <svg class="text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                    focusable="false" fill="currentColor" viewBox="0 0 24 24" width="25px">
-                    <path fill-rule="evenodd"
-                        d="M3 6c0-1.1.9-2 2-2h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 1.9h-6.6l-2.9 2.7c-1 .9-2.5.2-2.5-1v-1.7H5a2 2 0 0 1-2-2V6Zm5.7 3.8a1 1 0 1 0-1.4 1.4 1 1 0 1 0 1.4-1.4Zm2.6 0a1 1 0 1 1 0 1.4 1 1 0 0 1 0-1.4Zm5.4 0a1 1 0 1 0-1.4 1.4 1 1 0 1 0 1.4-1.4Z"
-                        clip-rule="evenodd" />
-                </svg>
-                <span>Goes by
-                    <span class="card_owner mx-1">Kaiser</span>
-                </span>
-                <span>(Sam)</span>
+            <p class="my-1 headline">{{ $formType=='edit' ? $nfc_card->nfc_info?->headline ?? '': '' }}</p>
+           <div class="row">
+                <div class="d-flex">
+                    <svg class="text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        focusable="false" fill="currentColor" viewBox="0 0 24 24" width="25px">
+                        <path fill-rule="evenodd"
+                            d="M3 6c0-1.1.9-2 2-2h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 1.9h-6.6l-2.9 2.7c-1 .9-2.5.2-2.5-1v-1.7H5a2 2 0 0 1-2-2V6Zm5.7 3.8a1 1 0 1 0-1.4 1.4 1 1 0 1 0 1.4-1.4Zm2.6 0a1 1 0 1 1 0 1.4 1 1 0 0 1 0-1.4Zm5.4 0a1 1 0 1 0-1.4 1.4 1 1 0 1 0 1.4-1.4Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                     <span class="card_owner">Goes by
+                           <span class="preferred_name"> {{ $formType=='edit' ? $nfc_card->nfc_info?->preferred_name ?? '' : '' }} </span>
+                    </span>
+                </div>
             </div>
         </div>
     </div>

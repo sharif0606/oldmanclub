@@ -211,6 +211,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6"></div>
+
                             <div class="row" id="my_img_to_pdf">
 
 
@@ -396,6 +397,7 @@
 
 
                                 </div>
+
                             </div>
                         </div>
                         <!-- Photos of you tab END -->
@@ -492,9 +494,15 @@
                                 <div class="col-sm-9">
                                     <input name="email" type="text" class="form-control">
                                 </div>
+
+
+                            </div>
+
+
                             </div>
 
                         </div>
+
 
                     </div>
 

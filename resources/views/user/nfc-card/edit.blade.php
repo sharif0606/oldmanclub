@@ -546,70 +546,70 @@
                                                         <input type="text" name="prefix"
                                                             value="{{ $formType=='edit' ? $nfc_card->nfc_info?->prefix ?? '' : '' }}"
                                                             class="form-control form-control-sm mb-2 mb-2"
-                                                            onkeyup="$('#prefix-name').text($(this).val());">
+                                                            onkeyup="$('.prefix-name').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">First Name</label>
                                                         <input type="text" name="f_name"
                                                             value="{{ $formType=='edit'  ? $nfc_card->client?->fname ?? '' : ''}}"
                                                             class="form-control form-control-sm mb-2"
-                                                            onkeyup="$('#f-name').text($(this).val());">
+                                                            onkeyup="$('.f-name').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Middle Name</label>
                                                         <input type="text" name="middle_name"
                                                             value="{{ $formType=='edit' ? $nfc_card->client?->middle_name ?? '' :''}}"
                                                             class="form-control form-control-sm mb-2"
-                                                            onkeyup="$('#m-name').text($(this).val());">
+                                                            onkeyup="$('.m-name').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Last Name</label>
                                                         <input type="text" name="l_name"
                                                             value="{{ $formType=='edit' ? $nfc_card->client?->last_name ?? '' :'' }}"
                                                             class="form-control form-control-sm mb-2"
-                                                            onkeyup="$('#l-name').text($(this).val());">
+                                                            onkeyup="$('.l-name').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Suffix</label>
                                                         <input type="text" name="suffix"
                                                             value="{{ $formType=='edit' ? $nfc_card->nfc_info?->suffix ?? '' :''}}"
                                                             id="" class="form-control form-control-sm mb-2"
-                                                            onkeyup="$('#suffix-name').text($(this).val());">
+                                                            onkeyup="$('.suffix-name').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Accreditations</label>
                                                         <input type="text" name="accreditations"
                                                             value="{{ $formType=='edit'  ? $nfc_card->nfc_info->accreditations ?? '' :'' }}"
                                                             id="" class="form-control form-control-sm mb-2"
-                                                            onkeyup="$('#accreditations').text($(this).val());">
+                                                            onkeyup="$('.accreditations').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Preferred Name</label>
                                                         <input type="text" name="preferred_name"
                                                             value="{{ $formType=='edit' ? $nfc_card->nfc_info->preferred_name ?? '' :'' }}"
                                                             id="" class="form-control"
-                                                            onkeyup="$('#preferred_name').text($(this).val());">
+                                                            onkeyup="$('.preferred_name').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Maiden Name</label>
                                                         <input type="text" name="maiden_name"
                                                             value="{{ $formType=='edit' ? $nfc_card->nfc_info->maiden_name ?? '' : ''}}" id=""
                                                             class="form-control form-control-sm mb-2"
-                                                            onkeyup="$('#accreditations').text($(this).val());">
+                                                            onkeyup="$('.accreditations').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Pronoun</label>
                                                         <input type="text" name="pronoun"
                                                             value="{{ $formType=='edit' ? $nfc_card->nfc_info->pronoun ?? '' : '' }}" id=""
                                                             class="form-control form-control-sm mb-2"
-                                                            onkeyup="$('#accreditations').text($(this).val());">
+                                                            onkeyup="$('.pronoun').text($(this).val());">
                                                     </div>
                                                 </div>
                                                 <h6 class="border-bottom py-4">Affiliation</h6>
                                                 <div class="row">
                                                     <div class="col-8 form-group">
                                                         <label for="">Title</label>
-                                                        <textarea name="title" onkeyup="$('#field-title').text($(this).val());" class="form-control form-control-sm mb-2"
+                                                        <textarea name="title" onkeyup="$('.field-title').text($(this).val());" class="form-control form-control-sm mb-2"
                                                             name="pronoun">{{ $formType=='edit' ? $nfc_card->nfc_info->title ?? '' : '' }}</textarea>
                                                     </div>
                                                     <div class="col-8 form-group">
@@ -617,21 +617,21 @@
                                                         <input type="text" name="department"
                                                             value="{{ $formType=='edit' ? $nfc_card->nfc_info->department ?? '' : '' }}"
                                                             id="" class="form-control form-control-sm mb-2"
-                                                            onkeyup="$('#deprtment').text($(this).val());">
+                                                            onkeyup="$('.deprtment').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Company</label>
                                                         <input type="text" name="company"
                                                             value="{{ $formType=='edit' ? $nfc_card->nfc_info->company ?? '' : ''}}"
                                                             class="form-control form-control-sm mb-2"
-                                                            onkeyup="$('#company').text($(this).val());">
+                                                            onkeyup="$('.company').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Headline</label>
                                                         <input type="text" name="headline"
                                                             value="{{ $formType=='edit' ? $nfc_card->nfc_info->headline ?? '' : '' }}"
                                                             class="form-control form-control-sm mb-2"
-                                                            onkeyup="$('#headline').text($(this).val());">
+                                                            onkeyup="$('.headline').text($(this).val());">
                                                     </div>
                                                 </div>
                                             </div>

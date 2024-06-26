@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 use PDF; // Import the PDF facade
 use Mail; 
 
@@ -299,11 +300,21 @@ class NfcCardController extends Controller
     public function downloadPdf($id, $client_id)
     {
         // Generate URL
-        $client = Client::find($client_id);
-        $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
-        //return view('user.nfc-card.pdf', compact('nfc_card', 'client'));
-        $pdf = PDF::loadView('user.nfc-card.pdf', compact('nfc_card', 'client'));
-        return $pdf->download('nfc.pdf');
+
+        $url = url('nfcqrurl/' . encryptor('encrypt', $id) . '/' . $client_id);
+
+        // Generate QR Code
+        $qrCode = QrCode::format('png')->size(300)->generate($url);
+
+        // Set the headers for file download
+        $headers = [
+            'Content-Type' => 'image/png',
+            'Content-Disposition' => 'attachment; filename="qr-code.png"',
+        ];
+
+        // Return the QR code as a downloadable response
+        return Response::make($qrCode, 200, $headers);
+
     }
     public function save_contact($id)
     {
@@ -394,7 +405,7 @@ class NfcCardController extends Controller
                 $newNfcInformation = $originalNfcCard->nfc_info->replicate();
                 $newNfcInformation->nfc_card_id = $newNfcCard->id; // Update the foreign key
                 $newNfcInformation->save();
-           
+
 
             // Duplicate and update related NfcField records through the pivot table
             foreach ($originalNfcCard->nfcFields as $nfcField) {
@@ -409,7 +420,7 @@ class NfcCardController extends Controller
             $nfcCardDesign = $originalNfcCard->card_design->replicate();
             $nfcCardDesign->nfc_card_id = $newNfcCard->id; // Update the foreign key
             $nfcCardDesign->save();
-            
+
 
             // Commit the transaction
             DB::commit();
@@ -424,6 +435,20 @@ class NfcCardController extends Controller
             return response()->json(['message' => 'Error duplicating record: ' . $e->getMessage()], 500);
         }
     }
+
+
+    public function upload(Request $request)
+    {
+        if($request->hasFile('image')) {
+            $path = $request->file('image')->store('public/images');
+            $url = Storage::url($path);
+
+            return response()->json(['url' => $url]);
+        }
+
+        return response()->json(['error' => 'No image uploaded'], 400);
+    }
+}
 
     public function fbshare($id, $client_id)
     {
@@ -472,3 +497,4 @@ class NfcCardController extends Controller
         }
     }
 }
+
