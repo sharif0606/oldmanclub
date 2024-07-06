@@ -14,6 +14,7 @@ use Laravel\Sanctum\HasApiTokens;
 class Client extends Model
 {
     use HasFactory, SoftDeletes, HasApiTokens, Notifiable;
+    
     public function feedback(){
         return $this->hasMany(CustomerFeedback::class);
     }
