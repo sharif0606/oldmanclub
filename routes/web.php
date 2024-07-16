@@ -96,6 +96,8 @@ use App\Http\Controllers\Backend\Nfc\NfcFieldController as nfc_field;
 use App\Http\Controllers\Backend\Nfc\DesignCardController as design_card;
 use App\Http\Controllers\Backend\Nfc\NfcCardController as nfc_card;
 
+
+
 // printing_service admin panelBackend\Printingservice
 
 use App\Http\Controllers\Backend\Printingservice\PrintingServiceController as print_service;
@@ -233,7 +235,7 @@ Route::get('client/login', [clientauth::class, 'signInForm'])->name('clientlogin
 Route::post('client/login', [clientauth::class, 'signInCheck'])->name('clientlogin.check');
 Route::get('client/logout', [clientauth::class, 'singOut'])->name('clientlogOut');
 Route::get('client/forget-password', [clientauth::class, 'forget_password'])->name('client_forget_password');
-Route::post('forget-password', [clientauth::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
+Route::post('forget-password', [clientauth::class, 'submitForgetPasswordForm'])->name('forget.password.post');
 Route::get('reset-password/{token}', [clientauth::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password', [clientauth::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
@@ -254,8 +256,8 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::get('comment-reaction-update', [commentreaction::class,'comment_reaction_update'])->name('comment-reaction-update');
     Route::get('reply-reaction-update', [replyreaction::class,'reply_reaction_update'])->name('reply-reaction-update');
     Route::get('gathering', [clientprofile::class, 'gathering'])->name('gathering');
-   
-    
+
+
 
     Route::resource('phonebook', phonebook::class);
     Route::resource('phonegroup', phonegroup::class);
@@ -288,6 +290,9 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
 
     Route::resource('nfc_card', nfc_card::class);
     Route::get('nfc_card/{id}/email', [nfc_card::class, 'email'])->name('email_signature');
+    Route::get('nfc_card/{id}/virtual-background', [nfc_card::class, 'virtual_background'])->name('virtual_background');
+    Route::post('upload-own-image', [nfc_card::class, 'upload_own_image'])->name('upload_own_image');
+
     Route::resource('address_verify', address_verify::class);
     Route::resource('company', company::class);
     Route::resource('bank', bank::class);
@@ -296,11 +301,23 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::post('post-update', [post::class, 'post_update'])->name('postUpdate');
     Route::resource('purchase', purchase::class);
 
-    
+
 
 });
 
 Route::get('nfcqrurl/{id}/{client_id}', [nfc_card::class, 'showqrurl']);
+Route::get('downloadPdf/{id}/{client_id}', [nfc_card::class, 'downloadPdf'])->name('downloadPdf');
+
+//Share
+Route::get('fb-share/{id}/{client_id}', [nfc_card::class, 'fbshare'])->name('fbshare');
+Route::get('x-share/{id}/{client_id}', [nfc_card::class, 'xshare'])->name('xshare');
+Route::get('l-share/{id}/{client_id}', [nfc_card::class, 'lshare'])->name('lshare');
+Route::get('w-share/{id}/{client_id}', [nfc_card::class, 'wshare'])->name('wshare');
+
+//Card Send via Email
+Route::post('card-send-via-email', [nfc_card::class, 'card_send_via_email'])->name('card_send_via_email');
+
+Route::get('duplicate/{id}/', [nfc_card::class, 'duplicate'])->name('duplicate');
 Route::get('save-contact/{id}', [nfc_card::class, 'save_contact'])->name('save_contact');
 Route::post('/send-message', [ChatController::class, 'sendMessage']);
 

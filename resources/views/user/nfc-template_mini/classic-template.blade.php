@@ -60,11 +60,12 @@
                                     fill="#6785F5" fill-rule="evenodd"></path>
                             @endif
                             <text x="123" y="85" font-family="Arial" font-size="28" fill="#676A79" text-anchor="middle">
-                                @if ($nfc_card->card_type == 1)
+                                {{$nfc_card->card_name}}
+                                {{-- @if ($nfc_card->card_type == 1)
                                     Work
                                 @else
                                     Personal
-                                @endif
+                                @endif --}}
                             </text>
                         </svg>
                     </div>

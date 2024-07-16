@@ -9,11 +9,20 @@ use App\Models\Backend\NfcField;
 use App\Models\Backend\NfcDesign;
 use App\Models\Backend\NfcInformation;
 use App\Models\Backend\User;
+use App\Models\User\Country;
+use App\Models\Backend\NfcVirtualBackgroundCategory;
+use App\Models\Backend\NfcVirtualBackground;
 
 use App\Http\Controllers\Controller;
+use App\Models\NfcCardBadges;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
+use PDF; // Import the PDF facade
+use Mail; 
 
 class NfcCardController extends Controller
 {
@@ -22,10 +31,10 @@ class NfcCardController extends Controller
      */
     public function index()
     {
-        $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id',currentUserId())->paginate(10);
+        $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id', currentUserId())->paginate(10);
         $client = Client::find(currentUserId());
         $postCount = Post::where('client_id', currentUserId())->count();
-        return view('user.nfc-card.index', compact('nfc_cards','client','postCount'));
+        return view('user.nfc-card.index', compact('nfc_cards', 'client', 'postCount'));
     }
 
     /**
@@ -36,7 +45,20 @@ class NfcCardController extends Controller
         $nfc_fields = NfcField::all();
         $client = Client::find(currentUserId());
         $postCount = Post::where('client_id', currentUserId())->count();
-        return view('user.nfc-card.create', compact('nfc_fields','client','postCount'));
+        $categories = [
+            '1' => 'Most Popular',
+            '2' => 'Social',
+            '3' => 'Communication',
+            '4' => 'Conferencing',
+            '5' => 'Payment',
+            '6' => 'Video',
+            '7' => 'Music',
+            '8' => 'Design',
+            '9' => 'Gaming',
+            '10' => 'Other',
+        ];
+        // return view('user.nfc-card.create', compact('nfc_fields','client','postCount'));
+        return view('user.nfc-card.edit', compact('categories', 'nfc_fields', 'client', 'postCount'));
     }
 
     /**
@@ -50,7 +72,7 @@ class NfcCardController extends Controller
             $nfc = new NfcCard;
             $nfc->client_id = currentUserId();
             $nfc->card_name = $request->card_name;
-            $nfc->card_type = $request->card_type;
+            $nfc->card_type = $request->card_type?$request->card_type:1;
             $nfc->created_by = currentUserId();
             if ($nfc->save()) {
 
@@ -73,7 +95,7 @@ class NfcCardController extends Controller
                 /* Insert Data To Nfc Design */
                 $nfc_design = new NfcDesign;
                 $nfc_design->nfc_card_id = $nfc->id;
-                $nfc_design->design_card_id = $request->design_card_id;
+                $nfc_design->design_card_id = $request->design_card_id?$request->design_card_id:1;
                 $nfc_design->created_by = currentUserId();
                 $nfc_design->save();
 
@@ -120,7 +142,8 @@ class NfcCardController extends Controller
         $client = Client::find(currentUserId());
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
         $postCount = Post::where('client_id', currentUserId())->count();
-        return view('user.nfc-card.show', compact('nfc_card','client','postCount'));
+        $countries = Country::get();
+        return view('user.nfc-card.show', compact('nfc_card', 'client', 'postCount', 'countries'));
     }
 
     /**
@@ -131,9 +154,20 @@ class NfcCardController extends Controller
         $client = Client::find(currentUserId());
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
         $nfc_info = NfcInformation::find($id);
-        $nfc_fields = NfcField::all();
         $postCount = Post::where('client_id', currentUserId())->count();
-        return view('user.nfc-card.edit', compact('nfc_fields', 'nfc_card', 'nfc_info','client','postCount'));
+        $categories = [
+            '1' => 'Most Popular',
+            '2' => 'Social',
+            '3' => 'Communication',
+            '4' => 'Conferencing',
+            '5' => 'Payment',
+            '6' => 'Video',
+            '7' => 'Music',
+            '8' => 'Design',
+            '9' => 'Gaming',
+            '10' => 'Other',
+        ];
+        return view('user.nfc-card.edit', compact('id', 'categories', 'nfc_card', 'nfc_info', 'client', 'postCount'));
     }
 
     /**
@@ -142,6 +176,7 @@ class NfcCardController extends Controller
     public function update(Request $request, $id)
     {
         // Start the database transaction
+        // dd($request->all());
         DB::beginTransaction();
         try {
 
@@ -154,8 +189,45 @@ class NfcCardController extends Controller
             /* Update Data From Nfc Design */
             $nfc_design = NfcDesign::where('nfc_card_id', encryptor('decrypt', $id))->first();
             $nfc_design->design_card_id = $request->design_card_id;
+            $nfc_design->color = $request->display_nfc_color;
+            if ($request->hasFile('logo')) {
+                $imageName = rand(111, 999) . time() . '.' . $request->logo->extension();
+                $request->logo->move(
+                    public_path('uploads/cards/'),
+                    $imageName
+                );
+                $nfc_design->logo = $imageName;
+            }
             $nfc_design->updated_by = currentUserId();
             $nfc_design->save();
+
+            /* badges image update */
+            if ($request->hasFile('badge_images')) {
+                $badges = $request->file('badge_images');
+                DB::table("nfc_card_badges")->where('nfc_card_id', encryptor('decrypt', $id))->delete();
+                foreach ($badges as $key => $badge) {
+                    $badgeImageName = rand(111, 999) . time() . '.' . $badge->extension();
+                    $badge->move(public_path('uploads/cards/badges'), $badgeImageName);
+                    DB::table("nfc_card_badges")->insert([
+                        'nfc_card_id' => encryptor('decrypt', $id),
+                        'badge_image' => $badgeImageName,
+                    ]);
+                }
+            }
+
+            /* Client Infomations Update */
+            $client = Client::find(currentUserId());
+            $client->fname = $request->f_name;
+            $client->middle_name = $request->middle_name;
+            $client->last_name = $request->l_name;
+            if ($request->hasFile('profile')) {
+                $profileImageName = rand(111, 999) . time() . '.' . $request->profile->extension();
+                $request->profile->move(public_path('uploads/client/'), $profileImageName);
+                $client->image = $profileImageName;
+            }
+            $client->updated_by = currentUserId();
+            $client->save();
+
 
             /* Update Data From Nfc Information */
             $nfc_info = NfcInformation::where('nfc_card_id', encryptor('decrypt', $id))->first();
@@ -173,23 +245,26 @@ class NfcCardController extends Controller
             $nfc_info->save();
 
             // Retrieve the existing pivot data associated with the NFC card
-            $existingPivotData = $nfc_card->nfcFields()->pluck('nfc_field_id', 'nfc_field_id')->toArray();
-
+            $existingPivotData = $nfc_card->nfcFields()->pluck('field_value', 'nfc_field_id')->toArray();
 
             // Retrieve the new data from the request
-            $nfcFieldIds = $request->input('nfc_field_id');
-            if ($nfcFieldIds) {
-                $nfcFieldValues = $request->input('field_value');
+            $nfcFieldIds = $request->input('nfc_id');
+            $nfcFieldUsernames = $request->input('nfc_user_name');
+            $nfcFieldLabels = $request->input('nfc_label');
 
+            if ($nfcFieldIds) {
                 // Prepare the data for sync
                 $nfcFieldData = [];
                 foreach ($nfcFieldIds as $index => $nfcFieldId) {
-                    $value = $nfcFieldValues[$nfcFieldId];
-                    $nfcFieldData[$nfcFieldId] = ['field_value' => $value];
+                    // Assuming each nfc_id corresponds to an nfc_field_id
+                    $nfcFieldData[$nfcFieldId] = [
+                        'field_value' => $nfcFieldUsernames[$index],
+                        'display_text' => $nfcFieldLabels[$index]
+                    ];
                 }
 
                 // Synchronize the relationship, deleting any records not included in the new data
-                $nfc_card->nfcFields()->sync($nfcFieldData, true);
+                $nfc_card->nfcFields()->sync($nfcFieldData);
             }
 
             // Save the NFC card
@@ -216,11 +291,30 @@ class NfcCardController extends Controller
     {
         //
     }
-    public function showqrurl($id,$client_id)
+    public function showqrurl($id, $client_id)
     {
         $client = Client::find($client_id);
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
-        return view('user.nfc-card.showqrurl', compact('nfc_card','client'));
+        return view('user.nfc-card.showqrurl', compact('nfc_card', 'client'));
+    }
+    public function downloadPdf($id, $client_id)
+    {
+        // Generate URL
+
+        $url = url('nfcqrurl/' . encryptor('encrypt', $id) . '/' . $client_id);
+
+        // Generate QR Code
+        $qrCode = QrCode::format('png')->size(300)->generate($url);
+
+        // Set the headers for file download
+        $headers = [
+            'Content-Type' => 'image/png',
+            'Content-Disposition' => 'attachment; filename="qr-code.png"',
+        ];
+
+        // Return the QR code as a downloadable response
+        return Response::make($qrCode, 200, $headers);
+
     }
     public function save_contact($id)
     {
@@ -273,10 +367,134 @@ class NfcCardController extends Controller
     public function email($id)
     {
         $client = Client::find(currentUserId());
-        $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id',currentUserId())->paginate(10);
+        $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id', currentUserId())->paginate(10);
         $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
-        $postCount = Post::where('client_id', currentUserId())->count();
-        return view('user.nfc-card.email_signature', compact('nfc_card','client','postCount','nfc_cards'));
+        return view('user.nfc-card.email_signature', compact('nfc_card', 'client', 'nfc_cards'));
+    }
+    public function virtual_background($id)
+    {
+        $client = Client::find(currentUserId());
+        $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id', currentUserId())->paginate(10);
+        $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
+        $nfc_virtual_categories = NfcVirtualBackgroundCategory::with('backgrounds')->get();
+        $nfc_virtual_background = NfcVirtualBackground::first();
+        return view('user.nfc-card.virtual_background', compact('nfc_card', 'client', 'nfc_cards', 'nfc_virtual_categories','nfc_virtual_background'));
+    }
+    public function duplicate($id)
+    {
+        // Start the transaction
+        DB::beginTransaction();
+
+        try {
+            $originalNfcCard  = NfcCard::with(['nfc_info', 'nfcFields', 'card_design','badges'])->find(encryptor('decrypt', $id));
+            $newNfcCard = $originalNfcCard->replicate();
+            $newNfcCard->card_name = $originalNfcCard->card_name . " " . "copy"; // Update the cardname
+            $newNfcCard->save();
+
+            // Duplicate and update related NfcField records through the pivot table
+            foreach ($originalNfcCard->nfcFields as $nfcField) {
+                $newNfcCard->nfcFields()->attach($nfcField->id, [
+                    'nfc_field_id' => $nfcField->pivot->nfc_field_id,
+                    'field_value' => $nfcField->pivot->field_value,
+                    'nfc_card_id' => $newNfcCard->id, // Ensure the new nfccard_id is set in the pivot table
+                ]);
+            }
+
+            // Duplicate and update related NfcInformation records
+
+                $newNfcInformation = $originalNfcCard->nfc_info->replicate();
+                $newNfcInformation->nfc_card_id = $newNfcCard->id; // Update the foreign key
+                $newNfcInformation->save();
+
+
+            // Duplicate and update related NfcField records through the pivot table
+            foreach ($originalNfcCard->nfcFields as $nfcField) {
+                $newNfcCard->nfcFields()->attach($nfcField->id, [
+                    'nfc_field_id' => $nfcField->pivot->nfc_field_id,
+                    'field_value' => $nfcField->pivot->field_value,
+                    'nfc_card_id' => $newNfcCard->id, // Ensure the new nfccard_id is set in the pivot table
+                ]);
+            }
+
+            // Duplicate and update related Nfc Card Design records
+            $nfcCardDesign = $originalNfcCard->card_design->replicate();
+            $nfcCardDesign->nfc_card_id = $newNfcCard->id; // Update the foreign key
+            $nfcCardDesign->save();
+
+
+            // Commit the transaction
+            DB::commit();
+
+            $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id', currentUserId())->paginate(10);
+            $client = Client::find(currentUserId());
+            return view('user.nfc-card.index', compact('nfc_cards', 'client'));
+        } catch (\Exception $e) {
+            // Rollback the transaction if an error occurs
+            DB::rollBack();
+
+            return response()->json(['message' => 'Error duplicating record: ' . $e->getMessage()], 500);
+        }
     }
 
+
+    public function upload(Request $request)
+    {
+        if($request->hasFile('image')) {
+            $path = $request->file('image')->store('public/images');
+            $url = Storage::url($path);
+
+            return response()->json(['url' => $url]);
+        }
+
+        return response()->json(['error' => 'No image uploaded'], 400);
+    }
 }
+
+    public function fbshare($id, $client_id)
+    {
+        // Generate URL
+        $client = Client::find($client_id);
+        $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
+        return view('user.nfc-card.pdf', compact('nfc_card', 'client'));
+    }
+    public function xshare($id, $client_id)
+    {
+        // Generate URL
+        $client = Client::find($client_id);
+        $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
+        return view('user.nfc-card.pdf', compact('nfc_card', 'client'));
+    }
+    public function lshare($id, $client_id)
+    {
+        // Generate URL
+        $client = Client::find($client_id);
+        $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
+        return view('user.nfc-card.pdf', compact('nfc_card', 'client'));
+    }
+    public function wshare($id, $client_id)
+    {
+        // Generate URL
+        $client = Client::find($client_id);
+        $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $id));
+        return view('user.nfc-card.pdf', compact('nfc_card', 'client'));
+    }
+    public function card_send_via_email(Request $request){
+        $client = Client::find($request->client_id);
+        $nfc_card = NfcCard::findOrFail(encryptor('decrypt', $request->id));
+        Mail::send('user.nfc-card.pdf', ['nfc_card' => $nfc_card,'client' => $client], function($message) use($request){
+            $message->from('oldclubman@quickpicker.xyz', 'Old Man Club');
+            $message->to($request->email);
+            $message->subject('NFC Card');
+        });
+        $this->notice::success('Nfc Card Send Successfully');
+        return redirect()->back();
+    }
+    public function upload_own_image(Request $request){
+        if($request->hasFile('profile')){
+            $imageName = rand(111,999).'.'.$request->image->extension();
+            $request->image->move(public_path('uploads/virtual_background'),$imageName);
+            
+        }
+    }
+}
+
