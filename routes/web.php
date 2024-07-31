@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\NewMessage;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\AuthenticationController as auth;
 use App\Http\Controllers\Backend\UserController as user;
@@ -108,6 +109,12 @@ use App\Http\Controllers\TestController as test;
 /*Test controler */
 Route::get('/mail', [test::class, 'index'])->name('mail');
 
+
+/*== API CONTROLLER ==*/
+
+use App\Http\Controllers\Api\AuthController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -124,6 +131,10 @@ Route::post('/register', [auth::class, 'signUpStore'])->name('register.store');
 Route::get('/login', [auth::class, 'signInForm'])->name('login');
 Route::post('/login', [auth::class, 'signInCheck'])->name('login.check');
 Route::get('/logout', [auth::class, 'singOut'])->name('logOut');
+
+// API ROUTES
+Route::get('webapi/test', [AuthController::class, 'test']);
+Route::post('webapi/client/login', [AuthController::class, 'clientLogin']);
 
 
 Route::middleware(['checkauth'])->prefix('admin')->group(function () {
@@ -360,10 +371,9 @@ Route::get('/states', [StateController::class,'getStatesByCountry'])->name('getS
 Route::get('/code', [CountryController::class,'getCodesByCountry'])->name('getCodesByCountry');//Phone Code
 Route::get('/cities', [CityController::class,'getCitiesByStates'])->name('getCitiesByStates');
 
+
 //Route::middleware(['checkclient'])->group(function () {
     Route::get('{username}', [clientprofile::class, 'client_by_search'])->name('client_by_search');
     Route::get('{username}/profile', [clientprofile::class, 'usernameProfile'])->name('usernameProfile');
     Route::get('{username}/profile-about', [clientprofile::class, 'usernameProfileAbout'])->name('usernameProfileAbout');
 //});
-
-

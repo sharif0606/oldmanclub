@@ -8,10 +8,13 @@ use App\Models\Backend\Website\CustomerFeedback;
 use App\Models\Backend\Website\PrintingService\PrintCustomerFeedback;
 use App\Models\Chat;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Client extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes, HasApiTokens, Notifiable;
+    
     public function feedback(){
         return $this->hasMany(CustomerFeedback::class);
     }
@@ -70,14 +73,14 @@ class Client extends Model
     {
         return $this->hasMany(Follow::class, 'following_id');
     }
-   
+
     public function followings()
     {
         return $this->hasMany(Follow::class, 'follower_id');
     }
      /*
      Here Function is Followings
-         Will result Who are follower here example as follower_id = 4  and follwing are 
+         Will result Who are follower here example as follower_id = 4  and follwing are
          SELECT * FROM `follows` WHERE `follower_id`=4;
     */
     public function getFormattedFollowersCountAttribute()
