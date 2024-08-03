@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
-
+use App\Http\Controllers\Api\ClientController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,7 +20,11 @@ Route::get('/test', function () {
 });
 // Route::get('/test', [AuthController::class, 'test']);
 Route::post('/client/login', [AuthController::class, 'clientLogin']);
+//
 
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/client/all', [ClientControlle::class, 'index']);
+});
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\User\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ClientControlle extends Controller
+class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $data = Client::get();
+        if ($data)
+        return response(array("status_code" => 200, "data" => $data));
+        else
+        return response(array("message" => "No data found", "status_code" => 202, "data" => array()));
     }
 
     /**
