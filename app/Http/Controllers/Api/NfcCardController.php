@@ -14,11 +14,22 @@ class NfcCardController extends Controller
      */
     public function index($id)
     {
-        $data = NfcCard::where('client_id',$id)->get();
+        $data = NfcCard::where('client_id', $id)->get();
+        foreach ($data as $d) {
+            $data = [
+                "id" => $d->id,
+                "card_name" => $d->card_name,
+                "card_type" => $d->card_type,
+                "image" => $d->client->image ? asset('uploads/client/') . "/" . $d->client->image : '',
+                "url" => url('/') . "api/nfc/show/" . $d->id
+            ];
+        }
+
+        dd($data);
         if ($data)
-        return response(array("status_code" => 200, "data" => $data));
+            return response(array("status_code" => 200, "data" => $data));
         else
-        return response(array("message" => "No data found", "status_code" => 202, "data" => array()));
+            return response(array("message" => "No data found", "status_code" => 202, "data" => array()));
     }
 
     /**
@@ -34,11 +45,20 @@ class NfcCardController extends Controller
      */
     public function show($id)
     {
-        $data = NfcCard::where('client_id',$id)->first();
+        $data = NfcCard::findorFail($id);
+        $data = [
+            "card_name" => $data->card_name,
+            "card_type" => $data->card_type,
+            "image" => $data->client->image ? asset('uploads/client/') . "/" . $data->client->image : '',
+            "client" => "",
+            "nfc_info" => "",
+            "nfcFields" => "",
+            "badges" => "",
+        ];
         if ($data)
-        return response(array("status_code" => 200, "data" => $data));
+            return response(array("status_code" => 200, "data" => $data));
         else
-        return response(array("message" => "No data found", "status_code" => 202, "data" => array()));
+            return response(array("message" => "No data found", "status_code" => 202, "data" => array()));
     }
 
     /**

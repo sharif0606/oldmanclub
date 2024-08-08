@@ -34,7 +34,7 @@ class AdminAuthController extends Controller
                             'name' => $user->name,
                             'email' => $user->email,
                             'contact_no' => $user->contact_no,
-                            'image' => $user->image ? public_path('uploads/client') : '',
+                            'image' => $user->image ? public_path('uploads/client/').$user->image : '',
                             'role' => $user->role->name
                         ];
                         return response()->json([
