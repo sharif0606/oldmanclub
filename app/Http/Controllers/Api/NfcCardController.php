@@ -17,11 +17,11 @@ class NfcCardController extends Controller
         $data = NfcCard::where('client_id', $id)->get();
         foreach ($data as $d) {
             $data = [
-                "id" => $d->id,
+                //"id" => $d->id,
                 "card_name" => $d->card_name,
                 "card_type" => $d->card_type,
                 "image" => $d->client->image ? asset('uploads/client/') . "/" . $d->client->image : '',
-                "url" => url('/') . "api/nfc/show/" . $d->id
+                "url" => url('/') . "api/nfc/show/" . encryptor('encrypt', $d->id)
             ];
         }
         if ($data)
@@ -43,7 +43,7 @@ class NfcCardController extends Controller
      */
     public function show($id)
     {
-        $data = NfcCard::findorFail($id);
+        $data = NfcCard::findorFail(encryptor('decrypt', $id));
         $data = [
             "card_name" => $data->card_name,
             "card_type" => $data->card_type,
