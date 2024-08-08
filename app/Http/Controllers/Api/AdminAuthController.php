@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use Laravel\Sanctum\PersonalAccessToken;
 class AdminAuthController extends Controller
 {
     public function adminLogin(Request $request)
@@ -68,8 +68,7 @@ class AdminAuthController extends Controller
     }
     public function logout(Request $request){
         // Get the token from the request
-        $request->user()->currentAccessToken()->delete();
-        return response()->json(['message' => 'Logged out successfully'], 200);
+        return $request->user();
     }
     
 }
