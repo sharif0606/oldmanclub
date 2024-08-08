@@ -24,8 +24,6 @@ class NfcCardController extends Controller
                 "url" => url('/') . "api/nfc/show/" . $d->id
             ];
         }
-
-        dd($data);
         if ($data)
             return response(array("status_code" => 200, "data" => $data));
         else
