@@ -66,5 +66,13 @@ class AdminAuthController extends Controller
     public function ForegtPassword()
     {
     }
+    public function logout(Request $request){
+        // Get the token from the request
+        $token = $request->bearerToken();
+
+        // Find and delete the token from the database
+        $request->user()->tokens()->where('token', hash('sha256', $token))->delete();
+        return response()->json(['message' => 'Logged out successfully'], 200);
+    }
     
 }
