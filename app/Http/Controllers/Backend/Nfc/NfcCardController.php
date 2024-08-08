@@ -448,7 +448,7 @@ class NfcCardController extends Controller
 
         return response()->json(['error' => 'No image uploaded'], 400);
     }
-}
+
 
     public function fbshare($id, $client_id)
     {
