@@ -68,8 +68,7 @@ class AdminAuthController extends Controller
     }
     public function logout(Request $request){
         // Get the token from the request
-        $request->user()->currentAccessToken()->delete();
-        return response()->json(['message' => 'Logged out successfully'], 200);
+        return $request->user();
     }
     
 }
