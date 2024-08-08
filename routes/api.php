@@ -23,7 +23,7 @@ Route::get('/test', function () {
 // Route::get('/test', [AuthController::class, 'test']);
 Route::post('/client/login', [AuthController::class, 'clientLogin']);
 Route::post('/admin/login', [AdminAuthController::class, 'adminLogin']);
-Route::get('/admin/logout', [AdminAuthController::class, 'logout']);
+
 
 
 
