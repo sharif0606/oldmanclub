@@ -67,8 +67,12 @@ class AdminAuthController extends Controller
     {
     }
     public function logout(Request $request){
-        // Get the token from the request
-        return $request->user();
+        // Debugging: Check if request has an authenticated user
+        if ($request->user()) {
+            return response()->json(['user' => $request->user()]);
+        } else {
+            return response()->json(['error' => 'No authenticated user found'], 401);
+        }
     }
     
 }
