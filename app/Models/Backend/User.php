@@ -5,9 +5,10 @@ namespace App\Models\Backend;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Chat;
+use Laravel\Sanctum\HasApiTokens;
 class User extends Model
 {
-    use HasFactory;
+    use HasFactory,HasApiTokens;
 
     public function role(){
         return $this->belongsTo(Role::class);
