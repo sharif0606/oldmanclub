@@ -10,10 +10,12 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\PersonalAccessToken;
+
 class AdminAuthController extends Controller
 {
     public function adminLogin(Request $request)
     {
+
         try {
             $status = false;
             $message = 'Invalid Credentials';
@@ -32,7 +34,7 @@ class AdminAuthController extends Controller
                             'name' => $user->name,
                             'email' => $user->email,
                             'contact_no' => $user->contact_no,
-                            'image' => $user->image?public_path('uploads/client'):'',
+                            'image' => $user->image ? public_path('uploads/client') : '',
                             'role' => $user->role->name
                         ];
                         return response()->json([
@@ -66,13 +68,19 @@ class AdminAuthController extends Controller
     public function ForegtPassword()
     {
     }
-    public function logout(Request $request){
-        // Debugging: Check if request has an authenticated user
-        if ($request->user()) {
-            return response()->json(['user' => $request->user()]);
-        } else {
-            return response()->json(['error' => 'No authenticated user found'], 401);
-        }
+    public function adminLogout(Request $request)
+    {
+
+            // Get the token from the request
+            $token = $request->user()->currentAccessToken();
+            if ($token) {
+                // Revoke the token if it exists
+                $token->delete();
+                return response()->json([
+                    'status' => true,
+                    'message' => "Logged out successfully",
+                ], 200);
+            }
+        
     }
-    
 }
