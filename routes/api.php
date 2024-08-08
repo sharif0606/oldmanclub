@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AdminAuthController;
 use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\NfcCardController;
+use App\Http\Controllers\Backend\Nfc\NfcCardController as nfc;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,8 +24,8 @@ Route::get('/test', function () {
 // Route::get('/test', [AuthController::class, 'test']);
 Route::post('/client/login', [AuthController::class, 'clientLogin']);
 Route::post('/admin/login', [AdminAuthController::class, 'adminLogin']);
-Route::get('/nfc/show/{id}', [NfcCardController::class, 'show']);
-
+//Route::get('/nfc/show/{id}', [NfcCardController::class, 'show']);
+Route::get('nfcqrurl/{id}/{client_id}', [nfc::class, 'showqrurl']);
 
 
 //
