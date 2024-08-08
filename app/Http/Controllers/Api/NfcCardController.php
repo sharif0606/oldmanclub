@@ -14,9 +14,11 @@ class NfcCardController extends Controller
      */
     public function index($id)
     {
-        $data = NfcCard::where('client_id', $id)->get();
-        foreach ($data as $d) {
-            $data = [
+        $result = NfcCard::where('client_id', $id)->get();
+        //dd($data);
+        foreach ($result as $d) {
+            //dd($d->client);
+            $data[] = [
                 //"id" => $d->id,
                 "card_name" => $d->card_name,
                 "card_type" => $d->card_type,
