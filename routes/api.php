@@ -3,7 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\AdminAuthController;
 use App\Http\Controllers\Api\ClientController;
+use App\Http\Controllers\Api\NfcCardController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,10 +22,12 @@ Route::get('/test', function () {
 });
 // Route::get('/test', [AuthController::class, 'test']);
 Route::post('/client/login', [AuthController::class, 'clientLogin']);
+Route::post('/admin/login', [AdminAuthController::class, 'adminLogin']);
+Route::get('/nfc/show/{id}', [NfcCardController::class, 'show']);
 //
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/client/all', [ClientControlle::class, 'index']);
+    Route::get('/client/all', [ClientController::class, 'index']);
 });
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
