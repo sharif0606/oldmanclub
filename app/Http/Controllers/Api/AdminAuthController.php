@@ -14,16 +14,10 @@ class AdminAuthController extends Controller
 {
     public function adminLogin(Request $request)
     {
-        $fields  = [
-            "id",
-            "name",
-            "email",
-            "contact_no",
-        ];
         try {
             $status = false;
             $message = 'Invalid Credentials';
-            $user = User::select($fields)->where(function ($query) use ($request) {
+            $user = User::where(function ($query) use ($request) {
                 $query->where('email', $request->username)
                     ->orWhere('contact_no', $request->username);
             })->first();
@@ -34,7 +28,13 @@ class AdminAuthController extends Controller
                         $status = true;
                         $message = 'Successfully Login';
                         $token = $user->createToken('authToken')->plainTextToken;
-
+                        $user = [
+                            'name' => $user->name,
+                            'email' => $user->email,
+                            'contact_no' => $user->contact_no,
+                            'image' => $user->image?public_path('uploads/client'):'',
+                            'role' => $user->role->name
+                        ];
                         return response()->json([
                             'status' => $status,
                             'message' => $message,
