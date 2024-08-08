@@ -14,10 +14,16 @@ class AdminAuthController extends Controller
 {
     public function adminLogin(Request $request)
     {
+        $fields  = [
+            "id",
+            "name",
+            "email",
+            "contact_no",
+        ];
         try {
             $status = false;
             $message = 'Invalid Credentials';
-            $user = User::where(function ($query) use ($request) {
+            $user = User::select($fields)->where(function ($query) use ($request) {
                 $query->where('email', $request->username)
                     ->orWhere('contact_no', $request->username);
             })->first();
