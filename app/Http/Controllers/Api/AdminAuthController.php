@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use Laravel\Sanctum\PersonalAccessToken;
 class AdminAuthController extends Controller
 {
     public function adminLogin(Request $request)
