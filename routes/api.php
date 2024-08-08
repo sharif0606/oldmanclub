@@ -23,7 +23,7 @@ Route::get('/test', function () {
 // Route::get('/test', [AuthController::class, 'test']);
 Route::post('/client/login', [AuthController::class, 'clientLogin']);
 Route::post('/admin/login', [AdminAuthController::class, 'adminLogin']);
-
+Route::get('/admin/logout', [AdminAuthController::class, 'logout']);
 
 
 
@@ -33,7 +33,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/client/all', [ClientController::class, 'index']); 
     Route::get('/nfc/list/{id}', [NfcCardController::class, 'index']);
     Route::get('/nfc/show/{id}', [NfcCardController::class, 'show']);
-    Route::post('/admin/logout', [AdminAuthController::class, 'logout']);
+    //Route::post('/admin/logout', [AdminAuthController::class, 'logout']);
 });
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
