@@ -21,7 +21,7 @@ class NfcCardController extends Controller
                 "card_name" => $d->card_name,
                 "card_type" => $d->card_type,
                 "image" => $d->client->image ? asset('uploads/client/') . "/" . $d->client->image : '',
-                "url" => url('/') . "api/nfc/show/" . encryptor('encrypt', $d->id)
+                "url" => url('/') . "/api/nfc/show/" . encryptor('encrypt', $d->id)
             ];
         }
         if ($data)
