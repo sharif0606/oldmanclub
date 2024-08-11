@@ -124,6 +124,20 @@
                 @if ($value->image)
                 <img class="card-img" src="{{ asset('public/uploads/client/' . $value->image) }}" alt="Post">
                 @endif
+            @elseif($value->post_type == 'video')
+                @if ($value->image)
+                <div class="overflow-hidden fullscreen-video w-100">
+                    <!-- HTML video START -->
+                    <div class="player-wrapper overflow-hidden">
+                        <video class="player-html" controls crossorigin="anonymous" poster="assets/images/videos/poster.jpg">
+                            <source src="{{ asset('public/uploads/post/videos/' . $value->image) }}" type="video/mp4">
+                        </video>
+                    </div>
+                    <!-- HTML video END -->
+            
+                    <!-- Plyr resources and browser polyfills are specified in the pen settings -->
+                </div>
+                @endif
             @else
                 @if ($value->image)
                 <img class="card-img" src="{{ asset('public/uploads/post/' . $value->image) }}" alt="Post">

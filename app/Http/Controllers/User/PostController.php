@@ -32,18 +32,45 @@ class PostController extends Controller
     public function store(Request $request)
     {
      
-        if($request->hasFile('image')){
+        /*if($request->hasFile('image')){
             $imageName = rand(111,999).time().'.'.$request->image->extension();
             $request->image->move(public_path('uploads/post'), $imageName);
         }else{
             $imageName = '';
+        }*/
+        $fileName = '';
+        $fileType = ''; // To store the type of the file (image or video)
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $extension = $file->getClientOriginalExtension();
+            $mimeType = $file->getMimeType();
+
+            // Determine if the file is an image or video
+            if (str_starts_with($mimeType, 'image/')) {
+                $directory = 'images';
+                $fileType = 'image';
+                $fileName = rand(111, 999) . time() . '.' . $extension;
+                $file->move(public_path('uploads/post'), $fileName);
+            } elseif (str_starts_with($mimeType, 'video/')) {
+                $directory = 'videos';
+                $fileType = 'video';
+                $fileName = rand(111, 999) . time() . '.' . $extension;
+                $file->move(public_path('uploads/post/' . $directory), $fileName);
+            } else {
+                return response()->json(['error' => 'Invalid file type'], 400);
+            }
+
+           
         }
+    
         // Normalize line breaks before storing the content
         $content = preg_replace('/\R{2,}/', "\n", $request->input('message'));
          // create db entry
          $post = Post::create([
             'message' => $content,
-            'image'=>$imageName,
+            'image'=>$fileName,
+            'post_type' => $fileType, // Store the file type
             'client_id' => currentUserId(),
             'privacy_mode' => $request->privacy_mode
         ]);

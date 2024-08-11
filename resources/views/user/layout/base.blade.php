@@ -872,6 +872,7 @@
     <!-- Modal create Feed photo START -->
     @include('user.includes.add-post-photo')
     @include('user.includes.edit-post')
+    @include('user.includes.add-post-video')
     <div class="modal fade" id="feedActionPhoto" tabindex="-1" aria-labelledby="feedActionPhotoLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -897,6 +898,7 @@
                         <form class="w-100">
                             <textarea class="form-control pe-4 fs-3 lh-1 border-0" rows="2" placeholder="Share your thoughts..."></textarea>
                         </form>
+                        
                     </div>
 
                     <!-- Dropzone photo START -->
@@ -936,59 +938,7 @@
     <!-- Modal create Feed photo END -->
 
     <!-- Modal create Feed video START -->
-    <div class="modal fade" id="feedActionVideo" tabindex="-1" aria-labelledby="feedActionVideoLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <!-- Modal feed header START -->
-                <div class="modal-header">
-                    <h5 class="modal-title" id="feedActionVideoLabel">Add post video</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <!-- Modal feed header END -->
 
-                <!-- Modal feed body START -->
-                <div class="modal-body">
-                    <!-- Add Feed -->
-                    <div class="d-flex mb-3">
-                        <!-- Avatar -->
-                        <div class="avatar avatar-xs me-2">
-                            <img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg"
-                                alt="">
-                        </div>
-                        <!-- Feed box  -->
-                        <form class="w-100">
-                            <textarea class="form-control pe-4 fs-3 lh-1 border-0" rows="2" placeholder="Share your thoughts..."></textarea>
-                        </form>
-                    </div>
-
-                    <!-- Dropzone photo START -->
-                    <div>
-                        <label class="form-label">Upload attachment</label>
-                        <div class="dropzone dropzone-default card shadow-none" data-dropzone='{"maxFiles":2}'>
-                            <div class="dz-message">
-                                <i class="bi bi-camera-reels display-3"></i>
-                                <p>Drag here or click to upload video.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Dropzone photo END -->
-
-                </div>
-                <!-- Modal feed body END -->
-
-                <!-- Modal feed footer -->
-                <div class="modal-footer">
-                    <!-- Button -->
-                    <button type="button" class="btn btn-danger-soft me-2"><i
-                            class="bi bi-camera-video-fill pe-1"></i> Live video</button>
-                    <button type="button" class="btn btn-success-soft">Post</button>
-                </div>
-                <!-- Modal feed footer -->
-            </div>
-        </div>
-    </div>
     <!-- Modal create Feed video END -->
 
     <!-- Modal create events START -->
@@ -1117,9 +1067,9 @@ JS libraries, plugins and custom scripts -->
 <script>
     $(document).ready(function() {
         // Initialize Dropzone
-        var myDropzone = new Dropzone("#postDropzone", {
+        var myDropzoneImage = new Dropzone("#image-dropzone", {
             url: "{{ route('post.store') }}",
-            paramName: 'image',
+            paramName: 'file',
             maxFilesize: 5,
             maxFiles: 1,
             acceptedFiles: 'image/*',
@@ -1136,29 +1086,62 @@ JS libraries, plugins and custom scripts -->
             }
         });
 
-        // Handle form submission
-        $("#submitBtn").on('click', function() {
-            // Check if Dropzone has files
-            if (myDropzone.getQueuedFiles().length > 0) {
-                // Process Dropzone queue
-                myDropzone.processQueue();
-            } else {
-                // If no files in Dropzone queue, submit the form
-                submitForm();
-            }
-        });
+        
 
         // Handle Dropzone success event
-        myDropzone.on('success', function(file, response) {
+        myDropzoneImage.on('success', function(file, response) {
             // Handle success response
             console.log(response);
             // Optionally, close the modal
-            $('#feedActionPhoto').modal('hide');
+             
+                $('#feedActionPhoto').modal('hide');
+           
+                //$('#feedActionVideo').modal('hide');
+            
             window.location.href = "{{route('clientdashboard')}}";
         });
 
         // Handle Dropzone error event
-        myDropzone.on('error', function(file, errorMessage) {
+        myDropzoneImage.on('error', function(file, errorMessage) {
+            // Handle error event
+            console.error(errorMessage);
+            // Display error message to the user
+            alert("Error: " + errorMessage);
+        });
+
+
+        var myDropzoneVideo = new Dropzone("#video-dropzone", {
+            url: "{{ route('post.store') }}",
+            paramName: 'file',
+            maxFilesize: 40,
+            maxFiles: 1,
+            acceptedFiles: 'video/*',
+            addRemoveLinks: true,
+            autoProcessQueue: false,
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            init: function() {
+                this.on("sending", function(file, xhr, formData) {
+                    // Append additional form data to Dropzone request
+                    formData.append('message', $('#message').text());
+                });
+            }
+        });
+
+        
+
+        // Handle Dropzone success event
+        myDropzoneVideo.on('success', function(file, response) {
+            // Handle success response
+            console.log(response);
+            // Optionally, close the modal
+            $('#feedActionVideo').modal('hide');
+            window.location.href = "{{route('clientdashboard')}}";
+        });
+
+        // Handle Dropzone error event
+        myDropzoneVideo.on('error', function(file, errorMessage) {
             // Handle error event
             console.error(errorMessage);
             // Display error message to the user
@@ -1166,8 +1149,8 @@ JS libraries, plugins and custom scripts -->
         });
 
         // Handle form submission
-        function submitForm() {
-            var formData = new FormData($("#formSubmit")[0]);
+        function submitForm(formId) {
+            var formData = new FormData($("#" + formId)[0]);
             // Append CSRF token to form data
             formData.append('_token', '{{ csrf_token() }}');
             $.ajax({
@@ -1179,8 +1162,14 @@ JS libraries, plugins and custom scripts -->
                 success: function(response) {
                     // Handle success response
                     console.log(response);
-                    // Optionally, close the modal
-                    $('#feedActionPhoto').modal('hide');
+                    // Optionally, close the appropriate modal
+                    var fileType = formData.get('file').type.split('/')[0]; // 'image' or 'video'
+                    
+                    if (fileType === 'image') {
+                        $('#feedActionPhoto').modal('hide');
+                    } else if (fileType === 'video') {
+                        $('#feedActionVideo').modal('hide');
+                    }
                     window.location.href = "{{route('clientdashboard')}}";
                 },
                 error: function(xhr, status, error) {
@@ -1191,6 +1180,30 @@ JS libraries, plugins and custom scripts -->
                 }
             });
         }
+
+        // Call the function with the appropriate form ID
+        $("#submitBtnPhoto").on("click", function() {
+            // Check if Dropzone has files
+            if (myDropzoneImage.getQueuedFiles().length > 0) {
+                // Process Dropzone queue
+                myDropzoneImage.processQueue();
+            } else {
+                // If no files in Dropzone queue, submit the form
+                submitForm('formSubmitPhoto');
+            }
+        });
+
+        $("#submitBtnVideo").on("click", function() {
+            // Check if Dropzone has files
+            if (myDropzoneVideo.getQueuedFiles().length > 0) {
+                // Process Dropzone queue
+                myDropzoneVideo.processQueue();
+            } else {
+                // If no files in Dropzone queue, submit the form
+                submitForm('formSubmitVideo');
+            }
+        });
+
 
         /*=== Edit Post  ===*/
         // Handle click event for edit post dropdown item

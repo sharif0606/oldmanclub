@@ -1,7 +1,7 @@
 <div class="modal fade" id="feedActionPhoto" tabindex="-1" aria-labelledby="feedActionPhotoLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <form class="w-100" id="formSubmit" enctype="multipart/form-data">
+            <form class="w-100" id="formSubmitPhoto" enctype="multipart/form-data">
                 <!-- Modal feed header START -->
                 <div class="modal-header">
                     <h5 class="modal-title" id="feedActionPhotoLabel">Add post photo</h5>
@@ -32,7 +32,7 @@
                     <!-- Dropzone photo START -->
                     <div>
                         <label class="form-label">Upload attachment</label>
-                        <div id="postDropzone">
+                        <div id="image-dropzone">
                             <div class="dz-message">
                                 <i class="bi bi-images display-3"></i>
                                 <p>Drag here or click to upload photo.</p>
@@ -56,7 +56,7 @@
                     <!-- Button -->
                     <button type="button" class="btn btn-danger-soft me-2"
                         data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-success-soft" id="submitBtn">Post</button>
+                    <button type="button" class="btn btn-success-soft" id="submitBtnPhoto">Post</button>
                     <!-- Button -->
                     </div>
 
