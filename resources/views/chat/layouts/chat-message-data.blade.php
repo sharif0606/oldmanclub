@@ -8,7 +8,7 @@
                             class="ri-arrow-left-s-line"></i></a>
                 </div>
                 <div class="mr-3">
-                    <img src="{{ $chatUser->avatar }}" class="rounded-circle avatar-xs" alt=""
+                    <img src="{{ $chatUser->image? asset('public/uploads/client/' . $chatUser->image) : asset('public/images/download.jpg') }}" class="rounded-circle avatar-xs" alt=""
                         id="user-profile-sender-img">
                 </div>
                 <div class="media-body overflow-hidden">

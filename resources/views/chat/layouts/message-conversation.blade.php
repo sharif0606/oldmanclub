@@ -3,7 +3,7 @@
         <div class="conversation-list">
             <div class="chat-avatar">
                 @if ($message->from_user == currentUserId())
-                    <img src="{{ $client->avatar }}" alt="" class="imgavatar">
+                    <img src="{{ $message->client->image? asset('public/uploads/client/' . $message->client->image) : asset('public/images/download.jpg') }}" alt="" class="imgavatar">
                 @else
                     <img src="{{ $chatUser->avatar }}" alt="">
                 @endif
