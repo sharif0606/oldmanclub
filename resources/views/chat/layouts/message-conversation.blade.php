@@ -5,7 +5,7 @@
                 @if ($message->from_user == currentUserId())
                     <img src="{{ $chatUser->avatar }}" alt="" class="imgavatar">
                 @else
-                    <img src="{{ $chatUser->avatar }}" alt="">
+                    <img src="{{ $chatUser->image? asset('public/uploads/client/' . $chatUser->image) : asset('public/images/download.jpg') }}" alt="">
                 @endif
             </div>
 
