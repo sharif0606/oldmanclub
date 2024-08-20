@@ -102,7 +102,7 @@ class ChatUserController extends Controller
     {
         if ($request->ajax()) {
 
-            $users = DB::select("SELECT chatdata.*,clients.id,clients.display_name,clients.avatar from (SELECT t1.*, CASE WHEN t1.from_user != " . currentUserId() . " THEN t1.from_user ELSE t1.to_user END AS userid , (SELECT SUM(is_read=0) as unread FROM `messages` WHERE messages.to_user=" . currentUserId() . " AND messages.from_user=userid GROUP BY messages.from_user) as unread
+            $users = DB::select("SELECT chatdata.*,clients.id,clients.display_name,clients.image from (SELECT t1.*, CASE WHEN t1.from_user != " . currentUserId() . " THEN t1.from_user ELSE t1.to_user END AS userid , (SELECT SUM(is_read=0) as unread FROM `messages` WHERE messages.to_user=" . currentUserId() . " AND messages.from_user=userid GROUP BY messages.from_user) as unread
                 FROM messages AS t1
                 INNER JOIN
                 (
