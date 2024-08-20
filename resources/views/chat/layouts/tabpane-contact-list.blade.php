@@ -9,7 +9,7 @@
                             {{ $contact->fname }}
                         </h5>
                     </div>
-                    <div class="dropdown">
+                    {{-- <div class="dropdown">
                         <a href="#" class="text-muted dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
                             <i class="ri-more-2-fill"></i>
@@ -23,7 +23,7 @@
                                 id="deleteContact" type="submit" data-id="{{ $contact->id }}">{{ __('Remove') }} <i
                                     class="ri-delete-bin-line float-right text-muted"></i></a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </li>
         @endforeach
