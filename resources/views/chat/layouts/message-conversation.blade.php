@@ -60,7 +60,7 @@
                                             </div>
                                         </div>
 
-                                        {{-- <div class="ml-4">
+                                        <div class="ml-4">
                                             <ul class="list-inline mb-0 font-size-20">
                                                 <li class="list-inline-item">
                                                     <a href="{{ $message->file }}" class="text-muted">
@@ -77,7 +77,7 @@
                                                     </div>
                                                 </li>
                                             </ul>
-                                        </div> --}}
+                                        </div>
                                     </div>
                                 </div>
                             @endif
@@ -91,7 +91,7 @@
                             <span class="align-middle">{{ date('d M y, h:i a', strtotime($message->created_at)) }}</span>
                         </p>
                     </div>
-                    <div class="dropdown align-self-start">
+                    {{-- <div class="dropdown align-self-start">
                         <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
                             <i class="ri-more-2-fill"></i>
@@ -102,7 +102,7 @@
                             <a class="dropdown-item" href="#">{{ __("Forward") }} <i class="ri-chat-forward-line float-right text-muted"></i></a>
                             <a class="dropdown-item deleteMessage" href="javascript:void(0)" msg-id="{{ $message->id }}">{{ __("Delete") }} <i class="ri-delete-bin-line float-right text-muted"></i></a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 @if ($message->from_user == currentUserId())
                     <div class="conversation-name profile-newname">{{ $client->name }}</div>
