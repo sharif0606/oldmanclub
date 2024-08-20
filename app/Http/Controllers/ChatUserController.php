@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
-use App\User;
+use App\Models\User\Client;
 use App\Message;
 
 class ChatUserController extends Controller
@@ -25,8 +25,8 @@ class ChatUserController extends Controller
             $avatarpath = public_path('/images/');
             $avataruloaded->move($avatarpath, $avatarname);
 
-            $my_id = Auth::id();
-            $user = User::find($my_id);
+            $my_id = currentUserId();
+            $user = Client::find($my_id);
             if (file_exists(public_path($user->avatar))) {
                 unlink(public_path($user->avatar));
             }
@@ -53,8 +53,8 @@ class ChatUserController extends Controller
             'name' => ['required', 'string', 'max:255']
         ]);
         if ($validation->passes()) {
-            $my_id = Auth::id();
-            $user = User::find($my_id);
+            $my_id = currentUserId();
+            $user = Client::find($my_id);
             $user->name = $request->name;
             $user->save();
             $response = [
@@ -73,14 +73,14 @@ class ChatUserController extends Controller
     // Delete Selected Contact 
     public function destroy($id)
     {
-        $users = User::findOrFail($id);
+        $users = Client::findOrFail($id);
         $users->delete();
 
-        $collection = User::orderBy('name')->get();
+        $collection = Client::orderBy('fname')->get();
         $contacts = $collection->groupBy(function ($item, $key) {
             return substr($item->name, 0, 1);
         });
-        $htmldata = view('layouts.tabpane-contact-list')->with('contacts', $contacts)->render();
+        $htmldata = view('chat.layouts.tabpane-contact-list')->with('contacts', $contacts)->render();
         return Response($htmldata);
     }
 
@@ -88,11 +88,11 @@ class ChatUserController extends Controller
     public function search(Request $request)
     {
         if ($request->ajax()) {
-            $datas = User::where('name', 'LIKE', '%' . $request->search . "%")->orderBy('name')->get();
+            $datas = Client::where('fname', 'LIKE', '%' . $request->search . "%")->orderBy('fname')->get();
             $contacts = $datas->groupBy(function ($item, $key) {
                 return substr($item->name, 0, 1);
             });
-            $htmldata = view('layouts.tabpane-contact-list')->with('contacts', $contacts)->render();
+            $htmldata = view('chat.layouts.tabpane-contact-list')->with('contacts', $contacts)->render();
             return Response($htmldata);
         }
     }
@@ -102,7 +102,7 @@ class ChatUserController extends Controller
     {
         if ($request->ajax()) {
 
-            $users = DB::select("SELECT chatdata.*,clients.id,clients.display_name,clients.avatar from (SELECT t1.*, CASE WHEN t1.from_user != " . currentUserId() . " THEN t1.from_user ELSE t1.to_user END AS userid , (SELECT SUM(is_read=0) as unread FROM `messages` WHERE messages.to_user=" . currentUserId() . " AND messages.from_user=userid GROUP BY messages.from_user) as unread
+            $users = DB::select("SELECT chatdata.*,clients.id,clients.display_name,clients.image from (SELECT t1.*, CASE WHEN t1.from_user != " . currentUserId() . " THEN t1.from_user ELSE t1.to_user END AS userid , (SELECT SUM(is_read=0) as unread FROM `messages` WHERE messages.to_user=" . currentUserId() . " AND messages.from_user=userid GROUP BY messages.from_user) as unread
                 FROM messages AS t1
                 INNER JOIN
                 (
@@ -120,7 +120,7 @@ class ChatUserController extends Controller
                     t1.id = t2.max_id
                     WHERE t1.`from_user` = " . currentUserId() . " OR t1.`to_user` =" . currentUserId() . ") chatdata JOIN clients On clients.id=userid  and clients.fname LIKE '%" . $request->search . "%' ORDER BY chatdata.id DESC");
 
-            $htmldata = view('chat.layouts.tabpane-recent-contact-list')->with('users', $users)->render();
+            $htmldata = view('chat.chat.layouts.tabpane-recent-contact-list')->with('users', $users)->render();
             return Response($htmldata);
         }
     }
@@ -129,7 +129,7 @@ class ChatUserController extends Controller
     public function messagesearch(Request $request)
     {
         if ($request->ajax()) {
-            $my_id = Auth::id();
+            $my_id = currentUserId();
             $user_id = $request->userid;
             $serachquery = $request->search;
 
@@ -139,9 +139,9 @@ class ChatUserController extends Controller
                 $query->where('from_user', $my_id)->where('to_user', $user_id)->where('message', 'LIKE', '%' . $serachquery . "%");
             })->get();
 
-            $chatUser = User::find($user_id);
+            $chatUser = Client::find($user_id);
 
-            $htmldata = view('layouts.message-conversation')->with(['messages' => $messages])->with(['chatUser' => $chatUser])->render();
+            $htmldata = view('chat.layouts.message-conversation')->with(['messages' => $messages])->with(['chatUser' => $chatUser])->render();
             return Response($htmldata);
         }
     }

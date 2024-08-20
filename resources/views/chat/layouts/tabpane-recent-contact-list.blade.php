@@ -5,12 +5,12 @@
                 <div class="media">
                     @if (Cache::has('is_online' . $user->id))
                         <div class="chat-user-img online align-self-center mr-3">
-                            <img src="{{ $user->avatar }}" class="rounded-circle avatar-xs" alt="">
+                            <img src="{{ $user->image? asset('public/uploads/client/' . $user->image) : asset('public/images/download.jpg') }}" class="rounded-circle avatar-xs" alt="">
                             <span class="user-status"></span>
                         </div>
                     @else
                         <div class="chat-user-img away align-self-center mr-3">
-                            <img src="{{ $user->avatar }}" class="rounded-circle avatar-xs" alt="">
+                            <img src="{{ $user->image? asset('public/uploads/client/' . $user->image) : asset('public/images/download.jpg') }}" class="rounded-circle avatar-xs" alt="">
                             <span class="user-status"></span>
                         </div>
                     @endif
