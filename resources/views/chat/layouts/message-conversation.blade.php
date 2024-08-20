@@ -3,9 +3,9 @@
         <div class="conversation-list">
             <div class="chat-avatar">
                 @if ($message->from_user == currentUserId())
-                    <img src="{{ $message->client->image? asset('public/uploads/client/' . $message->client->image) : asset('public/images/download.jpg') }}" alt="" class="imgavatar">a
+                    <img src="{{ $message->client->image? asset('public/uploads/client/' . $message->client->image) : asset('public/images/download.jpg') }}" alt="" class="imgavatar">
                 @else
-                   b <img src="{{ $chatUser->image? asset('public/uploads/client/' . $chatUser->image) : asset('public/images/download.jpg') }}" alt="">
+                   <img src="{{ $chatUser->image? asset('public/uploads/client/' . $chatUser->image) : asset('public/images/download.jpg') }}" alt="">
                 @endif
             </div>
 
@@ -21,7 +21,7 @@
                                                 <img src="{{ asset($message->file) }}" alt="" class="rounded border">
                                             </a>
                                         </div>
-                                        <div class="message-img-link">
+                                        {{-- <div class="message-img-link">
                                             <ul class="list-inline mb-0">
                                                 <li class="list-inline-item">
                                                     <a href="{{ asset($message->file) }}" download="">
@@ -40,7 +40,7 @@
                                                     </div>
                                                 </li>
                                             </ul>
-                                        </div>
+                                        </div> --}}
                                     </li>
                                 </ul>
                             @else
