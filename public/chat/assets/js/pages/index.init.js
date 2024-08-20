@@ -495,7 +495,7 @@ var receiver_userid = "";
         // need to create this post route
         data: datastr,
         cache: false,
-        success: function success(data) { getlastmessage(receiver_id);
+        success: function success(data) { //getlastmessage(receiver_id);
         },
         error: function error(jqXHR, status, err) {},
         complete: function complete() {
