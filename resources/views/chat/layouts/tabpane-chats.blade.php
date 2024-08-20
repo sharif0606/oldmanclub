@@ -24,7 +24,7 @@
                     <div class="item user chat-user-click" id="{{$user->id}}" user-id="{{ $user->id }}">
                         <a href="#" class="user-status-box">
                             <div class="avatar-xs mx-auto d-block chat-user-img online">
-                                <img src="{{$user->avatar}}" alt="user-img" class="img-fluid rounded-circle">
+                                <img src="{{ $user->image? asset('public/uploads/client/' . $user->image) : asset('public/images/download.jpg') }}" alt="user-img" class="img-fluid rounded-circle">
                                 <span class="user-status"></span>
                             </div>
                             <h5 class="font-size-13 text-truncate mt-3 mb-1">{{$user->name}}</h5>
