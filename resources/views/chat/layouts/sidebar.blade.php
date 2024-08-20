@@ -28,11 +28,11 @@
                     <i class="ri-message-3-line"></i>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="top" title="{{ __("Groups") }}">
+            {{-- <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="top" title="{{ __("Groups") }}">
                 <a class="nav-link" id="pills-groups-tab" data-toggle="pill" href="#pills-groups" role="tab">
                     <i class="ri-group-line"></i>
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="top" title="{{ __("Contacts") }}">
                 <a class="nav-link" id="pills-contacts-tab" data-toggle="pill" href="#pills-contacts" role="tab">
                     <i class="ri-contacts-line"></i>
