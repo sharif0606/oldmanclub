@@ -27,7 +27,7 @@
                                 <img src="{{ $user->image? asset('public/uploads/client/' . $user->image) : asset('public/images/download.jpg') }}" alt="user-img" class="img-fluid rounded-circle">
                                 <span class="user-status"></span>
                             </div>
-                            <h5 class="font-size-13 text-truncate mt-3 mb-1">{{$user->fname}}</h5>
+                            <h5 class="font-size-13 text-truncate mt-3 mb-1">{{$user->display_name}}</h5>
                         </a>
                     </div>
                 @endif
