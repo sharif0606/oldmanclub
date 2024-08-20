@@ -60,7 +60,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="ml-4">
+                                        {{-- <div class="ml-4">
                                             <ul class="list-inline mb-0 font-size-20">
                                                 <li class="list-inline-item">
                                                     <a href="{{ $message->file }}" class="text-muted">
@@ -77,7 +77,7 @@
                                                     </div>
                                                 </li>
                                             </ul>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             @endif
