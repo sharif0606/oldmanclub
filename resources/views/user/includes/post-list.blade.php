@@ -89,12 +89,18 @@
                             </li>
                         @endif
 
-                       
+
                        
                         {{--<li><a class="dropdown-item" href="#"> <i
                                     class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
                         <li>--}}
                             <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#"  data-delete-url="{{ route('post.destroy', $value->id) }}" data-delete-post-id="{{$value->id}}"> 
+                                <i class="bi bi-trash fa-fw pe-2"></i>Delete
+                                post
+                            </a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="#" data-privacy-mode="is_report" data-privacy-post-id="{{$value->id}}"> 
