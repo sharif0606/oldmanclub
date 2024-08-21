@@ -39,6 +39,7 @@ class ClientController extends Controller
             }
         ])
         ->where('client_id', currentUserId())
+        ->withoutTrashed() // Exclude soft-deleted posts
         ->orderBy('created_at', 'desc')
         ->get();
 

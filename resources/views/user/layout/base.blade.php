@@ -1319,6 +1319,36 @@ JS libraries, plugins and custom scripts -->
             button.closest('.share-form').submit();
         }
     }
+    /*============Delete Post ===============*/
+ 
+    
+    $(document).ready(function() {
+        $('[data-delete-post-id]').on('click', function(event) {
+            event.preventDefault();
+            
+            var deleteUrl = $(this).data('delete-url'); // Get the route URL from data attribute
+            
+            if (confirm('Are you sure you want to delete this post?')) {
+                $.ajax({
+                    url: deleteUrl, // Use the dynamic URL here
+                    type: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        alert(response.message);
+                        location.reload(); // Reload the page or remove the post element
+                    },
+                    error: function(xhr) {
+                        console.error('Error:', xhr.responseText);
+                    }
+                });
+            }
+        });
+    });
+
+
+
 
 </script>
     @include('user/scripts/reply-form-script')
