@@ -6,7 +6,6 @@ use Closure;
 use App\Models\User\Client; 
 use Illuminate\Http\Request;
 use Session; // custome
-use Illuminate\Support\Facades\Cache;
 
 class checkClient
 {
@@ -28,8 +27,6 @@ class checkClient
             if(!$user)
                 return redirect()->route('clientlogOut');
             else
-                $cacheKey = 'is_online' . $user->id;
-                Cache::put($cacheKey, true, now()->addMinutes(5)); // Set online status for 5 minutes
                 return $next($request);
         }
         return redirect()->route('clientlogOut');
