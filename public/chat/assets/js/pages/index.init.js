@@ -481,6 +481,36 @@ var receiver_userid = "";
   */
 
   $(document).on("click", ".send-chat-message", function () {
+    /*var receiver_id = $(this).attr('data-user');
+    var message = $(".chat-input input").val(); // check if enter key is pressed and message is not null also receiver is selected
+
+    if (message.trim() != "" && receiver_id != "") {
+      $(".emoji-wysiwyg-editor").empty();
+      $(".chat-input input").val(""); // while pressed enter text box will be empty
+
+      var datastr = "receiver_id=" + receiver_id + "&message=" + message;
+      $.ajax({
+        type: "post",
+        url: "message",
+        // need to create this post route
+        data: datastr,
+        cache: false,
+        success: function success(data) { //getlastmessage(receiver_id);
+        },
+        error: function error(jqXHR, status, err) {},
+        complete: function complete() {
+          scrollToBottomFunc();
+        }
+      });
+    }*/
+    sendMesssage();
+  });
+  $(document).on("keypress", "#comment", function (e) {
+    if ((e.keyCode === 13 || e.keyCode === 108) && !e.shiftKey) {  // Check if Enter key is pressed
+    sendMesssage();
+    }
+  });
+  function sendMesssage(){
     var receiver_id = $(this).attr('data-user');
     var message = $(".chat-input input").val(); // check if enter key is pressed and message is not null also receiver is selected
 
@@ -503,7 +533,7 @@ var receiver_userid = "";
         }
       });
     }
-  });
+  }
   /**
    *-------------------------------------------------------------
   * Typing
