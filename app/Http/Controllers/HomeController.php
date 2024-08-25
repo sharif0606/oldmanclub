@@ -104,8 +104,9 @@ class HomeController extends Controller
             $query->where('from_user', $my_id)->where('to_user', $user_id);
         })->orderBy('id', 'DESC')->limit(1)->get();
  
-        $chatUser = Client::find(currentUserId());
-        return view('chat.layouts.message-conversation')->with(['messages' => $messages])->with(['chatUser' => $chatUser]);
+        $chatUser = Client::find($user_id);
+        $client = Client::find($my_id);
+        return view('chat.layouts.message-conversation')->with(['messages' => $messages])->with(['chatUser' => $chatUser])->with(['client' => $client]);
     }
 
     // Send Messages using pusher
