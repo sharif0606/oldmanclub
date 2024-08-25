@@ -1062,6 +1062,14 @@ JS libraries, plugins and custom scripts -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+     toastr.options = {
+        "positionClass": "toast-bottom-left",
+        "closeButton": true, // Optional: Show close button
+        "progressBar": true, // Optional: Show progress bar
+        "timeOut": "5000",   // Optional: Set the duration of the toast
+    };
+</script>
 {!! Toastr::message() !!}
 @stack('scripts')
 <script>
