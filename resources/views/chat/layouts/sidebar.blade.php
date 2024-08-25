@@ -77,10 +77,11 @@
                     <a class="dropdown-item" href="{{route('myProfile')}}" id="profile-tab" target="_blank">{{ __("Profile") }} <i class="ri-profile-line float-right text-muted"></i></a>
                     <a class="dropdown-item" href="{{route('accountSetting')}}" id="setting-tab" target="_blank">{{ __("Setting") }} <i class="ri-settings-3-line float-right text-muted"></i></a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="javascript:void();" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __("Log out") }} <i class="ri-logout-circle-r-line float-right text-muted"></i></a>
-                    <form id="logout-form" action="{{ route('clientlogOut') }}" method="POST" style="display: none;">
+                    {{--<a class="dropdown-item" href="javascript:void();" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __("Log out") }} <i class="ri-logout-circle-r-line float-right text-muted"></i></a>
+                    <form id="logout-form" action="{{ route('logOut') }}" method="POST" style="display: none;">
                         @csrf
-                    </form>
+                    </form>--}}
+                    <a class="dropdown-item" href="{{route('logOut')}}" id="setting-tab" target="_blank">{{ __("Log out") }} <i class="ri-logout-circle-r-line float-right text-muted"></i></a>
                 </div>
             </li>
         </ul>
