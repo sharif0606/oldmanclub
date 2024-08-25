@@ -123,7 +123,7 @@ class HomeController extends Controller
         $data->message = $message;
         if ($file != Null) {
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $filepath = public_path('/Upload/');
+            $filepath = public_path('public/Upload/');
             $file->move($filepath, $filename);
             $data->file = 'Upload/' . $filename;
         }
