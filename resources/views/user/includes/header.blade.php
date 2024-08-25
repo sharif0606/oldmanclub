@@ -311,7 +311,7 @@
                                 & Privacy</a></li>
                         <li><a class="dropdown-item" href="{{route('chat')}}"><i class="bi bi-chat fa-fw me-2"></i>Chat</a></li>
                         <li class="dropdown-divider"></li>
-                        <li><a class="dropdown-item bg-danger-soft-hover" href="{{route('clientlogOut')}}"><i
+                        <li><a class="dropdown-item bg-danger-soft-hover" target="_blank" href="{{route('clientlogOut')}}"><i
                                     class="bi bi-power fa-fw me-2"></i>Sign Out</a></li>
                         <li>
                             <hr class="dropdown-divider">
