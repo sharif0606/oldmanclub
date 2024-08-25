@@ -81,7 +81,7 @@
                     <form id="logout-form" action="{{ route('logOut') }}" method="POST" style="display: none;">
                         @csrf
                     </form>--}}
-                    <a class="dropdown-item" href="{{route('logOut')}}" id="setting-tab" target="_blank">{{ __("Log out") }} <i class="ri-logout-circle-r-line float-right text-muted"></i></a>
+                    <a class="dropdown-item" href="{{route('logOut')}}">{{ __("Log out") }} <i class="ri-logout-circle-r-line float-right text-muted"></i></a>
                 </div>
             </li>
         </ul>
