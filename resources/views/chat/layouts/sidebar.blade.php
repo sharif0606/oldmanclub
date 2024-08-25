@@ -78,7 +78,7 @@
                     <a class="dropdown-item" href="{{route('accountSetting')}}" id="setting-tab" target="_blank">{{ __("Setting") }} <i class="ri-settings-3-line float-right text-muted"></i></a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="javascript:void();" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __("Log out") }} <i class="ri-logout-circle-r-line float-right text-muted"></i></a>
-                    <form id="logout-form" action="{{ route('logOut') }}" method="POST" style="display: none;">
+                    <form id="logout-form" action="{{ route('clientlogOut') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
                 </div>
