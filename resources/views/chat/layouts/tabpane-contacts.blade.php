@@ -1,14 +1,14 @@
 <!-- Start Contact content -->
 <div>
     <div class="p-4">
-        <div class="user-chat-nav float-right">
+        {{--<div class="user-chat-nav float-right">
             <div data-toggle="tooltip" data-placement="bottom" title="{{ __("Add Contact") }}">
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-link text-decoration-none text-muted font-size-18 py-0" data-toggle="modal" data-target="#addContact-exampleModal">
                     <i class="ri-user-add-line"></i>
                 </button>
             </div>
-        </div>
+        </div>--}}
         <h4 class="mb-4">{{ __("Contacts") }}</h4>
 
         <!-- Start Add contact Modal -->
@@ -42,7 +42,7 @@
         </div>
         <!-- End Add contact Modal -->
 
-        <div class="search-box chat-search-box">
+        {{--<div class="search-box chat-search-box">
             <div class="input-group bg-light  input-group-lg rounded-lg">
                 <div class="input-group-prepend">
                     <button class="btn btn-link text-decoration-none text-muted pr-1" type="button">
@@ -51,7 +51,7 @@
                 </div>
                 <input type="text" class="form-control bg-light " placeholder="{{ __("Search users") }}.." id="search">
             </div>
-        </div>
+        </div>--}}
         <!-- End search-box -->
     </div>
     <!-- end p-4 -->
