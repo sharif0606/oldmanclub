@@ -506,6 +506,7 @@ var receiver_userid = "";
     sendMesssage();
   });
   $(document).on("keypress", "#comment", function (e) {
+    console.log(e);
     if ((e.keyCode === 13 || e.keyCode === 108) && !e.shiftKey) {  // Check if Enter key is pressed
     sendMesssage();
     }
