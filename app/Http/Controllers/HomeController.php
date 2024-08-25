@@ -38,7 +38,7 @@ class HomeController extends Controller
             return substr(Str::lower($item->fname), 0, 1);
         });
         // Recent Chat Users -> Last send Messages users Display in first
-        $users = DB::select("SELECT chatdata.*,clients.id,clients.display_name,clients.image from (SELECT t1.*, CASE WHEN t1.from_user != " . currentUserId() . " THEN t1.from_user ELSE t1.to_user END AS userid , (SELECT SUM(is_read=0) as unread FROM `messages` WHERE messages.to_user=" . currentUserId() . " AND messages.from_user=userid GROUP BY messages.from_user) as unread
+        $users = DB::select("SELECT chatdata.*,clients.id,clients.fname,clients.image from (SELECT t1.*, CASE WHEN t1.from_user != " . currentUserId() . " THEN t1.from_user ELSE t1.to_user END AS userid , (SELECT SUM(is_read=0) as unread FROM `messages` WHERE messages.to_user=" . currentUserId() . " AND messages.from_user=userid GROUP BY messages.from_user) as unread
         FROM messages AS t1
         INNER JOIN
         (
