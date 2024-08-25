@@ -39,9 +39,9 @@
             <!-- End contacts tab-pane -->
 
             <!-- Start settings tab-pane -->
-            <div class="tab-pane" id="pills-setting" role="tabpanel" aria-labelledby="pills-setting-tab">
+            {{--<div class="tab-pane" id="pills-setting" role="tabpanel" aria-labelledby="pills-setting-tab">
                 @include('chat.layouts.tabpane-settings')
-            </div>
+            </div>--}}
             <!-- End settings tab-pane -->
         </div>
         <!-- end tab content -->
