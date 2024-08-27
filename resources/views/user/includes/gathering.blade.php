@@ -230,18 +230,18 @@
                             </form>
                         </div>
                         <!-- Share feed toolbar START -->
-                        {{-- <ul class="nav nav-pills nav-stack small fw-normal">
-                            <li class="nav-item">
+                        <ul class="nav nav-pills nav-stack small fw-normal">
+                            {{-- <li class="nav-item">
                                 <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal"
                                     data-bs-target="#feedActionPhoto"> <i
                                         class="bi bi-image-fill text-success pe-2"></i>Photo</a>
-                            </li>
+                            </li>--}}
                             <li class="nav-item">
-                                        <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal"
-                                            data-bs-target="#feedActionVideo"> <i
-                                                class="bi bi-camera-reels-fill text-info pe-2"></i>Video</a>
-                                    </li>
-                                    <li class="nav-item">
+                                <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal"
+                                    data-bs-target="#feedActionVideo"> <i
+                                        class="bi bi-camera-reels-fill text-info pe-2"></i>Video</a>
+                            </li>
+                                    {{--<li class="nav-item">
                                         <a href="#" class="nav-link bg-light py-1 px-2 mb-0" data-bs-toggle="modal"
                                             data-bs-target="#modalCreateEvents"> <i
                                                 class="bi bi-calendar2-event-fill text-danger pe-2"></i>Event </a>
@@ -268,8 +268,8 @@
                                             <li><a class="dropdown-item" href="#"> <i
                                                         class="bi bi-pencil-square fa-fw pe-2"></i>Help</a></li>
                                         </ul>
-                                    </li> 
-                        </ul> --}}
+                                    </li> --}} 
+                        </ul>
                         <!-- Share feed toolbar END -->
                     </div>
                     <!-- Share feed END -->
