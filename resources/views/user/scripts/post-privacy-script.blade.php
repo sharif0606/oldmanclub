@@ -34,12 +34,40 @@
                 },
                 success: function(response) {
                     console.log(response);
-                    // Update UI based on the selected privacy mode
+                    var postId = response.postId;
+                    var $dropdownItem = $('a[data-privacy-post-id="' + postId + '"]');
+
                     if (response.privacyMode === 'only_me') {
-                        $('[data-toggle-id="' + postId + '"]').hide(); // Hide the post
-                    } else {
-                        $('[data-toggle-id="' + postId + '"]').show(); // Show the post
+                        // Update the span with the privacy mode icon
+                        $('div[data-toggle-id="' + postId + '"] span.public')
+                            .removeClass('public')
+                            .addClass('only')
+                            .html('<i class="bi bi-lock"></i>');
+                            toastr.success('Privacy mode updated to Only Me');
+                        // Update the dropdown menu
+                        $dropdownItem
+                            .attr('data-privacy-mode', 'public')
+                            .html('<i class="bi bi-globe fa-fw pe-2"></i> Public');
+                    } else if (response.privacyMode === 'public') {
+                        // Update the span with the privacy mode icon
+                        $('div[data-toggle-id="' + postId + '"] span.only')
+                            .removeClass('only')
+                            .addClass('public')
+                            .html('<i class="bi bi-globe"></i>');
+                            toastr.success('Privacy mode updated to Public');
+                        // Update the dropdown menu
+                        $dropdownItem
+                            .attr('data-privacy-mode', 'only_me')
+                            .html('<i class="bi bi-x-circle fa-fw pe-2"></i> Only Me');
+                    } else if (response.privacyMode === 'is_report') {
+                        alert('Post reported successfully');
                     }
+                    toastr.options = {
+                        "positionClass": "toast-bottom-left",
+                        "closeButton": true,
+                        "progressBar": true,
+                        "timeOut": "5000",
+                    };
                 },
                 error: function(xhr, status, error) {
                     console.error(error); // Log any errors

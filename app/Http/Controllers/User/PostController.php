@@ -72,7 +72,7 @@ class PostController extends Controller
             'image'=>$fileName,
             'post_type' => $fileType, // Store the file type
             'client_id' => currentUserId(),
-            'privacy_mode' => $request->privacy_mode
+            'privacy_mode' => $request->privacy_mode?$request->privacy_mode:'public'
         ]);
         
         return response()->json($post);
