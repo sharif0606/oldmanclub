@@ -89,12 +89,18 @@
                             </li>
                         @endif
 
-                       
+
                        
                         {{--<li><a class="dropdown-item" href="#"> <i
                                     class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
                         <li>--}}
                             <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#"  data-delete-url="{{ route('post.destroy', $value->id) }}" data-delete-post-id="{{$value->id}}"> 
+                                <i class="bi bi-trash fa-fw pe-2"></i>Delete
+                                post
+                            </a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="#" data-privacy-mode="is_report" data-privacy-post-id="{{$value->id}}"> 
@@ -123,6 +129,20 @@
             @elseif($value->post_type == 'cover_photo')
                 @if ($value->image)
                 <img class="card-img" src="{{ asset('public/uploads/client/' . $value->image) }}" alt="Post">
+                @endif
+            @elseif($value->post_type == 'video')
+                @if ($value->image)
+                <div class="overflow-hidden fullscreen-video w-100">
+                    <!-- HTML video START -->
+                    <div class="player-wrapper overflow-hidden">
+                        <video class="player-html" controls crossorigin="anonymous" poster="assets/images/videos/poster.jpg">
+                            <source src="{{ asset('public/uploads/post/videos/' . $value->image) }}" type="video/mp4">
+                        </video>
+                    </div>
+                    <!-- HTML video END -->
+            
+                    <!-- Plyr resources and browser polyfills are specified in the pen settings -->
+                </div>
                 @endif
             @else
                 @if ($value->image)

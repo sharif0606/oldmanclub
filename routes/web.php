@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\NewMessage;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\AuthenticationController as auth;
 use App\Http\Controllers\Backend\UserController as user;
@@ -89,6 +90,9 @@ use App\Http\Controllers\User\PostReactionController as postreaction;
 // landing page
 use App\Http\Controllers\Common\frontendController as frontend;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ChatUserController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\PusherController;
 
 //NFC Field
@@ -108,6 +112,12 @@ use App\Http\Controllers\TestController as test;
 /*Test controler */
 Route::get('/mail', [test::class, 'index'])->name('mail');
 
+
+/*== API CONTROLLER ==*/
+
+use App\Http\Controllers\Api\AuthController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -125,11 +135,15 @@ Route::get('/login', [auth::class, 'signInForm'])->name('login');
 Route::post('/login', [auth::class, 'signInCheck'])->name('login.check');
 Route::get('/logout', [auth::class, 'singOut'])->name('logOut');
 
+// API ROUTES
+Route::get('webapi/test', [AuthController::class, 'test']);
+Route::post('webapi/client/login', [AuthController::class, 'clientLogin']);
+
 
 Route::middleware(['checkauth'])->prefix('admin')->group(function () {
     Route::get('dashboard', [dashboard::class, 'index'])->name('dashboard');
-    Route::get('admin/chat', [ChatController::class, 'adminChat'])->name('admin_chat');
-    Route::post('admin-chat', [ChatController::class, 'adminSendMessage'])->name('adminchat.store');
+    //Route::get('admin/chat', [ChatController::class, 'adminChat'])->name('admin_chat');
+    //Route::post('admin-chat', [ChatController::class, 'adminSendMessage'])->name('adminchat.store');
 });
 //middleware(['checkrole'])->
 Route::prefix('admin')->group(function () {
@@ -279,8 +293,60 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::post('/profile/savepass', [clientprofile::class, 'change_password'])->name('change_password');
     // Route::get('/phonebook/list', [clientprofile::class, 'phonebook_list'])->name('phonebook_list');
 
-    Route::get('/user/chat', [ChatController::class, 'userChat'])->name('user_chat');
-    Route::post('/user/chat', [ChatController::class, 'userSendMessage'])->name('userchat_store');
+    //Route::get('/user/chat', [ChatController::class, 'userChat'])->name('user_chat');
+    //Route::post('/user/chat', [ChatController::class, 'userSendMessage'])->name('userchat_store');
+    Route::get('/chat', [HomeController::class,'index']);
+    //Massage
+    Route::get('/message/{id}', [HomeController::class,'getMessage'])->name('message');
+    Route::post('message', [HomeController::class,'sendMessage']);
+    Route::post('typing', [HomeController::class,'sendTyping']);
+    Route::get('/lastmessage/{id}', [HomeController::class,'getLastMessage']);
+
+    //Update avatar
+    Route::post('/updateavatar', [ChatUserController::class,'update'])->name('updateavatar');
+
+    //Update Name
+    Route::post('/nameupdate', [ChatUserController::class,'nameupdate'])->name('nameupdate');
+
+    //Delete Contact
+    Route::delete('/delete/{id}', [ChatUserController::class,'destroy'])->name('contact.destroy');
+
+    //Search Contact
+    Route::get('/search',[ChatUserController::class,'search']);
+
+    //Search Recent Contact
+    Route::get('/recentsearch',[ChatUserController::class,'recentsearch']);
+
+    //chat Message Search
+    Route::get('/messagesearch',[ChatUserController::class,'messagesearch']);
+
+    //Delete Message
+    Route::get('/deleteMessage/{id}',[HomeController::class,'deleteMessage']);
+
+    // Delete Conversation
+    Route::get('/deleteConversation/{id}', [HomeController::class,'deleteConversation'])->name('conversation.delete');
+
+    //Group Create
+    Route::post('/groups', [GroupController::class,'store'])->name('groups');
+
+    //Group Search
+    Route::get('/groupsearch',[GroupController::class,'groupsearch']);
+
+    //Group Massage
+    Route::get('/groupmessage/{id}', [GroupController::class,'getGroupMessage'])->name('groupmessage');
+    Route::post('groupmessage', [GroupController::class,'sendGroupMessage']);
+    Route::get('/grouplastmessage/{id}', [GroupController::class,'getGroupLastMessage']);
+
+    // Delete Group Message
+    Route::get('/deletegroupmessage/{id}',[GroupController::class,'deletegroupmessage']);
+
+    // Delete Group Conversation
+    Route::get('/deleteGroupConversation/{id}', [GroupController::class,'deleteGroupConversation'])->name('groupconversation.delete');
+
+    //Group Message Search
+    Route::get('/groupmessagesearch',[GroupController::class,'groupmessagesearch']);
+
+
     Route::resource('phonebook', phonebook::class);
 
     Route::get('/download-phonebook', [phonebook::class, 'downloadPhonebook'])->name('phonebook_download');
@@ -350,20 +416,16 @@ Route::post('checkout', [CheckOutController::class, 'store'])->name('checkout.st
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-/*==Chat controller == */
-Route::get('/chat', 'App\Http\Controllers\PusherController@index');
-Route::post('/broadcast', 'App\Http\Controllers\PusherController@broadcast');
-Route::post('/receive', 'App\Http\Controllers\PusherController@receive');
+
 
 /*===City and State ====*/
 Route::get('/states', [StateController::class,'getStatesByCountry'])->name('getStatesByCountry');
 Route::get('/code', [CountryController::class,'getCodesByCountry'])->name('getCodesByCountry');//Phone Code
 Route::get('/cities', [CityController::class,'getCitiesByStates'])->name('getCitiesByStates');
 
+
 //Route::middleware(['checkclient'])->group(function () {
     Route::get('{username}', [clientprofile::class, 'client_by_search'])->name('client_by_search');
     Route::get('{username}/profile', [clientprofile::class, 'usernameProfile'])->name('usernameProfile');
     Route::get('{username}/profile-about', [clientprofile::class, 'usernameProfileAbout'])->name('usernameProfileAbout');
 //});
-
-
