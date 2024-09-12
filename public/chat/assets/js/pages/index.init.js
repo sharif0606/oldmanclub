@@ -504,6 +504,12 @@ var receiver_userid = "";
       });
     }
   });
+  $(document).on("keydown", ".chat-input .emoji-wysiwyg-editor", function (event) {
+    if (event.which == 13) {
+      $(".emoji-wysiwyg-editor").trigger("blur");
+      $(".send-chat-message").trigger('click');
+    }
+  });
   /**
    *-------------------------------------------------------------
   * Typing

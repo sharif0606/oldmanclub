@@ -17,8 +17,8 @@
                                 <ul class="list-inline message-img  mb-0">
                                     <li class="list-inline-item message-img-list">
                                         <div>
-                                            <a class="popup-img d-inline-block m-1" href="{{ asset($message->file) }}" title="{{ __("Project 1") }}">
-                                                <img src="{{ asset($message->file) }}" alt="" class="rounded border">
+                                            <a class="popup-img d-inline-block m-1" href="{{ asset('public/'.$message->file) }}" title="{{ __("Project 1") }}">
+                                                <img src="{{ asset('public/'.$message->file) }}" alt="" class="rounded border">
                                             </a>
                                         </div>
                                         {{-- <div class="message-img-link">

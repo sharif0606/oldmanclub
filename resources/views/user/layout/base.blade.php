@@ -1062,6 +1062,15 @@ JS libraries, plugins and custom scripts -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+     toastr.options = {
+        "positionClass": "toast-bottom-left",
+        "closeButton": true, // Optional: Show close button
+        "progressBar": true, // Optional: Show progress bar
+        "timeOut": "5000",   // Optional: Set the duration of the toast
+    };
+</script>
+
 {!! Toastr::message() !!}
 @stack('scripts')
 <script>
@@ -1347,6 +1356,7 @@ JS libraries, plugins and custom scripts -->
         });
     });
 
+    
 
 
 
@@ -1375,5 +1385,49 @@ JS libraries, plugins and custom scripts -->
     <script src="{{ asset('public/user/assets/js/zuck-stories.js') }}"></script>
     <!-- Theme Functions -->
     <script src="{{ asset('public/user/assets/js/functions.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let currentVideo = null;
+            let videoPlaybackPositions = new Map(); // To keep track of playback positions
+        
+            const videos = document.querySelectorAll('video');
+        
+            // Create an intersection observer to detect visibility
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    const video = entry.target;
+                    if (entry.isIntersecting) {
+                        // If there's a currently playing video, pause it
+                        if (currentVideo && currentVideo !== video) {
+                            videoPlaybackPositions.set(currentVideo, currentVideo.currentTime); // Save playback position
+                            currentVideo.pause();
+                        }
+                        // Restore playback position and play the current video
+                        if (videoPlaybackPositions.has(video)) {
+                            video.currentTime = videoPlaybackPositions.get(video);
+                        }
+                        video.play();
+                        currentVideo = video;
+                    } else {
+                        // Save the playback position when the video is not visible
+                        if (currentVideo === video) {
+                            videoPlaybackPositions.set(video, video.currentTime);
+                            video.pause();
+                            currentVideo = null;
+                        }
+                    }
+                });
+            }, {
+                threshold: 0.5 // Adjust this threshold as needed
+            });
+        
+            // Observe each video element
+            videos.forEach(video => {
+                observer.observe(video);
+            });
+        });
+        </script>
+        
+        
 </body>
 </html>

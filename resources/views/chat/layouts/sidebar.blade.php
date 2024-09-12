@@ -52,7 +52,7 @@
                     <a class="dropdown-item" href="#" id="setting-tab">{{ __("Setting") }} <i class="ri-settings-3-line float-right text-muted"></i></a>
                     <div class="dropdown-divider"></div> 
                     <a class="dropdown-item" href="javascript:void();" onclick="event.preventDefault(); document.getElementById('side-logout-form').submit();">{{ __("Log out") }} <i class="ri-logout-circle-r-line float-right text-muted"></i></a>
-                    <form id="side-logout-form" action="{{ route('logOut') }}" method="POST" style="display: none;">
+                    <form id="side-logout-form" action="{{ route('clientlogOut') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
                 </div>
@@ -74,13 +74,14 @@
                     <img src="{{ asset('public/uploads/client/' . $client->image) }}" alt="" class="profile-user rounded-circle imgavatar">
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#" id="profile-tab">{{ __("Profile") }} <i class="ri-profile-line float-right text-muted"></i></a>
-                    <a class="dropdown-item" href="#" id="setting-tab">{{ __("Setting") }} <i class="ri-settings-3-line float-right text-muted"></i></a>
+                    <a class="dropdown-item" href="{{route('myProfile')}}" id="profile-tab" target="_blank">{{ __("Profile") }} <i class="ri-profile-line float-right text-muted"></i></a>
+                    <a class="dropdown-item" href="{{route('accountSetting')}}" id="setting-tab" target="_blank">{{ __("Setting") }} <i class="ri-settings-3-line float-right text-muted"></i></a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="javascript:void();" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __("Log out") }} <i class="ri-logout-circle-r-line float-right text-muted"></i></a>
+                    {{--<a class="dropdown-item" href="javascript:void();" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __("Log out") }} <i class="ri-logout-circle-r-line float-right text-muted"></i></a>
                     <form id="logout-form" action="{{ route('logOut') }}" method="POST" style="display: none;">
                         @csrf
-                    </form>
+                    </form>--}}
+                    <a class="dropdown-item" href="{{route('clientlogOut')}}">{{ __("Log out") }} <i class="ri-logout-circle-r-line float-right text-muted"></i></a>
                 </div>
             </li>
         </ul>

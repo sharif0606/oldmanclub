@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-8 col-4">
+        {{--<div class="col-sm-8 col-4">
             <ul class="list-inline user-chat-nav text-right mb-0">
 
                 <li class="list-inline-item">
@@ -69,7 +69,7 @@
                 </li>
 
             </ul>
-        </div>
+        </div>--}}
     </div>
 </div>
 <!-- end chat user head -->

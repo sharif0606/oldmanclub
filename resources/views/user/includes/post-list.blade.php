@@ -135,7 +135,7 @@
                 <div class="overflow-hidden fullscreen-video w-100">
                     <!-- HTML video START -->
                     <div class="player-wrapper overflow-hidden">
-                        <video class="player-html" controls crossorigin="anonymous" poster="assets/images/videos/poster.jpg">
+                        <video class="player-html" id="video-{{ $value->id }}" controls crossorigin="anonymous" poster="assets/images/videos/poster.jpg">
                             <source src="{{ asset('public/uploads/post/videos/' . $value->image) }}" type="video/mp4">
                         </video>
                     </div>

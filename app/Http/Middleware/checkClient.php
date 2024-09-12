@@ -27,10 +27,13 @@ class checkClient
             $user=Client::where('status',1)->where('id',currentUserId())->first();
             if(!$user)
                 return redirect()->route('clientlogOut');
-            else
+            else{
+                // Store online status in the cache
                 $cacheKey = 'is_online' . $user->id;
                 Cache::put($cacheKey, true, now()->addMinutes(5)); // Set online status for 5 minutes
                 return $next($request);
+            }
+                
         }
         return redirect()->route('clientlogOut');
     }

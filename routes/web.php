@@ -295,7 +295,7 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
 
     //Route::get('/user/chat', [ChatController::class, 'userChat'])->name('user_chat');
     //Route::post('/user/chat', [ChatController::class, 'userSendMessage'])->name('userchat_store');
-    Route::get('/chat', [HomeController::class,'index']);
+    Route::get('/chat', [HomeController::class,'index'])->name('chat');
     //Massage
     Route::get('/message/{id}', [HomeController::class,'getMessage'])->name('message');
     Route::post('message', [HomeController::class,'sendMessage']);

@@ -14,10 +14,6 @@
         @yield('content')
     </div>
     <!-- END layout-wrapper -->
-<!-- JAVASCRIPT -->
-<script>
-    var appUrl = "{{ env('APP_URL') }}";
-</script>
 
 @include('chat.layouts.vendor-scripts')
 </body>

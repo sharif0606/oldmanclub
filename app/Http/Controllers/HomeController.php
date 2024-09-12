@@ -38,7 +38,7 @@ class HomeController extends Controller
             return substr(Str::lower($item->fname), 0, 1);
         });
         // Recent Chat Users -> Last send Messages users Display in first
-        $users = DB::select("SELECT chatdata.*,clients.id,clients.display_name,clients.image from (SELECT t1.*, CASE WHEN t1.from_user != " . currentUserId() . " THEN t1.from_user ELSE t1.to_user END AS userid , (SELECT SUM(is_read=0) as unread FROM `messages` WHERE messages.to_user=" . currentUserId() . " AND messages.from_user=userid GROUP BY messages.from_user) as unread
+        $users = DB::select("SELECT chatdata.*,clients.id,clients.fname,clients.image from (SELECT t1.*, CASE WHEN t1.from_user != " . currentUserId() . " THEN t1.from_user ELSE t1.to_user END AS userid , (SELECT SUM(is_read=0) as unread FROM `messages` WHERE messages.to_user=" . currentUserId() . " AND messages.from_user=userid GROUP BY messages.from_user) as unread
         FROM messages AS t1
         INNER JOIN
         (
@@ -104,8 +104,9 @@ class HomeController extends Controller
             $query->where('from_user', $my_id)->where('to_user', $user_id);
         })->orderBy('id', 'DESC')->limit(1)->get();
  
-        $chatUser = Client::find(currentUserId());
-        return view('chat.layouts.message-conversation')->with(['messages' => $messages])->with(['chatUser' => $chatUser]);
+        $chatUser = Client::find($user_id);
+        $client = Client::find($my_id);
+        return view('chat.layouts.message-conversation')->with(['messages' => $messages])->with(['chatUser' => $chatUser])->with(['client' => $client]);
     }
 
     // Send Messages using pusher
@@ -122,7 +123,7 @@ class HomeController extends Controller
         $data->message = $message;
         if ($file != Null) {
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $filepath = public_path('/Upload/');
+            $filepath = public_path('public/Upload/');
             $file->move($filepath, $filename);
             $data->file = 'Upload/' . $filename;
         }
