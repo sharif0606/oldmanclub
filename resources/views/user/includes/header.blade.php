@@ -83,14 +83,14 @@
                                 {{-- <li> <a class="dropdown-item" href="">Credit Card</a></li> --}}
                             </ul>
                     </li>
-                    <li class="nav-item dropdown">
+                    {{--<li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="postMenu" data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">SMS</a>
                             <ul class="dropdown-menu" aria-labelledby="postMenu">
                                 <li> <a class="dropdown-item" href="{{route('phonegroup.index')}}">CREATE PHONE GROUP</a></li>
                                 <li> <a class="dropdown-item" href="{{route('phonebook.index')}}">PHONE BOOK</a></li>
                                 <li> <a class="dropdown-item" href="{{route('purchase.index')}}">PURCHASE SMS</a></li>
-                                <li> <a class="dropdown-item" href="{{route('sms_send')}}">SEND SMS</a></li>
+                                <li> <a class="dropdown-item" href="{{route('sms_send')}}">SEND SMS</a></li>--}}
                                 {{-- <li class="dropdown-submenu dropstart">
                                     <a class="dropdown-item dropdown-toggle" href="#">Social Contact</a>
                                     <ul class="dropdown-menu dropdown-menu-end" data-bs-popper="none">
@@ -98,20 +98,20 @@
                                         <li> <a class="dropdown-item" href="">All Social Contact</a> </li>
                                     </ul>
                                 </li> --}}
-                            </ul>
-                    </li>
+                            {{--</ul>
+                    </li>--}}
 
                     <!-- Nav item 4 Mega menu -->
                     {{-- <li class="nav-item">
                         <a class="nav-link" href="">My network</a>
                     </li> --}}
-                    <li class="nav-item dropdown">
+                    {{--<li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="postMenu" data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">SMART MAILBOX</a>
                             <ul class="dropdown-menu" aria-labelledby="postMenu">
                                 <li> <a class="dropdown-item" href="{{route('inbox')}}">INBOX</a></li>
                             </ul>
-                    </li>
+                    </li>--}}
                     {{-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="postMenu" data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">Ecommerce</a>
