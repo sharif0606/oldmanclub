@@ -100,6 +100,7 @@
                                         <h5 class="font-size-14 mb-1">{{ $message->message }}</h5>
                                         <p class="text-muted font-size-13 mb-0">
                                             @php
+                                            if(file_exists(public_path($message->file)))
                                                 echo App\Http\Controllers\HomeController::bytesToHuman(File::size(public_path($message->file)));
                                             @endphp
                                         </p>

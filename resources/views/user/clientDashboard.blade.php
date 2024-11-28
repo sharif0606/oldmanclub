@@ -3,7 +3,7 @@
     <!-- Main content START -->
     <main>
         <!-- Container START -->
-        <div class="container">
+        <div class="container-fluid px-0">  
             <div class="row g-2">
                 <!-- Main content START -->
                 <div class="col-lg-12 vstack gap-4">
