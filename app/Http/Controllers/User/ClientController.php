@@ -59,7 +59,8 @@ class ClientController extends Controller
     {
         session()->forget('username');
         $client = Client::find(currentUserId());
-        return view('user.myProfileAbout', compact('client'));
+        $followers = Follow::where('following_id',currentUserId())->orderBy('id', 'desc')->take(4)->get();
+        return view('user.myProfileAbout', compact('client','followers'));
     }
     public function all_followers()
     {
@@ -161,7 +162,7 @@ class ClientController extends Controller
             $user->address_line_2 = $request->address_line_2;
             $user->current_country_id = $request->current_country_id;
             $user->current_state_id = $request->current_state_id;
-            $user->current_city_id = $request->current_city_id;
+            //$user->current_city_id = $request->current_city_id;
             //$user->current_zip_code = $request->current_zip_code;
             $user->from_country_id = $request->from_country_id;
             $user->from_city_id = $request->from_city_id;

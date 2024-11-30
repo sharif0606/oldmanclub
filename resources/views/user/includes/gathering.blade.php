@@ -3,75 +3,17 @@
     <!-- Main content START -->
     <main>
         <!-- Container START -->
-        <div class="container">
+        <div class="container-fluid">
             <div class="row g-2">
                 <!-- Main content START -->
-                <div class="col-lg-12 vstack gap-4">
+                <div class="col-lg-12 vstack gap-2">
                     <!-- My profile START -->
                     @include('user.includes.profile')
                     <!-- My profile END -->
                 </div>
-                <!-- Right sidebar START -->
-                <div class="col-lg-4">
+                <!-- Left sidebar START -->
+                <div class="col-lg-3">
                     <div class="row g-2">
-                        <!-- Card START -->
-                        <div class="col-md-6 col-lg-12">
-                            <div class="card">
-                                <div class="card-header border-0 pb-0">
-                                    {{-- <h5 class="card-title">INTRO</h5> --}}
-                                    <!-- Button modal -->
-                                </div>
-                                <!-- Card body START -->
-                                <div class="card-body position-relative pt-0">
-                                    <p class="text-center">{{ $client->tagline }}</p>
-                                    <hr>
-                                    <!-- Date time -->
-                                    <ul class="list-unstyled mt-3 mb-0">
-                                        <li class="mb-2"><i class="bi bi-calendar2-plus pe-1"></i>
-                                            Joined on {{ $client->created_at->format('d M,Y')}}
-                                        </li>
-                                        @if ($client->designation)
-                                        <li class="mb-2"><i class="bi bi-briefcase-fill pe-1"></i>
-                                            {{$client->designation}}
-                                        </li>
-                                        @endif
-                                        @if ($client->current_country_id)
-                                        <li class="mb-2">
-                                            <i class="bi bi-geo-alt pe-1"></i>
-                                            Lives In {{$client->currentcountry?->name}}@if($client->current_city_id), {{$client->currentstate?->name}} @endif
-                                        </li>
-                                        @endif
-                                        {{-- <li class="mb-2"> <i class="bi bi-calendar-date fa-fw pe-1"></i> Born:
-                                            <strong>{{ \Carbon\Carbon::parse($client->dob)->format('M-d-Y') }}</strong>
-                                        </li>
-                                        <li class="mb-2"> <i class="bi bi-heart fa-fw pe-1"></i> Status: <strong> Single
-                                            </strong>
-                                        </li>
-                                        <li class="mb-2">
-                                            <i class="bi bi-envelope fa-fw pe-1"></i> Email: <strong> {{ $client->email }}
-                                            </strong>
-                                        </li>
-                                        <li class="mb-2">
-                                            <i class="bi bi-phone fa-fw pe-1"></i> Contact: <strong>
-                                                {{ $client->contact_no }}
-                                            </strong>
-                                        </li>
-                                        <li class="mb-2">
-                                            <i class="bi bi-house fa-fw pe-1"></i> Address: <strong>
-                                                {{ $client->address_line_1 }}
-                                            </strong>
-                                        </li>
-                                        <li class="mb-2">
-                                            <i class="bi bi-card-text fa-fw pe-1"></i> ID NO: <strong> {{ $client->id_no }}
-                                            </strong>
-                                        </li> --}}
-                                    </ul>
-                                </div>
-                                <!-- Card body END -->
-                            </div>
-                        </div>
-                        <!-- Card END -->
-
                         <!-- Card START -->
                         {{-- <div class="col-md-6 col-lg-12">
                             <div class="card">
@@ -202,10 +144,14 @@
                         <!-- Card START -->
                         @include('user.includes.followers')
                         <!-- Card END -->
+
+                        <!-- Card START -->
+                        @include('user.includes.celebration')
+                        <!-- Card END -->
                     </div>
                 </div>
-                <!-- Right sidebar END -->
-                <div class="col-lg-8 vstack gap-2">
+                <!-- Middle Start -->
+                <div class="col-md-8 col-lg-6 vstack gap-2">
                     <!-- Share feed START -->
                     <div class="card card-body">
                         <div class="d-flex mb-3">
@@ -278,10 +224,17 @@
                     @include('user.includes.post-list')
                     <!-- Card feed item END -->
 
-                </div><!-- Main content END -->
+                </div>
+                <!-- Right sidebar START -->
+                <div class="col-md-3">
+                    <div class="row g-2">
+                    @include('user.includes.online-active')
+                    @include('user.includes.today-trending-post')
+                    </div>
+                </div>
             </div> <!-- Row END -->
         </div>
         <!-- Container END -->
-    </main>
+    </main><!-- Main content END -->
     <!-- Main content END -->
 @endsection

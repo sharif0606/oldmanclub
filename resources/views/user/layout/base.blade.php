@@ -127,7 +127,7 @@
     <main>
        
         <!-- Container START -->
-        <div class="containe-fluid">
+        <div class="container-fluid px-4">
             @yield('content')
         </div>
         <!-- Container END -->
