@@ -8,7 +8,8 @@
         <li class="nav-item"> <a class="nav-link @if (request()->routeIs('usernameProfileAbout')) active @endif" href="{{route('usernameProfileAbout',$username)}}">ABOUT</a></li>
         <li class="nav-item"> <a class="nav-link @if (request()->routeIs('gathering')) active @endif" href="{{route('gathering')}}">GATHERING</a></li>
         @else
-        <li class="nav-item"> <a class="nav-link @if (request()->routeIs('myProfile')) active @endif" href="{{route('myProfile')}}">POST</a> </li>
+        {{-- <li class="nav-item"> <a class="nav-link @if (request()->routeIs('myProfile')) active @endif" href="{{route('myProfile')}}">POST</a> </li> --}}
+        <li class="nav-item"> <a class="nav-link @if (request()->routeIs('myNfc')) active @endif" href="{{route('myNfc')}}">NFC</a> </li>
         <li class="nav-item"> <a class="nav-link @if (request()->routeIs('myProfileAbout')) active @endif" href="{{route('myProfileAbout')}}">ABOUT</a></li>
         {{-- <li class="nav-item"> <a class="nav-link @if (request()->routeIs('all.followers')) active @endif" href="{{route('all.followers')}}">Following<span class="badge bg-success bg-opacity-10 text-success small">{{$client->followers->count()}}</span> </a> </li> --}}
         <li class="nav-item"> <a class="nav-link @if (request()->routeIs('gathering')) active @endif" href="{{route('gathering')}}">GATHERING</a></li>

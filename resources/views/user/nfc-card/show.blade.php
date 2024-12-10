@@ -170,9 +170,49 @@
             @include('user.includes.profile')
             <!-- My profile END -->
         </div>
-        <!-- Sidenav END -->
+         <!-- Left sidebar START -->
+         <div class="col-lg-3">
+            <div class="row g-2">
+                <div class="card">
+                    <!-- Card header START -->
+                    <div class="card-header border-0 pb-4">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="card-title">INTRO</h5>
+                            <a class="btn btn-primary-soft icon-sm ms-auto" href="#"><i
+                                    class="fa-solid fa-pencil"> </i></a>
+                        </div>
+                        <p class="text-center pt-2"><small>Full Stack Developer at Test </small><span class="d-block">{
+                                Laravel,Vue,React }</span></p>
+                        <!-- User stat START -->
+                        <div class="hstack gap-2 gap-xl-3 justify-content-center">
+                            <!-- User stat item -->
+                            <div>
+                                <h6 class="mb-0">256</h6>
+                                <small>Post</small>
+                            </div>
+                            <!-- Divider -->
+                            <div class="vr"></div>
+                            <!-- User stat item -->
+                            <div>
+                                <h6 class="mb-0">2.5K</h6>
+                                <small>Followers</small>
+                            </div>
+                            <!-- Divider -->
+                            <div class="vr"></div>
+                            <!-- User stat item -->
+                            <div>
+                                <h6 class="mb-0">365</h6>
+                                <small>Following</small>
+                            </div>
+                        </div>
+                        <!-- User stat END -->
+                    </div>
+                    <!-- Card header END -->
+                </div>
+            </div>
+        </div>
         <!-- Main content START -->
-        <div class="col-md-12">
+        <div class="col-md-9 vstack gap-2">
             <!-- Card START -->
             <div class="card">
                 <!-- Card header START -->
@@ -226,7 +266,7 @@
                                         @include('user.nfc-template_show.sleek-template')
                                     @endif
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <div class="card p-3">
                                         <div class="tab-content" id="pills-tabContent" style="padding: 0">
                                             <h4 class="my-3 fs-5 text-center">Send Card</h4>
