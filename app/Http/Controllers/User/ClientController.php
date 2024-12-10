@@ -9,6 +9,7 @@ use App\Models\User\City;
 use App\Models\User\State;
 use App\Models\Backend\PhoneBook;
 use App\Models\User\Follow;
+use App\Models\Backend\NfcCard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -22,7 +23,7 @@ class ClientController extends Controller
 
     public function index()
     {
-        session()->forget('username');
+        /*session()->forget('username');
         $client = Client::withCount('followers', 'followings')->find(currentUserId());
         $post = Post::with([
             'reactions' => function ($query) {
@@ -46,7 +47,12 @@ class ClientController extends Controller
         $followers = Follow::where('following_id',currentUserId())->orderBy('id', 'desc')->take(4)->get();
         //dd($post);
         $postCount = Post::where('client_id', currentUserId())->count();
-        return view('user.clientDashboard', compact('client','post','postCount','followers'));
+        return view('user.clientDashboard', compact('client','post','postCount','followers'));*/
+        session()->forget('username');
+        $client = Client::find(currentUserId());
+        $followers = Follow::where('following_id',currentUserId())->orderBy('id', 'desc')->take(4)->get();
+        $post = Post::where('client_id',currentUserId())->orderBy('created_at', 'desc')->get();
+        return view('user.myProfileAbout', compact('post','client','followers'));
     }
     public function myProfile()
     {
@@ -60,7 +66,16 @@ class ClientController extends Controller
         session()->forget('username');
         $client = Client::find(currentUserId());
         $followers = Follow::where('following_id',currentUserId())->orderBy('id', 'desc')->take(4)->get();
-        return view('user.myProfileAbout', compact('client','followers'));
+        $post = Post::where('client_id',currentUserId())->orderBy('created_at', 'desc')->get();
+        return view('user.myProfileAbout', compact('post','client','followers'));
+    }
+    public function myNfc()
+    {
+        session()->forget('username');
+        $client = Client::find(currentUserId());
+        $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id', currentUserId())->paginate(10);
+        //return view('user.myNfc', compact('client','nfc_cards'));
+        return view('user.nfc-card.index', compact('nfc_cards', 'client'));
     }
     public function all_followers()
     {
