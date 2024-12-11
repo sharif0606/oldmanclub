@@ -254,7 +254,8 @@ Route::get('reset-password/{token}', [clientauth::class, 'showResetPasswordForm'
 Route::post('reset-password', [clientauth::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
 Route::middleware(['checkclient'])->prefix('user')->group(function () {
-    Route::get('dashboard', [clientprofile::class, 'index'])->name('clientdashboard');
+    //Route::get('dashboard', [clientprofile::class, 'index'])->name('clientdashboard');
+    Route::get('dashboard', [clientprofile::class, 'gathering'])->name('clientdashboard');
     Route::get('my-profile', [clientprofile::class, 'myProfile'])->name('myProfile');
     Route::get('my-profile-about', [clientprofile::class, 'myProfileAbout'])->name('myProfileAbout');
     Route::get('my-nfc', [clientprofile::class, 'myNfc'])->name('myNfc');
