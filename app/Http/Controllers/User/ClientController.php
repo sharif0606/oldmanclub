@@ -10,9 +10,13 @@ use App\Models\User\State;
 use App\Models\Backend\PhoneBook;
 use App\Models\User\Follow;
 use App\Models\Backend\NfcCard;
+use App\Message;
+use App\Group;
+use Pusher\Pusher;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use DB;
 use Session;
 class ClientController extends Controller
@@ -96,7 +100,53 @@ class ClientController extends Controller
         $client = Client::find(currentUserId());
         $post = Post::where('privacy_mode','public')->orderBy('id', 'desc')->get();
         $followers = Follow::where('following_id',currentUserId())->orderBy('id', 'desc')->take(4)->get();
-        return view('user.includes.gathering',compact('client','post','followers'));
+        $client = Client::find(currentUserId());
+        $followers = Follow::where('following_id',currentUserId())->orderBy('id', 'desc')->take(4)->get();
+        $post = Post::where('client_id',currentUserId())->orderBy('created_at', 'desc')->get();
+
+        /*=== Chat ==== */
+        //Show Contact list, Recent Chat User List and Group list
+        $collection = Client::orderBy('fname')->where('id', '!=', currentUserId())
+        ->get()
+        ->unique(function ($item) {
+            return strtolower(trim($item->fname));
+        });
+        $contacts = $collection->groupBy(function ($item, $key) {
+            return substr(Str::lower($item->fname), 0, 1);
+        });
+        // Recent Chat Users -> Last send Messages users Display in first
+        $users = DB::select("SELECT chatdata.*,clients.id,clients.fname,clients.image from (SELECT t1.*, CASE WHEN t1.from_user != " . currentUserId() . " THEN t1.from_user ELSE t1.to_user END AS userid , (SELECT SUM(is_read=0) as unread FROM `messages` WHERE messages.to_user=" . currentUserId() . " AND messages.from_user=userid GROUP BY messages.from_user) as unread
+        FROM messages AS t1
+        INNER JOIN
+        (
+            SELECT
+                LEAST(`from_user`, `to_user`) AS sender_id,
+                GREATEST(`from_user`, `to_user`) AS receiver_id,
+                MAX(id) AS max_id
+            FROM messages
+            GROUP BY
+                LEAST(sender_id, receiver_id),
+                GREATEST(sender_id, receiver_id)
+        ) AS t2
+            ON LEAST(t1.`from_user`, t1.`to_user`) = t2.sender_id AND
+            GREATEST(t1.`from_user`, t1.`to_user`) = t2.receiver_id AND
+            t1.id = t2.max_id
+            WHERE t1.`from_user` = " . currentUserId() . " OR t1.`to_user` =" . currentUserId() . ") chatdata JOIN clients On clients.id=userid  WHERE clients.id !=" . currentUserId() . " ORDER BY chatdata.id DESC");
+        $user_id = currentUserId();
+
+        $AttachedFiles = Message::where(function ($query) use ($user_id) {
+            $query->where('from_user', $user_id)->orWhere('to_user', $user_id);
+        })->whereNotNull('file')->get();
+
+        //Show Groups List only added users
+        $user_id = currentUserId();
+        $groupdata = Group::with(['users' => function($qq) use($user_id){
+            $qq->select('group_id', 'is_read')->where('user_id', $user_id);
+        }])->whereHas('groupUsers', function($qr) use($user_id){
+            $qr->where('user_id', '=', $user_id);
+        })->get();
+
+        return view('user.includes.gathering',compact('client','post','followers','users','contacts','groupdata','AttachedFiles'));
     }
     // public function phonebook_list()
     // {
