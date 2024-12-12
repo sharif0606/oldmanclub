@@ -1,6 +1,6 @@
 <style>
     .classic_header_image_show {
-        height: 325px;
+        height: 360px;
     }
 
     .classic_svg_show {
