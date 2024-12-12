@@ -26,7 +26,7 @@
         <h6 class="mb-0"><a href="blog-details.html">Skills that you can learn from business</a></h6>
         <small>6hr</small>
       </div>
-      <!-- Load more comments -->
+      {{-- <!-- Load more comments -->
       <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" data-bs-toggle="button" aria-pressed="true">
         <div class="spinner-dots me-2">
           <span class="spinner-dot"></span>
@@ -34,7 +34,7 @@
           <span class="spinner-dot"></span>
         </div>
         View all latest news
-      </a>
+      </a> --}}
     </div>
     <!-- Card body END -->
   </div>
