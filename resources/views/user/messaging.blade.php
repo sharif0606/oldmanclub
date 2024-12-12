@@ -21,11 +21,11 @@
           <div class=" d-flex justify-content-between align-items-center">
             <h1 class="h5 mb-0">Active chats <span class="badge bg-success bg-opacity-10 text-success">6</span></h1>
             <!-- Chat new create message item START -->
-            <div class="dropend position-relative">
+            {{-- <div class="dropend position-relative">
               <div class="nav">
                 <a class="icon-md rounded-circle btn btn-sm btn-primary-soft nav-link toast-btn" data-target="chatToast" href="#" > <i class="bi bi-pencil-square"></i> </a>
               </div>
-            </div>
+            </div> --}}
             <!-- Chat new create message item END -->
           </div>
         </div>
