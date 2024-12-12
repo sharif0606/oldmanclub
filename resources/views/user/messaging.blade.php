@@ -377,7 +377,7 @@
                       <div class="small text-secondary"><i class="fa-solid fa-circle text-danger me-1"></i>Last active 2 days</div>
                     </div>
                   </div>
-                  <div class="d-flex align-items-center">
+                  {{-- <div class="d-flex align-items-center">
                     <!-- Call button -->
                     <a href="#!" class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Audio call"><i class="bi bi-telephone-fill"></i></a>
                     <a href="#!" class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Video call"><i class="bi bi-camera-video-fill"></i></a>
@@ -394,7 +394,7 @@
                       </ul>
                     </div>
                     <!-- Card action END -->
-                  </div>
+                  </div> --}}
                 </div>
                 <!-- Top avatar and status END -->
                 <hr>
