@@ -81,7 +81,7 @@
                                     <!-- Add Nfc END -->
                                     <!-- Nfc item START -->
                                     @forelse ($nfc_cards as $nfc_card)
-                                        <div class="col-6 col-lg-4 position-relative px-2 mb-2" style="height:325px;">
+                                        <div class="col-6 col-lg-4 position-relative px-2 mb-2" style="height:360px;">
                                             @if ($nfc_card->card_design?->design_card_id == 1)
                                                 @include('user.nfc-template_mini.classic-template')
                                             @elseif($nfc_card->card_design?->design_card_id == 2)
