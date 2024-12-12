@@ -272,6 +272,7 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::get('comment-reaction-update', [commentreaction::class,'comment_reaction_update'])->name('comment-reaction-update');
     Route::get('reply-reaction-update', [replyreaction::class,'reply_reaction_update'])->name('reply-reaction-update');
     Route::get('gathering', [clientprofile::class, 'gathering'])->name('gathering');
+    Route::get('single-post', [clientprofile::class, 'singlePost'])->name('singlePost');
 
 
 

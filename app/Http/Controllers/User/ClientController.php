@@ -153,7 +153,10 @@ class ClientController extends Controller
     //     $phonebook = PhoneBook::where('client_id',currentUserId())->find();
     //     return view('user.clientDashboard', compact('phonebook'));
     // }
-
+    public function singlePost(){
+        $client = Client::find(currentUserId());
+        return view('user.includes.single-post',compact('client'));
+    }
     /**
      * Show the form for creating a new resource.
      */

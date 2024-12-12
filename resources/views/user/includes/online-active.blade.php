@@ -12,7 +12,59 @@
             <div class="hstack gap-2 mb-3">
                 <!-- Avatar -->
                 <div class="avatar">
-                    <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/04.jpg" alt=""></a>
+                    <a href="#!"><img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/04.jpg')}}" alt=""></a>
+                </div>
+                <!-- Title -->
+                <div class="overflow-hidden">
+                    <a class="h6 mb-0" href="#!">Judy Nguyen </a>
+                </div>
+                <!-- Button -->
+                <a class="btn btn-primary-soft rounded-circle icon-md ms-auto" href="#"><i class="fa-solid fa-plus"> </i></a>
+            </div>
+             <!-- Connection item START -->
+             <div class="hstack gap-2 mb-3">
+                <!-- Avatar -->
+                <div class="avatar">
+                    <a href="#!"><img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/04.jpg')}}" alt=""></a>
+                </div>
+                <!-- Title -->
+                <div class="overflow-hidden">
+                    <a class="h6 mb-0" href="#!">Judy Nguyen </a>
+                </div>
+                <!-- Button -->
+                <a class="btn btn-primary-soft rounded-circle icon-md ms-auto" href="#"><i class="fa-solid fa-plus"> </i></a>
+            </div>
+             <!-- Connection item START -->
+             <div class="hstack gap-2 mb-3">
+                <!-- Avatar -->
+                <div class="avatar">
+                    <a href="#!"><img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/04.jpg')}}" alt=""></a>
+                </div>
+                <!-- Title -->
+                <div class="overflow-hidden">
+                    <a class="h6 mb-0" href="#!">Judy Nguyen </a>
+                </div>
+                <!-- Button -->
+                <a class="btn btn-primary-soft rounded-circle icon-md ms-auto" href="#"><i class="fa-solid fa-plus"> </i></a>
+            </div>
+             <!-- Connection item START -->
+             <div class="hstack gap-2 mb-3">
+                <!-- Avatar -->
+                <div class="avatar">
+                    <a href="#!"><img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/04.jpg')}}" alt=""></a>
+                </div>
+                <!-- Title -->
+                <div class="overflow-hidden">
+                    <a class="h6 mb-0" href="#!">Judy Nguyen </a>
+                </div>
+                <!-- Button -->
+                <a class="btn btn-primary-soft rounded-circle icon-md ms-auto" href="#"><i class="fa-solid fa-plus"> </i></a>
+            </div>
+             <!-- Connection item START -->
+             <div class="hstack gap-2 mb-3">
+                <!-- Avatar -->
+                <div class="avatar">
+                    <a href="#!"><img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/04.jpg')}}" alt=""></a>
                 </div>
                 <!-- Title -->
                 <div class="overflow-hidden">
