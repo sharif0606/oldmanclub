@@ -288,7 +288,7 @@
                   <!-- Chat message left -->
                   <div class="d-flex mb-1">
                     <div class="flex-shrink-0 avatar avatar-xs me-2">
-                      <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/10.jpg'}}" alt="">
+                      <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/10.jpg')}}" alt="">
                     </div>
                     <div class="flex-grow-1">
                       <div class="w-100">
