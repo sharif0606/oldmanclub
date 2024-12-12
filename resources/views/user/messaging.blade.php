@@ -21,11 +21,11 @@
           <div class=" d-flex justify-content-between align-items-center">
             <h1 class="h5 mb-0">Active chats <span class="badge bg-success bg-opacity-10 text-success">6</span></h1>
             <!-- Chat new create message item START -->
-            <div class="dropend position-relative">
+            {{-- <div class="dropend position-relative">
               <div class="nav">
                 <a class="icon-md rounded-circle btn btn-sm btn-primary-soft nav-link toast-btn" data-target="chatToast" href="#" > <i class="bi bi-pencil-square"></i> </a>
               </div>
-            </div>
+            </div> --}}
             <!-- Chat new create message item END -->
           </div>
         </div>
@@ -377,7 +377,7 @@
                       <div class="small text-secondary"><i class="fa-solid fa-circle text-danger me-1"></i>Last active 2 days</div>
                     </div>
                   </div>
-                  <div class="d-flex align-items-center">
+                  {{-- <div class="d-flex align-items-center">
                     <!-- Call button -->
                     <a href="#!" class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Audio call"><i class="bi bi-telephone-fill"></i></a>
                     <a href="#!" class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Video call"><i class="bi bi-camera-video-fill"></i></a>
@@ -394,7 +394,7 @@
                       </ul>
                     </div>
                     <!-- Card action END -->
-                  </div>
+                  </div> --}}
                 </div>
                 <!-- Top avatar and status END -->
                 <hr>
