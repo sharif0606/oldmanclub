@@ -58,7 +58,7 @@
                         <a href="#chat-1" class="nav-link active text-start" id="chat-1-tab" data-bs-toggle="pill" role="tab">
                           <div class="d-flex">
                             <div class="flex-shrink-0 avatar avatar-story me-2 status-online">
-                              <img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt="">
+                              <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/10.jpg')}}" alt="">
                             </div>
                             <div class="flex-grow-1 d-block">
                               <h6 class="mb-0 mt-1">Frances Guerrero</h6>
@@ -72,7 +72,7 @@
                         <a href="#chat-2" class="nav-link text-start" id="chat-2-tab" data-bs-toggle="pill" role="tab">
                           <div class="d-flex">
                             <div class="flex-shrink-0 avatar me-2 status-offline">
-                              <img class="avatar-img rounded-circle" src="assets/images/avatar/11.jpg" alt="">
+                              <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/11.jpg')}}" alt="">
                             </div>
                             <div class="flex-grow-1 d-block">
                               <h6 class="mb-0 mt-1">Carolyn Ortiz</h6>
@@ -86,7 +86,7 @@
                         <a href="#chat-3" class="nav-link text-start" id="chat-3-tab" data-bs-toggle="pill" role="tab">
                           <div class="d-flex">
                             <div class="flex-shrink-0 avatar avatar-story me-2">
-                              <img class="avatar-img rounded-circle" src="assets/images/avatar/12.jpg" alt="">
+                              <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/12.jpg')}}" alt="">
                             </div>
                             <div class="flex-grow-1 d-block">
                               <h6 class="mb-0 mt-1">Billy Vasquez</h6>
@@ -102,10 +102,10 @@
                             <div class="flex-shrink-0 avatar me-2">
                               <ul class="avatar-group avatar-group-two">
                                 <li class="avatar avatar-xs">
-                                  <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="avatar">
+                                  <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/01.jpg')}}" alt="avatar">
                                 </li>
                                 <li class="avatar avatar-xs">
-                                  <img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg" alt="avatar">
+                                  <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/02.jpg')}}" alt="avatar">
                                 </li>
                               </ul>
                             </div>
@@ -123,13 +123,13 @@
                             <div class="flex-shrink-0 avatar me-2">
                               <ul class="avatar-group avatar-group-three">
                                 <li class="avatar avatar-xs">
-                                  <img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt="avatar">
+                                  <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/03.jpg')}}" alt="avatar">
                                 </li>
                                 <li class="avatar avatar-xs">
-                                  <img class="avatar-img rounded-circle" src="assets/images/avatar/04.jpg" alt="avatar">
+                                  <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/04.jpg')}}" alt="avatar">
                                 </li>
                                 <li class="avatar avatar-xs">
-                                  <img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt="avatar">
+                                  <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/05.jpg')}}" alt="avatar">
                                 </li>
                               </ul>
                             </div>
@@ -147,16 +147,16 @@
                             <div class="flex-shrink-0 avatar me-2">
                               <ul class="avatar-group avatar-group-four">
                                 <li class="avatar avatar-xxs">
-                                  <img class="avatar-img rounded-circle" src="assets/images/avatar/06.jpg" alt="avatar">
+                                  <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/06.jpg')}}" alt="avatar">
                                 </li>
                                 <li class="avatar avatar-xxs">
-                                  <img class="avatar-img rounded-circle" src="assets/images/avatar/07.jpg" alt="avatar">
+                                  <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/07.jpg')}}" alt="avatar">
                                 </li>
                                 <li class="avatar avatar-xxs">
-                                  <img class="avatar-img rounded-circle" src="assets/images/avatar/08.jpg" alt="avatar">
+                                  <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/08.jpg')}}" alt="avatar">
                                 </li>
                                 <li class="avatar avatar-xxs">
-                                  <img class="avatar-img rounded-circle" src="assets/images/avatar/placeholder.jpg" alt="avatar">
+                                  <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/placeholder.jpg')}}" alt="avatar">
                                 </li>
                               </ul>
                             </div>
@@ -189,14 +189,14 @@
                 <div class="d-sm-flex justify-content-between align-items-center">
                   <div class="d-flex mb-2 mb-sm-0">
                     <div class="flex-shrink-0 avatar me-2">
-                      <img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt="">
+                      <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/10.jpg')}}" alt="">
                     </div>
                     <div class="d-block flex-grow-1">
                       <h6 class="mb-0 mt-1">Judy Nguyen</h6>
                       <div class="small text-secondary"><i class="fa-solid fa-circle text-success me-1"></i>Online</div>
                     </div>
                   </div>
-                  <div class="d-flex align-items-center">
+                  {{-- <div class="d-flex align-items-center">
                     <!-- Call button -->
                     <a href="#!" class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Audio call"><i class="bi bi-telephone-fill"></i></a>
                     <a href="#!" class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Video call"><i class="bi bi-camera-video-fill"></i></a>
@@ -213,7 +213,7 @@
                       </ul>
                     </div>
                     <!-- Card action END -->
-                  </div>
+                  </div> --}}
                 </div>
                 <!-- Top avatar and status END -->
                 <hr>
@@ -224,7 +224,7 @@
                   <!-- Chat message left -->
                   <div class="d-flex mb-1">
                     <div class="flex-shrink-0 avatar avatar-xs me-2">
-                      <img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt="">
+                      <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/10.jpg')}}" alt="">
                     </div>
                     <div class="flex-grow-1">
                       <div class="w-100">
@@ -258,7 +258,7 @@
                   <!-- Chat message left -->
                   <div class="d-flex mb-1">
                     <div class="flex-shrink-0 avatar avatar-xs me-2">
-                      <img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt="">
+                      <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/10.jpg')}}" alt="">
                     </div>
                     <div class="flex-grow-1">
                       <div class="w-100">
@@ -274,7 +274,7 @@
                   <!-- Chat message left -->
                   <div class="d-flex mb-1">
                     <div class="flex-shrink-0 avatar avatar-xs me-2">
-                      <img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt="">
+                      <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/10.jpg')}}" alt="">
                     </div>
                     <div class="flex-grow-1">
                       <div class="w-100">
@@ -288,7 +288,7 @@
                   <!-- Chat message left -->
                   <div class="d-flex mb-1">
                     <div class="flex-shrink-0 avatar avatar-xs me-2">
-                      <img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt="">
+                      <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/10.jpg'}}" alt="">
                     </div>
                     <div class="flex-grow-1">
                       <div class="w-100">
@@ -296,7 +296,7 @@
                           <div class="bg-light text-secondary p-2 px-3 rounded-2">
                             <p class="small mb-0">Congratulations:)</p>
                             <div class="card shadow-none p-2 border border-2 rounded mt-2">
-                              <img src="assets/images/elements/14.svg" alt="">
+                              <img src="{{asset('public/user/assets/images/elements/14.svg')}}" alt="">
                             </div>
                           </div>
                           <div class="small my-2">3:22 PM</div>
@@ -321,7 +321,7 @@
                   <div class="d-flex justify-content-end text-end mb-1">
                     <div class="w-100">
                       <div class="d-flex flex-column align-items-end">
-                        <img class="rounded h-200px" src="assets/images/avatar/05.jpg" alt="">
+                        <img class="rounded h-200px" src="{{asset('public/user/assets/images/avatar/05.jpg')}}" alt="">
                         <div class="small my-2">5:36 PM</div>
                       </div>
                     </div>
@@ -331,7 +331,7 @@
                   <!-- Chat message left -->
                   <div class="d-flex mb-2">
                     <div class="flex-shrink-0 avatar avatar-xs me-2">
-                      <img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt="">
+                      <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/10.jpg')}}" alt="">
                     </div>
                     <div class="flex-grow-1">
                       <div class="w-100">
@@ -344,7 +344,7 @@
                   <!-- Chat message left -->
                   <div class="d-flex mb-1">
                     <div class="flex-shrink-0 avatar avatar-xs me-2">
-                      <img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt="">
+                      <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/10.jpg')}}" alt="">
                     </div>
                     <div class="flex-grow-1">
                       <div class="w-100">
@@ -370,7 +370,7 @@
                 <div class="d-sm-flex justify-content-between align-items-center">
                   <div class="d-flex mb-2 mb-sm-0">
                     <div class="flex-shrink-0 avatar me-2">
-                      <img class="avatar-img rounded-circle" src="assets/images/avatar/11.jpg" alt="">
+                      <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/11.jpg')}}" alt="">
                     </div>
                     <div class="d-block flex-grow-1">
                       <h6 class="mb-0 mt-1">Carolyn Ortiz</h6>
@@ -405,7 +405,7 @@
                   <!-- Chat message left -->
                   <div class="d-flex mb-1">
                     <div class="flex-shrink-0 avatar avatar-xs me-2">
-                      <img class="avatar-img rounded-circle" src="assets/images/avatar/11.jpg" alt="">
+                      <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/11.jpg')}}" alt="">
                     </div>
                     <div class="flex-grow-1">
                       <div class="w-100">
@@ -420,7 +420,7 @@
                   <div class="d-flex justify-content-end text-end mb-1">
                     <div class="w-100">
                       <div class="d-flex flex-column align-items-end">
-                        <div class="bg-primary text-white p-2 px-3 rounded-2">Creeping earth under was You're without which image.</div>
+                        <div class="bg-primary text-white p-2 px-3 rounded-2">Creeping earth under was You are without which image.</div>
                         <div class="d-flex my-2">
                           <div class="small text-secondary">6:20 AM</div>
                           <div class="small ms-2"><i class="fa-solid fa-check-double text-info"></i></div>
@@ -431,7 +431,7 @@
                   <!-- Chat message left -->
                   <div class="d-flex mb-1">
                     <div class="flex-shrink-0 avatar avatar-xs me-2">
-                      <img class="avatar-img rounded-circle" src="assets/images/avatar/11.jpg" alt="">
+                      <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/11.jpg')}}" alt="">
                     </div>
                     <div class="flex-grow-1">
                       <div class="w-100">
@@ -445,7 +445,7 @@
                   <!-- Chat message left -->
                   <div class="d-flex mb-1">
                     <div class="flex-shrink-0 avatar avatar-xs me-2">
-                      <img class="avatar-img rounded-circle" src="assets/images/avatar/11.jpg" alt="">
+                      <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/11.jpg')}}" alt="">
                     </div>
                     <div class="flex-grow-1">
                       <div class="w-100">
@@ -473,12 +473,12 @@
                   <!-- Chat message left -->
                   <div class="d-flex mb-1">
                     <div class="flex-shrink-0 avatar avatar-xs me-2">
-                      <img class="avatar-img rounded-circle" src="assets/images/avatar/11.jpg" alt="">
+                      <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/11.jpg')}}" alt="">
                     </div>
                     <div class="flex-grow-1">
                       <div class="w-100">
                         <div class="d-flex flex-column align-items-start">
-                          <div class="bg-light text-secondary p-2 px-3 rounded-2">Thing they're fruit together forth day.</div>
+                          <div class="bg-light text-secondary p-2 px-3 rounded-2">Thing they are fruit together forth day.</div>
                         </div>
                       </div>
                     </div>
@@ -486,7 +486,7 @@
                   <!-- Chat message left -->
                   <div class="d-flex mb-1">
                     <div class="flex-shrink-0 avatar avatar-xs me-2">
-                      <img class="avatar-img rounded-circle" src="assets/images/avatar/11.jpg" alt="">
+                      <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/11.jpg')}}" alt="">
                     </div>
                     <div class="flex-grow-1">
                       <div class="w-100">
@@ -508,7 +508,7 @@
                 <div class="d-sm-flex justify-content-between align-items-center">
                   <div class="d-flex mb-2 mb-sm-0">
                     <div class="flex-shrink-0 avatar me-2">
-                      <img class="avatar-img rounded-circle" src="assets/images/avatar/12.jpg" alt="">
+                      <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/12.jpg')}}" alt="">
                     </div>
                     <div class="d-block flex-grow-1">
                       <h6 class="mb-0 mt-1">Billy Vasquez</h6>
