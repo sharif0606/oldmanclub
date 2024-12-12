@@ -50,8 +50,12 @@
                             </div>
                             <!-- Card header END -->
                         </div>
+                        <!-- Card START -->
+                        @include('user.includes.celebration')
+                        <!-- Card END -->
                     </div>
                 </div>
+                
                 <!-- NFC Card START -->
                 <div class="col-md-6 vstack gap-2">
                     <!-- Card START -->
@@ -105,9 +109,6 @@
                 <div class="col-md-3">
                     <div class="row g-2">
                         @include('user.includes.online-active')
-                        <!-- Card START -->
-                        @include('user.includes.celebration')
-                        <!-- Card END -->
                     </div>
                 </div>
             </div> <!-- Row END -->
