@@ -71,7 +71,7 @@ class HomeController extends Controller
         $client = Client::find(currentUserId());
         //return view('chat.index')->with(['client' => $client,'users' => $users, 'contacts' => $contacts, 'groupdata' => $groupdata, 'AttachedFiles' => $AttachedFiles]);
         
-        return view('user.messaging',compact('client'));
+        return view('user.messaging',compact('client'))->with(['client' => $client,'users' => $users, 'contacts' => $contacts, 'groupdata' => $groupdata, 'AttachedFiles' => $AttachedFiles]);
     }
 
     public function getMessage($user_id)
