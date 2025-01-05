@@ -52,11 +52,11 @@
                 <!-- Chat list tab START -->
                 <div class="mt-4 h-100">
                   <div class="chat-tab-list custom-scrollbar">
-                    <ul class="nav flex-column nav-pills nav-pills-soft chat-list chat-user-list">
+                    <ul class="nav flex-column nav-pills nav-pills-soft">
                       @foreach($users as $user)
-                      <li class="user" data-id="{{ $user->id }}" id="user-{{ $user->id }}" user-id="{{ $user->id }}">
+                      <li data-bs-dismiss="offcanvas">
                         <!-- Chat user tab item -->
-                        <a href="#">
+                        <a href="#chat-{{$user->id}}" class="nav-link active text-start" id="chat-{{$user->id}}-tab" data-bs-toggle="pill" role="tab">
                           <div class="d-flex">
                             <div class="flex-shrink-0 avatar avatar-story me-2 status-{{ Cache::has('is_online' . $user->id) ? 'online' : 'offline' }}">
                               @if (Cache::has('is_online' . $user->id))
