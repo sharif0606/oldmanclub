@@ -2,21 +2,21 @@
 @section('content')
 <!-- **************** MAIN CONTENT START **************** -->
 <main>
-
+  
   <!-- Container START -->
   <div class="container">
-    <div class="row gx-0">
+		<div class="row gx-0">
       <!-- Sidebar START -->
       <div class="col-lg-4 col-xxl-3" id="chatTabs" role="tablist">
 
         <!-- Divider -->
-        <div class="d-flex align-items-center mb-4 d-lg-none">
-          <button class="border-0 bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-            <span class="btn btn-primary"><i class="fa-solid fa-sliders-h"></i></span>
+				<div class="d-flex align-items-center mb-4 d-lg-none">
+					<button class="border-0 bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+						<span class="btn btn-primary"><i class="fa-solid fa-sliders-h"></i></span>
             <span class="h6 mb-0 fw-bold d-lg-none ms-2">Chats</span>
-          </button>
-        </div>
-        <!-- Advanced filter responsive toggler END -->
+					</button>
+				</div>
+				<!-- Advanced filter responsive toggler END -->
         <div class="card card-body border-end-0 border-bottom-0 rounded-bottom-0">
           <div class=" d-flex justify-content-between align-items-center">
             <h1 class="h5 mb-0">Active chats <span class="badge bg-success bg-opacity-10 text-success">6</span></h1>
@@ -29,163 +29,152 @@
             <!-- Chat new create message item END -->
           </div>
         </div>
-        <div class="d-flex">
 
-          <ul class="nav nav-pills side-menu-nav justify-content-center mx-2" role="tablist">
-            <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="top" title="{{ __("Profile") }}">
-              <a class="nav-link" id="pills-user-tab" data-toggle="pill" href="#pills-user" role="tab">
-                <i class="bi bi-search fs-5"></i>
-              </a>
-            </li>
-          </ul>
+        <nav class="navbar navbar-light navbar-expand-lg mx-0">
+          <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar">
+            <!-- Offcanvas header -->
+						<div class="offcanvas-header">
+							<button type="button" class="btn-close text-reset ms-auto" data-bs-dismiss="offcanvas"></button>
+						</div>
 
-
-          <nav class="navbar navbar-light navbar-expand-lg mx-0">
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar">
-              <!-- Offcanvas header -->
-              <div class="offcanvas-header">
-                <button type="button" class="btn-close text-reset ms-auto" data-bs-dismiss="offcanvas"></button>
-              </div>
-
-              <!-- Offcanvas body -->
-              <div class="offcanvas-body p-0">
-                <div class="card card-chat-list rounded-end-lg-0 card-body border-end-lg-0 rounded-top-0">
-
-                  <!-- Search chat START -->
-                  <form class="position-relative">
-                    <input class="form-control py-2" type="search" placeholder="Search for chats" aria-label="Search">
-                    <button class="btn bg-transparent text-secondary px-2 py-0 position-absolute top-50 end-0 translate-middle-y" type="submit">
-                      <i class="bi bi-search fs-5"></i>
-                    </button>
-                  </form>
-                  <!-- Search chat END -->
-                  <!-- Chat list tab START -->
-                  <div class="mt-4 h-100">
-                    <div class="chat-tab-list custom-scrollbar">
-                      <ul class="nav flex-column nav-pills nav-pills-soft">
-                        <li data-bs-dismiss="offcanvas">
-                          <!-- Chat user tab item -->
-                          <a href="#chat-1" class="nav-link active text-start" id="chat-1-tab" data-bs-toggle="pill" role="tab">
-                            <div class="d-flex">
-                              <div class="flex-shrink-0 avatar avatar-story me-2 status-online">
-                                <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/10.jpg')}}" alt="">
-                              </div>
-                              <div class="flex-grow-1 d-block">
-                                <h6 class="mb-0 mt-1">Frances Guerrero</h6>
-                                <div class="small text-secondary">Frances sent a photo.</div>
-                              </div>
-                            </div>
-                          </a>
-                        </li>
+            <!-- Offcanvas body -->
+            <div class="offcanvas-body p-0">
+              <div class="card card-chat-list rounded-end-lg-0 card-body border-end-lg-0 rounded-top-0">
+                
+                <!-- Search chat START -->
+                <form class="position-relative">
+                  <input class="form-control py-2" type="search" placeholder="Search for chats" aria-label="Search">
+                  <button class="btn bg-transparent text-secondary px-2 py-0 position-absolute top-50 end-0 translate-middle-y" type="submit">
+                    <i class="bi bi-search fs-5"></i>
+                  </button>
+                </form>
+                <!-- Search chat END -->
+                <!-- Chat list tab START -->
+                <div class="mt-4 h-100">
+                  <div class="chat-tab-list custom-scrollbar">
+                    <ul class="nav flex-column nav-pills nav-pills-soft">
+                      <li data-bs-dismiss="offcanvas">
                         <!-- Chat user tab item -->
-                        <li data-bs-dismiss="offcanvas">
-                          <a href="#chat-2" class="nav-link text-start" id="chat-2-tab" data-bs-toggle="pill" role="tab">
-                            <div class="d-flex">
-                              <div class="flex-shrink-0 avatar me-2 status-offline">
-                                <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/11.jpg')}}" alt="">
-                              </div>
-                              <div class="flex-grow-1 d-block">
-                                <h6 class="mb-0 mt-1">Carolyn Ortiz</h6>
-                                <div class="small text-secondary">You missed a call form🤙</div>
-                              </div>
+                        <a href="#chat-1" class="nav-link active text-start" id="chat-1-tab" data-bs-toggle="pill" role="tab">
+                          <div class="d-flex">
+                            <div class="flex-shrink-0 avatar avatar-story me-2 status-online">
+                              <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/10.jpg')}}" alt="">
                             </div>
-                          </a>
-                        </li>
-                        <!-- Chat user tab item -->
-                        <li data-bs-dismiss="offcanvas">
-                          <a href="#chat-3" class="nav-link text-start" id="chat-3-tab" data-bs-toggle="pill" role="tab">
-                            <div class="d-flex">
-                              <div class="flex-shrink-0 avatar avatar-story me-2">
-                                <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/12.jpg')}}" alt="">
-                              </div>
-                              <div class="flex-grow-1 d-block">
-                                <h6 class="mb-0 mt-1">Billy Vasquez</h6>
-                                <div class="small text-secondary">Day sweetness 😊</div>
-                              </div>
+                            <div class="flex-grow-1 d-block">
+                              <h6 class="mb-0 mt-1">Frances Guerrero</h6>
+                              <div class="small text-secondary">Frances sent a photo.</div>
                             </div>
-                          </a>
-                        </li>
-                        <!-- Chat user tab item -->
-                        <li data-bs-dismiss="offcanvas">
-                          <a href="#chat-4" class="nav-link text-start" id="chat-4-tab" data-bs-toggle="pill" role="tab">
-                            <div class="d-flex">
-                              <div class="flex-shrink-0 avatar me-2">
-                                <ul class="avatar-group avatar-group-two">
-                                  <li class="avatar avatar-xs">
-                                    <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/01.jpg')}}" alt="avatar">
-                                  </li>
-                                  <li class="avatar avatar-xs">
-                                    <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/02.jpg')}}" alt="avatar">
-                                  </li>
-                                </ul>
-                              </div>
-                              <div class="flex-grow-1 d-block">
-                                <h6 class="mb-0 mt-1">Dennis, Ortiz</h6>
-                                <div class="small text-secondary">Ortiz: I'm adding jhon</div>
-                              </div>
+                          </div>
+                        </a>
+                      </li>
+                      <!-- Chat user tab item -->
+                      <li data-bs-dismiss="offcanvas">
+                        <a href="#chat-2" class="nav-link text-start" id="chat-2-tab" data-bs-toggle="pill" role="tab">
+                          <div class="d-flex">
+                            <div class="flex-shrink-0 avatar me-2 status-offline">
+                              <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/11.jpg')}}" alt="">
                             </div>
-                          </a>
-                        </li>
-                        <!-- Chat user tab item -->
-                        <li data-bs-dismiss="offcanvas">
-                          <a href="#chat-5" class="nav-link text-start" id="chat-5-tab" data-bs-toggle="pill" role="tab">
-                            <div class="d-flex">
-                              <div class="flex-shrink-0 avatar me-2">
-                                <ul class="avatar-group avatar-group-three">
-                                  <li class="avatar avatar-xs">
-                                    <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/03.jpg')}}" alt="avatar">
-                                  </li>
-                                  <li class="avatar avatar-xs">
-                                    <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/04.jpg')}}" alt="avatar">
-                                  </li>
-                                  <li class="avatar avatar-xs">
-                                    <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/05.jpg')}}" alt="avatar">
-                                  </li>
-                                </ul>
-                              </div>
-                              <div class="flex-grow-1 d-block">
-                                <h6 class="mb-0 mt-1">Knight, Billy, Bryan</h6>
-                                <div class="small text-secondary">Billy: Thank you!</div>
-                              </div>
+                            <div class="flex-grow-1 d-block">
+                              <h6 class="mb-0 mt-1">Carolyn Ortiz</h6>
+                              <div class="small text-secondary">You missed a call form🤙</div>
                             </div>
-                          </a>
-                        </li>
-                        <!-- Chat user tab item -->
-                        <li data-bs-dismiss="offcanvas">
-                          <a href="#chat-6" class="nav-link text-start" id="chat-6-tab" data-bs-toggle="pill" role="tab">
-                            <div class="d-flex">
-                              <div class="flex-shrink-0 avatar me-2">
-                                <ul class="avatar-group avatar-group-four">
-                                  <li class="avatar avatar-xxs">
-                                    <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/06.jpg')}}" alt="avatar">
-                                  </li>
-                                  <li class="avatar avatar-xxs">
-                                    <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/07.jpg')}}" alt="avatar">
-                                  </li>
-                                  <li class="avatar avatar-xxs">
-                                    <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/08.jpg')}}" alt="avatar">
-                                  </li>
-                                  <li class="avatar avatar-xxs">
-                                    <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/placeholder.jpg')}}" alt="avatar">
-                                  </li>
-                                </ul>
-                              </div>
-                              <div class="flex-grow-1 d-block overflow-hidden">
-                                <h6 class="mb-0 mt-1 text-truncate w-75">Webestica crew </h6>
-                                <div class="small text-secondary">You: Okay thanks, everyone.</div>
-                              </div>
+                          </div>
+                        </a>
+                      </li>
+                      <!-- Chat user tab item -->
+                      <li data-bs-dismiss="offcanvas">
+                        <a href="#chat-3" class="nav-link text-start" id="chat-3-tab" data-bs-toggle="pill" role="tab">
+                          <div class="d-flex">
+                            <div class="flex-shrink-0 avatar avatar-story me-2">
+                              <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/12.jpg')}}" alt="">
                             </div>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
+                            <div class="flex-grow-1 d-block">
+                              <h6 class="mb-0 mt-1">Billy Vasquez</h6>
+                              <div class="small text-secondary">Day sweetness 😊</div>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <!-- Chat user tab item -->
+                      <li data-bs-dismiss="offcanvas">
+                        <a href="#chat-4" class="nav-link text-start" id="chat-4-tab" data-bs-toggle="pill" role="tab">
+                          <div class="d-flex">
+                            <div class="flex-shrink-0 avatar me-2">
+                              <ul class="avatar-group avatar-group-two">
+                                <li class="avatar avatar-xs">
+                                  <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/01.jpg')}}" alt="avatar">
+                                </li>
+                                <li class="avatar avatar-xs">
+                                  <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/02.jpg')}}" alt="avatar">
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="flex-grow-1 d-block">
+                              <h6 class="mb-0 mt-1">Dennis, Ortiz</h6>
+                              <div class="small text-secondary">Ortiz: I'm adding jhon</div>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <!-- Chat user tab item -->
+                      <li data-bs-dismiss="offcanvas">
+                        <a href="#chat-5" class="nav-link text-start" id="chat-5-tab" data-bs-toggle="pill" role="tab">
+                          <div class="d-flex">
+                            <div class="flex-shrink-0 avatar me-2">
+                              <ul class="avatar-group avatar-group-three">
+                                <li class="avatar avatar-xs">
+                                  <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/03.jpg')}}" alt="avatar">
+                                </li>
+                                <li class="avatar avatar-xs">
+                                  <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/04.jpg')}}" alt="avatar">
+                                </li>
+                                <li class="avatar avatar-xs">
+                                  <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/05.jpg')}}" alt="avatar">
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="flex-grow-1 d-block">
+                              <h6 class="mb-0 mt-1">Knight, Billy, Bryan</h6>
+                              <div class="small text-secondary">Billy: Thank you!</div>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <!-- Chat user tab item -->
+                      <li data-bs-dismiss="offcanvas">
+                        <a href="#chat-6" class="nav-link text-start" id="chat-6-tab" data-bs-toggle="pill" role="tab">
+                          <div class="d-flex">
+                            <div class="flex-shrink-0 avatar me-2">
+                              <ul class="avatar-group avatar-group-four">
+                                <li class="avatar avatar-xxs">
+                                  <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/06.jpg')}}" alt="avatar">
+                                </li>
+                                <li class="avatar avatar-xxs">
+                                  <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/07.jpg')}}" alt="avatar">
+                                </li>
+                                <li class="avatar avatar-xxs">
+                                  <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/08.jpg')}}" alt="avatar">
+                                </li>
+                                <li class="avatar avatar-xxs">
+                                  <img class="avatar-img rounded-circle" src="{{asset('public/user/assets/images/avatar/placeholder.jpg')}}" alt="avatar">
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="flex-grow-1 d-block overflow-hidden">
+                              <h6 class="mb-0 mt-1 text-truncate w-75">Webestica crew </h6>
+                              <div class="small text-secondary">You: Okay thanks, everyone.</div>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                    </ul>
                   </div>
-                  <!-- Chat list tab END -->
                 </div>
+                <!-- Chat list tab END -->
               </div>
             </div>
-          </nav>
-        </div>
+          </div>
+        </nav>
       </div>
       <!-- Sidebar START -->
 
@@ -532,7 +521,7 @@
                     <a href="#!" class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Video call"><i class="bi bi-camera-video-fill"></i></a>
                     <!-- Card action START -->
                     <div class="dropdown">
-                      <a class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" href="#" id="chatcoversationDropdown3" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i></a>
+                      <a class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" href="#" id="chatcoversationDropdown3" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i></a>               
                       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="chatcoversationDropdown3">
                         <li><a class="dropdown-item" href="#"><i class="bi bi-check-lg me-2 fw-icon"></i>Mark as read</a></li>
                         <li><a class="dropdown-item" href="#"><i class="bi bi-mic-mute me-2 fw-icon"></i>Mute conversation</a></li>
@@ -634,7 +623,7 @@
                     <a href="#!" class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Video call"><i class="bi bi-camera-video-fill"></i></a>
                     <!-- Card action START -->
                     <div class="dropdown">
-                      <a class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" href="#" id="chatcoversationDropdown4" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i></a>
+                      <a class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" href="#" id="chatcoversationDropdown4" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i></a>               
                       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="chatcoversationDropdown4">
                         <li><a class="dropdown-item" href="#"><i class="bi bi-check-lg me-2 fw-icon"></i>Mark as read</a></li>
                         <li><a class="dropdown-item" href="#"><i class="bi bi-mic-mute me-2 fw-icon"></i>Mute conversation</a></li>
@@ -789,7 +778,7 @@
                     <a href="#!" class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Video call"><i class="bi bi-camera-video-fill"></i></a>
                     <!-- Card action START -->
                     <div class="dropdown">
-                      <a class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" href="#" id="chatcoversationDropdown5" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i></a>
+                      <a class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" href="#" id="chatcoversationDropdown5" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i></a>               
                       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="chatcoversationDropdown5">
                         <li><a class="dropdown-item" href="#"><i class="bi bi-check-lg me-2 fw-icon"></i>Mark as read</a></li>
                         <li><a class="dropdown-item" href="#"><i class="bi bi-mic-mute me-2 fw-icon"></i>Mute conversation</a></li>
@@ -916,7 +905,7 @@
                     <a href="#!" class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Video call"><i class="bi bi-camera-video-fill"></i></a>
                     <!-- Card action START -->
                     <div class="dropdown">
-                      <a class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" href="#" id="chatcoversationDropdown6" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i></a>
+                      <a class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" href="#" id="chatcoversationDropdown6" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i></a>               
                       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="chatcoversationDropdown6">
                         <li><a class="dropdown-item" href="#"><i class="bi bi-check-lg me-2 fw-icon"></i>Mark as read</a></li>
                         <li><a class="dropdown-item" href="#"><i class="bi bi-mic-mute me-2 fw-icon"></i>Mute conversation</a></li>
@@ -931,7 +920,7 @@
                 </div>
                 <!-- Top avatar and status END -->
                 <hr>
-                <!-- Chat conversation START -->
+                 <!-- Chat conversation START -->
                 <div class="chat-conversation-content custom-scrollbar">
                   <!-- Chat time -->
                   <div class="text-center small my-2">Jul 16, 2022, 06:15 am</div>
@@ -1048,7 +1037,7 @@
     <!-- =======================
     Chat END -->
 
-  </div>
+	</div>
   <!-- Container END -->
 
 </main>
@@ -1073,7 +1062,7 @@
           <span class="input-group-text border-0">To</span>
           <input class="form-control" type="text" placeholder="Type a name or multiple names">
         </div>
-      </form>
+      </form>         
       <!-- Chat conversation END -->
       <!-- Extra space -->
       <div class="h-200px"></div>

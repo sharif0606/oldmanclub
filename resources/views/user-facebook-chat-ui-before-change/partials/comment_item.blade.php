@@ -25,7 +25,6 @@
                 <p class="small mb-0">{{ $comment->content }}</p> <!-- Replace with comment content -->
             </div>
              <!-- Comment react -->
-             @if ($comment->replies->isNotEmpty())
              <ul class="nav nav-divider py-2 small reply-reaction" data-reply-id="{{$reply->id}}">
                 <!-- Add your reply reaction buttons here -->
                 <li class="nav-item dropdown dropup" data-bs-toggle="dropdown" aria-expanded="false">
@@ -66,7 +65,6 @@
                     <a class="nav-link" href="#!"> Reply</a>
                 </li> --}}
             </ul>
-            @endif
             {{-- action="{{ route('reply.store') }}" method="post" --}}
             <!-- Reply Form (hidden by default) -->
             <form class="nav nav-item w-100 position-relative reply-form my-2" style="display: none;" data-comment-id="{{ $comment->id }}">
