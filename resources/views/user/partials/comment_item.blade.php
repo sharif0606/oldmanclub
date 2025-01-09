@@ -66,6 +66,10 @@
                     <a class="nav-link" href="#!"> Reply</a>
                 </li> --}}
             </ul>
+            @else
+            <ul class="nav nav-divider py-2 small reply-reaction">
+            @include('user.partials.comment-reaction')
+            </ul>
             @endif
             {{-- action="{{ route('reply.store') }}" method="post" --}}
             <!-- Reply Form (hidden by default) -->
