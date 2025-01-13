@@ -1,6 +1,6 @@
 <div class="side-menu flex-lg-column mr-lg-1">
     <!-- LOGO -->
-    <div class="navbar-brand-box">
+    <!-- <div class="navbar-brand-box">
         <a href="{{url('/')}}" class="logo logo-dark">
             <span class="logo-sm">
                 <img src="{{ URL::asset('assets/images/logo.svg')}}" alt="" height="30">
@@ -12,17 +12,17 @@
                 <img src="{{ URL::asset('assets/images/logo.svg')}}" alt="" height="30">
             </span>
         </a>
-    </div>
+    </div> -->
     <!-- end navbar-brand-box -->
 
     <!-- Start side-menu nav -->
-    <div class="flex-lg-column my-auto">
+    <div class="flex-lg-column"><!--my-auto-->
         <ul class="nav nav-pills side-menu-nav justify-content-center" role="tablist">
-            <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="top" title="{{ __("Profile") }}">
+            {{--<li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="top" title="{{ __("Profile") }}">
                 <a class="nav-link" id="pills-user-tab" data-toggle="pill" href="#pills-user" role="tab">
                     <i class="ri-user-2-line"></i>
                 </a>
-            </li>
+            </li>--}}
             <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="top" title="{{ __("Chats") }}">
                 <a class="nav-link active" id="pills-chat-tab" data-toggle="pill" href="#pills-chat" role="tab">
                     <i class="ri-message-3-line"></i>
@@ -38,7 +38,7 @@
                     <i class="ri-contacts-line"></i>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="top" title="{{ __("Settings") }}">
+            {{--<li class="nav-item" data-toggle="tooltip" data-trigger="hover" data-placement="top" title="{{ __("Settings") }}">
                 <a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#pills-setting" role="tab">
                     <i class="ri-settings-2-line"></i>
                 </a>
@@ -56,12 +56,12 @@
                         @csrf
                     </form>
                 </div>
-            </li>
+            </li>--}}
         </ul>
     </div>
     <!-- end side-menu nav -->
 
-    <div class="flex-lg-column d-none d-lg-block">
+    {{--<div class="flex-lg-column d-none d-lg-block">
         <ul class="nav side-menu-nav justify-content-center">
             <li class="nav-item">
                 <a class="nav-link" id="light-dark" href="#" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="{{ __("Dark / Light Mode") }}">
@@ -77,14 +77,14 @@
                     <a class="dropdown-item" href="{{route('myProfile')}}" id="profile-tab" target="_blank">{{ __("Profile") }} <i class="ri-profile-line float-right text-muted"></i></a>
                     <a class="dropdown-item" href="{{route('accountSetting')}}" id="setting-tab" target="_blank">{{ __("Setting") }} <i class="ri-settings-3-line float-right text-muted"></i></a>
                     <div class="dropdown-divider"></div>
-                    {{--<a class="dropdown-item" href="javascript:void();" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __("Log out") }} <i class="ri-logout-circle-r-line float-right text-muted"></i></a>
+                    <a class="dropdown-item" href="javascript:void();" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __("Log out") }} <i class="ri-logout-circle-r-line float-right text-muted"></i></a>
                     <form id="logout-form" action="{{ route('logOut') }}" method="POST" style="display: none;">
                         @csrf
-                    </form>--}}
+                    </form>
                     <a class="dropdown-item" href="{{route('clientlogOut')}}">{{ __("Log out") }} <i class="ri-logout-circle-r-line float-right text-muted"></i></a>
                 </div>
             </li>
         </ul>
-    </div>
+    </div>--}}
     <!-- Side menu user -->
 </div>

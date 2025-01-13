@@ -1,5 +1,5 @@
 @foreach ($contacts as $user => $key)
-    <div class="p-3 font-weight-bold text-primary text-uppercase">{{ $user }}</div>
+    <div class="p-0 font-weight-bold text-primary text-uppercase">{{ $user }}</div>
     <ul class="list-unstyled contact-list">
         @foreach ($key as $contact)
             <li class="user" id="{{ $contact->id }}">

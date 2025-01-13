@@ -1,8 +1,8 @@
 <!-- Start chat user head -->
-<div class="p-3 p-lg-4 border-bottom">
+<div class="p-1 border-bottom">
     <div class="row align-items-center">
         <div class="col-sm-4 col-8">
-            <div class="media align-items-center CHATUSER" id="{{ $chatUser->id }}">
+            <div class="media align-items-center CHATUSER d-flex" id="{{ $chatUser->id }}">
                 <div class="d-block d-lg-none mr-2">
                     <a href="javascript: void(0);" class="user-chat-remove text-muted font-size-16 p-2"><i
                             class="ri-arrow-left-s-line"></i></a>
@@ -83,18 +83,18 @@
 <!-- end chat conversation end -->
 
 <!-- start chat input section -->
-<div class="chat-input p-3 p-lg-4 border-top mb-0">
-    <div class="row no-gutters">
+<div class="chat-input px-3 border-top mb-0">
+    <div class="row no-gutters d-flex align-item-center my-2">
         <div class="col">
             <div>
-                <p class="emoji-picker-container d-flex align-items-end m-0">
-                    <input class="input-field form-control form-control-lg bg-light border-light" data-emojiable="true"
+                <p class="emoji-picker-container d-flex align-items-center m-0">
+                    <input class="input-field form-control form-control-lg bg-light border-light me-4" data-emojiable="true"
                         data-emoji-input="true" type="text" name="comment" id="comment"
                         placeholder="{{ __("Enter Message") }}..." />
                 </p>
             </div>
         </div>
-        <div class="col-auto">
+        <div class="col-auto my-auto">
             <div class="chat-input-links ml-md-2">
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item">
@@ -112,7 +112,7 @@
                     </li>
                     <li class="list-inline-item">
                         <button type="button"
-                            class="btn btn-primary font-size-16 btn-lg chat-send waves-effect waves-light send-chat-message"
+                            class="btn btn-primary font-size-16 btn-sm chat-send waves-effect waves-light send-chat-message"
                             data-user="{{ $chatUser->id }}">
                             <i class="ri-send-plane-2-fill"></i>
                         </button>

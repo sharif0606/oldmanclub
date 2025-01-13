@@ -724,7 +724,8 @@ File: Main Css File
 
 .side-menu-nav .nav-item .nav-link.active {
   background-color: #f7f7ff;
-  color: #7269ef;
+  /*color: #7269ef;*/
+  color: #0F6FEA;
 }
 
 .side-menu-nav .nav-item.show > .nav-link {
@@ -741,7 +742,8 @@ File: Main Css File
 
 .chat-leftsidebar {
   height: 100vh;
-  background-color: #f5f7fb;
+   /*background-color: #f5f7fb; */
+  background-color: #fff;
 }
 
 @media (min-width: 992px) {
@@ -968,7 +970,7 @@ File: Main Css File
 }
 
 .chat-conversation .conversation-list {
-  margin-bottom: 24px;
+  /*margin-bottom: 24px;*/
   display: inline-flex;
   position: relative;
   align-items: flex-end;
@@ -981,7 +983,8 @@ File: Main Css File
 
 .chat-conversation .conversation-list .ctext-wrap-content {
   padding: 12px 20px;
-  background-color: #7269ef;
+  /*background-color: #7269ef;*/
+  background-color: #0F6FEA;
   border-radius: 8px 8px 8px 0;
   color: #fff;
   position: relative;
@@ -991,8 +994,10 @@ File: Main Css File
   content: "";
   position: absolute;
   border: 5px solid transparent;
-  border-left-color: #7269ef;
-  border-top-color: #7269ef;
+  /*border-left-color: #7269ef;
+  border-top-color: #7269ef;*/
+  border-left-color: #0F6FEA;
+  border-top-color: #0F6FEA;
   left: 0;
   bottom: -10px;
 }
@@ -1058,7 +1063,8 @@ File: Main Css File
 
 .chat-conversation .right .chat-time {
   text-align: left;
-  color: #7a7f9a;
+  /*color: #7a7f9a;*/
+  color: #fff;
 }
 
 .chat-conversation .right .conversation-list {
@@ -1068,8 +1074,10 @@ File: Main Css File
 
 .chat-conversation .right .conversation-list .ctext-wrap .ctext-wrap-content {
   order: 2;
-  background-color: #f5f7fb;
-  color: #343a40;
+  /*background-color: #f5f7fb;*/
+  background-color: #0F6FEA;
+  /*color: #343a40;*/
+  color: #fff;
   text-align: right;
   border-radius: 8px 8px 0px 8px;
 }

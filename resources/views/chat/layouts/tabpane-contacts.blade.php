@@ -1,6 +1,6 @@
 <!-- Start Contact content -->
 <div>
-    <div class="p-4">
+    <div class="px-2">
         {{--<div class="user-chat-nav float-right">
             <div data-toggle="tooltip" data-placement="bottom" title="{{ __("Add Contact") }}">
                 <!-- Button trigger modal -->
@@ -9,7 +9,7 @@
                 </button>
             </div>
         </div>--}}
-        <h4 class="mb-4">{{ __("Contacts") }}</h4>
+        <h4 class="mb-1">{{ __("Contacts") }}</h4>
 
         <!-- Start Add contact Modal -->
         <div class="modal fade" id="addContact-exampleModal" tabindex="-1" role="dialog" aria-labelledby="addContact-exampleModalLabel" aria-hidden="true">

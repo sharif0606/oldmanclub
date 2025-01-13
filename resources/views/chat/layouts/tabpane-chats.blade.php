@@ -1,11 +1,11 @@
 <!-- Start chats content -->
 <div>
-    <div class="px-4 pt-4">
-        <h4 class="mb-4">Chats</h4>
+    <div class="px-2">
+        <h4 class="mb-1">Active Chats</h4>
         <div class="search-box chat-search-box">
             <div class="input-group mb-3 bg-light  input-group-lg rounded-lg">
-                <div class="input-group-prepend">
-                    <button class="btn btn-link text-muted pr-1 text-decoration-none" type="button">
+                <div class="input-group-prepend py-2">
+                    <button class="btn btn-link text-muted ps-1 text-decoration-none" type="button">
                         <i class="ri-search-line search-icon font-size-18"></i>
                     </button>
                 </div>
@@ -16,7 +16,7 @@
     </div> <!-- .p-4 -->
     
     <!-- Start user status -->
-    <div class="px-4 pb-4" dir="ltr">
+    {{--<div class="px-4" dir="ltr">
 
         <div class="owl-carousel owl-theme" id="user-status-carousel">
             @foreach($users as $user)
@@ -34,12 +34,12 @@
             @endforeach
         </div>
         <!-- end user status carousel -->
-    </div>
+    </div>--}}
     <!-- end user status -->
 
     <!-- Start chat-message-list -->
     <div class="px-2">
-        <h5 class="mb-3 px-3 font-size-16">{{ __("Recent") }}</h5>
+        <!-- <h5 class="mb-3 px-3 font-size-16">{{ __("Recent") }}</h5> -->
 
         <div class="chat-message-list" data-simplebar>
             <div class="chat-message-chatlist">

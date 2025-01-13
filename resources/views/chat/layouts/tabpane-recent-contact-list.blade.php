@@ -1,46 +1,49 @@
 <ul class="list-unstyled chat-list chat-user-list">
     @foreach ($users as $user)
-        <li class="user" data-id="{{ $user->id }}" id="user-{{ $user->id }}" user-id="{{ $user->id }}">
-            <a href="#">
-                <div class="media">
+    <li class="user" data-id="{{ $user->id }}" id="user-{{ $user->id }}" user-id="{{ $user->id }}">
+        <a href="#">
+            <div class="media">
+                <div class="d-flex">
                     @if (Cache::has('is_online' . $user->id))
-                        <div class="chat-user-img online align-self-center mr-3">
-                            <img src="{{ $user->image? asset('public/uploads/client/' . $user->image) : asset('public/images/download.jpg') }}" class="rounded-circle avatar-xs" alt="">
-                            <span class="user-status"></span>
-                        </div>
+                    <div class="chat-user-img online align-self-center mr-3">
+                        <img src="{{ $user->image? asset('public/uploads/client/' . $user->image) : asset('public/images/download.jpg') }}" class="rounded-circle avatar-xs" alt="">
+                        <span class="user-status"></span>
+                    </div>
                     @else
-                        <div class="chat-user-img away align-self-center mr-3">
-                            <img src="{{ $user->image? asset('public/uploads/client/' . $user->image) : asset('public/images/download.jpg') }}" class="rounded-circle avatar-xs" alt="">
-                            <span class="user-status"></span>
-                        </div>
+                    <div class="chat-user-img away align-self-center mr-3">
+                        <img src="{{ $user->image? asset('public/uploads/client/' . $user->image) : asset('public/images/download.jpg') }}" class="rounded-circle avatar-xs" alt="">
+                        <span class="user-status"></span>
+                    </div>
                     @endif
+                    <div class="ps-2 w-100 d-flex justify-content-between">
+                        <div class="media-body overflow-hidden">
+                            <h5 class="text-truncate font-size-15 mb-1">{{ $user->fname }}</h5>
 
-                    <div class="media-body overflow-hidden">
-                        <h5 class="text-truncate font-size-15 mb-1">{{ $user->fname }}</h5>
-
-                        @if ($user->file)
+                            @if ($user->file)
                             @if (strtolower(pathinfo($user->file, PATHINFO_EXTENSION)) == 'jpg' || strtolower(pathinfo($user->file, PATHINFO_EXTENSION)) == 'png' || strtolower(pathinfo($user->file, PATHINFO_EXTENSION)) == 'gif')
-                                <p class="chat-user-message text-truncate mb-0"><i class="ri-image-fill align-middle mr-1"></i> {{ $user->message }}</p>
+                            <p class="chat-user-message text-truncate mb-0"><i class="ri-image-fill align-middle mr-1"></i> {{ $user->message }}</p>
                             @else
-                                <p class="chat-user-message text-truncate mb-0"><i class="ri-file-text-fill align-middle mr-1"></i> {{ $user->message }}</p>
+                            <p class="chat-user-message text-truncate mb-0"><i class="ri-file-text-fill align-middle mr-1"></i> {{ $user->message }}</p>
                             @endif
 
-                        @else
+                            @else
                             <p class="chat-user-message text-truncate mb-0">{{ $user->message }}</p>
-                        @endif
-                    </div>
-                    @if (date('Y-m-d') == date('Y-m-d', strtotime($user->created_at)))
+                            @endif
+                        </div>
+                        @if (date('Y-m-d') == date('Y-m-d', strtotime($user->created_at)))
                         <div class="font-size-11">{{ date('h:i a', strtotime($user->created_at)) }}</div>
-                    @else
+                        @else
                         <div class="font-size-11">{{ date('d/m', strtotime($user->created_at)) }}</div>
-                    @endif
-                    @if ($user->unread)
+                        @endif
+                        @if ($user->unread)
                         <div class="unread-message">
                             <span class="badge badge-soft-danger badge-pill pending">{{ $user->unread }}</span>
                         </div>
-                    @endif
+                        @endif
+                    </div>
                 </div>
-            </a>
-        </li>
+            </div>
+        </a>
+    </li>
     @endforeach
 </ul>
