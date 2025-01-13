@@ -2,7 +2,7 @@
 
     <!-- Logo Nav START -->
     <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid px-5">
+        <div class="container-fluid px-2 px-lg-5">
             <!-- Logo START -->
             <a class="navbar-brand" href="{{route('clientdashboard')}}">
                 {{-- <img class="light-mode-item navbar-brand-item"

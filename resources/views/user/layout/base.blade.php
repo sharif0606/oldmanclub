@@ -129,7 +129,7 @@
     <main>
        
         <!-- Container START -->
-        <div class="container-fluid px-4">
+        <div class="container-fluid px-0 px-lg-4">
             @yield('content')
         </div>
         <!-- Container END -->

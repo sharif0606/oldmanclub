@@ -111,7 +111,7 @@
 
     <!-- **************** MAIN CONTENT START **************** -->
     <main>
-        <div class="container-fluid px-5">
+        <div class="container-fluid px-lg-5 px-0">
             <div class="row gx-0">
                 <!-- Begin page -->
                 <div class="layout-wrapper d-lg-flex">
