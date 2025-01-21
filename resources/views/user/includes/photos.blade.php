@@ -43,7 +43,7 @@
     <!-- Photos item -->
     <div class="{{ $index < 2 ? 'col-6' : 'col-4' }}">
       <a href="{{ asset('public/uploads/client/' . $photo) }}" data-gallery="image-popup" data-glightbox="">
-        <img class="rounded img-fluid" src="{{asset('public/user')}}/assets/images/albums/01.jpg" alt="">
+        <img class="rounded img-fluid" src="{{ asset('public/uploads/client/' . $photo) }}" alt="">
       </a>
     </div>
     @empty
