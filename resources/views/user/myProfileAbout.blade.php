@@ -10,7 +10,7 @@
                     @include('user.includes.profile')
                     <!-- My profile END -->
 
-                </div>
+                </div> 
 
                 <!-- Left sidebar START -->
                 @include('user.includes.intro')

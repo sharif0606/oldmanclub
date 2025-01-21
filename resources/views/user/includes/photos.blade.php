@@ -42,10 +42,10 @@
     @forelse ($photos as $index => $photo)
     <!-- Photos item -->
     <div class="{{ $index < 2 ? 'col-6' : 'col-4' }}">
-      <a href="{{ asset('public/uploads/client/' . $photo) }}" data-gallery="image-popup" data-glightbox="">
-        <img class="rounded img-fluid" src="{{ asset('public/uploads/client/' . $photo) }}" alt="">
+      <a href="{{ asset('public/uploads/post/' . $photo) }}" data-gallery="image-popup" data-glightbox="">
+        <img class="rounded img-fluid" src="{{ asset('public/uploads/post/' . $photo) }}" alt="">
       </a>
-    </div>
+    </div> 
     @empty
     @endforelse
   </div>
