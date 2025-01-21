@@ -5,7 +5,7 @@
             <div class="card-header border-0 pb-0">
                 <div class="d-flex justify-content-between">
                     <h5 class="card-title">INTRO</h5>
-                    <a class="btn btn-primary-soft icon-sm ms-auto" href="#"><i
+                    <a class="btn btn-primary-soft icon-sm ms-auto" href="{{route('accountSetting')}}"><i
                             class="fa-solid fa-pencil"> </i></a>
                 </div>
                 <p class="text-center pt-2"><small>{{$client->profile_overview}}</small><span class="d-block">{{$client->tagline}}</span></p>
