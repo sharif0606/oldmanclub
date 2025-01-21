@@ -13,6 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Client extends Model
 {
+    protected $fillable = ['is_online'];
     use HasFactory, SoftDeletes, HasApiTokens, Notifiable;
     
     public function feedback(){

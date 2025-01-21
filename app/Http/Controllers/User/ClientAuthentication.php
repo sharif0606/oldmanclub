@@ -13,11 +13,11 @@ use App\Models\Backend\NfcInformation;
 use App\Http\Requests\User\SignupRequest;
 use App\Http\Requests\User\SigninRequest;
 use Illuminate\Support\Facades\Hash;
-use Carbon\Carbon; 
+use Carbon\Carbon;
 use Exception;
 use Validator;
 use DB;
-use Mail; 
+use Mail;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
@@ -55,18 +55,18 @@ class ClientAuthentication extends Controller
             'birthYear.between' => 'The birth year must be between 1900 and ' . date('Y') . '.',
             'unique_contact_or_email' => 'The email or contact already exists.',
         ]);
-    
+
         // Custom validation rule to check if either email or contact number already exists
         $validator->addExtension('unique_contact_or_email', function ($attribute, $value, $parameters, $validator) {
             $existsByEmail = Client::where('email', $value)->exists();
             $existsByContact = Client::where('contact_no', $value)->exists();
             return !$existsByEmail && !$existsByContact;
         });
-    
+
         $validator->sometimes('contact_or_email', 'unique_contact_or_email', function ($input) {
             return true;
         });
-    
+
         // Custom validation rule to check if fname, last_name, and dob are the same
         $validator->addExtension('same_client', function ($attribute, $value, $parameters, $validator) use ($request) {
             $dob = $request->birthYear . '-' . str_pad($request->birthMonth, 2, '0', STR_PAD_LEFT) . '-' . str_pad($request->birthDay, 2, '0', STR_PAD_LEFT);
@@ -76,31 +76,33 @@ class ClientAuthentication extends Controller
                 ['dob', '=', $dob],
             ])->doesntExist();
         });
-    
+
         $validator->sometimes(['fname', 'last_name', 'birthDay', 'birthMonth', 'birthYear'], 'same_client', function ($input) {
             return !empty($input->fname) && !empty($input->last_name) && !empty($input->birthDay) && !empty($input->birthMonth) && !empty($input->birthYear);
         });
-        
-    
+
+
         if ($validator->fails()) {
 
             // Construct dob from the birthDay, birthMonth, and birthYear
-    $dob = $request->birthYear . '-' . str_pad($request->birthMonth, 2, '0', STR_PAD_LEFT) . '-' . str_pad($request->birthDay, 2, '0', STR_PAD_LEFT);
-    
-    // Check if the validation error is due to the same_client rule
-    if ($validator->errors()->has('fname') && 
-        $validator->errors()->has('last_name') && 
-        $validator->errors()->has('birthDay') &&
-        Client::where([
-            ['fname', '=', $request->fname],
-            ['last_name', '=', $request->last_name],
-            ['dob', '=', $dob],
-        ])->exists()) {
-        // Redirect with a custom message
-        return redirect()->route('contact_create')->with('msg', 'Client with the same first name, last name, and date of birth already exists.');
-    }
+            $dob = $request->birthYear . '-' . str_pad($request->birthMonth, 2, '0', STR_PAD_LEFT) . '-' . str_pad($request->birthDay, 2, '0', STR_PAD_LEFT);
 
-            
+            // Check if the validation error is due to the same_client rule
+            if (
+                $validator->errors()->has('fname') &&
+                $validator->errors()->has('last_name') &&
+                $validator->errors()->has('birthDay') &&
+                Client::where([
+                    ['fname', '=', $request->fname],
+                    ['last_name', '=', $request->last_name],
+                    ['dob', '=', $dob],
+                ])->exists()
+            ) {
+                // Redirect with a custom message
+                return redirect()->route('contact_create')->with('msg', 'Client with the same first name, last name, and date of birth already exists.');
+            }
+
+
             // If other validation errors occur, return back with the errors
             return redirect()->back()->withErrors($validator)->withInput();
         }
@@ -183,12 +185,13 @@ class ClientAuthentication extends Controller
             //Client::where('email', $request->username)->first();
             $user = Client::where(function ($query) use ($request) {
                 $query->where('email', $request->username)
-                      ->orWhere('contact_no', $request->username);
+                    ->orWhere('contact_no', $request->username);
             })->first();
             if ($user) {
                 if ($user->status == 1) {
                     if (Hash::check($request->password, $user->password)) {
                         $this->setSession($user);
+                        event(new \App\Events\ClientLoggedIn($user));
                         $this->notice::success('Successfully Login');
                         return redirect()->route('clientdashboard')->with('success', 'Successfully login');
                     } else
@@ -220,9 +223,17 @@ class ClientAuthentication extends Controller
 
     public function singOut()
     {
-        //request()->session()->flush();
+
+        $userId = encryptor('decrypt', session('userId'));
+        $user = Client::find($userId);
+
+        // Fire the logout event
+        if ($user) {
+            event(new \App\Events\ClientLoggedOut($user));
+        }
+
         request()->session()->forget(['userId', 'username']);
-        return redirect()->route('clientlogin')->with('danger', 'Succfully Logged Out');
+        return redirect()->route('clientlogin')->with('danger', 'Successfully Logged Out');
     }
     public function forget_password()
     {
@@ -230,22 +241,24 @@ class ClientAuthentication extends Controller
     }
     public function submitForgetPasswordForm(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email|exists:clients',
-        ], 
-        [
-          'email.exists' => 'The email address does not exists.', // Customize the error message
-        ]);
+        $request->validate(
+            [
+                'email' => 'required|email|exists:clients',
+            ],
+            [
+                'email.exists' => 'The email address does not exists.', // Customize the error message
+            ]
+        );
 
         $token = Str::random(64);
 
-          DB::table('password_resets')->insert([
-            'email' => $request->email, 
-            'token' => $token, 
+        DB::table('password_resets')->insert([
+            'email' => $request->email,
+            'token' => $token,
             'created_at' => Carbon::now()
-          ]);
+        ]);
 
-        Mail::send('email.forgetPassword', ['token' => $token], function($message) use($request){
+        Mail::send('email.forgetPassword', ['token' => $token], function ($message) use ($request) {
             $message->from('oldclubman@quickpicker.xyz', 'Old Man Club');
             $message->to($request->email);
             $message->subject('Reset Password');
@@ -253,33 +266,34 @@ class ClientAuthentication extends Controller
 
         return back()->with('message', 'We have e-mailed your password reset link!');
     }
-    public function showResetPasswordForm($token) { 
+    public function showResetPasswordForm($token)
+    {
         return view('auth.forgetPasswordLink', ['token' => $token]);
     }
     public function submitResetPasswordForm(Request $request)
     {
-          $request->validate([
-              'email' => 'required|email|exists:clients',
-              'password' => 'required|string|confirmed'/*min:6|*/,
-              'password_confirmation' => 'required'
-          ]);
- 
-          $updatePassword = DB::table('password_resets')
-                              ->where([
-                                'email' => $request->email, 
-                                'token' => $request->token
-                              ])
-                              ->first();
-  
-          if(!$updatePassword){
-              return back()->withInput()->with('error', 'Invalid token!');
-          }
-  
-          $user = Client::where('email', $request->email)
-                      ->update(['password' => Hash::make($request->password)]);
- 
-          DB::table('password_resets')->where(['email'=> $request->email])->delete();
+        $request->validate([
+            'email' => 'required|email|exists:clients',
+            'password' => 'required|string|confirmed'/*min:6|*/,
+            'password_confirmation' => 'required'
+        ]);
 
-          return redirect()->route('clientlogin')->with('message', 'Your password has been changed!');
+        $updatePassword = DB::table('password_resets')
+            ->where([
+                'email' => $request->email,
+                'token' => $request->token
+            ])
+            ->first();
+
+        if (!$updatePassword) {
+            return back()->withInput()->with('error', 'Invalid token!');
+        }
+
+        $user = Client::where('email', $request->email)
+            ->update(['password' => Hash::make($request->password)]);
+
+        DB::table('password_resets')->where(['email' => $request->email])->delete();
+
+        return redirect()->route('clientlogin')->with('message', 'Your password has been changed!');
     }
 }

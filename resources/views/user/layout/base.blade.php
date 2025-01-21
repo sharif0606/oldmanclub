@@ -144,7 +144,7 @@
             href="#offcanvasChat" role="button" aria-controls="offcanvasChat">
             <i class="bi bi-chat-left-text-fill"></i>
         </a> --}}
-        <a target="_blank" href="{{route('chat')}}" class="icon-md btn btn-primary position-fixed end-0 bottom-0 me-5 mb-5" role="button">
+        <a target="_blank" href="{{route('chat')}}" class="icon-sm btn btn-primary position-fixed end-0 bottom-0 mb-5" role="button">
         <i class="bi bi-chat-left-text-fill"></i>
         </a>
 {{--        

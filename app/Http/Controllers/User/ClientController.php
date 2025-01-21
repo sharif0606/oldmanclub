@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use DB;
 use Session;
+
 class ClientController extends Controller
 {
     /**
@@ -54,30 +55,40 @@ class ClientController extends Controller
         return view('user.clientDashboard', compact('client','post','postCount','followers'));*/
         session()->forget('username');
         $client = Client::find(currentUserId());
-        $followers = Follow::where('following_id',currentUserId())->orderBy('id', 'desc')->take(4)->get();
-        $post = Post::where('client_id',currentUserId())->orderBy('created_at', 'desc')->get();
-        return view('user.myProfileAbout', compact('post','client','followers'));
+        $followers = Follow::where('following_id', currentUserId())->orderBy('id', 'desc')->take(4)->get();
+        $post = Post::where('client_id', currentUserId())->orderBy('created_at', 'desc')->get();
+        return view('user.myProfileAbout', compact('post', 'client', 'followers'));
     }
     public function myProfile()
     {
         session()->forget('username');
         $client = Client::find(currentUserId());
-        $post = Post::where('client_id',currentUserId())->orderBy('created_at', 'desc')->get();
-        return view('user.myProfile', compact('client','post'));
+        $post = Post::where('client_id', currentUserId())->orderBy('created_at', 'desc')->get();
+        return view('user.myProfile', compact('client', 'post'));
     }
     public function myProfileAbout()
     {
         session()->forget('username');
         $client = Client::find(currentUserId());
-        $followers = Follow::where('following_id',currentUserId())->orderBy('id', 'desc')->take(4)->get();
-        $post = Post::where('client_id',currentUserId())->orderBy('created_at', 'desc')->get();
+        $followers = Follow::where('following_id', currentUserId())->orderBy('id', 'desc')->take(4)->get();
+        $post = Post::where('client_id', currentUserId())->orderBy('created_at', 'desc')->get();
         $photos = Post::where('client_id', currentUserId())
-        ->where('post_type', 'image')
-        ->orderBy('created_at', 'desc')
-        ->limit(5)
-        ->pluck('image');
+            ->where('post_type', 'image')
+            ->orderBy('created_at', 'desc')
+            ->limit(5)
+            ->pluck('image');
 
-        return view('user.myProfileAbout', compact('post','client','followers','photos'));
+        // Get the Friend List  of the current user
+        $friend_list = Follow::where('following_id', currentUserId())
+            ->orderBy('id', 'desc')
+            ->pluck('follower_id'); // Extract only the `follower_id`
+
+        // Get the list of online users from the followers
+        $online_active_users = Client::whereIn('id', $friend_list)
+            ->where('is_online', true) // Check if the user is online
+            ->get();
+
+        return view('user.myProfileAbout', compact('post', 'client', 'followers', 'photos', 'online_active_users'));
     }
     public function myNfc()
     {
@@ -85,38 +96,48 @@ class ClientController extends Controller
         $client = Client::find(currentUserId());
         $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id', currentUserId())->paginate(10);
         //return view('user.myNfc', compact('client','nfc_cards'));
-        return view('user.nfc-card.index', compact('nfc_cards', 'client'));
+        // Get the Friend List  of the current user
+        $friend_list = Follow::where('following_id', currentUserId())
+            ->orderBy('id', 'desc')
+            ->pluck('follower_id'); // Extract only the `follower_id`
+
+        // Get the list of online users from the followers
+        $online_active_users = Client::whereIn('id', $friend_list)
+            ->where('is_online', true) // Check if the user is online
+            ->get();
+        return view('user.nfc-card.index', compact('nfc_cards', 'client', 'online_active_users'));
     }
     public function all_followers()
     {
         session()->forget('username');
         $client = Client::find(currentUserId());
-        $followers = Follow::with('client')->where('following_id', '=',currentUserId())->get();
-        return view('user.all-followers', compact('client','followers'));
+        $followers = Follow::with('client')->where('following_id', '=', currentUserId())->get();
+        return view('user.all-followers', compact('client', 'followers'));
     }
     public function accountSetting()
     {
         session()->forget('username');
         $client = Client::find(currentUserId());
         $countries = Country::get();
-        return view('user.accountSetting', compact('client','countries'));
+        return view('user.accountSetting', compact('client', 'countries'));
     }
-    public function gathering(){
+    public function gathering()
+    {
         session()->forget('username');
         $client = Client::find(currentUserId());
-        $post = Post::where('privacy_mode','public')->orderBy('id', 'desc')->get();
-        $followers = Follow::where('following_id',currentUserId())->orderBy('id', 'desc')->take(4)->get();
+        $post = Post::where('privacy_mode', 'public')->orderBy('id', 'desc')->get();
+        $followers = Follow::where('following_id', currentUserId())->orderBy('id', 'desc')->take(4)->get();
         $client = Client::find(currentUserId());
-        $followers = Follow::where('following_id',currentUserId())->orderBy('id', 'desc')->take(4)->get();
-        $post = Post::where('client_id',currentUserId())->orderBy('created_at', 'desc')->get();
+        $followers = Follow::where('following_id', currentUserId())->orderBy('id', 'desc')->take(4)->get();
+        $post = Post::where('client_id', currentUserId())->orderBy('created_at', 'desc')->get();
 
         /*=== Chat ==== */
         //Show Contact list, Recent Chat User List and Group list
         $collection = Client::orderBy('fname')->where('id', '!=', currentUserId())
-        ->get()
-        ->unique(function ($item) {
-            return strtolower(trim($item->fname));
-        });
+            ->get()
+            ->unique(function ($item) {
+                return strtolower(trim($item->fname));
+            });
         $contacts = $collection->groupBy(function ($item, $key) {
             return substr(Str::lower($item->fname), 0, 1);
         });
@@ -146,22 +167,33 @@ class ClientController extends Controller
 
         //Show Groups List only added users
         $user_id = currentUserId();
-        $groupdata = Group::with(['users' => function($qq) use($user_id){
+        $groupdata = Group::with(['users' => function ($qq) use ($user_id) {
             $qq->select('group_id', 'is_read')->where('user_id', $user_id);
-        }])->whereHas('groupUsers', function($qr) use($user_id){
+        }])->whereHas('groupUsers', function ($qr) use ($user_id) {
             $qr->where('user_id', '=', $user_id);
         })->get();
 
-        return view('user.includes.gathering',compact('client','post','followers','users','contacts','groupdata','AttachedFiles'));
+
+        // Get the Friend List  of the current user
+        $friend_list = Follow::where('following_id', currentUserId())
+            ->orderBy('id', 'desc')
+            ->pluck('follower_id'); // Extract only the `follower_id`
+
+        // Get the list of online users from the followers
+        $online_active_users = Client::whereIn('id', $friend_list)
+            ->where('is_online', true) // Check if the user is online
+            ->get();
+        return view('user.includes.gathering', compact('client', 'post', 'followers', 'users', 'contacts', 'groupdata', 'AttachedFiles', 'online_active_users'));
     }
     // public function phonebook_list()
     // {
     //     $phonebook = PhoneBook::where('client_id',currentUserId())->find();
     //     return view('user.clientDashboard', compact('phonebook'));
     // }
-    public function singlePost(){
+    public function singlePost()
+    {
         $client = Client::find(currentUserId());
-        return view('user.includes.single-post',compact('client'));
+        return view('user.includes.single-post', compact('client'));
     }
     /**
      * Show the form for creating a new resource.
@@ -190,38 +222,29 @@ class ClientController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
-    {
-
-    }
+    public function edit($id) {}
 
     /**
      * Update the specified resource in storage.
      */
 
 
-    public function update(Request $request, $id)
-    {
-
-    }
+    public function update(Request $request, $id) {}
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Client $client)
-    {
-
-    }
+    public function destroy(Client $client) {}
 
 
     public function save_profile(Request $request)
     {
         //dd($request);
         try {
-            $user=Client::find(currentUserId());
+            $user = Client::find(currentUserId());
             $count = Client::where('username', $request->username)->count();
             if ($count > 0  && $request->username !== $user->username) {
-                return redirect()->back()->withInput()->withErrors(['username' => 'The requested ('.$request->username.') username is not available. Please choose a different one.']);
+                return redirect()->back()->withInput()->withErrors(['username' => 'The requested (' . $request->username . ') username is not available. Please choose a different one.']);
             }
             $user->username = $request->username;
             $user->fname = $request->fname;
@@ -259,7 +282,7 @@ class ClientController extends Controller
                 $request->image->move(public_path('uploads/client'), $imageName);
                 $user->image = $imageName;
             }*/
-            if ($user->save()){
+            if ($user->save()) {
                 $this->setSession($user);
                 $this->notice::success('Save Changes Successfully');
                 return redirect()->back()->withInput(['tab' => 'nav-setting-tab-1']);
@@ -272,14 +295,14 @@ class ClientController extends Controller
     public function save_cover_profile_photo(Request $request)
     {
         try {
-            $user=Client::find(currentUserId());
+            $user = Client::find(currentUserId());
             if ($request->hasFile('cover_photo')) {
                 $imageName = rand(111, 999) . time() . '.' . $request->cover_photo->extension();
                 $request->cover_photo->move(public_path('uploads/client'), $imageName);
                 $user->cover_photo = $imageName;
                 $post = Post::create([
                     'message' => "Changed Cover Photo",
-                    'image'=>$imageName,
+                    'image' => $imageName,
                     'client_id' => currentUserId(),
                     'post_type' => 'profile_photo'
                 ]);
@@ -290,14 +313,14 @@ class ClientController extends Controller
                 $user->image = $imageName;
                 $post = Post::create([
                     'message' => "Changed Profile Photo",
-                    'image'=>$imageName,
+                    'image' => $imageName,
                     'client_id' => currentUserId(),
                     'post_type' => 'cover_photo'
                 ]);
             }
             $user->profile_overview = $request->profile_overview;
             $user->tagline = $request->tagline;
-            if ($user->save()){
+            if ($user->save()) {
                 $this->setSession($user);
                 $this->notice::success('Data Saved');
                 return redirect()->back()->withInput(['tab' => 'nav-setting-tab-2']);
@@ -312,7 +335,7 @@ class ClientController extends Controller
         try {
             $data = Client::find(currentUserId());
             //validate current password
-            if(!Hash::check($request->current_password, $data->password)){
+            if (!Hash::check($request->current_password, $data->password)) {
                 $this->notice::error('Current Password is incorrect');
                 return redirect()->back();
             }
@@ -340,14 +363,15 @@ class ClientController extends Controller
             ]
         );
     }
-    public function search_by_people(Request $request){
+    public function search_by_people(Request $request)
+    {
         //dd(currentUserId());
         $client = Client::with('followers')->find(currentUserId());
 
         // Retrieve all follow IDs from the followers
         // Enable query logging
         DB::connection()->enableQueryLog();
-        $followIds = Follow::where('following_id',currentUserId())->pluck('follower_id')->toArray();
+        $followIds = Follow::where('following_id', currentUserId())->pluck('follower_id')->toArray();
         // Get the executed queries
         $queries = DB::getQueryLog();
 
@@ -356,27 +380,27 @@ class ClientController extends Controller
             dump($query);
         }*/
         $search_by_people = trim($request->search);
-        if($request->search){
+        if ($request->search) {
             $follow_connections = Client::where(function ($query) use ($search_by_people) {
                 $names = explode(' ', $search_by_people);
                 foreach ($names as $name) {
                     $query->where(function ($query) use ($name) {
                         $query->where('fname', 'like', "%$name%")
-                              ->orWhere('middle_name', 'like', "%$name%")
-                              ->orWhere('last_name', 'like', "%$name%");
+                            ->orWhere('middle_name', 'like', "%$name%")
+                            ->orWhere('last_name', 'like', "%$name%");
                     });
                 }
             })
-            ->where('id', '!=', currentUserId())
-            ->whereNotIn('id', $followIds)
-            ->get();
-        }else{
+                ->where('id', '!=', currentUserId())
+                ->whereNotIn('id', $followIds)
+                ->get();
+        } else {
             $follow_connections = Client::where('id', '!=', currentUserId())
-                                ->whereNotIn('id', $followIds)
-                                ->orderBy('id','desc')->get();
+                ->whereNotIn('id', $followIds)
+                ->orderBy('id', 'desc')->get();
         }
 
-        $unfollow_connections = Follow::with('client')->where('following_id', '=',currentUserId())->get();
+        $unfollow_connections = Follow::with('client')->where('following_id', '=', currentUserId())->get();
 
         /*$search_client_id = Client::where(function ($query) use ($search_by_people) {
             $query->where('fname', 'like', '%' . $search_by_people . '%')
@@ -389,12 +413,12 @@ class ClientController extends Controller
             foreach ($names as $name) {
                 $query->where(function ($query) use ($name) {
                     $query->where('fname', 'like', "%$name%")
-                          ->orWhere('middle_name', 'like', "%$name%")
-                          ->orWhere('last_name', 'like', "%$name%");
+                        ->orWhere('middle_name', 'like', "%$name%")
+                        ->orWhere('last_name', 'like', "%$name%");
                 });
             }
         })->first();
-        return view('user.searchByPeople',compact('client','follow_connections','unfollow_connections','followIds','search_client_id'));
+        return view('user.searchByPeople', compact('client', 'follow_connections', 'unfollow_connections', 'followIds', 'search_client_id'));
     }
     public function client_by_search($username)
     {
@@ -403,19 +427,26 @@ class ClientController extends Controller
         Session::put('username', $username);
         //dd($username);
         $client = Client::where('username', $username)->first();
-        $post = Post::where('client_id',$client->id)->orderBy('created_at', 'desc')->get();
+        $post = Post::where('client_id', $client->id)->orderBy('created_at', 'desc')->get();
         $postCount = Post::where('client_id', currentUserId())->count();
-        $followers = Follow::where('following_id',$client->id)->orderBy('id', 'desc')->take(4)->get();
+        $followers = Follow::where('following_id', $client->id)->orderBy('id', 'desc')->take(4)->get();
         $connection = Client::where('username', $username)->first();
-        $followIds = Follow::where('following_id',currentUserId())->pluck('follower_id')->toArray();
-        return view('connection.connectionDashboard', compact('client','post','postCount','followers','followIds','connection'));
+        $followIds = Follow::where('following_id', currentUserId())->pluck('follower_id')->toArray();
+
+
+        // Get the list of online users from the followers
+        $online_active_users = Client::whereIn('id', $followIds)
+            ->where('is_online', true) // Check if the user is online
+            ->where('id', '!=', $client->id)
+            ->get();
+        //dd($followIds);
+        return view('connection.connectionDashboard', compact('client', 'post', 'postCount', 'followers', 'followIds', 'connection', 'online_active_users'));
     }
     public function usernameProfile($username)
     {
         $client = Client::where('username', 'like', "%$username%")->first();
-        $post = Post::where('client_id',$client->id)->orderBy('created_at', 'desc')->get();
-        return view('user.myProfile', compact('client','post'));
-       
+        $post = Post::where('client_id', $client->id)->orderBy('created_at', 'desc')->get();
+        return view('user.myProfile', compact('client', 'post'));
     }
     public function usernameProfileAbout($username)
     {

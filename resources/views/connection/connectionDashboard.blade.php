@@ -3,22 +3,22 @@
     <!-- Main content START -->
     <main>
         <!-- Container START -->
-        <div class="container">
+        <div class="container-fluid">
             <div class="row g-2">
                 <!-- Main content START -->
-                <div class="col-lg-12 vstack gap-4">
+                <div class="col-lg-12 vstack gap-2">
                     <!-- My profile START -->
                     @include('user.includes.connection-profile')
                     <!-- My profile END -->
                 </div>
                 <!-- Right sidebar START -->
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <div class="row g-2">
                         <!-- Card START -->
                         <div class="col-md-6 col-lg-12">
                             <div class="card">
                                 <div class="card-header border-0 pb-0">
-                                    {{-- <h5 class="card-title">INTRO</h5> --}}
+                                    <h5 class="card-title">INTRO</h5>
                                     <!-- Button modal -->
                                 </div>
                                 <!-- Card body START -->
@@ -205,7 +205,7 @@
                     </div>
                 </div>
                 <!-- Right sidebar END -->
-                <div class="col-lg-8 vstack gap-2">
+                <div class="col-lg-6 vstack gap-2">
                     <!-- Share feed START -->
 {{-- May use this if want to add post --}}
                     <!-- Share feed END -->
@@ -215,6 +215,11 @@
                     <!-- Card feed item END -->
 
                 </div><!-- Main content END -->
+                <div class="col-lg-3">
+                    <!-- Right sidebar START -->
+                    @include('user.includes.online-active')
+                    <!-- Right sidebar END -->
+                </div>
             </div> <!-- Row END -->
         </div>
         <!-- Container END -->

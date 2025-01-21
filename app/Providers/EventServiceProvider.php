@@ -6,7 +6,9 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
-
+use App\Events\ClientLoggedIn;
+use App\Events\ClientLoggedOut;
+use App\Listeners\UpdateOnlineStatus;
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -18,6 +20,13 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        ClientLoggedIn::class => [
+            UpdateOnlineStatus::class,
+        ],
+        ClientLoggedOut::class => [
+            UpdateOnlineStatus::class,
+        ],
+        
     ];
 
     /**
