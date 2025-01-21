@@ -71,7 +71,13 @@ class ClientController extends Controller
         $client = Client::find(currentUserId());
         $followers = Follow::where('following_id',currentUserId())->orderBy('id', 'desc')->take(4)->get();
         $post = Post::where('client_id',currentUserId())->orderBy('created_at', 'desc')->get();
-        return view('user.myProfileAbout', compact('post','client','followers'));
+        $photos = Post::where('client_id', currentUserId())
+        ->where('post_type', 'image')
+        ->orderBy('created_at', 'desc')
+        ->limit(5)
+        ->pluck('image');
+
+        return view('user.myProfileAbout', compact('post','client','followers','photos'));
     }
     public function myNfc()
     {

@@ -304,7 +304,7 @@
                                                 value="{{ $client->id_no }}">
                                         </div>
                                         <div class="col-lg-6">
-                                            <label class="form-label">Designation</label>
+                                            <label class="form-label">Designation (For Intro)</label>
                                             <input type="text" name="designation" class="form-control"
                                                 value="{{ $client->designation }}">
                                         </div>
@@ -442,12 +442,12 @@
                                                 style="display: none; max-width: 100px;">
                                         </div>
                                         <div class="col-12">
-                                            <label class="form-label">Profile Overview</label>
+                                            <label class="form-label">Profile Overview (For Intro)</label>
                                             <textarea class="form-control" rows="4" placeholder="Profile Overview (Required)" name="profile_overview">{{ $client->profile_overview }}</textarea>
                                             <small>Character limit: 300</small>
                                         </div>
                                         <div class="col-12">
-                                            <label class="form-label">Tagline</label>
+                                            <label class="form-label">Tagline (For Intro)</label>
                                             <textarea class="form-control" rows="2" placeholder="Tagline (Required)" name="tagline">{{ $client->tagline }}</textarea>
                                             <small>Character limit: 14</small>
                                         </div>

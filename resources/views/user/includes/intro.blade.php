@@ -8,27 +8,27 @@
                     <a class="btn btn-primary-soft icon-sm ms-auto" href="#"><i
                             class="fa-solid fa-pencil"> </i></a>
                 </div>
-                <p class="text-center pt-2"><small>Full Stack Developer at Test </small><span class="d-block">{
-                        Laravel,Vue,React }</span></p>
+                <p class="text-center pt-2"><small>{{$client->profile_overview}}</small><span class="d-block">{{$client->tagline}}</span></p>
                 <!-- User stat START -->
                 <div class="hstack gap-2 gap-xl-3 justify-content-center text-center">
                     <!-- User stat item -->
                     <div>
-                        <h6 class="mb-0">256</h6>
+                        <h6 class="mb-0">{{$post->count()}}</h6>
                         <small>Post</small>
                     </div>
                     <!-- Divider -->
                     <div class="vr"></div>
                     <!-- User stat item -->
                     <div>
-                        <h6 class="mb-0">2.5K</h6>
+                        <h6 class="mb-0">{{ $followers->count() >= 1000 ? number_format($followers->count() / 1000, 1) . 'k' : $followers->count() }}
+                        </h6>
                         <small>Followers</small>
                     </div>
                     <!-- Divider -->
                     <div class="vr"></div>
                     <!-- User stat item -->
                     <div>
-                        <h6 class="mb-0">365</h6>
+                        <h6 class="mb-0">0</h6>
                         <small>Following</small>
                     </div>
                 </div>
