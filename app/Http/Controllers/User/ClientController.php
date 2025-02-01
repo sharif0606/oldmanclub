@@ -89,7 +89,13 @@ class ClientController extends Controller
             ->where('is_online', true) // Check if the user is online
             ->get();
 
-        return view('user.myProfileAbout', compact('post', 'client', 'followers', 'photos', 'online_active_users'));
+        // Get online friends whose birthday is today
+        $today = Carbon::today()->format('m-d'); // Extracts month and day
+        $online_birthday_users = Client::whereIn('id', $friend_list)
+            ->whereRaw("DATE_FORMAT(dob, '%m-%d') = ?", [$today]) // Birthday check
+            ->get();
+
+        return view('user.myProfileAbout', compact('post', 'client', 'followers', 'photos', 'online_active_users','online_birthday_users'));
     }
     public function myNfc()
     {
@@ -243,7 +249,7 @@ class ClientController extends Controller
             ->limit(5)
             ->get();
 
-        return view('user.includes.single-post', compact('value', 'client','followers', 'online_active_users', 'online_birthday_users', 'top_trending_posts'));
+        return view('user.includes.single-post', compact('value', 'client', 'followers', 'online_active_users', 'online_birthday_users', 'top_trending_posts'));
     }
     /**
      * Show the form for creating a new resource.
