@@ -194,17 +194,28 @@ class ClientController extends Controller
             ->whereRaw("DATE_FORMAT(dob, '%m-%d') = ?", [$today]) // Birthday check
             ->get();
 
-        return view('user.includes.gathering', compact('client', 'post', 'followers', 'users', 'contacts', 'groupdata', 'AttachedFiles', 'online_active_users','online_birthday_users'));
+
+        $top_trending_posts = Post::withCount('reactions')
+        /*where('privacy_mode', 'public')
+        ->where('post_type', 'image')*/
+        ->whereIn('client_id', $friend_list)
+        ->orderByDesc('reactions_count')
+        ->limit(5)
+        ->get();
+//dd($top_trending_posts);
+        return view('user.includes.gathering', compact('client', 'post', 'followers', 'users', 'contacts', 'groupdata', 'AttachedFiles', 'online_active_users','online_birthday_users','top_trending_posts'));
     }
     // public function phonebook_list()
     // {
     //     $phonebook = PhoneBook::where('client_id',currentUserId())->find();
     //     return view('user.clientDashboard', compact('phonebook'));
     // }
-    public function singlePost()
+    public function singlePost($id)
     {
         $client = Client::find(currentUserId());
-        return view('user.includes.single-post', compact('client'));
+        $post = Post::with('client') // You can load the client details with the post
+        ->findOrFail($id);
+        return view('user.includes.single-post', compact('post', 'client'));
     }
     /**
      * Show the form for creating a new resource.

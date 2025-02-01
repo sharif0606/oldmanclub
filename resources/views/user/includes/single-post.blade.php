@@ -10,23 +10,47 @@
             <img class="rounded" src="assets/images/post/16by9/big/03.jpg" alt="">
             <div class="mt-4">
               <!-- Tag -->
-              <a href="#" class="badge bg-danger bg-opacity-10 text-danger mb-2 fw-bold">Lifestyle</a>
+              {{--<a href="#" class="badge bg-danger bg-opacity-10 text-danger mb-2 fw-bold">Lifestyle</a>--}}
               <!-- Title info -->
-              <h1 class="mb-2 h2">New comment moderation and support features, including live chat.</h1>
+              <h1 class="mb-2 h2">{{$post->message}}</h1>
               <ul class="nav nav-stack gap-3 align-items-center">
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <div class="nav-link">
                     by <a href="#" class="text-reset btn-link">Louis Ferguson</a>
                   </div>
-                </li>
-                <li class="nav-item"> <i class="bi bi-calendar-date pe-1"></i>Nov 15, 2022</li>
-                <li class="nav-item"> <i class="bi bi-clock pe-1"></i>5 min read</li>
+                </li> -->
+                <li class="nav-item"> <i class="bi bi-calendar-date pe-1"></i>{{ $post->created_at->format('M d, Y') }}</li>
+                <!-- <li class="nav-item"> <i class="bi bi-clock pe-1"></i>5 min read</li> -->
               </ul>
               <!-- description -->
-              <p class="mt-4"><span class="dropcap">A</span> pleasure exertion if believed provided to. All led out world this music while asked. Paid mind even sons does he door no. Attended overcame repeated it is perceived Marianne in. I think on style child of. Servants moreover in sensible it ye possible. </p>
-              <h4 class="mt-4">The pros and cons of business agency</h4>
+              @if($post->post_type == 'profile_photo')
+                @if ($post->image)
+                  <img class="card-img" src="{{ asset('public/uploads/client/' . $post->image) }}" alt="Post">
+                @endif
+              @elseif($post->post_type == 'cover_photo')
+                @if ($post->image)
+                  <img class="card-img" src="{{ asset('public/uploads/client/' . $post->image) }}" alt="Cover Photo">
+                @endif
+              @elseif($post->post_type == 'video')
+                @if ($post->image) <!-- Assuming 'image' is used for video thumbnail -->
+                  <!-- HTML video START -->
+                  <div class="player-wrapper overflow-hidden">
+                        <video class="player-html" id="video-{{ $post->id }}" controls crossorigin="anonymous" poster="assets/images/videos/poster.jpg">
+                            <source src="{{ asset('public/uploads/post/videos/' . $post->image) }}" type="video/mp4">
+                        </video>
+                    </div>
+                    <!-- HTML video END -->
+                @endif
+              @else
+                <!-- Add fallback content or empty block if needed -->
+                @if ($post->image)
+                <img class="card-img" src="{{ asset('public/uploads/post/' . $post->image) }}" alt="Post">
+                @endif
+              @endif
+              {{--<p class="mt-4"><span class="dropcap">A</span> pleasure exertion if believed provided to. All led out world this music while asked. Paid mind even sons does he door no. Attended overcame repeated it is perceived Marianne in. I think on style child of. Servants moreover in sensible it ye possible. </p>
+              <h4 class="mt-4">The pros and cons of business agency</h4>--}}
               <!-- Row START -->
-              <div class="row mb-4">
+              {{--<div class="row mb-4">
                 <div class="col-md-6">
                   <p>Fulfilled direction use continual set him propriety continued. Saw met applauded favorite deficient engrossed concealed and her. </p>
                   <p>Concluded boy perpetual old supposing. Farther related bed and passage comfort civilly. Dashwoods see frankness objection abilities.</p>
@@ -39,19 +63,19 @@
                     <li>Saying unto Place it seed you're Isn't heaven </li>
                   </ul>
                 </div>
-              </div>
+              </div>--}}
               <!-- Row END -->
               <!-- Blockquote START -->
-              <figure class="bg-light rounded p-3 p-sm-4 my-4">
+              {{--<figure class="bg-light rounded p-3 p-sm-4 my-4">
                 <blockquote class="blockquote">
                   <p>Dashwood does provide stronger is. But discretion frequently sir she instruments unaffected.</p>
                 </blockquote>
                 <figcaption class="blockquote-footer mb-0">
                   Albert Schweitzer
                 </figcaption>
-              </figure>
+              </figure>--}}
               <!-- Blockquote END -->
-              <p class="mb-0"> All led out world this music while asked. Paid mind even sons does he door no. Attended overcame repeated it is perceived Marianne in. I think on style child of. Servants moreover in sensible it ye possible. Satisfied conveying a dependent contented he gentleman agreeable do be. </p>
+              {{--<p class="mb-0"> All led out world this music while asked. Paid mind even sons does he door no. Attended overcame repeated it is perceived Marianne in. I think on style child of. Servants moreover in sensible it ye possible. Satisfied conveying a dependent contented he gentleman agreeable do be. </p>--}}
             </div>
           </div>
           <!-- Card END -->

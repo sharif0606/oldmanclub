@@ -207,10 +207,13 @@
                 <!-- Right sidebar END -->
                 <div class="col-lg-6 vstack gap-2">
                     <!-- Share feed START -->
-{{-- May use this if want to add post --}}
+                    {{-- May use this if want to add post --}}
                     <!-- Share feed END -->
 
                     <!-- Card feed item START -->
+                     
+                    <!-- Need To add Birthday wish Code here -->
+
                     @include('user.includes.post-list')
                     <!-- Card feed item END -->
 

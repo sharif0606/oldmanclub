@@ -7,25 +7,12 @@
     <!-- Card body START -->
     <div class="card-body">
       <!-- News item -->
+      @foreach($top_trending_posts as $post)
       <div class="mb-3">
-        <h6 class="mb-0"><a href="blog-details.html">Ten questions you should answer truthfully</a></h6>
-        <small>2hr</small>
+        <h6 class="mb-0"><a href="{{ route('singlePost', $post->id) }}">{{$post->message}}</a></h6>
+        <small>{{ $post->created_at->diffForHumans() }}</small>
       </div>
-      <!-- News item -->
-      <div class="mb-3">
-        <h6 class="mb-0"><a href="blog-details.html">Five unbelievable facts about money</a></h6>
-        <small>3hr</small>
-      </div>
-      <!-- News item -->
-      <div class="mb-3">
-        <h6 class="mb-0"><a href="blog-details.html">Best Pinterest Boards for learning about business</a></h6>
-        <small>4hr</small>
-      </div>
-      <!-- News item -->
-      <div class="mb-3">
-        <h6 class="mb-0"><a href="blog-details.html">Skills that you can learn from business</a></h6>
-        <small>6hr</small>
-      </div>
+      @endforeach
       {{-- <!-- Load more comments -->
       <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" data-bs-toggle="button" aria-pressed="true">
         <div class="spinner-dots me-2">
