@@ -1,5 +1,4 @@
-<div class="col-lg-3">
-    <div class="row g-2">
+
         <div class="card">
             <!-- Card header START -->
             <div class="card-header border-0 pb-0">
@@ -41,12 +40,4 @@
             </div>
         </div>
 
-        <!-- My Photo START -->
-        @include('user.includes.photos')
-        <!-- My Photo END -->
 
-         <!-- Card START -->
-         @include('user.includes.followers')
-         <!-- Card END -->
-    </div>
-</div>

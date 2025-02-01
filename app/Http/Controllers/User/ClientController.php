@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use DB;
 use Session;
+use Carbon\Carbon;
 
 class ClientController extends Controller
 {
@@ -94,6 +95,8 @@ class ClientController extends Controller
     {
         session()->forget('username');
         $client = Client::find(currentUserId());
+        $followers = Follow::where('following_id', currentUserId())->orderBy('id', 'desc')->take(4)->get();
+        $post = Post::where('client_id', currentUserId())->orderBy('created_at', 'desc')->get();
         $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id', currentUserId())->paginate(10);
         //return view('user.myNfc', compact('client','nfc_cards'));
         // Get the Friend List  of the current user
@@ -105,7 +108,7 @@ class ClientController extends Controller
         $online_active_users = Client::whereIn('id', $friend_list)
             ->where('is_online', true) // Check if the user is online
             ->get();
-        return view('user.nfc-card.index', compact('nfc_cards', 'client', 'online_active_users'));
+        return view('user.nfc-card.index', compact('nfc_cards', 'client', 'online_active_users', 'post', 'followers'));
     }
     public function all_followers()
     {
@@ -183,7 +186,15 @@ class ClientController extends Controller
         $online_active_users = Client::whereIn('id', $friend_list)
             ->where('is_online', true) // Check if the user is online
             ->get();
-        return view('user.includes.gathering', compact('client', 'post', 'followers', 'users', 'contacts', 'groupdata', 'AttachedFiles', 'online_active_users'));
+
+        // Birthday
+        $today = Carbon::today()->format('m-d'); // Extracts month and day
+        // Get online friends whose birthday is today
+        $online_birthday_users = Client::whereIn('id', $friend_list)
+            ->whereRaw("DATE_FORMAT(dob, '%m-%d') = ?", [$today]) // Birthday check
+            ->get();
+
+        return view('user.includes.gathering', compact('client', 'post', 'followers', 'users', 'contacts', 'groupdata', 'AttachedFiles', 'online_active_users','online_birthday_users'));
     }
     // public function phonebook_list()
     // {

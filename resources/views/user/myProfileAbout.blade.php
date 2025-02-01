@@ -13,7 +13,19 @@
                 </div> 
 
                 <!-- Left sidebar START -->
-                @include('user.includes.intro')
+                <div class="col-lg-3">
+                    <div class="row g-2">
+                        @include('user.includes.intro')
+                        <!-- My Photo START -->
+                        @include('user.includes.photos')
+                        <!-- My Photo END -->
+
+                        <!-- Card START -->
+                        @include('user.includes.followers')
+                        <!-- Card END -->
+                    </div>
+                </div>
+                
                 <div class="col-md-8 col-lg-6 vstack gap-2">
                     <!-- Share feed START -->
                     <!-- Card feed item START -->
