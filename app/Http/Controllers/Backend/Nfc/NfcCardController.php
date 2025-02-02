@@ -12,6 +12,7 @@ use App\Models\Backend\User;
 use App\Models\User\Country;
 use App\Models\Backend\NfcVirtualBackgroundCategory;
 use App\Models\Backend\NfcVirtualBackground;
+use App\Models\User\Follow;
 
 use App\Http\Controllers\Controller;
 use App\Models\NfcCardBadges;
