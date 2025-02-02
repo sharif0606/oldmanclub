@@ -36,7 +36,17 @@ class NfcCardController extends Controller
         $client = Client::find(currentUserId());
         $post = Post::where('client_id', currentUserId())->get();
         $followers = Follow::where('following_id', currentUserId())->orderBy('id', 'desc')->take(4)->get();
-        return view('user.nfc-card.index', compact('nfc_cards', 'client', 'post', 'followers'));
+        // Get the Friend List  of the current user
+        $friend_list = Follow::where('following_id', currentUserId())
+            ->orderBy('id', 'desc')
+            ->pluck('follower_id'); // Extract only the `follower_id`
+
+        // Get the list of online users from the followers
+        $online_active_users = Client::whereIn('id', $friend_list)
+            ->where('is_online', true) // Check if the user is online
+            ->get();
+
+        return view('user.nfc-card.index', compact('nfc_cards', 'client', 'post', 'followers', 'online_active_users'));
     }
 
     /**
