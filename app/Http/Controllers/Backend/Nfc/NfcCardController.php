@@ -33,7 +33,7 @@ class NfcCardController extends Controller
     {
         $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id', currentUserId())->paginate(10);
         $client = Client::find(currentUserId());
-        $post = Post::where('client_id', currentUserId())->count();
+        $post = Post::where('client_id', currentUserId())->get();
         return view('user.nfc-card.index', compact('nfc_cards', 'client', 'post'));
     }
 
