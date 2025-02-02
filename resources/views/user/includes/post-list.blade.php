@@ -218,7 +218,7 @@
                 <!-- Feed react START -->
 
                 <ul class="nav nav-pills nav-pills-light nav-fill nav-stack small border-top border-bottom py-1 mb-3">
-                    @if($value->client_id != currentUserId())
+                    {{--@if($value->client_id != currentUserId())--}}
                     <li class="nav-item dropdown dropup">
                         <a class="nav-link mb-0 active" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-hand-thumbs-up pe-1"></i>Like</a>
@@ -251,13 +251,13 @@
                             @endforeach
                         </ul>
                     </li>
-                    @else  
+                    {{--@else  
                     <li class="nav-item">
                         <a class="nav-link mb-0 active" href="#!">
                             <i class="bi bi-hand-thumbs-up pe-1"></i>Like
                         </a>
                     </li>
-                    @endif
+                    @endif--}}
                     <!-- Card share action menu END -->
                     {{-- <li class="nav-item">
                         <a class="nav-link mb-0" href="#!"> <i class="bi bi-chat-fill pe-1"></i>Comment</a>
@@ -267,7 +267,8 @@
                     <p>{{is_null($value->shared_from)}}</p>
                     <p>{{$value->post_type}}</p> --}}
                     <!-- Card share action menu START -->
-                    @if($value->client_id != currentUserId() && $value->shared_from!=currentUserId() && is_null($value->post_type))
+                    {{--$value->client_id != currentUserId() &&--}}
+                    @if($value->shared_from!=currentUserId() && !is_null($value->post_type))
                     <li class="nav-item dropdown">
                         <form method="post" action="{{route('share.store')}}" class="share-form">
                             @csrf
