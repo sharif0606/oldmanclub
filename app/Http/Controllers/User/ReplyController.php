@@ -31,6 +31,7 @@ class ReplyController extends Controller
     {
         $reply = New Reply();
         $reply->comment_id = $request->comment_id;
+        $reply->parent_id = $request->parent_id;
         $reply->content = $request->content;
         $reply->client_id = currentUserId();
         // Save the comment

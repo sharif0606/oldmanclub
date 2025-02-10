@@ -1,5 +1,6 @@
 <script>
 function reply(commentId, event) {
+    //alert('c'+commentId);
     event.preventDefault(); // Prevent the default behavior of the link
     
     // Log the comment ID to check if it's being captured correctly
@@ -15,5 +16,11 @@ function reply(commentId, event) {
     
     replyForm.toggle();
 }
-
+function replyNested(replyId, event) {
+    //alert('r'+replyId);
+    console.log(replyId);
+    event.preventDefault(); // Prevent the default behavior of the link
+    var replyForm = $('.reply-item[data-reply-id="' + replyId + '"] .reply-nested-form');
+    replyForm.toggle();
+}
 </script>

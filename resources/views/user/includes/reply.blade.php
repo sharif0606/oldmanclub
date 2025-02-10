@@ -1,4 +1,4 @@
-<li class="reply-item ms-2" data-reply-id="{{$reply->id}}">
+<li class="reply-item" data-reply-id="{{$reply->id}}">
     <div class="d-flex">
         <!-- Avatar -->
         <div class="avatar avatar-xs">
@@ -13,8 +13,7 @@
             @endif
         </div>
         <!-- Comment by -->
-        <!-- <div class="ms-2 reply-item" data-reply-id="{{$reply->id}}"> -->
-        <div class="ms-2">
+        <div class="ms-2 reply-item" data-reply-id="{{$reply->id}}">
             <div class="bg-light p-2 rounded">
                 <div class="d-flex justify-content-between">
                     <h6 class="my-0" style="font-size: 0.8375rem;"> <a href="#!">

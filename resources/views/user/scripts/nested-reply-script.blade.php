@@ -1,9 +1,10 @@
 <script>
-    function submitReplyForm(event, form) {
+    function submitNestedReplyForm(event, form) {
+        
         event.preventDefault(); // Prevent the default form submission
 
         // Get the comment ID from the form data attribute
-        var commentId = $(form).data('comment-id');
+        var replyId = $(form).data('reply-id');
 
         // Serialize the form data
         var formData = new FormData(form);
@@ -20,9 +21,11 @@
             contentType: false,
             success: function(response) {
                 console.log(response);
+                //alert($('.reply-item[data-reply-id="' + replyId + '"] .reply-item-nested').text());
                 // Check if the comment already exists in the container
-                //alert(commentId);
-                $('.comment-item[data-comment-id="' + commentId + '"] .reply-item-nested').prepend(response.commentHtml)
+                alert(replyId);
+                $('.reply-item[data-reply-id="' + replyId + '"]').append(response.commentHtml);
+                
                 // Clear the form fields
                 $('textarea', form).val('');
                 
@@ -37,11 +40,11 @@
     }
     $(document).ready(function() {
         // Event listener for keydown on the textarea within reply forms
-        $('.reply-form textarea[name="content"]').on('keydown', function(e) {
+        $('.reply-nested-form textarea[name="content"]').on('keydown', function(e) {
             if ((e.keyCode === 13 || e.keyCode === 108) && !e.shiftKey) {  // Check if Enter key is pressed
                 e.preventDefault(); // Prevent line break
                 var form = $(this).closest('form')[0]; // Get the form element
-                submitReplyForm(e, form); // Submit the reply form
+                submitNestedReplyForm(e, form); // Submit the reply form
             }
         });
     });
@@ -49,7 +52,7 @@
         if ((e.keyCode === 13 || e.keyCode === 108) && !e.shiftKey) {  // Check if Enter key is pressed
                 e.preventDefault(); // Prevent line break
                 var form = $(s).closest('form')[0]; // Get the form element
-                submitReplyForm(e, form); // Submit the reply form
+                submitNestedReplyForm(e, form); // Submit the reply form
             }
     }
 </script>

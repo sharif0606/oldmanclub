@@ -1004,6 +1004,7 @@ JS libraries, plugins and custom scripts -->
     @include('user/scripts/reply-form-script')
     @include('user/scripts/add-comment-script')
     @include('user/scripts/comment-reply-script')
+    @include('user/scripts/nested-reply-script')
     @include('user/scripts/comment-like-script')
     @include('user/scripts/post-reaction-script')
     @include('user/scripts/comment-reaction-script')
