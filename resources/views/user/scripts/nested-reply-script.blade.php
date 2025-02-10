@@ -23,7 +23,7 @@
                 console.log(response);
                 //alert($('.reply-item[data-reply-id="' + replyId + '"] .reply-item-nested').text());
                 // Check if the comment already exists in the container
-                alert(replyId);
+                //alert(replyId);
                 $('.reply-item[data-reply-id="' + replyId + '"]').append(response.commentHtml);
                 
                 // Clear the form fields
