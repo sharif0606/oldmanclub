@@ -34,6 +34,28 @@
     border-radius: 50%;
     width: 100%;
 }
+
+.design-card-active {
+            border: 1px solid {{ $nfc_card->card_design->color ? $nfc_card->card_design->color : 'rgb(0, 247, 255)' }};
+        }
+        #sleek_header_image,#header_text,#modern_header{
+            background: {{ $nfc_card->card_design->color ? $nfc_card->card_design->color : 'rgb(0, 247, 255)' }};
+        }
+
+        .active-text-color{
+            color: {{ $nfc_card->card_design->color  ? $nfc_card->card_design->color ?? '#9c9a9a' : '#9c9a9a'}};
+        }
+
+        .card{
+            font-family: {{ $nfc_card->card_design->font ? "$nfc_card->card_design->font" ?? 'nunito' : 'nunito'}}" !important;
+        }
+        /* .logo-image-preview{
+            margin-top: .8rem !important;
+        } */
+
+        .f-name,.m-name,.l-name,.field-title, .deprtment,.goes-by{
+            font-family: {{ $nfc_card->card_design->font ? "$nfc_card->card_design->font" ?? 'nunito' : 'nunito'}} !important;
+        }
 </style>
 <a href="{{ route('nfc_card.show', encryptor('encrypt', $nfc_card->id)) }}">
     <div class="modern">
@@ -98,11 +120,11 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        
+
                                     </div>
-                                   
+
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>

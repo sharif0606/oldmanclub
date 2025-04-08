@@ -161,6 +161,29 @@
             font-weight: bold;
             font-size: 12px;
         }
+
+        .design-card-active {
+            border: 1px solid {{ $nfc_card->card_design->color ? $nfc_card->card_design->color : 'rgb(0, 247, 255)' }};
+        }
+        #sleek_header_image,#header_text,#modern_header{
+            background: {{ $nfc_card->card_design->color ? $nfc_card->card_design->color : 'rgb(0, 247, 255)' }};
+        }
+
+        .active-text-color{
+            color: {{ $nfc_card->card_design->color  ? $nfc_card->card_design->color ?? '#9c9a9a' : '#9c9a9a'}};
+        }
+
+        .card{
+            font-family: {{ $nfc_card->card_design->font ? "$nfc_card->card_design->font" ?? 'nunito' : 'nunito'}}" !important;
+        }
+        /* .logo-image-preview{
+            margin-top: .8rem !important;
+        } */
+
+        .f-name,.m-name,.l-name,.field-title, .deprtment,.goes-by{
+            font-family: {{ $nfc_card->card_design->font ? "$nfc_card->card_design->font" ?? 'nunito' : 'nunito'}} !important;
+        }
+
     </style>
 @endpush
 @section('content')
@@ -256,14 +279,14 @@
 
 
                                 <div class="col-md-4">
-                                    @if ($nfc_card->card_design?->design_card_id == 1)
+                                    @if ($nfc_card->card_type == 1)
                                         @include('user.nfc-template_show.classic-template')
-                                    @elseif($nfc_card->card_design?->design_card_id == 2)
-                                        @include('user.nfc-template_show.flat-template')
-                                    @elseif($nfc_card->card_design?->design_card_id == 3)
+                                    @elseif($nfc_card->card_type == 2)
                                         @include('user.nfc-template_show.modern-template')
-                                    @elseif($nfc_card->card_design?->design_card_id == 4)
+                                    @elseif($nfc_card->card_type == 3)
                                         @include('user.nfc-template_show.sleek-template')
+                                    @elseif($nfc_card->card_type == 4)
+                                        @include('user.nfc-template_show.flat-template')
                                     @endif
                                 </div>
                                 <div class="col-md-5">
@@ -323,7 +346,7 @@
                                                     @csrf
                                                     <input type="hidden" name="id" value="{{encryptor('encrypt', $nfc_card->id)}}">
                                                     <input type="hidden" name="client_id" value="{{$nfc_card->client_id}}">
-                             
+
                                                     <input type="text" name="name" class="form-control mb-2"
                                                         placeholder="Name">
                                                     <input type="text" name="email" class="form-control mb-2"
@@ -626,20 +649,20 @@
         $('#copyButton').on('click', function() {
             // Get the text from the paragraph
             var textToCopy = $('#textToCopy').text();
-            
+
             // Create a temporary textarea element to copy the text
             var $tempTextarea = $('<textarea>');
             $tempTextarea.val(textToCopy).appendTo('body').select();
-            
+
             // Copy the text to the clipboard
             document.execCommand('copy');
-            
+
             // Remove the temporary textarea
             $tempTextarea.remove();
-            
+
             // Show the message
             $('#copyMessage').show();
-            
+
             // Hide the message after a few seconds
             setTimeout(function() {
                 $('#copyMessage').hide();

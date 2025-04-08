@@ -23,7 +23,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use PDF; // Import the PDF facade
-use Mail; 
+use Mail;
 
 class NfcCardController extends Controller
 {
@@ -46,6 +46,7 @@ class NfcCardController extends Controller
             ->where('is_online', true) // Check if the user is online
             ->get();
 
+        // dd($nfc_cards);
         return view('user.nfc-card.index', compact('nfc_cards', 'client', 'post', 'followers', 'online_active_users'));
     }
 
@@ -504,9 +505,7 @@ class NfcCardController extends Controller
     public function upload_own_image(Request $request){
         if($request->hasFile('profile')){
             $imageName = rand(111,999).'.'.$request->image->extension();
-            $request->image->move(public_path('uploads/virtual_background'),$imageName);
-            
+            $request->image->move(public_path('uploads/virtual_background'), $imageName);
         }
     }
 }
-

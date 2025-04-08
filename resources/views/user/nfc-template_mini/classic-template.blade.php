@@ -1,17 +1,23 @@
 <style>
     .classic_header_image_show {
-        height: 360px;
+        min-height: 310px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     }
 
     .classic_svg_show {
-        top: 140px;
+        top: 96px;
         position: absolute;
         width: calc(100% + 0px);
+        display: grid;
+        grid-template-rows: 1fr 2fr 1fr;
 
     }
 
     .classic {
-        transition: box-shadow 0.3s ease, transform 0.3s ease;
+        transition:box-shadow 0.3s ease, transform 0.3s ease;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        overflow:hidden;
+        border-radius:10px;
     }
 
     .classic:hover {
@@ -20,11 +26,32 @@
         transform: scale(1.05);
         /* Zoom effect on hover */
     }
+    .design-card-active {
+            border: 1px solid {{ $nfc_card->card_design->color ? $nfc_card->card_design->color : 'rgb(0, 247, 255)' }};
+        }
+        #sleek_header_image,#header_text,#modern_header{
+            background: {{ $nfc_card->card_design->color ? $nfc_card->card_design->color : 'rgb(0, 247, 255)' }};
+        }
+
+        .active-text-color{
+            color: {{ $nfc_card->card_design->color  ? $nfc_card->card_design->color ?? '#9c9a9a' : '#9c9a9a'}};
+        }
+
+        .card{
+            font-family: {{ $nfc_card->card_design->font ? "$nfc_card->card_design->font" ?? 'nunito' : 'nunito'}}" !important;
+        }
+        /* .logo-image-preview{
+            margin-top: .8rem !important;
+        } */
+
+        .f-name,.m-name,.l-name,.field-title, .deprtment,.goes-by{
+            font-family: {{ $nfc_card->card_design->font ? "$nfc_card->card_design->font" ?? 'nunito' : 'nunito'}} !important;
+        }
 </style>
 <a href="{{ route('nfc_card.show', encryptor('encrypt', $nfc_card->id)) }}">
     <div class="classic">
         <div class="card">
-            
+
             <div class="col-md-12">
                 <div class="classic_header_image_show">
                     @if ($nfc_card->client?->image)
@@ -95,11 +122,11 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
-                                       
+
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -113,6 +140,6 @@
                 </div>
             </div>
         </div>
-       
+
     </div>
 </a>
