@@ -94,7 +94,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('public/user/assets/vendor/flatpickr/dist/flatpickr.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/user/assets/vendor/plyr/plyr.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/user/assets/vendor/zuck.js/dist/zuck.min.css') }}">
-    
+
     <!-- Theme CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('public/user/assets/css/style.css') }}">
     <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
@@ -114,9 +114,9 @@
     .btn-primary-soft{
         font-size: 0.8rem;
     }
-</style>   
+</style>
  @stack('styles')
- 
+
 </head>
 
 <body>
@@ -127,7 +127,7 @@
 
     <!-- **************** MAIN CONTENT START **************** -->
     <main>
-       
+
         <!-- Container START -->
         <div class="container-fluid px-0 px-lg-4">
             @yield('content')
@@ -147,7 +147,7 @@
         <a target="_blank" href="{{route('chat')}}" class="icon-sm btn btn-primary position-fixed end-0 bottom-0 mb-5" role="button">
         <i class="bi bi-chat-left-text-fill"></i>
         </a>
-{{--        
+{{--
         <!-- Chat sidebar START -->
         <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
             id="offcanvasChat">
@@ -224,7 +224,7 @@
                         </li>
                     @endforeach
 
-                    
+
                     <!-- Button -->
                     <li class="mt-3 d-grid">
                         <a class="btn btn-primary-soft" href="{{route('chat')}}"> See all in messaging </a>
@@ -420,7 +420,7 @@
         </div>
         <!-- Chat END -->
 --}}
-    </div> 
+    </div>
     <!-- Main Chat END -->
 
     <!-- Modal create Feed START -->
@@ -453,10 +453,10 @@
                             @endif
                         </div>
                         <!-- Feed box  -->
-                        
+
                             <textarea class="form-control pe-4 fs-3 lh-1 border-0" name="message" rows="4" placeholder="Share your thoughts..."
                                 autofocus></textarea>
-                       
+
                     </div>
                     <!-- Feed rect START -->
                     <div class="hstack gap-2">
@@ -539,7 +539,7 @@
                         <form class="w-100">
                             <textarea class="form-control pe-4 fs-3 lh-1 border-0" rows="2" placeholder="Share your thoughts..."></textarea>
                         </form>
-                        
+
                     </div>
 
                     <!-- Dropzone photo START -->
@@ -561,7 +561,7 @@
                 <div class="modal-footer row justify-content-between">
                     <div class="col-lg-3">
                         <div class="choices" data-type="select-one" tabindex="0" role="listbox" aria-haspopup="true" aria-expanded="false"><div class="choices__inner"><select class="form-select js-choice choice-select-text-none choices__input" data-position="top" data-search-enabled="false" hidden="" tabindex="-1" data-choice="active"><option value="PB" data-custom-properties="[object Object]">Public</option></select><div class="choices__list choices__list--single"><div class="choices__item choices__item--selectable" data-item="" data-id="1" data-value="PB" data-custom-properties="[object Object]" aria-selected="true">Public</div></div></div><div class="choices__list choices__list--dropdown" aria-expanded="false"><div class="choices__list" role="listbox"><div id="choices--os0g-item-choice-1" class="choices__item choices__item--choice choices__item--selectable is-highlighted" role="option" data-choice="" data-id="1" data-value="PV" data-select-text="Press to select" data-choice-selectable="" aria-selected="true">Custom</div><div id="choices--os0g-item-choice-2" class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice="" data-id="2" data-value="PV" data-select-text="Press to select" data-choice-selectable="">Friends</div><div id="choices--os0g-item-choice-3" class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice="" data-id="3" data-value="PV" data-select-text="Press to select" data-choice-selectable="">Only me</div><div id="choices--os0g-item-choice-4" class="choices__item choices__item--choice is-selected choices__item--selectable" role="option" data-choice="" data-id="4" data-value="PB" data-select-text="Press to select" data-choice-selectable="">Public</div></div></div></div>
-                    
+
                     </div>
                     <div class="col-lg-8 text-sm-end">
                     <!-- Button -->
@@ -735,18 +735,18 @@ JS libraries, plugins and custom scripts -->
             }
         });
 
-        
+
 
         // Handle Dropzone success event
         myDropzoneImage.on('success', function(file, response) {
             // Handle success response
             console.log(response);
             // Optionally, close the modal
-             
+
                 $('#feedActionPhoto').modal('hide');
-           
+
                 //$('#feedActionVideo').modal('hide');
-            
+
             window.location.href = "{{route('clientdashboard')}}";
         });
 
@@ -778,7 +778,7 @@ JS libraries, plugins and custom scripts -->
             }
         });
 
-        
+
 
         // Handle Dropzone success event
         myDropzoneVideo.on('success', function(file, response) {
@@ -813,7 +813,7 @@ JS libraries, plugins and custom scripts -->
                     console.log(response);
                     // Optionally, close the appropriate modal
                     var fileType = formData.get('file').type.split('/')[0]; // 'image' or 'video'
-                    
+
                     if (fileType === 'image') {
                         $('#feedActionPhoto').modal('hide');
                     } else if (fileType === 'video') {
@@ -869,7 +869,7 @@ JS libraries, plugins and custom scripts -->
                     // Populate the modal with fetched data
                     $('#editMessage').val(data.message);
                     $('#editPrivacy').val(data.privacy);
-                    
+
                     // Set the post ID to the input field's data attribute
                     $('#postId').val(postId);
                     // Open the edit post modal
@@ -958,10 +958,10 @@ JS libraries, plugins and custom scripts -->
                         }
                     });
         }
-        
 
 
-    
+
+
     });
     function confirmShare(button) {
         if (confirm("Are you sure you want to share this post?")) {
@@ -969,14 +969,14 @@ JS libraries, plugins and custom scripts -->
         }
     }
     /*============Delete Post ===============*/
- 
-    
+
+
     $(document).ready(function() {
         $('[data-delete-post-id]').on('click', function(event) {
             event.preventDefault();
-            
-            var deleteUrl = $(this).data('delete-url'); // Get the route URL from data attribute
-            
+
+            var deleteUrl = $(this).data('delete-url');
+
             if (confirm('Are you sure you want to delete this post?')) {
                 $.ajax({
                     url: deleteUrl, // Use the dynamic URL here
@@ -996,7 +996,7 @@ JS libraries, plugins and custom scripts -->
         });
     });
 
-    
+
 
 
 
@@ -1030,9 +1030,9 @@ JS libraries, plugins and custom scripts -->
         document.addEventListener('DOMContentLoaded', function () {
             let currentVideo = null;
             let videoPlaybackPositions = new Map(); // To keep track of playback positions
-        
+
             const videos = document.querySelectorAll('video');
-        
+
             // Create an intersection observer to detect visibility
             const observer = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
@@ -1061,14 +1061,14 @@ JS libraries, plugins and custom scripts -->
             }, {
                 threshold: 0.5 // Adjust this threshold as needed
             });
-        
+
             // Observe each video element
             videos.forEach(video => {
                 observer.observe(video);
             });
         });
         </script>
-        
-        
+
+
 </body>
 </html>

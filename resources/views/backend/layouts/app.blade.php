@@ -8,6 +8,12 @@
         <title>@yield('title',env('APP_NAME')) </title>
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="{{asset('public/images/frontend_logo.png')}}">
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
+
         <link rel="stylesheet" href="{{asset('public/vendor/owl-carousel/css/owl.carousel.min.css')}}">
         <link rel="stylesheet" href="{{asset('public/vendor/owl-carousel/css/owl.theme.default.min.css')}}">
         <link href="{{asset('public/vendor/jqvmap/css/jqvmap.min.css')}}" rel="stylesheet">
@@ -92,7 +98,7 @@
                                         <i class="icon-envelope"></i>
                                         <div class="pulse-css"></div>
                                     </a>
-                                    
+
                                 </li>
                                 <li class="nav-item dropdown header-profile">
                                     <a class="nav-link" href="#" role="button" data-toggle="dropdown">
@@ -326,9 +332,9 @@
                         </div>
                     </div>
                     <!-- row -->
-                    
+
                     @yield('content')
-                   
+
                 </div>
             </div>
             <!--**********************************
@@ -396,7 +402,7 @@
         @stack('scripts')
         <!-- Init JavaScript -->
         <script src="{{asset('public/dist/js/init.js')}}"></script>
-        
+
          <script src="{{ asset('js/app.js') }}"></script>
     </body>
 

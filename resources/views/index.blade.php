@@ -13,7 +13,6 @@
   <!-- CSS -->
   <link rel="stylesheet" href="{{asset('public/style.css')}}">
   <!-- End CSS -->
-
 </head>
 
 <body>
@@ -25,11 +24,11 @@
 		  <small>Online</small>
 		</div>
 		</div>
-		
+
 		<div class="messages">
 			 @include('receive', ['message' => "Hey! What's up!  👋"])
 		</div>
-		
+
 		<div class="bottom">
 			<form>
 				<input type="text" id="message" name="message" placeholder="Enter message..." autocomplete="off">
@@ -55,9 +54,9 @@
 			$(".messages > .message ").last().after(res);
 			$(document).scrollTop($(document).height());
 		});
-	});	
+	});
 	//Broadcast Message
-	
+
 	$("form").submit(function(event){
 		event.preventDefault();
 		$.ajax({

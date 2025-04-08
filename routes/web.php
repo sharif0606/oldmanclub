@@ -56,11 +56,13 @@ use App\Http\Controllers\Backend\Website\SmartMail\SmartMailHeroController as sm
 use App\Http\Controllers\Backend\Website\SmartMail\SmartWorkSectionController as smartwork;
 use App\Http\Controllers\Backend\Website\SmartMail\SmartSmsServiceController as smartsms;
 use App\Http\Controllers\Backend\Website\SmartMail\SmartPhonebookServiceController as smartphonebook;
+
 //Printing service
 use App\Http\Controllers\Backend\Website\PrintingService\PrintingHeroController as printhero;
 use App\Http\Controllers\Backend\Website\PrintingService\PrintVideoSectionController as printvideo;
 use App\Http\Controllers\Backend\Website\PrintingService\PrintCardSectionController as printcard;
 use App\Http\Controllers\Backend\Website\PrintingService\PrintCustomerFeedbackController as printcus_feedback;
+
 //Country City and State
 use App\Http\Controllers\Backend\Location\CityController;
 use App\Http\Controllers\Backend\Location\CountryController;
@@ -101,7 +103,6 @@ use App\Http\Controllers\Backend\Nfc\DesignCardController as design_card;
 use App\Http\Controllers\Backend\Nfc\NfcCardController as nfc_card;
 
 
-
 // printing_service admin panelBackend\Printingservice
 
 use App\Http\Controllers\Backend\Printingservice\PrintingServiceController as print_service;
@@ -139,12 +140,12 @@ Route::get('/logout', [auth::class, 'singOut'])->name('logOut');
 Route::get('webapi/test', [AuthController::class, 'test']);
 Route::post('webapi/client/login', [AuthController::class, 'clientLogin']);
 
-
 Route::middleware(['checkauth'])->prefix('admin')->group(function () {
     Route::get('dashboard', [dashboard::class, 'index'])->name('dashboard');
-    //Route::get('admin/chat', [ChatController::class, 'adminChat'])->name('admin_chat');
+    Route::get('admin/chat', [ChatController::class, 'adminChat'])->name('admin_chat');
     //Route::post('admin-chat', [ChatController::class, 'adminSendMessage'])->name('adminchat.store');
 });
+
 //middleware(['checkrole'])->
 Route::prefix('admin')->group(function () {
     Route::resource('user', user::class);
@@ -152,7 +153,6 @@ Route::prefix('admin')->group(function () {
     Route::resource('client', client::class);
     Route::get('addressverification/{id}',[client::class, 'verification'])->name('address_verify');
     Route::post('addressverification/{id}',[client::class, 'verification_update'])->name('address_verify_saved');
-
     Route::get('permission/{role}', [permission::class, 'index'])->name('permission.list');
     Route::post('permission/{role}', [permission::class, 'save'])->name('permission.save');
     Route::resource('sms', sms::class);
@@ -162,6 +162,7 @@ Route::prefix('admin')->group(function () {
     Route::post('shippingUpdate/{id}', [ShippingController::class, 'shipping_update'])->name('shipping_update');
     Route::resource('shipstatus', shipstatus::class);
     Route::resource('shiptrack', shiptrack::class);
+
     // Nfc
     Route::resource('nfc_field', nfc_field::class);
     Route::resource('design_card', design_card::class);
@@ -189,8 +190,6 @@ Route::prefix('admin')->group(function () {
     Route::post('bank_update/{id}',[BankController::class,'bank_update'])->name('bank_update');
     Route::get('post_list',[PostController::class,'post_list'])->name('post_list');
     Route::get('contact/list',[contact::class,'contact_list'])->name('contact_list');
-
-
 
     //website
     Route::resource('setting', setting::class);
@@ -237,7 +236,6 @@ Route::prefix('admin')->group(function () {
 
 
 // Client Controller
-
 Route::get('client/register', [clientauth::class, 'signUpForm'])->name('clientregister');
 Route::post('client/register', [clientauth::class, 'signUpStore'])->name('clientregister.store');
 
@@ -273,9 +271,6 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::get('reply-reaction-update', [replyreaction::class,'reply_reaction_update'])->name('reply-reaction-update');
     Route::get('gathering', [clientprofile::class, 'gathering'])->name('gathering');
     Route::get('single-post/{id}', [ClientProfile::class, 'singlePost'])->name('singlePost');
-
-
-
 
     Route::resource('phonebook', phonebook::class);
     Route::resource('phonegroup', phonegroup::class);
@@ -350,7 +345,6 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     //Group Message Search
     Route::get('/groupmessagesearch',[GroupController::class,'groupmessagesearch']);
 
-
     Route::resource('phonebook', phonebook::class);
 
     Route::get('/download-phonebook', [phonebook::class, 'downloadPhonebook'])->name('phonebook_download');
@@ -370,9 +364,6 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::resource('share', share::class);
     Route::post('post-update', [post::class, 'post_update'])->name('postUpdate');
     Route::resource('purchase', purchase::class);
-
-
-
 });
 
 Route::get('nfcqrurl/{id}/{client_id}', [nfc_card::class, 'showqrurl']);
@@ -402,7 +393,6 @@ Route::get('allservice', [frontend::class, 'allservice'])->name('allservice');
 Route::get('shipping-more', [frontend::class, 'shipplearnmore'])->name('shipplearnmore');
 Route::get('contact/create', [frontend::class, 'contact_create'])->name('contact_create');
 Route::post('contact/create', [frontend::class, 'contact_store'])->name('contact_store');
-
 
 // cart
 Route::get('cart', [CartController::class, 'cart'])->name('cart_page');

@@ -30,6 +30,10 @@
             background: {{ $formType=='edit' ? $nfc_card->card_design->color : 'rgb(0, 247, 255)' }};
         }
 
+        .active-text-color{
+            color: {{ $formType=='edit' ? $nfc_card->card_design->color ?? '#9c9a9a' : '#9c9a9a'}};
+        }
+
         .design-card svg {
             box-shadow: 2px 5px 22px #cacaca;
             border-radius: 20px;
@@ -85,14 +89,25 @@
             border-color: #8F60DE !important;
         }
 
+        .card{
+            font-family: {{ $formType=='edit' ? "$nfc_card->card_design->font" ?? 'nunito' : 'nunito'}}" !important;
+        }
+        /* .logo-image-preview{
+            margin-top: .8rem !important;
+        } */
+
+        .f-name,.m-name,.l-name,.field-title, .deprtment,.goes-by{
+            font-family: {{ $formType=='edit' ? "$nfc_card->card_design->font" ?? 'nunito' : 'nunito'}} !important;
+        }
+
         .card-dragger-header {}
 
         .remove-button {
             position: absolute;
             top: 2px;
             right: 2px;
-            background: rgb(100, 98, 98);
-            color: rgb(232, 227, 227);
+            background: rgb(255, 23, 67);
+            color: white;
             border: none;
             border-radius: 50%;
             cursor: pointer;
@@ -100,6 +115,10 @@
             height: 15px;
             text-align: center;
             line-height: 18px;
+            font-size: .55555rem;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
         }
 
         .edit-nav-profile {
@@ -323,7 +342,7 @@
 
                                         <div class="tab-pane fade show active" id="tab-1" role="tabpanel">
                                             <div class="px-2">
-
+                                                {{-- Profile Photo --}}
                                                 <div class="col-12 border-bottom">
                                                     <h6>Profile Photo</h6>
                                                     <div class="row">
@@ -347,6 +366,7 @@
                                                     </div>
 
                                                 </div>
+                                                {{-- Card Design --}}
                                                 <div class="col-12 py-2 border-bottom">
                                                     <h6>Design</h6>
                                                     <input type="hidden" name="card_type"
@@ -521,7 +541,7 @@
                                                                     alt="" id="logo-placeholder">
                                                         </div>
                                                         <div class="col-4 py-2 offset-3">
-                                                            <div class="upload-container">
+                                                            <div class="upload-container" >
                                                                 <input type="file" id="logo" name="logo"
                                                                     accept="image/*"
                                                                     onchange="previewfile(event,'logo-placeholder'); previewfile(event,'logo-image-preview');">
@@ -628,21 +648,21 @@
                                                         <input type="text" name="preferred_name"
                                                             value="{{ $formType=='edit' ? $nfc_card->nfc_info->preferred_name ?? '' :'' }}"
                                                             id="" class="form-control"
-                                                            onkeyup="$('.preferred_name').text($(this).val());">
+                                                            onkeyup="$('.preferred_name').text($(this).val());$('.msg-icon').removeClass('d-none').addClass('show'); $('.goes-by').removeClass('d-none').addClass('show')">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Maiden Name</label>
                                                         <input type="text" name="maiden_name"
                                                             value="{{ $formType=='edit' ? $nfc_card->nfc_info->maiden_name ?? '' : ''}}" id=""
                                                             class="form-control form-control-sm mb-2"
-                                                            onkeyup="$('.accreditations').text($(this).val());">
+                                                            onkeyup="$('.maiden_name').text('('+$(this).val()+')');">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Pronoun</label>
                                                         <input type="text" name="pronoun"
                                                             value="{{ $formType=='edit' ? $nfc_card->nfc_info->pronoun ?? '' : '' }}" id=""
                                                             class="form-control form-control-sm mb-2"
-                                                            onkeyup="$('.pronoun').text($(this).val());">
+                                                            onkeyup="$('.pronoun').text('('+$(this).val()+')');">
                                                     </div>
                                                 </div>
                                                 <h6 class="border-bottom py-4">Affiliation</h6>
@@ -856,6 +876,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="tab-pane fade" id="tab-4" role="tabpanel">
                                             <div class="px-2">
                                                 <div class="col-12">
@@ -917,16 +938,25 @@
             colorBox.classList.toggle('selected');
         });
 
+
+        // On Design Change
         function changeDesign(event, id) {
             var design = document.getElementById('nfcDesign');
             var color = document.getElementById('displayNfcColor');
+            // console.log('color:',color.value);
+
             var allDesignCards = document.querySelectorAll('.design-card');
             allDesignCards.forEach(function(card) {
                 card.style.border = '2px solid transparent';
                 card.classList.remove('design-card-active');
             });
+
             if (design && color) {
                 design.value = id;
+                // Profile Image Background
+                document.querySelectorAll(".display-profile-pic").forEach((e) => {
+                    e.style.backgroundColor = color;
+                });
                 var designCard = event.target.closest('.design-card');
                 if (designCard) {
                     designCard.style.border = '2px solid ' + color.value;
@@ -1098,6 +1128,13 @@
             document.getElementById("header_text").style.background = color;
             document.getElementById("sleek_header_image").style.background = color;
             // document.getElementById("header_sleek").style.background = color;
+             // Profile Image Background
+            document.querySelectorAll(".display-profile-pic").forEach(function(element) {
+                element.style.color = color;
+            });
+            document.querySelectorAll(".active-text-color").forEach(function(element) {
+                element.style.color = color;
+            });
         }
         const badgeImages = [];
 
@@ -1174,9 +1211,6 @@
         function removeBadgeImage(id, imgSrc) {
             const previewOutput = document.getElementById(`badge-preview-${id}`).remove();
             const controlOutput = document.getElementById(`image-container-${id}`).remove();
-
-            // previewOutput.removeChild(previewDiv);
-            // controlOutput.removeChild(controlDiv);
 
             const index = badgeImages.indexOf(imgSrc);
             if (index > -1) {

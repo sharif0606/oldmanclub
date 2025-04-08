@@ -95,7 +95,7 @@
                                                 <textarea name="title" id="" class="form-control" name="pronoun"></textarea>
                                             </div>
                                         </div>
-                    
+
                                     </div>
                                     <div class="col-12">
                                         <h6 class="border-bottom">NFC Design</h6>
@@ -124,7 +124,7 @@
                                                         class="field-item btn btn-primary btn-sm text-white rounded-pill"><span
                                                             class="mx-1"><i
                                                                 class="{{ $value->icon }}"></i></span>{{ $value->name }}</button>
-                    
+
                                                 @empty
                                                 @endforelse
                                             </div>

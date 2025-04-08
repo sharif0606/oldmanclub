@@ -106,27 +106,28 @@ body {
     }
 }
 
+
 .middle {
-    border-left: 1px dashed black;
+    border-left: .5px dashed black;
 }
 
 /* modern  */
 
 .modern_card_image {
     height: var(--chakra-sizes-full);
-    max-height: 6rem;
+    /* max-height: 6rem; */
     max-width: var(--chakra-sizes-full);
-    object-fit: contain;
+    object-fit: cover;
     object-position: left center;
     width: var(--chakra-sizes-full);
     /* margin-top: -263px; */
     position: relative;
 }
-
+ /*
 .CardAvatar {
-    float: right;
-    /* margin-right: 2rem; */
-    /* aspect-ratio: 1 / 1;
+   float: right;
+     margin-right: 2rem;
+aspect-ratio: 1 / 1;
     border-radius: var(--chakra-radii-full);
     display: inline;
     float: right;
@@ -136,32 +137,57 @@ body {
     object-fit: cover;
     overflow: hidden;
     shape-margin: 0.5rem;
-    shape-outside: content-box; */
+    shape-outside: content-box;
+}
+ */
+
+.CardAvatar{
+    position: absolute;
+    bottom: 5rem;
+    right: 0;
+    width: 6rem;
+    height: 10rem;
+    z-index: 10000;
 }
 
 .CardAvatar img {
-    border-radius: 50%;
-    width: 100%;
+    border-radius: 100%;
+       /* width: 10rem; */
+    height: 6rem;
 }
 
 .modern_header {
     /* background-color: #414141; */
     margin-bottom: 1.5rem;
-    min-height: 6rem;
+    height: 17rem;
     /* padding: 2rem 2rem 0px; */
-    padding: 50px;
+    padding: 20px;
     position: relative;
     color: #ffffff;
     /* background: linear-gradient(-190deg, rgb(19, 18, 18) 90%, #CAC4C4 0%); */
     clip-path: polygon(0px 0px, 100% 0px, 100% calc(100% - 7rem), 0px 100%);
     background: linear-gradient(251.74deg, rgb(4, 4, 5) -20.73%, rgb(5, 4, 5) 127.58%);
-    height: 450px;
+
+}
+
+.modern_header:before {
+
+  inset:0px;
+  clip-path: polygon(0px 0px, 100% 0px, 100% calc(100% - 7rem), 0px 100%);
+  content: "";
+  position: absolute;
+  z-index: -1;
 }
 
 .header_body {
-    background-color: #CAC4C4;
-    ;
+    background-color: #FFF;
+    box-shadow: 0px 0px 5px #efe6e6;
+    box-sizing: border-box;
+    border-radius:10px;
+    overflow:hidden;
+    position: relative;
 }
+
 
 .modern_card {
     border-bottom-left-radius: 15px;
