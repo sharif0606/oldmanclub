@@ -318,11 +318,11 @@
                                                             <div class="col-md-12">
                                                                 <div class="classic_header_image_show">
                                                                     @if ($nfc_card->client?->image)
-                                                                        <img src="{{ asset('public/uploads/client/' . $nfc_card->client?->image) }}" class="img-fluid">
+                                                                        <img src="{{ asset('public/uploads/client/' . $nfc_card->client?->image) }}" class="img-fluid" height="350px" width="100%">
                                                                         </img>
                                                                     @else
                                                                         <img
-                                                                            src="{{ asset('public/assets/nfc/images/123.png') }}">
+                                                                            src="{{ asset('public/assets/nfc/images/123.png') }}" class="img-fluid" height="350px" width="100%">
                                                                     @endif
                                                                     <div class="classic_svg_show">
                                                                         <svg preserveAspectRatio="xMinYMax meet" viewBox="0 0 246 70" xmlns="http://www.w3.org/2000/svg"
@@ -431,7 +431,7 @@
                                                 <div>
                                                         <div class="CardAvatar">
                                                             <img src="{{ $nfc_card->client?->image ? asset('public/uploads/client/' . $nfc_card->client?->image) : asset('public/assets/nfc/images/123.png') }}"
-                                                                class=" img-fluid display-profile-pic" alt="" width="200px" height="200px"  />
+                                                                class=" img-fluid display-profile-pic" alt="" width="100%" height="350px"  />
                                                         </div>
                                                         <div class="CardBox css-19niztd">
                                                             <ul class="list-group social-user-ul">
@@ -462,7 +462,7 @@
                                                     <div class="header_sleek">
                                                         <div class="sleek_header_image" id="sleek_header_image">
                                                             <div class="css-79elbk">
-                                                                <img class="display-profile-pic"  src="{{ $nfc_card->client?->image ?  asset('public/uploads/client/' . $nfc_card->client?->image) : asset('public/assets/nfc/images/123.png')}}"}}" alt="" srcset="" class="" width="100%" style="height: 20rem">
+                                                                <img class="display-profile-pic"  src="{{ $nfc_card->client?->image ?  asset('public/uploads/client/' . $nfc_card->client?->image) : asset('public/assets/nfc/images/123.png')}}"}}" alt="" srcset="" class="" width="100%"  style="height: 20rem">
                                                             </div>
                                                         </div>
                                                         <div class="css-1fbwa35 " style="background: white">
