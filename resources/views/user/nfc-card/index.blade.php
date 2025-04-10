@@ -90,6 +90,11 @@
 
         .f-name,.m-name,.l-name,.field-title, .deprtment,.goes-by{
             font-family: 'nunito' !important;
+            font-size: 12px !important;
+        }
+
+        .prefix-name,.suffix-name,.maiden_name,.accreditations,.field-title,.deprtment,.company{
+            font-size: 12px !important;
         }
 
         .card-dragger-header {}
@@ -191,6 +196,10 @@
             font-size: 12px;
             font-weight: bold;
         }
+        .classic{
+            background-color: white;
+            overflow: hidden;
+        }
 
         .color-box {
             outline: transparent;
@@ -200,6 +209,53 @@
             height: 25px;
             border-radius: 50%;
         }
+        .CardAvatar {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 6rem;
+            height: 10rem;
+            z-index: 10000;
+            top: 50px;
+            }
+
+            .modern_header {
+                background-color: #414141;
+                margin-bottom: 1.5rem;
+                height: 10rem;
+                padding:
+                2rem 2rem 0px;
+                padding:
+                20px;
+                position: relative;
+                color: #ffffff;
+                background:
+                linear-gradient(-190deg, rgb(19, 18, 18) 90%, #CAC4C4 0%);
+                clip-path: polygon(0px 0px, 100% 0px, 100% calc(100% - 7rem), 0px 100%);
+                background:
+                linear-gradient(251.74deg, rgb(4, 4, 5) -20.73%, rgb(5, 4, 5) 127.58%);
+            }
+
+            .header_sleek {
+                background-color: white;
+                border:none;
+                width: unset !important;
+                height: unset !important;
+            }
+
+            .design-card-link{
+                background: white;
+                overflow: hidden;
+            }
+
+            .classic_svg_show{
+                height: 210px;
+            }
+
+            .classic_svg_show svg{
+                position: absolute;
+                top: 80px;
+            }
 
         label i.fas {
             padding: 3px;
@@ -250,16 +306,267 @@
                                     <!-- Nfc item START -->
                                     @forelse ($nfc_cards as $nfc_card)
                                     {{-- {{$nfc_card->card_design?->design_card_id }}
-                                    {{$nfc_card->card_type}} --}}
+                                     --}}
+                                     {{-- {{$nfc_card->card_type}} --}}
                                         <div class="col-6 col-lg-4 position-relative px-2 mb-2" style="height:360px;">
                                             @if ($nfc_card->card_type == 1)
-                                                @include('user.nfc-template_mini.classic-template')
+                                            {{-- CLASISC Design --}}
+                                                <a href="{{ route('nfc_card.show', encryptor('encrypt', $nfc_card->id)) }}" class="design-card-link">
+                                                    <div class="classic">
+                                                        <div class="">
+
+                                                            <div class="col-md-12">
+                                                                <div class="classic_header_image_show">
+                                                                    @if ($nfc_card->client?->image)
+                                                                        <img src="{{ asset('public/uploads/client/' . $nfc_card->client?->image) }}" class="img-fluid">
+                                                                        </img>
+                                                                    @else
+                                                                        <img
+                                                                            src="{{ asset('public/assets/nfc/images/123.png') }}">
+                                                                    @endif
+                                                                    <div class="classic_svg_show">
+                                                                        <svg preserveAspectRatio="xMinYMax meet" viewBox="0 0 246 70" xmlns="http://www.w3.org/2000/svg"
+                                                                            class="css-fxun4i">
+                                                                            @if ($nfc_card->card_type == 1)
+                                                                                <path clip-rule="evenodd"
+                                                                                    d="M 214.7168,6.1113281 C 195.65271,5.9023124 172.37742,11.948182 137.87305,32.529297 110.16613,49.05604 86.980345,56.862784 65.015625,57 H 65 v 43 H 246 V 11.453125 C 236.0775,8.6129313 226.15525,6.2367376 214.7168,6.1113281 Z"
+                                                                                    fill="{{ $nfc_card->card_design->color }}" fill-rule="evenodd"></path>
+                                                                                <path clip-rule="evenodd"
+                                                                                    d="M 0,35.773438 V 100 H 65 L 64.97852,57 C 43.192081,57.127508 22.605139,49.707997 0,35.773438 Z"
+                                                                                    fill="{{ $nfc_card->card_design->color }}" fill-rule="evenodd"></path>
+                                                                                <path clip-rule="evenodd"
+                                                                                    d="m 0,16.7221 v 19.052 C 45.4067,63.7643 82.6667,65.4583 137.873,32.5286 193.08,-0.401184 219.54,3.87965 246,11.4535 V 6.51403 C 185.24,-16.8661 135.913,29.331 97.6933,40.8564 59.4733,52.3818 33.6467,44.1494 0,16.7221 Z"
+                                                                                    fill="{{ $nfc_card->card_design->color }}" fill-rule="evenodd"></path>
+                                                                            @endif
+                                                                        </svg>
+                                                                        <div class="container-fluid mt-2">
+                                                                            <div class="row">
+                                                                                    <div class="d-flex">
+                                                                                        <div style="border-left: .5px dashed black;"></div>
+                                                                                        <div class="ps-2">
+                                                                                            @if ($nfc_card->nfc_info?->prefix)
+                                                                                                <span
+                                                                                                    class="me-2 fs-6 fw-bold prefix">{{ $nfc_card->nfc_info?->prefix }}</span>
+                                                                                            @else
+                                                                                                {{-- <span class="fs-4 fw-bold">Dr.</span> --}}
+                                                                                            @endif
+                                                                                            <span class="fs-6 fw-bold f-name">{{ $nfc_card->client?->fname }}</span>
+                                                                                            <span class="fs-6 fw-bold m-name">{{ $nfc_card->client?->middle_name }}</span>
+                                                                                            <span class="fs-6 fw-bold l-name">{{ $nfc_card->client?->last_name }}</span>
+                                                                                            <div>
+                                                                                                @if ($nfc_card->nfc_info?->suffix)
+                                                                                                    <span class="fs-6 sufix">{{ $nfc_card->nfc_info?->suffix }}</span>
+                                                                                                @else
+                                                                                                    {{-- <span class="fs-4 fw-bold">FCP</span> --}}
+                                                                                                @endif
+                                                                                            </div>
+                                                                                            <div class="row">
+                                                                                                <div>
+                                                                                                    @if ($nfc_card->nfc_info?->department)
+                                                                                                        <small>{{ $nfc_card->nfc_info?->department }}</small>
+                                                                                                    @else
+                                                                                                        {{-- <span class="fs-5 fw-bold">Software Development</span> --}}
+                                                                                                    @endif
+                                                                                                    @if ($nfc_card->nfc_info?->company)
+                                                                                                        <small>{{ $nfc_card->nfc_info?->company }}</small>
+                                                                                                    @else
+                                                                                                        {{-- <p class="fs-6 fst-italic">Muktodhara Technology Limited</p> --}}
+                                                                                                    @endif
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                </div>
+                                                                                <ul class="list-group social-user-ul">
+                                                                                        @foreach ($nfc_card->nfcFields as $nfcField)
+                                                                                            <li class="list-group-item social-list-item-{{ $nfcField->id }}">
+                                                                                                <i style="color:{{ $nfc_card->card_design->color }}" class="{{ $nfcField->icon }}"></i>
+                                                                                            &nbsp;
+                                                                                                <a href="#" class="social-item-link-{{$nfcField->id}}">{{ $nfcField->pivot->field_value }}</a>
+                                                                                            </li>
+                                                                                        @endforeach
+
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="mt-2 border-top">
+                                                            <div class="d-flex justify-content-between align-items-center px-2">
+                                                                <span class="fw-bold fs-6">{{ $nfc_card->card_name}}</span>
+                                                                <small style="font-size: 10px;">{{  $nfc_card->created_at->format('M d, Y')  }}</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
                                             @elseif($nfc_card->card_type == 2)
-                                                @include('user.nfc-template_mini.modern-template')
+                                                {{-- Modern Design --}}
+                                                <a class="design-card-link" href="{{ route('nfc_card.show', encryptor('encrypt', $nfc_card->id)) }}" class="design-card">
+
+                                                <div class="header_body">
+                                                <header class="modern_header" id="modern_header">
+                                                    <div class="col-sm-12 p-0 m-0">
+                                                            <span class="fs-4 fw-bold prefix-name">{{  $nfc_card->nfc_info?->prefix ?? ''}}</span>
+                                                        <span class="fs-4 fw-bold f-name">{{  $nfc_card->client?->fname ?? ''  }}</span>
+                                                    <span class="fs-5 fw-bold m-name">{{  $nfc_card->client?->middle_name ?? ''  }}</span>
+                                                    <span class="fs-4 fw-bold l-name">{{  $nfc_card->client?->last_name ?? ''  }}</span>
+                                                    <span class="fs-4 fw-bold suffix-name">{{  $nfc_card->nfc_info?->suffix ?? ''  }}</span>
+                                                    <span class="fs-2 fw-bold maiden_name">
+                                                            {{ $nfc_card->nfc_info?->maiden_name ? '('. $nfc_card->nfc_info?->maiden_name.')' ?? ''  : '' }}
+                                                    </span>
+                                                    <span class="accreditations">&nbsp;{{  $nfc_card->nfc_info?->accreditations  }}</span>
+                                                    </div>
+                                                    <div class="">
+                                                        <div class="">
+                                                            <p>
+                                                            <span class="">{{  $nfc_card->nfc_info?->title  }}</span> <br>
+                                                                <span class="fs-5 fw-bold deprtment " id="deprtment">{{  $nfc_card->nfc_info?->department ?? '' }}</span> <br>
+                                                            <span class="company" id="company">{{  $nfc_card->nfc_info?->company ?? ''  }}</span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </header>
+                                                <div>
+                                                        <div class="CardAvatar">
+                                                            <img src="{{ $nfc_card->client?->image ? asset('public/uploads/client/' . $nfc_card->client?->image) : asset('public/assets/nfc/images/123.png') }}"
+                                                                class=" img-fluid display-profile-pic" alt="" width="200px" height="200px"  />
+                                                        </div>
+                                                        <div class="CardBox css-19niztd">
+                                                            <ul class="list-group social-user-ul">
+                                                                    @foreach ($nfc_card->nfcFields as $nfcField)
+                                                                        <li class="list-group-item social-list-item-{{ $nfcField->id }}">
+                                                                            <i style="color:{{ $nfc_card->card_design->color }}" class="{{ $nfcField->icon }}"></i>
+                                                                        &nbsp;
+                                                                            <a href="#" class="social-item-link-{{$nfcField->id}}">{{ $nfcField->pivot->field_value }}</a>
+                                                                        </li>
+                                                                    @endforeach
+
+                                                            </ul>
+                                                        </div>
+
+                                                </div>
+                                                <div class="mt-2 border-top">
+                                                            <div class="d-flex justify-content-between align-items-center px-2">
+                                                                <span class="fw-bold fs-6">{{ $nfc_card->card_name}}</span>
+                                                                <small style="font-size: 10px;">{{  $nfc_card->created_at->format('M d, Y')  }}</small>
+                                                            </div>
+                                                        </div>
+
+                                                </div>
+                                            </a>
                                             @elseif($nfc_card->card_type == 3)
-                                                @include('user.nfc-template_mini.sleek-template')
+                                                {{-- SLEEK DESIGN --}}
+                                                <a href="{{ route('nfc_card.show', encryptor('encrypt', $nfc_card->id)) }}" class="design-card-link">
+                                                    <div class="header_sleek">
+                                                        <div class="sleek_header_image" id="sleek_header_image">
+                                                            <div class="css-79elbk">
+                                                                <img class="display-profile-pic"  src="{{ $nfc_card->client?->image ?  asset('public/uploads/client/' . $nfc_card->client?->image) : asset('public/assets/nfc/images/123.png')}}"}}" alt="" srcset="" class="" width="100%" style="height: 20rem">
+                                                            </div>
+                                                        </div>
+                                                        <div class="css-1fbwa35 " style="background: white">
+                                                            <div class="card sleek_card mx-auto mb-3">
+                                                                <div class="CardBox mx-auto">
+                                                                    <span class="fs-4 fw-bold prefix-name">{{  $nfc_card->nfc_info?->prefix ?? '' }}</span>
+                                                                <span class="fs-4 fw-bold f-name">{{  $nfc_card->client?->fname ?? '' }}</span>
+                                                                <span class="fs-4 fw-bold l-name">{{  $nfc_card->client?->middle_name ?? '' }}</span>
+                                                                <span class="fs-4 fw-bold suffix-name">{{  $nfc_card->client?->last_name ?? '' }}</span>
+
+                                                                <div>
+                                                                        <span class="fs-4 fw-bold suffix-name">{{  $nfc_card->nfc_info?->suffix ?? ''}}</span>
+                                                                    <span class="fs-4 fw-bold maiden_name">
+                                                                            {{ $nfc_card->nfc_info?->maiden_name ? '('.$nfc_card->nfc_info?->maiden_name.')' ?? '' : '' }}
+                                                                    </span>
+                                                                        <span class="accreditations">&nbsp;{{  $nfc_card->nfc_info?->accreditations  ?? '' }}</span>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                        <div class="">
+                                                            <div class="">
+                                                            <ul class="list-group social-user-ul">
+                                                                    @foreach ($nfc_card->nfcFields as $nfcField)
+                                                                        <li class="list-group-item social-list-item-{{ $nfcField->id }}">
+                                                                            <i style="color:{{ $nfc_card->card_design->color ?? ''}}" class="{{ $nfcField->icon }} "></i>
+                                                                        &nbsp;
+                                                                            <a href="#" class="social-item-link-{{$nfcField->id}}">{{ $nfcField->pivot->field_value }}</a>
+                                                                        </li>
+                                                                    @endforeach
+
+                                                            </ul>
+                                                        </div>
+                                                        <div class="mt-2 border-top">
+                                                            <div class="d-flex justify-content-between align-items-center px-2">
+                                                                <span class="fw-bold fs-6">{{ $nfc_card->card_name}}</span>
+                                                                <small style="font-size: 10px;">{{  $nfc_card->created_at->format('M d, Y')  }}</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                 </a>
                                             @elseif($nfc_card->card_type == 4)
-                                                @include('user.nfc-template_mini.flat-template')
+                                                {{-- FLAT DESIGN --}}
+                                                <a href="{{ route('nfc_card.show', encryptor('encrypt', $nfc_card->id)) }}" class="design-card-link">
+                                                    <div class="flat">
+                                                        <div class="card">
+                                                              <header>
+                                                                    <div class="header_section">
+                                                                        <div>
+                                                                                <img class="display-profile-pic"  src="{{ $nfc_card->client?->image ? asset('public/uploads/client/' . $nfc_card->client?->image) :null }}" alt="" width="350px" height="300px">
+                                                                                {{-- <img class="display-profile-pic"  src="{{  asset('public/uploads/client/' . $nfc_card->client?->image) : asset('public/assets/nfc/images/123.png')}}" alt="" width="350px" height="300px"> --}}
+                                                                        </div>
+                                                                        <div class="header_text" id="header_text"></div>
+                                                                    </div>
+                                                                </header>
+                                                                <div class="section">
+                                                                <div class="container-fluid mt-2">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12">
+                                                                            <span class="fs-4 fw-bold prefix-name text-dark" id="prefix-name">{{  $nfc_card->nfc_info?->prefix ?? ''}}</span>
+                                                                            <span class="fs-4 fw-bold f-name  text-dark" id="f-name">{{  $nfc_card->client?->fname ?? ''}}</span>
+                                                                            <span class="fs-4 fw-bold m-name  text-dark" id="m-name">{{  $nfc_card->client?->middle_name ?? ''}}</span>
+                                                                            <span class="fs-4 fw-bold l-name  text-dark" id="l-name">{{  $nfc_card->client?->last_name ?? ''}}</span>
+
+                                                                            <div style="display: contents">
+                                                                                <span class="fs-4 fw-bold suffix-name text-dark" id="suffix-name">{{  $nfc_card->nfc_info?->suffix ?? '' }}</span>
+                                                                                <span class="fs-4 fw-bold maiden_name text-dark" id="maiden_name">{{ $nfc_card->nfc_info?->maiden_name ? '('. $nfc_card->nfc_info?->maiden_name.')' ?? '' : ''}}</span>
+                                                                                    <span class="accreditations" id="accreditations">&nbsp;{{  $nfc_card->nfc_info?->accreditations ?? '' }}</span>
+                                                                            </div>
+                                                                            <p>
+                                                                                <span class="text-justify field-title text-dark fw-bold" id="field-title">{{  $nfc_card->nfc_info?->title ?? ''}}</span> <br>
+                                                                                <span class="fs-5 fw-bold deprtment active-text-color" id="deprtment">{{  $nfc_card->nfc_info?->department ?? '' }}</span> <br>
+                                                                                <span class="fs-6 company fst-italic fw-light" id="company">{{  $nfc_card->nfc_info?->company ?? '' }}</span>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <div class="container-fluid">
+                                                                        {{-- <p class="my-1 headline">{{  $nfc_card->nfc_info?->headline ?? '' }}</p> --}}
+                                                                    <div class="row">
+                                                                        <ul class="list-group social-user-ul">
+                                                                                @foreach ($nfc_card->nfcFields as $nfcField)
+                                                                                    <li class="list-group-item social-list-item-{{ $nfcField->id }}">
+                                                                                        <i style="color:{{ $nfc_card->card_design->color }}" class="{{ $nfcField->icon }} "></i>
+                                                                                        &nbsp;
+                                                                                        <a href="#" class="social-item-link-{{$nfcField->id}}">{{ $nfcField->pivot->field_value }}</a>
+                                                                                    </li>
+                                                                                @endforeach
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        <div class="mt-2 border-top">
+                                                            <div class="d-flex justify-content-between align-items-center px-2">
+                                                                <span class="fw-bold fs-6">{{ $nfc_card->card_name}}</span>
+                                                                <small style="font-size: 10px;">{{  $nfc_card->created_at->format('M d, Y')  }}</small>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
                                             @endif
                                         </div>
                                     @empty
