@@ -15,7 +15,6 @@
 </style>
 
 <div class="card p-3">
-
     @php
         $formType = isset($nfc_card)? 'edit' : 'create';
     @endphp

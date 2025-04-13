@@ -11,7 +11,7 @@
             <div class="css-1fbwa35 " style="background: #E2E8F0">
                 <div class="card sleek_card mx-auto mb-3">
                     <div class="card_img">
-                    <img src="{{ $formType=='edit' ? asset($nfc_card->card_design?->logo) :  asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="50px"
+                    <img src="{{ $formType=='edit' ? asset($nfc_card->card_design?->logo) :  asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="50px" height="50px"
                         />
                         <!-- <img src="assets/images/header_image.png" width="50px" alt="" srcset=""> -->
                     </div>

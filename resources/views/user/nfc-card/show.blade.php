@@ -204,8 +204,7 @@
                             <a class="btn btn-primary-soft icon-sm ms-auto" href="#"><i
                                     class="fa-solid fa-pencil"> </i></a>
                         </div>
-                        <p class="text-center pt-2"><small>Full Stack Developer at Test </small><span class="d-block">{
-                                Laravel,Vue,React }</span></p>
+                        <p class="text-center pt-2"><small>Full Stack Developer at Test </small><span class="d-block">(Laravel,Vue,React )</span></p>
                         <!-- User stat START -->
                         <div class="hstack gap-2 gap-xl-3 justify-content-center">
                             <!-- User stat item -->
@@ -242,7 +241,8 @@
                 <div class="card-header d-sm-flex text-center align-items-center justify-content-between border-0 pb-0">
                     <h4 class="card-title h4">PREVIEW NFC CARD</h4>
                     <!-- Button modal -->
-                    <a class="btn btn-primary-soft" href="{{ route('nfc_card.index') }}"> <i class="fas fa-list pe-1"></i>All
+                    <a class="btn btn-primary-soft" href="{{ route('nfc_card.index') }}">
+                    <i class="fas fa-list pe-1"></i>All
                         NFC CARD</a>
                 </div>
                 <!-- Card header START -->
@@ -270,7 +270,12 @@
                                     <a href="{{ route('downloadPdf', [encryptor('encrypt', $nfc_card->id), $nfc_card->client_id]) }}"
                                         title="Download PDF" class="fs-4"><i class="fas fa-file-pdf"></i></a>
                                     {{-- <a href="#" onclick="generatePDF()" title="Download PDF" class="fs-4"><i class="fas fa-file-pdf"></i></a> --}}
-                                    <a href="" class="fs-4" title="Delete"><i class="fas fa-trash"></i></a>
+
+                                    <form action="{{ route('nfc_card.destroy',encryptor('encrypt', $nfc_card->id))}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger" title="Delete"><i class="fas fa-trash"></i></button>
+                                    </form>
                                 </div>
                             </div>
                             <div class="col-md-6"></div>

@@ -22,12 +22,11 @@ class NfcCard extends Model
     {
         return $this->hasOne(NfcDesign::class);
     }
+    
     public function nfcFields()
     {
         return $this->belongsToMany(NfcField::class)->withPivot('field_value');
     }
-
-
 
     public function badges()
     {

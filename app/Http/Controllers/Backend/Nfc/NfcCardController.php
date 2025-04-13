@@ -45,8 +45,6 @@ class NfcCardController extends Controller
         $online_active_users = Client::whereIn('id', $friend_list)
             ->where('is_online', true) // Check if the user is online
             ->get();
-
-        // dd($nfc_cards);
         return view('user.nfc-card.index', compact('nfc_cards', 'client', 'post', 'followers', 'online_active_users'));
     }
 
@@ -291,7 +289,7 @@ class NfcCardController extends Controller
         } catch (Exception $e) {
             // If an exception occurs, rollback the transaction
             DB::rollback();
-            dd($e);
+            // dd($e);
             $this->notice::error('Something wrong! Please try again');
             return redirect()->back()->withInput();
         }
@@ -300,10 +298,36 @@ class NfcCardController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(NfcCard $nfcCard)
+   public function destroy($id)
     {
-        //
+        $decryptedId = encryptor('decrypt', $id);
+        DB::beginTransaction();
+        // Delete NFc Fields
+        DB::table('nfc_card_nfc_field')->where('nfc_card_id', $decryptedId)->delete();
+
+        // Delete NFC Design
+        NfcDesign::where('nfc_card_id', $decryptedId)->delete();
+
+        // Delete NFC Information
+        NfcInformation::where('nfc_card_id', $decryptedId)->delete(); // Adjust model if needed
+
+        // Delete NFC Card
+        $nfc_card = NfcCard::findOrFail($decryptedId);
+        $nfc_card->delete();
+        if($nfc_card->delete()){
+            DB::commit();
+            $this->notice::success('Nfc Card Successfully Deleted');
+            return redirect()->route('nfc_card.index');
+
+        }else{
+            DB::rollback();
+            $this->notice::error('Nfc Card Successfully Deleted');
+            return redirect()->route('nfc_card.index');
+        }
+
     }
+
+
     public function showqrurl($id, $client_id)
     {
         $client = Client::find($client_id);
@@ -393,6 +417,7 @@ class NfcCardController extends Controller
         $nfc_virtual_background = NfcVirtualBackground::first();
         return view('user.nfc-card.virtual_background', compact('nfc_card', 'client', 'nfc_cards', 'nfc_virtual_categories','nfc_virtual_background'));
     }
+
     public function duplicate($id)
     {
         // Start the transaction
@@ -401,8 +426,9 @@ class NfcCardController extends Controller
         try {
             $originalNfcCard  = NfcCard::with(['nfc_info', 'nfcFields', 'card_design','badges'])->find(encryptor('decrypt', $id));
             $newNfcCard = $originalNfcCard->replicate();
-            $newNfcCard->card_name = $originalNfcCard->card_name . " " . "copy"; // Update the cardname
+            $newNfcCard->card_name = $originalNfcCard->card_name . " " . "copy"; 
             $newNfcCard->save();
+
 
             // Duplicate and update related NfcField records through the pivot table
             foreach ($originalNfcCard->nfcFields as $nfcField) {
@@ -434,13 +460,19 @@ class NfcCardController extends Controller
             $nfcCardDesign->nfc_card_id = $newNfcCard->id; // Update the foreign key
             $nfcCardDesign->save();
 
-
             // Commit the transaction
             DB::commit();
-
             $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id', currentUserId())->paginate(10);
             $client = Client::find(currentUserId());
-            return view('user.nfc-card.index', compact('nfc_cards', 'client'));
+            $post = Post::where('client_id', currentUserId())->get();
+            $followers = Follow::where('following_id', currentUserId())->orderBy('id', 'desc')->take(4)->get();
+            $friend_list = Follow::where('following_id', currentUserId())
+                ->orderBy('id', 'desc')
+                ->pluck('follower_id');
+            $online_active_users = Client::whereIn('id', $friend_list)
+                ->where('is_online', true) // Check if the user is online
+                ->get();
+            return view('user.nfc-card.index', compact('nfc_cards', 'client', 'post', 'followers', 'online_active_users'));
         } catch (\Exception $e) {
             // Rollback the transaction if an error occurs
             DB::rollBack();
