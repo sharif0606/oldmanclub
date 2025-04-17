@@ -11,7 +11,7 @@
         </div>
         <div class="d-none d-sm-block">
                 <img src="{{ $formType=='edit' ? asset($nfc_card->card_design?->logo) : asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="60px"
-                    srcset="" />
+                    srcset=""  class="logo-image-preview"/>
         </div>
     </header>
  <div class="section">
@@ -52,6 +52,20 @@
                      <span class="card_owner">Goes by
                            <span class="preferred_name"> {{ $formType=='edit' ? $nfc_card->nfc_info?->preferred_name ?? '' : '' }} </span>
                     </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div id="badge-preview" class="badge-preview">
+                    @if ($formType=='edit' )
+                        @foreach ( $nfc_card->badges as $bagde)
+                            <div class="image-container " id="badge-preview-{{ $bagde->id }}">
+                                    <img class="avatar-img rounded-border-10 border border-white border-3"
+                                        src="{{ asset('public/uploads/cards/badges/'. $bagde->badge_image ?? '') }}"
+                                        alt="" class="badge-placeholder-{{ $bagde->id }}" id="badge-placeholder-{{ $bagde->id }}" width="50px" height="50px">
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
             <div class="row">

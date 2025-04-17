@@ -20,7 +20,7 @@
     @endphp
     <div class="col-md-12">
         <div class="classic_header_image_show">
-                <img class="display-profile-pic"  src="{{ $formType=='edit' ? asset('public/uploads/client/' . $nfc_card->client?->image) : null }}" alt="" width="350px"
+                <img class="display-profile-pic"  src="{{ $formType=='edit' ? asset('public/uploads/client/' . $nfc_card->nfc_info?->image) : null }}" alt="" width="350px"
                     height="350px" id="display-profile-pic">
 
             <div class="classic_svg_show">
@@ -49,7 +49,7 @@
                     @endif
                 </svg>
                 <div class="classic_image d-none d-sm-block">
-                        <img src="{{ $formType=='edit' ? asset('public/uploads/cards/'. $nfc_card->card_design?->logo ?? '') : asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="50px"
+                        <img class="logo-image-preview" src="{{ $formType=='edit' ? asset('public/uploads/cards/'. $nfc_card->card_design?->logo ?? '') : asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="50px"
                             id="logo-image-preview" style="margin-top: .8rem" />
                 </div>
             </div>
@@ -60,9 +60,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <span class="fs-4 fw-bold prefix-name text-dark" id="prefix-name">{{ $formType=='edit' ? $nfc_card->nfc_info?->prefix ?? '' : '' }}</span>
-                    <span class="fs-4 fw-bold f-name  text-dark" id="f-name">{{ $formType=='edit' ? $nfc_card->client?->fname ?? '' : '' }}</span>
-                    <span class="fs-4 fw-bold m-name  text-dark" id="m-name">{{ $formType=='edit' ? $nfc_card->client?->middle_name ?? '' : '' }}</span>
-                    <span class="fs-4 fw-bold l-name  text-dark" id="l-name">{{ $formType=='edit'  ? $nfc_card->client?->last_name ?? '' : '' }}</span>
+                    <span class="fs-4 fw-bold f-name  text-dark" id="f-name">{{ $formType=='edit' ? $nfc_card->nfc_info?->first_name ?? '' : '' }}</span>
+                    <span class="fs-4 fw-bold m-name  text-dark" id="m-name">{{ $formType=='edit' ? $nfc_card->nfc_info?->middle_name ?? '' : '' }}</span>
+                    <span class="fs-4 fw-bold l-name  text-dark" id="l-name">{{ $formType=='edit'  ? $nfc_card->nfc_info?->last_name ?? '' : '' }}</span>
 
                     <div style="display: contents">
                         <span class="fs-4 fw-bold suffix-name text-dark" id="suffix-name">{{ $formType=='edit' ? $nfc_card->nfc_info?->suffix ?? '' : ''}}</span>
@@ -98,13 +98,13 @@
                 </div>
             </div>
             <div class="row">
-                <div id="badge-preview">
+                <div id="badge-preview" class="badge-preview">
                     @if ($formType=='edit' )
                         @foreach ( $nfc_card->badges as $bagde)
                             <div class="image-container " id="badge-preview-{{ $bagde->id }}">
                                     <img class="avatar-img rounded-border-10 border border-white border-3"
                                         src="{{ asset('public/uploads/cards/badges/'. $bagde->badge_image ?? '') }}"
-                                        alt="" id="badge-placeholder-{{ $bagde->id }}" width="50px" height="50px">
+                                        alt="" class="badge-placeholder-{{ $bagde->id }}" id="badge-placeholder-{{ $bagde->id }}" width="50px" height="50px">
                             </div>
                         @endforeach
                     @endif
@@ -114,10 +114,11 @@
                  <ul class="list-group social-user-ul">
                     @if ($formType=='edit' )
                         @foreach ($nfc_card->nfcFields as $nfcField)
+                        {{-- {{ $nfcField}} --}}
                             <li class="list-group-item social-list-item-{{ $nfcField->id }}">
                                 <i class="{{ $nfcField->icon . " active-text-color" }} "></i>
                                 &nbsp;
-                                <a href="#" class="social-item-link-{{$nfcField->id}} text-dark">{{ $nfcField->pivot->field_value }}</a>
+                                <a href="{{$nfcField->link.$nfcField->pivot->field_value}}" class="social-item-link-{{$nfcField->id}} text-dark">{{ $nfcField->pivot->field_value }}</a>
                             </li>
                         @endforeach
                     @endif

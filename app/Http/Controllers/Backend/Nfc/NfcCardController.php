@@ -77,6 +77,7 @@ class NfcCardController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         // Start the database transaction
         DB::beginTransaction();
         try {
@@ -89,6 +90,15 @@ class NfcCardController extends Controller
 
                 /* Insert Data To Nfc Information */
                 $nfc_info = new NfcInformation;
+                $nfc_info->first_name = $request->f_name;
+                $nfc_info->middle_name = $request->middle_name;
+                $nfc_info->last_name = $request->l_name;
+                if ($request->hasFile('profile')) {
+                    $profileImageName = rand(111, 999) . time() . '.' . $request->profile->extension();
+                    $request->profile->move(public_path('uploads/client/'), $profileImageName);
+                    $nfc_info->image = $profileImageName;
+                }
+
                 $nfc_info->nfc_card_id = $nfc->id;
                 $nfc_info->prefix = $request->prefix;
                 $nfc_info->suffix = $request->suffix;
@@ -110,26 +120,40 @@ class NfcCardController extends Controller
                 $nfc_design->created_by = currentUserId();
                 $nfc_design->save();
 
-                /* Insert Data To Nfc Information */
+                // Retrieve the new data from the request
+                $nfcFieldIds = $request->input('nfc_id'); // this is nfc_field_id
+                $nfcFieldUsernames = $request->input('nfc_user_name'); // values for field_value
+                $nfcFieldLabels = $request->input('nfc_label'); // values for display_text
 
-                /*Nfc Field Data Insert */
-                $nfcFieldIds = $request->input('nfc_field_id');
                 if ($nfcFieldIds) {
-                    $nfcFieldValues = $request->input('field_value');
-                    // Find the NFC card
-                    $nfcCard = NfcCard::findOrFail($nfc->id);
-                    // Find the NFC fields
-                    $nfcFields = NfcField::whereIn('id', $nfcFieldIds)->get();
+                    $nfcFieldData = [];
 
-                    // Attach NFC fields with values
-                    foreach ($nfcFields as $nfcField) {
-                        // Get the value corresponding to the current NFC field ID
-                        $value = $nfcFieldValues[$nfcField->id];
-
-                        // Associate the NFC field with the NFC card along with the value
-                        $nfcCard->nfcFields()->attach($nfcField, ['field_value' => $value]);
+                    foreach ($nfcFieldIds as $index => $nfcFieldId) {
+                        $nfcFieldData[$nfcFieldId] = [
+                            'field_value' => $nfcFieldUsernames[$index] ?? null,
+                            'display_text' => $nfcFieldLabels[$index] ?? null,
+                            'created_at' => now(),
+                            'updated_at' => now(),
+                        ];
                     }
+
+                    // Insert data into pivot table using DB::table()->insert() manually
+                    foreach ($nfcFieldData as $fieldId => $data) {
+                        DB::table('nfc_card_nfc_field')->insert([
+                            'nfc_card_id' => $nfc->id,
+                            'nfc_field_id' => $fieldId,
+                            'field_value' => $data['field_value'],
+                            'display_text' => $data['display_text'],
+                            'created_at' => $data['created_at'],
+                            'updated_at' => $data['updated_at'],
+                        ]);
+                    }
+
+                    // OR use sync if you’ve defined the relationship
+                    // $nfc->nfcFields()->sync($nfcFieldData);
                 }
+
+
                 // Commit the transaction if all operations are successful
                 DB::commit();
 
@@ -139,11 +163,13 @@ class NfcCardController extends Controller
         } catch (Exception $e) {
             // If an exception occurs, rollback the transaction
             DB::rollback();
-            dd($e);
+            // dd($e);
             $this->notice::error('Something wrong! Please try again');
             return redirect()->back()->withInput();
         }
     }
+
+
 
     /**
      * Display the specified resource.
@@ -187,7 +213,7 @@ class NfcCardController extends Controller
     public function update(Request $request, $id)
     {
         // Start the database transaction
-        // dd($request->all());
+        dd($request->all());
         DB::beginTransaction();
         try {
 
@@ -226,22 +252,17 @@ class NfcCardController extends Controller
                 }
             }
 
-            /* Client Infomations Update */
-            $client = Client::find(currentUserId());
-            $client->fname = $request->f_name;
-            $client->middle_name = $request->middle_name;
-            $client->last_name = $request->l_name;
-            if ($request->hasFile('profile')) {
-                $profileImageName = rand(111, 999) . time() . '.' . $request->profile->extension();
-                $request->profile->move(public_path('uploads/client/'), $profileImageName);
-                $client->image = $profileImageName;
-            }
-            $client->updated_by = currentUserId();
-            $client->save();
-
 
             /* Update Data From Nfc Information */
             $nfc_info = NfcInformation::where('nfc_card_id', encryptor('decrypt', $id))->first();
+            $nfc_info->first_name = $request->f_name;
+            $nfc_info->middle_name = $request->middle_name;
+            $nfc_info->last_name = $request->l_name;
+            if ($request->hasFile('profile')) {
+                $profileImageName = rand(111, 999) . time() . '.' . $request->profile->extension();
+                $request->profile->move(public_path('uploads/client/'), $profileImageName);
+                $nfc_info->image = $profileImageName;
+            }
             $nfc_info->prefix = $request->prefix;
             $nfc_info->suffix = $request->suffix;
             $nfc_info->preferred_name = $request->preferred_name;
@@ -426,7 +447,7 @@ class NfcCardController extends Controller
         try {
             $originalNfcCard  = NfcCard::with(['nfc_info', 'nfcFields', 'card_design','badges'])->find(encryptor('decrypt', $id));
             $newNfcCard = $originalNfcCard->replicate();
-            $newNfcCard->card_name = $originalNfcCard->card_name . " " . "copy"; 
+            $newNfcCard->card_name = $originalNfcCard->card_name . " " . "copy";
             $newNfcCard->save();
 
 

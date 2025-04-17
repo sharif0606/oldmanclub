@@ -77,6 +77,16 @@
                                         @endif
                                     </div>
                                     </div>
+                                    <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="status">Link</label>
+                                        <input type="text" id="link" class="form-control"
+                                            value="{{ old('link', $nfcField->link) }}" name="link">
+                                        @if ($errors->has('link'))
+                                            <span class="text-danger"> {{ $errors->first('link') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="status">Status<i class="text-danger">*</i></label>

@@ -4,15 +4,15 @@
     <div class="header_body">
         <header class="modern_header" id="modern_header">
             <div class="">
-                    <img  src="{{ $formType=='edit' ? asset($nfc_card->card_design?->logo) : asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="60px" id="diplay-profile-pic"
+                    <img  src="{{ $formType=='edit' ? asset($nfc_card->card_design?->logo) : asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="60px" id="diplay-profile-pic" class="logo-image-preview"
                     />
                 <!-- <img src="assets/images/header_image.png" alt="abc" width="100px" srcset="" /> -->
             </div>
             <div class="col-sm-12 p-0 m-0">
                     <span class="fs-4 fw-bold prefix-name">{{ $formType=='edit' ? $nfc_card->nfc_info?->prefix ?? '' : ''}}</span>
-                <span class="fs-4 fw-bold f-name">{{ $formType=='edit' ? $nfc_card->client?->fname ?? '' : '' }}</span>
-            <span class="fs-5 fw-bold m-name">{{ $formType=='edit' ? $nfc_card->client?->middle_name ?? '' : '' }}</span>
-            <span class="fs-4 fw-bold l-name">{{ $formType=='edit' ? $nfc_card->client?->last_name ?? '' : '' }}</span>
+                <span class="fs-4 fw-bold f-name">{{ $formType=='edit' ? $nfc_card->nfc_info?->fname ?? '' : '' }}</span>
+            <span class="fs-5 fw-bold m-name">{{ $formType=='edit' ? $nfc_card->nfc_info?->middle_name ?? '' : '' }}</span>
+            <span class="fs-4 fw-bold l-name">{{ $formType=='edit' ? $nfc_card->nfc_info?->last_name ?? '' : '' }}</span>
             <span class="fs-4 fw-bold suffix-name">{{ $formType=='edit' ? $nfc_card->nfc_info?->suffix ?? '' : '' }}</span>
             <span class="fs-2 fw-bold maiden_name">
                     {{ $formType=='edit' && $nfc_card->nfc_info?->maiden_name ? '('. $nfc_card->nfc_info?->maiden_name.')' ?? '' : '' }}
@@ -30,7 +30,7 @@
             </div>
         </header>
                     <div class="CardAvatar">
-                            <img src="{{ $formType=='edit' ? asset('public/uploads/client/' . $nfc_card->client?->image) : asset('public/assets/nfc/images/123.png') }}"
+                            <img src="{{ $formType=='edit' ? asset('public/uploads/client/' . $nfc_card->nfc_info?->image) : asset('public/assets/nfc/images/123.png') }}"
                         class=" img-fluid display-profile-pic" alt="" width="200px" height="200px"  />
                     </div>
                 <div class="CardBox css-19niztd">
@@ -54,6 +54,20 @@
             </div>
     <section>
         <div class="container-fluid">
+
+            <div class="row">
+                <div id="badge-preview" class="badge-preview">
+                    @if ($formType=='edit' )
+                        @foreach ( $nfc_card->badges as $bagde)
+                            <div class="image-container " id="badge-preview-{{ $bagde->id }}">
+                                    <img class="avatar-img rounded-border-10 border border-white border-3"
+                                        src="{{ asset('public/uploads/cards/badges/'. $bagde->badge_image ?? '') }}"
+                                        alt="" class="badge-placeholder-{{ $bagde->id }}" id="badge-placeholder-{{ $bagde->id }}" width="50px" height="50px">
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
             <div class="row">
                 <div class="modern_card">
                     <ul class="list-group social-user-ul">

@@ -262,15 +262,18 @@
         label i.fas {
             padding: 3px;
         }
+        .classic_svg_show{
+            margin-top: -12px;
+        }
+
         .sleek_header_image img {
             height: 20rem !important;
             object-fit: cover;
         }
 
-        /* .sleek_card{
-            min-height: 15rem;
-        } */
-
+        .sleek_card{
+            min-height: 3rem;
+        }
 
     </style>
 @endpush
@@ -320,7 +323,7 @@
                                     {{-- {{$nfc_card->card_design?->design_card_id }}
                                      --}}
                                      {{-- {{$nfc_card->card_type}} --}}
-                                        <div  class="col-6 col-lg-4 position-relative px-2 mb-2 gap-5" >
+                                        <div  class="col-12 col-lg-4 position-relative px-2 mb-2 gap-5" >
                                             @if ($nfc_card->card_type == 1)
                                             {{-- CLASISC Design --}}
                                                 <a href="{{ route('nfc_card.show', encryptor('encrypt', $nfc_card->id)) }}" class="design-card-link">
@@ -328,7 +331,7 @@
                                                 <div class="card">
                                                     <div class="col-md-12">
                                                         <div class="classic_header_image_show">
-                                                                <img class="display-profile-pic"  src="{{ $nfc_card->client?->image? asset('public/uploads/client/' . $nfc_card->client?->image) : null }}" alt="" width="350px"
+                                                                <img class="display-profile-pic"  src="{{ $nfc_card->nfc_info?->image? asset('public/uploads/client/' . $nfc_card->nfc_info?->image) : null }}" alt="" width="350px"
                                                                     height="350px" id="display-profile-pic">
 
                                                             <div class="classic_svg_show">
@@ -353,9 +356,9 @@
                                                             <div class="row">
                                                                 <div class="col-sm-12">
                                                                     <span class="fs-4 fw-bold prefix-name text-dark" id="prefix-name">{{ $nfc_card->nfc_info?->prefix ?? ''  }}</span>
-                                                                    <span class="fs-4 fw-bold f-name  text-dark" id="f-name">{{ $nfc_card->client?->fname ?? ''  }}</span>
-                                                                    <span class="fs-4 fw-bold m-name  text-dark" id="m-name">{{  $nfc_card->client?->middle_name ?? ''  }}</span>
-                                                                    <span class="fs-4 fw-bold l-name  text-dark" id="l-name">{{ $nfc_card->client?->last_name ?? ''  }}</span>
+                                                                    <span class="fs-4 fw-bold f-name  text-dark" id="f-name">{{ $nfc_card->nfc_info?->first_name ?? ''  }}</span>
+                                                                    <span class="fs-4 fw-bold m-name  text-dark" id="m-name">{{ $nfc_card->nfc_info?->middle_name ?? ''  }}</span>
+                                                                    <span class="fs-4 fw-bold l-name  text-dark" id="l-name">{{ $nfc_card->nfc_info?->last_name ?? ''  }}</span>
 
                                                                     <div style="display: contents">
                                                                         <span class="fs-4 fw-bold suffix-name text-dark" id="suffix-name">{{  $nfc_card->nfc_info?->suffix ?? ''}}</span>
@@ -377,7 +380,7 @@
                                                                     <li class="list-group-item social-list-item-{{ $nfcField->id }}">
                                                                         <i style="color:{{ $nfc_card->card_design->color }}" class="{{ $nfcField->icon }} "></i>
                                                                         &nbsp;
-                                                                        <a href="#" class=" text-dark social-item-link-{{$nfcField->id}}">{{ $nfcField->pivot->field_value }}</a>
+                                                                        <a href="{{$nfcField->link.$nfcField->pivot->field_value}}" class=" text-dark social-item-link-{{$nfcField->id}}" target="_blank">{{ $nfcField->pivot->field_value }}</a>
                                                                     </li>
                                                                 @endforeach
 
@@ -399,9 +402,9 @@
                                                 <header class="modern_header" id="modern_header">
                                                     <div class="col-sm-12 p-0 m-0">
                                                             <span class="fs-4 fw-bold prefix-name">{{  $nfc_card->nfc_info?->prefix ?? ''}}</span>
-                                                        <span class="fs-4 fw-bold f-name">{{  $nfc_card->client?->fname ?? ''  }}</span>
-                                                    <span class="fs-5 fw-bold m-name">{{  $nfc_card->client?->middle_name ?? ''  }}</span>
-                                                    <span class="fs-4 fw-bold l-name">{{  $nfc_card->client?->last_name ?? ''  }}</span>
+                                                        <span class="fs-4 fw-bold f-name">{{  $nfc_card->nfc_info?->first_name ?? ''  }}</span>
+                                                    <span class="fs-5 fw-bold m-name">{{  $nfc_card->nfc_info?->middle_name ?? ''  }}</span>
+                                                    <span class="fs-4 fw-bold l-name">{{  $nfc_card->nfc_info?->last_name ?? ''  }}</span>
                                                     <span class="fs-4 fw-bold suffix-name">{{  $nfc_card->nfc_info?->suffix ?? ''  }}</span>
                                                     <span class="fs-2 fw-bold maiden_name">
                                                             {{ $nfc_card->nfc_info?->maiden_name ? '('. $nfc_card->nfc_info?->maiden_name.')' ?? ''  : '' }}
@@ -420,7 +423,7 @@
                                                 </header>
                                                 <div>
                                                         <div class="CardAvatar">
-                                                            <img src="{{ $nfc_card->client?->image ? asset('public/uploads/client/' . $nfc_card->client?->image) : asset('public/assets/nfc/images/123.png') }}"
+                                                            <img src="{{ $nfc_card->nfc_info?->image ? asset('public/uploads/client/' . $nfc_card->nfc_info?->image) : asset('public/assets/nfc/images/123.png') }}"
                                                                 class=" img-fluid display-profile-pic" alt="" width="100%" height="350px"  />
                                                         </div>
                                                         <div class="CardBox css-19niztd">
@@ -429,7 +432,7 @@
                                                                     <li class="list-group-item social-list-item-{{ $nfcField->id }}">
                                                                         <i style="color:{{ $nfc_card->card_design->color }}" class="{{ $nfcField->icon }} "></i>
                                                                         &nbsp;
-                                                                        <a href="#" class="social-item-link-{{$nfcField->id}}">{{ $nfcField->pivot->field_value }}</a>
+                                                                        <a href="{{ $nfcField->link.$nfcField->pivot->field_value }}" class="social-item-link-{{$nfcField->id}}"  target="_blank">{{ $nfcField->pivot->field_value }}</a>
                                                                     </li>
                                                                 @endforeach
 
@@ -453,16 +456,16 @@
 
                                                         <div class="sleek_header_image" id="sleek_header_image">
                                                             <div class="css-79elbk">
-                                                                <img class="display-profile-pic"  src="{{ $nfc_card->client?->image ?  asset('public/uploads/client/' . $nfc_card->client?->image) : asset('public/assets/nfc/images/123.png')}}"}}" alt="" srcset="" class="" width="100%"  style="height: 20rem">
+                                                                <img class="display-profile-pic"  src="{{ $nfc_card->nfc_info?->image ?  asset('public/uploads/client/' . $nfc_card->nfc_info?->image) : asset('public/assets/nfc/images/123.png')}}"}}" alt="" srcset="" class="" width="100%"  style="height: 20rem">
                                                             </div>
                                                         </div>
                                                         <div class="css-1fbwa35 " style="background: white">
                                                             <div class="card sleek_card mx-auto mb-3">
                                                                 <div class="CardBox mx-auto">
                                                                     <span class="fs-4 fw-bold prefix-name">{{  $nfc_card->nfc_info?->prefix ?? '' }}</span>
-                                                                <span class="fs-4 fw-bold f-name">{{  $nfc_card->client?->fname ?? '' }}</span>
+                                                                <span class="fs-4 fw-bold f-name">{{  $nfc_card->nfc_info?->first_name ?? '' }}</span>
                                                                 <span class="fs-4 fw-bold l-name">{{  $nfc_card->client?->middle_name ?? '' }}</span>
-                                                                <span class="fs-4 fw-bold suffix-name">{{  $nfc_card->client?->last_name ?? '' }}</span>
+                                                                <span class="fs-4 fw-bold suffix-name">{{  $nfc_card->nfc_info?->last_name ?? '' }}</span>
 
                                                                 <div>
                                                                         <span class="fs-4 fw-bold suffix-name">{{  $nfc_card->nfc_info?->suffix ?? ''}}</span>
@@ -479,7 +482,7 @@
                                                                             <li class="list-group-item social-list-item-{{ $nfcField->id }}">
                                                                                 <i style="color:{{ $nfc_card->card_design->color }}" class="{{ $nfcField->icon }} "></i>
                                                                                 &nbsp;
-                                                                                <a href="#" class=" text-dark social-item-link-{{$nfcField->id}}">{{ $nfcField->pivot->field_value }}</a>
+                                                                                <a href="{{ $nfcField->link.$nfcField->pivot->field_value }}" class=" text-dark social-item-link-{{$nfcField->id}}"  target="_blank">{{ $nfcField->pivot->field_value }}</a>
                                                                             </li>
                                                                         @endforeach
 
@@ -503,7 +506,7 @@
                                                               <header>
                                                                     <div class="header_section">
                                                                         <div>
-                                                                                <img class="display-profile-pic"  src="{{ $nfc_card->client?->image ? asset('public/uploads/client/' . $nfc_card->client?->image) :null }}" alt="" width="350px" height="300px">
+                                                                                <img class="display-profile-pic"  src="{{ $nfc_card->nfc_info?->image ? asset('public/uploads/client/' . $nfc_card->nfc_info?->image) :null }}" alt="" width="350px" height="300px">
                                                                                 {{-- <img class="display-profile-pic"  src="{{  asset('public/uploads/client/' . $nfc_card->client?->image) : asset('public/assets/nfc/images/123.png')}}" alt="" width="350px" height="300px"> --}}
                                                                         </div>
                                                                         <div class="header_text" id="header_text"></div>
@@ -514,9 +517,9 @@
                                                                     <div class="row">
                                                                         <div class="col-sm-12">
                                                                             <span class="fs-4 fw-bold prefix-name text-dark" id="prefix-name">{{  $nfc_card->nfc_info?->prefix ?? ''}}</span>
-                                                                            <span class="fs-4 fw-bold f-name  text-dark" id="f-name">{{  $nfc_card->client?->fname ?? ''}}</span>
-                                                                            <span class="fs-4 fw-bold m-name  text-dark" id="m-name">{{  $nfc_card->client?->middle_name ?? ''}}</span>
-                                                                            <span class="fs-4 fw-bold l-name  text-dark" id="l-name">{{  $nfc_card->client?->last_name ?? ''}}</span>
+                                                                            <span class="fs-4 fw-bold f-name  text-dark" id="f-name">{{  $nfc_card->nfc_info?->first_name ?? ''}}</span>
+                                                                            <span class="fs-4 fw-bold m-name  text-dark" id="m-name">{{  $nfc_card->nfc_info?->middle_name ?? ''}}</span>
+                                                                            <span class="fs-4 fw-bold l-name  text-dark" id="l-name">{{  $nfc_card->nfc_info?->last_name ?? ''}}</span>
 
                                                                             <div style="display: contents">
                                                                                 <span class="fs-4 fw-bold suffix-name text-dark" id="suffix-name">{{  $nfc_card->nfc_info?->suffix ?? '' }}</span>
@@ -541,7 +544,7 @@
                                                                                     <li class="list-group-item social-list-item-{{ $nfcField->id }}">
                                                                                         <i style="color:{{ $nfc_card->card_design->color }}" class="{{ $nfcField->icon }} "></i>
                                                                                         &nbsp;
-                                                                                        <a href="#" class="text-dark social-item-link-{{$nfcField->id}}">{{ $nfcField->pivot->field_value }}</a>
+                                                                                        <a href="{{ $nfcField->link.$nfcField->pivot->field_value }}" class="text-dark social-item-link-{{$nfcField->id}}" target="_blank">{{ $nfcField->pivot->field_value }}</a>
                                                                                     </li>
                                                                                 @endforeach
                                                                         </ul>

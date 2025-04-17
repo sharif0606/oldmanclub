@@ -18,6 +18,7 @@
                         <tr>
                             <th scope="col">{{__('#SL')}}</th>
                             <th scope="col">{{__('Name')}}</th>
+                            <th scope="col">{{__('Link')}}</th>
                             <th scope="col">{{__('Icon')}}</th>
                             <th scope="col">{{__('Status')}}</th>
                             <th class="white-space-nowrap">{{__('Action') }}</th>
@@ -28,6 +29,7 @@
                         <tr>
                             <th scope="row">{{ ++$loop->index }}</th>
                             <td>{{$p->name}}</td>
+                            <td>{{$p->link}}</td>
                             <td>
                             @if ($p->type==1)
                                 <i class="{{$p->icon}}" ></i>

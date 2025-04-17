@@ -42,9 +42,9 @@ class NfcFieldController extends Controller
             '8' => 'Gaming',
             '9' => 'Other',
         ];
-        return view('backend.nfc-field.edit',
+        return view('backend.nfc-field.create',
             compact('type', 'categories')
-        );;
+        );
     }
     /**
      * Store a newly created resource in storage.
@@ -68,6 +68,7 @@ class NfcFieldController extends Controller
             $nfcField = new NfcField;
             $nfcField->name = $request->name;
             $nfcField->icon = $icon;
+            $nfcField->link = $link;
             $nfcField->type = $request->type;
             $nfcField->category = $request->category;
             $nfcField->status = $request->status;
@@ -138,6 +139,7 @@ class NfcFieldController extends Controller
             $nfcField = NfcField::findOrFail(encryptor('decrypt',$id));
             $nfcField->name = $request->name;
             $nfcField->icon = $icon;
+            $nfcField->link = $link;
             $nfcField->type = $request->type;
             $nfcField->category = $request->category;
             $nfcField->status = $request->status;

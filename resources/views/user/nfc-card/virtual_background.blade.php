@@ -297,9 +297,7 @@
         }
     </style>
 @endpush
-
 @section('content')
-
     <div class="row g-4">
         <!-- Main content START -->
         <div class="col-lg-12 vstack gap-4">

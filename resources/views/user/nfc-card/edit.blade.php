@@ -348,7 +348,7 @@
                                                     <div class="row">
                                                         <div class="col-2">
                                                             <img class="rounded-border-10 border border-white border-3"
-                                                                src="{{ $formType=='edit' ? asset('public/uploads/client/' . $client->image) : asset('public/user/assets/images/avatar/placeholder.jpg') }}"
+                                                                src="{{ $formType=='edit' ? asset('public/uploads/client/' . $nfc_card->nfc_info->image) : asset('public/user/assets/images/avatar/placeholder.jpg') }}"
                                                                 alt="profile" id="profile-picture">
                                                         </div>
 
@@ -538,13 +538,13 @@
                                                         <div class="col-2">
                                                                 <img class="rounded-border-10 border border-white border-3"
                                                                     src="{{ $formType=='edit' ? asset('public/uploads/cards/' . $nfc_card->card_design?->logo ?? '') : asset('public/user/assets/images/avatar/placeholder.jpg') }}"
-                                                                    alt="" id="logo-placeholder">
+                                                                    alt="" id="logo-placeholder" class="logo-placeholder">
                                                         </div>
                                                         <div class="col-4 py-2 offset-3">
                                                             <div class="upload-container" >
                                                                 <input type="file" id="logo" name="logo"
                                                                     accept="image/*"
-                                                                    onchange="previewfile(event,'logo-placeholder'); previewfile(event,'logo-image-preview');">
+                                                                    onchange="previewfile(event,'#logo-placeholder'); previewfile(event,'.logo-image-preview');">
                                                                 <label for="logo"
                                                                     class="d-flex justify-content-center"><i
                                                                         class="fas fa-images"></i>Add Logo</label>
@@ -577,7 +577,7 @@
                                                                     <div class="image-container">
                                                                         <img class="avatar-img rounded-border-10 border border-white border-3"
                                                                             src="{{ asset('public/user/assets/images/avatar/placeholder.jpg') }}"
-                                                                            alt="" id="badge-placeholder">
+                                                                            alt=""  class="badge-placeholder">
                                                                     </div>
                                                                 @endif
                                                             </span>
@@ -611,21 +611,21 @@
                                                     <div class="col-8 form-group">
                                                         <label for="">First Name</label>
                                                         <input type="text" name="f_name"
-                                                            value="{{ $formType=='edit'  ? $nfc_card->client?->fname ?? '' : ''}}"
+                                                            value="{{ $formType=='edit'  ? $nfc_card->nfc_info?->first_name ?? '' : ''}}"
                                                             class="form-control form-control-sm mb-2"
                                                             onkeyup="$('.f-name').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Middle Name</label>
                                                         <input type="text" name="middle_name"
-                                                            value="{{ $formType=='edit' ? $nfc_card->client?->middle_name ?? '' :''}}"
+                                                            value="{{ $formType=='edit' ? $nfc_card->nfc_info?->middle_name ?? '' :''}}"
                                                             class="form-control form-control-sm mb-2"
                                                             onkeyup="$('.m-name').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Last Name</label>
                                                         <input type="text" name="l_name"
-                                                            value="{{ $formType=='edit' ? $nfc_card->client?->last_name ?? '' :'' }}"
+                                                            value="{{ $formType=='edit' ? $nfc_card->nfc_info?->last_name ?? '' :'' }}"
                                                             class="form-control form-control-sm mb-2"
                                                             onkeyup="$('.l-name').text($(this).val());">
                                                     </div>
@@ -997,15 +997,19 @@
             output.src = URL.createObjectURL(event.target.files[0]);
         }
 
-        function previewfile(event, previewimg = 'previewimg') {
-            var output = document.getElementById(previewimg);
-            output.src = URL.createObjectURL(event.target.files[0]);
+        function previewfile(event, previewimg = '.previewimg') {
+            var outputs = document.querySelectorAll(previewimg);
+            outputs.forEach((output) => {
+                output.src = URL.createObjectURL(event.target.files[0]);
+            });
 
+            // Optional: add remove button
             // var button = document.createElement("button");
             // button.classList.add("remove-button");
             // button.innerHTML = "X";
             // output.insertAdjacentElement('afterend', button);
         }
+
     </script>
     <script>
         function Confirm(text) {
@@ -1155,67 +1159,145 @@
             });
         }
 
+        // function previewMultipleBadgeFile(event) {
+        //     var previewOutput = document.getElementById('badge-preview');
+        //     var controlOutput = document.getElementById('badge-image-group');
+
+        //     removeDefaultBadgeImage();
+        //     var file = event.target.files[0];
+        //     console.log(file);
+        //     if (file) {
+        //         var imgSrc = URL.createObjectURL(file);
+
+        //         var previewDiv = document.createElement("div");
+        //         previewDiv.classList.add("image-container");
+        //         var previewImg = document.createElement("img");
+        //         previewImg.src = imgSrc;
+        //         previewImg.classList.add("rounded-border-10", "border", "border-white", "border-3");
+        //         previewDiv.appendChild(previewImg);
+        //         var badgeImgInput = document.createElement("input");
+        //         badgeImgInput.type = "file";
+        //         badgeImgInput.style.visibility = "hidden";
+        //         badgeImgInput.style.width = "1px";
+        //         badgeImgInput.name = "badge_images[]";
+        //         badgeImgInput.files = event.target.files;
+
+        //         previewOutput.appendChild(previewDiv);
+
+        //         var controlDiv = document.createElement("div");
+        //         controlDiv.classList.add("image-container");
+        //         var controlImg = document.createElement("img");
+        //         controlImg.src = imgSrc;
+        //         controlImg.classList.add("rounded-border-10", "border", "border-white", "border-3");
+        //         controlDiv.appendChild(controlImg);
+        //         controlDiv.appendChild(badgeImgInput);
+        //         controlOutput.append(controlDiv);
+        //         addRemoveBtn(controlDiv, previewDiv, controlOutput, previewOutput, imgSrc);
+        //         badgeImages.push(imgSrc);
+        //     }
+        // }
+
         function previewMultipleBadgeFile(event) {
-            var previewOutput = document.getElementById('badge-preview');
-            var controlOutput = document.getElementById('badge-image-group');
+            const previews = document.querySelectorAll('.badge-preview');
+            const controls = document.getElementById('badge-image-group');
 
-            removeDefaultBadgeImage();
-            var file = event.target.files[0];
-            console.log(file);
-            if (file) {
-                var imgSrc = URL.createObjectURL(file);
+            const file = event.target.files[0];
+            if (!file) return;
 
-                var previewDiv = document.createElement("div");
+            const imgSrc = URL.createObjectURL(file);
+            const badgeImgInput = document.createElement("input");
+            badgeImgInput.type = "file";
+            badgeImgInput.name = "badge_images[]";
+            badgeImgInput.style.visibility = "hidden";
+            badgeImgInput.style.width = "1px";
+            badgeImgInput.files = event.target.files;
+
+            const uniqueId = `badge-${Date.now()}`;
+
+            // Create control image container
+            const controlDiv = document.createElement("div");
+            controlDiv.classList.add("image-container");
+            controlDiv.id = `image-container-${uniqueId}`;
+
+            const controlImg = document.createElement("img");
+            controlImg.src = imgSrc;
+            controlImg.classList.add("rounded-border-10", "border", "border-white", "border-3");
+
+            controlDiv.appendChild(controlImg);
+            controlDiv.appendChild(badgeImgInput.cloneNode());
+            controls.appendChild(controlDiv);
+
+            previews.forEach((previewOutput, index) => {
+                removeDefaultBadgeImage(previewOutput);
+
+                const previewDiv = document.createElement("div");
                 previewDiv.classList.add("image-container");
-                var previewImg = document.createElement("img");
+                previewDiv.id = `badge-preview-${uniqueId}-${index}`;
+
+                const previewImg = document.createElement("img");
                 previewImg.src = imgSrc;
                 previewImg.classList.add("rounded-border-10", "border", "border-white", "border-3");
-                previewDiv.appendChild(previewImg);
-                var badgeImgInput = document.createElement("input");
-                badgeImgInput.type = "file";
-                badgeImgInput.style.visibility = "hidden";
-                badgeImgInput.style.width = "1px";
-                badgeImgInput.name = "badge_images[]";
-                badgeImgInput.files = event.target.files;
 
+                previewDiv.appendChild(previewImg);
                 previewOutput.appendChild(previewDiv);
 
-                var controlDiv = document.createElement("div");
-                controlDiv.classList.add("image-container");
-                var controlImg = document.createElement("img");
-                controlImg.src = imgSrc;
-                controlImg.classList.add("rounded-border-10", "border", "border-white", "border-3");
-                controlDiv.appendChild(controlImg);
-                controlDiv.appendChild(badgeImgInput);
-                controlOutput.append(controlDiv);
-                addRemoveBtn(controlDiv, previewDiv, controlOutput, previewOutput, imgSrc);
-                badgeImages.push(imgSrc);
-            }
+                // Add remove button inside controlDiv (just once)
+                if (index === 0) {
+                    addRemoveBtn(controlDiv, previews, uniqueId, imgSrc);
+                }
+            });
+
+            badgeImages.push(imgSrc);
         }
 
-        function addRemoveBtn(controlDiv, previewDiv, controlOutput, previewOutput, imgSrc) {
-            var button = document.createElement("button");
+
+
+
+
+
+      function addRemoveBtn(controlDiv, previewOutputs, uniqueId, imgSrc) {
+            const button = document.createElement("button");
             button.classList.add("remove-button");
             button.innerHTML = "X";
-            button.onclick = function() {
-                controlOutput.removeChild(controlDiv);
-                previewOutput.removeChild(previewDiv);
+
+            button.onclick = function () {
+                // Remove control
+                if (controlDiv && controlDiv.parentNode) {
+                    controlDiv.parentNode.removeChild(controlDiv);
+                }
+
+                // Remove all matching previews
+                previewOutputs.forEach((previewOutput, index) => {
+                    const previewDiv = document.getElementById(`badge-preview-${uniqueId}-${index}`);
+                    if (previewDiv && previewDiv.parentNode === previewOutput) {
+                        previewOutput.removeChild(previewDiv);
+                    }
+                });
+
+                // Remove from array
                 const index = badgeImages.indexOf(imgSrc);
                 if (index > -1) {
                     badgeImages.splice(index, 1);
                 }
             };
+
             controlDiv.appendChild(button);
         }
 
+
+
         function removeBadgeImage(id, imgSrc) {
-            const previewOutput = document.getElementById(`badge-preview-${id}`).remove();
-            const controlOutput = document.getElementById(`image-container-${id}`).remove();
+            const previewOutput = document.getElementById(`badge-preview-${id}`);
+            if (previewOutput) previewOutput.remove();
+
+            const controlOutput = document.getElementById(`image-container-${id}`);
+            if (controlOutput) controlOutput.remove();
 
             const index = badgeImages.indexOf(imgSrc);
             if (index > -1) {
                 badgeImages.splice(index, 1);
             }
         }
+
     </script>
 @endpush
