@@ -14,6 +14,8 @@ use App\Models\Backend\NfcVirtualBackgroundCategory;
 use App\Models\Backend\NfcVirtualBackground;
 use App\Models\User\Follow;
 
+use Illuminate\Database\QueryException;
+
 use App\Http\Controllers\Controller;
 use App\Models\NfcCardBadges;
 use Exception;
@@ -323,28 +325,33 @@ class NfcCardController extends Controller
     {
         $decryptedId = encryptor('decrypt', $id);
         DB::beginTransaction();
-        // Delete NFc Fields
-        DB::table('nfc_card_nfc_field')->where('nfc_card_id', $decryptedId)->delete();
 
-        // Delete NFC Design
-        NfcDesign::where('nfc_card_id', $decryptedId)->delete();
+        try {
+            // Delete pivot table records
+            DB::table('nfc_card_nfc_field')->where('nfc_card_id', $decryptedId)->delete();
 
-        // Delete NFC Information
-        NfcInformation::where('nfc_card_id', $decryptedId)->delete(); // Adjust model if needed
+            // Delete related NFC design
+            NfcDesign::where('nfc_card_id', $decryptedId)->delete();
 
-        // Delete NFC Card
-        $nfc_card = NfcCard::findOrFail($decryptedId);
-        $nfc_card->delete();
-        if($nfc_card->delete()){
+            // Delete related NFC information FIRST
+            NfcInformation::where('nfc_card_id', $decryptedId)->delete();
+
+            // Then delete the NFC card
+            $nfc_card = NfcCard::findOrFail($decryptedId);
+            $nfc_card->delete();
+
             DB::commit();
             $this->notice::success('Nfc Card Successfully Deleted');
             return redirect()->route('nfc_card.index');
 
-        }else{
+        } catch(QueryException $e) {
             DB::rollback();
-            $this->notice::error('Nfc Card Successfully Deleted');
+            dd($e); // For debugging
+
+            $this->notice::error('Something went wrong');
             return redirect()->route('nfc_card.index');
         }
+
 
     }
 
