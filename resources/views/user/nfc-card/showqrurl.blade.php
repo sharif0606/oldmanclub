@@ -21,14 +21,14 @@
         }
 
         .design-card-active {
-            border: 1px solid {{ $formType=='edit' ? $nfc_card->card_design->color : 'rgb(0, 247, 255)' }};
+            border: 1px solid {{  $nfc_card->card_design->color ?? 'rgb(0, 247, 255)' }};
         }
         #sleek_header_image,#header_text,#modern_header{
-            background: {{ $formType=='edit' ? $nfc_card->card_design->color : 'rgb(0, 247, 255)' }};
+            background: {{ $nfc_card->card_design->color ?? 'rgb(0, 247, 255)' }};
         }
 
         .active-text-color{
-            color: {{ $formType=='edit' ? $nfc_card->card_design->color ?? '#9c9a9a' : '#9c9a9a'}};
+            color: {{ $nfc_card->card_design->color ?? '#9c9a9a'}};
         }
 
         .design-card svg {
@@ -87,14 +87,14 @@
         }
 
         .card{
-            font-family: {{ $formType=='edit' ? "$nfc_card->card_design->font" ?? 'nunito' : 'nunito'}}" !important;
+            font-family: {{ $nfc_card->card_design->font ?? 'nunito'}}" !important;
         }
         /* .logo-image-preview{
             margin-top: .8rem !important;
         } */
 
         .f-name,.m-name,.l-name,.field-title, .deprtment,.goes-by{
-            font-family: {{ $formType=='edit' ? "$nfc_card->card_design->font" ?? 'nunito' : 'nunito'}} !important;
+            font-family: {{ $nfc_card->card_design->font ?? 'nunito'}} !important;
         }
 
         .card-dragger-header {}
@@ -209,20 +209,28 @@
         label i.fas {
             padding: 3px;
         }
+
+        .classic_svg{
+            bottom: 0px !important;
+        }
+        .header_sleek{
+            width: 100% !important;
+        }
     </style>
 @endpush
 @section('content')
     <div class="row">
         <div class="col-md-4 offset-md-4">
             <div class="card">
-                @if ($nfc_card->card_design?->design_card_id == 1)
+                {{-- {{$nfc_card->card_type}} --}}
+                @if ($nfc_card->card_type == 1)
                     @include('user.nfc-template.classic-template')
-                @elseif($nfc_card->card_design?->design_card_id == 2)
-                    @include('user.nfc-template.flat-template')
-                @elseif($nfc_card->card_design?->design_card_id == 3)
+                @elseif($nfc_card->card_type == 2)
                     @include('user.nfc-template.modern-template')
-                @elseif($nfc_card->card_design?->design_card_id == 4)
+                @elseif($nfc_card->card_type == 3)
                     @include('user.nfc-template.sleek-template')
+                @elseif($nfc_card->card_type == 4)
+                    @include('user.nfc-template.flat-template')
                 @endif
             </div>
         </div>

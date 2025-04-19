@@ -72,13 +72,13 @@
                 <div class="modern_card">
                     <ul class="list-group social-user-ul">
                     @if ($formType=='edit')
-                        @foreach ($nfc_card->nfcFields as $nfcField)
-                            <li class="list-group-item social-list-item-{{ $nfcField->id }}">
-                                <i class="{{ $nfcField->icon }} active-text-color"></i>
-                                &nbsp;
-                                <a href="#" class="social-item-link-{{$nfcField->id}}">{{ $nfcField->pivot->field_value }}</a>
-                            </li>
-                        @endforeach
+                        @foreach ($nfc_card->nfcFields  as $nfcField)
+                        <li class="list-group-item social-list-item-{{ $nfcField->id }}">
+                            <i style="color:{{ $nfc_card->card_design->color }}" class="{{ $nfcField->icon }} "></i>
+                            &nbsp;
+                            <a href="{{ $nfcField->link.$nfcField->pivot->field_value }}" class="social-item-link-{{$nfcField->id}}"  target="_blank">{{ $nfcField->pivot->field_value }}</a>
+                        </li>
+                    @endforeach
                     @endif
                     </ul>
                 </div>

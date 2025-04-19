@@ -2,7 +2,7 @@
     <header>
         <div class="classic_header_image" style="position: relative !important">
             @if ($nfc_card->client?->image)
-                <img src="{{ asset('public/uploads/client/' . $nfc_card->nfc_info?->image) }}" alt="" width="350px"
+                <img src="{{ asset('public/uploads/client/' . $nfc_card->nfc_info?->image) }}" alt="" width="100%"
                     height="350px">
                 <!-- <div class="main-img" style="background-image: url({{ asset('public/uploads/client/' . $nfc_card->client?->image) }})"></div> -->
             @else
@@ -10,7 +10,7 @@
                 <!-- <div class="main-img" style="background-image: url({{ asset('public/assets/nfc/images/123.png') }})">
                 </div> -->
             @endif
-            <div class="classic_svg">
+            <div class="classic_svg" style="bottom: 0px !important">
                 <svg preserveAspectRatio="xMinYMax meet" viewBox="0 0 246 57" xmlns="http://www.w3.org/2000/svg"
                     class="css-fxun4i">
                     @if ($nfc_card->card_type == 1)
@@ -38,7 +38,7 @@
             </div>
             <div class="classic_image d-none d-sm-block">
                 @if ($nfc_card->card_design?->logo)
-                    <img src="{{ asset($nfc_card->card_design?->logo) }}" alt="abc" width="60px"
+                    <img src="{{ asset('public/uploads/cards/'. $nfc_card->card_design?->logo) }}" alt="abc" width="60px"
                         srcset="" />
                 @else
                     <img src="{{ asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="60px"
@@ -140,27 +140,13 @@
             </div>
             <div class="row">
                 <ul class="list-group">
-                    @foreach ($nfc_card->nfcFields as $nfcField)
-                        <li class="list-group-item">
-                            <i class="{{ $nfcField->icon }}"></i>
-                            <a href="#" class="mx-1">
-                                {{-- <img src="assets/images/email.png" alt="" srcset="" width="25px"> --}}
-                            </a>
-                            <a href="#">{{ $nfcField->pivot->field_value }}</a>
+                     @foreach ($nfc_card->nfcFields  as $nfcField)
+                        <li class="list-group-item social-list-item-{{ $nfcField->id }}">
+                            <i style="color:{{ $nfc_card->card_design->color }}" class="{{ $nfcField->icon }} "></i>
+                            &nbsp;
+                            <a href="{{ $nfcField->link.$nfcField->pivot->field_value }}" class="social-item-link-{{$nfcField->id}}"  target="_blank">{{ $nfcField->pivot->field_value }}</a>
                         </li>
                     @endforeach
-                    <!-- <li class="list-group-item">
-                        <a href="#" class="mx-1">
-                            <img src="assets/images/phone-call.png" alt="" srcset="" width="25px">
-                        </a>
-                        <a href="#">018581111111</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="#" class="mx-1">
-                            <img src="assets/images/credit-card.png" alt="" srcset="" width="25px">
-                        </a>
-                        <a href="#">Google</a>
-                    </li> -->
                 </ul>
             </div>
         </div>

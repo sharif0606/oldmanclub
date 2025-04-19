@@ -10,7 +10,7 @@
             <div class="header_text" id="header_text"></div>
         </div>
         <div class="d-none d-sm-block">
-                <img src="{{ $formType=='edit' ? asset($nfc_card->card_design?->logo) : asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="60px"
+                <img src="{{ $formType=='edit' ? asset('public/uploads/cards/'. $nfc_card->card_design?->logo) : asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="60px"
                     srcset=""  class="logo-image-preview"/>
         </div>
     </header>

@@ -1,103 +1,43 @@
+
     <header>
         <div class="header_section">
             <div>
-                @if ($nfc_card->client?->image)
-                    <img src="{{ asset('public/uploads/client/' . $nfc_card->client?->image)}}" alt="" width="350px" height="300px">
-                    <!-- <div class="main-img" style="background-image: url({{ asset('public/uploads/client/' . $nfc_card->client?->image)}});"></div> -->
-                @else
-                    <div class="main-img" style="background-image: url({{ asset('public/assets/nfc/images/123.png') }}) width:350px;" >
-                    </div>
-                @endif
+                    <img class="display-profile-pic"  src="{{ $nfc_card->nfc_info?->image ? asset('public/uploads/client/' . $nfc_card->nfc_info?->image) :asset('public/assets/nfc/images/123.png') }}" alt="" width="100%" height="300px">
+                    {{-- <img class="display-profile-pic"  src="{{ $formType=='edit' ? asset('public/uploads/client/' . $nfc_card->client?->image) : asset('public/assets/nfc/images/123.png')}}" alt="" width="350px" height="300px"> --}}
             </div>
-            <div class="header_text"></div>
+            <div class="header_text" id="header_text" style="background-color: {{ $nfc_card->card_design->color }}"></div>
         </div>
         <div class="d-none d-sm-block">
-            @if ($nfc_card->card_design?->logo)
-                <img src="{{ asset($nfc_card->card_design?->logo) }}" alt="abc" width="60px"
-                    srcset="" />
-            @else
-                <img src="{{ asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="60px"
-                    srcset="" />
-            @endif
-        </div>
-        <div>
-            <p class="text-center fs-6 fw-bold m-0">
-                @if($nfc_card->card_type==1){{__('Work')}}
-                @else
-                    {{__('Personal')}}
-                @endif
-            </p>
+                <img src="{{ $nfc_card->card_design?->logo ? asset('public/uploads/cards/'. $nfc_card->card_design?->logo) : asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="60px"
+                    srcset=""  class="logo-image-preview"/>
         </div>
     </header>
-    {{--<section class="section">
-        <div class="container-fluid">
+ <div class="section">
+         <div class="container-fluid mt-2">
             <div class="row">
                 <div class="col-sm-12">
-                    @if ($nfc_card->nfc_info?->prefix)
-                        <span class="fs-4    fw-bold">{{ $nfc_card->nfc_info?->prefix }}</span>
-                    @else
-                        <span class="fs-4 fw-bold">Dr.</span>
-                    @endif
+                    <span class="fs-4 fw-bold prefix-name text-dark" id="prefix-name">{{ $nfc_card->nfc_info?->prefix ?? '' }}</span>
+                    <span class="fs-4 fw-bold f-name  text-dark" id="f-name">{{ $nfc_card->client?->fname ?? '' }}</span>
+                    <span class="fs-4 fw-bold m-name  text-dark" id="m-name">{{ $nfc_card->client?->middle_name ?? '' }}</span>
+                    <span class="fs-4 fw-bold l-name  text-dark" id="l-name">{{ $nfc_card->client?->last_name ?? '' }}</span>
 
-                    <span class="fs-4 fw-bold">{{ $nfc_card->client?->fname }}</span>
-                    <span class="fs-4 fw-bold">{{ $nfc_card->client?->middle_name }}</span>
-                    <span class="fs-4 fw-bold">{{ $nfc_card->client?->last_name }}</span>
-                    @if ($nfc_card->nfc_info?->suffix)
-                        <span class="fs-4 fw-bold">{{ $nfc_card->nfc_info?->suffix }}</span>
-                    @else
-                        <span class="fs-4 fw-bold">FCP</span>
-                    @endif
-                    <span class="fs-2 fw-bold">
-                        @if ($nfc_card->nfc_info?->maiden_name)
-                            ({{ $nfc_card->nfc_info?->maiden_name }})
-                        @else
-                            (Shuvo)
-                        @endif
-                    </span>
-                    @if ($nfc_card->nfc_info?->accreditations)
-                        <span>&nbsp;{{ $nfc_card->nfc_info?->accreditations }}</span>
-                    @else
-                        <span>&nbsp;FCPS</span>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                 @if ($nfc_card->nfc_info?->title)
-                    <p class="text-justify">{{ $nfc_card->nfc_info?->title }}</p>
-                @else
-                    <p class="text-justify">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda animi alias
-                        vitae! Magnam, esse consequatur culpa mollitia officiis at saepe cum iure. Reprehenderit
-                        voluptates
-                        ratione deserunt hic veritatis fuga quidem!Accusamus placeat dolore quis natus doloremque at
-                        incidunt recusandae error maiores autem maxime cupiditate, quasi aliquid cumque iste inventore,
-                        ullam fugit a minus blanditiis facere molestiae dicta illo assumenda. Eos?</p>
-                @endif
-            </div>
-            <div class="row">
-                <div>
-                    @if ($nfc_card->nfc_info?->department)
-                        <span class="fs-5 fw-bold">{{ $nfc_card->nfc_info?->department }}</span>
-                    @else
-                        <span class="fs-5 fw-bold">Software Development</span>
-                    @endif
-                    @if ($nfc_card->nfc_info?->company)
-                        <p class="fs-6 fw-bold">{{ $nfc_card->nfc_info?->company }}</p>
-                    @else
-                        <p class="fs-6 fst-italic">Muktodhara Technology Limited</p>
-                    @endif
+                    <div style="display: contents">
+                        <span class="fs-4 fw-bold suffix-name text-dark" id="suffix-name">{{ $nfc_card->nfc_info?->suffix ?? ''}}</span>
+                        <span class="fs-4 fw-bold maiden_name text-dark" id="maiden_name">{{ $nfc_card->nfc_info?->maiden_name ? '('. $nfc_card->nfc_info?->maiden_name.')' ?? '' : '' }}</span>
+                            <span class="accreditations" id="accreditations">&nbsp;{{  $nfc_card->nfc_info?->accreditations ?? ''}}</span>
+                    </div>
+                    <p>
+                        <span class="text-justify field-title text-dark fw-bold" id="field-title">{{ $nfc_card->nfc_info?->title ?? '' }}</span> <br>
+                         <span class="fs-5 fw-bold deprtment active-text-color" id="deprtment">{{ $nfc_card->nfc_info?->department ?? ''}}</span> <br>
+                        <span class="fs-6 company fst-italic fw-light" id="company">{{ $nfc_card->nfc_info?->company ?? '' }}</span>
+                    </p>
                 </div>
             </div>
         </div>
-    </section>
-    <section>
-        <div class="container-fluid mt-4">
-
-            @if ($nfc_card->nfc_info?->headline)
-                <p class="my-1">{{ $nfc_card->nfc_info?->headline }}</p>
-            @else
-                <p class="my-1 fs-6 text-secondary">Our Concern</p>
-            @endif
+    </div>
+    <div>
+        <div class="container-fluid">
+                <p class="my-1 headline">{{ $nfc_card->nfc_info?->headline ?? '' }}</p>
 
             <div class="row">
                 <div class="d-flex">
@@ -108,38 +48,32 @@
                             clip-rule="evenodd" />
                     </svg>
                      <span class="card_owner">Goes by
-                        @if ($nfc_card->nfc_info?->preferred_name)
-                            {{ $nfc_card->nfc_info?->preferred_name }}
-                        @else
-                            Kaisar (sam)
-                        @endif
+                           <span class="preferred_name"> {{  $nfc_card->nfc_info?->preferred_name ?? ''}} </span>
                     </span>
                 </div>
             </div>
+
             <div class="row">
-                <ul class="list-group">
-                    @foreach ($nfc_card->nfcFields as $nfcField)
-                    <li class="list-group-item">
-                        <i class="{{$nfcField->icon}}"></i>
-                        <a href="#" class="mx-1">
-                            <img src="assets/images/email.png" alt="" srcset="" width="25px">
-                        </a>
-                        <a href="#">{{ $nfcField->pivot->field_value}}</a>
-                    </li>
+                <div id="badge-preview" class="badge-preview">
+                        @foreach ( $nfc_card->badges as $bagde)
+                            <div class="image-container " id="badge-preview-{{ $bagde->id }}">
+                                    <img class="avatar-img rounded-border-10 border border-white border-3"
+                                        src="{{ asset('public/uploads/cards/badges/'. $bagde->badge_image ?? '') }}"
+                                        alt="" class="badge-placeholder-{{ $bagde->id }}" id="badge-placeholder-{{ $bagde->id }}" width="50px" height="50px">
+                            </div>
+                        @endforeach
+                </div>
+            </div>
+            <div class="row">
+                <ul class="list-group social-user-ul">
+                        @foreach ($nfc_card->nfcFields  as $nfcField)
+                        <li class="list-group-item social-list-item-{{ $nfcField->id }}">
+                            <i style="color:{{ $nfc_card->card_design->color }}" class="{{ $nfcField->icon }} "></i>
+                            &nbsp;
+                            <a href="{{ $nfcField->link.$nfcField->pivot->field_value }}" class="social-item-link-{{$nfcField->id}}"  target="_blank">{{ $nfcField->pivot->field_value }}</a>
+                        </li>
                     @endforeach
-                    <!-- <li class="list-group-item">
-                        <a href="#" class="mx-1">
-                            <img src="assets/images/phone-call.png" alt="" srcset="" width="25px">
-                        </a>
-                        <a href="#">018581111111</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="#" class="mx-1">
-                            <img src="assets/images/credit-card.png" alt="" srcset="" width="25px">
-                        </a>
-                        <a href="#">Google</a>
-                    </li> -->
                 </ul>
             </div>
         </div>
-    </section>--}}
+    </div>
