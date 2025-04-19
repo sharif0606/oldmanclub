@@ -426,7 +426,7 @@
                                                             <img src="{{ $nfc_card->nfc_info?->image ? asset('public/uploads/client/' . $nfc_card->nfc_info?->image) : asset('public/assets/nfc/images/123.png') }}"
                                                                 class=" img-fluid display-profile-pic" alt="" width="100%" height="350px"  />
                                                         </div>
-                                                        {{-- <div class="CardBox css-19niztd">
+                                                        <div class="CardBox css-19niztd">
                                                             <ul class="list-group social-user-ul">
                                                                 @foreach ($nfc_card->nfcFields->take(2)  as $nfcField)
                                                                     <li class="list-group-item social-list-item-{{ $nfcField->id }}">
@@ -437,7 +437,7 @@
                                                                 @endforeach
 
                                                             </ul>
-                                                        </div> --}}
+                                                        </div>
 
                                                 </div>
                                                     <div class="border-top card-footer p-2 m-0" style="position: absolute; bottom: 0;">
