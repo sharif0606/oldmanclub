@@ -303,7 +303,7 @@
                                     @elseif($nfc_card->card_design?->design_card_id == 4)
                                         @include('user.nfc-template_show.sleek-template')
                                     @endif --}}
-                                    <div class="{{  $formType=='create' || ($formType=='edit' && $nfc_card->card_type == 1) ? 'd-block' : 'd-none' }}"
+                                    <div class="{{   $formType=='edit' && $nfc_card->card_type == 1 ? 'd-block' : 'd-none' }}"
                                         id="design-card-id-1">
                                         @include('user.nfc-template_show.classic-template')
                                     </div>

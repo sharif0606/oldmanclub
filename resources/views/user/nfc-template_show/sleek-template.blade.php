@@ -5,13 +5,13 @@
         <div class="header_sleek">
             <div class="sleek_header_image" id="sleek_header_image">
                 <div class="css-79elbk">
-                    <img class="display-profile-pic"  src="{{ $formType=='edit' ?  asset('public/uploads/client/' . $nfc_card->nfc_info?->image) : asset('public/assets/nfc/images/123.png')}}" alt="" srcset="" class="" width="100%" style="height: 20rem">
+                    <img class="display-profile-pic"  src="{{ $formType=='edit' && $nfc_card->nfc_info?->image?  asset('public/uploads/client/' . $nfc_card->nfc_info?->image) : asset('public/assets/nfc/images/123.png')}}" alt="" srcset="" class="" width="100%" style="height: 20rem">
                 </div>
             </div>
             <div class="css-1fbwa35 " style="background: #E2E8F0">
                 <div class="card sleek_card mx-auto mb-3">
                     <div class="card_img">
-                    <img class="logo-image-preview" src="{{ $formType=='edit' ? asset($nfc_card->card_design?->logo) :  asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="50px" height="50px"
+                    <img class="logo-image-preview" src="{{  $formType=='edit' && $nfc_card->card_design?->logo ? asset('public/uploads/cards/' .$nfc_card->card_design?->logo) : asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="50px" height="50px"
                         />
                         <!-- <img src="assets/images/header_image.png" width="50px" alt="" srcset=""> -->
                     </div>

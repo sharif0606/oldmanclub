@@ -4,7 +4,7 @@
     <div class="header_body">
         <header class="modern_header" id="modern_header">
             <div class="">
-                    <img  src="{{ $formType=='edit' ? asset($nfc_card->card_design?->logo) : asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="60px" id="diplay-profile-pic" class="logo-image-preview"
+                    <img  src="{{ $formType=='edit' && $nfc_card->card_design?->logo ? asset('public/uploads/cards/' .$nfc_card->card_design?->logo) : asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="60px" id="diplay-profile-pic" class="logo-image-preview"
                     />
                 <!-- <img src="assets/images/header_image.png" alt="abc" width="100px" srcset="" /> -->
             </div>
@@ -30,7 +30,7 @@
             </div>
         </header>
                     <div class="CardAvatar">
-                            <img src="{{ $formType=='edit' ? asset('public/uploads/client/' . $nfc_card->nfc_info?->image) : asset('public/assets/nfc/images/123.png') }}"
+                            <img src="{{ $formType=='edit' && $nfc_card->nfc_info?->image ? asset('public/uploads/client/' . $nfc_card->nfc_info?->image) : asset('public/assets/nfc/images/123.png') }}"
                         class=" img-fluid display-profile-pic" alt="" width="200px" height="200px"  />
                     </div>
                 <div class="CardBox css-19niztd">

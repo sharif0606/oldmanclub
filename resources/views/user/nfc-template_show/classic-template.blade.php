@@ -20,7 +20,7 @@
     @endphp
     <div class="col-md-12">
         <div class="classic_header_image_show">
-                <img class="display-profile-pic"  src="{{ $formType=='edit' ? asset('public/uploads/client/' . $nfc_card->nfc_info?->image) : asset('public/assets/nfc/images/123.png') }}" alt="" width="350px"
+                <img class="display-profile-pic"  src="{{ $formType=='edit' && $nfc_card->nfc_info?->image ? asset('public/uploads/client/' . $nfc_card->nfc_info?->image) : asset('public/assets/nfc/images/123.png') }}" alt="" width="350px"
                     height="350px" id="display-profile-pic">
 
             <div class="classic_svg_show">
@@ -49,7 +49,7 @@
                     @endif
                 </svg>
                 <div class="classic_image d-none d-sm-block">
-                        <img class="logo-image-preview" src="{{ $formType=='edit' ? asset('public/uploads/cards/'. $nfc_card->card_design?->logo ?? '') : asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="50px"
+                        <img class="logo-image-preview" src="{{ $formType=='edit' && $nfc_card->card_design?->logo ? asset('public/uploads/cards/'. $nfc_card->card_design?->logo ?? '') : asset('public/assets/nfc/images/logo.png') }}" alt="abc" width="50px"
                             id="logo-image-preview" style="margin-top: .8rem" />
                 </div>
             </div>
