@@ -20,7 +20,7 @@
     @endphp
     <div class="col-md-12">
         <div class="classic_header_image_show">
-                <img class="display-profile-pic"  src="{{ $formType=='edit' ? asset('public/uploads/client/' . $nfc_card->nfc_info?->image) : null }}" alt="" width="350px"
+                <img class="display-profile-pic"  src="{{ $formType=='edit' ? asset('public/uploads/client/' . $nfc_card->nfc_info?->image) : asset('public/assets/nfc/images/123.png') }}" alt="" width="350px"
                     height="350px" id="display-profile-pic">
 
             <div class="classic_svg_show">

@@ -5,7 +5,7 @@
         <div class="header_sleek">
             <div class="sleek_header_image" id="sleek_header_image">
                 <div class="css-79elbk">
-                    <img class="display-profile-pic"  src="{{ $formType=='edit' ?  asset('public/uploads/client/' . $nfc_card->nfc_info?->image) : asset('public/assets/nfc/images/123.png')}}"}}" alt="" srcset="" class="" width="100%" style="height: 20rem">
+                    <img class="display-profile-pic"  src="{{ $formType=='edit' ?  asset('public/uploads/client/' . $nfc_card->nfc_info?->image) : asset('public/assets/nfc/images/123.png')}}" alt="" srcset="" class="" width="100%" style="height: 20rem">
                 </div>
             </div>
             <div class="css-1fbwa35 " style="background: #E2E8F0">

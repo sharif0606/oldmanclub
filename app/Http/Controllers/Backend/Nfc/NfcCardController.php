@@ -312,7 +312,7 @@ class NfcCardController extends Controller
         } catch (Exception $e) {
             // If an exception occurs, rollback the transaction
             DB::rollback();
-            // dd($e);
+            dd($e);
             $this->notice::error('Something wrong! Please try again');
             return redirect()->back()->withInput();
         }
@@ -346,13 +346,11 @@ class NfcCardController extends Controller
 
         } catch(QueryException $e) {
             DB::rollback();
-            dd($e); // For debugging
+            // dd($e); // For debugging
 
             $this->notice::error('Something went wrong');
             return redirect()->route('nfc_card.index');
         }
-
-
     }
 
 

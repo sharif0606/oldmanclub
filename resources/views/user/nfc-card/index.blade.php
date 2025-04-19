@@ -351,7 +351,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="middle" style="padding: 0px !important">
+                                                    <div class="middle" style="padding: 0px !important;margin-top:-20px">
                                                         <div class="container-fluid mt-2">
                                                             <div class="row">
                                                                 <div class="col-sm-12">
@@ -374,7 +374,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="">
+                                                    {{-- <div class="">
                                                         <ul class="p-2">
                                                                 @foreach ($nfc_card->nfcFields->take(2)  as $nfcField)
                                                                     <li class="list-group-item social-list-item-{{ $nfcField->id }}">
@@ -385,7 +385,7 @@
                                                                 @endforeach
 
                                                         </ul>
-                                                    </div>
+                                                    </div> --}}
                                                      <div class="border-top card-footer p-2 m-0">
                                                         <div class="d-flex justify-content-between align-items-center">
                                                             <span style="font-size:10px;font-weight:600">{{ $nfc_card->card_name}}</span>
@@ -426,7 +426,7 @@
                                                             <img src="{{ $nfc_card->nfc_info?->image ? asset('public/uploads/client/' . $nfc_card->nfc_info?->image) : asset('public/assets/nfc/images/123.png') }}"
                                                                 class=" img-fluid display-profile-pic" alt="" width="100%" height="350px"  />
                                                         </div>
-                                                        <div class="CardBox css-19niztd">
+                                                        {{-- <div class="CardBox css-19niztd">
                                                             <ul class="list-group social-user-ul">
                                                                 @foreach ($nfc_card->nfcFields->take(2)  as $nfcField)
                                                                     <li class="list-group-item social-list-item-{{ $nfcField->id }}">
@@ -437,10 +437,10 @@
                                                                 @endforeach
 
                                                             </ul>
-                                                        </div>
+                                                        </div> --}}
 
                                                 </div>
-                                                    <div class="border-top card-footer p-2 m-0">
+                                                    <div class="border-top card-footer p-2 m-0" style="position: absolute; bottom: 0;">
                                                         <div class="d-flex justify-content-between align-items-center">
                                                             <span style="font-size:10px;font-weight:600">{{ $nfc_card->card_name}}</span>
                                                             <small style="font-size: 10px;">{{  $nfc_card->created_at->format('M d, Y')  }}</small>
@@ -476,7 +476,7 @@
                                                                 </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="">
+                                                            {{-- <div class="">
                                                                 <ul class="p-2">
                                                                         @foreach ($nfc_card->nfcFields->take(2)  as $nfcField)
                                                                             <li class="list-group-item social-list-item-{{ $nfcField->id }}">
@@ -487,10 +487,10 @@
                                                                         @endforeach
 
                                                                 </ul>
-                                                            </div>
+                                                            </div> --}}
                                                         </div>
                                                         </div>
-                                                        <div class="border-top card-footer p-2 m-0">
+                                                        <div class="border-top card-footer p-2 m-0" style="position: absolute; bottom: 0;">
                                                             <div class="d-flex justify-content-between align-items-center">
                                                                 <span style="font-size:10px;font-weight:600">{{ $nfc_card->card_name}}</span>
                                                                 <small style="font-size: 10px;">{{  $nfc_card->created_at->format('M d, Y')  }}</small>
@@ -535,9 +535,8 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div>
+                                                           {{--  <div>
                                                                 <div class="container-fluid">
-                                                                        {{-- <p class="my-1 headline">{{  $nfc_card->nfc_info?->headline ?? '' }}</p> --}}
                                                                     <div class="row">
                                                                         <ul class="p-2">
                                                                                 @foreach ($nfc_card->nfcFields->take(2)  as $nfcField)
@@ -551,6 +550,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            --}}
                                                          <div class="border-top card-footer p-2 m-0">
                                                             <div class="d-flex justify-content-between align-items-center">
                                                                 <span style="font-size:10px;font-weight:600">{{ $nfc_card->card_name}}</span>
