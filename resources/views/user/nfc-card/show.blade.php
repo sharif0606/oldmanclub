@@ -386,6 +386,12 @@
                                                                 class="form-control mb-2" placeholder="Phone Number">
                                                         </div>
                                                     </div>
+                                                    <div class="row gx-1">
+                                                        <div class="col-md-9">
+                                                            <button class="btn btn-sm  btn-outline-primary w-5 m-auto offset-4"><i
+                                                            class="me-2 fas fa-sms"></i>Send SMS</button>
+                                                        </div>
+                                                    </div>
 
                                                 </form>
                                             </div>
@@ -460,10 +466,6 @@
                                             </li>
                                         </ul>
                                     </div>
-
-
-
-
                                 </div>
 
                             </div>
