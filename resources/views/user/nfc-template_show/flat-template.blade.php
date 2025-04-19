@@ -4,7 +4,7 @@
     <header>
         <div class="header_section">
             <div>
-                    <img class="display-profile-pic"  src="{{ $formType=='edit' ? asset('public/uploads/client/' . $nfc_card->client?->image) :null }}" alt="" width="350px" height="300px">
+                    <img class="display-profile-pic"  src="{{ $formType=='edit' ? asset('public/uploads/client/' . $nfc_card->nfc_info?->image) :null }}" alt="" width="350px" height="300px">
                     {{-- <img class="display-profile-pic"  src="{{ $formType=='edit' ? asset('public/uploads/client/' . $nfc_card->client?->image) : asset('public/assets/nfc/images/123.png')}}" alt="" width="350px" height="300px"> --}}
             </div>
             <div class="header_text" id="header_text"></div>
