@@ -213,7 +213,7 @@ class NfcCardController extends Controller
     public function update(Request $request, $id)
     {
         // Start the database transaction
-        dd($request->all());
+        // dd($request->all());
         DB::beginTransaction();
         try {
 
