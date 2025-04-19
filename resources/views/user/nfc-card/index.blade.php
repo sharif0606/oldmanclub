@@ -399,7 +399,7 @@
                                                 <a class="design-card-link" href="{{ route('nfc_card.show', encryptor('encrypt', $nfc_card->id)) }}" class="design-card">
 
                                                 <div class="card header_body" style="height: 20rem">
-                                                <header class="modern_header" id="modern_header">
+                                                <header class="modern_header" id="modern_header" style="background-color: {{ $nfc_card->card_design->color }} !important">
                                                     <div class="col-sm-12 p-0 m-0">
                                                             <span class="fs-4 fw-bold prefix-name">{{  $nfc_card->nfc_info?->prefix ?? ''}}</span>
                                                         <span class="fs-4 fw-bold f-name">{{  $nfc_card->nfc_info?->first_name ?? ''  }}</span>
@@ -428,7 +428,7 @@
                                                         </div>
                                                         <div class="CardBox css-19niztd">
                                                             <ul class="list-group social-user-ul">
-                                                                @foreach ($nfc_card->nfcFields->take(2)  as $nfcField)
+                                                                @foreach ($nfc_card->nfcFields->take(1)  as $nfcField)
                                                                     <li class="list-group-item social-list-item-{{ $nfcField->id }}">
                                                                         <i style="color:{{ $nfc_card->card_design->color }}" class="{{ $nfcField->icon }} "></i>
                                                                         &nbsp;
@@ -509,7 +509,7 @@
                                                                                 <img class="display-profile-pic"  src="{{ $nfc_card->nfc_info?->image ? asset('public/uploads/client/' . $nfc_card->nfc_info?->image) :null }}" alt="" width="350px" height="300px">
                                                                                 {{-- <img class="display-profile-pic"  src="{{  asset('public/uploads/client/' . $nfc_card->client?->image) : asset('public/assets/nfc/images/123.png')}}" alt="" width="350px" height="300px"> --}}
                                                                         </div>
-                                                                        <div class="header_text" id="header_text"></div>
+                                                                        <div class="header_text" id="header_text" style="background-color: {{ $nfc_card->card_design->color }}"></div>
                                                                     </div>
                                                                 </header>
                                                                 <div class="section">
