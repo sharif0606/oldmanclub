@@ -303,7 +303,7 @@
                                     @elseif($nfc_card->card_design?->design_card_id == 4)
                                         @include('user.nfc-template_show.sleek-template')
                                     @endif --}}
-                                    <div class="{{   $formType=='edit' && $nfc_card->card_type == 1 ? 'd-block' : 'd-none' }}"
+                                    <div class="{{  $formType=='create' || $formType=='edit' && $nfc_card->card_type == 1 ? 'd-block' : 'd-none' }}"
                                         id="design-card-id-1">
                                         @include('user.nfc-template_show.classic-template')
                                     </div>
@@ -495,7 +495,6 @@
                                                             <p class="mt-2">Flat</p>
                                                         </div>
                                                     </div>
-
                                                 </div>
 
                                                 <div class="col-12 py-2 border-bottom">
@@ -718,6 +717,7 @@
                                                                             $nfc_card->id,
                                                                         )
                                                                         ->get();
+                                                                        // print_r($ncfCardNfcFields);
                                                                 @endphp
                                                                     @foreach ($ncfCardNfcFields as $item)
                                                                         <div id="draggerContent" class="card px-4 py-2">
@@ -747,6 +747,7 @@
                                                                             </div>
                                                                             <div class="">
                                                                                 <div class="form-group">
+
                                                                                     <div class="col-auto">
                                                                                         <label class="sr-only"
                                                                                             for="inlineFormInputGroup">Phone</label>
@@ -771,9 +772,9 @@
                                                                                                             style="width:24px; height:20px;" />
                                                                                                         @endif
                                                                                                 </div>
-                                                                                                <input type="hidden"
+                                                                                                {{-- <input type="hidden"
                                                                                                     name="nfc_id[]"
-                                                                                                    value="{{ $item->id }}" />
+                                                                                                    value="{{ $item->id }}" /> --}}
                                                                                                 <input
                                                                                                     style="border:transparent"
                                                                                                     name="nfc_user_name[]"
@@ -781,10 +782,36 @@
                                                                                                     type="text"
                                                                                                     class="form-control "
                                                                                                     onchange="updateSocialItemLink({{ $item->id }}, this.value, '{{ $item->display_text}}');"
-                                                                                                    placeholder="Username">
+                                                                                                    placeholder="Full Url">
+
+
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
+                                                                                    {{-- @if ($item->type == 2) --}}
+                                                                                    <div class="col-auto">
+                                                                                        <div
+                                                                                            class="input-group mb-2  bg-white">
+                                                                                            <div class="input-group-prepend">
+                                                                                                <div class="">
+                                                                                                        <span class="mx-1"><i
+                                                                                                                class="fa fa-text-width"></i></span>
+
+                                                                                                </div>
+                                                                                                <input type="hidden"
+                                                                                                    name="nfc_id[]"
+                                                                                                    value="{{ $item->id }}" />
+                                                                                                <input
+                                                                                                    style="border:transparent"
+                                                                                                    name="display_name[]"
+                                                                                                    value="{{ $item->display_text }}"
+                                                                                                    type="text"
+                                                                                                    class="form-control "
+                                                                                                    placeholder="Display Name">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    {{-- @else --}}
                                                                                     <select
                                                                                         class="form-select form-control-sm mb-2 bg-white"
                                                                                         name="nfc_label[]">
@@ -797,6 +824,9 @@
                                                                                             {{ $item->display_text == 'work' ? 'selected' : '' }}
                                                                                             value="work">work</option>
                                                                                     </select>
+                                                                                    {{-- @endif --}}
+
+
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -823,7 +853,7 @@
                                                                 @foreach ($nfcFields as $value)
                                                                     @if ($value->type == 1)
                                                                         <button type="button"
-                                                                            onclick="addDraggableContent(`<span class='{{ $value->icon }}'></i></span>`,'{{ $value->name }}','{{ $value->id }}')"
+                                                                            onclick="addDraggableContent(`<span class='{{ $value->icon }}'></i></span>`,'{{ $value->name }}','{{ $value->id }}','{{ $value->type }}')"
                                                                             data-field="{{ $value->name }}"
                                                                             data-id="{{ $value->id }}"
                                                                             style="margin:2px 1px"
@@ -839,7 +869,7 @@
                                                                             );
                                                                         @endphp
                                                                         <button type="button"
-                                                                            onclick="addDraggableContent('{{ $icon }}','{{ $value->name }}','{{ $value->id }}')"
+                                                                            onclick="addDraggableContent('{{ $icon }}','{{ $value->name }}','{{ $value->id }}','{{ $value->type }}')"
                                                                             data-field="{{ $value->name }}"
                                                                             data-id="{{ $value->id }}"
                                                                             style="margin:2px 1px"
@@ -858,7 +888,7 @@
                                                                         @endphp
 
                                                                         <button type="button"
-                                                                            onclick="addDraggableContent('{{ $icon }}','{{ $value->name }}','{{ $value->id }}')"
+                                                                            onclick="addDraggableContent('{{ $icon }}','{{ $value->name }}','{{ $value->id }}','{{ $value->type }}')"
                                                                             data-field="{{ $value->name }}"
                                                                             data-id="{{ $value->id }}"
                                                                             style="margin:2px 1px"
@@ -1020,7 +1050,7 @@
             }
         }
 
-        function addDraggableContent(icon, text, id) {
+        function addDraggableContent(icon, text, id, typeId) {
             var draggableContent = `
             <div id="draggerContent" class="draggable-item card px-4 py-2">
                 <div class="card-dragger-header d-flex items-center" style="gap: 0 0.5rem;justify-content: space-between;">
@@ -1052,14 +1082,27 @@
                                 </div>
                             </div>
                         </div>
-                        <select class="form-select form-control-sm mb-2 bg-white" name="nfc_label[]">
+                        ${
+                            typeId != 2 ? `<div class="col-auto">
+                            <label class="sr-only" for="inlineFormInputGroup">Username</label>
+                            <div class="input-group mb-2  bg-white">
+                                <div class="input-group-prepend">
+                                    <div class="">
+                                        <span class="mx-1"><i class="fa fa-text-width"></i></span>
+                                    </div>
+                                    <input style="border:transparent" name="display_name[]" type="text" class="form-control " placeholder="Display Text" onchange="updateSocialItemLink( ${id}, this.value, '${text}')">
+                                </div>
+                            </div>
+                        </div>` : `<select class="form-select form-control-sm mb-2 bg-white" name="nfc_label[]">
                             <option value="">No Label</option>
                             <option value="personal">personal</option>
                             <option value="work">work</option>
-                        </select>
+                        </select>`
+                        }
                     </div>
                 </div>
             </div>`;
+
             AddLeftsideSocialUser(icon, text, id);
             $("#draggable").append(draggableContent);
             $("#draggable:last-child").sortable();

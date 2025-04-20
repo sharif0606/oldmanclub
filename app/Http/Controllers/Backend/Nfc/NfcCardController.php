@@ -123,9 +123,10 @@ class NfcCardController extends Controller
                 $nfc_design->save();
 
                 // Retrieve the new data from the request
-                $nfcFieldIds = $request->input('nfc_id'); // this is nfc_field_id
-                $nfcFieldUsernames = $request->input('nfc_user_name'); // values for field_value
-                $nfcFieldLabels = $request->input('nfc_label'); // values for display_text
+                $nfcFieldIds = $request->input('nfc_id');
+                $nfcFieldUsernames = $request->input('nfc_user_name');
+                $nfcFieldLabels = $request->input('nfc_label');
+                $nfcFieldDisplaynames = $request->input('display_name');
 
                 if ($nfcFieldIds) {
                     $nfcFieldData = [];
@@ -133,7 +134,8 @@ class NfcCardController extends Controller
                     foreach ($nfcFieldIds as $index => $nfcFieldId) {
                         $nfcFieldData[$nfcFieldId] = [
                             'field_value' => $nfcFieldUsernames[$index] ?? null,
-                            'display_text' => $nfcFieldLabels[$index] ?? null,
+                            'display_text' => $nfcFieldDisplaynames[$index] ?? null,
+                            'label' => $nfcFieldLabels[$index] ?? null,
                             'created_at' => now(),
                             'updated_at' => now(),
                         ];
@@ -145,6 +147,7 @@ class NfcCardController extends Controller
                             'nfc_card_id' => $nfc->id,
                             'nfc_field_id' => $fieldId,
                             'field_value' => $data['field_value'],
+                            'label' => $data['label'],
                             'display_text' => $data['display_text'],
                             'created_at' => $data['created_at'],
                             'updated_at' => $data['updated_at'],
@@ -284,6 +287,7 @@ class NfcCardController extends Controller
             // Retrieve the new data from the request
             $nfcFieldIds = $request->input('nfc_id');
             $nfcFieldUsernames = $request->input('nfc_user_name');
+            $nfcFieldDisplaynames = $request->input('display_name');
             $nfcFieldLabels = $request->input('nfc_label');
 
             if ($nfcFieldIds) {
@@ -293,7 +297,8 @@ class NfcCardController extends Controller
                     // Assuming each nfc_id corresponds to an nfc_field_id
                     $nfcFieldData[$nfcFieldId] = [
                         'field_value' => $nfcFieldUsernames[$index],
-                        'display_text' => $nfcFieldLabels[$index]
+                        'display_text' => $nfcFieldDisplaynames[$index],
+                        'label' => $nfcFieldLabels[$index],
                     ];
                 }
 

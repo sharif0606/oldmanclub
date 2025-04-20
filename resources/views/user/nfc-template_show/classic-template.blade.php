@@ -114,6 +114,7 @@
                  <ul class="list-group social-user-ul">
                     @if ($formType=='edit' )
                         @foreach ($nfc_card->nfcFields as $nfcField)
+                    {{-- {{$nfcField->pivot}} --}}
                         {{-- {{ $nfcField}} --}}
                             <li class="list-group-item social-list-item-{{ $nfcField->id }}">
                                 <i class="{{ $nfcField->icon . " active-text-color" }} "></i>
