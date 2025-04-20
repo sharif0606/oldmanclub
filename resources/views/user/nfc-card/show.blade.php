@@ -274,7 +274,7 @@
                                     <form action="{{ route('nfc_card.destroy',encryptor('encrypt', $nfc_card->id))}}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger" title="Delete"><i class="fas fa-trash"></i></button>
+                                        <button onclick="return myConfirm();" type="submit" class="btn btn-sm btn-danger" title="Delete"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </div>
                             </div>
@@ -377,7 +377,7 @@
                                                                 @foreach ($countries as $value)
                                                                     <option value="{{ $value->id }}"
                                                                         @if (old('nationality', $client->nationality) == $value->id) selected @endif>
-                                                                        {{ $value->name }}</option>
+                                                                        {{ $value->phonecode }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -676,5 +676,14 @@
             }, 2000);
         });
     });
+
+
+    function myConfirm(){
+        if (confirm("Are you sure you want to delete this item?")) {
+                return true;
+            } else {
+                return false;
+            }
+    }
     </script>
 @endpush

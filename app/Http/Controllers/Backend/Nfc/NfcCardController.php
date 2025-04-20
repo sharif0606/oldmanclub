@@ -83,6 +83,14 @@ class NfcCardController extends Controller
         // Start the database transaction
         DB::beginTransaction();
         try {
+
+            $request->validate([
+                'card_name' => 'required|string|max:255',
+                'f_name' => 'required|string',
+                'middle_name' => 'string',
+                'l_name' => 'required|string',
+            ]);
+
             $nfc = new NfcCard;
             $nfc->client_id = currentUserId();
             $nfc->card_name = $request->card_name;

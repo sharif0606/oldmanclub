@@ -283,7 +283,7 @@
                             @method('PATCH')
                     @else
                         <form action="{{ route('nfc_card.store') }}" method="post"
-                            class="row" enctype="multipart/form-data">
+                            class="row" enctype="multipart/form-data" id="nfcForm">
                             @csrf
                             @method('POST')
 
@@ -603,55 +603,57 @@
                                                     <div class="col-8 form-group">
                                                         <label for="">Prefix</label>
                                                         <input type="text" name="prefix"
-                                                            value="{{ $formType=='edit' ? $nfc_card->nfc_info?->prefix ?? '' : '' }}"
+                                                            placeholder="Prefix" value="{{  old('prefix',$formType=='edit' ? $nfc_card->nfc_info?->prefix ?? '' : '') }}"
                                                             class="form-control form-control-sm mb-2 mb-2"
-                                                            onkeyup="$('.prefix-name').text($(this).val());">
+                                                            onkeyup="$('.prefix-name').text($(this).val());" placeholder="Prefix">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">First Name</label>
                                                         <input type="text" name="f_name"
-                                                            value="{{ $formType=='edit'  ? $nfc_card->nfc_info?->first_name ?? '' : ''}}"
+                                                        placeholder="Frist name" value="{{  old('f_name',$formType=='edit'  ? $nfc_card->nfc_info?->first_name ?? '' : '') }}"
                                                             class="form-control form-control-sm mb-2"
                                                             onkeyup="$('.f-name').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Middle Name</label>
                                                         <input type="text" name="middle_name"
-                                                            value="{{ $formType=='edit' ? $nfc_card->nfc_info?->middle_name ?? '' :''}}"
+                                                            placeholder="Middle Name" value="{{  old('middle_name',$formType=='edit'  ? $nfc_card->nfc_info?->middle_name ?? '' : '') }}"
                                                             class="form-control form-control-sm mb-2"
                                                             onkeyup="$('.m-name').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Last Name</label>
                                                         <input type="text" name="l_name"
-                                                            value="{{ $formType=='edit' ? $nfc_card->nfc_info?->last_name ?? '' :'' }}"
+                                                            placeholder="Last Name" value="{{  old('l_name',$formType=='edit'  ? $nfc_card->nfc_info?->last_name ?? '' : '') }}"
                                                             class="form-control form-control-sm mb-2"
                                                             onkeyup="$('.l-name').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Suffix</label>
                                                         <input type="text" name="suffix"
-                                                            value="{{ $formType=='edit' ? $nfc_card->nfc_info?->suffix ?? '' :''}}"
+                                                            placeholder="suffix" value="{{  old('suffix',$formType=='edit'  ? $nfc_card->nfc_info?->suffix ?? '' : '') }}"
                                                             id="" class="form-control form-control-sm mb-2"
                                                             onkeyup="$('.suffix-name').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Accreditations</label>
                                                         <input type="text" name="accreditations"
-                                                            value="{{ $formType=='edit'  ? $nfc_card->nfc_info->accreditations ?? '' :'' }}"
+                                                        placeholder="Accreditations" value="{{  old('accreditations', $nfc_card->nfc_info?->accreditations ?? '') }}"
                                                             id="" class="form-control form-control-sm mb-2"
                                                             onkeyup="$('.accreditations').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Preferred Name</label>
                                                         <input type="text" name="preferred_name"
-                                                            value="{{ $formType=='edit' ? $nfc_card->nfc_info->preferred_name ?? '' :'' }}"
+                                                        placeholder="Preferred Name" value="{{  old('preferred_name',$nfc_card->nfc_info?->preferred_name ?? '') }}"
+
                                                             id="" class="form-control"
                                                             onkeyup="$('.preferred_name').text($(this).val());$('.msg-icon').removeClass('d-none').addClass('show'); $('.goes-by').removeClass('d-none').addClass('show')">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Maiden Name</label>
                                                         <input type="text" name="maiden_name"
+                                                        placeholder="Maiden Name" value="{{  old('maiden_name', $nfc_card->nfc_info?->maiden_name ?? '') }}"
                                                             value="{{ $formType=='edit' ? $nfc_card->nfc_info->maiden_name ?? '' : ''}}" id=""
                                                             class="form-control form-control-sm mb-2"
                                                             onkeyup="$('.maiden_name').text('('+$(this).val()+')');">
@@ -659,7 +661,7 @@
                                                     <div class="col-8 form-group">
                                                         <label for="">Pronoun</label>
                                                         <input type="text" name="pronoun"
-                                                            value="{{ $formType=='edit' ? $nfc_card->nfc_info->pronoun ?? '' : '' }}" id=""
+                                                        placeholder="Pronoun" value="{{  old('pronoun', $nfc_card->nfc_info?->pronoun ?? '') }}" id=""
                                                             class="form-control form-control-sm mb-2"
                                                             onkeyup="$('.pronoun').text('('+$(this).val()+')');">
                                                     </div>
@@ -669,26 +671,26 @@
                                                     <div class="col-8 form-group">
                                                         <label for="">Title</label>
                                                         <textarea name="title" onkeyup="$('.field-title').text($(this).val());" class="form-control form-control-sm mb-2"
-                                                            name="pronoun">{{ $formType=='edit' ? $nfc_card->nfc_info->title ?? '' : '' }}</textarea>
+                                                            >{{ $formType=='edit' ? $nfc_card->nfc_info->title ?? '' : '' }}</textarea>
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Department</label>
                                                         <input type="text" name="department"
-                                                            value="{{ $formType=='edit' ? $nfc_card->nfc_info->department ?? '' : '' }}"
+                                                            placeholder="Department" value="{{  old('department', $nfc_card->nfc_info?->department ?? '') }}"
                                                             id="" class="form-control form-control-sm mb-2"
                                                             onkeyup="$('.deprtment').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Company</label>
                                                         <input type="text" name="company"
-                                                            value="{{ $formType=='edit' ? $nfc_card->nfc_info->company ?? '' : ''}}"
+                                                        placeholder="Company Name" value="{{  old('company', $nfc_card->nfc_info?->company ?? '') }}"
                                                             class="form-control form-control-sm mb-2"
                                                             onkeyup="$('.company').text($(this).val());">
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Headline</label>
                                                         <input type="text" name="headline"
-                                                            value="{{ $formType=='edit' ? $nfc_card->nfc_info->headline ?? '' : '' }}"
+                                                        placeholder="Headline" value="{{  old('headline', $nfc_card->nfc_info?->headline ?? '') }}"
                                                             class="form-control form-control-sm mb-2"
                                                             onkeyup="$('.headline').text($(this).val());">
                                                     </div>
@@ -931,7 +933,8 @@
                                                         <label for="">Card Name</label>
                                                         <input type="text" name="card_name"
                                                         required
-                                                            value="{{ $formType=='edit' ? $nfc_card->card_name ?? '' :'' }}" id="card-name"
+                                                        placeholder="Card Name" value="{{  old('card_name', $nfc_card->card_name ?? '') }}"
+                                                            value="{{ $formType=='edit' ? $nfc_card->card_name ?? '' :'' }}" id="card-input-name"
                                                             class="form-control form-control-sm"
                                                             onkeyup="$('#card-name').text($(this).val());">
                                                     </div>
@@ -1341,6 +1344,17 @@
                 badgeImages.splice(index, 1);
             }
         }
+
+        document.getElementById("nfcForm").addEventListener("submit", function(event) {
+            // var cardInput = $('#card-input-name').val();
+            // if(cardInput.length > 0){
+            //     alert("Please input the card name from card section.");
+            // }
+            if (!this.checkValidity()) {
+            event.preventDefault();
+            alert("Please fill in all required fields.");
+            }
+        });
 
     </script>
 @endpush

@@ -10,7 +10,7 @@
             </div>
             <div class="col-sm-12 p-0 m-0">
                     <span class="fs-4 fw-bold prefix-name">{{ $formType=='edit' ? $nfc_card->nfc_info?->prefix ?? '' : ''}}</span>
-                <span class="fs-4 fw-bold f-name">{{ $formType=='edit' ? $nfc_card->nfc_info?->fname ?? '' : '' }}</span>
+                <span class="fs-4 fw-bold f-name">{{ $formType=='edit' ? $nfc_card->nfc_info?->first_name ?? '' : '' }}</span>
             <span class="fs-5 fw-bold m-name">{{ $formType=='edit' ? $nfc_card->nfc_info?->middle_name ?? '' : '' }}</span>
             <span class="fs-4 fw-bold l-name">{{ $formType=='edit' ? $nfc_card->nfc_info?->last_name ?? '' : '' }}</span>
             <span class="fs-4 fw-bold suffix-name">{{ $formType=='edit' ? $nfc_card->nfc_info?->suffix ?? '' : '' }}</span>
