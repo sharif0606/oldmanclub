@@ -440,7 +440,7 @@
                                                         </div>
 
                                                 </div>
-                                                    <div class="border-top card-footer p-2 m-0" style="position: absolute; bottom: 0;">
+                                                    <div class="border-top card-footer p-2 m-0" style="position: absolute; bottom: 0;width:100%">
                                                         <div class="d-flex justify-content-between align-items-center">
                                                             <span style="font-size:10px;font-weight:600">{{ $nfc_card->card_name}}</span>
                                                             <small style="font-size: 10px;">{{  $nfc_card->created_at->format('M d, Y')  }}</small>

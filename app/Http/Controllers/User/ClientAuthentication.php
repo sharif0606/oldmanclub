@@ -148,6 +148,9 @@ class ClientAuthentication extends Controller
                     $nfc_info = new NfcInformation;
                     $nfc_info->nfc_card_id = $nfc->id;
                     $nfc->client_id = $user->id;
+                    $nfc->first_name = $user->fname;
+                    $nfc->middle_name = $user->middle_name;
+                    $nfc->last_name = $user->last_name;
                     $nfc_info->created_by = $user->id;
 
                     if ($nfc_info->save()) {
