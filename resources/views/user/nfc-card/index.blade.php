@@ -331,7 +331,7 @@
                                                 <div class="card">
                                                     <div class="col-md-12">
                                                         <div class="classic_header_image_show">
-                                                                <img class="display-profile-pic"  src="{{ $nfc_card->nfc_info?->image? asset('public/uploads/client/' . $nfc_card->nfc_info?->image) : null }}" alt="" width="350px"
+                                                                <img class="display-profile-pic"  src="{{ $nfc_card->nfc_info?->image ? asset('public/uploads/client/' . $nfc_card->nfc_info?->image) :  asset('public/assets/nfc/images/123.png') }}" alt="" width="350px"
                                                                     height="350px" id="display-profile-pic">
 
                                                             <div class="classic_svg_show">
@@ -456,7 +456,7 @@
 
                                                         <div class="sleek_header_image" id="sleek_header_image">
                                                             <div class="css-79elbk">
-                                                                <img class="display-profile-pic"  src="{{ $nfc_card->nfc_info?->image ?  asset('public/uploads/client/' . $nfc_card->nfc_info?->image) : asset('public/assets/nfc/images/123.png')}}"}}" alt="" srcset="" class="" width="100%"  style="height: 20rem">
+                                                                <img class="display-profile-pic"  src="{{ $nfc_card->nfc_info?->image ?  asset('public/uploads/client/' . $nfc_card->nfc_info?->image) : asset('public/assets/nfc/images/123.png')}}" alt="" srcset="" class="" width="100%"  style="height: 20rem">
                                                             </div>
                                                         </div>
                                                         <div class="css-1fbwa35 " style="background: white">
@@ -506,7 +506,7 @@
                                                               <header>
                                                                     <div class="header_section">
                                                                         <div>
-                                                                                <img class="display-profile-pic"  src="{{ $nfc_card->nfc_info?->image ? asset('public/uploads/client/' . $nfc_card->nfc_info?->image) :null }}" alt="" width="350px" height="300px">
+                                                                                <img class="display-profile-pic"  src="{{ $nfc_card->nfc_info?->image ? asset('public/uploads/client/' . $nfc_card->nfc_info?->image) : asset('public/assets/nfc/images/123.png') }}" alt="" width="350px" height="300px">
                                                                                 {{-- <img class="display-profile-pic"  src="{{  asset('public/uploads/client/' . $nfc_card->client?->image) : asset('public/assets/nfc/images/123.png')}}" alt="" width="350px" height="300px"> --}}
                                                                         </div>
                                                                         <div class="header_text" id="header_text" style="background-color: {{ $nfc_card->card_design->color }}"></div>
