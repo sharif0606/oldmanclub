@@ -87,10 +87,13 @@ class NfcCardController extends Controller
         try {
 
             $request->validate([
-                'card_name' => 'required|string|max:255',
-                'f_name' => 'required|string',
-                'middle_name' => 'string',
                 'l_name' => 'required|string',
+                'f_name' => 'required|string',
+                'card_name' => 'required|string|max:255',
+            ], [
+                'f_name.required' => 'First name is required.',
+                'l_name.required' => 'Last name is required.',
+                'card_name.required' => 'Card name is required.',
             ]);
 
             $nfc = new NfcCard;
@@ -199,7 +202,11 @@ class NfcCardController extends Controller
         } catch (Exception $e) {
             // If an exception occurs, rollback the transaction
             DB::rollback();
-            // dd($e);
+            foreach ($e->errors() as $field => $messages) {
+                foreach ($messages as $message) {
+                    $this->notice::error($message);
+                }
+            }
             $this->notice::error('Something wrong! Please try again');
             return redirect()->back()->withInput();
         }

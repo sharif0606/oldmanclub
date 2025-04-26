@@ -613,6 +613,9 @@
                                                         placeholder="Frist name" value="{{  old('f_name',$formType=='edit'  ? $nfc_card->nfc_info?->first_name ?? '' : '') }}"
                                                             class="form-control form-control-sm mb-2"
                                                             onkeyup="$('.f-name').text($(this).val());">
+                                                            @error('f_name')
+                                                                <small class="text-danger">{{ $message }}</small>
+                                                            @enderror
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Middle Name</label>
@@ -627,6 +630,9 @@
                                                             placeholder="Last Name" value="{{  old('l_name',$formType=='edit'  ? $nfc_card->nfc_info?->last_name ?? '' : '') }}"
                                                             class="form-control form-control-sm mb-2"
                                                             onkeyup="$('.l-name').text($(this).val());">
+                                                            @error('l_name')
+                                                                <small class="text-danger">{{ $message }}</small>
+                                                            @enderror
                                                     </div>
                                                     <div class="col-8 form-group">
                                                         <label for="">Suffix</label>
@@ -1361,6 +1367,8 @@
                 document.getElementById("tab-4").scrollIntoView({ behavior: "smooth" });
 
                 alert("Please input the card name in the Card section.");
+                $('#card-input-name').css('border', '1px solid red');
+                $('#card-input-name').focus();
                 return; // stop here
             }
 
