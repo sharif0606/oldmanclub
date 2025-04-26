@@ -32,6 +32,7 @@ class ClientAuthentication extends Controller
 
     public function signUpStore(Request $request)
     {
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'contact_or_email' => 'required', // Add validation for the input field
             'password' => 'required|confirmed',
@@ -142,15 +143,14 @@ class ClientAuthentication extends Controller
 
                 $nfc = new NfcCard;
                 $nfc->client_id = $user->id;
+                $nfc->card_name = "Personal Card";
                 $nfc->created_by = $user->id;
                 if ($nfc->save()) {
                     /* Insert Data To Nfc Information */
                     $nfc_info = new NfcInformation;
                     $nfc_info->nfc_card_id = $nfc->id;
-                    $nfc->client_id = $user->id;
-                    $nfc->first_name = $user->fname;
-                    $nfc->middle_name = $user->middle_name;
-                    $nfc->last_name = $user->last_name;
+                    $nfc_info->first_name = $request->fname;
+                    $nfc_info->last_name = $request->last_name;
                     $nfc_info->created_by = $user->id;
 
                     if ($nfc_info->save()) {
