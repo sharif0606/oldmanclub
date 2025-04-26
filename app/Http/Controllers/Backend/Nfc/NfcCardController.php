@@ -55,6 +55,8 @@ class NfcCardController extends Controller
      */
     public function create()
     {
+
+        // dd("here");
         $nfc_fields = NfcField::all();
         $client = Client::find(currentUserId());
         $postCount = Post::where('client_id', currentUserId())->count();

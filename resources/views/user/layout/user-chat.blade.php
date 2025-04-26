@@ -99,7 +99,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     @include('chat.layouts.head')
     <style>
-        
+
     </style>
 </head>
 
@@ -151,8 +151,6 @@
     <script src="{{ asset('public/user/assets/js/zuck-stories.js') }}"></script>
     <!-- Theme Functions -->
     <script src="{{ asset('public/user/assets/js/functions.js') }}"></script>
-
-
 
 </body>
 

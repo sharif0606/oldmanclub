@@ -932,7 +932,6 @@
                                                         </div>
                                                         <label for="">Card Name</label>
                                                         <input type="text" name="card_name"
-                                                        required
                                                         placeholder="Card Name" value="{{  old('card_name', $nfc_card->card_name ?? '') }}"
                                                             value="{{ $formType=='edit' ? $nfc_card->card_name ?? '' :'' }}" id="card-input-name"
                                                             class="form-control form-control-sm"
@@ -1346,15 +1345,32 @@
         }
 
         document.getElementById("nfcForm").addEventListener("submit", function(event) {
-            // var cardInput = $('#card-input-name').val();
-            // if(cardInput.length > 0){
-            //     alert("Please input the card name from card section.");
-            // }
+            // get the card input value
+            var cardInput = $('#card-input-name').val();
+
+            // Check if the card input is empty
+            if (!cardInput || cardInput.trim().length === 0) {
+                event.preventDefault(); // stop form submission
+
+                // Activate tab-4
+                var tab4Trigger = document.querySelector('a[href="#tab-4"]');
+                var tab = new bootstrap.Tab(tab4Trigger);
+                tab.show();
+
+                // Optional: Scroll to the tab area if needed
+                document.getElementById("tab-4").scrollIntoView({ behavior: "smooth" });
+
+                alert("Please input the card name in the Card section.");
+                return; // stop here
+            }
+
+            // Regular form validation after that
             if (!this.checkValidity()) {
-            event.preventDefault();
-            alert("Please fill in all required fields.");
+                event.preventDefault();
+                alert("Please fill in all required fields.");
             }
         });
+
 
     </script>
 @endpush

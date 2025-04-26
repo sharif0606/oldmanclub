@@ -70,14 +70,14 @@ class HomeController extends Controller
         })->get();
         $client = Client::find(currentUserId());
         //return view('chat.index')->with(['client' => $client,'users' => $users, 'contacts' => $contacts, 'groupdata' => $groupdata, 'AttachedFiles' => $AttachedFiles]);
-        
+
         return view('user.messaging',compact('client'))->with(['client' => $client,'users' => $users, 'contacts' => $contacts, 'groupdata' => $groupdata, 'AttachedFiles' => $AttachedFiles]);
     }
 
     public function getMessage($user_id)
     {
         $my_id = currentUserId();
-        // Make read all unread                                      
+        // Make read all unread
         Message::where(['from_user' => $user_id, 'to_user' => $my_id])->update(['is_read' => 1]);
         // Get all message from selected user
         $messages = Message::where(function ($query) use ($user_id, $my_id) {
@@ -105,7 +105,7 @@ class HomeController extends Controller
         })->orWhere(function ($query) use ($user_id, $my_id) {
             $query->where('from_user', $my_id)->where('to_user', $user_id);
         })->orderBy('id', 'DESC')->limit(1)->get();
- 
+
         $chatUser = Client::find($user_id);
         $client = Client::find($my_id);
         return view('chat.layouts.message-conversation')->with(['messages' => $messages])->with(['chatUser' => $chatUser])->with(['client' => $client]);
@@ -143,7 +143,7 @@ class HomeController extends Controller
             $options
         );
         $data = ['from_user' => $from, 'to_user' => $to]; // sending from and to user id when pressed enter
-        $pusher->trigger('my-channel', 'my-event', $data); 
+        $pusher->trigger('my-channel', 'my-event', $data);
         return $data;
     }
 

@@ -208,7 +208,7 @@ class ClientController extends Controller
             ->orderByDesc('reactions_count')
             ->limit(5)
             ->get();
-        //dd($top_trending_posts);
+        // dd($users);
         return view('user.includes.gathering', compact('client', 'post', 'followers', 'users', 'contacts', 'groupdata', 'AttachedFiles', 'online_active_users', 'online_birthday_users', 'top_trending_posts'));
     }
     // public function phonebook_list()
@@ -239,7 +239,6 @@ class ClientController extends Controller
         $online_birthday_users = Client::whereIn('id', $friend_list)
             ->whereRaw("DATE_FORMAT(dob, '%m-%d') = ?", [$today]) // Birthday check
             ->get();
-
 
         $top_trending_posts = Post::withCount('reactions')
             /*where('privacy_mode', 'public')
