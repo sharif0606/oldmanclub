@@ -129,8 +129,29 @@ class NfcCardController extends Controller
                 $nfc_design = new NfcDesign;
                 $nfc_design->nfc_card_id = $nfc->id;
                 $nfc_design->design_card_id = $request->design_card_id?$request->design_card_id:1;
+                if ($request->hasFile('logo')) {
+                    $imageName = rand(111, 999) . time() . '.' . $request->logo->extension();
+                    $request->logo->move(
+                        public_path('uploads/cards/'),
+                        $imageName
+                    );
+                    $nfc_design->logo = $imageName;
+                }
                 $nfc_design->created_by = currentUserId();
                 $nfc_design->save();
+
+                /* badges image update */
+                if ($request->hasFile('badge_images')) {
+                    $badges = $request->file('badge_images');
+                    foreach ($badges as $key => $badge) {
+                        $badgeImageName = rand(111, 999) . time() . '.' . $badge->extension();
+                        $badge->move(public_path('uploads/cards/badges'), $badgeImageName);
+                        DB::table("nfc_card_badges")->insert([
+                            'nfc_card_id' => $nfc->id,
+                            'badge_image' => $badgeImageName,
+                        ]);
+                    }
+                }
 
                 // Retrieve the new data from the request
                 $nfcFieldIds = $request->input('nfc_id');
