@@ -300,6 +300,9 @@ Route::middleware(['checkclient'])->prefix('user')->group(function () {
     Route::post('message', [HomeController::class,'sendMessage']);
     Route::post('typing', [HomeController::class,'sendTyping']);
     Route::get('/lastmessage/{id}', [HomeController::class,'getLastMessage']);
+    // Dashboard
+    Route::get('/pop-message/{id}', [HomeController::class,'getSingleMessageDashboard'])->name('popUpMessage');
+
 
     //Update avatar
     Route::post('/updateavatar', [ChatUserController::class,'update'])->name('updateavatar');

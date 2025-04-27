@@ -814,6 +814,7 @@
                             success: function success(data) {},
                         });
                     });
+
                     /**
                      *-------------------------------------------------------------
                      * Select User Chat Open
@@ -859,6 +860,51 @@
                             },
                         });
                     }
+
+                    /**
+                     *-------------------------------------------------------------
+                     * Open Chat On Website
+                     *-------------------------------------------------------------
+                     */
+
+                    userclick(firstUser);
+                    $(".chat-message-dashboard ul li").on("click", function () {
+                        // alert("Chat");
+                        var id = $(this).attr("user-id");
+                        userclickDashboard(id);
+                    });
+
+                    $(".chat-user-list-dashboard").on("click", function () {
+                        var id = $(this).attr("user-id");
+                        userclickDashboard(id);
+                    });
+
+                    function userclickDashboard(receiver_id) {
+                        console.log("User Click Dashboard Id:", receiver_id);
+                        receiver_userid = receiver_id;
+                        $(".user").removeClass("active");
+                        $("#user-" + receiver_id).addClass("active");
+                        $("#user-" + receiver_id)
+                            .find(".pending")
+                            .remove();
+                        $(".user-profile-sidebar.group-profile-sidebar").hide();
+                        $("#messages").show();
+                        $("#group-messages").hide();
+                        $.ajax({
+                            type: "get",
+                            url: "pop-message/" + receiver_id,
+                            // need to create this route
+                            data: "",
+                            cache: false,
+                            success: function success(data) {
+                                $("#messages").html(data.view1);
+                                $("#userprofiledetail").html(data.view2);
+                                scrollToBottomFunc();
+                                loademoji();
+                            },
+                        });
+                    }
+
                     /**
                      *-------------------------------------------------------------
                      * scrollToBottom

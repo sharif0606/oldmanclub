@@ -193,4 +193,26 @@ class HomeController extends Controller
         $data = ['from_user' => $from, 'to_user' => $to, 'typing' => true]; // showing typing notification when a user is typing a message
         $pusher->trigger('my-channel', 'my-event', $data);
     }
+
+
+
+    // USER DASHBOARD CHAT
+    public function getSingleMessageDashboard($user_id)
+    {
+        $my_id = currentUserId();
+        // Make read all unread
+        Message::where(['from_user' => $user_id, 'to_user' => $my_id])->update(['is_read' => 1]);
+        // Get all message from selected user
+        $messages = Message::where(function ($query) use ($user_id, $my_id) {
+            $query->where('from_user', $user_id)->where('to_user', $my_id);
+        })->orWhere(function ($query) use ($user_id, $my_id) {
+            $query->where('from_user', $my_id)->where('to_user', $user_id);
+        })->get();
+        // Get Receiver user Detail
+        $chatUser = Client::find($user_id);
+        $client = Client::find($my_id);
+        return [
+            'view1' => view('chat.layouts.chat-message-data')->with(['messages' => $messages])->with(['chatUser' => $chatUser])->with(['client' => $client])->render()
+        ];
+    }
 }
