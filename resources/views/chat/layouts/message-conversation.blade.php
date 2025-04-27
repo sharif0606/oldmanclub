@@ -17,7 +17,7 @@
                                 <ul class="list-inline message-img  mb-0">
                                     <li class="list-inline-item message-img-list">
                                         <div>
-                                            <a class="popup-img d-inline-block m-1" href="{{ asset('public/'.$message->file) }}" title="{{ __("Project 1") }}">
+                                            <a target="_blank" class="popup-img d-inline-block m-1" href="{{ asset('public/'.$message->file) }}" title="{{ __("Project 1") }}">
                                                 <img src="{{ asset('public/'.$message->file) }}" alt="" class="rounded border">
                                             </a>
                                         </div>
@@ -63,7 +63,7 @@
                                         <div class="ml-4">
                                             <ul class="list-inline mb-0 font-size-20">
                                                 <li class="list-inline-item">
-                                                    <a href="{{asset('public/'.$message->file)}}" class="text-muted">
+                                                    <a target="_blank" href="{{asset('public/'.$message->file)}}" class="text-muted">
                                                         <i class="ri-download-2-line"></i>
                                                     </a>
                                                 </li>
