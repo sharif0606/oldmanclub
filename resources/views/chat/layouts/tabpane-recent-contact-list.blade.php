@@ -19,16 +19,16 @@
                         <div class="media-body overflow-hidden">
                             <h5 class="text-truncate font-size-15 mb-1">{{ $user->fname }}</h5>
 
-                            @if ($user->file)
+                            {{--@if ($user->file)
                             @if (strtolower(pathinfo($user->file, PATHINFO_EXTENSION)) == 'jpg' || strtolower(pathinfo($user->file, PATHINFO_EXTENSION)) == 'png' || strtolower(pathinfo($user->file, PATHINFO_EXTENSION)) == 'gif')
                             <p class="chat-user-message text-truncate mb-0"><i class="ri-image-fill align-middle mr-1"></i> {{ $user->message }}</p>
                             @else
                             <p class="chat-user-message text-truncate mb-0"><i class="ri-file-text-fill align-middle mr-1"></i> {{ $user->message }}</p>
                             @endif
 
-                            @else
+                            @else--}}
                             <p class="chat-user-message text-truncate mb-0">{{ $user->message }}</p>
-                            @endif
+                            {{--@endif--}}
                         </div>
                         @if (date('Y-m-d') == date('Y-m-d', strtotime($user->created_at)))
                         <div class="font-size-11">{{ date('h:i a', strtotime($user->created_at)) }}</div>
