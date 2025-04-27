@@ -227,7 +227,7 @@ class NfcCardController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the slpecified resource.
      */
     public function edit($id)
     {
@@ -321,6 +321,7 @@ class NfcCardController extends Controller
 
             // Retrieve the existing pivot data associated with the NFC card
             $existingPivotData = $nfc_card->nfcFields()->pluck('field_value', 'nfc_field_id')->toArray();
+            // dd($existingPivotData);
 
             // Retrieve the new data from the request
             $nfcFieldIds = $request->input('nfc_id');
@@ -329,16 +330,19 @@ class NfcCardController extends Controller
             $nfcFieldLabels = $request->input('nfc_label');
 
             if ($nfcFieldIds) {
-                // Prepare the data for sync
+                $nfcFieldIds = array_values(array_unique($nfcFieldIds));
                 $nfcFieldData = [];
+
                 foreach ($nfcFieldIds as $index => $nfcFieldId) {
-                    // Assuming each nfc_id corresponds to an nfc_field_id
-                    $nfcFieldData[$nfcFieldId] = [
-                        'field_value' => $nfcFieldUsernames[$index],
-                        'display_text' => $nfcFieldDisplaynames[$index],
-                        'label' => $nfcFieldLabels[$index],
-                    ];
+                    if (!isset($nfcFieldData[$nfcFieldId])) {
+                        $nfcFieldData[$nfcFieldId] = [
+                            'field_value' => $nfcFieldUsernames[$index] ?? null,
+                            'display_text' => $nfcFieldDisplaynames[$index] ?? null,
+                            'label' => $nfcFieldLabels[$index] ?? null,
+                        ];
+                    }
                 }
+
 
                 // Synchronize the relationship, deleting any records not included in the new data
                 $nfc_card->nfcFields()->sync($nfcFieldData);
