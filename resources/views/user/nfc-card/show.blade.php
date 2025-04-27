@@ -255,8 +255,8 @@
                                 <div class="d-flex justify-content-between mb-2">
                                     <a href="{{ route('nfc_card.edit', encryptor('encrypt', $nfc_card->id)) }}"
                                         class="ms-4 fs-4"><i class="fa fa-edit"></i></a>
-                                    <a href="#" class="fs-4" title="Card Settings" data-bs-toggle="modal"
-                                        data-bs-target="#cogModal"><i class="fas fa-cog"></i></a>
+                                    {{-- <a href="#" class="fs-4" title="Card Settings" data-bs-toggle="modal"
+                                        data-bs-target="#cogModal"><i class="fas fa-cog"></i></a> --}}
                                     <a href="{{ route('duplicate', encryptor('encrypt', $nfc_card->id)) }}" class="fs-4"
                                         title="Duplicate"><i class="fas fa-copy"></i></a>
                                     {{-- <a href="#" class="fs-4" data-bs-toggle="modal" data-bs-target="#shareModal"
@@ -267,8 +267,8 @@
                                             class="fas fa-download"></i></a>
                                     <a href="{{ route('email_signature', encryptor('encrypt', $nfc_card->id)) }}"
                                         title="Email Signature" class="fs-4"><i class="fas fa-envelope"></i></a>
-                                    <a href="{{ route('downloadPdf', [encryptor('encrypt', $nfc_card->id), $nfc_card->client_id]) }}"
-                                        title="Download PDF" class="fs-4"><i class="fas fa-file-pdf"></i></a>
+                                    {{-- <a href="{{ route('downloadPdf', [encryptor('encrypt', $nfc_card->id), $nfc_card->client_id]) }}"
+                                        title="Download PDF" class="fs-4"><i class="fas fa-file-pdf"></i></a> --}}
                                     {{-- <a href="#" onclick="generatePDF()" title="Download PDF" class="fs-4"><i class="fas fa-file-pdf"></i></a> --}}
 
                                     <form action="{{ route('nfc_card.destroy',encryptor('encrypt', $nfc_card->id))}}" method="POST">

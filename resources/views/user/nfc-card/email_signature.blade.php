@@ -1076,7 +1076,7 @@
                                         </li>
 
 
-                                        <li class="nav-item" role="presentation">
+                                        {{-- <li class="nav-item" role="presentation">
                                             <button class="nav-link mx-auto btn-white rounded-pill d-flex align-items-center"
                                                 id="outlook-web-tab" data-bs-toggle="pill" data-bs-target="#outlook-web"
                                                 type="button" role="tab" aria-controls="outlook-web"
@@ -1151,7 +1151,7 @@
 
 
                                             </button>
-                                        </li>
+                                        </li> --}}
                                     </ul>
                                 </div>
                                 <div class="col-md-9 main-content">
