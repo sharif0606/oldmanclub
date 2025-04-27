@@ -63,7 +63,7 @@
                                         <div class="ml-4">
                                             <ul class="list-inline mb-0 font-size-20">
                                                 <li class="list-inline-item">
-                                                    <a href="{{ $message->file }}" class="text-muted">
+                                                    <a href="{{ asset('public/'.$message->file') }}" class="text-muted">
                                                         <i class="ri-download-2-line"></i>
                                                     </a>
                                                 </li>
