@@ -504,6 +504,7 @@
                             case "jpeg":
                             case "png":
                             case "gif":
+                            case "pdf":
                                 break;
                             default:
                                 alert("Allowed file type(jpg, jpeg, png, gif)");
