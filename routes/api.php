@@ -25,6 +25,9 @@ Route::get('/test', function () {
 
 // Route::get('/test', [AuthController::class, 'test']);
 Route::post('/client/login', [AuthController::class, 'clientLogin']);
+Route::post('/client/register', [AuthController::class, 'signUpStore']);
+Route::post('/client/logout', [AuthController::class, 'signOut']);
+
 Route::post('/admin/login', [AdminAuthController::class, 'adminLogin']);
 //Route::get('/nfc/show/{id}', [NfcCardController::class, 'show']);
 Route::get('nfcqrurl/{id}/{client_id}', [nfc::class, 'showqrurl']);
