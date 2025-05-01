@@ -21,6 +21,7 @@ use DB;
 use Session;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+
 class ClientController extends Controller
 {
     /**
@@ -140,16 +141,6 @@ class ClientController extends Controller
         $followers = Follow::where('following_id', $loggedInUser)->orderBy('id', 'desc')->take(4)->get();
         $post = Post::where('client_id', $loggedInUser)->orderBy('created_at', 'desc')->get();
 
-        /*=== Chat ==== */
-        //Show Contact list, Recent Chat User List and Group list
-        $collection = Client::orderBy('fname')->where('id', '!=', $loggedInUser)
-            ->get()
-            ->unique(function ($item) {
-                return strtolower(trim($item->fname));
-            });
-        $contacts = $collection->groupBy(function ($item, $key) {
-            return substr(Str::lower($item->fname), 0, 1);
-        });
         // Recent Chat Users -> Last send Messages users Display in first
         $users = DB::select("SELECT chatdata.*,clients.id,clients.fname,clients.image from (SELECT t1.*, CASE WHEN t1.from_user != " . $loggedInUser . " THEN t1.from_user ELSE t1.to_user END AS userid , (SELECT SUM(is_read=0) as unread FROM `messages` WHERE messages.to_user=" . $loggedInUser . " AND messages.from_user=userid GROUP BY messages.from_user) as unread
         FROM messages AS t1
@@ -213,12 +204,11 @@ class ClientController extends Controller
             'post' => $post,
             'followers' => $followers,
             'users' => $users,
-            'contacts' => $contacts,
-            // 'groupdata' => $groupdata,
-            // 'AttachedFiles' => $AttachedFiles,
-            // 'online_active_users' => $online_active_users,
-            // 'online_birthday_users' => $online_birthday_users,
-            // 'top_trending_posts' => $top_trending_posts
+            'groupdata' => $groupdata,
+            'AttachedFiles' => $AttachedFiles,
+            'online_active_users' => $online_active_users,
+            'online_birthday_users' => $online_birthday_users,
+            'top_trending_posts' => $top_trending_posts
         ]);
         
     }
@@ -270,56 +260,18 @@ class ClientController extends Controller
         ]);
         //return view('user.includes.single-post', compact('value', 'client', 'followers', 'online_active_users', 'online_birthday_users', 'top_trending_posts'));
     }
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Client $client)
-    {
-        dd($client);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id) {}
-
-    /**
-     * Update the specified resource in storage.
-     */
-
-
-    public function update(Request $request, $id) {}
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Client $client) {}
-
-
+    
     public function save_profile(Request $request)
     {
         //dd($request);
         try {
-            $user = Client::find(currentUserId());
+            $user = Client::find(Auth::user()->id);
             $count = Client::where('username', $request->username)->count();
             if ($count > 0  && $request->username !== $user->username) {
-                return redirect()->back()->withInput()->withErrors(['username' => 'The requested (' . $request->username . ') username is not available. Please choose a different one.']);
+                return response()->json([
+                    'status' => false,
+                    'message' => 'The requested (' . $request->username . ') username is not available. Please choose a different one.',
+                ], 400);
             }
             $user->username = $request->username;
             $user->fname = $request->fname;
@@ -347,106 +299,115 @@ class ClientController extends Controller
             $user->id_no_type = $request->id_no_type;
             $user->marital_status = $request->marital_status;
             $user->designation = $request->designation;
-            /*if ($request->hasFile('cover_photo')) {
-                $imageName = rand(111, 999) . time() . '.' . $request->cover_photo->extension();
-                $request->cover_photo->move(public_path('uploads/client'), $imageName);
-                $user->cover_photo = $imageName;
-            }
-            if ($request->hasFile('image')) {
-                $imageName = rand(111, 999) . time() . '.' . $request->image->extension();
-                $request->image->move(public_path('uploads/client'), $imageName);
-                $user->image = $imageName;
-            }*/
+           
             if ($user->save()) {
-                $this->setSession($user);
                 $this->notice::success('Save Changes Successfully');
-                return redirect()->back()->withInput(['tab' => 'nav-setting-tab-1']);
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Save Changes Successfully',
+                    'user' => $user
+                ], 200);
             }
         } catch (Exception $e) {
             // dd($e);
-            return redirect()->back()->withInput()->with('error', 'Please try again');
+            return response()->json([
+                'status' => false,
+                'message' => 'Please try again',
+                'error' => $e->getMessage()
+            ], 400);
         }
     }
     public function save_cover_profile_photo(Request $request)
     {
         try {
-            $user = Client::find(currentUserId());
+            $user = Client::find(Auth::user()->id);
+            $monthfolder = date('Y-m');
+            $folder = public_path('uploads/client/' . $monthfolder);
+            if (!file_exists($folder)) {
+                mkdir($folder, 0777, true);
+            }
             if ($request->hasFile('cover_photo')) {
                 $imageName = rand(111, 999) . time() . '.' . $request->cover_photo->extension();
-                $request->cover_photo->move(public_path('uploads/client'), $imageName);
-                $user->cover_photo = $imageName;
+                $request->cover_photo->move($folder, $imageName);
+                $user->cover_photo = $monthfolder . '/' . $imageName;
                 $post = Post::create([
                     'message' => "Changed Cover Photo",
-                    'image' => $imageName,
-                    'client_id' => currentUserId(),
+                    'image' => $monthfolder . '/' . $imageName,
+                    'client_id' => Auth::user()->id,
                     'post_type' => 'profile_photo'
                 ]);
-            }
+            }   
             if ($request->hasFile('image')) {
                 $imageName = rand(111, 999) . time() . '.' . $request->image->extension();
-                $request->image->move(public_path('uploads/client'), $imageName);
-                $user->image = $imageName;
+                $request->image->move($folder, $imageName);
+                $user->image = $monthfolder . '/' . $imageName;
                 $post = Post::create([
                     'message' => "Changed Profile Photo",
-                    'image' => $imageName,
-                    'client_id' => currentUserId(),
+                    'image' => $monthfolder . '/' . $imageName,
+                    'client_id' => Auth::user()->id,
                     'post_type' => 'cover_photo'
                 ]);
             }
             $user->profile_overview = $request->profile_overview;
             $user->tagline = $request->tagline;
             if ($user->save()) {
-                $this->setSession($user);
                 $this->notice::success('Data Saved');
-                return redirect()->back()->withInput(['tab' => 'nav-setting-tab-2']);
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Data Saved',
+                    'user' => $user
+                ], 200);
             }
         } catch (Exception $e) {
             // dd($e);
-            return redirect()->back()->withInput()->with('error', 'Please try again');
+            return response()->json([
+                'status' => false,
+                'message' => 'Please try again',
+                'error' => $e->getMessage()
+            ], 400);
         }
     }
     public function change_password(Request $request)
     {
         try {
-            $data = Client::find(currentUserId());
+            $data = Client::find(Auth::user()->id);
             //validate current password
             if (!Hash::check($request->current_password, $data->password)) {
                 $this->notice::error('Current Password is incorrect');
-                return redirect()->back();
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Current Password is incorrect',
+                ], 400);
             }
             $data->password = Hash::make($request->password);
             if ($data->save()) {
-                $this->setSession($data);
                 $this->notice::success('Data Saved');
-                return redirect()->back()->withInput(['tab' => 'nav-setting-tab-4']);;
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Data Saved',
+                    'user' => $data
+                ], 200);
             }
         } catch (Exception $e) {
-            dd($e);
+            //dd($e);
             $this->notice::error('Please try again');
-            return redirect()->back()->withInput();
+            return response()->json([
+                'status' => false,
+                'message' => 'Please try again',
+                'error' => $e->getMessage()
+            ], 400);
         }
     }
-    public function setSession($client)
-    {
-        return request()->session()->put(
-            [
-                'userId' => encryptor('encrypt', $client->id),
-                'userName' => encryptor('encrypt', $client->first_name_en),
-                'emailAddress' => encryptor('encrypt', $client->email),
-                'userLogin' => 1,
-                'image' => $client->image ?? 'No Image Found'
-            ]
-        );
-    }
+    
     public function search_by_people(Request $request)
     {
         //dd(currentUserId());
-        $client = Client::with('followers')->find(currentUserId());
+        $client = Client::with('followers')->find(Auth::user()->id);
 
         // Retrieve all follow IDs from the followers
         // Enable query logging
         DB::connection()->enableQueryLog();
-        $followIds = Follow::where('following_id', currentUserId())->pluck('follower_id')->toArray();
+        $followIds = Follow::where('following_id', Auth::user()->id)->pluck('follower_id')->toArray();
         // Get the executed queries
         $queries = DB::getQueryLog();
 
@@ -466,16 +427,16 @@ class ClientController extends Controller
                     });
                 }
             })
-                ->where('id', '!=', currentUserId())
+                ->where('id', '!=', Auth::user()->id)
                 ->whereNotIn('id', $followIds)
                 ->get();
         } else {
-            $follow_connections = Client::where('id', '!=', currentUserId())
+            $follow_connections = Client::where('id', '!=', Auth::user()->id)
                 ->whereNotIn('id', $followIds)
                 ->orderBy('id', 'desc')->get();
         }
 
-        $unfollow_connections = Follow::with('client')->where('following_id', '=', currentUserId())->get();
+        $unfollow_connections = Follow::with('client')->where('following_id', '=', Auth::user()->id)->get();
 
         /*$search_client_id = Client::where(function ($query) use ($search_by_people) {
             $query->where('fname', 'like', '%' . $search_by_people . '%')
@@ -493,20 +454,23 @@ class ClientController extends Controller
                 });
             }
         })->first();
-        return view('user.searchByPeople', compact('client', 'follow_connections', 'unfollow_connections', 'followIds', 'search_client_id'));
+        return response()->json([
+            'client' => $client,
+            'follow_connections' => $follow_connections,
+            'unfollow_connections' => $unfollow_connections,
+            'followIds' => $followIds,
+            'search_client_id' => $search_client_id
+        ]);
+        //return view('user.searchByPeople', compact('client', 'follow_connections', 'unfollow_connections', 'followIds', 'search_client_id'));
     }
     public function client_by_search($username)
     {
-        session()->forget('username');
-        // Store the username in the session
-        Session::put('username', $username);
-        //dd($username);
         $client = Client::where('username', $username)->first();
         $post = Post::where('client_id', $client->id)->orderBy('created_at', 'desc')->get();
-        $postCount = Post::where('client_id', currentUserId())->count();
+        $postCount = Post::where('client_id', Auth::user()->id)->count();
         $followers = Follow::where('following_id', $client->id)->orderBy('id', 'desc')->take(4)->get();
         $connection = Client::where('username', $username)->first();
-        $followIds = Follow::where('following_id', currentUserId())->pluck('follower_id')->toArray();
+        $followIds = Follow::where('following_id', Auth::user()->id)->pluck('follower_id')->toArray();
 
 
         // Get the list of online users from the followers
@@ -515,17 +479,33 @@ class ClientController extends Controller
             ->where('id', '!=', $client->id)
             ->get();
         //dd($followIds);
-        return view('connection.connectionDashboard', compact('client', 'post', 'postCount', 'followers', 'followIds', 'connection', 'online_active_users'));
+        return response()->json([
+            'client' => $client,
+            'post' => $post,
+            'postCount' => $postCount,
+            'followers' => $followers,
+            'followIds' => $followIds,
+            'connection' => $connection,
+            'online_active_users' => $online_active_users
+        ]);
+        //return view('connection.connectionDashboard', compact('client', 'post', 'postCount', 'followers', 'followIds', 'connection', 'online_active_users'));
     }
     public function usernameProfile($username)
     {
         $client = Client::where('username', 'like', "%$username%")->first();
         $post = Post::where('client_id', $client->id)->orderBy('created_at', 'desc')->get();
-        return view('user.myProfile', compact('client', 'post'));
+        return response()->json([
+            'client' => $client,
+            'post' => $post
+        ]);
+        //return view('user.myProfile', compact('client', 'post'));
     }
     public function usernameProfileAbout($username)
     {
         $client = Client::where('username', 'like', "%$username%")->first();
-        return view('user.myProfileAbout', compact('client'));
+        return response()->json([
+            'client' => $client
+        ]);
+        //return view('user.myProfileAbout', compact('client'));
     }
 }

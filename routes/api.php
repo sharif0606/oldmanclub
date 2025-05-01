@@ -27,6 +27,8 @@ Route::get('/test', function () {
 // Route::get('/test', [AuthController::class, 'test']);
 Route::post('/client/login', [AuthController::class, 'clientLogin']);
 Route::post('/client/register', [AuthController::class, 'signUpStore']);
+Route::post('/client/forget-password', [AuthController::class, 'submitForgetPasswordForm']);
+Route::post('/client/reset-password/{token}', [AuthController::class, 'submitResetPasswordForm']);
 
 Route::post('/admin/login', [AdminAuthController::class, 'adminLogin']);
 //Route::get('/nfc/show/{id}', [NfcCardController::class, 'show']);
@@ -49,6 +51,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/client/accountSetting', [webClient::class, 'accountSetting']);
     Route::get('/client/gathering', [webClient::class, 'gathering']);
     Route::get('/client/singlePost/{id}', [webClient::class, 'singlePost']);
+    Route::post('/client/save_profile', [webClient::class, 'save_profile']);
+    Route::post('/client/save_cover_profile_photo', [webClient::class, 'save_cover_profile_photo']);
+    Route::get('/client/usernameProfile/{username}', [webClient::class, 'usernameProfile']);
+    Route::get('/client/usernameProfileAbout/{username}', [webClient::class, 'usernameProfileAbout']);
+    Route::post('/client/change_password', [webClient::class, 'change_password']);
+    Route::get('/client/search_by_people', [webClient::class, 'search_by_people']);
+    Route::get('/client/client_by_search/{username}', [webClient::class, 'client_by_search']);
 });
 
 

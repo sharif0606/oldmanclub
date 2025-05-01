@@ -16,8 +16,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Backend\NfcCard;
 use App\Models\Backend\NfcInformation;
 use App\Models\Backend\NfcDesign;
-
-
+use Mail;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 class AuthController extends Controller
 {
 
@@ -233,11 +234,69 @@ class AuthController extends Controller
             ], 400);
         }
     }
-    public function a(){
-        echo 'ok';
-    }
-    public function ForegtPassword()
+    public function submitForgetPasswordForm(Request $request)
     {
+        $request->validate(
+            [
+                'email' => 'required|email|exists:clients',
+            ],
+            [
+                'email.exists' => 'The email address does not exists.', // Customize the error message
+            ]
+        );
+
+        $token = Str::random(64);
+
+        DB::table('password_resets')->insert([
+            'email' => $request->email,
+            'token' => $token,
+            'created_at' => Carbon::now()->addMinutes(20)
+        ]);
+
+        Mail::send('email.forgetPassword', ['token' => $token], function ($message) use ($request) {
+            $message->from('oldclubman@quickpicker.xyz', 'Old Man Club');
+            $message->to($request->email);
+            $message->subject('Reset Password');
+        });
+
+        return response()->json([
+            'status' => true,
+            'message' => 'We have e-mailed your password reset link!',
+        ], 200);
+    }
+   
+    public function submitResetPasswordForm(Request $request)
+    {
+        
+        $request->validate([
+            'email' => 'required|email|exists:clients',
+            'password' => 'required|string|confirmed'/*min:6|*/,
+            'password_confirmation' => 'required'
+        ]);
+
+        $updatePassword = DB::table('password_resets')
+            ->where([
+                'email' => $request->email,
+                'token' => $request->token
+            ])->where('created_at', '>=', Carbon::now())
+            ->first();
+        
+        if (!$updatePassword) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Invalid token!',
+            ], 400);
+        }
+
+        $user = Client::where('email', $request->email)
+            ->update(['password' => Hash::make($request->password)]);
+
+        DB::table('password_resets')->where(['email' => $request->email])->delete();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Your password has been changed!',
+        ], 200);
     }
 
     public function signOut()
