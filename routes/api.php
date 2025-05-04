@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\NfcCardController;
 use App\Http\Controllers\Backend\Nfc\NfcCardController as nfc;
 use App\Http\Controllers\Api\Web\User\ClientController as webClient;
+use App\Http\Controllers\Api\Web\User\CommentController as comment;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/client/change_password', [webClient::class, 'change_password']);
     Route::get('/client/search_by_people', [webClient::class, 'search_by_people']);
     Route::get('/client/client_by_search/{username}', [webClient::class, 'client_by_search']);
+
+    // comment reaction routes
+    Route::post('/comment/reaction_save', [comment::class, 'reaction_save']);
+    Route::post('/comment/reaction_update', [comment::class, 'reaction_update']);
 });
 
 
