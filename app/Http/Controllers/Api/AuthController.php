@@ -50,7 +50,7 @@ class AuthController extends Controller
                             'user' => $user,
                             'access_token' => $token,
                             'token_type' => 'Bearer',
-                        ], 200);
+                        ]);
                     } else {
                         $message = 'Incorrect password!';
                     }
@@ -67,7 +67,7 @@ class AuthController extends Controller
         return response()->json([
             'status' => $status,
             'message' => $message,
-        ], 401);
+        ]);
     }
 
     public function signUpStore(Request $request)
@@ -143,7 +143,7 @@ class AuthController extends Controller
                 return response()->json([
                     'status' => false,
                     'message' => 'Client with the same first name, last name, and date of birth already exists.',
-                ], 400);
+                ]);
             }
 
 
@@ -152,7 +152,7 @@ class AuthController extends Controller
                 'status' => false,
                 'message' => 'Validation errors occurred.',
                 'errors' => $validator->errors(),
-            ], 422);
+            ]);
         }
         DB::beginTransaction();
         try {
@@ -219,19 +219,19 @@ class AuthController extends Controller
                     'user' => $user,
                     'access_token' => $token,
                     'token_type' => 'Bearer',
-                ], 200);
+                ]);
             } else
                 return response()->json([
                     'status' => false,
                     'message' => 'Something wrong! Please try again',
-                ], 400);
+                ]);
         } catch (Exception $e) {
             DB::rollback();
            // dd($e);
             return response()->json([
                 'status' => false,
                 'message' => 'Something wrong! Please try again',
-            ], 400);
+            ]);
         }
     }
     public function submitForgetPasswordForm(Request $request)
@@ -262,7 +262,7 @@ class AuthController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'We have e-mailed your password reset link!',
-        ], 200);
+        ]);
     }
    
     public function submitResetPasswordForm(Request $request)
@@ -285,7 +285,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => 'Invalid token!',
-            ], 400);
+            ]);
         }
 
         $user = Client::where('email', $request->email)
@@ -296,7 +296,7 @@ class AuthController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Your password has been changed!',
-        ], 200);
+        ]);
     }
 
     public function signOut()
