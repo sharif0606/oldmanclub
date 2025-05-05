@@ -27,10 +27,10 @@ Route::get('/test', function () {
 
 // Route::get('/test', [AuthController::class, 'test']);
 Route::post('/client/login', [AuthController::class, 'clientLogin']);
-Route::post('/client/register', [AuthController::class, 'signUpStore']);
+Route::post('/client/regi', [AuthController::class, 'signUpStore']);
 Route::post('/client/forget-password', [AuthController::class, 'submitForgetPasswordForm']);
 Route::post('/client/reset-password/{token}', [AuthController::class, 'submitResetPasswordForm']);
-
+ 
 Route::post('/admin/login', [AdminAuthController::class, 'adminLogin']);
 //Route::get('/nfc/show/{id}', [NfcCardController::class, 'show']);
 Route::get('nfcqrurl/{id}/{client_id}', [nfc::class, 'showqrurl']);
