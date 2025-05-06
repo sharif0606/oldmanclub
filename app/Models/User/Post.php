@@ -38,4 +38,12 @@ class Post extends Model
     {
         return $this->hasMany(Share::class);
     }
+    public function files(): HasMany
+    {
+        return $this->hasMany(PostFile::class);
+    }
+    public function reports(): HasMany
+    {
+        return $this->hasMany(PostReport::class);
+    }
 }

@@ -35,6 +35,7 @@ class ChatController extends BaseController
         $validator = \Validator::make($request->all(), [
             'type' => 'required|in:text,image,video,file,audio,sticker',
             'content' => 'required|string',
+            'files.*' => 'nullable|file|max:10240', // Max 10MB per file
         ]);
 
         if ($validator->fails()) {
@@ -46,13 +47,72 @@ class ChatController extends BaseController
             'user_id' => Auth::user()->id,
             'type' => $request->type,
             'content' => $request->content,
-            'file_name' => $request->file_name,
-            'file_size' => $request->file_size,
         ]);
+
+        // Handle multiple files if present
+        if ($request->hasFile('files')) {
+            $files = $request->file('files');
+            $fileDetails = [];
+            
+            foreach ($files as $file) {
+                $fileDetail = $this->handleFileUpload($file);
+                if ($fileDetail) {
+                    $fileDetails[] = $fileDetail;
+                }
+            }
+
+            // Update message with file details
+            if (!empty($fileDetails)) {
+                $message->update([
+                    'file_details' => json_encode($fileDetails)
+                ]);
+            }
+        }
 
         broadcast(new MessageSent($message))->toOthers();
 
         return response()->json($message->load('user'), 201);
+    }
+
+    private function handleFileUpload($file)
+    {
+        $extension = $file->getClientOriginalExtension();
+        $mimeType = $file->getMimeType();
+        $filefolder = date('Y') . '/' . date('m');
+        $fileName = rand(1111, 9999) . Auth::user()->id . '_' . rand(111, 999) . time() . '.' . $extension;
+
+        // Determine file type and directory
+        if (str_starts_with($mimeType, 'image/')) {
+            $directory = 'images';
+            $fileType = 'image';
+        } elseif (str_starts_with($mimeType, 'video/')) {
+            $directory = 'videos';
+            $fileType = 'video';
+        } elseif (str_starts_with($mimeType, 'audio/')) {
+            $directory = 'audio';
+            $fileType = 'audio';
+        } else {
+            $directory = 'files';
+            $fileType = 'file';
+        }
+
+        // Create directory if it doesn't exist
+        $uploadPath = public_path('uploads/chat/' . $directory . '/' . $filefolder);
+        if (!file_exists($uploadPath)) {
+            mkdir($uploadPath, 0777, true);
+        }
+
+        // Move file to appropriate directory
+        $file->move($uploadPath, $fileName);
+
+        return [
+            'file_name' => $fileName,
+            'file_type' => $fileType,
+            'file_size' => $file->getSize(),
+            'mime_type' => $mimeType,
+            'path' => 'uploads/chat/' . $directory . '/' . $filefolder . '/' . $fileName,
+            'url' => asset('uploads/chat/' . $directory . '/' . $filefolder . '/' . $fileName)
+        ];
     }
 
     private function authorizeUserInConversation(Conversation $conversation)
@@ -167,10 +227,15 @@ class ChatController extends BaseController
 
         // Delete old avatar if exists
         if ($conversation->avatar) {
-            \Storage::disk('public')->delete($conversation->avatar);
+            $oldAvatarPath = $conversation->avatar;
+            if (\Storage::disk('public')->exists($oldAvatarPath)) {
+                \Storage::disk('public')->delete($oldAvatarPath);
+            }
         }
 
-        $avatarPath = $request->file('avatar')->store('avatars', 'public');
+        // Generate unique filename
+        $fileName = 'chat_' . $conversation->id . '_' . time() . '.' . $request->file('avatar')->getClientOriginalExtension();
+        $avatarPath = $request->file('avatar')->storeAs('avatars', $fileName, 'public');
         
         $conversation->update([
             'avatar' => $avatarPath
