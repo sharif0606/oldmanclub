@@ -96,76 +96,62 @@ class PostController extends BaseController
     /**
      * Update the image post
      */
-    public function post_update_image(Request $request, $id){
+    public function post_update(Request $request, $id){
         $post = Post::where('client_id', Auth::user()->id)->findOrFail($id);
         
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $extension = $file->getClientOriginalExtension();
-            $mimeType = $file->getMimeType();
-            $fileName = pathinfo($post->image, PATHINFO_FILENAME);
+        // Normalize line breaks before updating the content
+        $content = preg_replace('/\R{2,}/', "\n", $request->input('message'));
+        $post->message = $content;
+        $post->updated_at = Carbon::now();
+        $post->privacy_mode = $request->privacy_mode;
+        $post->save();
 
-            // Determine if the file is an image or video
-            if (str_starts_with($mimeType, 'image/')) {
-                $directory = 'images';
-                $fileType = 'image';
-                $file->move(public_path('uploads/post'), $fileName);
-            } elseif (str_starts_with($mimeType, 'video/')) {
-                $directory = 'videos';
-                $fileType = 'video';
-                $file->move(public_path('uploads/post/' . $directory), $fileName);
-            } else {
-                return $this->sendError('Unauthorised.', ['error'=>'Invalid file type']);
+        if($request->removefiles){
+            $files = explode(',',$request->removefiles);
+            foreach($files as $file){
+                $postFile = PostFile::where('post_id',$post->id)->where('id',$file)->first();
+                if($postFile){
+                    if(file_exists(public_path('uploads/post/'.$postFile->file_path))){
+                        unlink(public_path('uploads/post/'.$postFile->file_path));
+                    }
+                    $postFile->delete();
+                }
+            }
+        }
+
+        if($request->hasFile('files')){
+            $files = $request->file('files');
+            foreach($files as $file){
+                $this->handleFileUpload($file,$post->id);
             }
         }
     
-        // Normalize line breaks before updating the content
-        $content = preg_replace('/\R{2,}/', "\n", $request->input('message'));
-        $post->message = $content;
-        $post->updated_at = Carbon::now();
-        $post->privacy_mode = $request->privacy_mode;
-        $post->save();
-    
-        return response()->json($post);
+        return $this->sendResponse($post->load('files'), 'Post updated successfully');
     }
-    /**
-     * Update the video post
-     */
-    public function post_update_video(Request $request, $id){
-        $post = Post::findOrFail($id);
-    
-        // Handle image upload if present
-        if ($request->hasFile('image')) {
-            $imageName = rand(111, 999) . time() . '.' . $request->image->extension();
-            $request->image->move(public_path('uploads/post'), $imageName);
-            $post->image = $imageName;
-        }
-    
-        // Normalize line breaks before updating the content
-        $content = preg_replace('/\R{2,}/', "\n", $request->input('message'));
-        $post->message = $content;
-        $post->updated_at = Carbon::now();
+   
+    public function privacy(Request $request,$id){
+        $post = Post::where('client_id', Auth::user()->id)->where('id',$id)->first();
         $post->privacy_mode = $request->privacy_mode;
         $post->save();
-    
-        return response()->json($post);
-    }
-    public function privacy(Request $request){
-        $post = Post::findOrFail($request->postId);
-        $post->privacy_mode = $request->privacy_mode;
-        $post->save();
-        return response()->json([
-            'commentHtml' => view('user.partials.privacy', compact('post'))->render(),
-        ], 201);
+        return $this->sendResponse($post->load('files'), 'Post privacy updated successfully');
     }
     /**
      * Remove the specified resource from storage.
      */
     public function destroy($id)
     {
-        $post = Post::findOrFail($id);
-        $post->delete();
+        $post = Post::where('client_id', Auth::user()->id)->where('id',$id)->first();
+        if($post){
+            $files = PostFile::where('post_id',$id)->get();
+            foreach($files as $file){
+                if(file_exists(public_path('uploads/post/'.$file->file_path))){
+                    unlink(public_path('uploads/post/'.$file->file_path));
+                }
+                $file->delete();
+            }
+            $post->delete();
+        }
     
-        return response()->json(['message' => 'Post deleted successfully.']);
+        return $this->sendResponse([], 'Post deleted successfully');
     }
 }

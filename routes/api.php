@@ -75,8 +75,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // post routes
     Route::post('/post/store', [post::class, 'store']);
-    Route::post('/post/post_update_image/{id}', [post::class, 'post_update_image']);
+    Route::post('/post/update/{id}', [post::class, 'post_update']);
     Route::get('/post', [post::class, 'user_posts']);
+    Route::post('/post/delete/{id}', [post::class, 'destroy']);
+    Route::post('/post/privacy/{id}', [post::class, 'privacy']);
     // chat routes
     Route::post('/chat', [ChatController::class, 'startConversation']);
     Route::get('/chat/search', [ChatController::class, 'searchConversations']);
