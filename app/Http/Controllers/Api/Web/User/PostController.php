@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Exception;
 class PostController extends BaseController
 {
-    public function all_posts(){
+    public function user_posts(){
         $posts = Post::where('client_id', Auth::user()->id)->get();
         return $this->sendResponse($posts, 'Posts fetched successfully');
     }
@@ -64,7 +64,7 @@ class PostController extends BaseController
      */
     public function post_update_image(Request $request, $id){
         $post = Post::findOrFail($id);
-        return $post;
+        return pathinfo($post->image);
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $extension = $file->getClientOriginalExtension();
