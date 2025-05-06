@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Models\Backend\User;
+use App\Http\Controllers\Api\BaseController;
 use App\Models\User\Client;
 use Exception;
-use Illuminate\Database\Eloquent\Casts\Json;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -19,7 +16,7 @@ use App\Models\Backend\NfcDesign;
 use Mail;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
-class AuthController extends Controller
+class AuthController extends BaseController
 {
 
     public function test()
@@ -44,30 +41,25 @@ class AuthController extends Controller
                         $message = 'Successfully Login';
                         $token = $user->createToken('authToken')->plainTextToken;
 
-                        return response()->json([
+                        return $this->sendResponse([
                             'status' => $status,
                             'message' => $message,
                             'user' => $user,
                             'access_token' => $token,
                             'token_type' => 'Bearer',
-                        ]);
+                        ], 'Successfully Login');
                     } else {
-                        $message = 'Incorrect password!';
+                        return $this->sendError('Unauthorised.', ['error'=>'Incorrect password!']);
                     }
                 } else {
-                    $message = 'You are not an active user. Please contact the authority!';
+                    return $this->sendError('Unauthorised.', ['error'=>'You are not an active user. Please contact the authority!']);
                 }
             } else {
-                $message = 'Your username or password is wrong!';
+                return $this->sendError('Unauthorised.', ['error'=>'Your username or password is wrong!']);
             }
         } catch (Exception $e) {
-            $message = 'An error occurred!';
+            return $this->sendError('Unauthorised.', ['error'=>'An error occurred!']);
         }
-
-        return response()->json([
-            'status' => $status,
-            'message' => $message,
-        ]);
     }
 
     public function signUpStore(Request $request)
