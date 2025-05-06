@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\NfcCardController;
 use App\Http\Controllers\Backend\Nfc\NfcCardController as nfc;
 use App\Http\Controllers\Api\Web\User\ClientController as webClient;
 use App\Http\Controllers\Api\Web\User\CommentController as comment;
+use App\Http\Controllers\Api\Web\User\PostController as post;
+use App\Http\Controllers\Api\Web\Location\LocationController as location;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +44,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/client/all', [ClientController::class, 'index']);
     Route::get('/nfc/list/{id}', [NfcCardController::class, 'index']);
     Route::post('/admin/logout', [AdminAuthController::class, 'adminLogout']);
+
+    //location routes
+    Route::get('/location/country', [location::class, 'country']);
+    Route::get('/location/state', [location::class, 'state']);
+    Route::get('/location/city', [location::class, 'city']);
+    Route::get('/location/area', [location::class, 'area']);
     
     // react routes
     Route::get('/client/dashboard', [webClient::class, 'index']);
@@ -62,7 +70,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // comment reaction routes
     Route::post('/comment/reaction_save', [comment::class, 'reaction_save']);
-    Route::post('/comment/reaction_update', [comment::class, 'reaction_update']);
+    Route::post('/comment/store', [comment::class, 'store']);
+
+    // post routes
+    Route::post('/post/store', [post::class, 'store']);
 });
 
 

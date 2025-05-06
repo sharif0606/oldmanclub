@@ -5,24 +5,19 @@ namespace App\Http\Controllers\Api\Web\User;
 use App\Models\User\Client;
 use App\Models\User\Post;
 use App\Models\User\Country;
-use App\Models\User\City;
-use App\Models\User\State;
-use App\Models\Backend\PhoneBook;
 use App\Models\User\Follow;
 use App\Models\Backend\NfcCard;
 use App\Message;
 use App\Group;
-use Pusher\Pusher;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use Exception;
 use DB;
-use Session;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
-class ClientController extends Controller
+class ClientController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -33,21 +28,21 @@ class ClientController extends Controller
         $client = Client::find(Auth::user()->id);
         $followers = Follow::where('following_id', Auth::user()->id)->orderBy('id', 'desc')->take(4)->get();
         $post = Post::where('client_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
-        return response()->json([
+        return $this->sendResponse([
             'client' => $client,
             'followers' => $followers,
             'post' => $post
-        ]);
+        ], 'Client Dashboard');
         //return view('user.myProfileAbout', compact('post', 'client', 'followers'));
     }
     public function myProfile()
     {
         $client = Client::find(Auth::user()->id);
         $post = Post::where('client_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
-        return response()->json([
+        return $this->sendResponse([
             'client' => $client,
             'post' => $post
-        ]);
+        ], 'Profile Details');
         //return view('user.myProfile', compact('client', 'post'));
     }
     public function myProfileAbout()
@@ -77,14 +72,14 @@ class ClientController extends Controller
             ->whereRaw("DATE_FORMAT(dob, '%m-%d') = ?", [$today]) // Birthday check
             ->get();
 
-        return response()->json([
+        return $this->sendResponse([
             'client' => $client,
             'post' => $post,
             'followers' => $followers,
             'photos' => $photos,
             'online_active_users' => $online_active_users,
             'online_birthday_users' => $online_birthday_users
-        ]);
+        ], 'Profile Details');
         //return view('user.myProfileAbout', compact('post', 'client', 'followers', 'photos', 'online_active_users','online_birthday_users'));
     }
     public function myNfc()
@@ -104,32 +99,32 @@ class ClientController extends Controller
             ->where('is_online', true) // Check if the user is online
             ->get();
 
-        return response()->json([
+        return $this->sendResponse([
             'nfc_cards' => $nfc_cards,
             'client' => $client,
             'online_active_users' => $online_active_users,
             'post' => $post,
             'followers' => $followers
-        ]);
+        ], 'Profile Details');
     }
     public function all_followers()
     {
         $client = Client::find(Auth::user()->id);
         $followers = Follow::with('client')->where('following_id', '=', Auth::user()->id)->get();
-        return response()->json([
+        return $this->sendResponse([
             'client' => $client,
             'followers' => $followers
-        ]);
+        ], 'All Followers');
         //return view('user.all-followers', compact('client', 'followers'));
     }
     public function accountSetting()
     {
         $client = Client::find(Auth::user()->id);
         $countries = Country::get();
-        return response()->json([
+        return $this->sendResponse([
             'client' => $client,
             'countries' => $countries
-        ]);
+        ], 'Account Setting');
         //return view('user.accountSetting', compact('client', 'countries'));
     }
     public function gathering()
@@ -199,7 +194,7 @@ class ClientController extends Controller
             ->limit(5)
             ->get();
         // dd($users);
-        return response()->json([
+        return $this->sendResponse([
             'client' => $client,
             'post' => $post,
             'followers' => $followers,
@@ -209,7 +204,7 @@ class ClientController extends Controller
             'online_active_users' => $online_active_users,
             'online_birthday_users' => $online_birthday_users,
             'top_trending_posts' => $top_trending_posts
-        ]);
+        ], 'Gathering');
         
     }
     // public function phonebook_list()
@@ -250,14 +245,14 @@ class ClientController extends Controller
             ->limit(5)
             ->get();
 
-        return response()->json([
+        return $this->sendResponse([
             'value' => $value,
             'client' => $client,
             'followers' => $followers,
             'online_active_users' => $online_active_users,
             'online_birthday_users' => $online_birthday_users,
             'top_trending_posts' => $top_trending_posts
-        ]);
+        ], 'Single Post');
         //return view('user.includes.single-post', compact('value', 'client', 'followers', 'online_active_users', 'online_birthday_users', 'top_trending_posts'));
     }
     
@@ -302,19 +297,18 @@ class ClientController extends Controller
            
             if ($user->save()) {
                 $this->notice::success('Save Changes Successfully');
-                return response()->json([
+                return $this->sendResponse([
                     'status' => true,
                     'message' => 'Save Changes Successfully',
                     'user' => $user
-                ], 200);
+                ], 'Save Changes Successfully');
             }
         } catch (Exception $e) {
             // dd($e);
-            return response()->json([
-                'status' => false,
+            return $this->sendError('Unauthorised.', [
                 'message' => 'Please try again',
                 'error' => $e->getMessage()
-            ], 400);
+            ]);
         }
     }
     public function save_cover_profile_photo(Request $request)
@@ -352,19 +346,18 @@ class ClientController extends Controller
             $user->tagline = $request->tagline;
             if ($user->save()) {
                 $this->notice::success('Data Saved');
-                return response()->json([
+                return $this->sendResponse([
                     'status' => true,
                     'message' => 'Data Saved',
                     'user' => $user
-                ], 200);
+                ], 'Data Saved');
             }
         } catch (Exception $e) {
             // dd($e);
-            return response()->json([
-                'status' => false,
+            return $this->sendError('Unauthorised.', [
                 'message' => 'Please try again',
                 'error' => $e->getMessage()
-            ], 400);
+            ]);
         }
     }
     public function change_password(Request $request)
@@ -374,28 +367,26 @@ class ClientController extends Controller
             //validate current password
             if (!Hash::check($request->current_password, $data->password)) {
                 $this->notice::error('Current Password is incorrect');
-                return response()->json([
-                    'status' => false,
+                return $this->sendError('Unauthorised.', [
                     'message' => 'Current Password is incorrect',
-                ], 400);
+                ]);
             }
             $data->password = Hash::make($request->password);
             if ($data->save()) {
                 $this->notice::success('Data Saved');
-                return response()->json([
+                return $this->sendResponse([
                     'status' => true,
                     'message' => 'Data Saved',
                     'user' => $data
-                ], 200);
+                ], 'Data Saved');
             }
         } catch (Exception $e) {
             //dd($e);
             $this->notice::error('Please try again');
-            return response()->json([
-                'status' => false,
+            return $this->sendError('Unauthorised.', [
                 'message' => 'Please try again',
                 'error' => $e->getMessage()
-            ], 400);
+            ]);
         }
     }
     
@@ -454,13 +445,13 @@ class ClientController extends Controller
                 });
             }
         })->first();
-        return response()->json([
+        return $this->sendResponse([
             'client' => $client,
             'follow_connections' => $follow_connections,
             'unfollow_connections' => $unfollow_connections,
             'followIds' => $followIds,
             'search_client_id' => $search_client_id
-        ]);
+        ], 'Search by People');
         //return view('user.searchByPeople', compact('client', 'follow_connections', 'unfollow_connections', 'followIds', 'search_client_id'));
     }
     public function client_by_search($username)
@@ -479,7 +470,7 @@ class ClientController extends Controller
             ->where('id', '!=', $client->id)
             ->get();
         //dd($followIds);
-        return response()->json([
+        return $this->sendResponse([
             'client' => $client,
             'post' => $post,
             'postCount' => $postCount,
@@ -487,25 +478,25 @@ class ClientController extends Controller
             'followIds' => $followIds,
             'connection' => $connection,
             'online_active_users' => $online_active_users
-        ]);
+        ], 'Client Dashboard');
         //return view('connection.connectionDashboard', compact('client', 'post', 'postCount', 'followers', 'followIds', 'connection', 'online_active_users'));
     }
     public function usernameProfile($username)
     {
         $client = Client::where('username', 'like', "%$username%")->first();
         $post = Post::where('client_id', $client->id)->orderBy('created_at', 'desc')->get();
-        return response()->json([
+        return $this->sendResponse([
             'client' => $client,
             'post' => $post
-        ]);
+        ], 'Client Dashboard');
         //return view('user.myProfile', compact('client', 'post'));
     }
     public function usernameProfileAbout($username)
     {
         $client = Client::where('username', 'like', "%$username%")->first();
-        return response()->json([
+        return $this->sendResponse([
             'client' => $client
-        ]);
+        ], 'Client Dashboard');
         //return view('user.myProfileAbout', compact('client'));
     }
 }

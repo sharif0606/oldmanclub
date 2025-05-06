@@ -132,19 +132,10 @@ class AuthController extends BaseController
                 ])->exists()
             ) {
                 // Redirect with a custom message
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Client with the same first name, last name, and date of birth already exists.',
-                ]);
+                return $this->sendError('Unauthorised.', ['error'=>'Client with the same first name, last name, and date of birth already exists.']);
             }
 
-
-            // If other validation errors occur, return back with the errors
-            return response()->json([
-                'status' => false,
-                'message' => 'Validation errors occurred.',
-                'errors' => $validator->errors(),
-            ]);
+            return $this->sendError('Validation errors occurred.', ['error'=>'Validation errors occurred.', 'errors' => $validator->errors()]);
         }
         DB::beginTransaction();
         try {
@@ -205,25 +196,19 @@ class AuthController extends BaseController
                 // Commit the transaction if all operations are successful
                 DB::commit();
                 $token = $user->createToken('authToken')->plainTextToken;
-                return response()->json([
+                return $this->sendResponse([
                     'status' => true,
                     'message' => 'Successfully Login',
                     'user' => $user,
                     'access_token' => $token,
                     'token_type' => 'Bearer',
-                ]);
+                ], 'Successfully Login');
             } else
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Something wrong! Please try again',
-                ]);
+                return $this->sendError('Unauthorised.', ['error'=>'Something wrong! Please try again']);
         } catch (Exception $e) {
             DB::rollback();
            // dd($e);
-            return response()->json([
-                'status' => false,
-                'message' => 'Something wrong! Please try again',
-            ]);
+            return $this->sendError('Unauthorised.', ['error'=>'Something wrong! Please try again']);
         }
     }
     public function submitForgetPasswordForm(Request $request)
@@ -251,10 +236,7 @@ class AuthController extends BaseController
             $message->subject('Reset Password');
         });
 
-        return response()->json([
-            'status' => true,
-            'message' => 'We have e-mailed your password reset link!',
-        ]);
+        return $this->sendResponse([], 'We have e-mailed your password reset link!');
     }
    
     public function submitResetPasswordForm(Request $request)
@@ -274,10 +256,7 @@ class AuthController extends BaseController
             ->first();
         
         if (!$updatePassword) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Invalid token!',
-            ]);
+            return $this->sendError('Unauthorised.', ['error'=>'Invalid token!']);
         }
 
         $user = Client::where('email', $request->email)
@@ -285,16 +264,13 @@ class AuthController extends BaseController
 
         DB::table('password_resets')->where(['email' => $request->email])->delete();
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Your password has been changed!',
-        ]);
+        return $this->sendResponse([], 'Your password has been changed!');
     }
 
     public function signOut()
     {
         $user = Auth::user();
         $user->tokens()->delete();
-        return response()->json(['message' => 'Successfully logged out']);
+        return $this->sendResponse([], 'Successfully logged out');
     }
 }
