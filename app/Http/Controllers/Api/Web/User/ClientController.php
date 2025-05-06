@@ -137,28 +137,28 @@ class ClientController extends BaseController
         $post = Post::where('client_id', $loggedInUser)->orderBy('created_at', 'desc')->get();
 
         // Recent Chat Users -> Last send Messages users Display in first
-        $users = DB::select("SELECT chatdata.*,clients.id,clients.fname,clients.image from (SELECT t1.*, CASE WHEN t1.from_user != " . $loggedInUser . " THEN t1.from_user ELSE t1.to_user END AS userid , (SELECT SUM(is_read=0) as unread FROM `messages` WHERE messages.to_user=" . $loggedInUser . " AND messages.from_user=userid GROUP BY messages.from_user) as unread
-        FROM messages AS t1
-        INNER JOIN
-        (
-            SELECT
-                LEAST(`from_user`, `to_user`) AS sender_id,
-                GREATEST(`from_user`, `to_user`) AS receiver_id,
-                MAX(id) AS max_id
-            FROM messages
-            GROUP BY
-                LEAST(sender_id, receiver_id),
-                GREATEST(sender_id, receiver_id)
-        ) AS t2
-            ON LEAST(t1.`from_user`, t1.`to_user`) = t2.sender_id AND
-            GREATEST(t1.`from_user`, t1.`to_user`) = t2.receiver_id AND
-            t1.id = t2.max_id
-            WHERE t1.`from_user` = " . $loggedInUser . " OR t1.`to_user` =" . Auth::user()->id . ") chatdata JOIN clients On clients.id=userid  WHERE clients.id !=" . $loggedInUser . " ORDER BY chatdata.id DESC");
+        // $users = DB::select("SELECT chatdata.*,clients.id,clients.fname,clients.image from (SELECT t1.*, CASE WHEN t1.from_user != " . $loggedInUser . " THEN t1.from_user ELSE t1.to_user END AS userid , (SELECT SUM(is_read=0) as unread FROM `messages` WHERE messages.to_user=" . $loggedInUser . " AND messages.from_user=userid GROUP BY messages.from_user) as unread
+        // FROM messages AS t1
+        // INNER JOIN
+        // (
+        //     SELECT
+        //         LEAST(`from_user`, `to_user`) AS sender_id,
+        //         GREATEST(`from_user`, `to_user`) AS receiver_id,
+        //         MAX(id) AS max_id
+        //     FROM messages
+        //     GROUP BY
+        //         LEAST(sender_id, receiver_id),
+        //         GREATEST(sender_id, receiver_id)
+        // ) AS t2
+        //     ON LEAST(t1.`from_user`, t1.`to_user`) = t2.sender_id AND
+        //     GREATEST(t1.`from_user`, t1.`to_user`) = t2.receiver_id AND
+        //     t1.id = t2.max_id
+        //     WHERE t1.`from_user` = " . $loggedInUser . " OR t1.`to_user` =" . Auth::user()->id . ") chatdata JOIN clients On clients.id=userid  WHERE clients.id !=" . $loggedInUser . " ORDER BY chatdata.id DESC");
         
 
-        $AttachedFiles = Message::where(function ($query) use ($loggedInUser) {
-            $query->where('from_user', $loggedInUser)->orWhere('to_user', $loggedInUser);
-        })->whereNotNull('file')->get();
+        // $AttachedFiles = Message::where(function ($query) use ($loggedInUser) {
+        //     $query->where('from_user', $loggedInUser)->orWhere('to_user', $loggedInUser);
+        // })->whereNotNull('file')->get();
 
         //Show Groups List only added users
         $groupdata = Group::with(['users' => function ($qq) use ($loggedInUser) {
@@ -198,9 +198,7 @@ class ClientController extends BaseController
             'client' => $client,
             'post' => $post,
             'followers' => $followers,
-            'users' => $users,
             'groupdata' => $groupdata,
-            'AttachedFiles' => $AttachedFiles,
             'online_active_users' => $online_active_users,
             'online_birthday_users' => $online_birthday_users,
             'top_trending_posts' => $top_trending_posts

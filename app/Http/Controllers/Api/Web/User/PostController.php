@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 use Exception;
 class PostController extends BaseController
 {
+    public function all_posts(){
+        $posts = Post::where('client_id', Auth::user()->id)->get();
+        return $this->sendResponse($posts, 'Posts fetched successfully');
+    }
     public function store(Request $request)
     {
         try{

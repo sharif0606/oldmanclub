@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Backend\Website\CustomerFeedback;
 use App\Models\Backend\Website\PrintingService\PrintCustomerFeedback;
 use App\Models\Chat;
+use App\Models\Conversation;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -24,6 +25,10 @@ class Client extends Model
     }
     public function cusfeedback(){
         return $this->hasMany(PrintCustomerFeedback::class);
+    }
+
+    public function conversations(){
+        return $this->hasMany(Conversation::class, 'created_by',);
     }
     public function chats(){
          return $this->hasMany(Chat::class, 'client_id');

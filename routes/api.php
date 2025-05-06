@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\Web\User\ClientController as webClient;
 use App\Http\Controllers\Api\Web\User\CommentController as comment;
 use App\Http\Controllers\Api\Web\User\PostController as post;
 use App\Http\Controllers\Api\Web\Location\LocationController as location;
+use App\Http\Controllers\Api\Web\User\ChatController as ChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,6 +75,13 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // post routes
     Route::post('/post/store', [post::class, 'store']);
+
+    // chat routes
+    Route::post('/chat', [ChatController::class, 'startConversation']);
+    Route::get('/chat/search', [ChatController::class, 'searchConversations']);
+    Route::get('/chat', [ChatController::class, 'getConversations']);
+    Route::get('/chat/{id}/messages', [ChatController::class, 'getMessages']);
+    Route::post('/chat/{id}/messages', [ChatController::class, 'sendMessage']);
 });
 
 

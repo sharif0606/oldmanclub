@@ -14,11 +14,10 @@ class CreateConversationsTable extends Migration
     public function up()
     {
         Schema::create('conversations', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('group_id');
-            $table->unsignedInteger('from_user_id');
-            $table->text('message')->nullable();
-            $table->string('file')->nullable();
+            $table->id();
+            $table->string('name')->nullable();
+            $table->boolean('is_group')->default(false);
+            $table->foreignId('created_by')->constrained('clients')->onDelete('cascade');
             $table->timestamps();
         });
     }

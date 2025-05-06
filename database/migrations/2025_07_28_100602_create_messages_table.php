@@ -14,12 +14,14 @@ class CreateMessagesTable extends Migration
     public function up()
     {
         Schema::create('messages', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('from_user');
-            $table->bigInteger('to_user');
-            $table->text('message');
-            $table->string('file')->nullable();
-            $table->tinyInteger('is_read');
+            $table->id();
+            $table->foreignId('conversation_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('clients')->onDelete('cascade');
+            $table->enum('type', ['text', 'image', 'video', 'file', 'audio', 'sticker'])->default('text');
+            $table->text('content');
+            $table->string('file_name')->nullable();
+            $table->integer('file_size')->nullable();
+            $table->foreignId('reply_to')->nullable()->constrained('messages')->onDelete('set null');
             $table->timestamps();
         });
     }

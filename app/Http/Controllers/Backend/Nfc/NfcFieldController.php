@@ -68,7 +68,7 @@ class NfcFieldController extends Controller
             $nfcField = new NfcField;
             $nfcField->name = $request->name;
             $nfcField->icon = $icon;
-            $nfcField->link = $link;
+            $nfcField->link = $request->link;
             $nfcField->type = $request->type;
             $nfcField->category = $request->category;
             $nfcField->status = $request->status;
@@ -139,7 +139,7 @@ class NfcFieldController extends Controller
             $nfcField = NfcField::findOrFail(encryptor('decrypt',$id));
             $nfcField->name = $request->name;
             $nfcField->icon = $icon;
-            $nfcField->link = $link;
+            $nfcField->link = $request->link;
             $nfcField->type = $request->type;
             $nfcField->category = $request->category;
             $nfcField->status = $request->status;
