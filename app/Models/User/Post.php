@@ -32,7 +32,18 @@ class Post extends Model
     }
     public function reactions()
     {
-        return $this->hasMany(PostReaction::class);
+        return $this->hasMany(PostReaction::class)->with('client');
+    }
+    public function singleReaction()
+    {
+        return $this->hasOne(PostReaction::class)->with('client');
+    }
+
+    public function multipleReactionCounts()
+    {
+        return $this->hasMany(PostReaction::class)
+            ->selectRaw('post_id, type, count(*) as count')
+            ->groupBy('post_id', 'type');
     }
     public function lastReaction()
     {

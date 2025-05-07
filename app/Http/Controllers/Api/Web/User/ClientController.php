@@ -134,7 +134,7 @@ class ClientController extends BaseController
         //$otherspost = Post::where('privacy_mode', 'public')->orderBy('id', 'desc')->get();
         $client = Client::find($loggedInUser);
         $followers = Follow::where('following_id', $loggedInUser)->orderBy('id', 'desc')->take(4)->get();
-        $post = Post::with('files','client','latestComment','reactions')->where('client_id', $loggedInUser)->orderBy('created_at', 'desc')->get();
+        $post = Post::with('files','client','latestComment','singleReaction','multipleReactionCounts')->where('client_id', $loggedInUser)->orderBy('created_at', 'desc')->get();
 
         // Recent Chat Users -> Last send Messages users Display in first
         // $users = DB::select("SELECT chatdata.*,clients.id,clients.fname,clients.image from (SELECT t1.*, CASE WHEN t1.from_user != " . $loggedInUser . " THEN t1.from_user ELSE t1.to_user END AS userid , (SELECT SUM(is_read=0) as unread FROM `messages` WHERE messages.to_user=" . $loggedInUser . " AND messages.from_user=userid GROUP BY messages.from_user) as unread
