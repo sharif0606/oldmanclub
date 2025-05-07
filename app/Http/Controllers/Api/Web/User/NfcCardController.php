@@ -8,7 +8,6 @@ use App\Models\Backend\NfcCard;
 use App\Models\Backend\NfcField;
 use App\Models\Backend\NfcDesign;
 use App\Models\Backend\NfcInformation;
-use App\Models\Backend\User;
 use App\Models\User\Country;
 use App\Models\Backend\NfcVirtualBackgroundCategory;
 use App\Models\Backend\NfcVirtualBackground;
@@ -17,18 +16,20 @@ use App\Models\User\Follow;
 use Illuminate\Database\QueryException;
 
 use App\Http\Controllers\Api\BaseController;
-use App\Models\NfcCardBadges;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Mail;
 use Illuminate\Support\Facades\Auth;
 
 class NfcCardController extends BaseController
 {
+    public function nfc_field()
+    {
+        $nfc_field = NfcField::all();
+        return $this->sendResponse($nfc_field, 'Nfc Field fetched successfully');
+    }
     /**
      * Store a newly created resource in storage.
      */

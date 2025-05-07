@@ -81,7 +81,7 @@ class NfcCardController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
+        dd($request->all());
         // Start the database transaction
         DB::beginTransaction();
         try {

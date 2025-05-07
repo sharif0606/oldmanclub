@@ -215,7 +215,7 @@ class ClientController extends BaseController
         $client = Client::find($loggedInUser);
         $followers = Follow::where('following_id', $loggedInUser)->orderBy('id', 'desc')->take(4)->get();
         $value = Post::with('client','files','comments','reactions') // You can load the client details with the post
-            ->findOrFail($id);
+            ->find($id);
 
         // Get the Friend List  of the current user
         $friend_list = Follow::where('following_id', $loggedInUser)

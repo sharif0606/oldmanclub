@@ -83,6 +83,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/post/privacy/{id}', [post::class, 'privacy']);
     Route::post('/post/reaction', [post::class, 'post_reaction']);
     // nfc card routes
+    Route::get('/nfc/field', [webNfc::class, 'nfc_field']);
     Route::post('/nfc/card/store', [webNfc::class, 'store']);
     Route::get('/nfc/card/{id}', [webNfc::class, 'show']);
     Route::post('/nfc/card/send', [webNfc::class, 'send']);
