@@ -13,7 +13,7 @@ use Exception;
 class PostController extends BaseController
 {
     public function user_posts(){
-        $posts = Post::with('files')->where('client_id', Auth::user()->id)->get();
+        $posts = Post::with('files','comments')->where('client_id', Auth::user()->id)->get();
         return $this->sendResponse($posts, 'Posts fetched successfully');
     }
     public function store(Request $request)
