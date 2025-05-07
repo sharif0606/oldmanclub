@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Auth;
 use Exception;
 class PostController extends BaseController
 {
+
+    public function index($limit = 20)
+    {
+        $post = Post::with('files','client','latestComment','singleReaction','multipleReactionCounts')->orderBy('created_at', 'desc')->paginate($limit);
+        return $this->sendResponse($post, 'Posts fetched successfully');
+    }
+
     public function user_posts(){
         $posts = Post::with('files','comments')->where('client_id', Auth::user()->id)->get();
         return $this->sendResponse($posts, 'Posts fetched successfully');

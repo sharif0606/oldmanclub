@@ -18,7 +18,13 @@ class Comment extends Model
     }
     public function replies()
     {
-        return $this->hasMany(Reply::class)->whereNull('parent_id');
+        return $this->hasMany(Reply::class)
+        ->whereNull('parent_id')  // Get only top-level replies
+        ->with(['client', 'reactions', 'children' => function($query) {
+            $query->with(['client', 'reactions', 'children' => function($query) {
+                $query->with(['client', 'reactions']);
+            }]);
+        }]);
     }
     public function reactions()
     {

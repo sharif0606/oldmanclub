@@ -75,9 +75,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/comment/store', [comment::class, 'store']);
 
     // post routes
+    Route::get('/post/{limit?}', [post::class, 'index']);
     Route::post('/post/store', [post::class, 'store']);
     Route::post('/post/update/{id}', [post::class, 'post_update']);
-    Route::get('/post', [post::class, 'user_posts']);
+    Route::get('/my_post', [post::class, 'user_posts']);
     Route::post('/post/delete/{id}', [post::class, 'destroy']);
     Route::post('/post/privacy/{id}', [post::class, 'privacy']);
     Route::post('/post/reaction', [post::class, 'post_reaction']);
