@@ -45,7 +45,11 @@ class CommentController extends BaseController
                 'likeCount' => $likeCount
             ], 'Comment Reaction Saved');
         } catch (Exception $e) {
-            return $this->sendError('Unauthorised.', ['error'=>'An error occurred']);
+            if($e){
+                return $this->sendError('Unauthorised.', ['error'=>$e->getMessage()]);
+            }else{
+                return $this->sendError('Unauthorised.', ['error'=>'An error occurred']);
+            }
         }
     }
 
@@ -65,7 +69,11 @@ class CommentController extends BaseController
             ], 'Comment Added Successfully');
 
         } catch (Exception $e) {
-            return $this->sendError('Unauthorised.', ['error'=>'An error occurred']);
+            if($e){
+                return $this->sendError('Unauthorised.', ['error'=>$e->getMessage()]);
+            }else{
+                return $this->sendError('Unauthorised.', ['error'=>'An error occurred']);
+            }
         }
     }
 }

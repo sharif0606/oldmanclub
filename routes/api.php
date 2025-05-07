@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\Web\User\CommentController as comment;
 use App\Http\Controllers\Api\Web\User\PostController as post;
 use App\Http\Controllers\Api\Web\Location\LocationController as location;
 use App\Http\Controllers\Api\Web\User\ChatController as ChatController;
+use App\Http\Controllers\Api\Web\User\NfcCardController as webNfc;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +80,18 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/post', [post::class, 'user_posts']);
     Route::post('/post/delete/{id}', [post::class, 'destroy']);
     Route::post('/post/privacy/{id}', [post::class, 'privacy']);
+
+    // nfc card routes
+    Route::post('/nfc/card/store', [webNfc::class, 'store']);
+    Route::get('/nfc/card/{id}', [webNfc::class, 'show']);
+    Route::post('/nfc/card/send', [webNfc::class, 'send']);
+    Route::post('/nfc/card/duplicate', [webNfc::class, 'duplicate']);
+    Route::post('/nfc/card/delete/{id}', [webNfc::class, 'delete']);
+    Route::post('/nfc/card/update/{id}', [webNfc::class, 'update']);
+    Route::post('/nfc/card/share', [webNfc::class, 'share']);
+    Route::post('/nfc/card/pdf/{id}', [webNfc::class, 'pdf']);
+    Route::post('/nfc/card/qrcode/{id}', [webNfc::class, 'qrcode']);
+
     // chat routes
     Route::post('/chat', [ChatController::class, 'startConversation']);
     Route::get('/chat/search', [ChatController::class, 'searchConversations']);

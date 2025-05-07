@@ -125,23 +125,23 @@
 <body>
     {{-- Fetch Users --}}
     @php
-        $users = DB::select("SELECT chatdata.*,clients.id,clients.fname,clients.image from (SELECT t1.*, CASE WHEN t1.from_user != " . currentUserId() . " THEN t1.from_user ELSE t1.to_user END AS userid , (SELECT SUM(is_read=0) as unread FROM `messages` WHERE messages.to_user=" . currentUserId() . " AND messages.from_user=userid GROUP BY messages.from_user) as unread
+        $users = DB::select("SELECT chatdata.*,clients.id,clients.fname,clients.image from (SELECT t1.*, CASE WHEN t1.user_id != " . currentUserId() . " THEN t1.user_id ELSE t1.reply_to END AS userid , (SELECT SUM(user_id=0) as unread FROM `messages` WHERE messages.reply_to=" . currentUserId() . " AND messages.user_id=userid GROUP BY messages.user_id) as unread
         FROM messages AS t1
         INNER JOIN
         (
             SELECT
-                LEAST(`from_user`, `to_user`) AS sender_id,
-                GREATEST(`from_user`, `to_user`) AS receiver_id,
+                LEAST(`user_id`, `reply_to`) AS sender_id,
+                GREATEST(`user_id`, `reply_to`) AS receiver_id,
                 MAX(id) AS max_id
             FROM messages
             GROUP BY
                 LEAST(sender_id, receiver_id),
                 GREATEST(sender_id, receiver_id)
         ) AS t2
-            ON LEAST(t1.`from_user`, t1.`to_user`) = t2.sender_id AND
-            GREATEST(t1.`from_user`, t1.`to_user`) = t2.receiver_id AND
+            ON LEAST(t1.`user_id`, t1.`reply_to`) = t2.sender_id AND
+            GREATEST(t1.`user_id`, t1.`reply_to`) = t2.receiver_id AND
             t1.id = t2.max_id
-            WHERE t1.`from_user` = " . currentUserId() . " OR t1.`to_user` =" . currentUserId() . ") chatdata JOIN clients On clients.id=userid  WHERE clients.id !=" . currentUserId() . " ORDER BY chatdata.id DESC");
+            WHERE t1.`user_id` = " . currentUserId() . " OR t1.`reply_to` =" . currentUserId() . ") chatdata JOIN clients On clients.id=userid  WHERE clients.id !=" . currentUserId() . " ORDER BY chatdata.id DESC");
 
     @endphp
 
