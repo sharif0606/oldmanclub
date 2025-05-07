@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Web\User;
 use App\Http\Controllers\Api\BaseController;
 use App\Models\User\Comment;
 use App\Models\User\CommentReaction;
+use App\Models\User\Reply;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -74,6 +75,26 @@ class CommentController extends BaseController
             }else{
                 return $this->sendError('Unauthorised.', ['error'=>'An error occurred']);
             }
+        }
+    }
+
+    public function replay(Request $request)
+    {
+        try{
+            $reply = New Reply();
+            $reply->comment_id = $request->comment_id;
+            $reply->parent_id = $request->parent_id;
+            $reply->content = $request->content;
+            $reply->client_id = Auth::user()->id;
+            // Save the comment
+            $reply->save();
+            $comment = Comment::find($request->comment_id);
+            return response()->json([
+                'reply' => $reply,
+                'comment' => $comment
+            ], 201);
+        }catch(Exception $e){
+            
         }
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Web\User;
 use App\Models\User\Post;
 use App\Models\User\PostFile;
 use App\Models\User\PostReport;
+use App\Models\User\PostReaction;
 use App\Http\Controllers\Api\BaseController;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -153,5 +154,24 @@ class PostController extends BaseController
         }
     
         return $this->sendResponse([], 'Post deleted successfully');
+    }
+
+    public function post_reaction(Request $request){
+        $existingReaction = PostReaction::where('post_id', $request->post_id)
+            ->where('client_id', Auth::user()->id)
+            ->first();
+
+        if($existingReaction){
+            $post_reaction = $existingReaction;
+            $post_reaction->updated_at = Carbon::now();
+        }else{
+            $post_reaction = new PostReaction();
+            $post_reaction->post_id = $request->post_id;
+            $post_reaction->client_id = Auth::user()->id;
+        }
+        $post_reaction->type = $request->reaction_type;
+        $post_reaction->save();
+
+        return $this->sendResponse($post_reaction, 'Post reaction updated successfully');
     }
 }

@@ -80,7 +80,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/post', [post::class, 'user_posts']);
     Route::post('/post/delete/{id}', [post::class, 'destroy']);
     Route::post('/post/privacy/{id}', [post::class, 'privacy']);
-
+    Route::post('/post/reaction', [post::class, 'post_reaction']);
     // nfc card routes
     Route::post('/nfc/card/store', [webNfc::class, 'store']);
     Route::get('/nfc/card/{id}', [webNfc::class, 'show']);

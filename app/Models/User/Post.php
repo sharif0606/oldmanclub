@@ -22,9 +22,13 @@ class Post extends Model
     public function client(){
         return $this->belongsTo(Client::class ,'client_id','id');
     }
+    public function latestComment()
+    {
+        return $this->hasOne(Comment::class)->latest();
+    }
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class)->with('replies');
     }
     public function reactions()
     {
