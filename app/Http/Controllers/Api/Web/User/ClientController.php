@@ -87,7 +87,7 @@ class ClientController extends BaseController
         $client = Client::find(Auth::user()->id);
         $followers = Follow::where('following_id', Auth::user()->id)->orderBy('id', 'desc')->take(4)->get();
         $post = Post::with('files','client','comments')->where('client_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
-        $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id', Auth::user()->id)->paginate(10);
+        $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields','nfcInformation'])->where('client_id', Auth::user()->id)->paginate(10);
         //return view('user.myNfc', compact('client','nfc_cards'));
         // Get the Friend List  of the current user
         $friend_list = Follow::where('following_id', Auth::user()->id)
