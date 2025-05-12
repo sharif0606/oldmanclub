@@ -207,43 +207,13 @@ class ClientController extends BaseController
     public function singlePost($id)
     {
         $loggedInUser = Auth::user()->id;
-        $client = Client::find($loggedInUser);
-        $followers = Follow::where('following_id', $loggedInUser)->orderBy('id', 'desc')->take(4)->get();
         $value = Post::with('client','files','comments','reactions') // You can load the client details with the post
             ->find($id);
 
-        // Get the Friend List  of the current user
-        $friend_list = Follow::where('following_id', $loggedInUser)
-            ->orderBy('id', 'desc')
-            ->pluck('follower_id'); // Extract only the `follower_id`
-
-        // Get the list of online users from the followers
-        $online_active_users = Client::whereIn('id', $friend_list)
-            ->where('is_online', true) // Check if the user is online
-            ->get();
-
-        // Birthday
-        $today = Carbon::today()->format('m-d'); // Extracts month and day
-        // Get online friends whose birthday is today
-        $online_birthday_users = Client::whereIn('id', $friend_list)
-            ->whereRaw("DATE_FORMAT(dob, '%m-%d') = ?", [$today]) // Birthday check
-            ->get();
-
-        $top_trending_posts = Post::withCount('reactions')
-            /*where('privacy_mode', 'public')
-        ->where('post_type', 'image')*/
-            ->whereIn('client_id', $friend_list)
-            ->orderByDesc('reactions_count')
-            ->limit(5)
-            ->get();
+        
 
         return $this->sendResponse([
-            'value' => $value,
-            'client' => $client,
-            'followers' => $followers,
-            'online_active_users' => $online_active_users,
-            'online_birthday_users' => $online_birthday_users,
-            'top_trending_posts' => $top_trending_posts
+            'value' => $value
         ], 'Single Post');
         //return view('user.includes.single-post', compact('value', 'client', 'followers', 'online_active_users', 'online_birthday_users', 'top_trending_posts'));
     }

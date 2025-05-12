@@ -28,7 +28,7 @@ class Post extends Model
     }
     public function comments()
     {
-        return $this->hasMany(Comment::class)->orderBy('created_at', 'desc')->with('replies');
+        return $this->hasMany(Comment::class)->orderBy('created_at', 'desc')->with('replies','client_comment');
     }
     public function reactions()
     {
