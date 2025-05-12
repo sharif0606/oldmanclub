@@ -173,11 +173,8 @@ class NfcCardController extends BaseController
     public function show($id)
     {
         $currentUserId = Auth::user()->id;
-        $client = Client::find($currentUserId);
-        $nfc_card = NfcCard::where('client_id', $currentUserId)->where('id', $id)->first();
-        $postCount = Post::where('client_id', $currentUserId)->count();
-        $countries = Country::get();
-        return $this->sendResponse(['nfc_card' => $nfc_card, 'client' => $client, 'postCount' => $postCount, 'countries' => $countries], 'Nfc card fetched successfully');
+        $nfc_card = NfcCard::with(['client', 'card_design', 'nfcFields','nfc_info'])->where('client_id', $currentUserId)->where('id', $id)->first();
+        return $this->sendResponse(['nfc_card' => $nfc_card], 'Nfc card fetched successfully');
     }
 
     /**
