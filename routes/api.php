@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\Web\User\PostController as post;
 use App\Http\Controllers\Api\Web\Location\LocationController as location;
 use App\Http\Controllers\Api\Web\User\ChatController as ChatController;
 use App\Http\Controllers\Api\Web\User\NfcCardController as webNfc;
+use App\Http\Controllers\Api\Web\User\FollowController as follow;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +94,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/nfc/card/share', [webNfc::class, 'share']);
     Route::post('/nfc/card/pdf/{id}', [webNfc::class, 'pdf']);
     Route::post('/nfc/card/qrcode/{id}', [webNfc::class, 'qrcode']);
+
+    // follow routes
+    Route::post('/follow', [follow::class, 'follow']);
+    Route::post('/unfollow', [follow::class, 'unfollow']);
 
     // chat routes
     Route::post('/chat', [ChatController::class, 'startConversation']);

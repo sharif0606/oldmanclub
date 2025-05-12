@@ -77,7 +77,7 @@ class Client extends Model
     }
     public function followers()
     {
-        return $this->hasMany(Follow::class, 'following_id');
+        return $this->hasMany(Follow::class, 'following_id')->with('follower_client');
     }
 
     public function followings()

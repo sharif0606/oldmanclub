@@ -117,7 +117,7 @@ class ChatController extends BaseController
 
     private function authorizeUserInConversation(Conversation $conversation)
     {
-        if (!$conversation->users()->where('user_id', Auth::user()->id)->exists()) {
+        if (!$conversation->users()->where('client_id', Auth::user()->id)->exists()) {
             abort(403, 'Unauthorized');
         }
     }
