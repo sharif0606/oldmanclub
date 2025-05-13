@@ -142,7 +142,7 @@ class NfcCardController extends BaseController
                         ]);
                     }
 
-                    // OR use sync if you’ve defined the relationship
+                    // OR use sync if you've defined the relationship
                     // $nfc->nfcFields()->sync($nfcFieldData);
                 }
 
@@ -155,13 +155,20 @@ class NfcCardController extends BaseController
         } catch (Exception $e) {
             // If an exception occurs, rollback the transaction
             DB::rollback();
-            $errorMessages = [];
-            foreach ($e->errors() as $field => $messages) {
-                foreach ($messages as $message) {
-                    $errorMessages[] = $message;
+            
+            // Check if it's a validation exception
+            if ($e instanceof \Illuminate\Validation\ValidationException) {
+                $errorMessages = [];
+                foreach ($e->errors() as $field => $messages) {
+                    foreach ($messages as $message) {
+                        $errorMessages[] = $message;
+                    }
                 }
+                return $this->sendError('Validation failed', $errorMessages);
             }
-            return $this->sendError('Something wrong! Please try again', $errorMessages);
+            
+            // For other types of exceptions
+            return $this->sendError('Something went wrong! Please try again', [$e->getMessage()]);
         }
     }
 
