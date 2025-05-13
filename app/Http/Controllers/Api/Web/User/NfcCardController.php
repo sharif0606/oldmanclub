@@ -218,6 +218,7 @@ class NfcCardController extends BaseController
     {
         DB::beginTransaction();
         try {
+            $currentUserId = Auth::user()->id;
 
             // Find the NFC card by decrypting the ID
             $nfc_card = NfcCard::where('client_id', Auth::user()->id)->where('id', $id)->first();
@@ -237,7 +238,7 @@ class NfcCardController extends BaseController
                 );
                 $nfc_design->logo = $imageName;
             }
-            $nfc_design->updated_by = Auth::user()->id;
+            $nfc_design->updated_by = $currentUserId;
             $nfc_design->save();
 
             /* badges image update */
@@ -275,7 +276,7 @@ class NfcCardController extends BaseController
             $nfc_info->department = $request->department;
             $nfc_info->company = $request->company;
             $nfc_info->headline = $request->headline;
-            $nfc_info->updated_by = currentUserId();
+            $nfc_info->updated_by = $currentUserId;
             $nfc_info->save();
 
             // Retrieve the existing pivot data associated with the NFC card
@@ -314,15 +315,21 @@ class NfcCardController extends BaseController
             DB::commit();
             return $this->sendResponse([], 'Nfc Card Successfully Updated');
         } catch (Exception $e) {
-            // If an exception occurs, rollback the transaction
             DB::rollback();
-            $errorMessages = [];
-            foreach ($e->errors() as $field => $messages) {
-                foreach ($messages as $message) {
-                    $errorMessages[] = $message;
+            
+            // Check if it's a validation exception
+            if ($e instanceof \Illuminate\Validation\ValidationException) {
+                $errorMessages = [];
+                foreach ($e->errors() as $field => $messages) {
+                    foreach ($messages as $message) {
+                        $errorMessages[] = $message;
+                    }
                 }
+                return $this->sendError('Validation failed', $errorMessages);
             }
-            return $this->sendError('Something wrong! Please try again', $errorMessages);
+            
+            // For other types of exceptions
+            return $this->sendError('Something went wrong! Please try again', [$e->getMessage()]);
         }
     }
 
