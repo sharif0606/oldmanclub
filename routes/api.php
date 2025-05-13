@@ -88,7 +88,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/nfc/card/store', [webNfc::class, 'store']);
     Route::get('/nfc/card/{id}', [webNfc::class, 'show']);
     Route::post('/nfc/card/send', [webNfc::class, 'send']);
-    Route::post('/nfc/card/duplicate', [webNfc::class, 'duplicate']);
+    Route::post('/nfc/card/duplicate/{id}', [webNfc::class, 'duplicate']);
     Route::post('/nfc/card/delete/{id}', [webNfc::class, 'delete']);
     Route::post('/nfc/card/update/{id}', [webNfc::class, 'update']);
     Route::post('/nfc/card/share', [webNfc::class, 'share']);
