@@ -95,6 +95,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/nfc/card/pdf/{id}', [webNfc::class, 'pdf']);
     Route::post('/nfc/card/qrcode/{id}', [webNfc::class, 'qrcode']);
     Route::get('/nfc/design', [webNfc::class, 'get_nfc_design']);
+    Route::post('/nfc/card/save_contact/{id}', [webNfc::class, 'save_contact']);
     // follow routes
     Route::post('/follow', [follow::class, 'follow']);
     Route::post('/unfollow', [follow::class, 'unfollow']);
