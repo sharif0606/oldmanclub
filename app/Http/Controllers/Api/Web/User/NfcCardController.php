@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Web\User;
 
+use App\Models\Backend\DesignCard;
 use App\Models\User\Client;
 use App\Models\User\Post;
 use App\Models\Backend\NfcCard;
@@ -41,12 +42,12 @@ class NfcCardController extends BaseController
         try {
 
             $request->validate([
-                'l_name' => 'required|string',
-                'f_name' => 'required|string',
+                'last_name' => 'required|string',
+                'first_name' => 'required|string',
                 'card_name' => 'required|string|max:255',
             ], [
-                'f_name.required' => 'First name is required.',
-                'l_name.required' => 'Last name is required.',
+                'first_name.required' => 'First name is required.',
+                'last_name.required' => 'Last name is required.',
                 'card_name.required' => 'Card name is required.',
             ]);
 
@@ -59,9 +60,9 @@ class NfcCardController extends BaseController
 
                 /* Insert Data To Nfc Information */
                 $nfc_info = new NfcInformation;
-                $nfc_info->first_name = $request->f_name;
+                $nfc_info->first_name = $request->first_name;
                 $nfc_info->middle_name = $request->middle_name;
-                $nfc_info->last_name = $request->l_name;
+                $nfc_info->last_name = $request->last_name;
                 if ($request->hasFile('profile')) {
                     $profileImageName = rand(111, 999) . time() . '.' . $request->profile->extension();
                     $request->profile->move(public_path('uploads/client/'), $profileImageName);
@@ -256,9 +257,9 @@ class NfcCardController extends BaseController
 
             /* Update Data From Nfc Information */
             $nfc_info = NfcInformation::where('nfc_card_id', $nfc_card->id)->first();
-            $nfc_info->first_name = $request->f_name;
+            $nfc_info->first_name = $request->first_name;
             $nfc_info->middle_name = $request->middle_name;
-            $nfc_info->last_name = $request->l_name;
+            $nfc_info->last_name = $request->last_name;
             if ($request->hasFile('profile')) {
                 $profileImageName = rand(111, 999) . time() . '.' . $request->profile->extension();
                 $request->profile->move(public_path('uploads/client/'), $profileImageName);
@@ -500,7 +501,6 @@ class NfcCardController extends BaseController
         }
     }
 
-
     public function upload(Request $request)
     {
         if($request->hasFile('image')) {
@@ -529,5 +529,10 @@ class NfcCardController extends BaseController
             $imageName = rand(111,999).'.'.$request->image->extension();
             $request->image->move(public_path('uploads/virtual_background'), $imageName);
         }
+    }
+
+    public function get_nfc_design(){
+        $nfc_design = DesignCard::all();
+        return $this->sendResponse(['nfc_design' => $nfc_design], 'Nfc design fetched successfully');
     }
 }
