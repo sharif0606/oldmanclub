@@ -74,6 +74,45 @@ class ClientController extends BaseController
         ], 'Profile Details');
         //return view('user.myProfile', compact('client', 'post'));
     }
+    public function userProfile($id,$limit = 20)
+    {
+        $client = Client::find($id);
+        $followers = Follow::where('following_id', $id)->count();
+        $following = Follow::where('follower_id', $id)->count();
+        $post = Post::with('files','client','latestComment','singleReaction','multipleReactionCounts')->orderBy('created_at', 'desc')->where('client_id', $id)->paginate($limit);
+        $photos = Post::where('client_id', Auth::user()->id)
+            ->where('post_type', 'image')
+            ->orderBy('created_at', 'desc')
+            ->limit($limit)
+            ->pluck('image');
+
+        // Get the Friend List  of the current user
+        $friend_list = Follow::where('following_id', Auth::user()->id)
+            ->orderBy('id', 'desc')
+            ->pluck('follower_id'); // Extract only the `follower_id`
+
+        // Get the list of online users from the followers
+        $online_active_users = Client::whereIn('id', $friend_list)
+            ->where('is_online', true) // Check if the user is online
+            ->get();
+
+        // Get online friends whose birthday is today
+        $today = Carbon::today()->format('m-d'); // Extracts month and day
+        $online_birthday_users = Client::whereIn('id', $friend_list)
+            ->whereRaw("DATE_FORMAT(dob, '%m-%d') = ?", [$today]) // Birthday check
+            ->get();
+
+        return $this->sendResponse([
+            'client' => $client,
+            'post' => $post,
+            'followers' => $followers,
+            'following' => $following,
+            'photos' => $photos,
+            'online_active_users' => $online_active_users,
+            'online_birthday_users' => $online_birthday_users
+        ], 'Profile Details');
+        //return view('user.myProfile', compact('client', 'post'));
+    }
     
     public function myNfc()
     {
@@ -276,7 +315,7 @@ class ClientController extends BaseController
                 ]);
             }   
             if ($request->hasFile('image')) {
-                $imageName = rand(111, 999) . time() . '.' . $request->image->extension();
+                $imageName = rand(1111, 9999) . time() . '.' . $request->image->extension();
                 $request->image->move($folder, $imageName);
                 $user->image = $monthfolder . '/' . $imageName;
                 $post = Post::create([
@@ -288,6 +327,7 @@ class ClientController extends BaseController
             }
             $user->profile_overview = $request->profile_overview;
             $user->tagline = $request->tagline;
+            
             if ($user->save()) {
                 $this->notice::success('Data Saved');
                 return $this->sendResponse([
