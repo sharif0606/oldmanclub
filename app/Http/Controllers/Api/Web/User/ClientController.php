@@ -35,25 +35,16 @@ class ClientController extends BaseController
         ], 'Client Dashboard');
         //return view('user.myProfileAbout', compact('post', 'client', 'followers'));
     }
-    public function myProfile()
+    public function myProfile($limit = 20)
     {
         $client = Client::find(Auth::user()->id);
-        $post = Post::where('client_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
-        return $this->sendResponse([
-            'client' => $client,
-            'post' => $post
-        ], 'Profile Details');
-        //return view('user.myProfile', compact('client', 'post'));
-    }
-    public function myProfileAbout()
-    {
-        $client = Client::find(Auth::user()->id);
-        $followers = Follow::where('following_id', Auth::user()->id)->orderBy('id', 'desc')->take(4)->get();
-        $post = Post::where('client_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        $followers = Follow::where('following_id', Auth::user()->id)->count();
+        $following = Follow::where('follower_id', Auth::user()->id)->count();
+        $post = Post::with('files','client','latestComment','singleReaction','multipleReactionCounts')->orderBy('created_at', 'desc')->where('client_id', Auth::user()->id)->paginate($limit);
         $photos = Post::where('client_id', Auth::user()->id)
             ->where('post_type', 'image')
             ->orderBy('created_at', 'desc')
-            ->limit(5)
+            ->limit($limit)
             ->pluck('image');
 
         // Get the Friend List  of the current user
@@ -76,40 +67,31 @@ class ClientController extends BaseController
             'client' => $client,
             'post' => $post,
             'followers' => $followers,
+            'following' => $following,
             'photos' => $photos,
             'online_active_users' => $online_active_users,
             'online_birthday_users' => $online_birthday_users
         ], 'Profile Details');
-        //return view('user.myProfileAbout', compact('post', 'client', 'followers', 'photos', 'online_active_users','online_birthday_users'));
+        //return view('user.myProfile', compact('client', 'post'));
     }
+    
     public function myNfc()
     {
         $client = Client::find(Auth::user()->id);
-        $followers = Follow::where('following_id', Auth::user()->id)->orderBy('id', 'desc')->take(4)->get();
-        $post = Post::with('files','client','comments')->where('client_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
         $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields','nfc_info'])->where('client_id', Auth::user()->id)->paginate(10);
         //return view('user.myNfc', compact('client','nfc_cards'));
         // Get the Friend List  of the current user
-        $friend_list = Follow::where('following_id', Auth::user()->id)
-            ->orderBy('id', 'desc')
-            ->pluck('follower_id'); // Extract only the `follower_id`
-
-        // Get the list of online users from the followers
-        $online_active_users = Client::whereIn('id', $friend_list)
-            ->where('is_online', true) // Check if the user is online
-            ->get();
+        
 
         return $this->sendResponse([
             'nfc_cards' => $nfc_cards,
             'client' => $client,
-            'online_active_users' => $online_active_users,
-            'post' => $post,
-            'followers' => $followers
         ], 'Profile Details');
     }
-    public function all_followers()
+    
+    public function all_followers($limit = 20)
     {
-        $followers = Follow::with('client')->where('following_id', '=', Auth::user()->id)->get();
+        $followers = Follow::with('client')->where('following_id', '=', Auth::user()->id)->paginate($limit);
         return $this->sendResponse(['followers' => $followers], 'All Followers');
     }
     public function accountSetting()

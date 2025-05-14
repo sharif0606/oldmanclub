@@ -56,10 +56,9 @@ Route::middleware('auth:sanctum')->group(function () {
     
     // react routes
     Route::get('/client/dashboard', [webClient::class, 'index']);
-    Route::get('/client/myprofile', [webClient::class, 'myProfile']);
-    Route::get('/client/myprofileabout', [webClient::class, 'myProfileAbout']);
+    Route::get('/client/myprofile/{limit?}', [webClient::class, 'myProfile']);
     Route::get('/client/myNfc', [webClient::class, 'myNfc']);
-    Route::get('/client/all_followers', [webClient::class, 'all_followers']);
+    Route::get('/client/all_followers/{limit?}', [webClient::class, 'all_followers']);
     Route::get('/client/accountSetting', [webClient::class, 'accountSetting']);
     Route::get('/client/gathering', [webClient::class, 'gathering']);
     Route::get('/client/singlePost/{id}', [webClient::class, 'singlePost']);
