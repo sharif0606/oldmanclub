@@ -24,7 +24,7 @@ class Post extends Model
     }
     public function latestComment()
     {
-        return $this->hasOne(Comment::class)->latest();
+        return $this->hasOne(Comment::class)->with('client')->latest();
     }
     public function comments()
     {
