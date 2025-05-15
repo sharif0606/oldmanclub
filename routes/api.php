@@ -74,7 +74,8 @@ Route::middleware('auth:sanctum')->group(function () {
     // comment reaction routes
     Route::post('/comment/reaction_save', [comment::class, 'reaction_save']);
     Route::post('/comment/store', [comment::class, 'store']);
-
+    Route::post('/comment/replay', [comment::class, 'replay']);
+    Route::post('/comment/replay/reaction', [comment::class, 'replay_reaction']);
     // post routes
     Route::get('/post/{limit?}', [post::class, 'index']);
     Route::post('/post/store', [post::class, 'store']);

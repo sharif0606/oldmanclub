@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\BaseController;
 use App\Models\User\Comment;
 use App\Models\User\CommentReaction;
 use App\Models\User\Reply;
+use App\Models\User\ReplyReaction;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -94,7 +95,49 @@ class CommentController extends BaseController
                 'comment' => $comment
             ], 201);
         }catch(Exception $e){
-            
+            if($e){
+                return $this->sendError('Unauthorised.', ['error'=>$e->getMessage()]);
+            }else{
+                return $this->sendError('Unauthorised.', ['error'=>'An error occurred']);
+            }
+        }
+    }
+
+    public function replay_reaction(Request $request)
+    {
+        try {
+            // Validate the incoming request data
+            $request->validate(['reply_id' => 'required|exists:replies,id']);
+            // Check if the user has already reacted to the comment
+            $existingReaction = ReplyReaction::where('reply_id', $request->reply_id)
+                ->where('client_id', Auth::user()->id)
+                ->first();
+            if ($existingReaction) {
+                $reply_reaction = $existingReaction;
+                $reply_reaction->updated_at = Carbon::now();
+            }else{
+                $reply_reaction = new ReplyReaction();
+                $reply_reaction->reply_id = $request->reply_id;
+                $reply_reaction->client_id = Auth::user()->id;
+            }
+            $reply_reaction->type = $request->type;
+            $reply_reaction->save();
+            $reply = Reply::find($request->reply_id);
+
+            // Get updated like count for the comment
+            $likeCount = ReplyReaction::where('reply_id', $request->reply_id)
+                /*->where('type', 'like')*/
+                ->count();
+            return $this->sendResponse([
+                'reply' => $reply,
+                'likeCount' => $likeCount
+            ], 'Reply Reaction Saved');
+        } catch (Exception $e) {
+            if($e){
+                return $this->sendError('Unauthorised.', ['error'=>$e->getMessage()]);
+            }else{
+                return $this->sendError('Unauthorised.', ['error'=>'An error occurred']);
+            }
         }
     }
 }
