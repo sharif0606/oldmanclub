@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Web\User;
 
 use App\Models\User\Client;
+use App\Models\User\Comment;
 use App\Models\User\Post;
 use App\Models\User\Country;
 use App\Models\User\Follow;
@@ -112,6 +113,12 @@ class ClientController extends BaseController
             'online_birthday_users' => $online_birthday_users
         ], 'Profile Details');
         //return view('user.myProfile', compact('client', 'post'));
+    }
+
+    public function replyComment(Request $request)
+    {
+        $comment = Comment::with('client','replies')->find($request->comment_id);
+        return $this->sendResponse(['comment' => $comment], 'Reply Comment');
     }
     
     public function myNfc()
