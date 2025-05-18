@@ -381,10 +381,10 @@ class ClientController extends BaseController
     public function search_by_people(Request $request)
     {
         // Enable query logging
-        //DB::connection()->enableQueryLog();
-        $followIds = Follow::where('following_id', Auth::user()->id)->pluck('follower_id')->toArray();
+        DB::connection()->enableQueryLog();
+        $followIds = Follow::where('follower_id', Auth::user()->id)->pluck('following_id')->toArray();
         // Get the executed queries
-        //$queries = DB::getQueryLog();
+        $queries = DB::getQueryLog();
 
         // Print the queries
         /*foreach ($queries as $query) {
@@ -405,20 +405,29 @@ class ClientController extends BaseController
                 }
             })
                 ->where('id', '!=', Auth::user()->id)
-                ->whereNotIn('id', $followIds)
-                ->get();
+                ->get()
+                ->map(function ($client) use ($followIds) {
+                    $client->followed = in_array($client->id, $followIds) ? 'followed' : 'not_followed';
+                    return $client;
+                });
         } else {
-            $follow_connections = Client::with('followers')->select('id','fname','middle_name','last_name','username','display_name','designation','image')->where('id', '!=', Auth::user()->id)->whereNotIn('id', $followIds)->orderBy('id', 'desc')->get();
+            $follow_connections = Client::with('followers')
+                ->select('id','fname','middle_name','last_name','username','display_name','designation','image')
+                ->where('id', '!=', Auth::user()->id)
+                ->whereNotIn('id', $followIds)
+                ->orderBy('id', 'desc')
+                ->get()
+                ->map(function ($client) use ($followIds) {
+                    $client->followed = in_array($client->id, $followIds) ? 'followed' : 'not_followed';
+                    return $client;
+                });
         }
 
-        $unfollow_connections = Follow::with('client')->where('following_id', '=', Auth::user()->id)->get();
-
        
+        
         return $this->sendResponse([
-            'follow_connections' => $follow_connections,
-            'unfollow_connections' => $unfollow_connections,
+            'follow_connections' => $follow_connections
         ], 'Search by People');
-        //return view('user.searchByPeople', compact('client', 'follow_connections', 'unfollow_connections', 'followIds', 'search_client_id'));
     }
     public function client_by_search($username)
     {
