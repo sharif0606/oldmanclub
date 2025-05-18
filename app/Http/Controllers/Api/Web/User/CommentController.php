@@ -84,7 +84,9 @@ class CommentController extends BaseController
         try{
             $reply = New Reply();
             $reply->comment_id = $request->comment_id;
-            $reply->parent_id = $request->parent_id;
+            if($request->parent_id!="null"){
+                $reply->parent_id = $request->parent_id;
+            }
             $reply->content = $request->content;
             $reply->client_id = Auth::user()->id;
             // Save the comment
