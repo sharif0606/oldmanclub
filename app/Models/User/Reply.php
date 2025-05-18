@@ -14,6 +14,9 @@ class Reply extends Model
     {
         return $this->belongsTo(Client::class, 'client_id', 'id');
     }
+    public function client_comment(){
+        return $this->belongsTo(Client::class ,'client_id','id')->select('id','fname','middle_name','last_name','username','display_name','designation','image');
+    }
     public function comment()
     {
         return $this->belongsTo(Comment::class);
@@ -25,7 +28,7 @@ class Reply extends Model
     // Relationship for nested replies
     public function children()
     {
-        return $this->hasMany(Reply::class, 'parent_id')->with('client', 'children', 'reactions');
+        return $this->hasMany(Reply::class, 'parent_id')->with('client_comment', 'children', 'reactions');
     }
 
     public function parent()
