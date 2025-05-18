@@ -9,4 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class ReplyReaction extends Model
 {
     use HasFactory,SoftDeletes;
+
+    public function client(){
+        return $this->belongsTo(Client::class ,'client_id','id')->select('id','fname','middle_name','last_name','username','display_name','designation','image');
+    }
 }

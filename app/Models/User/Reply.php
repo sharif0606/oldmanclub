@@ -23,7 +23,11 @@ class Reply extends Model
     }
     public function reactions()
     {
-        return $this->hasMany(ReplyReaction::class);
+        return $this->hasMany(ReplyReaction::class)->with('client');
+    }
+    public function singleReaction()
+    {
+        return $this->hasOne(ReplyReaction::class)->with('client');
     }
     // Relationship for nested replies
     public function children()
