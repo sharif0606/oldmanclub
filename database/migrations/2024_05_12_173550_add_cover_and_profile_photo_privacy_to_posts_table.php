@@ -19,7 +19,6 @@ return new class extends Migration
             $table->unsignedBigInteger('report_by')->after('is_report')->nullable();
 
             // Define foreign key constraints
-            $table->foreign('shared_from')->references('id')->on('clients')->onDelete('cascade');
             $table->foreign('report_by')->references('id')->on('clients')->onDelete('cascade');
         });
     }
@@ -31,7 +30,7 @@ return new class extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             // Drop foreign key constraint first
-            $table->dropForeign(['shared_from']);
+            
             $table->dropForeign(['report_by']);
 
             // Then drop the column
