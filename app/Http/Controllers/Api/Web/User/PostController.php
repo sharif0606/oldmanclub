@@ -181,4 +181,22 @@ class PostController extends BaseController
 
         return $this->sendResponse($post_reaction, 'Post reaction updated successfully');
     }
+
+    public function post_share(Request $request){
+        $post = Post::where('id',$request->post_id)->first();
+        $post->share_count = $post->share_count + 1;
+        $post->save();
+
+        $post_share = new Post();
+        $post_share->client_id = Auth::user()->id;
+        $post_share->message = $post->message;
+        $post_share->privacy_mode = $post->privacy_mode;
+        $post_share->shared_from = $post->id;
+        $post_share->save();
+
+        $post_share->files()->create([
+            'post_id' => $post_share->id,
+        ]);
+        return $this->sendResponse($post, 'Post shared successfully'); 
+    }
 }

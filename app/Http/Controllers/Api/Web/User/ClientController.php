@@ -380,16 +380,7 @@ class ClientController extends BaseController
     
     public function search_by_people(Request $request)
     {
-        // Enable query logging
-        DB::connection()->enableQueryLog();
         $followIds = Follow::where('follower_id', Auth::user()->id)->pluck('following_id')->toArray();
-        // Get the executed queries
-        $queries = DB::getQueryLog();
-
-        // Print the queries
-        /*foreach ($queries as $query) {
-            dump($query);
-        }*/
         $search_by_people = trim($request->search);
         if ($request->search) {
             $follow_connections = Client::with('followers')
@@ -414,7 +405,6 @@ class ClientController extends BaseController
             $follow_connections = Client::with('followers')
                 ->select('id','fname','middle_name','last_name','username','display_name','designation','image')
                 ->where('id', '!=', Auth::user()->id)
-                ->whereNotIn('id', $followIds)
                 ->orderBy('id', 'desc')
                 ->get()
                 ->map(function ($client) use ($followIds) {
@@ -423,8 +413,6 @@ class ClientController extends BaseController
                 });
         }
 
-       
-        
         return $this->sendResponse([
             'follow_connections' => $follow_connections
         ], 'Search by People');
