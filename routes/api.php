@@ -64,8 +64,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/client/singlePost/{id}', [webClient::class, 'singlePost']);
     Route::post('/client/save_profile', [webClient::class, 'save_profile']);
     Route::post('/client/save_cover_profile_photo', [webClient::class, 'save_cover_profile_photo']);
-    Route::get('/client/usernameProfile/{username}', [webClient::class, 'usernameProfile']);
-    Route::get('/client/usernameProfileAbout/{username}', [webClient::class, 'usernameProfileAbout']);
+
     Route::post('/client/change_password', [webClient::class, 'change_password']);
     Route::get('/client/search_by_people', [webClient::class, 'search_by_people']);
     Route::get('/client/client_by_search/{username}', [webClient::class, 'client_by_search']);

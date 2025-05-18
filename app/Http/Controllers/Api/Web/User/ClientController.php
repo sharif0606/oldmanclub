@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Web\User;
 use App\Models\User\Client;
 use App\Models\User\Comment;
 use App\Models\User\Post;
+use App\Models\User\PostFile;
 use App\Models\User\Country;
 use App\Models\User\Follow;
 use App\Models\Backend\NfcCard;
@@ -81,11 +82,13 @@ class ClientController extends BaseController
         $followers = Follow::where('following_id', $id)->count();
         $following = Follow::where('follower_id', $id)->count();
         $post = Post::with('files','client','latestComment','singleReaction','multipleReactionCounts')->orderBy('created_at', 'desc')->where('client_id', $id)->paginate($limit);
-        $photos = Post::where('client_id', Auth::user()->id)
-            ->where('post_type', 'image')
+        $allpostphoto = Post::where('client_id', $id)->pluck('id')->toArray();
+        $isfollowed = Follow::where('follower_id', Auth::user()->id)->where('following_id', $id)->count();
+        $photos = PostFile::whereIn('post_id', $allpostphoto)
+            ->where('file_type', 'image')
             ->orderBy('created_at', 'desc')
             ->limit($limit)
-            ->pluck('image');
+            ->pluck('file_path');
 
         // Get the Friend List  of the current user
         $friend_list = Follow::where('following_id', Auth::user()->id)
@@ -109,8 +112,9 @@ class ClientController extends BaseController
             'followers' => $followers,
             'following' => $following,
             'photos' => $photos,
+            'isfollowed' => $isfollowed,
             'online_active_users' => $online_active_users,
-            'online_birthday_users' => $online_birthday_users
+            'online_brithday_users' => $online_birthday_users
         ], 'Profile Details');
         //return view('user.myProfile', compact('client', 'post'));
     }
@@ -444,22 +448,5 @@ class ClientController extends BaseController
         ], 'Client Dashboard');
         //return view('connection.connectionDashboard', compact('client', 'post', 'postCount', 'followers', 'followIds', 'connection', 'online_active_users'));
     }
-    public function usernameProfile($username)
-    {
-        $client = Client::where('username', 'like', "%$username%")->first();
-        $post = Post::where('client_id', $client->id)->orderBy('created_at', 'desc')->get();
-        return $this->sendResponse([
-            'client' => $client,
-            'post' => $post
-        ], 'Client Dashboard');
-        //return view('user.myProfile', compact('client', 'post'));
-    }
-    public function usernameProfileAbout($username)
-    {
-        $client = Client::where('username', 'like', "%$username%")->first();
-        return $this->sendResponse([
-            'client' => $client
-        ], 'Client Dashboard');
-        //return view('user.myProfileAbout', compact('client'));
-    }
+
 }
