@@ -14,7 +14,7 @@ class Comment extends Model
         return $this->belongsTo(Post::class);
     }
     public function client(){
-        return $this->belongsTo(Client::class ,'client_id','id');
+        return $this->belongsTo(Client::class ,'client_id','id')->select('id','fname','middle_name','last_name','username','display_name','designation','image');
     }
     public function client_comment(){
         return $this->belongsTo(Client::class ,'client_id','id')->select('id','fname','middle_name','last_name','username','display_name','designation','image');
