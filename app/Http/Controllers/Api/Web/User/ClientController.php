@@ -234,7 +234,7 @@ class ClientController extends BaseController
     // }
     public function singlePost($id)
     {
-        $value = Post::with('client','files','comments','reactions') // You can load the client details with the post
+        $value = Post::with('singleReaction','client','files','comments','reactions') // You can load the client details with the post
             ->find($id);
 
         return $this->sendResponse([
