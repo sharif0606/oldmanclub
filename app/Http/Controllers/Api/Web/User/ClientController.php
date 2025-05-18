@@ -117,7 +117,7 @@ class ClientController extends BaseController
 
     public function replyComment(Request $request)
     {
-        $comment = Comment::with('client_comment','replies')->find($request->comment_id);
+        $comment = Comment::with('client_comment','replies','singleReaction')->find($request->comment_id);
         return $this->sendResponse(['comment' => $comment], 'Reply Comment');
     }
     

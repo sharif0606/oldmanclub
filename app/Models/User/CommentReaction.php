@@ -12,4 +12,8 @@ class CommentReaction extends Model
     {
         return $this->belongsTo(Comment::class);
     }
+
+    public function client(){
+        return $this->belongsTo(Client::class ,'client_id','id')->select('id','fname','middle_name','last_name','username','display_name','designation','image');
+    }
 }

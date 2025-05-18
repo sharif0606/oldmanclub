@@ -34,4 +34,9 @@ class Comment extends Model
     {
         return $this->hasMany(CommentReaction::class);
     }
+
+    public function singleReaction()
+    {
+        return $this->hasOne(CommentReaction::class)->with('client');
+    }
 }
