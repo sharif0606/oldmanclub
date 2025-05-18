@@ -194,9 +194,16 @@ class PostController extends BaseController
         $post_share->shared_from = $post->id;
         $post_share->save();
 
-        $post_share->files()->create([
+        $post_share_file = PostFile::where('post_id',$post->id)->get();
+        foreach($post_share_file as $file){
+        $post_share_file = PostFile::create([
             'post_id' => $post_share->id,
-        ]);
+            'file_type' => $file->file_type,
+            'file_path' => $file->file_path,
+            'file_name' => $file->file_name,
+            'file_size' => $file->file_size,
+            ]);
+        }
         return $this->sendResponse($post, 'Post shared successfully'); 
     }
 }
