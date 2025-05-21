@@ -417,14 +417,6 @@ class NfcCardController extends BaseController
         }, $file_name, $headers);
     }
 
-    public function email($id)
-    {
-        $currentUserId = Auth::user()->id;
-        $client = Client::find($currentUserId);
-        $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id', $currentUserId)->paginate(10);
-        $nfc_card = NfcCard::where('client_id', $currentUserId)->where('id', $id)->first();
-        return $this->sendResponse(['nfc_card' => $nfc_card, 'client' => $client, 'nfc_cards' => $nfc_cards], 'Nfc card fetched successfully');
-    }
     public function virtual_background()
     {
         $nfc_virtual_categories = NfcVirtualBackgroundCategory::with('backgrounds')->get();
@@ -536,3 +528,7 @@ class NfcCardController extends BaseController
         return $this->sendResponse(['nfc_design' => $nfc_design], 'Nfc design fetched successfully');
     }
 }
+
+
+
+

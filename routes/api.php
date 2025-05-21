@@ -99,6 +99,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/nfc/design', [webNfc::class, 'get_nfc_design']);
     Route::post('/nfc/card/save_contact/{id}', [webNfc::class, 'save_contact']);
     Route::get('/nfc/virtual_background', [webNfc::class, 'virtual_background']);
+    Route::post('/nfc/email', [webNfc::class, 'card_send_via_email']);
     // follow routes
     Route::post('/follow', [follow::class, 'follow']);
     Route::post('/unfollow', [follow::class, 'unfollow']);
