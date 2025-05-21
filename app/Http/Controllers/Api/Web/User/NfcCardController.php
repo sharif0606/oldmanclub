@@ -374,8 +374,7 @@ class NfcCardController extends BaseController
 
     public function save_contact($id)
     {
-        $currentUserId = Auth::user()->id;
-        $nfc_card = NfcCard::with(['client', 'nfc_info'])->where('client_id', $currentUserId)->where('id', $id)->first();
+        $nfc_card = NfcCard::with(['client', 'nfc_info'])->where('id', $id)->first();
         // Initialize an empty vCard string
         $vCard = "BEGIN:VCARD\r\n";
         $vCard .= "VERSION:3.0\r\n";
