@@ -24,8 +24,8 @@ class CommentController extends BaseController
             $request->validate(['comment_id' => 'required|exists:comments,id']);
             // Check if the user has already reacted to the comment
             $existingReaction = CommentReaction::where('comment_id', $request->comment_id)
-                ->where('client_id', Auth::user()->id)
-                ->first();
+                                ->where('client_id', Auth::user()->id)
+                                ->first();
             if ($existingReaction) {
                 $comment_reaction = $existingReaction;
                 $comment_reaction->updated_at = Carbon::now();
@@ -58,9 +58,10 @@ class CommentController extends BaseController
     public function store(Request $request)
     {
         try{
+            $content = strip_tags(preg_replace('/\R{2,}/', "\n", $request->input('content')));
             $comment = new Comment();
             $comment->post_id = $request->post_id;
-            $comment->content = $request->content;
+            $comment->content = $content;
             $comment->client_id = Auth::user()->id;
             // Save the comment
             $comment->save();
@@ -87,7 +88,8 @@ class CommentController extends BaseController
             if($request->parent_id!="null"){
                 $reply->parent_id = $request->parent_id;
             }
-            $reply->content = $request->content;
+            $content = strip_tags(preg_replace('/\R{2,}/', "\n", $request->input('content')));
+            $reply->content = $content;
             $reply->client_id = Auth::user()->id;
             // Save the comment
             $reply->save();
@@ -112,8 +114,8 @@ class CommentController extends BaseController
             $request->validate(['reply_id' => 'required|exists:replies,id']);
             // Check if the user has already reacted to the comment
             $existingReaction = ReplyReaction::where('reply_id', $request->reply_id)
-                ->where('client_id', Auth::user()->id)
-                ->first();
+                                ->where('client_id', Auth::user()->id)
+                                ->first();
             if ($existingReaction) {
                 $reply_reaction = $existingReaction;
                 $reply_reaction->updated_at = Carbon::now();

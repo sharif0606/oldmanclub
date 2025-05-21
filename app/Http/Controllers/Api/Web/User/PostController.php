@@ -27,7 +27,6 @@ class PostController extends BaseController
     public function store(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'message' => 'required|string',
             'privacy_mode' => 'required|in:public,friends,private',
             'files.*' => 'nullable|file|max:10240', // Max 10MB per file
         ]);
@@ -36,8 +35,8 @@ class PostController extends BaseController
             return $this->sendError('Validation Error', $validator->errors());
         }
 
-        // Normalize line breaks
-        $content = preg_replace('/\R{2,}/', "\n", $request->input('message'));
+        // Normalize line breaks and remove HTML tags
+        $content = strip_tags(preg_replace('/\R{2,}/', "\n", $request->input('message')));
 
         $post = Post::create([
             'client_id' => Auth::user()->id,
@@ -107,8 +106,8 @@ class PostController extends BaseController
     public function post_update(Request $request, $id){
         $post = Post::where('client_id', Auth::user()->id)->findOrFail($id);
         
-        // Normalize line breaks before updating the content
-        $content = preg_replace('/\R{2,}/', "\n", $request->input('message'));
+        // Normalize line breaks and remove HTML tags before updating the content
+        $content = strip_tags(preg_replace('/\R{2,}/', "\n", $request->input('message')));
         $post->message = $content;
         $post->updated_at = Carbon::now();
         $post->privacy_mode = $request->privacy_mode;

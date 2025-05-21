@@ -100,43 +100,10 @@ class AuthController extends BaseController
             return true;
         });
 
-        // Custom validation rule to check if fname, last_name, and dob are the same
-        $validator->addExtension('same_client', function ($attribute, $value, $parameters, $validator) use ($request) {
-            $dob = $request->birthYear . '-' . str_pad($request->birthMonth, 2, '0', STR_PAD_LEFT) . '-' . str_pad($request->birthDay, 2, '0', STR_PAD_LEFT);
-            return Client::where([
-                ['fname', '=', $request->fname],
-                ['last_name', '=', $request->last_name],
-                ['dob', '=', $dob],
-            ])->doesntExist();
-        });
-
-        $validator->sometimes(['fname', 'last_name', 'birthDay', 'birthMonth', 'birthYear'], 'same_client', function ($input) {
-            return !empty($input->fname) && !empty($input->last_name) && !empty($input->birthDay) && !empty($input->birthMonth) && !empty($input->birthYear);
-        });
-
-
         if ($validator->fails()) {
-
-            // Construct dob from the birthDay, birthMonth, and birthYear
-            $dob = $request->birthYear . '-' . str_pad($request->birthMonth, 2, '0', STR_PAD_LEFT) . '-' . str_pad($request->birthDay, 2, '0', STR_PAD_LEFT);
-
-            // Check if the validation error is due to the same_client rule
-            if (
-                $validator->errors()->has('fname') &&
-                $validator->errors()->has('last_name') &&
-                $validator->errors()->has('birthDay') &&
-                Client::where([
-                    ['fname', '=', $request->fname],
-                    ['last_name', '=', $request->last_name],
-                    ['dob', '=', $dob],
-                ])->exists()
-            ) {
-                // Redirect with a custom message
-                return $this->sendError('Unauthorised.', ['error'=>'Client with the same first name, last name, and date of birth already exists.']);
-            }
-
             return $this->sendError('Validation errors occurred.', ['error'=>'Validation errors occurred.', 'errors' => $validator->errors()]);
         }
+        
         DB::beginTransaction();
         try {
             $user = new Client;
