@@ -91,13 +91,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/nfc/card/{id}', [webNfc::class, 'show']);
     Route::post('/nfc/card/send', [webNfc::class, 'send']);
     Route::post('/nfc/card/duplicate/{id}', [webNfc::class, 'duplicate']);
-    Route::post('/nfc/card/delete/{id}', [webNfc::class, 'delete']);
+    Route::post('/nfc/card/delete/{id}', [webNfc::class, 'destroy']);
     Route::post('/nfc/card/update/{id}', [webNfc::class, 'update']);
     Route::post('/nfc/card/share', [webNfc::class, 'share']);
     Route::post('/nfc/card/pdf/{id}', [webNfc::class, 'pdf']);
     Route::post('/nfc/card/qrcode/{id}', [webNfc::class, 'qrcode']);
     Route::get('/nfc/design', [webNfc::class, 'get_nfc_design']);
     Route::post('/nfc/card/save_contact/{id}', [webNfc::class, 'save_contact']);
+    Route::get('/nfc/card/virtual_background', [webNfc::class, 'virtual_background']);
     // follow routes
     Route::post('/follow', [follow::class, 'follow']);
     Route::post('/unfollow', [follow::class, 'unfollow']);

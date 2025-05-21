@@ -173,6 +173,8 @@
                             <ul aria-expanded="false">
                                 <li><a href="{{route('nfc-field.index')}}">NFC Field</a></li>
                                 <li><a href="{{route('design_card.index')}}">Design Card</a></li>
+                                <li><a href="{{route('nfc-virtual-background-category.index')}}">NFC Virtual Background Category</a></li>
+                                <li><a href="{{route('nfc-virtual-background.index')}}">NFC Virtual Background</a></li>
                             </ul>
                         </li>
                         <li>

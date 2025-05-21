@@ -427,15 +427,11 @@ class NfcCardController extends BaseController
         $nfc_card = NfcCard::where('client_id', $currentUserId)->where('id', $id)->first();
         return $this->sendResponse(['nfc_card' => $nfc_card, 'client' => $client, 'nfc_cards' => $nfc_cards], 'Nfc card fetched successfully');
     }
-    public function virtual_background($id)
+    public function virtual_background()
     {
-        $currentUserId = Auth::user()->id;
-        $client = Client::find($currentUserId);
-        $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields'])->where('client_id', $currentUserId)->paginate(10);
-        $nfc_card = NfcCard::where('client_id', $currentUserId)->where('id', $id)->first();
         $nfc_virtual_categories = NfcVirtualBackgroundCategory::with('backgrounds')->get();
         $nfc_virtual_background = NfcVirtualBackground::first();
-        return $this->sendResponse(['nfc_card' => $nfc_card, 'client' => $client, 'nfc_cards' => $nfc_cards, 'nfc_virtual_categories' => $nfc_virtual_categories, 'nfc_virtual_background' => $nfc_virtual_background], 'Nfc card fetched successfully');
+        return $this->sendResponse(['nfc_virtual_categories' => $nfc_virtual_categories, 'nfc_virtual_background' => $nfc_virtual_background], 'Nfc card fetched successfully');
     }
 
     public function duplicate($id)

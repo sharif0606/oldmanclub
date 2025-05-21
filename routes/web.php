@@ -37,6 +37,8 @@ use App\Http\Controllers\Backend\Website\NfcCard\NfcCardImageController as nfcca
 use App\Http\Controllers\Backend\Website\NfcCard\NfcCardPriceSectionController as nfcpricesection;
 use App\Http\Controllers\Backend\Website\NfcCard\NfcCardPriceController as nfccardprice;
 use App\Http\Controllers\Backend\Website\NfcCard\SubscribeSectionController as subscribesection;
+use App\Http\Controllers\Backend\Nfc\NfcVirtualBackgroundCategoryController as nfc_virtual_background_category;
+use App\Http\Controllers\Backend\Nfc\NfcVirtualBackgroundController as nfc_virtual_background;
 //Shipping Service
 use App\Http\Controllers\Backend\Website\ShippingService\HeaderSectionController as shippingheader;
 use App\Http\Controllers\Backend\Website\ShippingService\ServiceSectionController as shippingservice;
@@ -146,8 +148,7 @@ Route::middleware(['checkauth'])->prefix('admin')->group(function () {
     //Route::post('admin-chat', [ChatController::class, 'adminSendMessage'])->name('adminchat.store');
 });
 
-//middleware(['checkrole'])->
-Route::prefix('admin')->group(function () {
+Route::middleware(['checkrole'])->prefix('admin')->group(function () {
     Route::resource('user', user::class);
     Route::resource('role', role::class);
     Route::resource('client', client::class);
@@ -194,6 +195,8 @@ Route::prefix('admin')->group(function () {
     //website
     Route::resource('setting', setting::class);
     Route::resource('nfc-field', nfc_field::class);
+    Route::resource('nfc-virtual-background-category', nfc_virtual_background_category::class);
+    Route::resource('nfc-virtual-background', nfc_virtual_background::class);
     Route::resource('slider', slider::class);
     Route::resource('ourservice', ourservice::class);
     Route::resource('homepage', homepage::class);

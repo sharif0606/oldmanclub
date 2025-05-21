@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Backend\Nfc;
 
 use App\Http\Controllers\Controller;
-use App\Models\NfcVirtualBackground;
+use App\Models\Backend\NfcVirtualBackground;
+use App\Models\Backend\NfcVirtualBackgroundCategory;
 use Illuminate\Http\Request;
 
 class NfcVirtualBackgroundController extends Controller
@@ -13,7 +14,8 @@ class NfcVirtualBackgroundController extends Controller
      */
     public function index()
     {
-        //
+        $data = NfcVirtualBackground::all();
+        return view('backend.nfc.virtual_background.index', compact('data'));
     }
 
     /**
@@ -21,7 +23,8 @@ class NfcVirtualBackgroundController extends Controller
      */
     public function create()
     {
-        //
+        $categories = NfcVirtualBackgroundCategory::all();
+        return view('backend.nfc.virtual_background.create', compact('categories'));
     }
 
     /**
@@ -29,7 +32,22 @@ class NfcVirtualBackgroundController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+
+            $data = new NfcVirtualBackground();
+
+            if ($request->hasFile('image')) {
+                $imageName = rand(111, 999) . time() . '.' . $request->image->extension();
+                $request->image->move(public_path('uploads/nfc_virtual_background/'), $imageName);
+                $data->image = $imageName;
+            }
+            $data->category_id = $request->category_id;
+            $data->save();
+            return redirect()->route('nfc-virtual-background.index')->with('success', 'Nfc virtual background created successfully');
+        } catch (\Exception $e) {
+            dd($e);
+            return redirect()->route('nfc-virtual-background.index')->with('error', 'Nfc virtual background creation failed');
+        }
     }
 
     /**
@@ -43,24 +61,44 @@ class NfcVirtualBackgroundController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(NfcVirtualBackground $nfcVirtualBackground)
+    public function edit( $id)
     {
-        //
+        $data = NfcVirtualBackground::find(encryptor('decrypt',$id));
+        $categories = NfcVirtualBackgroundCategory::all();
+        return view('backend.nfc.virtual_background.edit', compact('data', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, NfcVirtualBackground $nfcVirtualBackground)
+    public function update(Request $request, $id)
     {
-        //
+        $data = NfcVirtualBackground::find(encryptor('decrypt',$id));
+        if ($request->hasFile('image')) {
+            if ($data->image) {
+                if (file_exists(public_path('uploads/nfc_virtual_background/' . $data->image))) {
+                    unlink(public_path('uploads/nfc_virtual_background/' . $data->image));
+                }
+            }
+            $imageName = rand(111, 999) . time() . '.' . $request->image->extension();
+            $request->image->move(public_path('uploads/nfc_virtual_background/'), $imageName);
+            $data->image = $imageName;
+        }
+        $data->category_id = $request->category_id;
+        $data->save();
+        return redirect()->route('nfc-virtual-background.index')->with('success', 'Nfc virtual background updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(NfcVirtualBackground $nfcVirtualBackground)
+    public function destroy($id)
     {
-        //
+        $data = NfcVirtualBackground::find(encryptor('decrypt',$id));
+        if ($data->image) {
+            unlink(public_path('uploads/nfc_virtual_background/' . $data->image));
+        }
+        $data->delete();
+        return redirect()->route('nfc-virtual-background.index')->with('success', 'Nfc virtual background deleted successfully');
     }
 }
