@@ -173,8 +173,6 @@ class NfcCardController extends BaseController
         }
     }
 
-
-
     /**
      * Display the specified resource.
      */

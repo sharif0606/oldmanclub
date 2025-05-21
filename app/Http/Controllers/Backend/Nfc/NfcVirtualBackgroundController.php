@@ -35,11 +35,16 @@ class NfcVirtualBackgroundController extends Controller
         try {
 
             $data = new NfcVirtualBackground();
+            $folder = date('Y-m');
+            $path = public_path('uploads/nfc_virtual_background/' . $folder);
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
 
             if ($request->hasFile('image')) {
                 $imageName = rand(111, 999) . time() . '.' . $request->image->extension();
-                $request->image->move(public_path('uploads/nfc_virtual_background/'), $imageName);
-                $data->image = $imageName;
+                $request->image->move($path, $imageName);
+                $data->image = $folder . '/' . $imageName;
             }
             $data->category_id = $request->category_id;
             $data->save();
@@ -80,9 +85,14 @@ class NfcVirtualBackgroundController extends Controller
                     unlink(public_path('uploads/nfc_virtual_background/' . $data->image));
                 }
             }
+            $folder = date('Y-m');
+            $path = public_path('uploads/nfc_virtual_background/' . $folder);
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
             $imageName = rand(111, 999) . time() . '.' . $request->image->extension();
-            $request->image->move(public_path('uploads/nfc_virtual_background/'), $imageName);
-            $data->image = $imageName;
+            $request->image->move($path, $imageName);
+            $data->image = $folder . '/' . $imageName;
         }
         $data->category_id = $request->category_id;
         $data->save();

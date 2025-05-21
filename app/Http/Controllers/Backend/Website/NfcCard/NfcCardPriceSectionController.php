@@ -69,9 +69,9 @@ class NfcCardPriceSectionController extends Controller
     {
         try{
             $nfccardsection = NfcCardPriceSection::findOrFail(encryptor('decrypt',$id));
-            $nfccard->text_large = $request->text_large;
-            $nfccard->text_small = $request->text_small;
-            if($nfccard->save()){
+            $nfccardsection->text_large = $request->text_large;
+            $nfccardsection->text_small = $request->text_small;
+            if($nfccardsection->save()){
                 $this->notice::success('Data Successfully Saved');
                 return redirect()->route('nfcpricesection.index');
             }
