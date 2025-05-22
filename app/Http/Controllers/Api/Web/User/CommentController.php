@@ -144,4 +144,36 @@ class CommentController extends BaseController
             }
         }
     }
+
+    public function replay_reaction_delete(Request $request)
+    {
+        try {
+            $request->validate(['reply_id' => 'required|exists:replies,id']);
+            $existingReaction = ReplyReaction::where('reply_id', $request->reply_id)
+            ->where('client_id', Auth::user()->id)
+            ->first();
+            if($existingReaction){
+                $existingReaction->delete();
+            }
+            return $this->sendResponse([], 'Reply Reaction Deleted');
+        } catch (Exception $e) {
+            return $this->sendError('Unauthorised.', ['error'=>$e->getMessage()]);
+        }
+    }
+
+    public function comment_reaction_delete(Request $request)
+    {
+        try {
+            $request->validate(['comment_id' => 'required|exists:comments,id']);
+            $existingReaction = CommentReaction::where('comment_id', $request->comment_id)
+            ->where('client_id', Auth::user()->id)
+            ->first();
+            if($existingReaction){
+                $existingReaction->delete();
+            }
+            return $this->sendResponse([], 'Comment Reaction Deleted');
+        } catch (Exception $e) {
+            return $this->sendError('Unauthorised.', ['error'=>$e->getMessage()]);
+        }
+    }
 }

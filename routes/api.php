@@ -76,6 +76,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/comment/replay', [comment::class, 'replay']);
     Route::post('/comment/replay/reaction', [comment::class, 'replay_reaction']);
     Route::get('/comment/reply', [webClient::class, 'replyComment']);
+    Route::post('/comment/replay/reaction_delete', [comment::class, 'replay_reaction_delete']);
+    Route::post('/comment/reaction_delete', [comment::class, 'comment_reaction_delete']);
     // post routes
     Route::get('/post/{limit?}', [post::class, 'index']);
     Route::post('/post/store', [post::class, 'store']);
@@ -85,6 +87,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/post/privacy/{id}', [post::class, 'privacy']);
     Route::post('/post/reaction', [post::class, 'post_reaction']);
     Route::post('/post/share', [post::class, 'post_share']);
+    Route::post('/post_reaction_delete', [post::class, 'post_reaction_delete']);
     // nfc card routes
     Route::get('/nfc/field', [webNfc::class, 'nfc_field']);
     Route::post('/nfc/card/store', [webNfc::class, 'store']);

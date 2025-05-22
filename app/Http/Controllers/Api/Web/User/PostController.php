@@ -181,6 +181,17 @@ class PostController extends BaseController
         return $this->sendResponse($post_reaction, 'Post reaction updated successfully');
     }
 
+    public function post_reaction_delete(Request $request){
+        $request->validate(['post_id' => 'required|exists:posts,id']);
+        $existingReaction = PostReaction::where('post_id', $request->post_id)
+            ->where('client_id', Auth::user()->id)
+            ->first();
+        if($existingReaction){
+            $existingReaction->delete();
+        }
+        return $this->sendResponse([], 'Post reaction deleted successfully');
+    }
+
     public function post_share(Request $request){
         $post = Post::where('id',$request->post_id)->first();
         $post->share_count = $post->share_count + 1;
