@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\Web\Location\LocationController as location;
 use App\Http\Controllers\Api\Web\User\ChatController as ChatController;
 use App\Http\Controllers\Api\Web\User\NfcCardController as webNfc;
 use App\Http\Controllers\Api\Web\User\FollowController as follow;
+use App\Http\Controllers\Api\Web\User\CompanyController as company;
 
 /*
 |--------------------------------------------------------------------------
@@ -111,6 +112,12 @@ Route::middleware('auth:sanctum')->group(function () {
     // follow routes
     Route::post('/follow', [follow::class, 'follow']);
     Route::post('/unfollow', [follow::class, 'unfollow']);
+
+    // company routes
+    Route::get('/company', [company::class, 'index']);
+    Route::post('/company', [company::class, 'store']);
+    Route::post('/company/{id}', [company::class, 'update']);
+    Route::post('/company/{id}', [company::class, 'destroy']);
 
     // chat routes
     Route::post('/chat', [ChatController::class, 'startConversation']);

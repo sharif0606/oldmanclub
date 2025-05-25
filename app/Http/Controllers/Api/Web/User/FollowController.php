@@ -15,6 +15,10 @@ class FollowController extends BaseController
     public function follow(Request $request)
     {
         $current_user_id=Auth::user()->id;
+        $check=Follow::where('follower_id',$current_user_id)->where('following_id',$request->following_id)->first();
+        if($check){
+            return $this->sendError('Already followed');
+        }
        
         $follow = New Follow;
         $follow->follower_id =$current_user_id;
