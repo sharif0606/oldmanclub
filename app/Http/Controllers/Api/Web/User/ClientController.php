@@ -145,22 +145,42 @@ class ClientController extends BaseController
     
     public function all_followers($limit = 20)
     {
-        $followers = Follow::with('follower_client')->where('following_id', '=', Auth::user()->id)->paginate($limit);
+        $followIds = Follow::where('following_id', Auth::user()->id)->pluck('follower_id')->toArray();
+        $followers = Follow::with('follower_client')->where('following_id', '=', Auth::user()->id)
+                        ->paginate($limit)->map(function ($client) use ($followIds) {
+                            $client->followed = in_array($client->id, $followIds) ? 'followed' : 'not_followed';
+                            return $client;
+                        });
         return $this->sendResponse(['followers' => $followers], 'All Followers');
     }
     public function all_following($limit = 20)
     {
-        $followers = Follow::with('follower_client')->where('follower_id', '=', Auth::user()->id)->paginate($limit);
+        $followIds = Follow::where('follower_id', Auth::user()->id)->pluck('following_id')->toArray();
+        $followers = Follow::with('follower_client')->where('follower_id', '=', Auth::user()->id)
+                    ->paginate($limit)->map(function ($client) use ($followIds) {
+                            $client->followed = in_array($client->id, $followIds) ? 'followed' : 'not_followed';
+                            return $client;
+                        });
         return $this->sendResponse(['followers' => $followers], 'All Following');
     }
     public function all_followers_user($id,$limit = 20)
     {
-        $followers = Follow::with('follower_client')->where('following_id', '=', $id)->paginate($limit);
+        $followIds = Follow::where('following_id', $id)->pluck('follower_id')->toArray();
+        $followers = Follow::with('follower_client')->where('following_id', '=', $id)
+                    ->paginate($limit)->map(function ($client) use ($followIds) {
+                            $client->followed = in_array($client->id, $followIds) ? 'followed' : 'not_followed';
+                            return $client;
+                        });
         return $this->sendResponse(['followers' => $followers], 'All Followers');
     }
     public function all_following_user($id,$limit = 20)
     {
-        $followers = Follow::with('follower_client')->where('follower_id', '=', $id)->paginate($limit);
+        $followIds = Follow::where('follower_id', $id)->pluck('following_id')->toArray();
+        $followers = Follow::with('follower_client')->where('follower_id', '=', $id)
+                        ->paginate($limit)->map(function ($client) use ($followIds) {
+                            $client->followed = in_array($client->id, $followIds) ? 'followed' : 'not_followed';
+                            return $client;
+                        });
         return $this->sendResponse(['followers' => $followers], 'All Following');
     }
     public function accountSetting()
