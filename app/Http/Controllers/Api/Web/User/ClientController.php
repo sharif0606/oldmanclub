@@ -42,6 +42,7 @@ class ClientController extends BaseController
         $client = Client::find(Auth::user()->id);
         $followers = Follow::where('following_id', Auth::user()->id)->count();
         $following = Follow::where('follower_id', Auth::user()->id)->count();
+        $latest_eight_followers = Follow::with('follower_client')->where('following_id', Auth::user()->id)->orderBy('id', 'desc')->take(8)->get();
         $post = Post::with('files','client','latestComment','singleReaction','multipleReactionCounts')->orderBy('created_at', 'desc')->where('client_id', Auth::user()->id)->paginate($limit);
         $photos = Post::where('client_id', Auth::user()->id)
             ->where('post_type', 'image')
@@ -72,7 +73,8 @@ class ClientController extends BaseController
             'following' => $following,
             'photos' => $photos,
             'online_active_users' => $online_active_users,
-            'online_birthday_users' => $online_birthday_users
+            'online_birthday_users' => $online_birthday_users,
+            'latest_eight_followers' => $latest_eight_followers
         ], 'Profile Details');
         //return view('user.myProfile', compact('client', 'post'));
     }
@@ -81,6 +83,7 @@ class ClientController extends BaseController
         $client = Client::find($id);
         $followers = Follow::where('following_id', $id)->count();
         $following = Follow::where('follower_id', $id)->count();
+        $latest_eight_followers = Follow::with('follower_client')->where('following_id', $id)->orderBy('id', 'desc')->take(8)->get();
         $post = Post::with('files','client','latestComment','singleReaction','multipleReactionCounts')->orderBy('created_at', 'desc')->where('client_id', $id)->paginate($limit);
         $allpostphoto = Post::where('client_id', $id)->pluck('id')->toArray();
         $isfollowed = Follow::where('follower_id', Auth::user()->id)->where('following_id', $id)->count();
@@ -114,7 +117,8 @@ class ClientController extends BaseController
             'photos' => $photos,
             'isfollowed' => $isfollowed,
             'online_active_users' => $online_active_users,
-            'online_brithday_users' => $online_birthday_users
+            'online_brithday_users' => $online_birthday_users,
+            'latest_eight_followers' => $latest_eight_followers
         ], 'Profile Details');
         //return view('user.myProfile', compact('client', 'post'));
     }
@@ -141,8 +145,23 @@ class ClientController extends BaseController
     
     public function all_followers($limit = 20)
     {
-        $followers = Follow::with('client')->where('following_id', '=', Auth::user()->id)->paginate($limit);
+        $followers = Follow::with('follower_client')->where('following_id', '=', Auth::user()->id)->paginate($limit);
         return $this->sendResponse(['followers' => $followers], 'All Followers');
+    }
+    public function all_following($limit = 20)
+    {
+        $followers = Follow::with('follower_client')->where('follower_id', '=', Auth::user()->id)->paginate($limit);
+        return $this->sendResponse(['followers' => $followers], 'All Following');
+    }
+    public function all_followers_user($id,$limit = 20)
+    {
+        $followers = Follow::with('follower_client')->where('following_id', '=', $id)->paginate($limit);
+        return $this->sendResponse(['followers' => $followers], 'All Followers');
+    }
+    public function all_following_user($id,$limit = 20)
+    {
+        $followers = Follow::with('follower_client')->where('follower_id', '=', $id)->paginate($limit);
+        return $this->sendResponse(['followers' => $followers], 'All Following');
     }
     public function accountSetting()
     {

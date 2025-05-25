@@ -59,6 +59,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/client/myprofile/{limit?}', [webClient::class, 'myProfile']);
     Route::get('/client/myNfc', [webClient::class, 'myNfc']);
     Route::get('/client/all_followers/{limit?}', [webClient::class, 'all_followers']);
+    Route::get('/client/all_following/{limit?}', [webClient::class, 'all_following']);
+    Route::get('/client/all_followers_user/{id}/{limit?}', [webClient::class, 'all_followers_user']);
+    Route::get('/client/all_following_user/{id}/{limit?}', [webClient::class, 'all_following_user']);
+
+
     Route::get('/client/accountSetting', [webClient::class, 'accountSetting']);
     Route::get('/client/gathering', [webClient::class, 'gathering']);
     Route::get('/client/singlePost/{id}', [webClient::class, 'singlePost']);
