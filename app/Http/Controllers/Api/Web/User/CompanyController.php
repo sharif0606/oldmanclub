@@ -30,6 +30,19 @@ class CompanyController extends BaseController
     public function store(Request $request)
     {
         try{
+            $validator = Validator::make($request->all(), [
+                'company_name' => 'required|string|max:255',
+                'company_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'company_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'company_document' => 'nullable|array',
+                'company_document.*' => 'nullable|mimes:jpg,png,pdf,doc,docx|max:2048',
+                'contact_no' => 'required|string|max:255|unique:companies,contact_no',
+                'email' => 'required|email|max:255|unique:companies,email',
+                'phone_number' => 'required|string|max:255|unique:companies,phone_number',
+            ]);
+            if($validator->fails()){
+                return $this->sendError('Validation Error!', $validator->errors());
+            }
             $company = new Company;
             $company->company_name = $request->company_name;
             $folder = date('Y') . '/' . date('m');
@@ -80,7 +93,7 @@ class CompanyController extends BaseController
                 return $this->sendResponse($company, 'Company created successfully');
             }
         }catch(Exception $e){
-            return $this->sendError('Something Wrong! Please try again');
+            return $this->sendError('Something Wrong! Please try again'.$e->getMessage());
         }
     }
 

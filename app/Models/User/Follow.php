@@ -21,6 +21,6 @@ class Follow extends Model
 
     public function follower_client()
     {
-        return $this->belongsTo(Client::class, 'follower_id')->select('id','display_name','image');
+        return $this->belongsTo(Client::class, 'follower_id')->select('id','display_name','email','middle_name','fname','last_name','image');
     }
 }
