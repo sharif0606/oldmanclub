@@ -19,6 +19,9 @@ class FollowController extends BaseController
         if($check){
             return $this->sendError('Already followed');
         }
+        if($current_user_id==$request->following_id){
+            return $this->sendError('You cannot follow yourself');
+        }
        
         $follow = New Follow;
         $follow->follower_id =$current_user_id;
