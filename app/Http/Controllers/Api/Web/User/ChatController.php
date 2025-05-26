@@ -140,8 +140,7 @@ class ChatController extends BaseController
             'user_ids' => 'required|min:1',
             'user_ids.*' => 'exists:clients,id',
             'is_group' => 'boolean',
-            'name' => 'nullable|string',
-            'avatar' => 'nullable|image|max:2048',
+            'name' => 'nullable|string'
         ]);
         $request->user_ids = explode(',', $request->user_ids);
 
