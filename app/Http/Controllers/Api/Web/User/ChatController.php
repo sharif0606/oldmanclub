@@ -16,7 +16,18 @@ class ChatController extends BaseController
 {
     public function getConversations()
     {
-        return $this->sendResponse(Auth::user()->conversations()->with('users')->get(), 'Conversations fetched successfully');
+        $conversations = Auth::user()->conversations()->with(['users', 'messages' => function($query) {
+            $query->latest()->limit(1);
+        }])->get();
+        
+        $conversations->map(function($conversation){
+            $conversation->avatar = asset('uploads/chat/avatars/'.$conversation->avatar);
+            $conversation->last_message = $conversation->messages->first();
+            
+            return $conversation;
+        });
+       
+        return $this->sendResponse($conversations, 'Conversations fetched successfully');
     }
 
     public function getMessages($id)
@@ -126,21 +137,51 @@ class ChatController extends BaseController
     public function startConversation(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'user_ids' => 'required|array|min:1',
+            'user_ids' => 'required|min:1',
             'user_ids.*' => 'exists:clients,id',
             'is_group' => 'boolean',
             'name' => 'nullable|string',
             'avatar' => 'nullable|image|max:2048',
         ]);
+        $request->user_ids = explode(',', $request->user_ids);
 
         if ($validator->fails()) {
             return $this->sendError('Validation Error', $validator->errors(), 422);
         }
 
+        // Check for existing conversation between users
+        if (!$request->is_group) {
+            $existingConversation = Conversation::whereHas('users', function($query) use ($request) {
+                $query->whereIn('clients.id', $request->user_ids);
+            })
+            ->whereHas('users', function($query) {
+                $query->where('clients.id', Auth::user()->id);
+            })
+            ->where('is_group', false)
+            ->first();
+
+            if ($existingConversation) {
+                return $this->sendResponse([
+                    'conversation' => $existingConversation->load('users'),
+                    'avatar_url' => $existingConversation->avatar ? asset('storage/' . $existingConversation->avatar) : null,
+                ], 'Existing conversation found');
+            }
+        }
+
         // Handle avatar upload
         $avatarPath = null;
+        $foldername=date('Y') . '/' . date('m');
         if ($request->hasFile('avatar')) {
+
             $avatarPath = $request->file('avatar')->store('avatars', 'public');
+        }
+        if($request->avatar){
+            $avatarPath = $request->avatar;
+        }
+
+        $check_conversation = Conversation::where('name', $request->name)->first();
+        if($check_conversation){
+            return $this->sendError('Conversation already exists');
         }
 
         DB::beginTransaction();

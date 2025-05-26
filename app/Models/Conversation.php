@@ -17,7 +17,7 @@ class Conversation extends Model
 
     public function users()
     {
-        return $this->belongsToMany(Client::class);
+        return $this->belongsToMany(Client::class)->select('id', 'fname','last_name','middle_name','display_name', 'image','username');
     }
     
 }
