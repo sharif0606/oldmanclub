@@ -145,4 +145,79 @@ class ChatUserController extends Controller
             return Response($htmldata);
         }
     }
+
+    // Get messages for a conversation
+    public function getMessages($userId)
+    {
+        $my_id = currentUserId();
+        $messages = Message::where(function ($query) use ($userId, $my_id) {
+            $query->where('from_user', $userId)->where('to_user', $my_id);
+        })->oRwhere(function ($query) use ($userId, $my_id) {
+            $query->where('from_user', $my_id)->where('to_user', $userId);
+        })->get();
+
+        return response()->json([
+            'messages' => $messages
+        ]);
+    }
+
+    // Send a new message
+    public function sendMessage(Request $request)
+    {
+        $from_user = currentUserId();
+        $to_user = $request->chatId; // This should match your frontend chatId
+        $message = $request->content;
+
+        $data = new Message();
+        $data->from_user = $from_user;
+        $data->to_user = $to_user;
+        $data->message = $message;
+        $data->is_read = 0;
+        $data->save();
+
+        // Trigger Pusher event
+        $options = [
+            'cluster' => env('PUSHER_APP_CLUSTER'),
+            'useTLS' => true
+        ];
+
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            $options
+        );
+
+        $pusher->trigger('private-chat.' . $to_user, 'MessageSent', [
+            'message' => $data
+        ]);
+
+        return response()->json([
+            'message' => $data
+        ]);
+    }
+
+     // Handle typing indicator
+     public function typing(Request $request)
+     {
+         $options = [
+             'cluster' => env('PUSHER_APP_CLUSTER'),
+             'useTLS' => true
+         ];
+ 
+         $pusher = new Pusher(
+             env('PUSHER_APP_KEY'),
+             env('PUSHER_APP_SECRET'),
+             env('PUSHER_APP_ID'),
+             $options
+         );
+ 
+         $pusher->trigger('private-chat.' . $request->conversation_id, 'typing', [
+             'user' => [
+                 'id' => currentUserId()
+             ]
+         ]);
+ 
+         return response()->json(['success' => true]);
+     }
 }

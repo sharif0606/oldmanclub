@@ -1,21 +1,24 @@
 <?php
 namespace App\Events;
 
-use App\Models\Message;
 use Illuminate\Broadcasting\Channel;
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+use App\Models\Message;
 
 class MessageSent implements ShouldBroadcast
 {
-    use SerializesModels;
+    use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $message;
 
     public function __construct(Message $message)
     {
-        $this->message = $message->load('user');
+        $this->message = $message;
     }
 
     public function broadcastOn()
@@ -23,17 +26,21 @@ class MessageSent implements ShouldBroadcast
         return new PrivateChannel('conversation.' . $this->message->conversation_id);
     }
 
+    public function broadcastAs()
+    {
+        return 'MessageSent';
+    }
+
     public function broadcastWith()
     {
         return [
-            'id' => $this->message->id,
+            'message' => $this->message->load('user'),
+            'conversation_id' => $this->message->conversation_id,
+            'user_id' => $this->message->user_id,
             'type' => $this->message->type,
             'content' => $this->message->content,
-            'user' => [
-                'id' => $this->message->user->id,
-                'name' => $this->message->user->display_name,
-            ],
-            'created_at' => $this->message->created_at->toDateTimeString(),
+            'file_details' => $this->message->file_details,
+            'timestamp' => $this->message->created_at->toIso8601String()
         ];
     }
 }
