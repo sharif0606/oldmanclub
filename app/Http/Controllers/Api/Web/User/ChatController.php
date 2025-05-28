@@ -45,7 +45,7 @@ class ChatController extends BaseController
 
         $validator = \Validator::make($request->all(), [
             'type' => 'required|in:text,image,video,file,audio,sticker',
-            'content' => 'required|string',
+            'content' => 'nullable|string',
             'files.*' => 'nullable|file|max:10240', // Max 10MB per file
         ]);
 
@@ -57,7 +57,7 @@ class ChatController extends BaseController
             'conversation_id' => $conversation->id,
             'user_id' => Auth::user()->id,
             'type' => $request->type,
-            'content' => $request->content,
+            'content' => $request->content ?? null,
         ]);
 
         // Handle multiple files if present
