@@ -18,7 +18,7 @@ class Message extends Model
 
     public function user()
     {
-        return $this->belongsTo(Client::class)->select('id', 'display_name', 'image', 'avatar');
+        return $this->belongsTo(Client::class)->select('id','fname','last_name','middle_name', 'display_name', 'image', 'avatar');
     }
     
     
