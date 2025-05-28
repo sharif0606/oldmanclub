@@ -31,7 +31,7 @@ class MessageSent implements ShouldBroadcast
             'content' => $this->message->content,
             'user' => [
                 'id' => $this->message->user->id,
-                'name' => $this->message->user->display_name,
+                'name' => $this->message->user->display_name ?? $this->message->user->fname . ' ' .$this->message->user->middle_name . ' ' . $this->message->user->last_name,
             ],
             'created_at' => $this->message->created_at->toDateTimeString(),
         ];
