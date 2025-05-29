@@ -28,7 +28,7 @@ class Client extends Model
     }
 
     public function conversations(){
-        return $this->hasMany(Conversation::class, 'created_by',);
+        return $this->belongsToMany(Conversation::class, 'client_conversation', 'client_id', 'conversation_id');
     }
     public function chats(){
          return $this->hasMany(Chat::class, 'client_id');

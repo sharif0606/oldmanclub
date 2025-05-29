@@ -82,7 +82,7 @@ class ChatController extends BaseController
 
         broadcast(new MessageSent($message))->toOthers();
 
-        return response()->json($message->load('user'), 201);
+        return response()->json($message->load('user'), status: 201);
     }
 
     private function handleFileUpload($file)
