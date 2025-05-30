@@ -130,7 +130,7 @@ class ChatController extends BaseController
                 'file_size' => $fileSize,
                 'mime_type' => $mimeType,
                 'path' => 'uploads/chat/' . $directory . '/' . $filefolder . '/' . $fileName,
-                'url' => asset('uploads/chat/' . $directory . '/' . $filefolder . '/' . $fileName)
+                //'url' => asset('uploads/chat/' . $directory . '/' . $filefolder . '/' . $fileName)
             ];
         } catch (\Exception $e) {
             \Log::error('File upload error: ' . $e->getMessage());
