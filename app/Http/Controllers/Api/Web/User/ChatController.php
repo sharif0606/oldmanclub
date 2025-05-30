@@ -75,7 +75,7 @@ class ChatController extends BaseController
             // Update message with file details
             if (!empty($fileDetails)) {
                 $message->update([
-                    'file_details' => json_encode($fileDetails)
+                    'file_name' => json_encode($fileDetails)
                 ]);
             }
         }
