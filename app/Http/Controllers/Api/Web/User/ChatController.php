@@ -87,43 +87,55 @@ class ChatController extends BaseController
 
     private function handleFileUpload($file)
     {
-        $extension = $file->getClientOriginalExtension();
-        $mimeType = $file->getMimeType();
-        $filefolder = date('Y') . '/' . date('m');
-        $fileName = rand(1111, 9999) . Auth::user()->id . '_' . rand(111, 999) . time() . '.' . $extension;
+        try {
+            $extension = $file->getClientOriginalExtension();
+            $mimeType = $file->getMimeType();
+            $filefolder = date('Y') . '/' . date('m');
+            $fileName = rand(1111, 9999) . Auth::user()->id . '_' . rand(111, 999) . time() . '.' . $extension;
 
-        // Determine file type and directory
-        if (str_starts_with($mimeType, 'image/')) {
-            $directory = 'images';
-            $fileType = 'image';
-        } elseif (str_starts_with($mimeType, 'video/')) {
-            $directory = 'videos';
-            $fileType = 'video';
-        } elseif (str_starts_with($mimeType, 'audio/')) {
-            $directory = 'audio';
-            $fileType = 'audio';
-        } else {
-            $directory = 'files';
-            $fileType = 'file';
+            // Determine file type and directory
+            if (str_starts_with($mimeType, 'image/')) {
+                $directory = 'images';
+                $fileType = 'image';
+            } elseif (str_starts_with($mimeType, 'video/')) {
+                $directory = 'videos';
+                $fileType = 'video';
+            } elseif (str_starts_with($mimeType, 'audio/')) {
+                $directory = 'audio';
+                $fileType = 'audio';
+            } else {
+                $directory = 'files';
+                $fileType = 'file';
+            }
+
+            // Create directory if it doesn't exist
+            $uploadPath = public_path('uploads/chat/' . $directory . '/' . $filefolder);
+            if (!file_exists($uploadPath)) {
+                mkdir($uploadPath, 0777, true);
+            }
+
+            // Move file to appropriate directory
+            $file->move($uploadPath, $fileName);
+
+            // Get file size safely
+            $fileSize = 0;
+            $fullPath = $uploadPath . '/' . $fileName;
+            if (file_exists($fullPath) && is_readable($fullPath)) {
+                $fileSize = filesize($fullPath);
+            }
+
+            return [
+                'file_name' => $fileName,
+                'file_type' => $fileType,
+                'file_size' => $fileSize,
+                'mime_type' => $mimeType,
+                'path' => 'uploads/chat/' . $directory . '/' . $filefolder . '/' . $fileName,
+                'url' => asset('uploads/chat/' . $directory . '/' . $filefolder . '/' . $fileName)
+            ];
+        } catch (\Exception $e) {
+            \Log::error('File upload error: ' . $e->getMessage());
+            return null;
         }
-
-        // Create directory if it doesn't exist
-        $uploadPath = public_path('uploads/chat/' . $directory . '/' . $filefolder);
-        if (!file_exists($uploadPath)) {
-            mkdir($uploadPath, 0777, true);
-        }
-
-        // Move file to appropriate directory
-        $file->move($uploadPath, $fileName);
-
-        return [
-            'file_name' => $fileName,
-            'file_type' => $fileType,
-            'file_size' => $file->getSize(),
-            'mime_type' => $mimeType,
-            'path' => 'uploads/chat/' . $directory . '/' . $filefolder . '/' . $fileName,
-            'url' => asset('uploads/chat/' . $directory . '/' . $filefolder . '/' . $fileName)
-        ];
     }
 
     private function authorizeUserInConversation(Conversation $conversation)
