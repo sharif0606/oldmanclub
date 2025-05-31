@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\Web\User\ChatController as ChatController;
 use App\Http\Controllers\Api\Web\User\NfcCardController as webNfc;
 use App\Http\Controllers\Api\Web\User\FollowController as follow;
 use App\Http\Controllers\Api\Web\User\CompanyController as company;
+use App\Http\Controllers\Api\LocationController;
 use Illuminate\Support\Facades\Broadcast;
 
 /*
@@ -127,6 +128,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/chat/{id}/messages', [ChatController::class, 'getMessages']);
     Route::post('/chat/{id}/messages', [ChatController::class, 'sendMessage']);
     Route::post('/chat/typing', [ChatController::class, 'typing']);
+
+    //location routes
+    Route::get('/location/cities', [LocationController::class, 'cities']);
+    Route::get('/location/states', [LocationController::class, 'states']);
+    Route::get('/location/countries', [LocationController::class, 'countries']);
 
     Route::post('/messages/send', [App\Http\Controllers\Api\MessageController::class, 'sendMessage']);
 
