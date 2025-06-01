@@ -10,7 +10,6 @@ use App\Http\Controllers\Backend\Nfc\NfcCardController as nfc;
 use App\Http\Controllers\Api\Web\User\ClientController as webClient;
 use App\Http\Controllers\Api\Web\User\CommentController as comment;
 use App\Http\Controllers\Api\Web\User\PostController as post;
-use App\Http\Controllers\Api\Web\Location\LocationController as location;
 use App\Http\Controllers\Api\Web\User\ChatController as ChatController;
 use App\Http\Controllers\Api\Web\User\NfcCardController as webNfc;
 use App\Http\Controllers\Api\Web\User\FollowController as follow;
