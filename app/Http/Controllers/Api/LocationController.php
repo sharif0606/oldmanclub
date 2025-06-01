@@ -12,8 +12,11 @@ class LocationController extends BaseController
 {
     public function cities(Request $request){
         $cities = City::orderBy('name','asc')
-        ->when($request->has('state_id'),function($query) use ($request){
+        ->when($request->has('state_id') && $request->state_id !="" ,function($query) use ($request){
             $query->where('state_id',$request->state_id);
+        })
+        ->when($request->has('id') && $request->id !="",function($query) use ($request){
+            $query->where('id',$request->id);
         })
         ->get();
         return $this->sendResponse($cities,'Cities fetched successfully');
@@ -21,15 +24,22 @@ class LocationController extends BaseController
 
     public function states(Request $request){
         $states = State::orderBy('name','asc')
-        ->when($request->has('country_id'),function($query) use ($request){
+        ->when($request->has('country_id') && $request->country_id,function($query) use ($request){
             $query->where('country_id',$request->country_id);
+        })
+        ->when($request->has('id') && $request->id != '',function($query) use ($request){
+            $query->where('id',$request->id);
         })
         ->get();
         return $this->sendResponse($states,'States fetched successfully');
     }
 
     public function countries(Request $request){
-        $countries = Country::orderBy('name','asc')->get();
+        $countries = Country::orderBy('name','asc')
+        ->when($request->has('id') && $request->id != '',function($query) use ($request){
+            $query->where('id',$request->id);
+        })
+        ->get();
         return $this->sendResponse($countries,'Countries fetched successfully');
     }
 }
