@@ -51,10 +51,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/admin/logout', [AdminAuthController::class, 'adminLogout']);
 
     //location routes
-    Route::get('/location/country', [location::class, 'country']);
-    Route::get('/location/state', [location::class, 'state']);
-    Route::get('/location/city', [location::class, 'city']);
-    Route::get('/location/area', [location::class, 'area']);
+    Route::get('/location/country', [LocationController::class, 'countries']);
+    Route::get('/location/state', [LocationController::class, 'states']);
+    Route::get('/location/city', [LocationController::class, 'cities']);
     
     // react routes
     Route::get('/client/dashboard', [webClient::class, 'index']);
@@ -128,10 +127,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/chat/{id}/messages', [ChatController::class, 'sendMessage']);
     Route::post('/chat/typing', [ChatController::class, 'typing']);
 
-    //location routes
-    Route::get('/location/cities', [LocationController::class, 'cities']);
-    Route::get('/location/states', [LocationController::class, 'states']);
-    Route::get('/location/countries', [LocationController::class, 'countries']);
 
     Route::post('/messages/send', [App\Http\Controllers\Api\MessageController::class, 'sendMessage']);
 

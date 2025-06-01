@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\BaseController;
 use App\Models\Settings\Location\City;
 use App\Models\Settings\Location\State;
 use App\Models\Settings\Location\Country;
+use App\Models\Settings\Location\Area;
 use Illuminate\Http\Request;
 
 class LocationController extends BaseController
@@ -42,4 +43,5 @@ class LocationController extends BaseController
         ->get();
         return $this->sendResponse($countries,'Countries fetched successfully');
     }
+
 }
