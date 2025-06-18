@@ -75,6 +75,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/client/search_by_people', [webClient::class, 'search_by_people']);
     Route::get('/client/client_by_search/{username}', [webClient::class, 'client_by_search']);
     Route::get('/client/user_profile/{id}/{limit?}', [webClient::class, 'userProfile']);
+    Route::get('/client/random_people/{limit?}', [webClient::class, 'random_people']);
 
     // comment reaction routes
     Route::post('/comment/reaction_save', [comment::class, 'reaction_save']);

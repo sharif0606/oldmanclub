@@ -488,4 +488,18 @@ class ClientController extends BaseController
         //return view('connection.connectionDashboard', compact('client', 'post', 'postCount', 'followers', 'followIds', 'connection', 'online_active_users'));
     }
 
+    public function random_people(Request $request,$limit = 10)
+    {
+        $followIds = Follow::where('follower_id', Auth::user()->id)->pluck('following_id')->toArray();
+       
+        $follow_connections = Client::select('id','fname','middle_name','last_name','username','display_name','designation','image','is_online' ,'dob','status')
+                                ->where('id', '!=', Auth::user()->id)
+                                ->whereNotIn('id', $followIds)
+                                ->paginate($limit);
+        
+        return $this->sendResponse([
+            'follow_connections' => $follow_connections
+        ], 'Search by People');
+    }
+
 }
