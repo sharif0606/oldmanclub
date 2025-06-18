@@ -52,8 +52,8 @@
                             
                         </ul>
                         <div class="navbar-right">
-                            <a href="{{route('clientlogin')}}" class="btn btn-link ps-0 text-uppercase">Sign In</a>
-                            <a href="{{route('clientregister')}}" class="btn btn-outline-warning rounded-pill px-4 py-1 m-0 sign-up-btn text-uppercase">Sign Up</a>
+                            <a href="https://socila.oldclubman.com/client/login" class="btn btn-link ps-0 text-uppercase">Sign In</a>
+                            <a href="https://socila.oldclubman.com/client/register" class="btn btn-outline-warning rounded-pill px-4 py-1 m-0 sign-up-btn text-uppercase">Sign Up</a>
                             <a href="{{route('cart_page')}}" class="cart-nav border-0 bg-transparent mx-3">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
