@@ -175,7 +175,8 @@ class AuthController extends BaseController
         } catch (Exception $e) {
             DB::rollback();
            // dd($e);
-            return $this->sendError('Unauthorised.', ['error'=>'Something wrong! Please try again']);
+          
+            return $this->sendError('Unauthorised.', ['error'=>'Something wrong! Please try again'.$e->getMessage()]);
         }
     }
     public function submitForgetPasswordForm(Request $request)
