@@ -43,7 +43,7 @@ class ClientController extends BaseController
         $followers = Follow::where('following_id', Auth::user()->id)->count();
         $following = Follow::where('follower_id', Auth::user()->id)->count();
         $latest_eight_followers = Follow::with('follower_client')->where('following_id', Auth::user()->id)->orderBy('id', 'desc')->take(8)->get();
-        $post = Post::with('files','client','latestComment','singleReaction','multipleReactionCounts')->orderBy('created_at', 'desc')->where('client_id', Auth::user()->id)->paginate($limit);
+        $post = Post::with('files','client','latestComment','singleReaction','multipleReactionCounts','shared_post')->orderBy('created_at', 'desc')->where('client_id', Auth::user()->id)->paginate($limit);
         $photos = Post::where('client_id', Auth::user()->id)
             ->where('post_type', 'image')
             ->orderBy('created_at', 'desc')
@@ -84,7 +84,7 @@ class ClientController extends BaseController
         $followers = Follow::where('following_id', $id)->count();
         $following = Follow::where('follower_id', $id)->count();
         $latest_eight_followers = Follow::with('follower_client')->where('following_id', $id)->orderBy('id', 'desc')->take(8)->get();
-        $post = Post::with('files','client','latestComment','singleReaction','multipleReactionCounts')->orderBy('created_at', 'desc')->where('client_id', $id)->paginate($limit);
+        $post = Post::with('files','client','latestComment','singleReaction','multipleReactionCounts','shared_post')->orderBy('created_at', 'desc')->where('client_id', $id)->paginate($limit);
         $allpostphoto = Post::where('client_id', $id)->pluck('id')->toArray();
         $isfollowed = Follow::where('follower_id', Auth::user()->id)->where('following_id', $id)->count();
         $photos = PostFile::whereIn('post_id', $allpostphoto)

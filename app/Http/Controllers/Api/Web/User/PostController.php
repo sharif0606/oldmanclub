@@ -199,8 +199,8 @@ class PostController extends BaseController
 
         $post_share = new Post();
         $post_share->client_id = Auth::user()->id;
-        $post_share->message = $request->message;
-        $post_share->privacy_mode = $request->privacy_mode;
+        $post_share->message = $request->message ?? $post->message;
+        $post_share->privacy_mode = $request->privacy_mode ?? $post->privacy_mode;
         $post_share->shared_from = $post->id;
         $post_share->save();
 
