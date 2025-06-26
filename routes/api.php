@@ -41,13 +41,15 @@ Route::post('/client/reset-password/{token}', [AuthController::class, 'submitRes
 Route::post('/admin/login', [AdminAuthController::class, 'adminLogin']);
 //Route::get('/nfc/show/{id}', [NfcCardController::class, 'show']);
 Route::get('nfcqrurl/{id}/{client_id}', [nfc::class, 'showqrurl']);
+Route::get('/public/nfc/card/{id}', [NfcCardController::class, 'show']);
+Route::post('/public/nfc/card/save_contact/{id}', [NfcCardController::class, 'save_contact']);
 
 
 //Client Routes
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/client/logout', [AuthController::class, 'signOut']);
     Route::get('/client/all', [ClientController::class, 'index']);
-    Route::get('/nfc/list/{id}', [NfcCardController::class, 'index']);
+    Route::get('/nfc/list/{id}', [webNfc::class, 'index']);
     Route::post('/admin/logout', [AdminAuthController::class, 'adminLogout']);
 
     //location routes

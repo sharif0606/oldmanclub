@@ -54,6 +54,11 @@ class Post extends Model
     {
         return $this->hasMany(Share::class);
     }
+
+    public function shared_post(): HasMany
+    {
+        return $this->hasMany(Post::class,'shared_from','id')->with('client');
+    }
     public function files(): HasMany
     {
         return $this->hasMany(PostFile::class);

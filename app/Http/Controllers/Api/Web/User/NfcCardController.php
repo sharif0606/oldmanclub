@@ -26,6 +26,26 @@ use Illuminate\Support\Facades\Auth;
 
 class NfcCardController extends BaseController
 {
+    public function index($id)
+    {
+        $result = NfcCard::where('client_id', $id)->get();
+        //dd($data);
+        foreach ($result as $d) {
+            //dd($d->client);
+            $data[] = [
+                //"id" => $d->id,
+                "card_name" => $d->card_name,
+                "card_type" => $d->card_type,
+                "image" => $d->client->image ? asset('uploads/client/') . "/" . $d->client->image : '',
+                "url" => url('/') . "/api/nfcqrurl/" . encryptor('encrypt', $d->id).'/'.$d->client_id
+            ];
+        }
+        if ($data)
+            return response(array("status_code" => 200, "data" => $data));
+        else
+            return response(array("message" => "No data found", "status_code" => 202, "data" => array()));
+    }
+    
     public function nfc_field()
     {
         $nfc_field = NfcField::all();
