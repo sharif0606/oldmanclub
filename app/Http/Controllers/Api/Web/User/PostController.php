@@ -28,7 +28,7 @@ class PostController extends BaseController
     {
         $validator = \Validator::make($request->all(), [
             'privacy_mode' => 'required|in:public,friends,private',
-            'files.*' => 'nullable|file|max:10240', // Max 10MB per file
+            'files.*' => 'nullable|file|max:100000', // Max 100MB per file
         ]);
 
         if ($validator->fails()) {
