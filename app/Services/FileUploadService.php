@@ -17,7 +17,7 @@ class FileUploadService
      * @return PostFile|null
      * @throws Exception
      */
-    public function uploadPostFile(UploadedFile $file, int $postId): ?PostFile
+    public function uploadPostFile($file, int $postId)
     {
         try {
             $extension = $file->getClientOriginalExtension();
