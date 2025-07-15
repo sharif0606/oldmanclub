@@ -18,9 +18,16 @@ use Exception;
 use DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use App\Services\FileUploadService;
 
 class ClientController extends BaseController
 {
+    // protected $fileUploadService;
+
+    // public function __construct(FileUploadService $fileUploadService)
+    // {
+    //     $this->fileUploadService = $fileUploadService;
+    // }
     /**
      * Display a listing of the resource.
      */
@@ -350,16 +357,18 @@ class ClientController extends BaseController
             if (!file_exists($folder)) {
                 mkdir($folder, 0777, true);
             }
+            $fileUploadService = new FileUploadService();
+
             if ($request->hasFile('cover_photo')) {
                 $imageName = rand(111, 999) . time() . '.' . $request->cover_photo->extension();
                 $request->cover_photo->move($folder, $imageName);
                 $user->cover_photo = $monthfolder . '/' . $imageName;
                 $post = Post::create([
                     'message' => "Changed Cover Photo",
-                    'image' => $monthfolder . '/' . $imageName,
                     'client_id' => Auth::user()->id,
                     'post_type' => 'profile_photo'
                 ]);
+                $fileUploadService->uploadPostFile($request->cover_photo, $post->id);
             }   
             if ($request->hasFile('image')) {
                 $imageName = rand(1111, 9999) . time() . '.' . $request->image->extension();
@@ -367,10 +376,10 @@ class ClientController extends BaseController
                 $user->image = $monthfolder . '/' . $imageName;
                 $post = Post::create([
                     'message' => "Changed Profile Photo",
-                    'image' => $monthfolder . '/' . $imageName,
                     'client_id' => Auth::user()->id,
                     'post_type' => 'cover_photo'
                 ]);
+                $fileUploadService->uploadPostFile($request->image, $post->id);
             }
             $user->profile_overview = $request->profile_overview;
             $user->tagline = $request->tagline;

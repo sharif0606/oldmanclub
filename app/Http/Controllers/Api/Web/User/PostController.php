@@ -7,16 +7,28 @@ use App\Models\User\PostFile;
 use App\Models\User\PostReport;
 use App\Models\User\PostReaction;
 use App\Http\Controllers\Api\BaseController;
+use App\Services\FileUploadService;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Exception;
+
 class PostController extends BaseController
 {
+    protected $fileUploadService;
 
-    public function index($limit = 20)
+    public function __construct(FileUploadService $fileUploadService)
     {
-        $post = Post::with('files','client','latestComment','singleReaction','multipleReactionCounts','shared_post')->orderBy('created_at', 'desc')->paginate($limit);
+        $this->fileUploadService = $fileUploadService;
+    }
+
+    public function index(Request $request,$limit = 20)
+    {
+        $post = Post::with('files','client','latestComment','singleReaction','multipleReactionCounts','shared_post');
+        if($request->has('search')){
+            $post->where('message','like','%'.$request->search.'%');
+        }
+        $post = $post->orderBy('created_at', 'desc')->paginate($limit);
         return $this->sendResponse($post, 'Posts fetched successfully');
     }
 
@@ -45,13 +57,15 @@ class PostController extends BaseController
         ]);
 
         // Handle multiple files if present
-        if($post){
-            if ($request->hasFile('files')) {
-                $files = $request->file('files');
-                $fileDetails = [];
-                
-                foreach ($files as $file) {
-                     $this->handleFileUpload($file,$post->id);
+        if($post && $request->hasFile('files')) {
+            $files = $request->file('files');
+            
+            foreach ($files as $file) {
+                try {
+                    $this->fileUploadService->uploadPostFile($file, $post->id);
+                } catch (Exception $e) {
+                    // Log error and continue with other files
+                    \Log::error('File upload failed: ' . $e->getMessage());
                 }
             }
         }
@@ -59,50 +73,6 @@ class PostController extends BaseController
         return $this->sendResponse($post->load('files'), 'Post created successfully');
     }
 
-    private function handleFileUpload($file, $postId)
-    {
-        $extension = $file->getClientOriginalExtension();
-        $mimeType = $file->getMimeType();
-        $filefolder = date('Y') . '/' . date('m');
-        $fileName = rand(1111, 9999) . Auth::user()->id . '_' . rand(111, 999) . time() . '.' . $extension;
-
-        // Determine file type and directory
-        if (str_starts_with($mimeType, 'image/')) {
-            $directory = 'images';
-            $fileType = 'image';
-        } elseif (str_starts_with($mimeType, 'video/')) {
-            $directory = 'videos';
-            $fileType = 'video';
-        } else {
-            return null; // Skip unsupported file types
-        }
-
-        // Create directory if it doesn't exist
-        $uploadPath = public_path('uploads/post/' . $directory . '/' . $filefolder);
-        if (!file_exists($uploadPath)) {
-            mkdir($uploadPath, 0777, true);
-        }
-
-        // Move file to appropriate directory
-        $file->move($uploadPath, $fileName);
-        
-        // Get file size after moving
-        $fullPath = $uploadPath . '/' . $fileName;
-        $fileSize = file_exists($fullPath) ? filesize($fullPath) : 0;
-
-        $postFile = PostFile::create([
-            'post_id' => $postId,
-            'file_name' => $fileName,
-            'file_type' => $fileType,
-            'file_size' => $fileSize,
-            'file_path' => $directory . '/' . $filefolder . '/' . $fileName
-        ]);
-        return $postFile;
-    }
-
-    /**
-     * Update the image post
-     */
     public function post_update(Request $request, $id){
         $post = Post::where('client_id', Auth::user()->id)->findOrFail($id);
         
@@ -118,9 +88,7 @@ class PostController extends BaseController
             foreach($files as $file){
                 $postFile = PostFile::where('post_id',$post->id)->where('id',$file)->first();
                 if($postFile){
-                    if(file_exists(public_path('uploads/post/'.$postFile->file_path))){
-                        unlink(public_path('uploads/post/'.$postFile->file_path));
-                    }
+                    $this->fileUploadService->deleteFile($postFile->file_path);
                     $postFile->delete();
                 }
             }
@@ -129,7 +97,11 @@ class PostController extends BaseController
         if($request->hasFile('files')){
             $files = $request->file('files');
             foreach($files as $file){
-                $this->handleFileUpload($file,$post->id);
+                try {
+                    $this->fileUploadService->uploadPostFile($file, $post->id);
+                } catch (Exception $e) {
+                    \Log::error('File upload failed: ' . $e->getMessage());
+                }
             }
         }
     
@@ -151,9 +123,7 @@ class PostController extends BaseController
         if($post){
             $files = PostFile::where('post_id',$id)->get();
             foreach($files as $file){
-                if(file_exists(public_path('uploads/post/'.$file->file_path))){
-                    unlink(public_path('uploads/post/'.$file->file_path));
-                }
+                $this->fileUploadService->deleteFile($file->file_path);
                 $file->delete();
             }
             $post->delete();
