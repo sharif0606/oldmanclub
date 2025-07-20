@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('clients', function (Blueprint $table) {
             $table->json('profile_visibility')->nullable();
+            $table->integer('gender')->nullable();
         });
     }
 
@@ -23,6 +24,7 @@ return new class extends Migration
     {
         Schema::table('clients', function (Blueprint $table) {
             $table->dropColumn('profile_visibility');
+            $table->dropColumn('gender');
         });
     }
 };

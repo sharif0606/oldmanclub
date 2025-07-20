@@ -14,7 +14,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Client extends Model
 {
-    protected $fillable = ['is_online','profile_visibility'];
+    protected $fillable = ['is_online','profile_visibility','gender'];
     use HasFactory, SoftDeletes, HasApiTokens, Notifiable;
     
     public function feedback(){

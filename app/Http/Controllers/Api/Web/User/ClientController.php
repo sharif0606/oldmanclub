@@ -314,6 +314,7 @@ class ClientController extends BaseController
             $user->current_state_id = $request->current_state_id;
             //$user->current_city_id = $request->current_city_id;
             //$user->current_zip_code = $request->current_zip_code;
+            $user->gender = $request->gender;
             $user->from_country_id = $request->from_country_id;
             $user->from_city_id = $request->from_city_id;
             $user->from_state_id = $request->from_state_id;
