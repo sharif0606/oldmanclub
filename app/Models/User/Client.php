@@ -75,8 +75,11 @@ class Client extends Model
     public function fromstate(){
         return $this->belongsTo(State::class,'from_state_id','id');
     }
-    public function city(){
-        return $this->belongsTo(City::class);
+    public function fromcity(){
+        return $this->belongsTo(City::class,'from_city_id','id');
+    }
+    public function currentcity(){
+        return $this->belongsTo(City::class,'current_city_id','id');
     }
     public function followers()
     {

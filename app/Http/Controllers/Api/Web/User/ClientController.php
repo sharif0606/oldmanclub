@@ -40,7 +40,7 @@ class ClientController extends BaseController
     }
     public function myProfile($limit = 20)
     {
-        $client = Client::with('metas')->find(Auth::user()->id);
+        $client = Client::with('metas','currentcountry','currentstate','fromcountry','fromstate','fromcity','currentcity')->find(Auth::user()->id);
         $followers = Follow::where('following_id', Auth::user()->id)->count();
         $following = Follow::where('follower_id', Auth::user()->id)->count();
         $latest_eight_followers = Follow::with('follower_client')->where('following_id', Auth::user()->id)->orderBy('id', 'desc')->take(8)->get();
