@@ -18,7 +18,6 @@ class Post extends Model
         'post_type',
         'privacy_mode',
         'shared_from'
-       
     ];
     public function client(){
         return $this->belongsTo(Client::class ,'client_id','id')->with('fromcountry');
@@ -58,11 +57,10 @@ class Post extends Model
     public function shared_post(){
         return $this->hasOne(Post::class,'id','shared_from')->with('client');
     }
-    public function files(): HasMany
-    {
+    public function files(){
         return $this->hasMany(PostFile::class);
     }
-    public function reports(): HasMany
+    public function reports()
     {
         return $this->hasMany(PostReport::class);
     }

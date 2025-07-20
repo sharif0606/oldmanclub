@@ -88,7 +88,7 @@ class ChatUserController extends Controller
     public function search(Request $request)
     {
         if ($request->ajax()) {
-            $datas = Client::where('fname', 'LIKE', '%' . $request->search . "%")->orderBy('fname')->get();
+            $datas = Client::with('metas')->where('fname', 'LIKE', '%' . $request->search . "%")->orderBy('fname')->get();
             $contacts = $datas->groupBy(function ($item, $key) {
                 return substr($item->name, 0, 1);
             });

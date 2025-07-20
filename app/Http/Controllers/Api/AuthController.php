@@ -119,12 +119,7 @@ class AuthController extends BaseController
                 $user->contact_no = $request->contact_or_email;
             }
             $user->dob = $request->birthYear . '-' . $request->birthMonth . '-' . $request->birthDay;
-            // $user->address_line_1 = $request->address_line_1;
-            // $user->address_line_2 = $request->address_line_2;
-            // $user->country_id = $request->country_id;
-            // $user->city_id = $request->city_id;
-            // $user->state_id = $request->state_id;
-            // $user->zip_code = $request->zip_code;
+            
             $user->status = 1;
             $user->password = Hash::make($request->password);
 
@@ -182,12 +177,8 @@ class AuthController extends BaseController
     public function submitForgetPasswordForm(Request $request)
     {
         $request->validate(
-            [
-                'email' => 'required|email|exists:clients',
-            ],
-            [
-                'email.exists' => 'The email address does not exists.', // Customize the error message
-            ]
+            ['email' => 'required|email|exists:clients'],
+            ['email.exists' => 'The email address does not exists.']
         );
 
         $token = Str::random(64);

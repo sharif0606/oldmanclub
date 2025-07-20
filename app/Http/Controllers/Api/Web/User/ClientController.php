@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Web\User;
 
 use App\Models\User\Client;
+use App\Models\User\ClientMeta;
 use App\Models\User\Comment;
 use App\Models\User\Post;
 use App\Models\User\PostFile;
@@ -27,7 +28,7 @@ class ClientController extends BaseController
 
     public function index()
     {
-        $client = Client::find(Auth::user()->id);
+        $client = Client::with('metas')->find(Auth::user()->id);
         $followers = Follow::where('following_id', Auth::user()->id)->orderBy('id', 'desc')->take(4)->get();
         $post = Post::where('client_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
         return $this->sendResponse([
@@ -39,7 +40,7 @@ class ClientController extends BaseController
     }
     public function myProfile($limit = 20)
     {
-        $client = Client::find(Auth::user()->id);
+        $client = Client::with('metas')->find(Auth::user()->id);
         $followers = Follow::where('following_id', Auth::user()->id)->count();
         $following = Follow::where('follower_id', Auth::user()->id)->count();
         $latest_eight_followers = Follow::with('follower_client')->where('following_id', Auth::user()->id)->orderBy('id', 'desc')->take(8)->get();
@@ -80,7 +81,7 @@ class ClientController extends BaseController
     }
     public function userProfile($id,$limit = 20)
     {
-        $client = Client::find($id);
+        $client = Client::with('metas')->find($id);
         $followers = Follow::where('following_id', $id)->count();
         $following = Follow::where('follower_id', $id)->count();
         $latest_eight_followers = Follow::with('follower_client')->where('following_id', $id)->orderBy('id', 'desc')->take(8)->get();
@@ -99,13 +100,13 @@ class ClientController extends BaseController
             ->pluck('follower_id'); // Extract only the `follower_id`
 
         // Get the list of online users from the followers
-        $online_active_users = Client::whereIn('id', $friend_list)
+        $online_active_users = Client::with('metas')->whereIn('id', $friend_list)
             ->where('is_online', true) // Check if the user is online
             ->get();
 
         // Get online friends whose birthday is today
         $today = Carbon::today()->format('m-d'); // Extracts month and day
-        $online_birthday_users = Client::whereIn('id', $friend_list)
+        $online_birthday_users = Client::with('metas')->whereIn('id', $friend_list)
             ->whereRaw("DATE_FORMAT(dob, '%m-%d') = ?", [$today]) // Birthday check
             ->get();
 
@@ -131,7 +132,7 @@ class ClientController extends BaseController
     
     public function myNfc()
     {
-        $client = Client::find(Auth::user()->id);
+        $client = Client::with('metas')->find(Auth::user()->id);
         $nfc_cards = NfcCard::with(['client', 'card_design', 'nfcFields','nfc_info'])->where('client_id', Auth::user()->id)->paginate(10);
         //return view('user.myNfc', compact('client','nfc_cards'));
         // Get the Friend List  of the current user
@@ -185,7 +186,7 @@ class ClientController extends BaseController
     }
     public function accountSetting()
     {
-        $client = Client::find(Auth::user()->id);
+        $client = Client::with('metas')->find(Auth::user()->id);
         $countries = Country::get();
         return $this->sendResponse([
             'client' => $client,
@@ -198,7 +199,7 @@ class ClientController extends BaseController
         $loggedInUser = Auth::user()->id;
         
         //$otherspost = Post::where('privacy_mode', 'public')->orderBy('id', 'desc')->get();
-        $client = Client::find($loggedInUser);
+        $client = Client::with('metas')->find($loggedInUser);
         $followers = Follow::where('following_id', $loggedInUser)->orderBy('id', 'desc')->take(4)->get();
         
 
@@ -240,14 +241,14 @@ class ClientController extends BaseController
             ->pluck('follower_id'); // Extract only the `follower_id`
 
         // Get the list of online users from the followers
-        $online_active_users = Client::whereIn('id', $friend_list)
+        $online_active_users = Client::with('metas')->whereIn('id', $friend_list)
             ->where('is_online', true) // Check if the user is online
             ->get();
 
         // Birthday
         $today = Carbon::today()->format('m-d'); // Extracts month and day
         // Get online friends whose birthday is today
-        $online_birthday_users = Client::whereIn('id', $friend_list)
+        $online_birthday_users = Client::with('metas')->whereIn('id', $friend_list)
             ->whereRaw("DATE_FORMAT(dob, '%m-%d') = ?", [$today]) // Birthday check
             ->get();
 
@@ -290,7 +291,7 @@ class ClientController extends BaseController
     {
         //dd($request);
         try {
-            $user = Client::find(Auth::user()->id);
+            $user = Client::with('metas')->find(Auth::user()->id);
             $count = Client::where('username', $request->username)->count();
             if ($count > 0  && $request->username !== $user->username) {
                 return response()->json([
@@ -324,8 +325,23 @@ class ClientController extends BaseController
             $user->id_no_type = $request->id_no_type;
             $user->marital_status = $request->marital_status;
             $user->designation = $request->designation;
-           
+            $user->profile_visibility = str_replace("'", '"', $request->profile_visibility);
+          
             if ($user->save()) {
+
+                if($request->has('metas')){
+                    $metas = json_decode(str_replace("'", '"', $request->metas), true);
+                    foreach($metas as $meta){
+                        ClientMeta::updateOrCreate([
+                            'meta_key' => trim($meta['meta_key']),
+                            'client_id' => $user->id
+                        ],[
+                            'meta_value' => $meta['meta_value'],
+                            'meta_status' => $meta['meta_status'] ?? 1
+                        ]);
+                    }
+                }
+
                 $this->notice::success('Save Changes Successfully');
                 return $this->sendResponse([
                     'status' => true,
@@ -344,7 +360,7 @@ class ClientController extends BaseController
     public function save_cover_profile_photo(Request $request)
     {
         try {
-            $user = Client::find(Auth::user()->id);
+            $user = Client::with('metas')->find(Auth::user()->id);
             $monthfolder = date('Y-m');
             $folder = public_path('uploads/client/' . $monthfolder);
             if (!file_exists($folder)) {
@@ -382,7 +398,7 @@ class ClientController extends BaseController
     public function change_password(Request $request)
     {
         try {
-            $data = Client::find(Auth::user()->id);
+            $data = Client::with('metas')->find(Auth::user()->id);
             //validate current password
             if (!Hash::check($request->current_password, $data->password)) {
                 $this->notice::error('Current Password is incorrect');
@@ -414,7 +430,7 @@ class ClientController extends BaseController
         $followIds = Follow::where('follower_id', Auth::user()->id)->pluck('following_id')->toArray();
         $search_by_people = trim($request->search);
         if ($request->search) {
-            $follow_connections = Client::with('followers')
+            $follow_connections = Client::with('followers','metas')
             ->select('id','fname','middle_name','last_name','username','display_name','designation','image')
             ->where(function ($query) use ($search_by_people) {
                 $names = explode(' ', $search_by_people);
@@ -433,7 +449,7 @@ class ClientController extends BaseController
                     return $client;
                 });
         } else {
-            $follow_connections = Client::with('followers')
+            $follow_connections = Client::with('followers','metas')
                 ->select('id','fname','middle_name','last_name','username','display_name','designation','image')
                 ->where('id', '!=', Auth::user()->id)
                 ->orderBy('id', 'desc')
@@ -450,16 +466,16 @@ class ClientController extends BaseController
     }
     public function client_by_search($username)
     {
-        $client = Client::where('username', $username)->first();
+        $client = Client::with('metas')->where('username', $username)->first();
         $post = Post::where('client_id', $client->id)->orderBy('created_at', 'desc')->get();
         $postCount = Post::where('client_id', Auth::user()->id)->count();
         $followers = Follow::where('following_id', $client->id)->orderBy('id', 'desc')->take(4)->get();
-        $connection = Client::where('username', $username)->first();
+        $connection = Client::with('metas')->where('username', $username)->first();
         $followIds = Follow::where('following_id', Auth::user()->id)->pluck('follower_id')->toArray();
 
 
         // Get the list of online users from the followers
-        $online_active_users = Client::whereIn('id', $followIds)
+        $online_active_users = Client::with('metas')->whereIn('id', $followIds)
             ->where('is_online', true) // Check if the user is online
             ->where('id', '!=', $client->id)
             ->get();
@@ -480,7 +496,7 @@ class ClientController extends BaseController
     {
         $followIds = Follow::where('follower_id', Auth::user()->id)->pluck('following_id')->toArray();
        
-        $follow_connections = Client::select('id','fname','middle_name','last_name','username','display_name','designation','image','is_online' ,'dob','status')
+        $follow_connections = Client::with('metas')->select('id','fname','middle_name','last_name','username','display_name','designation','image','is_online' ,'dob','status')
                                 ->where('id', '!=', Auth::user()->id)
                                 ->whereNotIn('id', $followIds)
                                 ->paginate($limit);

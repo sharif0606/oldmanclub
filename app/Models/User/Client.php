@@ -14,7 +14,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Client extends Model
 {
-    protected $fillable = ['is_online'];
+    protected $fillable = ['is_online','profile_visibility'];
     use HasFactory, SoftDeletes, HasApiTokens, Notifiable;
     
     public function feedback(){
@@ -22,6 +22,9 @@ class Client extends Model
     }
     public function cus_feedback(){
         return $this->hasMany(PhoneCustomerFeedback::class);
+    }
+    public function metas(){
+        return $this->hasMany(ClientMeta::class);
     }
     public function cusfeedback(){
         return $this->hasMany(PrintCustomerFeedback::class);
