@@ -97,7 +97,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/post/reaction', [post::class, 'post_reaction']);
     Route::post('/post/share', [post::class, 'post_share']);
     Route::post('/post_reaction_delete', [post::class, 'post_reaction_delete']);
-    Route::get('/post/background', [post::class, 'post_background']);
+    Route::get('/post_background', [post::class, 'post_background']);
     // nfc card routes
     Route::get('/nfc/field', [webNfc::class, 'nfc_field']);
     Route::post('/nfc/card/store', [webNfc::class, 'store']);
