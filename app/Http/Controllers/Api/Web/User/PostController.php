@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Exception;
+use App\Models\PostBackground;
 
 class PostController extends BaseController
 {
@@ -30,6 +31,11 @@ class PostController extends BaseController
         }
         $post = $post->orderBy('created_at', 'desc')->paginate($limit);
         return $this->sendResponse($post, 'Posts fetched successfully');
+    }
+
+    public function post_background(){
+        $post_background = PostBackground::with('category')->get();
+        return $this->sendResponse($post_background, 'Post background fetched successfully');
     }
 
     public function user_posts(){

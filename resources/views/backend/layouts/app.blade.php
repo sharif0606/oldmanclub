@@ -179,6 +179,16 @@
                         </li>
                         <li>
                             <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                <i class="fa-solid fa-address-card"></i>
+                                <span class="nav-text">Post</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="{{route('post-background-category.index')}}">Post Background Category</a></li>
+                                <li><a href="{{route('post-background.index')}}">Post Background</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                                 <i class="fa-solid fa-print"></i>
                                 <span class="nav-text">Printing Service</span>
                             </a>

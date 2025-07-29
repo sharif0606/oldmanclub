@@ -24,6 +24,10 @@ use App\Http\Controllers\Backend\Admin\PostController;
 use App\Http\Controllers\Backend\Admin\ContactUserController as contact;
 use App\Http\Controllers\Backend\Admin\CouponController as coupon;
 
+use App\Http\Controllers\Backend\Admin\PostBackgroundCategoryController as post_background_category;
+use App\Http\Controllers\Backend\Admin\PostBackgroundController as post_background;
+
+
 // use App\Http\Controllers\Backend\PhoneBookController as phonebook;
 use App\Http\Controllers\Backend\Website\SettingController as setting;
 use App\Http\Controllers\Backend\Website\SliderController as slider;
@@ -163,6 +167,10 @@ Route::middleware(['checkrole'])->prefix('admin')->group(function () {
     Route::post('shippingUpdate/{id}', [ShippingController::class, 'shipping_update'])->name('shipping_update');
     Route::resource('shipstatus', shipstatus::class);
     Route::resource('shiptrack', shiptrack::class);
+
+    // Post background
+    Route::resource('post-background-category', post_background_category::class);
+    Route::resource('post-background', post_background::class);
 
     // Nfc
     Route::resource('nfc_field', nfc_field::class);
