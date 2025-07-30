@@ -31,7 +31,7 @@ class PostBackgroundCategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category_name' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
         ]);
 
         $post_background_category = PostBackgroundCategory::create($request->all());
