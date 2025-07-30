@@ -17,8 +17,14 @@ class Post extends Model
         'image',
         'post_type',
         'privacy_mode',
-        'shared_from'
+        'shared_from',
+        'background_url'
     ];
+
+    public function getBackgroundUrlAttribute($value)
+    {
+        return asset('public/uploads/post_background/' . $value);
+    }
     public function client(){
         return $this->belongsTo(Client::class ,'client_id','id')->with('fromcountry');
     }

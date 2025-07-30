@@ -34,7 +34,7 @@ class PostController extends BaseController
     }
 
     public function post_background(){
-        $post_background = PostBackground::with('category')->get();
+        $post_background = PostBackground::with('category')->where('status',1)->get();
         return $this->sendResponse($post_background, 'Post background fetched successfully');
     }
 
@@ -60,6 +60,7 @@ class PostController extends BaseController
             'client_id' => Auth::user()->id,
             'message' => $content,
             'privacy_mode' => $request->privacy_mode,
+            'background_url' => $request->background_url,
         ]);
 
         // Handle multiple files if present
@@ -87,6 +88,9 @@ class PostController extends BaseController
         $post->message = $content;
         $post->updated_at = Carbon::now();
         $post->privacy_mode = $request->privacy_mode;
+        if($request->background_url){
+            $post->background_url = $request->background_url;
+        }
         $post->save();
 
         if($request->removefiles){
@@ -178,6 +182,7 @@ class PostController extends BaseController
         $post_share->message = $request->message ?? $post->message;
         $post_share->privacy_mode = $request->privacy_mode ?? $post->privacy_mode;
         $post_share->shared_from = $post->id;
+        $post_share->background_url = $post->background_url;
         $post_share->save();
 
         $post_share_file = PostFile::where('post_id',$post->id)->get();

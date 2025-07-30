@@ -18,6 +18,11 @@ class PostBackground extends Model
 
     public function getImageAttribute($value)
     {
-        return asset('public/uploads/post_background/' . $value);
+        $url = asset('public/uploads/post_background/' . $value);
+        $path = $value;
+        return [
+            'url' => $url,
+            'path' => $path
+        ];
     }
 }
