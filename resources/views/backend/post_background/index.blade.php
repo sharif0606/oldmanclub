@@ -27,7 +27,7 @@
                         <tr>
                             <th scope="row">{{ ++$loop->index }}</th>
                             <td>{{$p->category?->name}}</td>
-                            <td><img src="{{asset('public/uploads/post_background/'.$p->image)}}" alt="Image" width="100"></td>
+                            <td><img src="{{$p->image['url']}}" alt="Image" width="100"></td>
                             <td class="white-space-nowrap">
                                 <a href="{{route('post-background.edit',encryptor('encrypt',$p->id))}}">
                                     <i class="fa fa-edit"></i>
