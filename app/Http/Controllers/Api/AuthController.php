@@ -123,6 +123,7 @@ class AuthController extends BaseController
             $user->status = 1;
             $user->password = Hash::make($request->password);
 
+
             // Generate username based on middle and last name
             $username = strtolower(substr($request->fname, 0, 1) . $request->last_name);
             $count = Client::where('username', 'like', $username . '%')->count();
@@ -130,6 +131,7 @@ class AuthController extends BaseController
                 $username .= $count + 1;
             }
             $user->username = $username;
+            $user->profile_visibility = '{"dob": "public", "city": "public", "email": "private", "status": "public", "location": "public", "contact_no": "private", "marital_status": "public"}';
 
             if ($user->save()) {
 
