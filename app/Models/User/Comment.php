@@ -25,8 +25,8 @@ class Comment extends Model
         return $this->hasMany(Reply::class)
        // ->whereNull('parent_id')  // Get only top-level replies
         ->orderBy('created_at', 'desc')
-        ->with(['client_comment', 'reactions','singleReaction', 'children' => function($query) {
-            $query->with(['client_comment', 'reactions','singleReaction', 'children' => function($query) {
+        ->with(['client_comment', 'reactions','singleReaction','files', 'children' => function($query) {
+            $query->with(['client_comment', 'reactions','singleReaction','files', 'children' => function($query) {
                 $query->with(['client_comment','singleReaction', 'reactions','files']);
             }]);
         }]);
