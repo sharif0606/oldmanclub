@@ -19,7 +19,7 @@ class Reply extends Model
     }
     public function comment()
     {
-        return $this->belongsTo(Comment::class);
+        return $this->belongsTo(Comment::class)->with('files');
     }
     public function reactions()
     {
@@ -32,11 +32,15 @@ class Reply extends Model
     // Relationship for nested replies
     public function children()
     {
-        return $this->hasMany(Reply::class, 'parent_id')->with('client_comment', 'children', 'reactions');
+        return $this->hasMany(Reply::class, 'parent_id')->with('client_comment', 'children', 'reactions','files');
     }
 
     public function parent()
     {
-        return $this->belongsTo(Reply::class, 'parent_id');
+        return $this->belongsTo(Reply::class, 'parent_id')->with('files');
+    }
+    public function files()
+    {
+        return $this->hasMany(ReplayFile::class);
     }
 }

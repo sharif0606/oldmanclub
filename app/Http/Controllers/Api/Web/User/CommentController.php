@@ -10,9 +10,19 @@ use App\Models\User\ReplyReaction;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use App\Services\CommentFileUploadService;
+use App\Services\ReplayFileUploadService;
 use Exception;
 class CommentController extends BaseController
 {
+    protected $commentFileUploadService;
+    protected $replyFileUploadService;
+
+    public function __construct(CommentFileUploadService $commentFileUploadService, ReplayFileUploadService $replyFileUploadService)
+    {
+        $this->commentFileUploadService = $commentFileUploadService;
+        $this->replyFileUploadService = $replyFileUploadService;
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -65,6 +75,19 @@ class CommentController extends BaseController
             $comment->client_id = Auth::user()->id;
             // Save the comment
             $comment->save();
+            // Handle multiple files if present
+            if($comment && $request->hasFile('files')) {
+                $files = $request->file('files');
+                
+                foreach ($files as $file) {
+                    try {
+                        $this->commentFileUploadService->uploadCommentFile($file, $comment->id);
+                    } catch (Exception $e) {
+                        // Log error and continue with other files
+                        \Log::error('File upload failed: ' . $e->getMessage());
+                    }
+                }
+            }
 
             // Return the newly created comment as a JSON response
             return $this->sendResponse([
@@ -79,6 +102,7 @@ class CommentController extends BaseController
             }
         }
     }
+   
 
     public function replay(Request $request)
     {
@@ -93,6 +117,18 @@ class CommentController extends BaseController
             $reply->client_id = Auth::user()->id;
             // Save the comment
             $reply->save();
+            if($reply && $request->hasFile('files')) {
+                $files = $request->file('files');
+                
+                foreach ($files as $file) {
+                    try {
+                        $this->replyFileUploadService->uploadReplayFile($file, $reply->id);
+                    } catch (Exception $e) {
+                        // Log error and continue with other files
+                        \Log::error('File upload failed: ' . $e->getMessage());
+                    }
+                }
+            }
             $comment = Comment::find($request->comment_id);
             return response()->json([
                 'reply' => $reply,

@@ -27,7 +27,7 @@ class Comment extends Model
         ->orderBy('created_at', 'desc')
         ->with(['client_comment', 'reactions','singleReaction', 'children' => function($query) {
             $query->with(['client_comment', 'reactions','singleReaction', 'children' => function($query) {
-                $query->with(['client_comment','singleReaction', 'reactions']);
+                $query->with(['client_comment','singleReaction', 'reactions','files']);
             }]);
         }]);
     }
@@ -39,5 +39,9 @@ class Comment extends Model
     public function singleReaction()
     {
         return $this->hasOne(CommentReaction::class)->with('client')->where('client_id',Auth::user()->id);
+    }
+    public function files()
+    {
+        return $this->hasMany(CommentFile::class);
     }
 }
