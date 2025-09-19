@@ -182,7 +182,7 @@ class PostController extends BaseController
         $post_share->message = $request->message ?? $post->message;
         $post_share->privacy_mode = $request->privacy_mode ?? $post->privacy_mode;
         $post_share->shared_from = $post->id;
-        $post_share->background_url = $post->background_url;
+        $post_share->background_url = $post->getRawOriginal('background_url');
         $post_share->save();
 
         $post_share_file = PostFile::where('post_id',$post->id)->get();
