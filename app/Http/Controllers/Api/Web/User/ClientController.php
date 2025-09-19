@@ -506,5 +506,20 @@ class ClientController extends BaseController
             'follow_connections' => $follow_connections
         ], 'Search by People');
     }
+    public function mentioned_people(Request $request,$limit = 10)
+    {
+        $follow_connections = Client::select('id','fname','middle_name','last_name','username','display_name','image')
+                                ->where('id', '!=', Auth::user()->id)
+                                ->when($request->search, function ($query) use ($request) {
+                                    $query->where('fname', 'like', "%{$request->search}%")
+                                        ->orWhere('middle_name', 'like', "%{$request->search}%")
+                                        ->orWhere('last_name', 'like', "%{$request->search}%");
+                                })
+                                ->paginate($limit);
+        
+        return $this->sendResponse([
+            'follow_connections' => $follow_connections
+        ], 'Search by People');
+    }
 
 }
