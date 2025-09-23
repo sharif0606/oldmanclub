@@ -12,16 +12,18 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Services\CommentFileUploadService;
 use App\Services\ReplayFileUploadService;
+use App\Services\UrlConversionService;
 use Exception;
 class CommentController extends BaseController
 {
     protected $commentFileUploadService;
     protected $replyFileUploadService;
-
-    public function __construct(CommentFileUploadService $commentFileUploadService, ReplayFileUploadService $replyFileUploadService)
+    protected $urlConversionService;
+    public function __construct(CommentFileUploadService $commentFileUploadService, ReplayFileUploadService $replyFileUploadService, UrlConversionService $urlConversionService)
     {
         $this->commentFileUploadService = $commentFileUploadService;
         $this->replyFileUploadService = $replyFileUploadService;
+        $this->urlConversionService = $urlConversionService;
     }
 
     /**
@@ -68,7 +70,7 @@ class CommentController extends BaseController
     public function store(Request $request)
     {
         try{
-            $content = strip_tags(preg_replace('/\R{2,}/', "\n", $request->input('content')));
+            $content = $this->urlConversionService->processTextContent($request->input('content'));
             $comment = new Comment();
             $comment->post_id = $request->post_id;
             $comment->content = $content;
@@ -112,7 +114,7 @@ class CommentController extends BaseController
             if($request->parent_id!="null"){
                 $reply->parent_id = $request->parent_id;
             }
-            $content = strip_tags(preg_replace('/\R{2,}/', "\n", $request->input('content')));
+            $content = $this->urlConversionService->processTextContent($request->input('content'));
             $reply->content = $content;
             $reply->client_id = Auth::user()->id;
             // Save the comment
