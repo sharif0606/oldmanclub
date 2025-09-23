@@ -8,6 +8,7 @@ use App\Models\User\PostReport;
 use App\Models\User\PostReaction;
 use App\Http\Controllers\Api\BaseController;
 use App\Services\FileUploadService;
+use App\Services\UrlConversionService;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -17,10 +18,11 @@ use App\Models\PostBackground;
 class PostController extends BaseController
 {
     protected $fileUploadService;
-
-    public function __construct(FileUploadService $fileUploadService)
+    protected $urlConversionService;
+    public function __construct(FileUploadService $fileUploadService, UrlConversionService $urlConversionService)
     {
         $this->fileUploadService = $fileUploadService;
+        $this->urlConversionService = $urlConversionService;
     }
 
     public function index(Request $request,$limit = 20)
@@ -54,8 +56,9 @@ class PostController extends BaseController
         }
 
         // Normalize line breaks and remove HTML tags
-        $content = strip_tags(preg_replace('/\R{2,}/', "\n", $request->input('message')));
-
+        //$content = strip_tags(preg_replace('/\R{2,}/', "\n", $request->input('message')), '<b><i><u>');
+        //$content = strip_tags(preg_replace('/\R{2,}/', "\n", $request->input('message')));
+        $content = $this->urlConversionService->processTextContent($request->input('message'));
         $post = Post::create([
             'client_id' => Auth::user()->id,
             'message' => $content,
@@ -84,7 +87,8 @@ class PostController extends BaseController
         $post = Post::where('client_id', Auth::user()->id)->findOrFail($id);
         
         // Normalize line breaks and remove HTML tags before updating the content
-        $content = strip_tags(preg_replace('/\R{2,}/', "\n", $request->input('message')));
+        //$content = strip_tags(preg_replace('/\R{2,}/', "\n", $request->input('message')), '<b><i><u>');
+        $content = $this->urlConversionService->processTextContent($request->input('message'));
         $post->message = $content;
         $post->updated_at = Carbon::now();
         $post->privacy_mode = $request->privacy_mode;
