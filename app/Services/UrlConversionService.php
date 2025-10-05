@@ -70,7 +70,7 @@ class UrlConversionService
      * @param array $allowedTags
      * @return string
      */
-    public function processTextContent($text, array $allowedTags = ['<b>', '<i>', '<u>','<h1>','<p>','<br/>','<br>']): string
+    public function processTextContent($text, array $allowedTags = ['<b>', '<i>', '<u>','<h1>','<p>','<br/>','<br>'])
     {
         if($text == null){
             return null;
