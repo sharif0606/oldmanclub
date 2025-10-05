@@ -70,8 +70,14 @@ class UrlConversionService
      * @param array $allowedTags
      * @return string
      */
-    public function processTextContent(string $text, array $allowedTags = ['<b>', '<i>', '<u>','<h1>','<p>','<br/>','<br>']): string
+    public function processTextContent($text, array $allowedTags = ['<b>', '<i>', '<u>','<h1>','<p>','<br/>','<br>']): string
     {
+        if($text == null){
+            return null;
+        }
+        if($text == ''){
+            return '';
+        }
         // Normalize line breaks
         $content = preg_replace('/\R{2,}/', "\n", $text);
         
