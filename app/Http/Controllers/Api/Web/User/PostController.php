@@ -28,7 +28,7 @@ class PostController extends BaseController
     public function index(Request $request,$limit = 20)
     {
         $post = Post::with('files','client','latestComment','singleReaction','multipleReactionCounts','shared_post');
-        if($request->has('search')){
+        if($request->has('search') && $request->search != ''){
             $post->where('message','like','%'.$request->search.'%');
         }
         $post = $post->orderBy('created_at', 'desc')->paginate($limit);
