@@ -73,7 +73,7 @@ class CommentController extends BaseController
             $content = $this->urlConversionService->processTextContent($request->input('content'));
             $comment = new Comment();
             $comment->post_id = $request->post_id;
-            $comment->content = $content;
+            $comment->content = $content ?? null;
             $comment->client_id = Auth::user()->id;
             // Save the comment
             $comment->save();
@@ -115,7 +115,7 @@ class CommentController extends BaseController
                 $reply->parent_id = $request->parent_id;
             }
             $content = $this->urlConversionService->processTextContent($request->input('content'));
-            $reply->content = $content;
+            $reply->content = $content ?? null;
             $reply->client_id = Auth::user()->id;
             // Save the comment
             $reply->save();
