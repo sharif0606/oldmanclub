@@ -11,6 +11,9 @@ use App\Models\Conversation;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Category;
+use App\Models\ClientEducation;
+use App\Models\ClientWork;
 
 class Client extends Model
 {
@@ -119,5 +122,20 @@ class Client extends Model
         } else {
             return $count . ' Following';
         }
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'client_categories');
+    }
+    
+    public function educations()
+    {
+        return $this->hasMany(ClientEducation::class,'client_id','id');
+    }
+    
+    public function works()
+    {
+        return $this->hasMany(ClientWork::class);
     }
 }

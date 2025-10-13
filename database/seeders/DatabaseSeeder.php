@@ -22,8 +22,9 @@ class DatabaseSeeder extends Seeder
                 // ClientSeeder::class,
                 // PostSeeder::class
                 //FollowSeeder::class
-                NfcVirtualBackgroundCategoriesSeeder::class,
-                NfcVirtualBackgroundsSeeder::class,
+                CategoriesSeeder::class,
+                //NfcVirtualBackgroundCategoriesSeeder::class,
+                //NfcVirtualBackgroundsSeeder::class,
             ]
         );
 

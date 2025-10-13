@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\Web\User\FollowController as follow;
 use App\Http\Controllers\Api\Web\User\CompanyController as company;
 use App\Http\Controllers\Api\LocationController;
 use Illuminate\Support\Facades\Broadcast;
+use App\Http\Controllers\Api\Web\User\ClientMetaController as clientMeta;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +73,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/client/singlePost/{id}', [webClient::class, 'singlePost']);
     Route::post('/client/save_profile', [webClient::class, 'save_profile']);
     Route::post('/client/save_cover_profile_photo', [webClient::class, 'save_cover_profile_photo']);
+    Route::get('/client/category_list', [clientMeta::class, 'categorylist']);
+    Route::post('/client/save_category', [clientMeta::class, 'storeCategory']);
+    Route::post('/client/save_education', [clientMeta::class, 'storeEducation']);
+    Route::post('/client/update_education', [clientMeta::class, 'updateEducation']);
+    Route::post('/client/delete_education', [clientMeta::class, 'deleteEducation']);
+    Route::post('/client/save_work', [clientMeta::class, 'storeWork']);
+    Route::post('/client/update_work', [clientMeta::class, 'updateWork']);
+    Route::post('/client/delete_work', [clientMeta::class, 'deleteWork']);
+
 
     Route::post('/client/change_password', [webClient::class, 'change_password']);
     Route::get('/client/search_by_people', [webClient::class, 'search_by_people']);

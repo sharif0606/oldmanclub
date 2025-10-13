@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\Web\User;
 
 use App\Models\User\Client;
 use App\Models\User\ClientMeta;
+use App\Models\ClientCategory;
+use App\Models\ClientEducation;
 use App\Models\User\Comment;
 use App\Models\User\Post;
 use App\Models\User\PostFile;
@@ -13,6 +15,7 @@ use App\Models\Backend\NfcCard;
 use App\Message;
 use App\Group;
 use App\Http\Controllers\Api\BaseController;
+use App\Http\Helpers\SanitizationHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Exception;
@@ -81,7 +84,17 @@ class ClientController extends BaseController
     }
     public function userProfile($id,$limit = 20)
     {
-        $client = Client::with('metas','currentcountry','currentstate','fromcountry','fromstate','fromcity','currentcity')->find($id);
+        $client = Client::with(
+                    'metas',
+                                'currentcountry',
+                                'currentstate',
+                                'fromcountry',
+                                'fromstate',
+                                'fromcity',
+                                'currentcity',
+                                'categories:id,name',
+                                'educations:id,client_id,institution,field_of_study,degree,start_date,end_date,description,status',
+                                'works:id,client_id,company_name,position,start_date,end_date,description,status')->find($id);
         $followers = Follow::where('following_id', $id)->count();
         $following = Follow::where('follower_id', $id)->count();
         $latest_eight_followers = Follow::with('follower_client')->where('following_id', $id)->orderBy('id', 'desc')->take(8)->get();
@@ -289,56 +302,69 @@ class ClientController extends BaseController
     
     public function save_profile(Request $request)
     {
-        //dd($request);
         try {
             $user = Client::with('metas')->find(Auth::user()->id);
-            $count = Client::where('username', $request->username)->count();
-            if ($count > 0  && $request->username !== $user->username) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'The requested (' . $request->username . ') username is not available. Please choose a different one.',
-                ], 400);
+            
+            // Sanitize username and check availability
+            $sanitizedUsername = SanitizationHelper::sanitizeUsername($request->username);
+            if ($sanitizedUsername && $sanitizedUsername !== $user->username) {
+                $count = Client::where('username', $sanitizedUsername)->count();
+                if ($count > 0) {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'The requested (' . $sanitizedUsername . ') username is not available. Please choose a different one.',
+                    ], 400);
+                }
             }
-            $user->username = $request->username;
-            $user->fname = $request->fname;
-            $user->middle_name = $request->middle_name;
-            $user->last_name = $request->last_name;
-            $user->display_name = $request->display_name;
-            $user->dob = $request->dob;
-            $user->phone_code = $request->phone_code;
-            $user->contact_no = $request->contact_no;
-            $user->email = $request->email;
-            $user->address_line_1 = $request->address_line_1;
-            $user->address_line_2 = $request->address_line_2;
-            $user->current_country_id = $request->current_country_id;
-            $user->current_state_id = $request->current_state_id;
-            //$user->current_city_id = $request->current_city_id;
-            //$user->current_zip_code = $request->current_zip_code;
-            $user->gender = $request->gender;
-            $user->from_country_id = $request->from_country_id;
-            $user->from_city_id = $request->from_city_id;
-            $user->from_state_id = $request->from_state_id;
-            //$user->from_zip_code = $request->from_zip_code;
-            $user->zip_code = $request->zip_code;
-            $user->nationality = $request->nationality;
-            $user->phone_code = $request->phone_code;
-            $user->id_no = $request->id_no;
-            $user->id_no_type = $request->id_no_type;
-            $user->marital_status = $request->marital_status;
-            $user->designation = $request->designation;
-            $user->profile_visibility = str_replace("'", '"', $request->profile_visibility);
+            
+            // Sanitize all input fields
+            $user->username = $sanitizedUsername;
+            $user->fname = SanitizationHelper::sanitizeString($request->fname, 100);
+            $user->middle_name = SanitizationHelper::sanitizeString($request->middle_name, 100);
+            $user->last_name = SanitizationHelper::sanitizeString($request->last_name, 100);
+            $user->display_name = SanitizationHelper::sanitizeString($request->display_name, 100);
+            $user->dob = SanitizationHelper::sanitizeDate($request->dob);
+            $user->phone_code = SanitizationHelper::sanitizeString($request->phone_code, 10);
+            $user->contact_no = SanitizationHelper::sanitizePhoneNumber($request->contact_no);
+            $user->email = SanitizationHelper::sanitizeEmail($request->email);
+            $user->address_line_1 = SanitizationHelper::sanitizeString($request->address_line_1, 255);
+            $user->address_line_2 = SanitizationHelper::sanitizeString($request->address_line_2, 255);
+            $user->current_country_id = SanitizationHelper::sanitizeInteger($request->current_country_id, 1);
+            $user->current_state_id = SanitizationHelper::sanitizeInteger($request->current_state_id, 1);
+            $user->is_blood_donor = SanitizationHelper::sanitizeBoolean($request->is_blood_donor);
+            $user->blood_group = SanitizationHelper::sanitizeString($request->blood_group, 10);
+            $user->gender = SanitizationHelper::sanitizeString($request->gender, 20);
+            $user->from_country_id = SanitizationHelper::sanitizeInteger($request->from_country_id, 1);
+            $user->from_city_id = SanitizationHelper::sanitizeInteger($request->from_city_id, 1);
+            $user->from_state_id = SanitizationHelper::sanitizeInteger($request->from_state_id, 1);
+            $user->zip_code = SanitizationHelper::sanitizeString($request->zip_code, 20);
+            $user->nationality = SanitizationHelper::sanitizeString($request->nationality, 100);
+            $user->id_no = SanitizationHelper::sanitizeString($request->id_no, 50);
+            $user->id_no_type = SanitizationHelper::sanitizeString($request->id_no_type, 50);
+            $user->marital_status = SanitizationHelper::sanitizeString($request->marital_status, 20);
+            $user->designation = SanitizationHelper::sanitizeString($request->designation, 100);
+            $user->profile_visibility = SanitizationHelper::sanitizeProfileVisibility($request->profile_visibility);
           
             if ($user->save()) {
 
+                
+                /*
+                [{'institution':'gg','field_of_study':'bd','degree':'kk','start_date':'2025-10-13','end_date':'2025-10-13','description':'','status':'0'},{'institution':'ggderg','field_of_study':'btd','degree':'kck','start_date':'2025-10-13','end_date':'2025-10-13','description':'','status':'1'}]
+                */
+               
+
                 if($request->has('metas')){
-                    $metas = json_decode(str_replace("'", '"', $request->metas), true);
-                    foreach($metas as $meta){
+                    $sanitizedMetas = SanitizationHelper::sanitizeMetaData(
+                        SanitizationHelper::sanitizeJson($request->metas)
+                    );
+                    
+                    foreach($sanitizedMetas as $meta){
                         ClientMeta::updateOrCreate([
-                            'meta_key' => trim($meta['meta_key']),
+                            'meta_key' => $meta['meta_key'],
                             'client_id' => $user->id
                         ],[
                             'meta_value' => $meta['meta_value'],
-                            'meta_status' => $meta['meta_status'] ?? 1
+                            'meta_status' => $meta['meta_status']
                         ]);
                     }
                 }
@@ -377,8 +403,8 @@ class ClientController extends BaseController
                 $request->image->move($folder, $imageName);
                 $user->image = $monthfolder . '/' . $imageName;
             }
-            $user->profile_overview = $request->profile_overview;
-            $user->tagline = $request->tagline;
+            $user->profile_overview = SanitizationHelper::sanitizeString($request->profile_overview, 1000);
+            $user->tagline = SanitizationHelper::sanitizeString($request->tagline, 255);
             
             if ($user->save()) {
                 $this->notice::success('Data Saved');
@@ -429,8 +455,8 @@ class ClientController extends BaseController
     public function search_by_people(Request $request)
     {
         $followIds = Follow::where('follower_id', Auth::user()->id)->pluck('following_id')->toArray();
-        $search_by_people = trim($request->search);
-        if ($request->search) {
+        $search_by_people = SanitizationHelper::sanitizeSearchQuery($request->search);
+        if ($search_by_people) {
             $follow_connections = Client::with('followers','metas')
             ->select('id','fname','middle_name','last_name','username','display_name','designation','image')
             ->where(function ($query) use ($search_by_people) {
@@ -467,20 +493,28 @@ class ClientController extends BaseController
     }
     public function client_by_search($username)
     {
-        $client = Client::with('metas')->where('username', $username)->first();
+        $sanitizedUsername = SanitizationHelper::sanitizeUsername($username);
+        if (!$sanitizedUsername) {
+            return $this->sendError('Invalid username provided', [], 400);
+        }
+        
+        $client = Client::with('metas')->where('username', $sanitizedUsername)->first();
+        if (!$client) {
+            return $this->sendError('User not found', [], 404);
+        }
+        
         $post = Post::where('client_id', $client->id)->orderBy('created_at', 'desc')->get();
         $postCount = Post::where('client_id', Auth::user()->id)->count();
         $followers = Follow::where('following_id', $client->id)->orderBy('id', 'desc')->take(4)->get();
-        $connection = Client::with('metas')->where('username', $username)->first();
+        $connection = Client::with('metas')->where('username', $sanitizedUsername)->first();
         $followIds = Follow::where('following_id', Auth::user()->id)->pluck('follower_id')->toArray();
-
 
         // Get the list of online users from the followers
         $online_active_users = Client::with('metas')->whereIn('id', $followIds)
             ->where('is_online', true) // Check if the user is online
             ->where('id', '!=', $client->id)
             ->get();
-        //dd($followIds);
+            
         return $this->sendResponse([
             'client' => $client,
             'post' => $post,
@@ -508,12 +542,14 @@ class ClientController extends BaseController
     }
     public function mentioned_people(Request $request,$limit = 10)
     {
+        $sanitizedSearch = SanitizationHelper::sanitizeSearchQuery($request->search);
+        
         $follow_connections = Client::select('id','fname','middle_name','last_name','username','display_name','image')
                                 ->where('id', '!=', Auth::user()->id)
-                                ->when($request->search, function ($query) use ($request) {
-                                    $query->where('fname', 'like', "%{$request->search}%")
-                                        ->orWhere('middle_name', 'like', "%{$request->search}%")
-                                        ->orWhere('last_name', 'like', "%{$request->search}%");
+                                ->when($sanitizedSearch, function ($query) use ($sanitizedSearch) {
+                                    $query->where('fname', 'like', "%{$sanitizedSearch}%")
+                                        ->orWhere('middle_name', 'like', "%{$sanitizedSearch}%")
+                                        ->orWhere('last_name', 'like', "%{$sanitizedSearch}%");
                                 })
                                 ->paginate($limit);
         
