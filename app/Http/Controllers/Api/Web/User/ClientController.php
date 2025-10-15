@@ -84,6 +84,11 @@ class ClientController extends BaseController
     }
     public function userProfile($id,$limit = 20)
     {
+        $id=Client::where('username',$id)->first();
+        if(!$id){
+            return $this->sendError('User not found', [], 404);
+        }
+        $id=$id->id;
         $client = Client::with(
                     'metas',
                                 'currentcountry',
