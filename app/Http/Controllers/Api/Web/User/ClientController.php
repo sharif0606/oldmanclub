@@ -347,6 +347,7 @@ class ClientController extends BaseController
             $user->id_no = SanitizationHelper::sanitizeString($request->id_no, 50);
             $user->id_no_type = SanitizationHelper::sanitizeString($request->id_no_type, 50);
             $user->marital_status = SanitizationHelper::sanitizeString($request->marital_status, 20);
+            $user->is_spouse_need = SanitizationHelper::sanitizeBoolean($request->is_spouse_need);
             $user->designation = SanitizationHelper::sanitizeString($request->designation, 100);
             $user->profile_visibility = SanitizationHelper::sanitizeProfileVisibility($request->profile_visibility);
           
