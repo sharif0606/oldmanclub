@@ -87,6 +87,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/client/search_by_people', [webClient::class, 'search_by_people']);
     Route::get('/client/client_by_search/{username}', [webClient::class, 'client_by_search']);
     Route::get('/client/user_profile/{id}/{limit?}', [webClient::class, 'userProfile']);
+    Route::get('/client/user_profile_by_username/{username}/{limit?}', [webClient::class, 'userProfileByUsername']);
+    Route::get('/client/advance_search_profile/{limit?}', [webClient::class, 'advanceSearchProfile']);
     Route::get('/client/random_people/{limit?}', [webClient::class, 'random_people']);
     Route::get('/client/mentioned_people/{limit?}', [webClient::class, 'mentioned_people']);
 

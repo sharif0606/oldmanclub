@@ -84,11 +84,6 @@ class ClientController extends BaseController
     }
     public function userProfile($id,$limit = 20)
     {
-        $id=Client::where('username',$id)->first();
-        if(!$id){
-            return $this->sendError('User not found', [], 404);
-        }
-        $id=$id->id;
         $client = Client::with(
                     'metas',
                                 'currentcountry',
@@ -140,6 +135,139 @@ class ClientController extends BaseController
             'latest_eight_followers' => $latest_eight_followers
         ], 'Profile Details');
         //return view('user.myProfile', compact('client', 'post'));
+    }
+    public function userProfileByUsername($username,$limit = 20)
+    {
+        $id=Client::where('username',$username)->pluck('id')->first();
+        
+        if(!$id){
+            return $this->sendError('User not found', [], 404);
+        }
+        $client = Client::with(
+                    'metas',
+                                'currentcountry',
+                                'currentstate',
+                                'fromcountry',
+                                'fromstate',
+                                'fromcity',
+                                'currentcity',
+                                'categories:id,name',
+                                'educations:id,client_id,institution,field_of_study,degree,start_date,end_date,description,status',
+                                'works:id,client_id,company_name,position,start_date,end_date,description,status')->find($id);
+        $followers = Follow::where('following_id', $id)->count();
+        $following = Follow::where('follower_id', $id)->count();
+        $latest_eight_followers = Follow::with('follower_client')->where('following_id', $id)->orderBy('id', 'desc')->take(8)->get();
+        $post = Post::with('files','client','latestComment','singleReaction','multipleReactionCounts','shared_post')->orderBy('created_at', 'desc')->where('client_id', $id)->paginate($limit);
+        $allpostphoto = Post::where('client_id', $id)->pluck('id')->toArray();
+        $isfollowed = Follow::where('follower_id', Auth::user()->id)->where('following_id', $id)->count();
+        $photos = PostFile::whereIn('post_id', $allpostphoto)
+            ->where('file_type', 'image')
+            ->orderBy('created_at', 'desc')
+            ->limit($limit)
+            ->pluck('file_path');
+
+        // Get the Friend List  of the current user
+        $friend_list = Follow::where('following_id', Auth::user()->id)
+            ->orderBy('id', 'desc')
+            ->pluck('follower_id'); // Extract only the `follower_id`
+
+        // Get the list of online users from the followers
+        $online_active_users = Client::with('metas')->whereIn('id', $friend_list)
+            ->where('is_online', true) // Check if the user is online
+            ->get();
+
+        // Get online friends whose birthday is today
+        $today = Carbon::today()->format('m-d'); // Extracts month and day
+        $online_birthday_users = Client::with('metas')->whereIn('id', $friend_list)
+            ->whereRaw("DATE_FORMAT(dob, '%m-%d') = ?", [$today]) // Birthday check
+            ->get();
+
+        return $this->sendResponse([
+            'client' => $client,
+            'post' => $post,
+            'followers' => $followers,
+            'following' => $following,
+            'photos' => $photos,
+            'isfollowed' => $isfollowed,
+            'online_active_users' => $online_active_users,
+            'online_brithday_users' => $online_birthday_users,
+            'latest_eight_followers' => $latest_eight_followers
+        ], 'Profile Details');
+        //return view('user.myProfile', compact('client', 'post'));
+    }
+    public function AdvanceSearchProfile(Request $request,$limit = 20)
+    {
+        $followIds = Follow::where('follower_id', Auth::user()->id)->pluck('following_id')->toArray();
+        $client = Client::with('metas');
+
+        if($request->blood_group){
+            $client->where('is_blood_donor', true)->where('blood_group', $request->blood_group)->where('current_state_id', Auth::user()->current_state_id);
+            
+            // If current_city_id is not null, also filter by city
+            if(Auth::user()->current_city_id){
+                $client->where('current_city_id', Auth::user()->current_city_id);
+            }
+        }
+        if($request->city_id){
+            $client->where('current_city_id', $request->city_id);
+        }
+        if($request->country_id){
+            $client->where('current_country_id', $request->country_id);
+        }
+        if($request->state_id){
+            $client->where('current_state_id', $request->state_id);
+        }
+        if($request->community){
+            $client->where(function($query) use ($request){
+                $query->where('nationality', Auth::user()->nationality)
+                    ->orWhere('designation', $request->designation);
+            });
+        }
+
+        if($request->school && $request->school == 'yes'){
+            // Get all institutions that the logged-in user has attended
+            $userInstitutions = Auth::user()->educations()->pluck('institution')->toArray();
+            
+            if(!empty($userInstitutions)){
+                $client->where(function($query) use ($userInstitutions){
+                    $query->whereHas('educations', function($query) use ($userInstitutions){
+                        $query->whereIn('institution', $userInstitutions);
+                    });
+                });
+            }
+        }
+        if($request->singles){
+            $client->where('is_single', true)->where('is_spouse_need', true)->where('current_state_id', Auth::user()->current_state_id);
+            if(Auth::user()->current_city_id){
+                $client->where('current_city_id', Auth::user()->current_city_id);
+            }
+        }
+        $client = $client->paginate($limit)->map(function ($client) use ($followIds) {
+            $client->followed = in_array($client->id, $followIds) ? 'followed' : 'not_followed';
+            
+            // Get followers for this specific client
+            $clientFollowers = Follow::with('follower_client:id,fname,last_name,display_name,middle_name')
+                ->where('following_id', $client->id)
+                ->take(4)
+                ->get()
+                ->map(function($follow) {
+                    return [
+                        'id' => $follow->follower_client->id,
+                        'fname' => $follow->follower_client->fname,
+                        'lname' => $follow->follower_client->last_name,
+                        'middle_name' => $follow->follower_client->middle_name,
+                        'displayName' => $follow->follower_client->display_name
+                    ];
+                });
+            
+            $client->followers = $clientFollowers;
+            
+            return $client;
+        });
+
+        return $this->sendResponse([
+            'search_results' => $client
+        ], 'Advanced Search Results');
     }
 
     public function replyComment(Request $request)
