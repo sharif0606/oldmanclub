@@ -236,7 +236,7 @@ class ClientController extends BaseController
                 });
             }
         }
-        if($request->singles){
+        if($request->singles && $request->singles == 'yes'){
             $client->where('is_single', true)->where('is_spouse_need', true)->where('current_state_id', Auth::user()->current_state_id);
             if(Auth::user()->current_city_id){
                 $client->where('current_city_id', Auth::user()->current_city_id);
