@@ -18,6 +18,7 @@ use App\Models\ClientWork;
 class Client extends Model
 {
     protected $fillable = ['is_online','profile_visibility','gender'];
+    protected $hidden = ['password'];
     use HasFactory, SoftDeletes, HasApiTokens, Notifiable;
     
     public function feedback(){
