@@ -14,6 +14,7 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Models\Category;
 use App\Models\ClientEducation;
 use App\Models\ClientWork;
+use App\Models\Language;
 
 class Client extends Model
 {
@@ -138,5 +139,10 @@ class Client extends Model
     public function works()
     {
         return $this->hasMany(ClientWork::class);
+    }
+
+    public function languages()
+    {
+        return $this->belongsToMany(Language::class, 'client_languages', 'client_id', 'language_id');
     }
 }

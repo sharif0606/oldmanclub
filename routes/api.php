@@ -81,6 +81,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/client/save_work', [clientMeta::class, 'storeWork']);
     Route::post('/client/update_work', [clientMeta::class, 'updateWork']);
     Route::post('/client/delete_work', [clientMeta::class, 'deleteWork']);
+    Route::post('/client/save_language', [clientMeta::class, 'storeLanguage']);
+    Route::post('/client/delete_language', [clientMeta::class, 'deleteLanguage']);
+    Route::get('/languages', [clientMeta::class, 'getLanguages']);
 
 
     Route::post('/client/change_password', [webClient::class, 'change_password']);

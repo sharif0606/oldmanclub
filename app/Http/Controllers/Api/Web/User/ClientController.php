@@ -43,7 +43,7 @@ class ClientController extends BaseController
     }
     public function myProfile($limit = 20)
     {
-        $client = Client::with('metas','currentcountry','currentstate','fromcountry','fromstate','fromcity','currentcity')->find(Auth::user()->id);
+        $client = Client::with('metas','currentcountry','currentstate','fromcountry','fromstate','fromcity','currentcity','languages:id,name')->find(Auth::user()->id);
         $followers = Follow::where('following_id', Auth::user()->id)->count();
         $following = Follow::where('follower_id', Auth::user()->id)->count();
         $latest_eight_followers = Follow::with('follower_client')->where('following_id', Auth::user()->id)->orderBy('id', 'desc')->take(8)->get();
@@ -65,9 +65,10 @@ class ClientController extends BaseController
             ->get();
 
         // Get online friends whose birthday is today
-        $today = Carbon::today()->format('m-d'); // Extracts month and day
+        $today = Carbon::today();
         $online_birthday_users = Client::whereIn('id', $friend_list)
-            ->whereRaw("DATE_FORMAT(dob, '%m-%d') = ?", [$today]) // Birthday check
+            ->whereMonth('dob', $today->month)
+            ->whereDay('dob', $today->day)
             ->get();
 
         return $this->sendResponse([
@@ -94,7 +95,9 @@ class ClientController extends BaseController
                                 'currentcity',
                                 'categories:id,name',
                                 'educations:id,client_id,institution,field_of_study,degree,start_date,end_date,description,status',
-                                'works:id,client_id,company_name,position,start_date,end_date,description,status')->find($id);
+                                'works:id,client_id,company_name,position,start_date,end_date,description,status',
+                                'languages:id,name'
+                                )->find($id);
         $followers = Follow::where('following_id', $id)->count();
         $following = Follow::where('follower_id', $id)->count();
         $latest_eight_followers = Follow::with('follower_client')->where('following_id', $id)->orderBy('id', 'desc')->take(8)->get();
@@ -118,9 +121,10 @@ class ClientController extends BaseController
             ->get();
 
         // Get online friends whose birthday is today
-        $today = Carbon::today()->format('m-d'); // Extracts month and day
+        $today = Carbon::today();
         $online_birthday_users = Client::with('metas')->whereIn('id', $friend_list)
-            ->whereRaw("DATE_FORMAT(dob, '%m-%d') = ?", [$today]) // Birthday check
+            ->whereMonth('dob', $today->month)
+            ->whereDay('dob', $today->day)
             ->get();
 
         return $this->sendResponse([
@@ -177,9 +181,10 @@ class ClientController extends BaseController
             ->get();
 
         // Get online friends whose birthday is today
-        $today = Carbon::today()->format('m-d'); // Extracts month and day
+        $today = Carbon::today();
         $online_birthday_users = Client::with('metas')->whereIn('id', $friend_list)
-            ->whereRaw("DATE_FORMAT(dob, '%m-%d') = ?", [$today]) // Birthday check
+            ->whereMonth('dob', $today->month)
+            ->whereDay('dob', $today->day)
             ->get();
 
         return $this->sendResponse([
@@ -392,10 +397,11 @@ class ClientController extends BaseController
             ->get();
 
         // Birthday
-        $today = Carbon::today()->format('m-d'); // Extracts month and day
+        $today = Carbon::today();
         // Get online friends whose birthday is today
         $online_birthday_users = Client::with('metas')->whereIn('id', $friend_list)
-            ->whereRaw("DATE_FORMAT(dob, '%m-%d') = ?", [$today]) // Birthday check
+            ->whereMonth('dob', $today->month)
+            ->whereDay('dob', $today->day)
             ->get();
 
 
@@ -478,6 +484,12 @@ class ClientController extends BaseController
             $user->is_spouse_need = SanitizationHelper::sanitizeBoolean($request->is_spouse_need);
             $user->designation = SanitizationHelper::sanitizeString($request->designation, 100);
             $user->profile_visibility = SanitizationHelper::sanitizeProfileVisibility($request->profile_visibility);
+
+            /* new columns */
+            $user->pronounce_name = SanitizationHelper::sanitizeString($request->pronounce_name, 100);
+            $user->website = SanitizationHelper::sanitizeString($request->website, 100);
+            $user->member_of_group = SanitizationHelper::sanitizeString($request->member_of_group, 100);
+            $user->cell_number = SanitizationHelper::sanitizeString($request->cell_number, 100);
           
             if ($user->save()) {
 

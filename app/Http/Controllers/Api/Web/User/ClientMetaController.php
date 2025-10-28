@@ -10,6 +10,8 @@ use App\Models\User\Client;
 use App\Models\ClientWork;
 use App\Models\ClientCategory;
 use App\Models\ClientEducation;
+use App\Models\Language;
+use App\Models\User\ClientLanguage;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 use Illuminate\Support\Facades\Validator;
@@ -218,6 +220,67 @@ class ClientMetaController extends BaseController
             ClientWork::where('id', SanitizationHelper::sanitizeInteger($request->id,1))->where('client_id', Auth::user()->id)->delete();
             return $this->sendResponse([], 'Work deleted successfully');
         } catch (Exception $e) {
+            return $this->sendError('Unauthorised.', [
+                'message' => 'Please try again',
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function storeLanguage(Request $request)
+    {
+        try {
+            if($request->has('language_name') && $request->language_name != ''){
+                $language=Language::updateOrCreate(['name' => SanitizationHelper::sanitizeString($request->language_name,100)],['status' => 1]);
+                $language_id=$language->id;
+            }else if($request->has('language_id') && $request->language_id != ''){
+                $language_id=SanitizationHelper::sanitizeInteger($request->language_id,1);
+            }else{
+                return $this->sendError('Language not found', [], 202);
+            }
+            $clientLanguage = ClientLanguage::updateOrCreate([
+                'client_id' => Auth::user()->id,
+                'language_id' => $language_id
+            ],[
+                'status' => $request->status ?? 1
+            ]);
+            return $this->sendResponse($clientLanguage, 'Language saved successfully');
+        }
+        catch (Exception $e) {
+            return $this->sendError('Unauthorised.', [
+                'message' => 'Please try again',
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
+    public function deleteLanguage(Request $request)
+    {
+        try {
+            //validation
+            $validator = Validator::make($request->all(), [
+                'language_id' => 'required',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors());
+            }
+            ClientLanguage::where('language_id', SanitizationHelper::sanitizeInteger($request->language_id,1))->where('client_id', Auth::user()->id)->delete();
+            return $this->sendResponse([], 'Language deleted successfully');
+        }
+        catch (Exception $e) {
+            return $this->sendError('Unauthorised.', [
+                'message' => 'Please try again',
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function getLanguages()
+    {
+        try {
+            $languages = Language::all();
+            return $this->sendResponse($languages, 'Languages fetched successfully');
+        }
+        catch (Exception $e) {
             return $this->sendError('Unauthorised.', [
                 'message' => 'Please try again',
                 'error' => $e->getMessage()
