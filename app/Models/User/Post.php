@@ -70,4 +70,8 @@ class Post extends Model
     {
         return $this->hasMany(PostReport::class);
     }
+
+    public function post_location(){
+        return $this->hasMany(PostLocation::class);
+    }
 }

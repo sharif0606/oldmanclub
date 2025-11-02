@@ -6,7 +6,9 @@ use App\Models\User\Post;
 use App\Models\User\PostFile;
 use App\Models\User\PostReport;
 use App\Models\User\PostReaction;
+use App\Models\User\PostLocation;
 use App\Http\Controllers\Api\BaseController;
+use App\Http\Helpers\SanitizationHelper;
 use App\Services\FileUploadService;
 use App\Services\UrlConversionService;
 use Illuminate\Http\Request;
@@ -46,6 +48,8 @@ class PostController extends BaseController
     }
     public function store(Request $request)
     {
+
+       
         $validator = \Validator::make($request->all(), [
             'privacy_mode' => 'required|in:public,friends,private',
             'files.*' => 'nullable|file|max:100000', // Max 100MB per file
@@ -79,8 +83,39 @@ class PostController extends BaseController
                 }
             }
         }
+        
+        // Handle post locations if present
+        if($post && $request->has('post_locations')){
+           
+            // Parse and sanitize post locations
+            $postLocations = SanitizationHelper::sanitizePostLocations(
+                SanitizationHelper::sanitizeJson($request->post_locations)
+            );
+            
+            if(!empty($postLocations)){
+                foreach($postLocations as $location){
+                    try {
+                        PostLocation::create([
+                            'post_id' => $post->id,
+                            'post_type' => $location['post_type'],
+                            'place_name' => $location['place_name'],
+                            'lat' => $location['lat'] ? (float)$location['lat'] : null,
+                            'lon' => $location['lon'] ? (float)$location['lon'] : null,
+                            'address' => $location['address'],
+                            'type' => $location['type'],
+                            'place_id' => $location['place_id'],
+                            'place_rank' => $location['place_rank'],
+                            'name' => $location['name']
+                        ]);
+                    } catch (Exception $e) {
+                        // Log error and continue with other locations
+                        \Log::error('Post location save failed: ' . $e->getMessage());
+                    }
+                }
+            }
+        }
 
-        return $this->sendResponse($post->load('files'), 'Post created successfully');
+        return $this->sendResponse($post->load(['files', 'post_location']), 'Post created successfully');
     }
 
     public function post_update(Request $request, $id){

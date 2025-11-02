@@ -329,4 +329,36 @@ class SanitizationHelper
 
         return $result;
     }
+
+    /**
+     * Sanitize post location data array
+     */
+    public static function sanitizePostLocations($postLocations)
+    {
+        if (!is_array($postLocations)) {
+            return [];
+        }
+
+        $sanitized = [];
+        
+        foreach ($postLocations as $location) {
+            if (!is_array($location)) {
+                continue;
+            }
+
+            $sanitized[] = [
+                'post_type' => self::sanitizeInteger($location['post_type'] ?? 1, 1, 2),
+                'place_name' => self::sanitizeString($location['place_name'] ?? null, 255),
+                'lat' => self::sanitizeString($location['lat'] ?? null, 20), // Will be converted to decimal
+                'lon' => self::sanitizeString($location['lon'] ?? null, 20), // Will be converted to decimal
+                'address' => self::sanitizeString($location['address'] ?? null, 1000),
+                'type' => self::sanitizeString($location['type'] ?? null, 255),
+                'place_id' => self::sanitizeString($location['place_id'] ?? null, 255),
+                'place_rank' => self::sanitizeInteger($location['place_rank'] ?? null),
+                'name' => self::sanitizeString($location['name'] ?? null, 255)
+            ];
+        }
+
+        return $sanitized;
+    }
 }
