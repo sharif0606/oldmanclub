@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\Web\User\NfcCardController as webNfc;
 use App\Http\Controllers\Api\Web\User\FollowController as follow;
 use App\Http\Controllers\Api\Web\User\CompanyController as company;
 use App\Http\Controllers\Api\LocationController;
+use App\Http\Controllers\Api\Web\User\SalePostController as salePost;
 use Illuminate\Support\Facades\Broadcast;
 use App\Http\Controllers\Api\Web\User\ClientMetaController as clientMeta;
 
@@ -146,6 +147,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/chat/{id}/messages', [ChatController::class, 'getMessages']);
     Route::post('/chat/{id}/messages', [ChatController::class, 'sendMessage']);
     Route::post('/chat/typing', [ChatController::class, 'typing']);
+
+    // sale post routes
+    Route::get('/sale_post/{limit?}', [salePost::class, 'index']);
+    Route::post('/sale_post/store', [salePost::class, 'store']);
+    Route::post('/sale_post/update/{id}', [salePost::class, 'update']);
+    Route::post('/sale_post/delete/{id}', [salePost::class, 'destroy']);
+    Route::get('/sale_post_category', [salePost::class, 'getSalePostCategory']);
 
 
     Route::post('/messages/send', [App\Http\Controllers\Api\MessageController::class, 'sendMessage']);

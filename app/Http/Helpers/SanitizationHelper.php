@@ -361,4 +361,14 @@ class SanitizationHelper
 
         return $sanitized;
     }
+    /**
+     * Sanitize a float input
+     */
+    public static function sanitizeFloat($input)
+    {
+        if (is_null($input)) {
+            return null;
+        }
+        return (float) $input;
+    }
 }

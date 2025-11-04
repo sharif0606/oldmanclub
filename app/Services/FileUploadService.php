@@ -5,6 +5,7 @@ namespace App\Services;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User\PostFile;
+use App\Models\User\SalePostFile;
 use Exception;
 
 class FileUploadService
@@ -35,7 +36,7 @@ class FileUploadService
             $fileType = $fileInfo['type'];
 
             // Create directory if it doesn't exist
-            $uploadPath = $this->createUploadDirectory($directory, $filefolder);
+            $uploadPath = $this->createUploadDirectory('post', $directory, $filefolder);
 
             // Move file to appropriate directory
             $file->move($uploadPath, $fileName);
@@ -55,6 +56,55 @@ class FileUploadService
         } catch (Exception $e) {
             throw new Exception('File upload failed: ' . $e->getMessage());
         }
+    }
+
+    /**
+     * Handle file upload for sale posts
+     *
+     * @param UploadedFile $file
+     * @param int $salePostId
+     * @return SalePostFile|null
+     * @throws Exception
+     */
+    public function uploadSalePostFile($file, int $salePostId)
+    {
+        try {
+            $extension = $file->getClientOriginalExtension();
+            $mimeType = $file->getMimeType();
+            $filefolder = date(format: 'Y') . '/' . date('m');
+            $fileName = $this->generateFileName($extension);
+
+            // Determine file type and directory
+            $fileInfo = $this->determineFileType($mimeType);
+            if (!$fileInfo) {
+                return null; // Skip unsupported file types
+            }
+
+            $directory = $fileInfo['directory'];
+            $fileType = $fileInfo['type'];
+
+            // Create directory if it doesn't exist
+            $uploadPath = $this->createUploadDirectory('sale_post', $directory, $filefolder);
+
+            // Move file to appropriate directory
+            $file->move($uploadPath, $fileName);
+            
+            // Get file size after moving
+            $fullPath = $uploadPath . '/' . $fileName;
+            $fileSize = file_exists($fullPath) ? filesize($fullPath) : 0;
+
+            return SalePostFile::create([
+                'sale_post_id' => $salePostId,
+                'file_name' => $fileName,
+                'file_type' => $fileType,
+                'file_size' => $fileSize,
+                'file_path' => $directory . '/' . $filefolder . '/' . $fileName
+            ]);
+        }
+        catch (Exception $e) {
+            throw new Exception('File upload failed: ' . $e->getMessage());
+        }
+       
     }
 
     /**
@@ -98,9 +148,9 @@ class FileUploadService
      * @param string $filefolder
      * @return string
      */
-    private function createUploadDirectory(string $directory, string $filefolder): string
+    private function createUploadDirectory(string $type, string $directory, string $filefolder): string
     {
-        $uploadPath = public_path('uploads/post/' . $directory . '/' . $filefolder);
+        $uploadPath = public_path('uploads/' . $type . '/' . $directory . '/' . $filefolder);
         
         if (!file_exists($uploadPath)) {
             mkdir($uploadPath, 0777, true);
@@ -109,15 +159,17 @@ class FileUploadService
         return $uploadPath;
     }
 
+
+
     /**
      * Delete file from storage
      *
      * @param string $filePath
      * @return bool
      */
-    public function deleteFile(string $filePath): bool
+    public function deleteFile(string $type, string $filePath): bool
     {
-        $fullPath = public_path('uploads/post/' . $filePath);
+        $fullPath = public_path('uploads/' . $type . '/' . $filePath);
         
         if (file_exists($fullPath)) {
             return unlink($fullPath);

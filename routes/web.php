@@ -108,7 +108,7 @@ use App\Http\Controllers\Backend\Nfc\NfcFieldController as nfc_field;
 use App\Http\Controllers\Backend\Nfc\DesignCardController as design_card;
 use App\Http\Controllers\Backend\Nfc\NfcCardController as nfc_card;
 
-
+use App\Http\Controllers\Backend\Admin\SalePostCategoryController as sale_post_category;
 // printing_service admin panelBackend\Printingservice
 
 use App\Http\Controllers\Backend\Printingservice\PrintingServiceController as print_service;
@@ -243,6 +243,7 @@ Route::middleware(['checkrole'])->prefix('admin')->group(function () {
 
     /*== Secret Login ==*/
     Route::get('secret/login/{id}', [client::class, 'secretLogin'])->name('secretLogin');
+    Route::resource('sale-post-category', sale_post_category::class);
 });
 
 
@@ -433,7 +434,7 @@ Route::get('/cities', [CityController::class,'getCitiesByStates'])->name('getCit
 
 
 //Route::middleware(['checkclient'])->group(function () {
-    Route::get('{username}', [clientprofile::class, 'client_by_search'])->name('client_by_search');
-    Route::get('{username}/profile', [clientprofile::class, 'usernameProfile'])->name('usernameProfile');
-    Route::get('{username}/profile-about', [clientprofile::class, 'usernameProfileAbout'])->name('usernameProfileAbout');
+    // Route::get('{username}', [clientprofile::class, 'client_by_search'])->name('client_by_search');
+    // Route::get('{username}/profile', [clientprofile::class, 'usernameProfile'])->name('usernameProfile');
+    // Route::get('{username}/profile-about', [clientprofile::class, 'usernameProfileAbout'])->name('usernameProfileAbout');
 //});

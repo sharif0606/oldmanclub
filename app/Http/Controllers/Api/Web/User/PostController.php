@@ -137,7 +137,7 @@ class PostController extends BaseController
             foreach($files as $file){
                 $postFile = PostFile::where('post_id',$post->id)->where('id',$file)->first();
                 if($postFile){
-                    $this->fileUploadService->deleteFile($postFile->file_path);
+                    $this->fileUploadService->deleteFile('post', $postFile->file_path);
                     $postFile->delete();
                 }
             }
@@ -205,7 +205,7 @@ class PostController extends BaseController
         if($post){
             $files = PostFile::where('post_id',$id)->get();
             foreach($files as $file){
-                $this->fileUploadService->deleteFile($file->file_path);
+                $this->fileUploadService->deleteFile('post', $file->file_path);
                 $file->delete();
             }
             $post->delete();
