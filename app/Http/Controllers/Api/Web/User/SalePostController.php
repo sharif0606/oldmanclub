@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\BaseController;
 use App\Models\Tag;
 use App\Models\SalePostTag;
 use App\Models\SalePostCategory;
+use Illuminate\Support\Facades\Auth;
 class SalePostController extends BaseController
 {
     protected $fileUploadService;
@@ -26,9 +27,49 @@ class SalePostController extends BaseController
      */
     public function index(Request $request,$limit = 20)
     {
-        $post = SalePost::with('files','category','tags','country','state','city');
+        $post = SalePost::with('files','category:id,name','tags:id,name','country:id,name','state:id,name','city:id,name');
         if($request->has('search') && $request->search != ''){
-            $post->where('message','like','%'.$request->search.'%');
+            $post->where(function($query) use ($request){
+                $query->where('title','like','%'.$request->search.'%')
+                    ->orWhere('sku','like','%'.$request->search.'%')
+                    ->orWhere('description','like','%'.$request->search.'%');
+            });
+        }
+        if($request->has('category_id') && $request->category_id != ''){
+            $post->where('category_id', $request->category_id);
+        }
+        if($request->has('country_id') && $request->country_id != ''){
+            $post->where('country_id', $request->country_id);
+        }
+        if($request->has('state_id') && $request->state_id != ''){
+            $post->where('state_id', $request->state_id);
+        }
+        if($request->has('city_id') && $request->city_id != ''){
+            $post->where('city_id', $request->city_id);
+        }
+        if($request->has('min_price') && $request->min_price != ''){
+            $post->where('price', '>=', $request->min_price);
+        }
+        if($request->has('max_price') && $request->max_price != ''){
+            $post->where('price', '<=', $request->max_price);
+        }
+        if($request->has('condition') && $request->condition != ''){
+            $post->where('condition', $request->condition);
+        }
+        if($request->has('availability') && $request->availability != ''){
+            $post->where('availability', $request->availability);
+        }
+        if($request->has('sku') && $request->sku != ''){
+            $post->where('sku', $request->sku);
+        }
+        if($request->has('public_meetup') && $request->public_meetup != ''){
+            $post->where('public_meetup', $request->public_meetup);
+        }
+        if($request->has('door_pickup') && $request->door_pickup != ''){
+            $post->where('door_pickup', $request->door_pickup);
+        }
+        if($request->has('door_dropoff') && $request->door_dropoff != ''){
+            $post->where('door_dropoff', $request->door_dropoff);
         }
         $post = $post->orderBy('created_at', 'desc')->paginate($limit);
         return $this->sendResponse($post, 'Sale posts fetched successfully');
@@ -76,7 +117,7 @@ class SalePostController extends BaseController
        
         $salePost = SalePost::create(
             [
-                'client_id' => currentUserId(),
+                'client_id' => Auth::user()->id,
                 'title' => $title,
                 'price' => $price,
                 'category_id' => $category_id,
@@ -114,7 +155,8 @@ class SalePostController extends BaseController
             $tags = SanitizationHelper::sanitizeString($request->input('tags'));
             $tags = explode(',', $tags);
             foreach($tags as $tag){
-                $tag = Tag::firstOrCreate(['name' => $tag]);
+                $sanitizedTag = SanitizationHelper::sanitizeString($tag);
+                $tag = Tag::firstOrCreate(['name' => $sanitizedTag]);
                 $salePostTag = SalePostTag::create([
                     'sale_post_id' => $salePost->id,
                     'tag_id' => $tag->id
@@ -127,9 +169,12 @@ class SalePostController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(SalePost $salePost)
+    public function show($id)
     {
-        $salePost = $salePost->load('files','category','tags','country','state','city');
+        $salePost = SalePost::with('files','category:id,name','tags:id,name','country:id,name','state:id,name','city:id,name')->find($id);
+        if(!$salePost){
+            return $this->sendError('Sale post not found');
+        }
         return $this->sendResponse($salePost, 'Sale post fetched successfully');
     }
 
@@ -140,14 +185,12 @@ class SalePostController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        $salePost = SalePost::where('client_id', currentUserId())->find($id);
+        $salePost = SalePost::where('client_id', Auth::user()->id)->find($id);
         if(!$salePost){
             return $this->sendError('Sale post not found');
         }
         $validator = \Validator::make($request->all(), [
             'title' => 'required|string|max:255',
-            'photos' => 'required|array',
-            'photos.*' => 'required|image|max:10240',
             'price' => 'required|numeric',
             'category_id' => 'required|exists:sale_post_categories,id',
             'condition' => 'required|integer'
@@ -209,7 +252,8 @@ class SalePostController extends BaseController
             $tags = SanitizationHelper::sanitizeString($request->input('tags'));
             $tags = explode(',', $tags);
             foreach($tags as $tag){
-                $tag = Tag::firstOrCreate(['name' => $tag]);
+                $sanitizedTag = SanitizationHelper::sanitizeString($tag);
+                $tag = Tag::firstOrCreate(['name' => $sanitizedTag]);
                 $salePostTag = SalePostTag::create([
                     'sale_post_id' => $salePost->id,
                     'tag_id' => $tag->id
@@ -224,7 +268,7 @@ class SalePostController extends BaseController
      */
     public function destroy($id)
     {
-        $salePost = SalePost::where('client_id', currentUserId())->find($id);
+        $salePost = SalePost::where('client_id', Auth::user()->id)->find($id);
         if(!$salePost){
             return $this->sendError('Sale post not found');
         }

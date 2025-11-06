@@ -150,6 +150,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // sale post routes
     Route::get('/sale_post/{limit?}', [salePost::class, 'index']);
+    Route::get('/single_sale_post/{id}', [salePost::class, 'show']);
     Route::post('/sale_post/store', [salePost::class, 'store']);
     Route::post('/sale_post/update/{id}', [salePost::class, 'update']);
     Route::post('/sale_post/delete/{id}', [salePost::class, 'destroy']);
