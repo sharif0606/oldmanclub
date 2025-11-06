@@ -149,7 +149,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/chat/typing', [ChatController::class, 'typing']);
 
     // sale post routes
+
     Route::get('/sale_post/{limit?}', [salePost::class, 'index']);
+    Route::get('/my_sale_post/{limit?}', [salePost::class, 'mySalePost']);
     Route::get('/single_sale_post/{id}', [salePost::class, 'show']);
     Route::post('/sale_post/store', [salePost::class, 'store']);
     Route::post('/sale_post/update/{id}', [salePost::class, 'update']);

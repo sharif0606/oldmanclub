@@ -70,4 +70,8 @@ class SalePost extends Model
     {
         return $this->hasMany(SalePostFile::class);
     }
+
+    public function client(){
+        return $this->belongsTo(Client::class);
+    }
 }

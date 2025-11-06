@@ -75,6 +75,58 @@ class SalePostController extends BaseController
         return $this->sendResponse($post, 'Sale posts fetched successfully');
     }
 
+    public function mySalePost(Request $request,$limit = 20){
+        $post = SalePost::with('files','category:id,name','tags:id,name','country:id,name','state:id,name','city:id,name')
+                            ->where('client_id',Auth::user()->id);
+        if($request->has('search') && $request->search != ''){
+            $post->where(function($query) use ($request){
+                $query->where('title','like','%'.$request->search.'%')
+                    ->orWhere('sku','like','%'.$request->search.'%')
+                    ->orWhere('description','like','%'.$request->search.'%');
+            });
+        }
+        if($request->has('category_id') && $request->category_id != ''){
+            $post->where('category_id', $request->category_id);
+        }
+        if($request->has('country_id') && $request->country_id != ''){
+            $post->where('country_id', $request->country_id);
+        }
+        if($request->has('state_id') && $request->state_id != ''){
+            $post->where('state_id', $request->state_id);
+        }
+        if($request->has('city_id') && $request->city_id != ''){
+            $post->where('city_id', $request->city_id);
+        }
+        if($request->has('min_price') && $request->min_price != ''){
+            $post->where('price', '>=', $request->min_price);
+        }
+        if($request->has('max_price') && $request->max_price != ''){
+            $post->where('price', '<=', $request->max_price);
+        }
+        if($request->has('condition') && $request->condition != ''){
+            $post->where('condition', $request->condition);
+        }
+        if($request->has('availability') && $request->availability != ''){
+            $post->where('availability', $request->availability);
+        }
+        if($request->has('sku') && $request->sku != ''){
+            $post->where('sku', $request->sku);
+        }
+        if($request->has('public_meetup') && $request->public_meetup != ''){
+            $post->where('public_meetup', $request->public_meetup);
+        }
+        if($request->has('door_pickup') && $request->door_pickup != ''){
+            $post->where('door_pickup', $request->door_pickup);
+        }
+        if($request->has('door_dropoff') && $request->door_dropoff != ''){
+            $post->where('door_dropoff', $request->door_dropoff);
+        }
+        $post = $post->orderBy('created_at', 'desc')->paginate($limit);
+        $client=\App\Models\User\Client::find(Auth::user()->id);
+        $data=['post'=>$post,'client'=>$client];
+        return $this->sendResponse($data, 'Sale posts fetched successfully');
+    }
+
     public function getSalePostCategory()
     {
         $data = SalePostCategory::all();
@@ -88,8 +140,8 @@ class SalePostController extends BaseController
     {
         $validator = \Validator::make($request->all(), [
             'title' => 'required|string|max:255',
-            'photos' => 'required|array',
-            'photos.*' => 'required|image|max:10240',
+            'files' => 'required|array',
+            'files.*' => 'required|image|max:10240',
             'price' => 'required|numeric',
             'category_id' => 'required|exists:sale_post_categories,id',
             'condition' => 'required|integer'
@@ -171,7 +223,7 @@ class SalePostController extends BaseController
      */
     public function show($id)
     {
-        $salePost = SalePost::with('files','category:id,name','tags:id,name','country:id,name','state:id,name','city:id,name')->find($id);
+        $salePost = SalePost::with('files','category:id,name','tags:id,name','country:id,name','state:id,name','city:id,name','client')->find($id);
         if(!$salePost){
             return $this->sendError('Sale post not found');
         }
